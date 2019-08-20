@@ -6,22 +6,7 @@
     <option name="CUSTOM_SCOPE_NAME" value="All Places" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c070a032-b98d-46f2-baff-71bc64b5e7dd" name="Default Changelist" comment="Trailing zero in BigDecimal number">
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Model/Exp.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Model/PrintTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Model/Sum.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/Model/SumTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/Model/Exp.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/Model/PrintTest.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/Model/Sum.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/test-classes/Model/SumTest.class" afterDir="false" />
-    </list>
+    <list default="true" id="c070a032-b98d-46f2-baff-71bc64b5e7dd" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,7 +54,7 @@
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
     <property name="last_opened_file_path" value="C:/Program Files/Git/cmd/git.exe" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+    <property name="settings.editor.selected.configurable" value="settings.github" />
   </component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.RecentsKey">
@@ -227,7 +212,14 @@
       <option name="project" value="LOCAL" />
       <updated>1566225504027</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="new test sum">
+      <created>1566312788450</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1566312788450</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TodoView">
@@ -280,7 +272,8 @@
     <MESSAGE value="Created test for same arguments(for int and double, positive&amp;positive, positive&amp;negative, negative&amp;negative)" />
     <MESSAGE value="Trailing zero in BigDecimal number" />
     <MESSAGE value="All works, before optimizing tests" />
-    <option name="LAST_COMMIT_MESSAGE" value="All works, before optimizing tests" />
+    <MESSAGE value="new test sum" />
+    <option name="LAST_COMMIT_MESSAGE" value="new test sum" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
