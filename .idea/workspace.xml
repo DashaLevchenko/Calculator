@@ -7,28 +7,81 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="feaeb0c2-feb2-4a9c-98e3-48b1d1a339aa" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/User.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Calculator.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/Model/ArithmeticMinusTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/Model/Arithmetic.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/test-classes/Model/ArithmeticTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Model/Exp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Exp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Model/SumTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/SumTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Model/Exp.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Model/Exp.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/Model/SumTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/Model/SumTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Sum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Arithmetic.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Model/SumTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/ArithmeticSumTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Model/Sum.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/Model/SumTest.class" beforeDir="false" />
     </list>
+    <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/Model/ArithmeticSumTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-804">
+              <caret line="11" column="3" selection-start-line="11" selection-start-column="3" selection-end-line="1417" selection-end-column="5" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#sumValidInputIntegerInteger#0;class#SumTest#0" />
+                <element signature="method#sumValidInputIntegerDouble#0;class#SumTest#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/Model/Arithmetic.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="187">
+              <caret line="11" column="34" selection-start-line="11" selection-start-column="29" selection-end-line="11" selection-end-column="34" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/test/java/Model/ArithmeticMinusTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="221">
+              <caret line="1364" column="48" selection-start-line="1364" selection-start-column="48" selection-end-line="1364" selection-end-column="48" />
+              <folding>
+                <element signature="method#sumValidInputIntegerInteger#0;class#ArithmeticMinusTest#0" />
+                <element signature="method#sumValidInputIntegerDouble#0;class#ArithmeticMinusTest#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JUnit5 Test Class" />
         <option value="Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <excluded-from-favorite>
       <branch-storage>
         <map>
@@ -42,13 +95,16 @@
         </map>
       </branch-storage>
     </excluded-from-favorite>
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$" value="master" />
-      </map>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/main/java/Model/Sum.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Model/Arithmetic.java" />
+        <option value="$PROJECT_DIR$/src/test/java/Model/ArithmeticTest.java" />
+        <option value="$PROJECT_DIR$/src/test/java/Model/ArithmeticMinusTest.java" />
+      </list>
     </option>
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
   <component name="MavenImportPreferences">
     <option name="importingSettings">
@@ -57,8 +113,86 @@
       </MavenImportingSettings>
     </option>
   </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="186" />
+    <option name="y" value="130" />
+    <option name="width" value="816" />
+    <option name="height" value="788" />
+  </component>
   <component name="ProjectId" id="1PgWSDgDGhULvVlBsGRkvbBRrgj" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="Calculator" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Calculator" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Calculator" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Calculator" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Calculator" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Calculator" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Calculator" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Calculator" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Calculator" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Calculator" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="Model" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Calculator" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Calculator" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Calculator" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Calculator" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Calculator" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Calculator" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="Model" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Calculator" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Calculator" type="462c0819:PsiDirectoryNode" />
+              <item name="target" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
+    </panes>
+  </component>
   <component name="PropertiesComponent">
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
@@ -75,14 +209,14 @@
     <key name="CreateTestDialog.RecentsKey">
       <recent name="Model" />
     </key>
-    <key name="CreateTestDialog.Recents.Supers">
-      <recent name="" />
-    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="Model" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="Model" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Дарья\IdeaProjects\Calculator\src\test\java\Model" />
@@ -100,7 +234,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.SumTest">
+  <component name="RunManager" selected="JUnit.ArithmeticMinusTest.minusValidInputIntegerInteger">
     <configuration name="Exp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Model.Exp" />
       <module name="Calculator" />
@@ -114,7 +248,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SumTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ArithmeticMinusTest.minusValidInputIntegerInteger" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Calculator" />
       <extension name="coverage">
         <pattern>
@@ -123,13 +257,29 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="Model" />
-      <option name="MAIN_CLASS_NAME" value="Model.SumTest" />
+      <option name="MAIN_CLASS_NAME" value="Model.ArithmeticMinusTest" />
+      <option name="METHOD_NAME" value="minusValidInputIntegerInteger" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ArithmeticSumTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Calculator" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Model.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Model" />
+      <option name="MAIN_CLASS_NAME" value="Model.ArithmeticSumTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SumTest.sumNotValidDouble" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ArithmeticSumTest.sumValidDoublePositiveNegative" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Calculator" />
       <extension name="coverage">
         <pattern>
@@ -138,39 +288,7 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="Model" />
-      <option name="MAIN_CLASS_NAME" value="Model.SumTest" />
-      <option name="METHOD_NAME" value="sumNotValidDouble" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="SumTest.sumValid" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Calculator" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Model.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="Model" />
-      <option name="MAIN_CLASS_NAME" value="Model.SumTest" />
-      <option name="METHOD_NAME" value="sumValid" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="SumTest.sumValidDoublePositiveNegative" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Calculator" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Model.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="Model" />
-      <option name="MAIN_CLASS_NAME" value="Model.SumTest" />
+      <option name="MAIN_CLASS_NAME" value="Model.ArithmeticSumTest" />
       <option name="METHOD_NAME" value="sumValidDoublePositiveNegative" />
       <option name="TEST_OBJECT" value="method" />
       <option name="PARAMETERS" value="" />
@@ -178,20 +296,36 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="ArithmeticSumTest.sumValidInputIntegerDouble" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Calculator" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Model.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Model" />
+      <option name="MAIN_CLASS_NAME" value="Model.ArithmeticSumTest" />
+      <option name="METHOD_NAME" value="sumValidInputIntegerDouble" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <list>
       <item itemvalue="Application.Exp" />
-      <item itemvalue="JUnit.SumTest" />
-      <item itemvalue="JUnit.SumTest.sumNotValidDouble" />
-      <item itemvalue="JUnit.SumTest.sumValid" />
-      <item itemvalue="JUnit.SumTest.sumValidDoublePositiveNegative" />
+      <item itemvalue="JUnit.ArithmeticSumTest" />
+      <item itemvalue="JUnit.ArithmeticSumTest.sumValidDoublePositiveNegative" />
+      <item itemvalue="JUnit.ArithmeticSumTest.sumValidInputIntegerDouble" />
+      <item itemvalue="JUnit.ArithmeticMinusTest.minusValidInputIntegerInteger" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.SumTest" />
-        <item itemvalue="JUnit.SumTest.sumValidDoublePositiveNegative" />
+        <item itemvalue="JUnit.ArithmeticMinusTest.minusValidInputIntegerInteger" />
+        <item itemvalue="JUnit.ArithmeticSumTest.sumValidInputIntegerDouble" />
+        <item itemvalue="JUnit.ArithmeticSumTest" />
+        <item itemvalue="JUnit.ArithmeticSumTest.sumValidDoublePositiveNegative" />
         <item itemvalue="Application.Exp" />
-        <item itemvalue="JUnit.SumTest.sumNotValidDouble" />
-        <item itemvalue="JUnit.SumTest.sumValid" />
       </list>
     </recent_temporary>
   </component>
@@ -314,6 +448,17 @@
     <option name="localTasksCounter" value="16" />
     <servers />
   </component>
+  <component name="TestHistory">
+    <history-entry file="SumTest - 2019.08.21 at 19h 44m 17s.xml">
+      <configuration name="SumTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ArithmeticTest_sumValidInputIntegerDouble - 2019.08.21 at 20h 09m 17s.xml">
+      <configuration name="ArithmeticTest.sumValidInputIntegerDouble" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ArithmeticTest_sumValidInputIntegerDouble - 2019.08.21 at 20h 10m 16s.xml">
+      <configuration name="ArithmeticTest.sumValidInputIntegerDouble" configurationId="JUnit" />
+    </history-entry>
+  </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
       <is-autoscroll-to-source value="true" />
@@ -322,6 +467,57 @@
       <are-packages-shown value="true" />
       <is-autoscroll-to-source value="true" />
     </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="22" width="1382" height="754" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4964029" visible="true" weight="0.26192278" />
+      <window_info id="Structure" order="1" sideWeight="0.50359714" side_tool="true" weight="0.20136261" />
+      <window_info id="Designer" order="2" />
+      <window_info id="Favorites" order="3" side_tool="true" />
+      <window_info anchor="bottom" id="Inspection Results" weight="0.329582" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.4996215" weight="0.329582" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4950795" visible="true" weight="0.329582" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.4996215" weight="0.39871383" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.4996215" weight="0.329582" />
+      <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49432248" weight="0.3279743" />
+      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.4996215" weight="0.329582" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50492054" side_tool="true" visible="true" weight="0.329582" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.329582" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Maven" order="3" />
+      <window_info anchor="right" id="Palette&#9;" order="4" />
+      <window_info anchor="right" id="Key Promoter X" order="5" />
+    </layout>
+    <layout-to-restore>
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49880096" visible="true" weight="0.28009084" />
+      <window_info id="Structure" order="1" sideWeight="0.50119907" side_tool="true" weight="0.24886535" />
+      <window_info id="Designer" order="2" />
+      <window_info id="Favorites" order="3" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.329582" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.329582" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Terminal" order="8" />
+      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
+      <window_info anchor="bottom" id="Messages" order="10" visible="true" weight="0.329582" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Maven" order="3" />
+      <window_info anchor="right" id="Palette&#9;" order="4" />
+      <window_info anchor="right" id="Key Promoter X" order="5" />
+    </layout-to-restore>
   </component>
   <component name="Vcs.Log.History.Properties">
     <option name="COLUMN_ORDER">
@@ -339,6 +535,12 @@
         <entry key="1">
           <value>
             <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
               <option name="FILTERS">
                 <map>
                   <entry key="range">
@@ -356,6 +558,12 @@
         <entry key="MAIN">
           <value>
             <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
               <option name="COLUMN_ORDER" />
             </State>
           </value>
@@ -390,5 +598,40 @@
     <MESSAGE value="No problem with scale in sum()" />
     <MESSAGE value="Before all input in BigDecimal" />
     <option name="LAST_COMMIT_MESSAGE" value="Before all input in BigDecimal" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/Calculator.iml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/Model/ArithmeticSumTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-804">
+          <caret line="11" column="3" selection-start-line="11" selection-start-column="3" selection-end-line="1417" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#sumValidInputIntegerInteger#0;class#SumTest#0" />
+            <element signature="method#sumValidInputIntegerDouble#0;class#SumTest#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Model/Arithmetic.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="34" selection-start-line="11" selection-start-column="29" selection-end-line="11" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/Model/ArithmeticMinusTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="1364" column="48" selection-start-line="1364" selection-start-column="48" selection-end-line="1364" selection-end-column="48" />
+          <folding>
+            <element signature="method#sumValidInputIntegerInteger#0;class#ArithmeticMinusTest#0" />
+            <element signature="method#sumValidInputIntegerDouble#0;class#ArithmeticMinusTest#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
   </component>
 </project>

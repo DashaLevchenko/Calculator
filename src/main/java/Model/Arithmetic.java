@@ -1,13 +1,16 @@
 package Model;
 
 import java.math.BigDecimal;
-import java.math.MathContext;
 
 
-public class Sum {
+public class Arithmetic {
 
     public static BigDecimal sum(BigDecimal x, BigDecimal y) {
         return scaleForBigdecimal(x.add(y).stripTrailingZeros());
+    }
+
+    public static BigDecimal minus(BigDecimal x, BigDecimal y) {
+        return scaleForBigdecimal(x.subtract(y).stripTrailingZeros());
     }
 
     public static BigDecimal scaleForBigdecimal(BigDecimal numberDouble){
