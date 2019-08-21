@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 import static java.math.BigDecimal.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-class SumTest {
+class ArithmeticSumTest {
     @Test
     void sumValidInputIntegerInteger() {
         combinationSumValidNegative(valueOf(0), valueOf(0), "0", "0");
@@ -282,9 +282,10 @@ class SumTest {
         combinationSumValidNegative(valueOf(10000000000000000L), valueOf(10000000000000000L), "20000000000000000", "0");
     }
 
+    @Test
     void sumValidInputIntegerDouble() {
         combinationsSumValidMovePoint(valueOf(0), valueOf(0.1), "0.1");
-        combinationsSumValidMovePoint(valueOf(0), valueOf(-0.1), "-1");
+        combinationsSumValidMovePoint(valueOf(0), valueOf(-0.1), "-0.1");
         combinationsSumValidMovePoint(valueOf(1), valueOf(0.1), "1.1");
         combinationsSumValidMovePoint(valueOf(1), valueOf(-0.1), "0.9");
         combinationsSumValidMovePoint(valueOf(-1), valueOf(0.1), "-0.9");
@@ -1361,7 +1362,7 @@ class SumTest {
     }
 
     void assertionSumValid(BigDecimal x, BigDecimal y, BigDecimal sum) {
-        BigDecimal sumActual = Sum.sum(x, y);
+        BigDecimal sumActual = Arithmetic.sum(x, y);
         sum = scaleForBigdecimal(sum.stripTrailingZeros());
         assertEquals(sum, sumActual);
     }
