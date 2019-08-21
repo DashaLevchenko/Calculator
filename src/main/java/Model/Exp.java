@@ -4,14 +4,14 @@ package Model;
 import java.math.BigDecimal;
 
 public class Exp {
-    public static String plusL(long number) {
-        String temp = Long.valueOf(number).toString();
-        if (number > Integer.MAX_VALUE) {
-            temp = number + "L";
-
-        }
-        return temp;
-    }
+//    public static String plusL(long number) {
+//        String temp = Long.valueOf(number).toString();
+//        if (number > Integer.MAX_VALUE) {
+//            temp = number + "L";
+//
+//        }
+//        return temp;
+//    }
 
     public static void main(String[] args) {
 //        System.out.println(Sum.sum(964197523864192L, 9641975238641969L));//10606172762506161//1,060617276250616e+16
@@ -34,17 +34,34 @@ public class Exp {
 //        long x = 593827124;//593827124, 5938271564L, 5344444440L,
 //        long y = 5938271564L;//593827124, 5938271564L, 5344444440L,
 //        System.out.println(plusL(x+y));
-        BigDecimal x = BigDecimal.valueOf(2.0);
-        BigDecimal y = BigDecimal.valueOf(20.0);
-
-        System.out.println(x.stripTrailingZeros());
-        System.out.println(y.stripTrailingZeros());
+//        BigDecimal x = scaleForBigdecimal(BigDecimal.valueOf(2.0).stripTrailingZeros());
+//        BigDecimal u = scaleForBigdecimal(BigDecimal.valueOf(2.8).stripTrailingZeros());
+//        BigDecimal y = scaleForBigdecimal(BigDecimal.valueOf(20.880).stripTrailingZeros());
+//        BigDecimal i = scaleForBigdecimal(BigDecimal.valueOf(20).stripTrailingZeros());
 //
-//    }
+//        System.out.println(x);
+//        System.out.println(u);
+//        System.out.println(y);
+//        System.out.println(i);
 
+        BigDecimal x = BigDecimal.valueOf(99999999999999999L);
+        BigDecimal y = BigDecimal.valueOf(99999999999999999L);
+        BigDecimal s = x.add(y);
+        System.out.println(s.stripTrailingZeros());
+        System.out.println(BigDecimal.valueOf(99999999999999999L));
+
+//
+    }
+    public static BigDecimal scaleForBigdecimal(BigDecimal numberDouble){
+
+        if (numberDouble.scale() < 0){
+            numberDouble = numberDouble.setScale(0);
+        }
+        return numberDouble;
+    }
 //    public static String exponent(String i){
 //        String result = i.replace("E", "e+" );
 //
 //        return result;
-    }
+//    }
 }

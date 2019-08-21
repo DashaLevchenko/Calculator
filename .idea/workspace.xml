@@ -7,7 +7,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="feaeb0c2-feb2-4a9c-98e3-48b1d1a339aa" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/User.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Exp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Exp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Model/SumTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/SumTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Model/Exp.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Model/Exp.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/Model/SumTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/Model/SumTest.class" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -64,7 +69,7 @@
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="editing.templates" />
   </component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.RecentsKey">
@@ -95,7 +100,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.SumTest.sumValidDoublePositiveNegative">
+  <component name="RunManager" selected="JUnit.SumTest">
     <configuration name="Exp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Model.Exp" />
       <module name="Calculator" />
@@ -182,10 +187,10 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.SumTest.sumValidDoublePositiveNegative" />
         <item itemvalue="JUnit.SumTest" />
-        <item itemvalue="JUnit.SumTest.sumNotValidDouble" />
+        <item itemvalue="JUnit.SumTest.sumValidDoublePositiveNegative" />
         <item itemvalue="Application.Exp" />
+        <item itemvalue="JUnit.SumTest.sumNotValidDouble" />
         <item itemvalue="JUnit.SumTest.sumValid" />
       </list>
     </recent_temporary>
@@ -195,7 +200,7 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="c070a032-b98d-46f2-baff-71bc64b5e7dd" name="Default Changelist" comment="" />
+      <changelist id="feaeb0c2-feb2-4a9c-98e3-48b1d1a339aa" name="Default Changelist" comment="" />
       <created>1565432602101</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -257,7 +262,56 @@
       <option name="project" value="LOCAL" />
       <updated>1566315859678</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="all work">
+      <created>1566317337168</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1566317337168</updated>
+    </task>
+    <task id="LOCAL-00010" summary="all work">
+      <created>1566317361719</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1566317361719</updated>
+    </task>
+    <task id="LOCAL-00011" summary="test">
+      <created>1566317445760</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1566317445760</updated>
+    </task>
+    <task id="LOCAL-00012" summary="All tests before sort">
+      <created>1566388514589</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1566388514589</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Problem with scale in sum() Expect 2, got 2.0">
+      <created>1566388566448</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1566388566448</updated>
+    </task>
+    <task id="LOCAL-00014" summary="No problem with scale in sum()">
+      <created>1566395525600</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1566395525600</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Before all input in BigDecimal">
+      <created>1566395569586</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1566395569586</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TodoView">
@@ -329,18 +383,12 @@
     <MESSAGE value="All works, before optimizing tests" />
     <MESSAGE value="new test sum" />
     <MESSAGE value="new workspace" />
+    <MESSAGE value="all work" />
     <MESSAGE value="test" />
-    <option name="LAST_COMMIT_MESSAGE" value="test" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/Model/SumTest.java</url>
-          <line>274</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="All tests before sort" />
+    <MESSAGE value="Problem with scale in sum() Expect 2, got 2.0" />
+    <MESSAGE value="No problem with scale in sum()" />
+    <MESSAGE value="Before all input in BigDecimal" />
+    <option name="LAST_COMMIT_MESSAGE" value="Before all input in BigDecimal" />
   </component>
 </project>
