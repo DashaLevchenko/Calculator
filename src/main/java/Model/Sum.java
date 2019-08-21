@@ -7,13 +7,15 @@ import java.math.MathContext;
 public class Sum {
 
     public static BigDecimal sum(BigDecimal x, BigDecimal y) {
-        return x.add(y);
+        return scaleForBigdecimal(x.add(y).stripTrailingZeros());
     }
 
-//    public BigDecimal scaleForBigdecimal(BigDecimal numberDouble){
-//        BigDecimal numberScaled;
-//
-//        return numberScaled;
-//    }
+    public static BigDecimal scaleForBigdecimal(BigDecimal numberDouble){
+
+        if (numberDouble.scale() < 0){
+            numberDouble = numberDouble.setScale(0);
+        }
+        return numberDouble;
+    }
 
 }
