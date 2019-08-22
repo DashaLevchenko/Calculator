@@ -1365,6 +1365,7 @@ class ArithmeticSumTest {
         BigDecimal sumActual = Arithmetic.sum(x, y);
         sum = scaleForBigdecimal(sum.stripTrailingZeros());
         assertEquals(sum, sumActual);
+        assertEquals(sum, scaleForBigdecimal(x.add(y).stripTrailingZeros()));
     }
 
     void combinationSumValidNegative(BigDecimal x, BigDecimal y, String sumXY, String minusXY) {
