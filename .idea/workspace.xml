@@ -7,10 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="feaeb0c2-feb2-4a9c-98e3-48b1d1a339aa" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Model/ArithmeticMinusTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/ArithmeticMinusTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Model/ArithmeticSumTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/ArithmeticSumTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Arithmetic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Arithmetic.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -320,7 +317,14 @@
       <option name="project" value="LOCAL" />
       <updated>1566395569586</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="all tests for minus() work">
+      <created>1566482113063</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1566482113063</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TodoView">
@@ -398,6 +402,7 @@
     <MESSAGE value="Problem with scale in sum() Expect 2, got 2.0" />
     <MESSAGE value="No problem with scale in sum()" />
     <MESSAGE value="Before all input in BigDecimal" />
-    <option name="LAST_COMMIT_MESSAGE" value="Before all input in BigDecimal" />
+    <MESSAGE value="all tests for minus() work" />
+    <option name="LAST_COMMIT_MESSAGE" value="all tests for minus() work" />
   </component>
 </project>

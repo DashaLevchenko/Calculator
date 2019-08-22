@@ -12,6 +12,9 @@ public class Arithmetic {
     public static BigDecimal minus(BigDecimal x, BigDecimal y) {
         return scaleForBigdecimal(x.subtract(y).stripTrailingZeros());
     }
+    public static BigDecimal multiply(BigDecimal x, BigDecimal y) {
+        return scaleForBigdecimal(x.multiply(y).stripTrailingZeros());
+    }
 
     public static BigDecimal scaleForBigdecimal(BigDecimal numberDouble){
 
