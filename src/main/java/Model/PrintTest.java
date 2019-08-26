@@ -1,13 +1,15 @@
 package Model;
 
+import static java.math.BigDecimal.valueOf;
+
 public class PrintTest {
 
     public static void main(String[] args) {
 
-        for (long i = 0, j = 9999999999999990L; i < 10; i++) {
-            System.out.println("assertionSumValid(" + j +"L, " + j + "L, " + (j+j)+"L);");
-            j++;
-        }
+//        for (long i = 0, j = 9999999999999990L; i < 10; i++) {
+//            System.out.println("assertionSumValid(" + j +"L, " + j + "L, " + (j+j)+"L);");
+//            j++;
+//        }
 //        for (long i = 2, j = 10; i < 100; i+=12, j += 123) {
 //            System.out.println("assertionSumValid(" + i +", " + -j + ", " + (i+-j)+ ");");
 //
@@ -24,6 +26,17 @@ public class PrintTest {
 //        for (long i = 0 ; i < 16; i++) {
 //            System.out.println("combinationsSumValid(" + number +", " + number + ");");
 //            number +=9;
+
+//        for (long i = 1; i < 11; i++) {
+//            for (int j = 1; j < 11; j++) {
+//                System.out.println("combinationMultiplyValidNegative(valueOf("+i+"), valueOf("+j+"), \""+(i*j)+"\");");
+//            }
 //        }
+
+        for (long i = 1; i < 11; i++) {
+            for (int j = 1; j < 11; j++) {
+                System.out.println("combinationDivideValidNegative(valueOf("+(i*j)+"), valueOf("+i+"), \""+j+"\");");
+            }
+        }
     }
 }
