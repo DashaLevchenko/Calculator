@@ -2,6 +2,7 @@ package Model;
 
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class Exp {
 //    public static String plusL(long number) {
@@ -44,14 +45,34 @@ public class Exp {
 //        System.out.println(y);
 //        System.out.println(i);
 
-        BigDecimal x = BigDecimal.valueOf(99999999999999999L);
-        BigDecimal y = BigDecimal.valueOf(99999999999999999L);
-        BigDecimal s = x.add(y);
-        System.out.println(s.stripTrailingZeros());
-        System.out.println(BigDecimal.valueOf(99999999999999999L));
+//        BigDecimal x = BigDecimal.valueOf(99999999999999999L);
+//        BigDecimal y = BigDecimal.valueOf(99999999999999999L);
+//        BigDecimal s = x.add(y);
+//        System.out.println(s.stripTrailingZeros());
+//        System.out.println(BigDecimal.valueOf(99999999999999999L));
 
-//
+        BigDecimal  numberZero = viewDecimalNumber(new BigDecimal("0.0665163472378805"));
+        BigDecimal  numberOne = viewDecimalNumber(new BigDecimal("1.0665163472378805"));
+        BigDecimal  numberTwo = viewDecimalNumber(new BigDecimal("13.8082191780821918"));
+        BigDecimal  numberThree = viewDecimalNumber(new BigDecimal("102.1538461538461538"));
+
+
+        System.out.println(numberZero);
+        System.out.println(numberOne);
+        System.out.println(numberTwo);
+        System.out.println(numberThree);
+
     }
+    public static BigDecimal viewDecimalNumber(BigDecimal number){
+        int scale;
+        if (number.compareTo(BigDecimal.ONE) > 0 || number.compareTo(BigDecimal.valueOf(-1)) < 0) {
+            int indexPoint = new StringBuilder(number.toPlainString()).indexOf(".");
+            scale = 16 - indexPoint;
+            number = number.setScale(scale, RoundingMode.HALF_UP);
+        }
+        return number;
+    }
+
     public static BigDecimal scaleForBigdecimal(BigDecimal numberDouble){
 
         if (numberDouble.scale() < 0){

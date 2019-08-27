@@ -22,7 +22,7 @@ public class Arithmetic {
         try {
             return scaleForBigdecimal(x.divide(y, 16, RoundingMode.HALF_UP).stripTrailingZeros());
         } catch (ArithmeticException e) {
-            throw new ArithmeticException("Деление на ноль невозможно");
+            throw new ArithmeticException("Cannot divide by zero");
         }
     }
 

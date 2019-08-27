@@ -1,5 +1,7 @@
 package Model;
 
+import java.util.Random;
+
 import static java.math.BigDecimal.valueOf;
 
 public class PrintTest {
@@ -32,11 +34,14 @@ public class PrintTest {
 //                System.out.println("combinationMultiplyValidNegative(valueOf("+i+"), valueOf("+j+"), \""+(i*j)+"\");");
 //            }
 //        }
-
-        for (long i = 1; i < 11; i++) {
-            for (int j = 1; j < 11; j++) {
-                System.out.println("combinationDivideValidNegative(valueOf("+(i*j)+"), valueOf("+i+"), \""+j+"\");");
-            }
+        //16
+        Random randomFirst = new Random();
+        Random randomSecond = new Random();
+        for (int i = 1; i < 11; i++) {
+            String firstFirst = Integer.valueOf(randomFirst.nextInt((100000000 - 10000000) + 1) + 10000000).toString();
+            String first = Integer.valueOf(randomFirst.nextInt((10000000 - 1000000) + 1) + 1000000).toString();
+            String second = Integer.valueOf(randomSecond.nextInt(999999999)).toString();
+            System.out.println("combinationDivideValidNegative(valueOf(" + i +firstFirst+ first + "L), valueOf(" + second + "), \"\");");
         }
     }
 }
