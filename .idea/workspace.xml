@@ -8,6 +8,7 @@
   <component name="ChangeListManager">
     <list default="true" id="feaeb0c2-feb2-4a9c-98e3-48b1d1a339aa" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Model/ArithmeticDivideTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/ArithmeticDivideTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/Model/ArithmeticSumTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/ArithmeticSumTest.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -101,22 +102,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.ArithmeticSumTest">
-    <configuration name="ArithmeticDivideTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Calculator" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Model.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="Model" />
-      <option name="MAIN_CLASS_NAME" value="Model.ArithmeticDivideTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="JUnit.Model in Calculator">
     <configuration name="ArithmeticDivideTest.divideValidInputIntegerDouble" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Calculator" />
       <extension name="coverage">
@@ -128,22 +114,6 @@
       <option name="PACKAGE_NAME" value="Model" />
       <option name="MAIN_CLASS_NAME" value="Model.ArithmeticDivideTest" />
       <option name="METHOD_NAME" value="divideValidInputIntegerDouble" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ArithmeticDivideTest.divideValidInputIntegerInteger" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Calculator" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Model.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="Model" />
-      <option name="MAIN_CLASS_NAME" value="Model.ArithmeticDivideTest" />
-      <option name="METHOD_NAME" value="divideValidInputIntegerInteger" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -180,20 +150,50 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="ArithmeticSumTest.sumValidInputIntegerInteger" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Calculator" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Model.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Model" />
+      <option name="MAIN_CLASS_NAME" value="Model.ArithmeticSumTest" />
+      <option name="METHOD_NAME" value="sumValidInputIntegerInteger" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Model in Calculator" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Calculator" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Model.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Model" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <list>
-      <item itemvalue="JUnit.ArithmeticDivideTest" />
-      <item itemvalue="JUnit.ArithmeticDivideTest.divideValidInputIntegerInteger" />
       <item itemvalue="JUnit.ArithmeticDivideTest.divideValidInputIntegerDouble" />
       <item itemvalue="JUnit.ArithmeticSumTest.sumValidInputIntegerDouble" />
       <item itemvalue="JUnit.ArithmeticSumTest" />
+      <item itemvalue="JUnit.ArithmeticSumTest.sumValidInputIntegerInteger" />
+      <item itemvalue="JUnit.Model in Calculator" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.Model in Calculator" />
+        <item itemvalue="JUnit.ArithmeticSumTest.sumValidInputIntegerInteger" />
         <item itemvalue="JUnit.ArithmeticSumTest" />
         <item itemvalue="JUnit.ArithmeticSumTest.sumValidInputIntegerDouble" />
         <item itemvalue="JUnit.ArithmeticDivideTest.divideValidInputIntegerDouble" />
-        <item itemvalue="JUnit.ArithmeticDivideTest" />
-        <item itemvalue="JUnit.ArithmeticDivideTest.divideValidInputIntegerInteger" />
       </list>
     </recent_temporary>
   </component>
@@ -351,7 +351,14 @@
       <option name="project" value="LOCAL" />
       <updated>1566918390009</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="less tests for sum">
+      <created>1566918940655</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1566918940655</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TodoView">
@@ -433,14 +440,15 @@
     <MESSAGE value="all tests for multiply() work" />
     <MESSAGE value="new tests for minus and divide, all work" />
     <MESSAGE value="all tests are working" />
-    <option name="LAST_COMMIT_MESSAGE" value="all tests are working" />
+    <MESSAGE value="less tests for sum" />
+    <option name="LAST_COMMIT_MESSAGE" value="less tests for sum" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/Model/ArithmeticDivideTest.java</url>
-          <line>54</line>
+          <line>53</line>
           <option name="timeStamp" value="12" />
         </line-breakpoint>
       </breakpoints>
