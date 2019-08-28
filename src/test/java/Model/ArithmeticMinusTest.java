@@ -1149,8 +1149,8 @@ class ArithmeticMinusTest {
     }
 
     void combinationMinusValidNegative(BigDecimal x, BigDecimal y, String sumXY, String minusXY) {
-        BigDecimal xNegative = x.divide(valueOf(-1));
-        BigDecimal yNegative = y.divide(valueOf(-1));
+        BigDecimal xNegative = x.negate();
+        BigDecimal yNegative = y.negate();
         String minusXYNegative = "-" + minusXY;
         String sumXYNegative = "-" + sumXY;
 

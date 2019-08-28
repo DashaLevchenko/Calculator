@@ -1,6 +1,7 @@
 package Model;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.math.RoundingMode;
 
 
@@ -24,6 +25,14 @@ public class Arithmetic {
         } catch (ArithmeticException e) {
             throw new ArithmeticException("Cannot divide by zero");
         }
+    }
+    public static BigDecimal squareRoot(BigDecimal x) throws ArithmeticException {
+//        try {
+            return scaleForBigdecimal(x.sqrt(MathContext.DECIMAL64).stripTrailingZeros());
+//            return x.sqrt(MathContext.DECIMAL64);
+//        } catch (ArithmeticException e) {
+//            throw new ArithmeticException("Invalid input");
+//        }
     }
 
     public static BigDecimal scaleForBigdecimal(BigDecimal numberDouble){

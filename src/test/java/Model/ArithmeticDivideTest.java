@@ -3,6 +3,7 @@ package Model;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.math.RoundingMode;
 
 import static java.math.BigDecimal.valueOf;
@@ -1252,8 +1253,6 @@ class ArithmeticDivideTest {
         combinationDivideValidNegative(valueOf(9999999999999999L), valueOf(999999999999999.9), "10");
         combinationDivideValidNegative(valueOf(10000000000000000L), valueOf(0.1), "100000000000000000");
 
-
-
         //region Description
         combinationDivideValidNegative(valueOf(108), valueOf(7.3), "14.7945205479452055");
         combinationDivideValidNegative(valueOf(129), valueOf(0.17), "758.8235294117647059");
@@ -1570,8 +1569,8 @@ class ArithmeticDivideTest {
     }
 
     void combinationDivideValidNegative(BigDecimal x, BigDecimal y, String divideXY) {
-        BigDecimal xNegative = x.divide(valueOf(-1));
-        BigDecimal yNegative = y.divide(valueOf(-1));
+        BigDecimal xNegative = x.negate();
+        BigDecimal yNegative = y.negate();
         String divideXYNegative = "-" + divideXY;
 
 

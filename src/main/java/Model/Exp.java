@@ -51,16 +51,19 @@ public class Exp {
 //        System.out.println(s.stripTrailingZeros());
 //        System.out.println(BigDecimal.valueOf(99999999999999999L));
 
-        BigDecimal  numberZero = viewDecimalNumber(new BigDecimal("0.0665163472378805"));
-        BigDecimal  numberOne = viewDecimalNumber(new BigDecimal("1.0665163472378805"));
-        BigDecimal  numberTwo = viewDecimalNumber(new BigDecimal("13.8082191780821918"));
-        BigDecimal  numberThree = viewDecimalNumber(new BigDecimal("102.1538461538461538"));
-
-
-        System.out.println(numberZero);
-        System.out.println(numberOne);
-        System.out.println(numberTwo);
-        System.out.println(numberThree);
+        //region for view
+//        BigDecimal  numberZero = viewDecimalNumber(new BigDecimal("0.0665163472378805"));
+//        BigDecimal  numberOne = viewDecimalNumber(new BigDecimal("1.0665163472378805"));
+//        BigDecimal  numberTwo = viewDecimalNumber(new BigDecimal("13.8082191780821918"));
+//        BigDecimal  numberThree = viewDecimalNumber(new BigDecimal("102.1538461538461538"));
+//
+//
+//        System.out.println(numberZero);
+//        System.out.println(numberOne);
+//        System.out.println(numberTwo);
+//        System.out.println(numberThree);
+        //endregion
+        System.out.println(BigDecimal.valueOf(99).negate());
 
     }
     public static BigDecimal viewDecimalNumber(BigDecimal number){

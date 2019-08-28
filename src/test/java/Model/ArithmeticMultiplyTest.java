@@ -1245,8 +1245,8 @@ class ArithmeticMultiplyTest {
     }
 
     void combinationMultiplyValidNegative(BigDecimal x, BigDecimal y, String multiplyXY) {
-        BigDecimal xNegative = x.divide(valueOf(-1));
-        BigDecimal yNegative = y.divide(valueOf(-1));
+        BigDecimal xNegative = x.negate();
+        BigDecimal yNegative = y.negate();
         String multiplyXYNegative = "-" + multiplyXY;
 
 
