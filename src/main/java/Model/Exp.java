@@ -2,6 +2,7 @@ package Model;
 
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.math.RoundingMode;
 
 public class Exp {
@@ -63,7 +64,11 @@ public class Exp {
 //        System.out.println(numberTwo);
 //        System.out.println(numberThree);
         //endregion
-        System.out.println(BigDecimal.valueOf(99).negate());
+      BigDecimal x = BigDecimal.valueOf(3);
+      BigDecimal y = BigDecimal.valueOf(3.89898);
+        System.out.println(x.scale());
+        System.out.println(y.scale());
+
 
     }
     public static BigDecimal viewDecimalNumber(BigDecimal number){

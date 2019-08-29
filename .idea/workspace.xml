@@ -7,16 +7,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="feaeb0c2-feb2-4a9c-98e3-48b1d1a339aa" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/test/java/Model/ArithmeticSquerRootTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/Model/ArithmeticXSquerTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Model/Arithmetic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Arithmetic.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Model/Exp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Exp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/PrintTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/PrintTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/Model/ArithmeticDivideTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/ArithmeticDivideTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/Model/ArithmeticMinusTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/ArithmeticMinusTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/Model/ArithmeticMultiplyTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/ArithmeticMultiplyTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Model/ArithmeticSquerRootTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/ArithmeticSquerRootTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/Model/ArithmeticSumTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/ArithmeticSumTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Model/Arithmetic.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Model/Arithmetic.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Model/Exp.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Model/Exp.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Model/PrintTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Model/PrintTest.class" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -26,6 +29,9 @@
   </component>
   <component name="CoverageViewManager">
     <option name="myElementSize" value="214" />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="Calculator" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -58,6 +64,11 @@
         </map>
       </branch-storage>
     </excluded-from-favorite>
+  </component>
+  <component name="JavaAutoRunManager">
+    <enabled-run-configurations>
+      <run-configuration type="JUnit" name="Rerun Failed Tests" />
+    </enabled-run-configurations>
   </component>
   <component name="MavenImportPreferences">
     <option name="importingSettings">
@@ -109,7 +120,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.ArithmeticSquerRootTest.squareRootValid">
+  <component name="RunManager" selected="JUnit.ArithmeticXSquerTest">
     <configuration name="Exp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Model.Exp" />
       <module name="Calculator" />
@@ -123,7 +134,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ArithmeticDivideTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ArithmeticDivideTest.divideValidInputIntegerDouble" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Calculator" />
       <extension name="coverage">
         <pattern>
@@ -133,12 +144,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="Model" />
       <option name="MAIN_CLASS_NAME" value="Model.ArithmeticDivideTest" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="METHOD_NAME" value="divideValidInputIntegerDouble" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ArithmeticSquerRootTest.squareRootValid" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ArithmeticSquerRootTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Calculator" />
       <extension name="coverage">
         <pattern>
@@ -148,13 +160,12 @@
       </extension>
       <option name="PACKAGE_NAME" value="Model" />
       <option name="MAIN_CLASS_NAME" value="Model.ArithmeticSquerRootTest" />
-      <option name="METHOD_NAME" value="squareRootValid" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ArithmeticSumTest.sumValidInputIntegerInteger" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ArithmeticSquerRootTest.squareRootNOTValid" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Calculator" />
       <extension name="coverage">
         <pattern>
@@ -163,14 +174,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="Model" />
-      <option name="MAIN_CLASS_NAME" value="Model.ArithmeticSumTest" />
-      <option name="METHOD_NAME" value="sumValidInputIntegerInteger" />
+      <option name="MAIN_CLASS_NAME" value="Model.ArithmeticSquerRootTest" />
+      <option name="METHOD_NAME" value="squareRootNOTValid" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Model in Calculator" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ArithmeticXSquerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Calculator" />
       <extension name="coverage">
         <pattern>
@@ -179,25 +190,26 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="Model" />
-      <option name="TEST_OBJECT" value="package" />
+      <option name="MAIN_CLASS_NAME" value="Model.ArithmeticXSquerTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <list>
-      <item itemvalue="JUnit.ArithmeticSumTest.sumValidInputIntegerInteger" />
-      <item itemvalue="JUnit.Model in Calculator" />
       <item itemvalue="Application.Exp" />
-      <item itemvalue="JUnit.ArithmeticDivideTest" />
-      <item itemvalue="JUnit.ArithmeticSquerRootTest.squareRootValid" />
+      <item itemvalue="JUnit.ArithmeticDivideTest.divideValidInputIntegerDouble" />
+      <item itemvalue="JUnit.ArithmeticSquerRootTest" />
+      <item itemvalue="JUnit.ArithmeticSquerRootTest.squareRootNOTValid" />
+      <item itemvalue="JUnit.ArithmeticXSquerTest" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.ArithmeticSquerRootTest.squareRootValid" />
-        <item itemvalue="JUnit.ArithmeticDivideTest" />
-        <item itemvalue="JUnit.Model in Calculator" />
+        <item itemvalue="JUnit.ArithmeticXSquerTest" />
+        <item itemvalue="JUnit.ArithmeticSquerRootTest" />
+        <item itemvalue="JUnit.ArithmeticSquerRootTest.squareRootNOTValid" />
+        <item itemvalue="JUnit.ArithmeticDivideTest.divideValidInputIntegerDouble" />
         <item itemvalue="Application.Exp" />
-        <item itemvalue="JUnit.ArithmeticSumTest.sumValidInputIntegerInteger" />
       </list>
     </recent_temporary>
   </component>
@@ -369,7 +381,14 @@
       <option name="project" value="LOCAL" />
       <updated>1567001362926</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="need to sort all tests besides sumTest,&#10;new method squareRoot(), writing tests">
+      <created>1567006020714</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1567006020715</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TodoView">
@@ -453,18 +472,8 @@
     <MESSAGE value="all tests are working" />
     <MESSAGE value="less tests for sum" />
     <MESSAGE value="need to sort all tests besides sumTest" />
-    <option name="LAST_COMMIT_MESSAGE" value="need to sort all tests besides sumTest" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/Model/ArithmeticDivideTest.java</url>
-          <line>54</line>
-          <option name="timeStamp" value="12" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="need to sort all tests besides sumTest,&#10;new method squareRoot(), writing tests" />
+    <option name="LAST_COMMIT_MESSAGE" value="need to sort all tests besides sumTest,&#10;new method squareRoot(), writing tests" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Calculator$Model_in_Calculator.ic" NAME="Model in Calculator Coverage Results" MODIFIED="1566916135185" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

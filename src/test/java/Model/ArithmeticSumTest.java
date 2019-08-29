@@ -3,6 +3,8 @@ package Model;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 
 
 import static java.math.BigDecimal.*;
@@ -196,7 +198,7 @@ class ArithmeticSumTest {
         combinationSumValidNegative(valueOf(4647), valueOf(74556387735L), "74556392382", "74556383088");
         combinationSumValidNegative(valueOf(4781), valueOf(4567), "9348", "214");
         combinationSumValidNegative(valueOf(4856), valueOf(45577), "50433", "40721");
-        combinationSumValidNegative(valueOf(4986), valueOf(342578735543543432L), "342578735543548418", "342578735543538446");
+        combinationSumValidNegative(valueOf(4986), valueOf(3425787355435434L), "3425787355440420", "3425787355430448");
         combinationSumValidNegative(valueOf(5086), valueOf(309059), "314145", "303973");
         combinationSumValidNegative(valueOf(5154), valueOf(621), "5775", "4533");
         combinationSumValidNegative(valueOf(5243), valueOf(473), "5716", "4770");
@@ -563,15 +565,16 @@ class ArithmeticSumTest {
         combinationSumValidNegative(valueOf(5555555555555555L), valueOf(5555555555555555L), "11111111111111110", "0");
         combinationSumValidNegative(valueOf(5989302613023979L), valueOf(345), "5989302613024324", "5989302613023634");
         combinationSumValidNegative(valueOf(6641544716331561L), valueOf(45), "6641544716331606", "6641544716331516");
-        combinationSumValidNegative(valueOf(6666666666666666L), valueOf(6666666666666666L), "13333333333333332", "0");
+        combinationSumValidNegative(valueOf(6666666666666666L), valueOf(6666666666666666L), "13333333333333330", "0");
         combinationSumValidNegative(valueOf(7396263949590271L), valueOf(35657), "7396263949625928", "7396263949554614");
-        combinationSumValidNegative(valueOf(7777777777777777L), valueOf(7777777777777777L), "15555555555555554", "0");
+        combinationSumValidNegative(valueOf(7777777777777777L), valueOf(7777777777777777L), "15555555555555550", "0");
         combinationSumValidNegative(valueOf(8186213672826316L), valueOf(3554545343443L), "8189768218169759", "8182659127482873");
-        combinationSumValidNegative(valueOf(8888888888888888L), valueOf(8888888888888888L), "17777777777777776", "0");
+        combinationSumValidNegative(valueOf(8888888888888888L), valueOf(8888888888888888L), "17777777777777780", "0");
         combinationSumValidNegative(valueOf(9565533382416259L), valueOf(44), "9565533382416303", "9565533382416215");
-        combinationSumValidNegative(valueOf(9999999999999999L), valueOf(9999999999999999L), "19999999999999998", "0");
-        combinationSumValidNegative(valueOf(10289622287797479L), valueOf(349675), "10289622288147154", "10289622287447804");
+        combinationSumValidNegative(valueOf(9999999999999999L), valueOf(9999999999999999L), "20000000000000000", "0");
+        combinationSumValidNegative(valueOf(10289622287797479L), valueOf(349675), "10289622288147150", "10289622287447800");
         combinationSumValidNegative(valueOf(10000000000000000L), valueOf(10000000000000000L), "20000000000000000", "0");
+
     }
 
     @Test
@@ -759,7 +762,7 @@ class ArithmeticSumTest {
         combinationSumValidNegative(valueOf(4647), valueOf(7455.236387735), "12102.236387735", "2808.236387735");
         combinationSumValidNegative(valueOf(4781), valueOf(45676.6), "50457.6", "40895.6");
         combinationSumValidNegative(valueOf(4856), valueOf(455.2277), "5311.2277", "4400.7723");
-        combinationSumValidNegative(valueOf(4986), valueOf(342578.67355435435), "347564.67355435435", "337592.67355435435");
+        combinationSumValidNegative(valueOf(4986), valueOf(342578.6735543543), "347564.6735543543", "337592.6735543543");
         combinationSumValidNegative(valueOf(5086), valueOf(3090.659), "8176.659", "1995.341");
         combinationSumValidNegative(valueOf(5154), valueOf(62.21), "5216.21", "5091.79");
         combinationSumValidNegative(valueOf(5243), valueOf(47.263), "5290.263", "5195.737");
@@ -981,7 +984,7 @@ class ArithmeticSumTest {
         combinationSumValidNegative(valueOf(9641975237L), valueOf(9641975238.4), "19283950475.4", "1.4");
         combinationSumValidNegative(valueOf(9999999999L), valueOf(999999999.9), "10999999998.9", "8999999999.1");
         combinationSumValidNegative(valueOf(10000000000L), valueOf(0.1), "10000000000.1", "9999999999.9");
-        combinationSumValidNegative(valueOf(10648346070L), valueOf(385.2686874687468), "10648346455.2686874687468", "10648345684.7313125312532");
+        combinationSumValidNegative(valueOf(10648346070L), valueOf(385.2686874687468), "10648346455.26869", "10648345684.73131");
         combinationSumValidNegative(valueOf(11111111111L), valueOf(1111111111.1), "12222222222.1", "9999999999.9");
         combinationSumValidNegative(valueOf(15885072310L), valueOf(2.3522), "15885072312.3522", "15885072307.6478");
         combinationSumValidNegative(valueOf(22222222222L), valueOf(2222222222.2), "24444444444.2", "19999999999.8");
@@ -1037,113 +1040,111 @@ class ArithmeticSumTest {
         combinationSumValidNegative(valueOf(1000000000000L), valueOf(0.1), "1000000000000.1", "999999999999.9");
         combinationSumValidNegative(valueOf(1043076933286L), valueOf(34.525), "1043076933320.525", "1043076933251.475");
         combinationSumValidNegative(valueOf(1111111111111L), valueOf(111111111111.1), "1222222222222.1", "999999999999.9");
-        combinationSumValidNegative(valueOf(1661976720562L), valueOf(0.52524), "1661976720562.52524", "1661976720561.47476");
+        combinationSumValidNegative(valueOf(1661976720562L), valueOf(0.52524), "1661976720562.525", "1661976720561.475");
         combinationSumValidNegative(valueOf(2222222222222L), valueOf(222222222222.2), "2444444444444.2", "1999999999999.8");
         combinationSumValidNegative(valueOf(2234567891234L), valueOf(2234567891234.5), "4469135782468.5", "0.5");
-        combinationSumValidNegative(valueOf(2541625608378L), valueOf(7.25234), "2541625608385.25234", "2541625608370.74766");
-        combinationSumValidNegative(valueOf(3167388668972L), valueOf(3.5254), "3167388668975.5254", "3167388668968.4746");
+        combinationSumValidNegative(valueOf(2541625608378L), valueOf(7.25234), "2541625608385.252", "2541625608370.748");
+        combinationSumValidNegative(valueOf(3167388668972L), valueOf(3.5254), "3167388668975.525", "3167388668968.475");
         combinationSumValidNegative(valueOf(3333333333333L), valueOf(333333333333.3), "3666666666666.3", "2999999999999.7");
         combinationSumValidNegative(valueOf(3469135782468L), valueOf(346913578246.9), "3816049360714.9", "3122222204221.1");
         combinationSumValidNegative(valueOf(4444444444444L), valueOf(444444444444.4), "4888888888888.4", "3999999999999.6");
-        combinationSumValidNegative(valueOf(4696818168135L), valueOf(467.2534), "4696818168602.2534", "4696818167667.7466");
+        combinationSumValidNegative(valueOf(4696818168135L), valueOf(467.2534), "4696818168602.253", "4696818167667.747");
         combinationSumValidNegative(valueOf(4703703673702L), valueOf(4703703673703.5), "9407407347405.5", "1.5");
         combinationSumValidNegative(valueOf(5555555555555L), valueOf(555555555555.5), "6111111111110.5", "4999999999999.5");
-        combinationSumValidNegative(valueOf(5786237141698L), valueOf(54.2566), "5786237141752.2566", "5786237141643.7434");
+        combinationSumValidNegative(valueOf(5786237141698L), valueOf(54.2566), "5786237141752.257", "5786237141643.743");
         combinationSumValidNegative(valueOf(5938271564936L), valueOf(593827156493.8), "6532098721429.8", "5344444408442.2");
-        combinationSumValidNegative(valueOf(6578868631288L), valueOf(45.5265), "6578868631333.5265", "6578868631242.4735");
+        combinationSumValidNegative(valueOf(6578868631288L), valueOf(45.5265), "6578868631333.527", "6578868631242.474");
         combinationSumValidNegative(valueOf(6666666666666L), valueOf(666666666666.6), "7333333333332.6", "5999999999999.4");
         combinationSumValidNegative(valueOf(7172839456170L), valueOf(7172839456172.5), "14345678912342.5", "2.5");
         combinationSumValidNegative(valueOf(7678437626710L), valueOf(435.525), "7678437627145.525", "7678437626274.475");
         combinationSumValidNegative(valueOf(7777777777777L), valueOf(777777777777.7), "8555555555554.7", "6999999999999.3");
-        combinationSumValidNegative(valueOf(8115228240773L), valueOf(3.2555), "8115228240776.2555", "8115228240769.7445");
+        combinationSumValidNegative(valueOf(8115228240773L), valueOf(3.2555), "8115228240776.256", "8115228240769.745");
         combinationSumValidNegative(valueOf(8407407347404L), valueOf(840740734740.7), "9248148082144.7", "7566666612663.3");
         combinationSumValidNegative(valueOf(8888888888888L), valueOf(888888888888.8), "9777777777776.8", "7999999999999.2");
         combinationSumValidNegative(valueOf(9383872832927L), valueOf(26.527), "9383872832953.527", "9383872832900.473");
         combinationSumValidNegative(valueOf(9641975238638L), valueOf(9641975238641.5), "19283950477279.5", "3.5");
         combinationSumValidNegative(valueOf(9999999999999L), valueOf(999999999999.9), "10999999999998.9", "8999999999999.1");
         combinationSumValidNegative(valueOf(10000000000000L), valueOf(0.1), "10000000000000.1", "9999999999999.9");
-        combinationSumValidNegative(valueOf(10912669268058L), valueOf(4.2525), "10912669268062.2525", "10912669268053.7475");
+        combinationSumValidNegative(valueOf(10912669268058L), valueOf(4.2525), "10912669268062.25", "10912669268053.75");
         combinationSumValidNegative(valueOf(11111111111111L), valueOf(1111111111111.1), "12222222222222.1", "9999999999999.9");
-        combinationSumValidNegative(valueOf(18967900763277L), valueOf(4.5233), "18967900763281.5233", "18967900763272.4767");
+        combinationSumValidNegative(valueOf(18967900763277L), valueOf(4.5233), "18967900763281.52", "18967900763272.48");
         combinationSumValidNegative(valueOf(22222222222222L), valueOf(2222222222222.2), "24444444444444.2", "19999999999999.8");
         combinationSumValidNegative(valueOf(22345678912345L), valueOf(22345678912345.6), "44691357824690.6", "0.6");
         combinationSumValidNegative(valueOf(28814421473798L), valueOf(45552.67), "28814421519350.67", "28814421428245.33");
         combinationSumValidNegative(valueOf(33333333333333L), valueOf(3333333333333.3), "36666666666666.3", "29999999999999.7");
-        combinationSumValidNegative(valueOf(34932665441977L), valueOf(2.524), "34932665441979.524", "34932665441974.476");
+        combinationSumValidNegative(valueOf(34932665441977L), valueOf(2.524), "34932665441979.52", "34932665441974.48");
         combinationSumValidNegative(valueOf(34691357824690L), valueOf(34691357824691.2), "69382715649381.2", "1.2");
-        combinationSumValidNegative(valueOf(41906397884264L), valueOf(0.525345), "41906397884264.525345", "41906397884263.474655");
+        combinationSumValidNegative(valueOf(41906397884264L), valueOf(0.525345), "41906397884264.53", "41906397884263.47");
         combinationSumValidNegative(valueOf(44444444444444L), valueOf(4444444444444.4), "48888888888888.4", "39999999999999.6");
         combinationSumValidNegative(valueOf(47037036737035L), valueOf(47037036737036.8), "94074073474071.8", "1.8");
-        combinationSumValidNegative(valueOf(53210422959869L), valueOf(435.565), "53210422960304.565", "53210422959433.435");
+        combinationSumValidNegative(valueOf(53210422959869L), valueOf(435.565), "53210422960304.57", "53210422959433.44");
         combinationSumValidNegative(valueOf(55555555555555L), valueOf(5555555555555.5), "61111111111110.5", "49999999999999.5");
-        combinationSumValidNegative(valueOf(62684106579307L), valueOf(34.554), "62684106579341.554", "62684106579272.446");
+        combinationSumValidNegative(valueOf(62684106579307L), valueOf(34.554), "62684106579341.55", "62684106579272.45");
         combinationSumValidNegative(valueOf(59382715649380L), valueOf(59382715649382.4), "118765431298762.4", "2.4");
         combinationSumValidNegative(valueOf(66666666666666L), valueOf(6666666666666.6), "73333333333332.6", "59999999999999.4");
         combinationSumValidNegative(valueOf(71728394561725L), valueOf(7172839456172.8), "78901234017897.8", "64555555105552.2");
         combinationSumValidNegative(valueOf(77636461990006L), valueOf(2.53), "77636461990008.53", "77636461990003.47");
         combinationSumValidNegative(valueOf(77777777777777L), valueOf(7777777777777.7), "85555555555554.7", "69999999999999.3");
-        combinationSumValidNegative(valueOf(83934923104566L), valueOf(3.554524), "83934923104569.554524", "83934923104562.445476");
+        combinationSumValidNegative(valueOf(83934923104566L), valueOf(3.554524), "83934923104569.55", "83934923104562.45");
         combinationSumValidNegative(valueOf(84074073474070L), valueOf(84074073474073.6), "168148146948143.6", "3.6");
         combinationSumValidNegative(valueOf(88888888888888L), valueOf(8888888888888.8), "97777777777776.8", "79999999999999.2");
         combinationSumValidNegative(valueOf(96419752386415L), valueOf(96419752386419.2), "192839504772834.2", "4.2");
-        combinationSumValidNegative(valueOf(97574217892059L), valueOf(35.525), "97574217892094.525", "97574217892023.475");
+        combinationSumValidNegative(valueOf(97574217892059L), valueOf(35.525), "97574217892094.53", "97574217892023.48");
         combinationSumValidNegative(valueOf(99999999999999L), valueOf(9999999999999.9), "109999999999998.9", "89999999999999.1");
         combinationSumValidNegative(valueOf(100000000000000L), valueOf(0.1), "100000000000000.1", "99999999999999.9");
-        combinationSumValidNegative(valueOf(109975967636925L), valueOf(32.2523), "109975967636957.2523", "109975967636892.7477");
+        combinationSumValidNegative(valueOf(109975967636925L), valueOf(32.2523), "109975967636957.3", "109975967636892.7");
         combinationSumValidNegative(valueOf(111111111111111L), valueOf(11111111111111.1), "122222222222222.1", "99999999999999.9");
-        combinationSumValidNegative(valueOf(139127866523754L), valueOf(6.257), "139127866523760.257", "139127866523747.743");
+        combinationSumValidNegative(valueOf(139127866523754L), valueOf(6.257), "139127866523760.3", "139127866523747.7");
         combinationSumValidNegative(valueOf(222222222222222L), valueOf(22222222222222.2), "244444444444444.2", "199999999999999.8");
         combinationSumValidNegative(valueOf(223456789123456L), valueOf(223456789123456.7), "446913578246912.7", "0.7");
-        combinationSumValidNegative(valueOf(280338152300756L), valueOf(9.5254), "280338152300765.5254", "280338152300746.4746");
+        combinationSumValidNegative(valueOf(280338152300756L), valueOf(9.5254), "280338152300765.5", "280338152300746.5");
         combinationSumValidNegative(valueOf(333333333333333L), valueOf(33333333333333.3), "366666666666666.3", "299999999999999.7");
         combinationSumValidNegative(valueOf(346913578246912L), valueOf(346913578246913.4), "693827156493825.4", "1.4");
-        combinationSumValidNegative(valueOf(393062283969216L), valueOf(2.523), "393062283969218.523", "393062283969213.477");
+        combinationSumValidNegative(valueOf(393062283969216L), valueOf(2.523), "393062283969218.5", "393062283969213.5");
         combinationSumValidNegative(valueOf(444444444444444L), valueOf(44444444444444.4), "488888888888888.4", "399999999999999.6");
         combinationSumValidNegative(valueOf(470370367370368L), valueOf(470370367370370.1), "940740734740738.1", "2.1");
-        combinationSumValidNegative(valueOf(495517864676273L), valueOf(3.54), "495517864676276.54", "495517864676269.46");
+        combinationSumValidNegative(valueOf(495517864676273L), valueOf(3.54), "495517864676276.5", "495517864676269.5");
         combinationSumValidNegative(valueOf(555555555555555L), valueOf(55555555555555.5), "611111111111110.5", "499999999999999.5");
-        combinationSumValidNegative(valueOf(565933996761014L), valueOf(1632.525), "565933996762646.525", "565933996759381.475");
-        combinationSumValidNegative(valueOf(593827156493824L), valueOf(593827156493826.8), "1187654312987650.8", "2.8");
-        combinationSumValidNegative(valueOf(613324119312512L), valueOf(3.523), "613324119312515.523", "613324119312508.477");
+        combinationSumValidNegative(valueOf(565933996761014L), valueOf(1632.525), "565933996762646.5", "565933996759381.5");
+        combinationSumValidNegative(valueOf(593827156493824L), valueOf(593827156493826.8), "1187654312987651", "2.8");
+        combinationSumValidNegative(valueOf(613324119312512L), valueOf(3.523), "613324119312515.5", "613324119312508.5");
         combinationSumValidNegative(valueOf(666666666666666L), valueOf(66666666666666.6), "733333333333332.6", "599999999999999.4");
-        combinationSumValidNegative(valueOf(717283945617280L), valueOf(717283945617283.5), "1434567891234563.5", "3.5");
-        combinationSumValidNegative(valueOf(725359517350599L), valueOf(213.5255), "725359517350812.5255", "725359517350385.4745");
+        combinationSumValidNegative(valueOf(717283945617280L), valueOf(717283945617283.5), "1434567891234564", "3.5");
+        combinationSumValidNegative(valueOf(725359517350599L), valueOf(213.5255), "725359517350812.5", "725359517350385.5");
         combinationSumValidNegative(valueOf(777777777777777L), valueOf(77777777777777.7), "855555555555554.7", "699999999999999.3");
-        combinationSumValidNegative(valueOf(822140431376958L), valueOf(0.525234), "822140431376958.525234", "822140431376957.474766");
-        combinationSumValidNegative(valueOf(840740734740736L), valueOf(840740734740740.2), "1681481469481476.2", "4.2");
+        combinationSumValidNegative(valueOf(822140431376958L), valueOf(0.525234), "822140431376958.5", "822140431376957.5");
+        combinationSumValidNegative(valueOf(840740734740736L), valueOf(840740734740740.2), "1681481469481476", "4.2");
         combinationSumValidNegative(valueOf(888888888888888L), valueOf(88888888888888.8), "977777777777776.8", "799999999999999.2");
-        combinationSumValidNegative(valueOf(973287862158423L), valueOf(227525.29), "973287862385948.29", "973287861930897.71");
-        combinationSumValidNegative(valueOf(999999999999999L), valueOf(99999999999999.9), "1099999999999998.9", "899999999999999.1");
-        combinationSumValidNegative(valueOf(1000000000000000L), valueOf(0.1), "1000000000000000.1", "999999999999999.9");
-        combinationSumValidNegative(valueOf(1082424349226241L), valueOf(0.55234), "1082424349226241.55234", "1082424349226240.44766");
-        combinationSumValidNegative(valueOf(1107365378852798L), valueOf(3.523565), "1107365378852801.523565", "1107365378852794.476435");
-        combinationSumValidNegative(valueOf(1111111111111111L), valueOf(111111111111111.1), "1222222222222222.1", "999999999999999.9");
-        combinationSumValidNegative(valueOf(2222222222222222L), valueOf(222222222222222.2), "2444444444444444.2", "1999999999999999.8");
-        combinationSumValidNegative(valueOf(2521185208088925L), valueOf(24.35), "2521185208088949.35", "2521185208088900.65");
-        combinationSumValidNegative(valueOf(3333333333333333L), valueOf(333333333333333.3), "3666666666666666.3", "2999999999999999.7");
-        combinationSumValidNegative(valueOf(3390604897575657L), valueOf(4.4), "3390604897575661.4", "3390604897575652.6");
-        combinationSumValidNegative(valueOf(4444444444444444L), valueOf(444444444444444.4), "4888888888888888.4", "3999999999999999.6");
-        combinationSumValidNegative(valueOf(4692689393420864L), valueOf(4.5), "4692689393420868.5", "4692689393420859.5");
-        combinationSumValidNegative(valueOf(5555555555555555L), valueOf(555555555555555.5), "6111111111111110.5", "4999999999999999.5");
-        combinationSumValidNegative(valueOf(5989302613023979L), valueOf(3.45), "5989302613023982.45", "5989302613023975.55");
-        combinationSumValidNegative(valueOf(6641544716331561L), valueOf(45.52), "6641544716331606.52", "6641544716331515.48");
-        combinationSumValidNegative(valueOf(6666666666666666L), valueOf(666666666666666.6), "7333333333333332.6", "5999999999999999.4");
-        combinationSumValidNegative(valueOf(7396263949590271L), valueOf(356.57), "7396263949590627.57", "7396263949589914.43");
-        combinationSumValidNegative(valueOf(7777777777777777L), valueOf(777777777777777.8), "8555555555555554.8", "6999999999999999.2");
-        combinationSumValidNegative(valueOf(8186213672826316L), valueOf(3554.545343443), "8186213672829870.545343443", "8186213672822761.454656557");
-        combinationSumValidNegative(valueOf(8888888888888888L), valueOf(888888888888888.8), "9777777777777776.8", "7999999999999999.2");
-        combinationSumValidNegative(valueOf(9565533382416259L), valueOf(4.5214), "9565533382416263.5214", "9565533382416254.4786");
-        combinationSumValidNegative(valueOf(9999999999999999L), valueOf(999999999999999.9), "10999999999999998.9", "8999999999999999.1");
-        combinationSumValidNegative(valueOf(10000000000000000L), valueOf(0.1), "10000000000000000.1", "9999999999999999.9");
-        combinationSumValidNegative(valueOf(10289622287797479L), valueOf(349.10675), "10289622287797828.10675", "10289622287797129.89325");
-
+        combinationSumValidNegative(valueOf(973287862158423L), valueOf(227525.29), "973287862385948.3", "973287861930897.7");
+        combinationSumValidNegative(valueOf(999999999999999L), valueOf(99999999999999.9), "1099999999999999", "899999999999999.1");
+        combinationSumValidNegative(valueOf(1000000000000000L), valueOf(0.1), "1000000000000000", "999999999999999.9");
+        combinationSumValidNegative(valueOf(1082424349226241L), valueOf(0.55234), "1082424349226242", "1082424349226240");
+        combinationSumValidNegative(valueOf(1107365378852798L), valueOf(3.523565), "1107365378852802", "1107365378852794");
+        combinationSumValidNegative(valueOf(1111111111111111L), valueOf(111111111111111.1), "1222222222222222", "999999999999999.9");
+        combinationSumValidNegative(valueOf(2222222222222222L), valueOf(222222222222222.2), "2444444444444444", "2000000000000000");
+        combinationSumValidNegative(valueOf(2521185208088925L), valueOf(24.35), "2521185208088949", "2521185208088901");
+        combinationSumValidNegative(valueOf(3333333333333333L), valueOf(333333333333333.3), "3666666666666666", "3000000000000000");
+        combinationSumValidNegative(valueOf(3390604897575657L), valueOf(4.4), "3390604897575661", "3390604897575653");
+        combinationSumValidNegative(valueOf(4444444444444444L), valueOf(444444444444444.4), "4888888888888888", "4000000000000000");
+        combinationSumValidNegative(valueOf(4692689393420864L), valueOf(4.5), "4692689393420869", "4692689393420860");
+        combinationSumValidNegative(valueOf(5555555555555555L), valueOf(555555555555555.5), "6111111111111111", "5000000000000000");
+        combinationSumValidNegative(valueOf(5989302613023979L), valueOf(3.45), "5989302613023982", "5989302613023976");
+        combinationSumValidNegative(valueOf(6641544716331561L), valueOf(45.52), "6641544716331607", "6641544716331515");
+        combinationSumValidNegative(valueOf(6666666666666666L), valueOf(666666666666666.6), "7333333333333333", "5999999999999999");
+        combinationSumValidNegative(valueOf(7396263949590271L), valueOf(356.57), "7396263949590628", "7396263949589914");
+        combinationSumValidNegative(valueOf(7777777777777777L), valueOf(777777777777777.8), "8555555555555555", "6999999999999999");
+        combinationSumValidNegative(valueOf(8186213672826316L), valueOf(3554.545343443), "8186213672829871", "8186213672822761");
+        combinationSumValidNegative(valueOf(8888888888888888L), valueOf(888888888888888.8), "9777777777777777", "7999999999999999");
+        combinationSumValidNegative(valueOf(9565533382416259L), valueOf(4.5214), "9565533382416264", "9565533382416254");
+        combinationSumValidNegative(valueOf(9999999999999999L), valueOf(999999999999999.9), "11000000000000000", "8999999999999999");
+        combinationSumValidNegative(valueOf(10000000000000000L), valueOf(0.1), "10000000000000000", "10000000000000000");
+        combinationSumValidNegative(valueOf(10289622287797479L), valueOf(349.10675), "10289622287797830", "10289622287797130");
     }
 
     void assertionSumValid(BigDecimal x, BigDecimal y, BigDecimal sum) {
-        BigDecimal sumActual = Arithmetic.sum(x, y);
-        sum = scaleForBigDecimal(sum.stripTrailingZeros());
-        assertEquals(sum, sumActual);
-        assertEquals(sum, scaleForBigDecimal(x.add(y).stripTrailingZeros()));
+        sum = scaleForBigDecimal(sum);
+        assertEquals(sum, Arithmetic.sum(x, y));
+        assertEquals(sum, scaleForBigDecimal(x.add(y, new MathContext(16))));
     }
 
     void combinationSumValidNegative(BigDecimal x, BigDecimal y, String sumXY, String minusXY) {
@@ -1199,6 +1200,7 @@ class ArithmeticSumTest {
     }
 
     static BigDecimal scaleForBigDecimal(BigDecimal numberDouble) {
+        numberDouble = numberDouble.stripTrailingZeros();
         if (numberDouble.scale() < 0) {
             numberDouble = numberDouble.setScale(0);
         }
