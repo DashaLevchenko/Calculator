@@ -64,9 +64,10 @@ public class Exp {
 //        System.out.println(numberTwo);
 //        System.out.println(numberThree);
         //endregion
-      BigDecimal x = BigDecimal.valueOf(3);
-      BigDecimal y = BigDecimal.valueOf(3.89898);
-        System.out.println(x.scale());
+        BigDecimal x = BigDecimal.valueOf(999999999999999.9);
+        BigDecimal y = BigDecimal.ONE.divide(x, new MathContext(16)).setScale(16);
+        System.out.println(y);
+        System.out.println(y.toPlainString());
         System.out.println(y.scale());
 
 

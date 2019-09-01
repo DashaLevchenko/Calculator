@@ -35,8 +35,25 @@ public class Arithmetic {
             throw new ArithmeticException("Invalid input");
         }
     }
+
     public static BigDecimal xSquare(BigDecimal x) {
         return scaleForBigDecimal(multiply(x, x));
+    }
+
+    public static BigDecimal oneDivideX(BigDecimal x) throws ArithmeticException {
+        try {
+            BigDecimal oneDivideX = divide(BigDecimal.ONE, x);
+            if(oneDivideX.scale() > 16){
+                oneDivideX = oneDivideX.setScale(16, RoundingMode.HALF_UP);
+            }
+            return scaleForBigDecimal(oneDivideX);
+        } catch (ArithmeticException e) {
+            throw new ArithmeticException("Cannot divide by zero");
+        }
+    }
+
+    public  static BigDecimal percent(BigDecimal x, BigDecimal percent){
+        return scaleForBigDecimal(x.multiply(percent.divide(BigDecimal.valueOf(100),mathContext), mathContext));
     }
 
     public static BigDecimal scaleForBigDecimal(BigDecimal numberDouble){
