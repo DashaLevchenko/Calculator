@@ -4,6 +4,9 @@ package Model;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
+import java.text.DecimalFormat;
+
+import static java.math.BigDecimal.valueOf;
 
 public class Exp {
 //    public static String plusL(long number) {
@@ -64,11 +67,31 @@ public class Exp {
 //        System.out.println(numberTwo);
 //        System.out.println(numberThree);
         //endregion
-        BigDecimal x = BigDecimal.valueOf(999999999999999.9);
-        BigDecimal y = BigDecimal.ONE.divide(x, new MathContext(16)).setScale(16);
-        System.out.println(y);
-        System.out.println(y.toPlainString());
-        System.out.println(y.scale());
+//        combinationDivideValidNegative(valueOf(44.568), valueOf(879), "0.0507030716723549");
+//        combinationDivideValidNegative(valueOf(191.64), valueOf(7071), "0.0271022486211286");
+//        BigDecimal x = valueOf(44.568);
+//        BigDecimal y = valueOf(879);
+//        BigDecimal r = x.divide(y, MathContext.DECIMAL128);
+//
+//        BigDecimal x2 = valueOf(191.64);
+//        BigDecimal y2 = valueOf(7071);
+//        BigDecimal r2 = x2.divide(y2, MathContext.DECIMAL128);
+//        BigDecimal x2 = valueOf(214);
+//        BigDecimal y2 = valueOf(12);
+//        BigDecimal r2 = x2.divide(y2, MathContext.DECIMAL128);
+
+//
+//        System.out.println(r);
+//        System.out.println(r.abs(new MathContext(15))+"\n");
+//        System.out.println(r2);
+//        System.out.println(r2.abs(new MathContext(15))+"\n");
+//
+//        System.out.println(new DecimalFormat("#.################").format(r));
+//        System.out.println(new DecimalFormat("#.################").format(r2));
+//
+        System.out.println(BigDecimal.valueOf(-23).negate());
+
+
 
 
     }
