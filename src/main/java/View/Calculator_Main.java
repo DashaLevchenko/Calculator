@@ -5,8 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
-
+import javafx.stage.StageStyle;
 
 
 public class Calculator_Main extends Application {
@@ -19,8 +18,8 @@ public class Calculator_Main extends Application {
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/View/calculator_view.fxml"));
         stage.setTitle("Calculator");
-        stage.setScene(new Scene(root, 320, 469));
-//        stage.initStyle(StageStyle.UNDECORATED);
+        stage.setScene(new Scene(root, 320, 500));
+        stage.initStyle(StageStyle.UNDECORATED);
         stage.show();
     }
 }

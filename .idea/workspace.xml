@@ -7,25 +7,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="feaeb0c2-feb2-4a9c-98e3-48b1d1a339aa" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/macket/allMenu.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/macket/m.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/macket/menu.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/macket/numberBtnSelect.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/macket/operationBtnPush.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/macket/operationBtnSelect.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/macket/operationBtnSelectBlue.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/macket/without.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/View/Calculator_Controller.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/View/Calculator_Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/View/calculator_view.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Arithmetic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Arithmetic.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Model/Arithmetic.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Model/Arithmetic.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Model/Exp.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Model/Exp.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Model/PrintTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Model/PrintTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/macket/menu.png" beforeDir="false" afterPath="$PROJECT_DIR$/macket/menu.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/View/Calculator_Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/Calculator_Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/View/calculator_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/calculator_view.fxml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -103,15 +88,15 @@
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="Model" />
     </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Calculator\target\classes\View" />
+      <recent name="C:\Users\Дарья\IdeaProjects\Calculator\src\test\java\Model" />
+    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="Model" />
     </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Calculator\target\classes\View" />
-      <recent name="C:\Users\Дарья\IdeaProjects\Calculator\src\test\java\Model" />
     </key>
   </component>
   <component name="RunDashboard">
