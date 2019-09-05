@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.paint.*?>
 <?import javafx.scene.effect.*?>
 <?import java.lang.*?>
 <?import javafx.geometry.*?>
@@ -47,7 +46,7 @@
                         <Font name="Calculator MDL2 Assets" size="19.0" />
                      </font>
                   </Label>
-                  <MenuButton alignment="TOP_CENTER" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" snapToPixel="false" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="menu" stylesheets="@style.css" text="">
+                  <MenuButton alignment="TOP_CENTER" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" snapToPixel="false" style="-fx-background-color: e6e6e6; -fx-background-radius: 0; -fx-border-radius: 0;" styleClass="style_sheets" text="">
                     <items>
                       <MenuItem mnemonicParsing="false" text="Action 1" />
                       <MenuItem mnemonicParsing="false" text="Action 2" />
@@ -55,12 +54,6 @@
                      <font>
                         <Font name="Segoe MDL2 Assets" size="16.0" />
                      </font>
-                     <GridPane.margin>
-                        <Insets />
-                     </GridPane.margin>
-                     <padding>
-                        <Insets right="-10.0" top="7.0" />
-                     </padding>
                   </MenuButton>
                </children>
             </GridPane>
@@ -78,7 +71,7 @@
                   <Cursor fx:constant="TEXT" />
                </cursor>
             </Label>
-            <GridPane layoutY="136.0">
+            <GridPane layoutY="134.0">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
@@ -93,7 +86,7 @@
                <children>
                   <Button alignment="BOTTOM_CENTER" disable="true" minHeight="30.0" minWidth="50.0" mnemonicParsing="false" style="-fx-background-color: e6e6e6; -fx-background-radius: 0; -fx-border-radius: 0;" text="">
                      <font>
-                        <Font name="Calculator MDL2 Assets" size="16.0" />
+                        <Font name="Calculator MDL2 Assets" size="13.0" />
                      </font>
                      <GridPane.margin>
                         <Insets />
@@ -101,62 +94,47 @@
                   </Button>
                   <Button alignment="BOTTOM_CENTER" disable="true" minHeight="30.0" minWidth="50.0" mnemonicParsing="false" style="-fx-background-color: e6e6e6; -fx-background-radius: 0; -fx-border-radius: 0;" text="" GridPane.columnIndex="1">
                      <font>
-                        <Font name="Calculator MDL2 Assets" size="16.0" />
+                        <Font name="Calculator MDL2 Assets" size="13.0" />
                      </font>
                      <GridPane.margin>
                         <Insets left="2.0" right="2.0" />
                      </GridPane.margin>
                   </Button>
-                  <Button alignment="BOTTOM_CENTER" minHeight="30.0" minWidth="50.0" mnemonicParsing="false" style="-fx-background-color: e6e6e6; -fx-background-radius: 0; -fx-border-radius: 0;" stylesheets="@style.css" text="" GridPane.columnIndex="2">
+                  <Button alignment="BOTTOM_CENTER" minHeight="30.0" minWidth="50.0" mnemonicParsing="false" style="-fx-background-color: e6e6e6; -fx-background-radius: 0; -fx-border-radius: 0;" text="" GridPane.columnIndex="2">
                      <font>
-                        <Font name="Calculator MDL2 Assets" size="16.0" />
+                        <Font name="Calculator MDL2 Assets" size="13.0" />
                      </font>
                      <GridPane.margin>
                         <Insets left="2.0" right="2.0" />
                      </GridPane.margin>
-                     <padding>
-                        <Insets bottom="6.0" />
-                     </padding>
                   </Button>
-                  <Button alignment="BOTTOM_CENTER" minHeight="30.0" minWidth="50.0" mnemonicParsing="false" style="-fx-background-color: e6e6e6; -fx-background-radius: 0; -fx-border-radius: 0;" stylesheets="@style.css" text="" GridPane.columnIndex="3">
+                  <Button alignment="BOTTOM_CENTER" minHeight="30.0" minWidth="50.0" mnemonicParsing="false" style="-fx-background-color: e6e6e6; -fx-background-radius: 0; -fx-border-radius: 0;" text="" GridPane.columnIndex="3">
                      <font>
-                        <Font name="Calculator MDL2 Assets" size="16.0" />
+                        <Font name="Calculator MDL2 Assets" size="13.0" />
                      </font>
                      <GridPane.margin>
                         <Insets left="2.0" right="2.0" />
                      </GridPane.margin>
-                     <padding>
-                        <Insets bottom="6.0" />
-                     </padding>
                   </Button>
-                  <Button alignment="BOTTOM_CENTER" minHeight="30.0" minWidth="50.0" mnemonicParsing="false" style="-fx-background-color: e6e6e6; -fx-background-radius: 0; -fx-border-radius: 0;" styleClass="memory_bold" stylesheets="@style.css" text="" GridPane.columnIndex="4">
+                  <Button alignment="BOTTOM_CENTER" minHeight="30.0" minWidth="50.0" mnemonicParsing="false" style="-fx-background-color: e6e6e6; -fx-background-radius: 0; -fx-border-radius: 0;" text="" GridPane.columnIndex="4">
                      <font>
-                        <Font name="Calculator MDL2 Assets" size="16.0" />
+                        <Font name="Calculator MDL2 Assets" size="14.0" />
                      </font>
                      <GridPane.margin>
                         <Insets left="2.0" right="2.0" />
                      </GridPane.margin>
-                     <padding>
-                        <Insets bottom="6.0" />
-                     </padding>
                   </Button>
-                  <MenuButton alignment="CENTER_RIGHT" disable="true" minHeight="30.0" minWidth="50.0" mnemonicParsing="false" style="-fx-background-color: e6e6e6; -fx-background-radius: 0; -fx-border-radius: 0;" styleClass="memory_down" stylesheets="@style.css" text="M" textAlignment="RIGHT" GridPane.columnIndex="5">
+                  <MenuButton alignment="CENTER_RIGHT" disable="true" minHeight="30.0" minWidth="50.0" mnemonicParsing="false" style="-fx-background-color: e6e6e6; -fx-background-radius: 0; -fx-border-radius: 0;" text="M" textAlignment="RIGHT" GridPane.columnIndex="5">
                     <items>
                       <MenuItem mnemonicParsing="false" text="Action 1" />
                       <MenuItem mnemonicParsing="false" text="Action 2" />
                     </items>
-                     <font>
-                        <Font name="Segoe MDL2 Assets" size="15.0" />
-                     </font>
-                     <padding>
-                        <Insets bottom="6.0" />
-                     </padding>
                   </MenuButton>
                </children>
             </GridPane>
             <Group layoutX="5.0" layoutY="167.0">
                <children>
-                  <Button minHeight="47.0" minWidth="76.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="76.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation" stylesheets="@style.css" text="">
+                  <Button minHeight="47.0" minWidth="76.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="76.0" style="-fx-background-color: f0f0f0; -fx-background-radius: 0; -fx-border-radius: 0;" text="">
                      <rotationAxis>
                         <Point3D />
                      </rotationAxis>
@@ -164,7 +142,7 @@
                         <Font name="Calculator MDL2 Assets" size="16.0" />
                      </font>
                   </Button>
-                  <Button layoutX="78.0" minHeight="47.0" minWidth="76.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="76.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation" stylesheets="@style.css" text="">
+                  <Button layoutX="78.0" minHeight="47.0" minWidth="76.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="76.0" style="-fx-background-color: f0f0f0; -fx-background-radius: 0; -fx-border-radius: 0;" text="">
                      <rotationAxis>
                         <Point3D />
                      </rotationAxis>
@@ -172,7 +150,7 @@
                         <Font name="Segoe MDL2 Assets" size="15.0" />
                      </font>
                   </Button>
-                  <Button layoutX="156.0" minHeight="47.0" minWidth="76.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="76.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation" stylesheets="@style.css" text="">
+                  <Button layoutX="156.0" minHeight="47.0" minWidth="76.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="76.0" style="-fx-background-color: f0f0f0; -fx-background-radius: 0; -fx-border-radius: 0;" text="">
                      <rotationAxis>
                         <Point3D />
                      </rotationAxis>
@@ -180,7 +158,7 @@
                         <Font name="Calculator MDL2 Assets" size="19.0" />
                      </font>
                   </Button>
-                  <Button contentDisplay="CENTER" layoutX="234.0" minHeight="47.0" minWidth="76.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="76.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation" stylesheets="@style.css" text="">
+                  <Button contentDisplay="CENTER" layoutX="234.0" minHeight="47.0" minWidth="76.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="76.0" style="-fx-background-color: f0f0f0; -fx-background-radius: 0; -fx-border-radius: 0;" text="">
                      <rotationAxis>
                         <Point3D />
                      </rotationAxis>
@@ -188,7 +166,7 @@
                         <Font name="Calculator MDL2 Assets" size="18.0" />
                      </font>
                   </Button>
-                  <Button layoutY="50.0" minHeight="47.0" minWidth="76.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="76.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation" stylesheets="@style.css" text="CE">
+                  <Button layoutY="50.0" minHeight="47.0" minWidth="76.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="76.0" style="-fx-background-color: f0f0f0; -fx-background-radius: 0; -fx-border-radius: 0;" text="CE">
                      <rotationAxis>
                         <Point3D />
                      </rotationAxis>
@@ -196,7 +174,7 @@
                         <Font name="Segoe MDL2 Assets" size="15.0" />
                      </font>
                   </Button>
-                  <Button layoutX="78.0" layoutY="50.0" minHeight="47.0" minWidth="76.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="76.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation" stylesheets="@style.css" text="C">
+                  <Button layoutX="78.0" layoutY="50.0" minHeight="47.0" minWidth="76.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="76.0" style="-fx-background-color: f0f0f0; -fx-background-radius: 0; -fx-border-radius: 0;" text="C">
                      <rotationAxis>
                         <Point3D />
                      </rotationAxis>
@@ -204,7 +182,7 @@
                         <Font size="15.0" />
                      </font>
                   </Button>
-                  <Button layoutX="156.0" layoutY="50.0" minHeight="47.0" minWidth="76.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="76.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation" stylesheets="@style.css" text="">
+                  <Button layoutX="156.0" layoutY="50.0" minHeight="47.0" minWidth="76.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="76.0" style="-fx-background-color: f0f0f0; -fx-background-radius: 0; -fx-border-radius: 0;" text="">
                      <rotationAxis>
                         <Point3D />
                      </rotationAxis>
@@ -212,7 +190,7 @@
                         <Font name="Segoe MDL2 Assets" size="15.0" />
                      </font>
                   </Button>
-                  <Button layoutX="234.0" layoutY="50.0" minHeight="47.0" minWidth="76.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="76.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation_arithmetic" stylesheets="@style.css" text="">
+                  <Button layoutX="234.0" layoutY="50.0" minHeight="47.0" minWidth="76.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="76.0" style="-fx-background-color: f0f0f0; -fx-background-radius: 0; -fx-border-radius: 0;" text="">
                      <rotationAxis>
                         <Point3D />
                      </rotationAxis>
@@ -222,7 +200,7 @@
                   </Button>
                   <Group layoutY="100.5">
                      <children>
-                        <Button alignment="CENTER" minHeight="47.0" minWidth="76.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="76.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_number" stylesheets="@style.css" text="7">
+                        <Button minHeight="47.0" minWidth="76.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="76.0" style="-fx-background-color: fafafa; -fx-background-radius: 0; -fx-border-radius: 0;" text="7">
                            <rotationAxis>
                               <Point3D />
                            </rotationAxis>
@@ -230,7 +208,7 @@
                               <Font name="Segoe UI Semibold" size="24.0" />
                            </font>
                         </Button>
-                        <Button alignment="CENTER" layoutX="78.0" minHeight="47.0" minWidth="76.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="76.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_number" stylesheets="@style.css" text="8">
+                        <Button layoutX="78.0" minHeight="47.0" minWidth="76.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="76.0" style="-fx-background-color: fafafa; -fx-background-radius: 0; -fx-border-radius: 0;" text="8">
                            <rotationAxis>
                               <Point3D />
                            </rotationAxis>
@@ -238,7 +216,7 @@
                               <Font name="Segoe UI Semibold" size="24.0" />
                            </font>
                         </Button>
-                        <Button alignment="CENTER" layoutX="156.0" minHeight="47.0" minWidth="76.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="76.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_number" stylesheets="@style.css" text="9">
+                        <Button layoutX="156.0" minHeight="47.0" minWidth="76.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="76.0" style="-fx-background-color: fafafa; -fx-background-radius: 0; -fx-border-radius: 0;" text="9">
                            <rotationAxis>
                               <Point3D />
                            </rotationAxis>
@@ -246,7 +224,7 @@
                               <Font name="Segoe UI Semibold" size="24.0" />
                            </font>
                         </Button>
-                        <Button layoutX="234.0" minHeight="47.0" minWidth="76.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="76.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation_arithmetic" stylesheets="@style.css" text="">
+                        <Button layoutX="234.0" minHeight="47.0" minWidth="76.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="76.0" style="-fx-background-color: f0f0f0; -fx-background-radius: 0; -fx-border-radius: 0;" text="">
                            <rotationAxis>
                               <Point3D />
                            </rotationAxis>
@@ -254,7 +232,7 @@
                               <Font name="Segoe MDL2 Assets" size="15.0" />
                            </font>
                         </Button>
-                        <Button alignment="CENTER" layoutY="50.0" minHeight="47.0" minWidth="76.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="76.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_number" stylesheets="@style.css" text="4">
+                        <Button layoutY="50.0" minHeight="47.0" minWidth="76.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="76.0" style="-fx-background-color: fafafa; -fx-background-radius: 0; -fx-border-radius: 0;" text="4">
                            <rotationAxis>
                               <Point3D />
                            </rotationAxis>
@@ -262,7 +240,7 @@
                               <Font name="Segoe UI Semibold" size="24.0" />
                            </font>
                         </Button>
-                        <Button alignment="CENTER" layoutX="78.0" layoutY="50.0" minHeight="47.0" minWidth="76.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="76.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_number" stylesheets="@style.css" text="5">
+                        <Button layoutX="78.0" layoutY="50.0" minHeight="47.0" minWidth="76.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="76.0" style="-fx-background-color: fafafa; -fx-background-radius: 0; -fx-border-radius: 0;" text="5">
                            <rotationAxis>
                               <Point3D />
                            </rotationAxis>
@@ -270,7 +248,7 @@
                               <Font name="Segoe UI Semibold" size="24.0" />
                            </font>
                         </Button>
-                        <Button alignment="CENTER" layoutX="156.0" layoutY="50.0" minHeight="47.0" minWidth="76.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="76.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_number" stylesheets="@style.css" text="6">
+                        <Button layoutX="156.0" layoutY="50.0" minHeight="47.0" minWidth="76.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="76.0" style="-fx-background-color: fafafa; -fx-background-radius: 0; -fx-border-radius: 0;" text="6">
                            <rotationAxis>
                               <Point3D />
                            </rotationAxis>
@@ -278,7 +256,7 @@
                               <Font name="Segoe UI Semibold" size="24.0" />
                            </font>
                         </Button>
-                        <Button layoutX="234.0" layoutY="50.0" minHeight="47.0" minWidth="76.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="76.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation_arithmetic" stylesheets="@style.css" text="">
+                        <Button layoutX="234.0" layoutY="50.0" minHeight="47.0" minWidth="76.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="76.0" style="-fx-background-color: f0f0f0; -fx-background-radius: 0; -fx-border-radius: 0;" text="">
                            <rotationAxis>
                               <Point3D />
                            </rotationAxis>
@@ -286,7 +264,7 @@
                               <Font name="Segoe MDL2 Assets" size="15.0" />
                            </font>
                         </Button>
-                        <Button alignment="CENTER" layoutY="100.0" minHeight="47.0" minWidth="76.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="76.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_number" stylesheets="@style.css" text="1">
+                        <Button layoutY="100.0" minHeight="47.0" minWidth="76.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="76.0" style="-fx-background-color: fafafa; -fx-background-radius: 0; -fx-border-radius: 0;" text="1">
                            <rotationAxis>
                               <Point3D />
                            </rotationAxis>
@@ -294,7 +272,7 @@
                               <Font name="Segoe UI Semibold" size="25.0" />
                            </font>
                         </Button>
-                        <Button alignment="CENTER" layoutX="78.0" layoutY="100.0" minHeight="47.0" minWidth="76.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="76.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_number" stylesheets="@style.css" text="2">
+                        <Button layoutX="78.0" layoutY="100.0" minHeight="47.0" minWidth="76.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="76.0" style="-fx-background-color: fafafa; -fx-background-radius: 0; -fx-border-radius: 0;" text="2">
                            <rotationAxis>
                               <Point3D />
                            </rotationAxis>
@@ -302,7 +280,7 @@
                               <Font name="Segoe UI Semibold" size="24.0" />
                            </font>
                         </Button>
-                        <Button alignment="CENTER" layoutX="156.0" layoutY="100.0" minHeight="47.0" minWidth="76.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="76.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_number" stylesheets="@style.css" text="3">
+                        <Button layoutX="156.0" layoutY="100.0" minHeight="47.0" minWidth="76.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="76.0" style="-fx-background-color: fafafa; -fx-background-radius: 0; -fx-border-radius: 0;" text="3">
                            <rotationAxis>
                               <Point3D />
                            </rotationAxis>
@@ -310,7 +288,7 @@
                               <Font name="Segoe UI Semibold" size="24.0" />
                            </font>
                         </Button>
-                        <Button layoutX="234.0" layoutY="100.0" minHeight="47.0" minWidth="76.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="76.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation_arithmetic" stylesheets="@style.css" text="">
+                        <Button layoutX="234.0" layoutY="100.0" minHeight="47.0" minWidth="76.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="76.0" style="-fx-background-color: f0f0f0; -fx-background-radius: 0; -fx-border-radius: 0;" text="">
                            <rotationAxis>
                               <Point3D />
                            </rotationAxis>
@@ -318,7 +296,7 @@
                               <Font name="Segoe MDL2 Assets" size="15.0" />
                            </font>
                         </Button>
-                        <Button layoutY="150.0" minHeight="47.0" minWidth="76.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="76.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation" stylesheets="@style.css" text="">
+                        <Button layoutY="150.0" minHeight="47.0" minWidth="76.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="76.0" style="-fx-background-color: f0f0f0; -fx-background-radius: 0; -fx-border-radius: 0;" text="">
                            <rotationAxis>
                               <Point3D />
                            </rotationAxis>
@@ -326,7 +304,7 @@
                               <Font name="Segoe MDL2 Assets" size="15.0" />
                            </font>
                         </Button>
-                        <Button alignment="CENTER" layoutX="78.0" layoutY="150.0" minHeight="47.0" minWidth="76.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="76.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_number" stylesheets="@style.css" text="0" textAlignment="CENTER">
+                        <Button alignment="CENTER" layoutX="78.0" layoutY="150.0" minHeight="47.0" minWidth="76.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="76.0" style="-fx-background-color: fafafa; -fx-background-radius: 0; -fx-border-radius: 0;" text="0" textAlignment="CENTER">
                            <rotationAxis>
                               <Point3D />
                            </rotationAxis>
@@ -334,7 +312,7 @@
                               <Font name="Segoe UI Semibold" size="24.0" />
                            </font>
                         </Button>
-                        <Button layoutX="156.0" layoutY="150.0" minHeight="47.0" minWidth="76.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="76.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation" stylesheets="@style.css" text=",">
+                        <Button layoutX="156.0" layoutY="150.0" minHeight="47.0" minWidth="76.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="76.0" style="-fx-background-color: f0f0f0; -fx-background-radius: 0; -fx-border-radius: 0;" text=",">
                            <rotationAxis>
                               <Point3D />
                            </rotationAxis>
@@ -342,7 +320,7 @@
                               <Font name="Segoe UI Semibold" size="23.0" />
                            </font>
                         </Button>
-                        <Button layoutX="234.0" layoutY="150.0" minHeight="47.0" minWidth="76.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="76.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation_arithmetic" stylesheets="@style.css" text="">
+                        <Button layoutX="234.0" layoutY="150.0" minHeight="47.0" minWidth="76.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="76.0" style="-fx-background-color: f0f0f0; -fx-background-radius: 0; -fx-border-radius: 0;" text="">
                            <rotationAxis>
                               <Point3D />
                            </rotationAxis>
@@ -357,18 +335,27 @@
          </children>
       </Group>
       <GridPane>
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+         </rowConstraints>
          <children>
-            <Button cancelButton="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="30.0" minWidth="46.0" mnemonicParsing="false" pickOnBounds="false" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="init_close" stylesheets="@style.css" text="" GridPane.columnIndex="3">
+            <Button cancelButton="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="30.0" minWidth="46.0" mnemonicParsing="false" pickOnBounds="false" style="-fx-background-color: e6e6e6; -fx-background-radius: 0; -fx-border-radius: 0;" text="" GridPane.columnIndex="3">
                <font>
                   <Font name="Segoe MDL2 Assets" size="12.0" />
                </font>
             </Button>
-            <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="30.0" minWidth="46.0" mnemonicParsing="false" pickOnBounds="false" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="init_other" stylesheets="@style.css" text="" GridPane.columnIndex="2">
+            <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="30.0" minWidth="46.0" mnemonicParsing="false" pickOnBounds="false" style="-fx-background-color: e6e6e6; -fx-background-radius: 0; -fx-border-radius: 0;" text="" GridPane.columnIndex="2">
                <font>
                   <Font name="Segoe MDL2 Assets" size="10.0" />
                </font>
             </Button>
-            <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="30.0" minWidth="46.0" mnemonicParsing="false" pickOnBounds="false" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="init_other" stylesheets="@style.css" text="" GridPane.columnIndex="1">
+            <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="30.0" minWidth="46.0" mnemonicParsing="false" pickOnBounds="false" style="-fx-background-color: e6e6e6; -fx-background-radius: 0; -fx-border-radius: 0;" text="" GridPane.columnIndex="1">
                <font>
                   <Font name="Segoe MDL2 Assets" size="10.0" />
                </font>
@@ -379,15 +366,6 @@
                </padding>
             </Label>
          </children>
-         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-         </rowConstraints>
       </GridPane>
    </children>
 </AnchorPane>
