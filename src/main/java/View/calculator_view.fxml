@@ -1,26 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.paint.*?>
-<?import javafx.scene.effect.*?>
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.geometry.Point3D?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="500.0" minWidth="320.0" style="-fx-background-color: e6e6e6;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Calculator_Controller">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="500.0" minWidth="320.0" style="-fx-background-color: e6e6e6;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Calculator_Controller">
    <children>
       <MenuButton alignment="TOP_CENTER" layoutY="30.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" snapToPixel="false" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="menu" stylesheets="@style.css" text="">
         <items>
@@ -326,7 +320,7 @@
             <Font name="Calculator MDL2 Assets" size="19.0" />
          </font>
       </Label>
-      <Label alignment="CENTER_RIGHT" layoutY="70.0" minHeight="90.0" minWidth="320.0" text="0" AnchorPane.rightAnchor="0.0">
+      <Label alignment="CENTER_RIGHT" layoutY="70.0" minHeight="90.0" minWidth="312.0" text="0" AnchorPane.rightAnchor="4.0">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
