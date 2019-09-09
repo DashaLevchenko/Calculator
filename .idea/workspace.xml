@@ -7,10 +7,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="feaeb0c2-feb2-4a9c-98e3-48b1d1a339aa" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/View/Resize.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/View/Calculator_Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/Calculator_Controller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/View/Calculator_Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/Calculator_Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/View/calculator_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/calculator_view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/View/Resize.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/Resize.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -403,7 +403,14 @@
       <option name="project" value="LOCAL" />
       <updated>1567693046458</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="View without resize 50/50">
+      <created>1567784792485</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1567784792485</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -481,7 +488,8 @@
     <MESSAGE value="need to sort all tests besides sumTest,&#10;new method squareRoot(), writing tests" />
     <MESSAGE value="Model is ready, need to add MovePoint, Memory(method), sort all tests" />
     <MESSAGE value="Model is ready, need to add MovePoint, Memory(method), sort all tests&#10;View without resize done" />
-    <option name="LAST_COMMIT_MESSAGE" value="Model is ready, need to add MovePoint, Memory(method), sort all tests&#10;View without resize done" />
+    <MESSAGE value="View without resize 50/50" />
+    <option name="LAST_COMMIT_MESSAGE" value="View without resize 50/50" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Calculator$Model_in_Calculator.ic" NAME="Model in Calculator Coverage Results" MODIFIED="1566916135185" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

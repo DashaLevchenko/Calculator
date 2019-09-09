@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -21,11 +22,13 @@ public class Calculator_Main extends Application {
         stage.setTitle("Calculator");
         stage.setScene(new Scene(root));
 //        stage.setScene(new Scene(root));
-        stage.setMinHeight(510);
-        stage.setMinWidth(336);
+        stage.setMinHeight(500);
+        stage.setMinWidth(320);
         stage.initStyle(StageStyle.UNDECORATED);
 
-        Resize.addResizeListener(stage);
+        Resize resize = new Resize(stage);
+        resize.resizeAllStage();
+
 
         stage.show();
     }
