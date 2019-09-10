@@ -89,12 +89,12 @@ public class Resize {
                     cursorEvent = Cursor.DEFAULT;
                 }
                 scene.setCursor(cursorEvent);
-//                System.out.println(mouseWinX+" "+mouseWinY);
-//                System.out.println(mouseEvent.getScreenX()+" "+mouseEvent.getScreenY());
-
             } else if (MouseEvent.MOUSE_DRAGGED.equals(mouseEventType)) {
                 if (cursorEvent.equals(Cursor.N_RESIZE) || cursorEvent.equals(Cursor.NE_RESIZE) || cursorEvent.equals(Cursor.NW_RESIZE)) {
                     changeYPosition(mouseEvent);
+//                    if (mouseEvent.getScreenY() == 0){
+//                        stage.setHeight();
+//                    }
                     if(cursorEvent.equals(Cursor.NE_RESIZE)){
                         if (mouseWinX > minWidth) {
                             stage.setWidth(mouseWinX);
@@ -123,6 +123,11 @@ public class Resize {
                         }
                     }
                 }
+//                 if (mouseEvent.getSceneX() > 4 && mouseEvent.getSceneX() < 179){
+//                    stage.setX(mouseEvent.getScreenX()-border);
+//                    System.out.println("o");
+////                    stage.setY();
+//                }
             }
         };
 

@@ -8,8 +8,12 @@
   <component name="ChangeListManager">
     <list default="true" id="feaeb0c2-feb2-4a9c-98e3-48b1d1a339aa" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Exp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Exp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/View/Calculator_Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/Calculator_Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/View/Calculator_Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/Calculator_Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/View/Resize.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/Resize.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/View/calculator_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/calculator_view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Model/Exp.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Model/Exp.class" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -78,7 +82,7 @@
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="editing.templates" />
   </component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.RecentsKey">
@@ -130,6 +134,19 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Exp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Model.Exp" />
+      <module name="Calculator" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Model.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="View.Main" />
       <module name="Calculator" />
@@ -139,22 +156,6 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ArithmeticPlusMinusTest.plusMinus" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Calculator" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Model.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="Model" />
-      <option name="MAIN_CLASS_NAME" value="Model.ArithmeticPlusMinusTest" />
-      <option name="METHOD_NAME" value="plusMinus" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -192,17 +193,17 @@
     <list>
       <item itemvalue="Application.Main" />
       <item itemvalue="Application.Calculator_Main" />
-      <item itemvalue="JUnit.ArithmeticPlusMinusTest.plusMinus" />
       <item itemvalue="JUnit.Model in Calculator" />
       <item itemvalue="JUnit.ArithmeticXSquerTest.xSquare" />
+      <item itemvalue="Application.Exp" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Calculator_Main" />
+        <item itemvalue="Application.Exp" />
         <item itemvalue="JUnit.Model in Calculator" />
         <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.ArithmeticXSquerTest.xSquare" />
-        <item itemvalue="JUnit.ArithmeticPlusMinusTest.plusMinus" />
       </list>
     </recent_temporary>
   </component>
@@ -416,7 +417,14 @@
       <option name="project" value="LOCAL" />
       <updated>1568037759503</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="start controller">
+      <created>1568039874579</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1568039874579</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -496,7 +504,8 @@
     <MESSAGE value="Model is ready, need to add MovePoint, Memory(method), sort all tests&#10;View without resize done" />
     <MESSAGE value="View without resize 50/50" />
     <MESSAGE value="resize is work" />
-    <option name="LAST_COMMIT_MESSAGE" value="resize is work" />
+    <MESSAGE value="start controller" />
+    <option name="LAST_COMMIT_MESSAGE" value="start controller" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Calculator$Model_in_Calculator.ic" NAME="Model in Calculator Coverage Results" MODIFIED="1566916135185" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

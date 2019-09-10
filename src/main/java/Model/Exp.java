@@ -89,7 +89,16 @@ public class Exp {
 //        System.out.println(new DecimalFormat("#.################").format(r));
 //        System.out.println(new DecimalFormat("#.################").format(r2));
 //
-        System.out.println(BigDecimal.valueOf(-23).negate());
+        String l = "168546756876543";
+        for (int i = 0; i < l.length(); i++) {
+
+            if(i%3 == 0 && i!=0){
+                System.out.println("p");
+                System.out.println(l.toCharArray()[i]);
+            }else {
+                System.out.println(l.toCharArray()[i]);
+            }
+        }
 
 
 
