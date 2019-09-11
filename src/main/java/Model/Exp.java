@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 
 import static java.math.BigDecimal.valueOf;
 
@@ -90,15 +91,14 @@ public class Exp {
 //        System.out.println(new DecimalFormat("#.################").format(r2));
 //
         String l = "168546756876543";
-        for (int i = 0; i < l.length(); i++) {
+//        DecimalFormatSymbols k = new DecimalFormatSymbols();
+//        k.setGroupingSeparator('\b');
+       DecimalFormat f = new DecimalFormat("###,###");
+       l =  f.format(new BigDecimal(l));
+       System.out.println(l);
+       String o = l.replace(" ", "");
+        System.out.println(o);
 
-            if(i%3 == 0 && i!=0){
-                System.out.println("p");
-                System.out.println(l.toCharArray()[i]);
-            }else {
-                System.out.println(l.toCharArray()[i]);
-            }
-        }
 
 
 

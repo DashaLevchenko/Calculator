@@ -1,18 +1,28 @@
 package View;
 
+import java.math.BigDecimal;
 import java.net.URL;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ResourceBundle;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.value.WritableValue;
 import javafx.collections.ObservableList;
+import javafx.css.CssMetaData;
+import javafx.css.Style;
+import javafx.css.StyleableObjectProperty;
+import javafx.css.StyleableProperty;
+import javafx.css.converter.EnumConverter;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ZoomEvent;
+import javafx.scene.layout.Region;
+import javafx.scene.text.Text;
 
 public class Calculator_Controller {
 
@@ -103,7 +113,9 @@ public class Calculator_Controller {
     private Button cancel;
 
     @FXML
-    private TextField outText;
+    private Label outText;
+
+    private int charactersNumber = 16;
 
     @FXML
     void initialize() {
@@ -112,45 +124,48 @@ public class Calculator_Controller {
 
     @FXML
     public void binaryOperation(ActionEvent actionEvent) {
-        System.out.println("op");
-    }
 
-    private int count = 0;
+    }
+    private String textOnDisplay = "";
 
     @FXML
     public void number(ActionEvent actionEvent) {
+        String buttonText = ((Button) actionEvent.getSource()).getText();
+        textOnDisplay += buttonText;
+        String textForPrint = separateNumber(textOnDisplay);
+        Text text = new Text(textForPrint);
+        text.setFont(outText.getFont());
+
+        Double textWidth = text.getBoundsInLocal().getWidth();
+        Double widthLabelForText = outText.getWidth() - (outText.getPadding().getRight() + outText.getPadding().getLeft());
         if (start) {
-            outText.setText("" + ((Button) actionEvent.getSource()).getText());
+            outText.setText("" + buttonText);
             start = false;
         } else {
-            if (outText.getText().length() < 16) { // 1232456985
+            if (textOnDisplay.length()-1 < charactersNumber) {
+                    if (textWidth.compareTo(widthLabelForText) > 0 ) {
+                        double presentSize = outText.getFont().getSize();
+                        Text button = new Text(buttonText);
+                        button.setFont(outText.getFont());
 
-                outText.setText(outText.getText() + ((Button) actionEvent.getSource()).getText());
-
-//                if (count == 11) {
-//                    outText.setStyle("-fx-font-size: 32px;" +
-//                            "-fx-background-color: e6e6e6;" +
-//                            "-fx-font-family:\"Segoe UI Semibold\"");
-//                } else if (count == 12) {
-//                    outText.setStyle("-fx-font-size: 30px;" +
-//                            "-fx-background-color: e6e6e6;" +
-//                            "-fx-font-family:\"Segoe UI Semibold\"");
-//                }else if (count == 13) {
-//                    outText.setStyle("-fx-font-size: 24px;" +
-//                            "-fx-background-color: e6e6e6;" +
-//                            "-fx-font-family:\"Segoe UI Semibold\"");
-//                }
-//                if (outText.getText().length() > outText.getLength()) {
-//                    outText.setStyle("-fx-font-size: 32px;" +
-//                            "-fx-background-color: fff;" +
-//                            "-fx-font-family:\"Segoe UI Semibold\"");
-//                }
-
+                        double percentOfChange = button.getBoundsInLocal().getWidth()/textWidth;
+                        double newSize = presentSize - (presentSize*percentOfChange);
+                        outText.setStyle("-fx-font-size: "+newSize+"px;"+
+                                        "-fx-background-color: e6e6e6;" +
+                                         "-fx-font-family:\"Segoe UI Semibold\";"+
+                                         "-fx-alignment: center-right;");
+                    }
+                outText.setText(textForPrint);
             }
         }
-//        System.out.println(count+" "+outText.textProperty().is);
 
+    }
 
+    private String separateNumber(String text){
+        BigDecimal number = new BigDecimal(text);
+        DecimalFormat decimalFormat = new DecimalFormat("###,###");
+
+        return decimalFormat.format(number);
     }
 
 

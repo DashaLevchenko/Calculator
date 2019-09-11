@@ -10,8 +10,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Model/Exp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Exp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/View/Calculator_Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/Calculator_Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/View/Calculator_Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/Calculator_Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/View/Resize.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/Resize.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/View/calculator_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/calculator_view.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Model/Exp.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Model/Exp.class" afterDir="false" />
     </list>
@@ -91,16 +89,16 @@
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="Model" />
     </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Calculator\target\classes\View" />
+      <recent name="D:\Calculator\src\main\java\View" />
+      <recent name="C:\Users\Дарья\IdeaProjects\Calculator\src\test\java\Model" />
+    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="Model" />
     </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Calculator\target\classes\View" />
-      <recent name="D:\Calculator\src\main\java\View" />
-      <recent name="C:\Users\Дарья\IdeaProjects\Calculator\src\test\java\Model" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -193,9 +191,9 @@
     <list>
       <item itemvalue="Application.Main" />
       <item itemvalue="Application.Calculator_Main" />
+      <item itemvalue="Application.Exp" />
       <item itemvalue="JUnit.Model in Calculator" />
       <item itemvalue="JUnit.ArithmeticXSquerTest.xSquare" />
-      <item itemvalue="Application.Exp" />
     </list>
     <recent_temporary>
       <list>
@@ -424,7 +422,14 @@
       <option name="project" value="LOCAL" />
       <updated>1568039874579</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="resize is working,&#10;start controller, I want to change textField">
+      <created>1568133473126</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1568133473126</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -505,7 +510,15 @@
     <MESSAGE value="View without resize 50/50" />
     <MESSAGE value="resize is work" />
     <MESSAGE value="start controller" />
-    <option name="LAST_COMMIT_MESSAGE" value="start controller" />
+    <MESSAGE value="resize is working,&#10;start controller, I want to change textField" />
+    <option name="LAST_COMMIT_MESSAGE" value="resize is working,&#10;start controller, I want to change textField" />
+  </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="text.txBounds" />
+      </configuration>
+    </watches-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Calculator$Model_in_Calculator.ic" NAME="Model in Calculator Coverage Results" MODIFIED="1566916135185" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
