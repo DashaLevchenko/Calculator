@@ -10,6 +10,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Model/Exp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Exp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/View/Calculator_Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/Calculator_Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/View/Calculator_Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/Calculator_Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/View/calculator_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/calculator_view.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Model/Exp.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Model/Exp.class" afterDir="false" />
     </list>
@@ -89,16 +90,16 @@
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="Model" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Calculator\target\classes\View" />
-      <recent name="D:\Calculator\src\main\java\View" />
-      <recent name="C:\Users\Дарья\IdeaProjects\Calculator\src\test\java\Model" />
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="Model" />
     </key>
-    <key name="CreateTestDialog.Recents.Supers">
-      <recent name="" />
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Calculator\target\classes\View" />
+      <recent name="D:\Calculator\src\main\java\View" />
+      <recent name="C:\Users\Дарья\IdeaProjects\Calculator\src\test\java\Model" />
     </key>
   </component>
   <component name="RunAnythingCache">

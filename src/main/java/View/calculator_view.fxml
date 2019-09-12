@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.geometry.Point3D?>
 <?import javafx.scene.control.Button?>
@@ -17,7 +12,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="500.0" minWidth="320.0" style="-fx-background-color: e6e6e6;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Calculator_Controller">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="500.0" minWidth="320.0" onKeyPressed="#keyPressed" style="-fx-background-color: e6e6e6;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Calculator_Controller">
    <children>
       <MenuButton alignment="TOP_CENTER" layoutY="30.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" snapToPixel="false" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="menu" stylesheets="@style.css" text="">
          <items>
@@ -116,7 +111,7 @@
                   <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="Backspace" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="47.0" prefWidth="76.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation" stylesheets="@style.css" text="" GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <Button fx:id="Backspace" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onKeyPressed="#backspace" prefHeight="47.0" prefWidth="76.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation" stylesheets="@style.css" text="" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <rotationAxis>
                   <Point3D />
                </rotationAxis>
@@ -438,7 +433,7 @@
             <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
          </rowConstraints>
       </GridPane>
-      <Label fx:id="outText" alignment="BOTTOM_RIGHT" layoutY="70.0" prefHeight="90.0" prefWidth="312.0" text="0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0">
+      <Label fx:id="outText" alignment="BOTTOM_RIGHT" layoutY="70.0" onKeyPressed="#keyPressed" prefHeight="90.0" prefWidth="312.0" text="0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0">
          <font>
             <Font name="Segoe UI Semibold" size="46.0" />
          </font>
