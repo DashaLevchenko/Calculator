@@ -1423,11 +1423,11 @@ class ArithmeticPlusMinusTest {
     }
 
     void assertionPlusMinus(BigDecimal x, BigDecimal resultXSquare) {
-        assertEquals(resultXSquare,  Arithmetic.plusMinus(x));
+        assertEquals(resultXSquare,  Arithmetic.negate(x));
 
         BigDecimal xNegative = x.negate();
         BigDecimal resultXSquarePositive = resultXSquare.negate();
-        assertEquals(resultXSquarePositive,  Arithmetic.plusMinus(xNegative));
+        assertEquals(resultXSquarePositive,  Arithmetic.negate(xNegative));
     }
 
 }

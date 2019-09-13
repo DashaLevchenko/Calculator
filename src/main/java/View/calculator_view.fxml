@@ -100,7 +100,7 @@
                   <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="C" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="47.0" prefWidth="76.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation" stylesheets="@style.css" text="C" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Button fx:id="C" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#clearAllC" prefHeight="47.0" prefWidth="76.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation" stylesheets="@style.css" text="C" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <rotationAxis>
                   <Point3D />
                </rotationAxis>
@@ -111,7 +111,7 @@
                   <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="Backspace" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onKeyPressed="#backspace" prefHeight="47.0" prefWidth="76.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation" stylesheets="@style.css" text="" GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <Button fx:id="Backspace" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#backspace" prefHeight="47.0" prefWidth="76.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation" stylesheets="@style.css" text="" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <rotationAxis>
                   <Point3D />
                </rotationAxis>
@@ -265,7 +265,7 @@
                   <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="plusMinus" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="47.0" prefWidth="76.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation" stylesheets="@style.css" text="" GridPane.rowIndex="5">
+            <Button fx:id="plusMinus" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#negate" prefHeight="47.0" prefWidth="76.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation" stylesheets="@style.css" text="" GridPane.rowIndex="5">
                <rotationAxis>
                   <Point3D />
                </rotationAxis>
@@ -433,7 +433,7 @@
             <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
          </rowConstraints>
       </GridPane>
-      <Label fx:id="outText" alignment="BOTTOM_RIGHT" layoutY="70.0" onKeyPressed="#keyPressed" prefHeight="90.0" prefWidth="312.0" text="0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0">
+      <Label fx:id="outText" alignment="BOTTOM_RIGHT" layoutY="70.0" prefHeight="90.0" prefWidth="312.0" text="0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0">
          <font>
             <Font name="Segoe UI Semibold" size="46.0" />
          </font>

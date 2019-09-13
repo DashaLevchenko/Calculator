@@ -63,7 +63,7 @@ public class Arithmetic {
         return scaleForBigDecimal(x.multiply(percent.movePointLeft(2), MathContext.DECIMAL128));
     }
 
-    public  static BigDecimal plusMinus(BigDecimal x){
+    public  static BigDecimal negate(BigDecimal x){
         return scaleForBigDecimal(x.negate());
     }
 
