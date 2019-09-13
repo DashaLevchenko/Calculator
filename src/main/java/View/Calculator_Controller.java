@@ -6,19 +6,15 @@ import java.text.DecimalFormat;
 import java.util.ResourceBundle;
 
 import Model.Arithmetic;
-import javafx.css.Style;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 public class Calculator_Controller {
-
 
 
     //region Description
@@ -110,11 +106,15 @@ public class Calculator_Controller {
     private Label outText;
     //endregion
 
-    private int charactersNumber = 16;
-    private String textForDisplayWithoutSeparate = "";
+
+    private final int CHAR_MAX = 16;
+    private int charactersNumber;
+    private String textWithoutSeparateOld = "";
+    private String textWithoutSeparateNew = "";
     private double widthMaxTextOutput;
     private Font firstStyleLabel;
     private boolean start = true;
+    private boolean pointInText = false;
 
     @FXML
     void initialize() {
@@ -137,7 +137,7 @@ public class Calculator_Controller {
 
     @FXML
     void keyPressed(KeyEvent event) {
-        String inputText = "";
+        String inputText;
         KeyCode keyCode = event.getCode();
         if (keyCode == KeyCode.DIGIT1 || keyCode == KeyCode.DIGIT2 || keyCode == KeyCode.DIGIT3 ||
                 keyCode == KeyCode.DIGIT4 || keyCode == KeyCode.DIGIT5 || keyCode == KeyCode.DIGIT6 ||
@@ -147,96 +147,141 @@ public class Calculator_Controller {
                 keyCode == KeyCode.NUMPAD7 || keyCode == KeyCode.NUMPAD8 || keyCode == KeyCode.NUMPAD9 ||
                 keyCode == KeyCode.NUMPAD0) {
             inputText = event.getText();
-            resizeNumberFont(inputText, true);
+            textWithoutSeparateNew = textWithoutSeparateOld + inputText;
+            resizeNumberFont();
         } else if (keyCode == KeyCode.ESCAPE) {
-//            textForDisplayWithoutSeparate = "";
-//            outText.setFont(firstStyleLabel);
-//            outText.setText("0");
-//            start = true;
             outTextClear();
         } else if (keyCode == KeyCode.BACK_SPACE) {
             backspaceText();
+        } else if (keyCode == KeyCode.COMMA) {
+            comma();
         }
     }
 
     @FXML
     public void number(ActionEvent actionEvent) {
         String buttonText = ((Button) actionEvent.getSource()).getText();
-        resizeNumberFont(buttonText, true);
+        textWithoutSeparateNew += buttonText;
+        resizeNumberFont();
     }
 
     @FXML
     public void negate(ActionEvent actionEvent) {
-        textForDisplayWithoutSeparate = Arithmetic.negate(new BigDecimal(textForDisplayWithoutSeparate)).toString();
-        resizeNumberFont("", true);
+        BigDecimal numberNeedChange = Arithmetic.negate(new BigDecimal(textWithoutSeparateOld.replace(",", ".")));
+        textWithoutSeparateNew = numberNeedChange.toString().replace(".", ",");
+        if (textWithoutSeparateNew.contains("-")) {
+            charactersNumber += 1;
+        } else {
+            charactersNumber = CHAR_MAX;
+        }
+        resizeNumberFont();
     }
 
-    private void resizeNumberFont(String numberAdd, boolean lessNumber) {
+    @FXML
+    public void commaMouseClick(ActionEvent actionEvent) {
+        comma();
+    }
+
+    private void resizeNumberFont() {
         if (start) {
-            textForDisplayWithoutSeparate += numberAdd;
+            textWithoutSeparateOld += textWithoutSeparateNew;
             firstStyleLabel = outText.getFont();
+            outText.setText(textWithoutSeparateNew);
+            charactersNumber = CHAR_MAX;
             start = false;
         } else {
-            Text textOld = new Text(separateNumber(textForDisplayWithoutSeparate));
-            Text textNew;
-            textOld.setFont(outText.getFont());
-            Double textWidthOld = textOld.getBoundsInLocal().getWidth();
-            widthMaxTextOutput = outText.getWidth() - (outText.getPadding().getRight() + outText.getPadding().getLeft());
-            double presentSize = outText.getFont().getSize();
-            double percentOfChange;
-            double newSize = presentSize;
-            double textWidthNew;
-            if (lessNumber) {
-                if (textForDisplayWithoutSeparate.length() <= charactersNumber - 1) {
-                    textNew = new Text(separateNumber(textForDisplayWithoutSeparate + numberAdd));
-                    textNew.setFont(outText.getFont());
-                    textWidthNew = textNew.getBoundsInLocal().getWidth();
-                    if (textWidthNew > widthMaxTextOutput) {
-                        percentOfChange = (textWidthNew - textWidthOld) / textWidthOld;
-                        newSize = presentSize - (presentSize * percentOfChange);
-                    }
-                    textForDisplayWithoutSeparate += numberAdd;
-                }
-            } else {
-                String textWithoutLastSymbol = new StringBuilder(textForDisplayWithoutSeparate).deleteCharAt(textForDisplayWithoutSeparate.length() - 1).toString();
-                textNew = new Text(separateNumber(textWithoutLastSymbol));
-                textNew.setFont(outText.getFont());
-                textWidthNew = textNew.getBoundsInLocal().getWidth();
-                percentOfChange = (textWidthOld - textWidthNew) / textWidthOld;
-                newSize = presentSize + (presentSize * percentOfChange);
-                textForDisplayWithoutSeparate = textWithoutLastSymbol;
-            }
-            if (newSize < firstStyleLabel.getSize()) {
+            if (textWithoutSeparateNew.length() <= charactersNumber) {
+                double newSize = newSizeForText();
                 outText.setStyle("-fx-font-size: " + newSize + "px;" +
                         "-fx-background-color: e6e6e6;" +
                         "-fx-font-family:\"Segoe UI Semibold\";" +
                         "-fx-alignment: center-right;");
+                textWithoutSeparateOld = textWithoutSeparateNew;
+                outText.setText(separateNumber(textWithoutSeparateNew));
             }
         }
-        outText.setText(separateNumber(textForDisplayWithoutSeparate));
+    }
+
+    private double newSizeForText() {
+        widthMaxTextOutput = outText.getWidth() - (outText.getPadding().getRight() + outText.getPadding().getLeft());
+        Text textOld = new Text(separateNumber(textWithoutSeparateOld));
+        Text textNew = new Text(separateNumber(textWithoutSeparateNew));
+        textOld.setFont(outText.getFont());
+        textNew.setFont(outText.getFont());
+        double textWidthOld = textOld.getBoundsInLocal().getWidth();
+        double textWidthNew = textNew.getBoundsInLocal().getWidth();
+        double presentSize = outText.getFont().getSize();
+        double percentOfChange;
+        double newSize = presentSize;
+
+
+            if (textWidthNew > widthMaxTextOutput) {
+                percentOfChange = (textWidthNew - textWidthOld) / textWidthOld;
+                newSize = presentSize - (presentSize * percentOfChange);
+            } else if (textWidthNew < textWidthOld) {
+                percentOfChange = (textWidthOld - textWidthNew) / textWidthOld;
+                newSize = presentSize + (presentSize * percentOfChange);
+            }
+
+        if (newSize > firstStyleLabel.getSize()) {
+            newSize =  firstStyleLabel.getSize();
+        }
+        return newSize;
     }
 
     private String separateNumber(String text) {
-        BigDecimal number = new BigDecimal(text);
+        String textAfterComma = "";
         DecimalFormat decimalFormat = new DecimalFormat("###,###");
-        return decimalFormat.format(number);
+
+        if (text.contains(",")) {
+            int commaIndex = text.indexOf(",");
+            String textBeforeComma = text.substring(0, commaIndex);
+            textAfterComma = text.substring(commaIndex);
+            text = decimalFormat.format(new BigDecimal(textBeforeComma)) + textAfterComma;
+        } else {
+            text = decimalFormat.format(new BigDecimal(text)) + textAfterComma;
+        }
+        return text;
     }
 
     private void outTextClear() {
-        textForDisplayWithoutSeparate = "";
+        textWithoutSeparateOld = "";
+        textWithoutSeparateNew = "";
         outText.setStyle(firstStyleLabel.getStyle());
         outText.setText("0");
         start = true;
+        pointInText = false;
+    }
+
+    private void comma() {
+        if (!pointInText) {
+            if(start){
+                textWithoutSeparateNew += "0,";
+                textWithoutSeparateOld += textWithoutSeparateNew;
+                start = false;
+            } else{
+                textWithoutSeparateNew += ",";
+            }
+            charactersNumber += 1;
+            pointInText = true;
+
+        }
+            resizeNumberFont();
+
+
     }
 
     private void backspaceText() {
-        if (textForDisplayWithoutSeparate != null) {
-            if (textForDisplayWithoutSeparate.length() == 1) {
+        if (textWithoutSeparateOld != null) {
+            if (textWithoutSeparateOld.length() == 1) {
                 outTextClear();
             }
-            StringBuilder stringBuilder = new StringBuilder(textForDisplayWithoutSeparate);
-            String deleteNumber = stringBuilder.substring(stringBuilder.length() - 1);
-            resizeNumberFont(deleteNumber, false);
+            if (textWithoutSeparateOld.charAt(textWithoutSeparateOld.length() - 1) == ',') {
+                pointInText = false;
+                charactersNumber = CHAR_MAX;
+            }
+            textWithoutSeparateNew = new StringBuilder(textWithoutSeparateOld).deleteCharAt(textWithoutSeparateOld.length() - 1).toString();
+            resizeNumberFont();
         }
     }
 }

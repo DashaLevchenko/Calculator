@@ -89,10 +89,12 @@ public class Exp {
 //        System.out.println(new DecimalFormat("#.################").format(r));
 //        System.out.println(new DecimalFormat("#.################").format(r2));
 //
-        String l = "168546756876543";
+        String text = "-168546756876543";
+        DecimalFormat decimalFormat = new DecimalFormat("###,###");
 
 
-        System.out.println(l+"6");
+        System.out.println(decimalFormat.format(new BigDecimal(text)));
+
 
 
 

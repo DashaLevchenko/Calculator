@@ -9,10 +9,10 @@
     <list default="true" id="feaeb0c2-feb2-4a9c-98e3-48b1d1a339aa" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Model/Arithmetic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Arithmetic.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Exp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Exp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/View/Calculator_Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/Calculator_Controller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/View/calculator_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/calculator_view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Model/ArithmeticPlusMinusTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/ArithmeticPlusMinusTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Model/Arithmetic.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Model/Arithmetic.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Model/Exp.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Model/Exp.class" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -437,7 +437,14 @@
       <option name="project" value="LOCAL" />
       <updated>1568307869830</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="all are working, before old and new text">
+      <created>1568371333220</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1568371333220</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -495,7 +502,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Created test for same arguments(for int and double, positive&amp;positive, positive&amp;negative, negative&amp;negative)" />
     <MESSAGE value="Trailing zero in BigDecimal number" />
     <MESSAGE value="All works, before optimizing tests" />
     <MESSAGE value="new test sum" />
@@ -520,9 +526,19 @@
     <MESSAGE value="start controller" />
     <MESSAGE value="resize is working,&#10;start controller, I want to change textField" />
     <MESSAGE value="plus backspace" />
-    <option name="LAST_COMMIT_MESSAGE" value="plus backspace" />
+    <MESSAGE value="all are working, before old and new text" />
+    <option name="LAST_COMMIT_MESSAGE" value="all are working, before old and new text" />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/View/Calculator_Controller.java</url>
+          <line>268</line>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
         <watch expression="text.txBounds" />
