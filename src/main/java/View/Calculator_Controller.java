@@ -6,13 +6,17 @@ import java.text.DecimalFormat;
 import java.util.ResourceBundle;
 
 import Model.Arithmetic;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 public class Calculator_Controller {
 
@@ -153,7 +157,7 @@ public class Calculator_Controller {
             outTextClear();
         } else if (keyCode == KeyCode.BACK_SPACE) {
             backspaceText();
-        } else if (keyCode == KeyCode.COMMA) {
+        } else if (keyCode == KeyCode.COMMA || keyCode == KeyCode.DECIMAL) {
             comma();
         }
     }
@@ -163,6 +167,11 @@ public class Calculator_Controller {
         String buttonText = ((Button) actionEvent.getSource()).getText();
         textWithoutSeparateNew += buttonText;
         resizeNumberFont();
+    }
+
+    @FXML
+    public void closeButton(ActionEvent actionEvent) {
+        Platform.exit();
     }
 
     @FXML
