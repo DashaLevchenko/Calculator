@@ -94,11 +94,6 @@ public class Exp {
 
 
         System.out.println(decimalFormat.format(new BigDecimal(text)));
-
-
-
-
-
     }
     public static BigDecimal viewDecimalNumber(BigDecimal number){
         int scale;

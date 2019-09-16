@@ -43,24 +43,18 @@
 .memory_down *.arrow-button {
 -fx-alignment: left;
 -fx-padding: 1px 15px 7px 1px;
-
-
 }
 
-/*.memory_bold{
--fx-font-family: "Calculator MDL2 Assets";
--fx-font-weight: 900;
--fx-font-size: 16px;
--fx-font-style: italic;
-}**/
 .button_operation_arithmetic {
 -fx-background-color: #f0f0f0;
 -fx-text-base-color: #000;
 }
-.button_operation_arithmetic:hover {
+
+.button_operation_arithmetic:hover{
 -fx-background-color: #0078d7;
 -fx-text-base-color: #fff;
 }
+
 .button_operation_arithmetic:pressed {
 -fx-background-color: #a6d8ff;
 -fx-text-base-color: #fff;
@@ -74,7 +68,8 @@
 -fx-background-color: #fafafa;
 -fx-text-base-color: #000;
 }
-.button_operation:hover, .button_number:hover {
+
+.button_operation:hover, .button_number:hover, .button_operation:pressed, .button_number:pressed {
 -fx-background-color: #e6e6e6;
 }
 
