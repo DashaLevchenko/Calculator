@@ -7,7 +7,6 @@ import java.util.ResourceBundle;
 
 import Model.Arithmetic;
 import Model.OperationsEnum;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -96,63 +95,107 @@ public class Calculator_Controller {
     private BigDecimal number1;
     private BigDecimal number2;
     private BigDecimal result;
-    private OperationsEnum operation;
+    private OperationsEnum newOperation;
+    private OperationsEnum oldOperation;
+    private boolean operationEnd = false;
+    private boolean canChangeOperator = false;
+    private String historyOperations = "";
 
     @FXML
     void initialize() {
     }
 
+    String oneOp;
+
     @FXML
     public void binaryOperation(ActionEvent actionEvent) {
-        Character buttonText = ((Button) actionEvent.getSource()).getText().charAt(0);
 
+        Character buttonText = ((Button) actionEvent.getSource()).getText().charAt(0);
+        if (!canChangeOperator && newOperation != null) {
+            setNum2();
+            calculateBinaryOperation();
+        }
+        setNum1();
+
+        if (number2 == null) {
+            if (buttonText.equals(OperationsEnum.MINUS.getOperations())) {
+                newOperation = OperationsEnum.MINUS;
+            } else if (buttonText.equals(OperationsEnum.PLUS.getOperations())) {
+                newOperation = OperationsEnum.PLUS;
+            } else if (buttonText.equals(OperationsEnum.DIVIDE.getOperations())) {
+                newOperation = OperationsEnum.DIVIDE;
+            } else if (buttonText.equals(OperationsEnum.MULTIPLY.getOperations())) {
+                newOperation = OperationsEnum.MULTIPLY;
+            } else if (buttonText.equals(OperationsEnum.PERCENT.getOperations())) {
+                newOperation = OperationsEnum.PERCENT;
+            }
+
+            if (!canChangeOperator) {
+                oldOperation = newOperation;
+                canChangeOperator = true;
+                historyOperations += oldOperation.getSymbol();
+            } else {
+                if (!newOperation.equals(oldOperation)) {
+                    historyOperations = new StringBuilder(historyOperations).delete(historyOperations.length() - 3, historyOperations.length()).toString();
+                    historyOperations += newOperation.getSymbol();
+                }
+            }
+
+        }
+
+
+        outOperationMemory.setText(historyOperations);
+        oldOperation = newOperation;
+        CE.fire();
+
+    }
+
+    private void setNum1() {
         if (number1 == null) {
-            number1 = new BigDecimal(textWithoutSeparateNew);
+            number1 = new BigDecimal(textWithoutSeparateNew.replace(",", "."));
             start = true;
-            outOperationMemory.setText(outOperationMemory.getText() + number1);
-        }  else if (number2 == null){
+            historyOperations += number1;
+            textWithoutSeparateNew = "";
+        }
+    }
+
+    private void setNum2() {
+        if (!canChangeOperator) {
             try {
-                number2 = new BigDecimal(textWithoutSeparateNew);
-                outOperationMemory.setText(outOperationMemory.getText() + number2);
+                number2 = new BigDecimal(textWithoutSeparateNew.replace(",", "."));
+                historyOperations += number2;
+                operationEnd = true;
+                textWithoutSeparateNew = "";
             } catch (Exception e) {
                 number2 = BigDecimal.ZERO;
             }
             start = true;
-        }
-        if (buttonText.equals(OperationsEnum.MINUS.getOperations())) {
-            operation = OperationsEnum.MINUS;
-        } else if (buttonText.equals(OperationsEnum.PLUS.getOperations())) {
-            operation = OperationsEnum.PLUS;
-        } else if (buttonText.equals(OperationsEnum.DIVIDE.getOperations())) {
-            operation = OperationsEnum.DIVIDE;
-        } else if (buttonText.equals(OperationsEnum.MULTIPLY.getOperations())) {
-            operation = OperationsEnum.MULTIPLY;
-        } else if (buttonText.equals(OperationsEnum.PERCENT.getOperations())) {
-            operation = OperationsEnum.PERCENT;
+            System.out.println(number1 + " " + number2);
         }
 
-        outOperationMemory.setText(outOperationMemory.getText() + operation.getSymbol());
-        CE.fire();
-        System.out.println(number1 + " " + number2);
+    }
+
+
+    private void calculateBinaryOperation() {
         if (number1 != null && number2 != null) {
             textWithoutSeparateOld = textWithoutSeparateNew;
             try {
-                result = Arithmetic.calculateBinaryOperations(number1, number2, operation);
+                result = Arithmetic.calculateBinaryOperations(number1, number2, newOperation);
                 textWithoutSeparateNew = result.toString();
                 resizeNumberFont();
 
                 number1 = result;
                 number2 = null;
+                canChangeOperator = false;
+                oldOperation = null;
+                start = true;
+
                 textWithoutSeparateNew = "";
-                operation = null;
             } catch (Exception e) {
                 textWithoutSeparateNew = e.getMessage();
                 resizeNumberFont();
             }
-
         }
-
-
     }
 
     @FXML
@@ -181,6 +224,7 @@ public class Calculator_Controller {
         textWithoutSeparateNew = "";
         number1 = null;
         number2 = null;
+        historyOperations = "";
         if (!start) {
             outText.setStyle(firstStyleLabel.getStyle());
             outText.setText("0");
@@ -230,6 +274,9 @@ public class Calculator_Controller {
         String buttonText = ((Button) actionEvent.getSource()).getText();
         textWithoutSeparateNew += buttonText;
         resizeNumberFont();
+        if (number1 != null) {
+            canChangeOperator = false;
+        }
     }
 
     @FXML
@@ -243,7 +290,7 @@ public class Calculator_Controller {
         BigDecimal numberNeedChange = Arithmetic.negate(new BigDecimal(textWithoutSeparateOld.replace(",", ".")));
         textWithoutSeparateNew = numberNeedChange.toString().replace(".", ",");
         if (textWithoutSeparateNew.contains("-")) {
-            charactersNumber += 1;
+            charactersNumber ++;
         } else {
             charactersNumber = CHAR_MAX;
         }
