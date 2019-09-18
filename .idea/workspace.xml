@@ -9,8 +9,9 @@
     <list default="true" id="feaeb0c2-feb2-4a9c-98e3-48b1d1a339aa" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/View/Calculator_Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/Calculator_Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/View/Calculator_Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/Calculator_Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/View/calculator_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/calculator_view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/View/calculator_view_withInit.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/View/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/style.css" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -89,11 +90,11 @@
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="Model" />
     </key>
-    <key name="CreateTestDialog.Recents.Supers">
-      <recent name="" />
-    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="Model" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Calculator\target\classes\View" />

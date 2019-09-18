@@ -2,48 +2,91 @@ package View;
 
 import java.math.BigDecimal;
 import java.net.URL;
+import java.security.Key;
 import java.text.DecimalFormat;
 import java.util.ResourceBundle;
 
 import Model.Arithmetic;
 import Model.OperationsEnum;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
+import javafx.scene.input.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class Calculator_Controller {
-
-
-    //region Description
     @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
+    private Label outText;
 
     @FXML
     private Button per_cent;
 
     @FXML
-    private Button Backspace;
+    private Button sqrt;
+
+    @FXML
+    private Button sqrX;
+
+    @FXML
+    private Button OneDivideX;
 
     @FXML
     private Button CE;
 
     @FXML
-    private Button plusMinus;
-
-    @FXML
     private Button C;
 
     @FXML
+    private Button Backspace;
+
+    @FXML
+    private Button divide;
+
+    @FXML
+    private Button seven;
+
+    @FXML
+    private Button eight;
+
+    @FXML
+    private Button nine;
+
+    @FXML
+    private Button multiply;
+
+    @FXML
+    private Button four;
+
+    @FXML
+    private Button five;
+
+    @FXML
+    private Button six;
+
+    @FXML
+    private Button difference;
+
+    @FXML
+    private Button one;
+
+    @FXML
+    private Button two;
+
+    @FXML
+    private Button three;
+
+    @FXML
     private Button sum;
+
+    @FXML
+    private Button plusMinus;
+
+    @FXML
+    private Button zero;
 
     @FXML
     private Button point;
@@ -52,35 +95,22 @@ public class Calculator_Controller {
     private Button equal;
 
     @FXML
-    private Button sqrX;
-
-    @FXML
-    private Button sqrt;
-
-    @FXML
-    private Button OneDivideX;
-
-    @FXML
-    private Button difference;
-
-    @FXML
-    private Button divide;
-
-    @FXML
-    private Button multiply;
+    private Label title;
 
     @FXML
     private Button cancel;
 
     @FXML
-    private Label title;
-
-    @FXML
-    private Label outText;
-
-    @FXML
     private Label outOperationMemory;
-    //endregion
+
+    @FXML
+    private Button scrollButtonLeft;
+
+    @FXML
+    private Button scrollButtonRight;
+
+    @FXML
+    private ScrollPane scrollPaneOperation;
 
 
     private final int CHAR_MAX = 16;
@@ -105,11 +135,8 @@ public class Calculator_Controller {
     void initialize() {
     }
 
-    String oneOp;
-
     @FXML
     public void binaryOperation(ActionEvent actionEvent) {
-
         Character buttonText = ((Button) actionEvent.getSource()).getText().charAt(0);
         if (!canChangeOperator && newOperation != null) {
             setNum2();
@@ -140,19 +167,42 @@ public class Calculator_Controller {
                     historyOperations += newOperation.getSymbol();
                 }
             }
-
         }
-
-
         outOperationMemory.setText(historyOperations);
+        scrollOutOperationMemory();
         oldOperation = newOperation;
         CE.fire();
 
     }
+    double plusScroll = 0;
+    private void scrollOutOperationMemory(){
+
+        Text history = new Text(historyOperations);
+        if(history.getBoundsInLocal().getWidth() > outOperationMemory.getWidth())
+        {
+            scrollButtonLeft.setVisible(true);
+            scrollPaneOperation.setHmax(1);
+            scrollButtonLeft.setOnMousePressed(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    System.out.println(scrollPaneOperation.hmaxProperty());
+
+//                    if (plusScroll < 1) {
+
+                        scrollPaneOperation.setHvalue(0.2); //8/40
+//                    }
+                }
+            });
+        }
+    }
 
     private void setNum1() {
         if (number1 == null) {
-            number1 = new BigDecimal(textWithoutSeparateNew.replace(",", "."));
+            if (textWithoutSeparateNew.contains(",")) {
+                textWithoutSeparateNew = textWithoutSeparateNew.replace(",", ".");
+            }
+            System.out.println(textWithoutSeparateNew);
+            number1 = new BigDecimal(textWithoutSeparateNew);
             start = true;
             historyOperations += number1;
             textWithoutSeparateNew = "";
@@ -170,7 +220,6 @@ public class Calculator_Controller {
                 number2 = BigDecimal.ZERO;
             }
             start = true;
-            System.out.println(number1 + " " + number2);
         }
 
     }
@@ -179,22 +228,18 @@ public class Calculator_Controller {
     private void calculateBinaryOperation() {
         if (number1 != null && number2 != null) {
             textWithoutSeparateOld = textWithoutSeparateNew;
-            try {
-                result = Arithmetic.calculateBinaryOperations(number1, number2, newOperation);
-                textWithoutSeparateNew = result.toString();
-                resizeNumberFont();
+            result = Arithmetic.calculateBinaryOperations(number1, number2, newOperation);
+            textWithoutSeparateNew = result.toString();
+            resizeNumberFont();
 
-                number1 = result;
-                number2 = null;
-                canChangeOperator = false;
-                oldOperation = null;
-                start = true;
+            number1 = result;
+            number2 = null;
+            canChangeOperator = false;
+            oldOperation = null;
+            start = true;
 
-                textWithoutSeparateNew = "";
-            } catch (Exception e) {
-                textWithoutSeparateNew = e.getMessage();
-                resizeNumberFont();
-            }
+            textWithoutSeparateNew = "";
+
         }
     }
 
@@ -222,16 +267,16 @@ public class Calculator_Controller {
     void clearAllC(ActionEvent actionEvent) {
         textWithoutSeparateOld = "";
         textWithoutSeparateNew = "";
+        outText.setStyle(firstStyleLabel.getStyle());
+        outText.setText("0");
+        outOperationMemory.setText("");
+        start = true;
+        pointInText = false;
+        canChangeOperator = false;
+        newOperation = null;
         number1 = null;
         number2 = null;
         historyOperations = "";
-        if (!start) {
-            outText.setStyle(firstStyleLabel.getStyle());
-            outText.setText("0");
-            outOperationMemory.setText("");
-            start = true;
-            pointInText = false;
-        }
     }
 
     @FXML
@@ -248,24 +293,45 @@ public class Calculator_Controller {
 
     @FXML
     void keyPressed(KeyEvent event) {
-        String inputText;
         KeyCode keyCode = event.getCode();
-        if (keyCode == KeyCode.DIGIT1 || keyCode == KeyCode.DIGIT2 || keyCode == KeyCode.DIGIT3 ||
-                keyCode == KeyCode.DIGIT4 || keyCode == KeyCode.DIGIT5 || keyCode == KeyCode.DIGIT6 ||
-                keyCode == KeyCode.DIGIT7 || keyCode == KeyCode.DIGIT8 || keyCode == KeyCode.DIGIT9 ||
-                keyCode == KeyCode.DIGIT0 || keyCode == KeyCode.NUMPAD1 || keyCode == KeyCode.NUMPAD2 || keyCode == KeyCode.NUMPAD3 ||
-                keyCode == KeyCode.NUMPAD4 || keyCode == KeyCode.NUMPAD5 || keyCode == KeyCode.NUMPAD6 ||
-                keyCode == KeyCode.NUMPAD7 || keyCode == KeyCode.NUMPAD8 || keyCode == KeyCode.NUMPAD9 ||
-                keyCode == KeyCode.NUMPAD0) {
-            inputText = event.getText();
-            textWithoutSeparateNew = textWithoutSeparateOld + inputText;
-            resizeNumberFont();
+        if (keyCode == KeyCode.DIGIT1 || keyCode == KeyCode.NUMPAD1) {
+            one.fire();
+        } else if (keyCode == KeyCode.DIGIT2 || keyCode == KeyCode.NUMPAD2) {
+            two.fire();
+        } else if (keyCode == KeyCode.DIGIT3 || keyCode == KeyCode.NUMPAD3) {
+            three.fire();
+        } else if (keyCode == KeyCode.DIGIT4 || keyCode == KeyCode.NUMPAD4) {
+            four.fire();
+        } else if (keyCode == KeyCode.DIGIT5 || keyCode == KeyCode.NUMPAD5) {
+            five.fire();
+        } else if (keyCode == KeyCode.DIGIT6 || keyCode == KeyCode.NUMPAD6) {
+            six.fire();
+        } else if (keyCode == KeyCode.DIGIT7 || keyCode == KeyCode.NUMPAD7) {
+            seven.fire();
+        } else if (keyCode == KeyCode.DIGIT8 || keyCode == KeyCode.NUMPAD8) {
+            if (event.isShiftDown()) {
+                multiply.fire();
+            } else {
+                eight.fire();
+            }
+        } else if (keyCode == KeyCode.DIGIT9 || keyCode == KeyCode.NUMPAD9) {
+            nine.fire();
+        } else if (keyCode == KeyCode.DIGIT0 || keyCode == KeyCode.NUMPAD0) {
+            zero.fire();
         } else if (keyCode == KeyCode.ESCAPE) {
             CE.fire();
         } else if (keyCode == KeyCode.BACK_SPACE) {
             Backspace.fire();
         } else if (keyCode == KeyCode.PERIOD) {
-            comma();
+            point.fire();
+        } else if (keyCode == KeyCode.ADD || (keyCode == KeyCode.EQUALS && event.isShiftDown())) {
+            sum.fire();
+        } else if (keyCode == KeyCode.MINUS || keyCode == KeyCode.SUBTRACT) {
+            difference.fire();
+        } else if (keyCode == KeyCode.MULTIPLY) {
+            multiply.fire();
+        } else if (keyCode == KeyCode.SLASH || keyCode == KeyCode.DIVIDE) {
+            divide.fire();
         }
     }
 
@@ -290,7 +356,7 @@ public class Calculator_Controller {
         BigDecimal numberNeedChange = Arithmetic.negate(new BigDecimal(textWithoutSeparateOld.replace(",", ".")));
         textWithoutSeparateNew = numberNeedChange.toString().replace(".", ",");
         if (textWithoutSeparateNew.contains("-")) {
-            charactersNumber ++;
+            charactersNumber++;
         } else {
             charactersNumber = CHAR_MAX;
         }
@@ -299,7 +365,19 @@ public class Calculator_Controller {
 
     @FXML
     public void commaMouseClick(ActionEvent actionEvent) {
-        comma();
+        String buttonText = ((Button) actionEvent.getSource()).getText();
+        if (!pointInText) {
+            if (start) {
+                textWithoutSeparateNew += "0" + buttonText;
+                textWithoutSeparateOld += textWithoutSeparateNew;
+                start = false;
+            } else {
+                textWithoutSeparateNew += buttonText;
+            }
+            charactersNumber++;
+            pointInText = true;
+        }
+        resizeNumberFont();
     }
 
     private void resizeNumberFont() {
@@ -352,7 +430,6 @@ public class Calculator_Controller {
                 "-fx-alignment:" + alignment + ";");
     }
 
-
     private String separateNumber(String text) {
         String textAfterComma = "";
         DecimalFormat decimalFormat = new DecimalFormat("###,###");
@@ -368,24 +445,6 @@ public class Calculator_Controller {
         return text;
     }
 
-
-    private void comma() {
-        if (!pointInText) {
-            if (start) {
-                textWithoutSeparateNew += "0,";
-                textWithoutSeparateOld += textWithoutSeparateNew;
-                start = false;
-            } else {
-                textWithoutSeparateNew += ",";
-            }
-            charactersNumber += 1;
-            pointInText = true;
-
-        }
-        resizeNumberFont();
-
-
-    }
 
 }
 

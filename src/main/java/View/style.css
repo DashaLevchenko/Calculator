@@ -1,4 +1,7 @@
-.init{
+
+.button{
+-fx-background-radius: 0;
+-fx-border-radius: 0;
 }
 
 .init_close, .init_other{
@@ -36,12 +39,12 @@
 -fx-max-width: 5px;
 }
 .memory_down *.label {
--fx-alignment: right;
+-fx-alignment: center-right;
 -fx-padding: 0px 0px 0px 0px;
-
 }
+
 .memory_down *.arrow-button {
--fx-alignment: left;
+-fx-alignment: center-left;
 -fx-padding: 1px 15px 7px 1px;
 }
 
@@ -72,4 +75,23 @@
 .button_operation:hover, .button_number:hover, .button_operation:pressed, .button_number:pressed {
 -fx-background-color: #e6e6e6;
 }
+
+.scrollButton{
+-fx-background-color: transparent;
+-fx-text-base-color: #2088d9;
+}
+
+.scrollButton:hover{
+-fx-background-color: #3e3e3e;
+-fx-text-base-color: #000000;
+-fx-opacity: 0.7;
+}
+
+
+
+
+
+
+
+
 
