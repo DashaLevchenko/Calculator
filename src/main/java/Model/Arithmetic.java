@@ -82,6 +82,12 @@ public class Arithmetic {
             } catch (ArithmeticException e) {
                 throw new ArithmeticException("Cannot divide by zero");
             }
+        } else if (operation.equals(OperationsEnum.SQRT)){
+            result = squareRoot(number1);
+        } else if (operation.equals(OperationsEnum.SQRX)){
+            result = xSquare(number1);
+        }else if (operation.equals(OperationsEnum.ONE_DIVIDE_X)){
+            result = oneDivideX(number1);
         }
 
         return result;

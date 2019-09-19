@@ -72,6 +72,11 @@
 -fx-text-base-color: #000;
 }
 
+.scrollPaneOperation *.viewport{
+-fx-background-color: #e6e6e6;
+}
+
+
 .button_operation:hover, .button_number:hover, .button_operation:pressed, .button_number:pressed {
 -fx-background-color: #e6e6e6;
 }
@@ -82,7 +87,7 @@
 }
 
 .scrollButton:hover{
--fx-background-color: #3e3e3e;
+-fx-background-color: #757474;
 -fx-text-base-color: #000000;
 -fx-opacity: 0.7;
 }

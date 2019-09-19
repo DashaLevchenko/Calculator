@@ -6,9 +6,9 @@ public enum OperationsEnum {
     MULTIPLY ('\uE947', " x "),
     DIVIDE ('\uE94A', " \u00f7 "),
     PERCENT ('\uE94C',  " % "),
-//    SQRT (""),
-//    SQRX (""),
-//    ONE_DIVIDE_X ("");
+    SQRT ('\uE94B', "\u221A( "),
+    SQRX ('\uF7C8', "sqr( "),
+    ONE_DIVIDE_X ('\uF7C9', " 1/( ");
 ;
 
 

@@ -1,17 +1,12 @@
 package View;
 
 import java.math.BigDecimal;
-import java.net.URL;
-import java.security.Key;
 import java.text.DecimalFormat;
-import java.util.ResourceBundle;
 
 import Model.Arithmetic;
 import Model.OperationsEnum;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.input.*;
 import javafx.scene.text.Font;
@@ -117,19 +112,18 @@ public class Calculator_Controller {
     private int charactersNumber;
     private String textWithoutSeparateOld = "";
     private String textWithoutSeparateNew = "";
-    private double widthMaxTextOutput;
     private Font firstStyleLabel;
     private boolean start = true;
     private boolean pointInText = false;
 
     private BigDecimal number1;
     private BigDecimal number2;
-    private BigDecimal result;
-    private OperationsEnum newOperation;
-    private OperationsEnum oldOperation;
-    private boolean operationEnd = false;
+    private OperationsEnum newBinaryOperation;
+    private OperationsEnum oldBinaryOperation;
+    private OperationsEnum unaryOperation;
     private boolean canChangeOperator = false;
     private String historyOperations = "";
+    private double moveScroll;
 
     @FXML
     void initialize() {
@@ -138,7 +132,7 @@ public class Calculator_Controller {
     @FXML
     public void binaryOperation(ActionEvent actionEvent) {
         Character buttonText = ((Button) actionEvent.getSource()).getText().charAt(0);
-        if (!canChangeOperator && newOperation != null) {
+        if (!canChangeOperator && newBinaryOperation != null) {
             setNum2();
             calculateBinaryOperation();
         }
@@ -146,96 +140,99 @@ public class Calculator_Controller {
 
         if (number2 == null) {
             if (buttonText.equals(OperationsEnum.MINUS.getOperations())) {
-                newOperation = OperationsEnum.MINUS;
+                newBinaryOperation = OperationsEnum.MINUS;
             } else if (buttonText.equals(OperationsEnum.PLUS.getOperations())) {
-                newOperation = OperationsEnum.PLUS;
+                newBinaryOperation = OperationsEnum.PLUS;
             } else if (buttonText.equals(OperationsEnum.DIVIDE.getOperations())) {
-                newOperation = OperationsEnum.DIVIDE;
+                newBinaryOperation = OperationsEnum.DIVIDE;
             } else if (buttonText.equals(OperationsEnum.MULTIPLY.getOperations())) {
-                newOperation = OperationsEnum.MULTIPLY;
+                newBinaryOperation = OperationsEnum.MULTIPLY;
             } else if (buttonText.equals(OperationsEnum.PERCENT.getOperations())) {
-                newOperation = OperationsEnum.PERCENT;
+                newBinaryOperation = OperationsEnum.PERCENT;
             }
 
             if (!canChangeOperator) {
-                oldOperation = newOperation;
+                oldBinaryOperation = newBinaryOperation;
                 canChangeOperator = true;
-                historyOperations += oldOperation.getSymbol();
+                historyOperations += oldBinaryOperation.getSymbol();
             } else {
-                if (!newOperation.equals(oldOperation)) {
+                if (!newBinaryOperation.equals(oldBinaryOperation)) {
                     historyOperations = new StringBuilder(historyOperations).delete(historyOperations.length() - 3, historyOperations.length()).toString();
-                    historyOperations += newOperation.getSymbol();
+                    historyOperations += newBinaryOperation.getSymbol();
                 }
             }
         }
+        historyUnaryOperations="";
         outOperationMemory.setText(historyOperations);
         scrollOutOperationMemory();
-        oldOperation = newOperation;
+        oldBinaryOperation = newBinaryOperation;
         CE.fire();
 
     }
-    double plusScroll = 0;
-    private void scrollOutOperationMemory(){
 
-        Text history = new Text(historyOperations);
-        if(history.getBoundsInLocal().getWidth() > outOperationMemory.getWidth())
-        {
-            scrollButtonLeft.setVisible(true);
-            scrollPaneOperation.setHmax(1);
-            scrollButtonLeft.setOnMousePressed(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent mouseEvent) {
-                    System.out.println(scrollPaneOperation.hmaxProperty());
-
-//                    if (plusScroll < 1) {
-
-                        scrollPaneOperation.setHvalue(0.2); //8/40
-//                    }
-                }
-            });
-        }
-    }
-
-    private void setNum1() {
+    String historyUnaryOperations = "";
+    @FXML
+    public void unaryOperations(ActionEvent actionEvent) {
         if (number1 == null) {
             if (textWithoutSeparateNew.contains(",")) {
                 textWithoutSeparateNew = textWithoutSeparateNew.replace(",", ".");
             }
-            System.out.println(textWithoutSeparateNew);
             number1 = new BigDecimal(textWithoutSeparateNew);
             start = true;
-            historyOperations += number1;
-            textWithoutSeparateNew = "";
+            historyUnaryOperations +=number1.toString();
         }
-    }
-
-    private void setNum2() {
-        if (!canChangeOperator) {
-            try {
-                number2 = new BigDecimal(textWithoutSeparateNew.replace(",", "."));
-                historyOperations += number2;
-                operationEnd = true;
-                textWithoutSeparateNew = "";
-            } catch (Exception e) {
-                number2 = BigDecimal.ZERO;
+        else if(number2 == null) {
+            if (textWithoutSeparateNew.contains(",")) {
+                textWithoutSeparateNew = textWithoutSeparateNew.replace(",", ".");
             }
+            number2 = new BigDecimal(textWithoutSeparateNew);
             start = true;
+            historyUnaryOperations +=number2.toString();
         }
 
-    }
+        Character buttonText = ((Button) actionEvent.getSource()).getText().charAt(0);
+            if (buttonText.equals(OperationsEnum.SQRT.getOperations())) {
+                unaryOperation = OperationsEnum.SQRT;
+            } else if (buttonText.equals(OperationsEnum.SQRX.getOperations())) {
+                unaryOperation = OperationsEnum.SQRX;
+            } else if (buttonText.equals(OperationsEnum.ONE_DIVIDE_X.getOperations())) {
+                unaryOperation = OperationsEnum.ONE_DIVIDE_X;
+            }
 
 
-    private void calculateBinaryOperation() {
-        if (number1 != null && number2 != null) {
+        historyUnaryOperations = unaryOperation.getSymbol() + historyUnaryOperations+ " )";
+        calculateUnaryOperations();
+        unaryOperation = null;
+        calculateBinaryOperation();
+        outOperationMemory.setText(historyOperations+historyUnaryOperations);
+        scrollOutOperationMemory();
+
+        CE.fire();
+
+        }
+//        outOperationMemory.setText(historyOperations);
+//        scrollOutOperationMemory();
+//        oldOperation = newOperation;
+//        CE.fire();
+
+    private void calculateUnaryOperations(){
+        if (number1 != null || number2 != null) {
             textWithoutSeparateOld = textWithoutSeparateNew;
-            result = Arithmetic.calculateBinaryOperations(number1, number2, newOperation);
+            BigDecimal result;
+
+
+
+            if (number2 == null){
+                 result = Arithmetic.calculateBinaryOperations(number1, number2, unaryOperation);
+                number1 = result;
+            } else {
+                result = Arithmetic.calculateBinaryOperations(number2, number1, unaryOperation);
+                number2 = result;
+            }
+
             textWithoutSeparateNew = result.toString();
             resizeNumberFont();
 
-            number1 = result;
-            number2 = null;
-            canChangeOperator = false;
-            oldOperation = null;
             start = true;
 
             textWithoutSeparateNew = "";
@@ -244,8 +241,27 @@ public class Calculator_Controller {
     }
 
     @FXML
+    void scrollButtonLeftPressed(ActionEvent event) {
+        scrollPaneOperation.setHvalue(scrollPaneOperation.getHvalue() + moveScroll);
+        scrollButtonRight.setVisible(true);
+        if (scrollPaneOperation.getHvalue() == scrollPaneOperation.getHmax()) {
+            scrollButtonLeft.setVisible(false);
+            scrollButtonRight.setVisible(true);
+        }
+    }
+
+    @FXML
+    void scrollButtonRightPressed(ActionEvent event) {
+        scrollPaneOperation.setHvalue(scrollPaneOperation.getHvalue() - moveScroll);
+        scrollButtonLeft.setVisible(true);
+        if (scrollPaneOperation.getHvalue() == 0) {
+            scrollButtonRight.setVisible(false);
+            scrollButtonLeft.setVisible(true);
+        }
+    }
+
+    @FXML
     public void calculate(ActionEvent actionEvent) {
-        System.out.println("ok");
     }
 
     @FXML
@@ -254,12 +270,15 @@ public class Calculator_Controller {
             if (textWithoutSeparateOld.length() == 1) {
                 C.fire();
             }
-            if (textWithoutSeparateOld.charAt(textWithoutSeparateOld.length() - 1) == ',') {
-                pointInText = false;
-                charactersNumber = CHAR_MAX;
+            if (!textWithoutSeparateOld.isEmpty()) {
+                if (textWithoutSeparateOld.charAt(textWithoutSeparateOld.length() - 1) == ',') {
+                    pointInText = false;
+                    charactersNumber = CHAR_MAX;
+                }
+                textWithoutSeparateNew = new StringBuilder(textWithoutSeparateOld).deleteCharAt(textWithoutSeparateOld.length() - 1).toString();
+                resizeNumberFont();
             }
-            textWithoutSeparateNew = new StringBuilder(textWithoutSeparateOld).deleteCharAt(textWithoutSeparateOld.length() - 1).toString();
-            resizeNumberFont();
+
         }
     }
 
@@ -273,10 +292,13 @@ public class Calculator_Controller {
         start = true;
         pointInText = false;
         canChangeOperator = false;
-        newOperation = null;
+        newBinaryOperation = null;
         number1 = null;
         number2 = null;
         historyOperations = "";
+        scrollButtonRight.setVisible(false);
+        scrollButtonLeft.setVisible(false);
+        historyUnaryOperations = "";
     }
 
     @FXML
@@ -397,7 +419,7 @@ public class Calculator_Controller {
     }
 
     private void newSizeForText() {
-        widthMaxTextOutput = outText.getWidth() - (outText.getPadding().getRight() + outText.getPadding().getLeft());
+        double widthMaxTextOutput = outText.getWidth() - outText.getPadding().getRight() - outText.getPadding().getLeft();
         Text textOld = new Text(separateNumber(textWithoutSeparateOld));
         Text textNew = new Text(separateNumber(textWithoutSeparateNew));
         textOld.setFont(outText.getFont());
@@ -407,27 +429,22 @@ public class Calculator_Controller {
         double presentSize = outText.getFont().getSize();
         double percentOfChange;
         double newSize = presentSize;
-        String alignment = outText.getAlignment().toString();
 
         if (textWidthNew > widthMaxTextOutput) {
             percentOfChange = (textWidthNew - textWidthOld) / textWidthOld;
             newSize = presentSize - (presentSize * percentOfChange);
-            alignment = Pos.CENTER_RIGHT.toString();
         } else if (textWidthNew < textWidthOld) {
             percentOfChange = (textWidthOld - textWidthNew) / textWidthOld;
             newSize = presentSize + (presentSize * percentOfChange);
-            alignment = Pos.CENTER_RIGHT.toString();
         }
 
         if (newSize > firstStyleLabel.getSize()) {
             newSize = firstStyleLabel.getSize();
-            alignment = Pos.BOTTOM_RIGHT.toString();
         }
 
         outText.setStyle("-fx-font-size: " + newSize + "px;" +
                 "-fx-background-color: e6e6e6;" +
-                "-fx-font-family:\"Segoe UI Semibold\";" +
-                "-fx-alignment:" + alignment + ";");
+                "-fx-font-family:\"Segoe UI Semibold\";");
     }
 
     private String separateNumber(String text) {
@@ -445,6 +462,62 @@ public class Calculator_Controller {
         return text;
     }
 
+    private void scrollOutOperationMemory() {
+        Text history = new Text(historyOperations);
+        history.setFont(outOperationMemory.getFont());
+        double maxWidthForLabelOperation = scrollPaneOperation.getWidth() - scrollPaneOperation.getPadding().getLeft() - scrollPaneOperation.getPadding().getRight();
+        if (history.getBoundsInLocal().getWidth() > maxWidthForLabelOperation) {
+            scrollButtonLeft.setVisible(true);
+            double p = history.getBoundsInLocal().getWidth() / maxWidthForLabelOperation;
+            int temp = (int) p;
+            moveScroll = scrollPaneOperation.getHmax() / temp;
+        }
+    }
 
+    private void setNum1() {
+        if (number1 == null) {
+            if (textWithoutSeparateNew.contains(",")) {
+                textWithoutSeparateNew = textWithoutSeparateNew.replace(",", ".");
+            }
+            number1 = new BigDecimal(textWithoutSeparateNew);
+            start = true;
+            historyOperations += number1;
+            textWithoutSeparateNew = "";
+        } else {
+            historyOperations += historyUnaryOperations;
+        }
+
+
+    }
+
+    private void setNum2() {
+        if (!canChangeOperator) {
+            try {
+                number2 = new BigDecimal(textWithoutSeparateNew.replace(",", "."));
+                historyOperations += number2;
+                boolean operationEnd = true;
+                textWithoutSeparateNew = "";
+            } catch (Exception e) {
+                number2 = BigDecimal.ZERO;
+            }
+            start = true;
+        }
+    }
+
+    private void calculateBinaryOperation() {
+        if (number1 != null && number2 != null) {
+            textWithoutSeparateOld = textWithoutSeparateNew;
+            BigDecimal result = Arithmetic.calculateBinaryOperations(number1, number2, newBinaryOperation);
+            textWithoutSeparateNew = result.toString();
+            resizeNumberFont();
+
+            number1 = result;
+            number2 = null;
+            canChangeOperator = false;
+            oldBinaryOperation = null;
+            start = true;
+            textWithoutSeparateNew = "";
+        }
+    }
 }
 
