@@ -61,7 +61,7 @@
             <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="46.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Button fx:id="per_cent" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#binaryOperation" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation" stylesheets="@style.css" text="">
+            <Button fx:id="per_cent" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#per_centOperation" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation" stylesheets="@style.css" text="">
                <rotationAxis>
                   <Point3D />
                </rotationAxis>
