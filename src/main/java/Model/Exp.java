@@ -89,11 +89,25 @@ public class Exp {
 //        System.out.println(new DecimalFormat("#.################").format(r));
 //        System.out.println(new DecimalFormat("#.################").format(r2));
 //
-        String text = "-168546756876543";
-        DecimalFormat decimalFormat = new DecimalFormat("###,###");
+        String text = "16854675687654";
+        StringBuilder p= new StringBuilder();
+
+        for (int i = 0; i < text.length(); i++) {
+            p.append(text.toCharArray()[i]);
+            if (text.length()%3 == 0 && i != 0){
+                p.append(" ");
+            } else if (text.length()%3 == 1){
+                p.append(text.toCharArray()[i]+" ");
+            } else if (text.length()%3 == 2){
+                p.append(text.toCharArray()[i]+" ");
+            }
+        }
 
 
-        System.out.println(decimalFormat.format(new BigDecimal(text)));
+
+        System.out.println(p.toString());
+
+
     }
     public static BigDecimal viewDecimalNumber(BigDecimal number){
         int scale;

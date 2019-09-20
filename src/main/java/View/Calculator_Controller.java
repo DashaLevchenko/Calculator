@@ -126,6 +126,7 @@ public class Calculator_Controller {
     private OperationsEnum percentOperation;
     private boolean canChangeOperator = false;
     private String historyOperations = "";
+    private String historyUnaryOperations = "";
     private double moveScroll;
 
     @FXML
@@ -170,8 +171,6 @@ public class Calculator_Controller {
         CE.fire();
 
     }
-
-    String historyUnaryOperations = "";
 
     @FXML
     public void unaryOperations(ActionEvent actionEvent) {
@@ -218,54 +217,6 @@ public class Calculator_Controller {
 
     }
 
-
-    void calculatePerCent() {
-        if (numberFirstBinaryOperations != null && numberSecondBinaryOperations != null) {
-            textWithoutSeparateOld = textWithoutSeparateNew;
-            result = Arithmetic.calculateBinaryOperations(numberFirstBinaryOperations, numberSecondBinaryOperations, percentOperation);
-            textWithoutSeparateNew = result.toString();
-            resizeNumberFont();
-
-            if (newBinaryOperation != null) {
-                numberSecondBinaryOperations = result;
-                historyOperations += result;
-                calculateBinaryOperation();
-            } else {
-                numberFirstBinaryOperations = result;
-            }
-
-            canChangeOperator = false;
-
-        }
-
-    }
-
-
-    private void calculateUnaryOperations() {
-        if (numberUnaryOperations != null) {
-            textWithoutSeparateOld = textWithoutSeparateNew;
-
-            result = Arithmetic.calculateUnaryOperations(numberUnaryOperations, unaryOperation);
-
-            textWithoutSeparateNew = result.toString();
-            resizeNumberFont();
-
-            if (newBinaryOperation == null) {
-                numberFirstBinaryOperations = result;
-            } else {
-                numberSecondBinaryOperations = result;
-                calculateBinaryOperation();
-            }
-
-
-            start = true;
-            textWithoutSeparateNew = "";
-            unaryOperation = null;
-            numberUnaryOperations = null;
-
-        }
-    }
-
     @FXML
     void scrollButtonLeftPressed(ActionEvent event) {
         scrollPaneOperation.setHvalue(scrollPaneOperation.getHvalue() + moveScroll);
@@ -302,7 +253,7 @@ public class Calculator_Controller {
                     charactersNumber = CHAR_MAX;
                 }
                 textWithoutSeparateNew = new StringBuilder(textWithoutSeparateOld).deleteCharAt(textWithoutSeparateOld.length() - 1).toString();
-                resizeNumberFont();
+                printTextOutput();
             }
 
         }
@@ -387,7 +338,7 @@ public class Calculator_Controller {
     public void number(ActionEvent actionEvent) {
         String buttonText = ((Button) actionEvent.getSource()).getText();
         textWithoutSeparateNew += buttonText;
-        resizeNumberFont();
+        printTextOutput();
         if (numberFirstBinaryOperations != null) {
             canChangeOperator = false;
         }
@@ -408,7 +359,7 @@ public class Calculator_Controller {
         } else {
             charactersNumber = CHAR_MAX;
         }
-        resizeNumberFont();
+        printTextOutput();
     }
 
     @FXML
@@ -425,10 +376,10 @@ public class Calculator_Controller {
             charactersNumber++;
             pointInText = true;
         }
-        resizeNumberFont();
+        printTextOutput();
     }
 
-    private void resizeNumberFont() {
+    private void printTextOutput() {
         if (start) {
             textWithoutSeparateOld += textWithoutSeparateNew;
             firstStyleLabel = outText.getFont();
@@ -437,14 +388,14 @@ public class Calculator_Controller {
             start = false;
         } else {
             if (textWithoutSeparateNew.length() <= charactersNumber) {
-                newSizeForText();
+                resizeOutputText();
                 textWithoutSeparateOld = textWithoutSeparateNew;
                 outText.setText(separateNumber(textWithoutSeparateNew));
             }
         }
     }
 
-    private void newSizeForText() {
+    private void resizeOutputText() {
         double widthMaxTextOutput = outText.getWidth() - outText.getPadding().getRight() - outText.getPadding().getLeft();
         Text textOld = new Text(separateNumber(textWithoutSeparateOld));
         Text textNew = new Text(separateNumber(textWithoutSeparateNew));
@@ -533,7 +484,7 @@ public class Calculator_Controller {
             textWithoutSeparateOld = textWithoutSeparateNew;
             result = Arithmetic.calculateBinaryOperations(numberFirstBinaryOperations, numberSecondBinaryOperations, newBinaryOperation);
             textWithoutSeparateNew = result.toString();
-            resizeNumberFont();
+            printTextOutput();
 
             numberFirstBinaryOperations = result;
             numberSecondBinaryOperations = null;
@@ -543,6 +494,52 @@ public class Calculator_Controller {
             start = true;
             textWithoutSeparateNew = "";
         }
+    }
+
+    private void calculateUnaryOperations() {
+        if (numberUnaryOperations != null) {
+            textWithoutSeparateOld = textWithoutSeparateNew;
+
+            result = Arithmetic.calculateUnaryOperations(numberUnaryOperations, unaryOperation);
+
+            textWithoutSeparateNew = result.toString();
+            printTextOutput();
+
+            if (newBinaryOperation == null) {
+                numberFirstBinaryOperations = result;
+            } else {
+                numberSecondBinaryOperations = result;
+                calculateBinaryOperation();
+            }
+
+
+            start = true;
+            textWithoutSeparateNew = "";
+            unaryOperation = null;
+            numberUnaryOperations = null;
+
+        }
+    }
+
+    private void calculatePerCent() {
+        if (numberFirstBinaryOperations != null && numberSecondBinaryOperations != null) {
+            textWithoutSeparateOld = textWithoutSeparateNew;
+            result = Arithmetic.calculateBinaryOperations(numberFirstBinaryOperations, numberSecondBinaryOperations, percentOperation);
+            textWithoutSeparateNew = result.toString();
+            printTextOutput();
+
+            if (newBinaryOperation != null) {
+                numberSecondBinaryOperations = result;
+                historyOperations += result;
+                calculateBinaryOperation();
+            } else {
+                numberFirstBinaryOperations = result;
+            }
+
+            canChangeOperator = false;
+
+        }
+
     }
 }
 

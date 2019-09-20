@@ -92,6 +92,9 @@
 -fx-opacity: 0.7;
 }
 
+.leftMenuButton *.text{
+-fx-translate-x: -21;
+}
 
 
 
