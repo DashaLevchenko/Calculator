@@ -67,7 +67,46 @@ public class Arithmetic {
         return scaleForBigDecimal(x.negate());
     }
 
+    public static BigDecimal calculateBinaryOperations(BigDecimal number1, BigDecimal number2, OperationsEnum operation){
+        BigDecimal result = BigDecimal.ZERO;
 
+        if (operation.equals(OperationsEnum.PLUS)){
+            result = sum(number1, number2);
+        } else if (operation.equals(OperationsEnum.MINUS)){
+            result = minus(number1, number2);
+        } else if (operation.equals(OperationsEnum.MULTIPLY)){
+            result = multiply(number1, number2);
+        }else if (operation.equals(OperationsEnum.PERCENT)){
+            result = percent(number1, number2);
+        } else if(operation.equals(OperationsEnum.DIVIDE)){
+            try {
+                result = divide(number1, number2);
+            } catch (ArithmeticException e) {
+                throw new ArithmeticException("Cannot divide by zero");
+            }
+        } else if (operation.equals(OperationsEnum.SQRT)){
+            result = squareRoot(number1);
+        } else if (operation.equals(OperationsEnum.SQRX)){
+            result = xSquare(number1);
+        }else if (operation.equals(OperationsEnum.ONE_DIVIDE_X)){
+            result = oneDivideX(number1);
+        }
+
+        return result;
+    }
+    public static BigDecimal calculateUnaryOperations(BigDecimal number1, OperationsEnum operation){
+        BigDecimal result = BigDecimal.ZERO;
+
+        if (operation.equals(OperationsEnum.SQRT)){
+            result = squareRoot(number1);
+        } else if (operation.equals(OperationsEnum.SQRX)){
+            result = xSquare(number1);
+        }else if (operation.equals(OperationsEnum.ONE_DIVIDE_X)){
+            result = oneDivideX(number1);
+        }
+
+        return result;
+    }
 
     public static BigDecimal scaleForBigDecimal(BigDecimal numberDouble){
         numberDouble = numberDouble.stripTrailingZeros();

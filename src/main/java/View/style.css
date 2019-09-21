@@ -1,4 +1,7 @@
-.init{
+
+.button{
+-fx-background-radius: 0;
+-fx-border-radius: 0;
 }
 
 .init_close, .init_other{
@@ -36,31 +39,25 @@
 -fx-max-width: 5px;
 }
 .memory_down *.label {
--fx-alignment: right;
+-fx-alignment: center-right;
 -fx-padding: 0px 0px 0px 0px;
-
 }
+
 .memory_down *.arrow-button {
--fx-alignment: left;
+-fx-alignment: center-left;
 -fx-padding: 1px 15px 7px 1px;
-
-
 }
 
-/*.memory_bold{
--fx-font-family: "Calculator MDL2 Assets";
--fx-font-weight: 900;
--fx-font-size: 16px;
--fx-font-style: italic;
-}**/
 .button_operation_arithmetic {
 -fx-background-color: #f0f0f0;
 -fx-text-base-color: #000;
 }
-.button_operation_arithmetic:hover {
+
+.button_operation_arithmetic:hover{
 -fx-background-color: #0078d7;
 -fx-text-base-color: #fff;
 }
+
 .button_operation_arithmetic:pressed {
 -fx-background-color: #a6d8ff;
 -fx-text-base-color: #fff;
@@ -74,7 +71,35 @@
 -fx-background-color: #fafafa;
 -fx-text-base-color: #000;
 }
-.button_operation:hover, .button_number:hover {
+
+.scrollPaneOperation *.viewport{
 -fx-background-color: #e6e6e6;
 }
+
+
+.button_operation:hover, .button_number:hover, .button_operation:pressed, .button_number:pressed {
+-fx-background-color: #e6e6e6;
+}
+
+.scrollButton{
+-fx-background-color: transparent;
+-fx-text-base-color: #2088d9;
+}
+
+.scrollButton:hover{
+-fx-background-color: #757474;
+-fx-text-base-color: #000000;
+-fx-opacity: 0.7;
+}
+
+.leftMenuButton *.text{
+-fx-translate-x: -21;
+}
+
+
+
+
+
+
+
 
