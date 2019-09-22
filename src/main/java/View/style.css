@@ -93,10 +93,22 @@
 }
 
 .leftMenuButton *.text{
+
 -fx-translate-x: -21;
 }
 
+.leftMenuButton{
+-fx-background-color: #efefef;
+}
 
+.leftMenuButton:hover{
+-fx-background-color: #e6e6e6;
+}
+
+.scroll_pane_left_menu *.scroll-bar *.decrement-button,
+.scroll_pane_left_menu *.scroll-bar *.increment-button{
+visibility: false;
+}
 
 
 

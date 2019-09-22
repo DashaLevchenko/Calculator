@@ -8,8 +8,9 @@ public enum OperationsEnum {
     PERCENT ('\uE94C',  " % "),
     SQRT ('\uE94B', "\u221A( "),
     SQRX ('\uF7C8', "sqr( "),
-    ONE_DIVIDE_X ('\uF7C9', " 1/( ");
-;
+    ONE_DIVIDE_X ('\uF7C9', " 1/( "),
+    EQUAL ('\uE94E', "");
+
 
 
     private Character operation;
