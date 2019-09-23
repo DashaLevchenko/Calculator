@@ -90,16 +90,12 @@ public class Exp {
 //        System.out.println(new DecimalFormat("#.################").format(r2));
 //
         String text = "16854675687654";
-        StringBuilder p= new StringBuilder();
-
-        for (int i = 0; i < text.length(); i++) {
-            p.append(text.toCharArray()[i]);
-            if (text.length()%3 == 0 && i != 0){
-                p.append(" ");
-            } else if (text.length()%3 == 1){
-                p.append(text.toCharArray()[i]+" ");
-            } else if (text.length()%3 == 2){
-                p.append(text.toCharArray()[i]+" ");
+        StringBuilder p= new StringBuilder(text); //16 854 675 687 654      10
+        int h = p.length()-3;
+        for (int i = p.length(); i > 0; i--) {
+                if (i%h == 0){
+                    p.insert(i, " ");
+                    h-=3;
             }
         }
 

@@ -25,25 +25,25 @@
 .menu {
 -fx-background-color: #e6e6e6;
 }
-.menu *.arrow {
+.menu .arrow {
 -fx-max-height: 0px;
 -fx-max-width: 0px;
 -fx-min-height: 0px;
 -fx-min-width: 0px;
 }
-.memory_down *.arrow{
+.memory_down .arrow{
 -fx-background-color: #000;
 -fx-min-height: 2px;
 -fx-min-width: 5px;
 -fx-max-height: 2px;
 -fx-max-width: 5px;
 }
-.memory_down *.label {
+.memory_down .label {
 -fx-alignment: center-right;
 -fx-padding: 0px 0px 0px 0px;
 }
 
-.memory_down *.arrow-button {
+.memory_down .arrow-button {
 -fx-alignment: center-left;
 -fx-padding: 1px 15px 7px 1px;
 }
@@ -72,7 +72,7 @@
 -fx-text-base-color: #000;
 }
 
-.scrollPaneOperation *.viewport{
+.scrollPaneOperation .viewport{
 -fx-background-color: #e6e6e6;
 }
 
@@ -92,26 +92,94 @@
 -fx-opacity: 0.7;
 }
 
-.leftMenuButton *.text{
+.leftMenuButton .text{
 
 -fx-translate-x: -21;
 }
 
 .leftMenuButton{
--fx-background-color: #efefef;
+-fx-background-color: #e8e8e8;
 }
 
 .leftMenuButton:hover{
--fx-background-color: #e6e6e6;
+-fx-background-color: #cfcfcf;
 }
 
-.scroll_pane_left_menu *.scroll-bar *.decrement-button,
-.scroll_pane_left_menu *.scroll-bar *.increment-button{
-visibility: false;
+.scroll_pane_left_menu .scroll-bar .decrement-button,
+.scroll_pane_left_menu .scroll-bar .increment-button{
+-fx-opacity: 0;
+}
+
+.scroll_pane_left_menu .scroll-bar .thumb{
+-fx-background-color: #7a7a7a;
+}
+
+.scroll_pane_left_menu .scroll-bar .track-background{
+-fx-background-color: transparent;
+}
+
+.scroll_pane_left_menu .scroll-bar {
+-fx-background-color: transparent;
+-fx-pref-width: 6px;
+-fx-translate-x: -6;
+}
+
+.scroll_pane_left_menu .scroll-bar:hover {
+-fx-background-color: e8e8e8;
+-fx-opacity: 1;
+-fx-pref-width: 20px;
+-fx-translate-x: -6;
+}
+
+.scroll_pane_left_menu .scroll-bar:hover .decrement-button,
+.scroll_pane_left_menu .scroll-bar:hover .increment-button{
+-fx-opacity: 1;
+
+}
+.scroll_pane_left_menu .scroll-bar:hover .thumb{
+-fx-background-color: #b8b8b8;
+-fx-background-radius: 0;
+}
+
+.scroll_pane_left_menu .scroll-bar:hover .thumb:hover{
+-fx-background-color: #8a8a8a;
+-fx-background-radius: 0;
+}.scroll_pane_left_menu .scroll-bar:hover .thumb:pressed{
+-fx-background-color: #5c5c5c;
+-fx-background-radius: 0;
+}
+
+.scroll_pane_left_menu .scroll-bar:hover .decrement-button{
+-fx-translate-y: 3;
 }
 
 
+.scroll_pane_left_menu .scroll-bar:hover .increment-button{
+-fx-translate-y: -3;
+}
 
+.scroll_pane_left_menu .scroll-bar:hover .decrement-button,
+.scroll_pane_left_menu .scroll-bar:hover .increment-button{
+-fx-background-color: transparent;
+-fx-pref-height: 20px;
+-fx-pref-width: 5px;
+}
+.scroll_pane_left_menu .scroll-bar:hover .decrement-button:hover,
+.scroll_pane_left_menu .scroll-bar:hover .increment-button:hover{
+-fx-background-color: #cfcfcf;
+-fx-pref-height: 20px;
+-fx-pref-width: 5px;
+}
+.scroll_pane_left_menu .scroll-bar:hover .decrement-button:pressed,
+.scroll_pane_left_menu .scroll-bar:hover .increment-button:pressed{
+-fx-background-color: #5c5c5c;
+-fx-pref-height: 20px;
+-fx-pref-width: 5px;
+-fx-text-base-color: red;
+}
 
+.scroll_pane_left_menu .scroll-bar:hover .decrement-button:pressed .decrement-arrow ,
+.scroll_pane_left_menu .scroll-bar:hover .increment-button:pressed .increment-arrow{
+-fx-background-color: #dbdbdb;
 
-
+}

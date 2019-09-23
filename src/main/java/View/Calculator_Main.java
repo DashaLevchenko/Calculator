@@ -25,9 +25,12 @@ public class Calculator_Main extends Application {
         stage.setMinWidth(320);
         stage.initStyle(StageStyle.UNDECORATED);
 
-        Resize resize = new Resize(stage);
-        resize.resizeAllStage();
+
+//        Resize resize = new Resize(stage);
+//        resize.resizeAllStage();
 
                 stage.show();
     }
+
+
 }
