@@ -1,0 +1,879 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Point3D?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="generalAnchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="320.0" onKeyPressed="#keyPressed" onMouseExited="#resizeWindow" prefHeight="500.0" prefWidth="320.0" style="-fx-background-color: e6e6e6;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Calculator_Controller">
+   <children>
+      <GridPane layoutY="92.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="92.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="220.0" minHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="63.0" minHeight="10.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Label fx:id="outText" alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="73.0" prefWidth="312.0" style="-fx-background-color: e6e6e6;" text="0">
+                     <font>
+                        <Font name="Segoe UI Semibold" size="46.0" />
+                     </font>
+                     <padding>
+                        <Insets left="12.0" right="13.0" />
+                     </padding>
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </Label>
+                  <GridPane GridPane.rowIndex="1">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <Button alignment="TOP_CENTER" disable="true" minHeight="30.0" minWidth="50.0" mnemonicParsing="false" style="-fx-background-color: e6e6e6; -fx-background-radius: 0; -fx-border-radius: 0;" text="MC">
+                           <font>
+                              <Font name="Segoe UI Historic" size="12.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin>
+                        </Button>
+                        <Button alignment="TOP_CENTER" disable="true" minHeight="30.0" minWidth="50.0" mnemonicParsing="false" style="-fx-background-color: e6e6e6; -fx-background-radius: 0; -fx-border-radius: 0;" text="MR" GridPane.columnIndex="1">
+                           <font>
+                              <Font name="Segoe UI Historic" size="12.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets left="2.0" right="2.0" />
+                           </GridPane.margin>
+                        </Button>
+                        <Button alignment="BOTTOM_CENTER" minHeight="30.0" minWidth="50.0" mnemonicParsing="false" style="-fx-background-color: e6e6e6; -fx-background-radius: 0; -fx-border-radius: 0;" stylesheets="@style.css" text="M+" GridPane.columnIndex="2">
+                           <font>
+                              <Font name="Segoe UI Semibold" size="13.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets left="2.0" right="2.0" />
+                           </GridPane.margin>
+                           <padding>
+                              <Insets bottom="6.0" />
+                           </padding>
+                        </Button>
+                        <Button alignment="BOTTOM_CENTER" minHeight="30.0" minWidth="50.0" mnemonicParsing="false" style="-fx-background-color: e6e6e6; -fx-background-radius: 0; -fx-border-radius: 0;" stylesheets="@style.css" text="M-" GridPane.columnIndex="3">
+                           <font>
+                              <Font name="Segoe UI Semibold" size="13.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets left="2.0" right="2.0" />
+                           </GridPane.margin>
+                           <padding>
+                              <Insets bottom="6.0" />
+                           </padding>
+                        </Button>
+                        <Button alignment="BOTTOM_CENTER" minHeight="30.0" minWidth="50.0" mnemonicParsing="false" style="-fx-background-color: e6e6e6; -fx-background-radius: 0; -fx-border-radius: 0;" styleClass="memory_bold" stylesheets="@style.css" text="MS" GridPane.columnIndex="4">
+                           <font>
+                              <Font name="Segoe UI Semibold" size="13.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets left="2.0" right="2.0" />
+                           </GridPane.margin>
+                           <padding>
+                              <Insets bottom="6.0" />
+                           </padding>
+                        </Button>
+                        <MenuButton alignment="CENTER_RIGHT" disable="true" minHeight="30.0" minWidth="50.0" mnemonicParsing="false" style="-fx-background-color: e6e6e6; -fx-background-radius: 0; -fx-border-radius: 0;" styleClass="memory_down" stylesheets="@style.css" text="M" textAlignment="RIGHT" GridPane.columnIndex="5">
+                           <items>
+                              <MenuItem mnemonicParsing="false" text="Action 1" />
+                              <MenuItem mnemonicParsing="false" text="Action 2" />
+                           </items>
+                           <font>
+                              <Font name="Segoe UI Historic" size="12.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="3.0" />
+                           </padding>
+                        </MenuButton>
+                     </children>
+                  </GridPane>
+               </children>
+            </GridPane>
+            <GridPane hgap="1.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" vgap="3.0" GridPane.rowIndex="1">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="46.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="46.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="46.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="46.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="46.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="46.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Button fx:id="per_cent" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#per_centOperation" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation" stylesheets="@style.css" text="">
+                     <rotationAxis>
+                        <Point3D />
+                     </rotationAxis>
+                     <font>
+                        <Font name="Calculator MDL2 Assets" size="15.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </Button>
+                  <Button fx:id="sqrt" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#unaryOperations" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation" stylesheets="@style.css" text="" GridPane.columnIndex="1">
+                     <rotationAxis>
+                        <Point3D />
+                     </rotationAxis>
+                     <font>
+                        <Font name="Segoe MDL2 Assets" size="15.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </Button>
+                  <Button fx:id="sqrX" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#unaryOperations" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation" stylesheets="@style.css" text="" GridPane.columnIndex="2">
+                     <rotationAxis>
+                        <Point3D />
+                     </rotationAxis>
+                     <font>
+                        <Font name="Calculator MDL2 Assets" size="19.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </Button>
+                  <Button fx:id="OneDivideX" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#unaryOperations" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation" stylesheets="@style.css" text="" GridPane.columnIndex="3">
+                     <rotationAxis>
+                        <Point3D />
+                     </rotationAxis>
+                     <font>
+                        <Font name="Calculator MDL2 Assets" size="17.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </Button>
+                  <Button fx:id="CE" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#clearNumberCE" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation" stylesheets="@style.css" text="CE" GridPane.rowIndex="1">
+                     <rotationAxis>
+                        <Point3D />
+                     </rotationAxis>
+                     <font>
+                        <Font name="Segoe MDL2 Assets" size="15.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </Button>
+                  <Button fx:id="C" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#clearAllC" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation" stylesheets="@style.css" text="C" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <rotationAxis>
+                        <Point3D />
+                     </rotationAxis>
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </Button>
+                  <Button fx:id="Backspace" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#backspace" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation" stylesheets="@style.css" text="" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                     <rotationAxis>
+                        <Point3D />
+                     </rotationAxis>
+                     <font>
+                        <Font name="Segoe MDL2 Assets" size="15.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </Button>
+                  <Button fx:id="divide" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#binaryOperation" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation_arithmetic" stylesheets="@style.css" text="" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                     <rotationAxis>
+                        <Point3D />
+                     </rotationAxis>
+                     <font>
+                        <Font name="Calculator MDL2 Assets" size="15.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </Button>
+                  <Button fx:id="seven" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#number" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_number" stylesheets="@style.css" text="7" GridPane.rowIndex="2">
+                     <rotationAxis>
+                        <Point3D />
+                     </rotationAxis>
+                     <font>
+                        <Font name="Segoe UI Semibold" size="24.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </Button>
+                  <Button fx:id="eight" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#number" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_number" stylesheets="@style.css" text="8" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <rotationAxis>
+                        <Point3D />
+                     </rotationAxis>
+                     <font>
+                        <Font name="Segoe UI Semibold" size="24.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </Button>
+                  <Button fx:id="nine" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#number" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_number" stylesheets="@style.css" text="9" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                     <rotationAxis>
+                        <Point3D />
+                     </rotationAxis>
+                     <font>
+                        <Font name="Segoe UI Semibold" size="24.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </Button>
+                  <Button fx:id="multiply" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#binaryOperation" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation_arithmetic" stylesheets="@style.css" text="" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                     <rotationAxis>
+                        <Point3D />
+                     </rotationAxis>
+                     <font>
+                        <Font name="Segoe MDL2 Assets" size="15.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </Button>
+                  <Button fx:id="four" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#number" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_number" stylesheets="@style.css" text="4" GridPane.rowIndex="3">
+                     <rotationAxis>
+                        <Point3D />
+                     </rotationAxis>
+                     <font>
+                        <Font name="Segoe UI Semibold" size="24.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </Button>
+                  <Button fx:id="five" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#number" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_number" stylesheets="@style.css" text="5" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <rotationAxis>
+                        <Point3D />
+                     </rotationAxis>
+                     <font>
+                        <Font name="Segoe UI Semibold" size="24.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </Button>
+                  <Button fx:id="six" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#number" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_number" stylesheets="@style.css" text="6" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                     <rotationAxis>
+                        <Point3D />
+                     </rotationAxis>
+                     <font>
+                        <Font name="Segoe UI Semibold" size="24.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </Button>
+                  <Button fx:id="difference" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#binaryOperation" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation_arithmetic" stylesheets="@style.css" text="" GridPane.columnIndex="3" GridPane.rowIndex="3">
+                     <rotationAxis>
+                        <Point3D />
+                     </rotationAxis>
+                     <font>
+                        <Font name="Segoe MDL2 Assets" size="15.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </Button>
+                  <Button fx:id="one" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#number" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_number" stylesheets="@style.css" text="1" GridPane.rowIndex="4">
+                     <rotationAxis>
+                        <Point3D />
+                     </rotationAxis>
+                     <font>
+                        <Font name="Segoe UI Semibold" size="25.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </Button>
+                  <Button fx:id="two" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#number" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_number" stylesheets="@style.css" text="2" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                     <rotationAxis>
+                        <Point3D />
+                     </rotationAxis>
+                     <font>
+                        <Font name="Segoe UI Semibold" size="24.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </Button>
+                  <Button fx:id="three" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#number" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_number" stylesheets="@style.css" text="3" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                     <rotationAxis>
+                        <Point3D />
+                     </rotationAxis>
+                     <font>
+                        <Font name="Segoe UI Semibold" size="24.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </Button>
+                  <Button fx:id="sum" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#binaryOperation" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation_arithmetic" stylesheets="@style.css" text="" GridPane.columnIndex="3" GridPane.rowIndex="4">
+                     <rotationAxis>
+                        <Point3D />
+                     </rotationAxis>
+                     <font>
+                        <Font name="Segoe MDL2 Assets" size="15.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </Button>
+                  <Button fx:id="plusMinus" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#negate" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation" stylesheets="@style.css" text="" GridPane.rowIndex="5">
+                     <rotationAxis>
+                        <Point3D />
+                     </rotationAxis>
+                     <font>
+                        <Font name="Segoe MDL2 Assets" size="15.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </Button>
+                  <Button fx:id="zero" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#number" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_number" stylesheets="@style.css" text="0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                     <rotationAxis>
+                        <Point3D />
+                     </rotationAxis>
+                     <font>
+                        <Font name="Segoe UI Semibold" size="24.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </Button>
+                  <Button fx:id="point" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#commaMouseClick" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation" stylesheets="@style.css" text="," GridPane.columnIndex="2" GridPane.rowIndex="5">
+                     <rotationAxis>
+                        <Point3D />
+                     </rotationAxis>
+                     <font>
+                        <Font name="Segoe UI Semibold" size="23.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </Button>
+                  <Button fx:id="equal" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#pressedEqual" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation_arithmetic" stylesheets="@style.css" text="" GridPane.columnIndex="3" GridPane.rowIndex="5">
+                     <rotationAxis>
+                        <Point3D />
+                     </rotationAxis>
+                     <font>
+                        <Font name="Calculator MDL2 Assets" size="15.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </Button>
+               </children>
+            </GridPane>
+         </children>
+      </GridPane>
+      <Button alignment="CENTER" layoutX="280.0" layoutY="30.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" pickOnBounds="false" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: e6e6e6; -fx-background-radius: 0; -fx-border-radius: 0;" text="" AnchorPane.rightAnchor="0.0" GridPane.columnIndex="2">
+         <font>
+            <Font name="Calculator MDL2 Assets" size="16.0" />
+         </font>
+      </Button>
+      <Label fx:id="textStandard" layoutX="40.0" layoutY="30.0" minHeight="40.0" minWidth="240.0" text="Standard" GridPane.columnIndex="1">
+         <padding>
+            <Insets left="12.0" />
+         </padding>
+         <font>
+            <Font name="Calculator MDL2 Assets" size="19.0" />
+         </font>
+      </Label>
+      <Label fx:id="title" minHeight="30.0" minWidth="182.0" onMouseDragged="#draggedWindow" onMousePressed="#clickWindow" text="Calculator">
+         <padding>
+            <Insets left="12.0" />
+         </padding>
+      </Label>
+      <ScrollPane fx:id="scrollPaneOperation" cache="true" fitToHeight="true" hbarPolicy="NEVER" layoutY="74.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="RIGHT_TO_LEFT" pannable="true" prefWidth="320.0" style="-fx-background-color: e6e6e6;" styleClass="scrollPaneOperation" stylesheets="@style.css" vbarPolicy="NEVER" vmax="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <content>
+            <Label fx:id="outOperationMemory" alignment="TOP_LEFT" contentDisplay="TOP" ellipsisString="" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: e6e6e6;" textAlignment="RIGHT" textFill="#8d8b8b">
+               <font>
+                  <Font name="Segoe UI" size="15.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="DEFAULT" />
+               </cursor>
+               <padding>
+                  <Insets bottom="2.0" />
+               </padding>
+            </Label>
+         </content>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <padding>
+            <Insets left="18.0" right="18.0" />
+         </padding>
+      </ScrollPane>
+      <Button fx:id="scrollButtonLeft" layoutX="2.0" layoutY="76.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="17.0" minWidth="20.0" mnemonicParsing="false" onAction="#scrollButtonLeftPressed" styleClass="scrollButton" stylesheets="@style.css" text="" visible="false" AnchorPane.leftAnchor="2.0">
+         <font>
+            <Font name="Calculator MDL2 Assets" size="12.0" />
+         </font>
+         <padding>
+            <Insets bottom="-2.0" left="-5.0" right="-3.0" top="-2.0" />
+         </padding>
+      </Button>
+      <Button fx:id="scrollButtonRight" layoutX="298.0" layoutY="76.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="17.0" minWidth="20.0" mnemonicParsing="false" onAction="#scrollButtonRightPressed" styleClass="scrollButton" stylesheets="@style.css" text="" visible="false" AnchorPane.rightAnchor="1.0">
+         <font>
+            <Font name="Calculator MDL2 Assets" size="12.0" />
+         </font>
+         <padding>
+            <Insets bottom="-2.0" left="-5.0" right="-3.0" top="-2.0" />
+         </padding>
+      </Button>
+      <AnchorPane fx:id="leftMenu" layoutX="-264.0" layoutY="79.0" maxHeight="1.7976931348623157E308" prefHeight="421.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="79.0">
+         <children>
+            <ScrollPane fitToHeight="true" hbarPolicy="NEVER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="352.0" prefWidth="264.0" style="-fx-background-color: transparent; -fx-border-width: 0;" styleClass="scroll_pane_left_menu" stylesheets="@style.css" AnchorPane.bottomAnchor="69.0" AnchorPane.topAnchor="0.0">
+               <content>
+                  <AnchorPane layoutX="-256.0" prefHeight="829.0" prefWidth="256.0" style="-fx-background-color: e8e8e8;">
+                     <children>
+                        <Label prefHeight="40.0" prefWidth="256.0" style="-fx-background-color: e8e8e8;" text="Calculator">
+                           <font>
+                              <Font name="Segoe UI Semibold" size="15.0" />
+                           </font>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                        </Label>
+                        <Label layoutY="200.0" prefHeight="40.0" prefWidth="256.0" style="-fx-background-color: e8e8e8;" text="Converter">
+                           <font>
+                              <Font name="Segoe UI Semibold" size="15.0" />
+                           </font>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                        </Label>
+                        <Button alignment="BASELINE_LEFT" layoutY="80.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" styleClass="leftMenuButton" stylesheets="@style.css" text="Scientific">
+                           <font>
+                              <Font name="Segoe MDL2 Assets" size="15.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="3.0" left="41.0" />
+                           </padding>
+                           <graphic>
+                              <AnchorPane translateX="-37.0">
+                                 <children>
+                                    <Text layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" translateX="8.0">
+                                       <font>
+                                          <Font name="Calculator MDL2 Assets" size="16.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </AnchorPane>
+                           </graphic>
+                        </Button>
+                        <Button alignment="BASELINE_LEFT" layoutY="120.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" styleClass="leftMenuButton" stylesheets="@style.css" text="Programmer">
+                           <font>
+                              <Font name="Segoe MDL2 Assets" size="15.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="3.0" left="41.0" />
+                           </padding>
+                           <graphic>
+                              <AnchorPane translateX="-37.0">
+                                 <children>
+                                    <Text layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" translateX="8.0">
+                                       <font>
+                                          <Font name="Calculator MDL2 Assets" size="16.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </AnchorPane>
+                           </graphic>
+                        </Button>
+                        <Button alignment="BASELINE_LEFT" layoutY="160.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" styleClass="leftMenuButton" stylesheets="@style.css" text="Date Calculation">
+                           <font>
+                              <Font name="Segoe MDL2 Assets" size="15.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="3.0" left="41.0" />
+                           </padding>
+                           <graphic>
+                              <AnchorPane translateX="-37.0">
+                                 <children>
+                                    <Text layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" translateX="8.0">
+                                       <font>
+                                          <Font name="Calculator MDL2 Assets" size="16.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </AnchorPane>
+                           </graphic>
+                        </Button>
+                        <Button alignment="BASELINE_LEFT" layoutY="240.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" styleClass="leftMenuButton" stylesheets="@style.css" text="Currency">
+                           <font>
+                              <Font name="Segoe MDL2 Assets" size="15.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="3.0" left="41.0" />
+                           </padding>
+                           <graphic>
+                              <AnchorPane translateX="-37.0">
+                                 <children>
+                                    <Text layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" translateX="8.0">
+                                       <font>
+                                          <Font name="Calculator MDL2 Assets" size="16.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </AnchorPane>
+                           </graphic>
+                        </Button>
+                        <Button alignment="BASELINE_LEFT" layoutY="280.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" styleClass="leftMenuButton" stylesheets="@style.css" text="Volume">
+                           <font>
+                              <Font name="Segoe MDL2 Assets" size="15.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="3.0" left="41.0" />
+                           </padding>
+                           <graphic>
+                              <AnchorPane translateX="-37.0">
+                                 <children>
+                                    <Text layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" translateX="8.0">
+                                       <font>
+                                          <Font name="Calculator MDL2 Assets" size="16.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </AnchorPane>
+                           </graphic>
+                        </Button>
+                        <Button alignment="BASELINE_LEFT" layoutY="360.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" styleClass="leftMenuButton" stylesheets="@style.css" text="Weight and Mass">
+                           <font>
+                              <Font name="Segoe MDL2 Assets" size="15.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="3.0" left="41.0" />
+                           </padding>
+                           <graphic>
+                              <AnchorPane translateX="-37.0">
+                                 <children>
+                                    <Text layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" translateX="8.0">
+                                       <font>
+                                          <Font name="Calculator MDL2 Assets" size="16.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </AnchorPane>
+                           </graphic>
+                        </Button>
+                        <Button alignment="BASELINE_LEFT" layoutY="440.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" styleClass="leftMenuButton" stylesheets="@style.css" text="Energy">
+                           <font>
+                              <Font name="Segoe MDL2 Assets" size="15.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="3.0" left="41.0" />
+                           </padding>
+                           <graphic>
+                              <AnchorPane translateX="-37.0">
+                                 <children>
+                                    <Text layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" translateX="8.0">
+                                       <font>
+                                          <Font name="Calculator MDL2 Assets" size="16.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </AnchorPane>
+                           </graphic>
+                        </Button>
+                        <Button alignment="BASELINE_LEFT" layoutY="480.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" styleClass="leftMenuButton" stylesheets="@style.css" text="Area">
+                           <font>
+                              <Font name="Segoe MDL2 Assets" size="15.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="3.0" left="41.0" />
+                           </padding>
+                           <graphic>
+                              <AnchorPane translateX="-37.0">
+                                 <children>
+                                    <Text layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" translateX="8.0">
+                                       <font>
+                                          <Font name="Calculator MDL2 Assets" size="16.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </AnchorPane>
+                           </graphic>
+                        </Button>
+                        <Button alignment="BASELINE_LEFT" layoutY="520.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" styleClass="leftMenuButton" stylesheets="@style.css" text="Speed">
+                           <font>
+                              <Font name="Segoe MDL2 Assets" size="15.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="3.0" left="41.0" />
+                           </padding>
+                           <graphic>
+                              <AnchorPane translateX="-37.0">
+                                 <children>
+                                    <Text layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" translateX="8.0">
+                                       <font>
+                                          <Font name="Calculator MDL2 Assets" size="16.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </AnchorPane>
+                           </graphic>
+                        </Button>
+                        <Button alignment="BASELINE_LEFT" layoutY="560.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" styleClass="leftMenuButton" stylesheets="@style.css" text="Time">
+                           <font>
+                              <Font name="Segoe MDL2 Assets" size="15.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="3.0" left="41.0" />
+                           </padding>
+                           <graphic>
+                              <AnchorPane translateX="-37.0">
+                                 <children>
+                                    <Text layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" translateX="8.0">
+                                       <font>
+                                          <Font name="Calculator MDL2 Assets" size="16.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </AnchorPane>
+                           </graphic>
+                        </Button>
+                        <Button alignment="BASELINE_LEFT" layoutY="600.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" styleClass="leftMenuButton" stylesheets="@style.css" text="Power">
+                           <font>
+                              <Font name="Segoe MDL2 Assets" size="15.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="3.0" left="41.0" />
+                           </padding>
+                           <graphic>
+                              <AnchorPane translateX="-37.0">
+                                 <children>
+                                    <Text layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" translateX="8.0">
+                                       <font>
+                                          <Font name="Calculator MDL2 Assets" size="16.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </AnchorPane>
+                           </graphic>
+                        </Button>
+                        <Button alignment="BASELINE_LEFT" layoutY="640.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" styleClass="leftMenuButton" stylesheets="@style.css" text="Data">
+                           <font>
+                              <Font name="Segoe MDL2 Assets" size="15.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="3.0" left="41.0" />
+                           </padding>
+                           <graphic>
+                              <AnchorPane translateX="-37.0">
+                                 <children>
+                                    <Text layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" translateX="8.0">
+                                       <font>
+                                          <Font name="Calculator MDL2 Assets" size="16.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </AnchorPane>
+                           </graphic>
+                        </Button>
+                        <Button alignment="BASELINE_LEFT" layoutY="680.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" styleClass="leftMenuButton" stylesheets="@style.css" text="Pressure">
+                           <font>
+                              <Font name="Segoe MDL2 Assets" size="15.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="3.0" left="41.0" />
+                           </padding>
+                           <graphic>
+                              <AnchorPane translateX="-37.0">
+                                 <children>
+                                    <Text layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" translateX="8.0">
+                                       <font>
+                                          <Font name="Calculator MDL2 Assets" size="16.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </AnchorPane>
+                           </graphic>
+                        </Button>
+                        <Button alignment="BASELINE_LEFT" layoutY="720.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" styleClass="leftMenuButton" stylesheets="@style.css" text="Angle">
+                           <font>
+                              <Font name="Segoe MDL2 Assets" size="15.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="3.0" left="41.0" />
+                           </padding>
+                           <graphic>
+                              <AnchorPane translateX="-37.0">
+                                 <children>
+                                    <Text layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" translateX="8.0">
+                                       <font>
+                                          <Font name="Calculator MDL2 Assets" size="16.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </AnchorPane>
+                           </graphic>
+                        </Button>
+                        <Button alignment="BASELINE_LEFT" layoutY="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" styleClass="leftMenuButton" stylesheets="@style.css" text="Standard">
+                           <font>
+                              <Font name="Segoe MDL2 Assets" size="15.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="3.0" left="41.0" />
+                           </padding>
+                           <graphic>
+                              <AnchorPane translateX="-37.0">
+                                 <children>
+                                    <Text layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" translateX="8.0">
+                                       <font>
+                                          <Font name="Calculator MDL2 Assets" size="16.0" />
+                                       </font>
+                                    </Text>
+                                    <Rectangle arcWidth="5.0" fill="DODGERBLUE" height="24.0" smooth="false" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="2.0" />
+                                 </children>
+                              </AnchorPane>
+                           </graphic>
+                        </Button>
+                        <Button alignment="BASELINE_LEFT" layoutY="400.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" styleClass="leftMenuButton" stylesheets="@style.css" text="Temperature">
+                           <font>
+                              <Font name="Segoe MDL2 Assets" size="15.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="3.0" left="41.0" />
+                           </padding>
+                           <graphic>
+                              <AnchorPane translateX="-37.0">
+                                 <children>
+                                    <Text layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" translateX="8.0">
+                                       <font>
+                                          <Font name="Calculator MDL2 Assets" size="16.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </AnchorPane>
+                           </graphic>
+                        </Button>
+                        <Button alignment="BASELINE_LEFT" layoutY="320.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" styleClass="leftMenuButton" stylesheets="@style.css" text="Length">
+                           <font>
+                              <Font name="Segoe MDL2 Assets" size="15.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="3.0" left="41.0" />
+                           </padding>
+                           <graphic>
+                              <AnchorPane translateX="-37.0">
+                                 <children>
+                                    <Text layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" translateX="8.0">
+                                       <font>
+                                          <Font name="Calculator MDL2 Assets" size="16.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </AnchorPane>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </ScrollPane>
+            <AnchorPane layoutY="352.0" minWidth="226.0" prefHeight="73.0" style="-fx-background-color: e8e8e8;" translateX="-7.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+               <children>
+                  <Button alignment="BASELINE_LEFT" layoutY="22.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" style="-fx-background-color: transparent;" styleClass="leftMenuButton" stylesheets="@style.css" text="About" translateX="8.0">
+                     <font>
+                        <Font name="Segoe MDL2 Assets" size="15.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="3.0" left="41.0" />
+                     </padding>
+                     <graphic>
+                        <AnchorPane translateX="-37.0">
+                           <children>
+                              <Text layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" translateX="8.0">
+                                 <font>
+                                    <Font name="Calculator MDL2 Assets" size="16.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </AnchorPane>
+                     </graphic>
+                  </Button>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+      <Button fx:id="buttonMenu" layoutX="0.5" layoutY="30.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onAction="#showLeftMenu" prefHeight="40.0" prefWidth="40.0" styleClass="menu" stylesheets="@style.css" text="">
+         <font>
+            <Font name="Segoe MDL2 Assets" size="16.0" />
+         </font>
+      </Button>
+      <GridPane layoutY="0.5" AnchorPane.rightAnchor="0.0">
+         <children>
+            <Button fx:id="cancel" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="30.0" minWidth="46.0" mnemonicParsing="false" onAction="#cancelButton" pickOnBounds="false" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="init_close" stylesheets="@style.css" text="" GridPane.columnIndex="3">
+               <font>
+                  <Font name="Segoe MDL2 Assets" size="12.0" />
+               </font>
+            </Button>
+            <Button fx:id="maximizeButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="30.0" minWidth="46.0" mnemonicParsing="false" onAction="#maximizeWindow" pickOnBounds="false" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="init_other" stylesheets="@style.css" text="" GridPane.columnIndex="2">
+               <font>
+                  <Font name="Segoe MDL2 Assets" size="10.0" />
+               </font>
+            </Button>
+            <Button fx:id="hideButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="30.0" minWidth="46.0" mnemonicParsing="false" onAction="#hideWindow" pickOnBounds="false" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="init_other" stylesheets="@style.css" text="" GridPane.columnIndex="1">
+               <font>
+                  <Font name="Segoe MDL2 Assets" size="10.0" />
+               </font>
+            </Button>
+         </children>
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+      </GridPane>
+   </children>
+</AnchorPane>

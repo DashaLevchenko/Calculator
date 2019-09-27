@@ -9,6 +9,7 @@ import java.text.DecimalFormat;
 import static java.math.BigDecimal.valueOf;
 
 public class Exp {
+
 //    public static String plusL(long number) {
 //        String temp = Long.valueOf(number).toString();
 //        if (number > Integer.MAX_VALUE) {
@@ -55,18 +56,7 @@ public class Exp {
 //        System.out.println(s.stripTrailingZeros());
 //        System.out.println(BigDecimal.valueOf(99999999999999999L));
 
-        //region for view
-//        BigDecimal  numberZero = viewDecimalNumber(new BigDecimal("0.0665163472378805"));
-//        BigDecimal  numberOne = viewDecimalNumber(new BigDecimal("1.0665163472378805"));
-//        BigDecimal  numberTwo = viewDecimalNumber(new BigDecimal("13.8082191780821918"));
-//        BigDecimal  numberThree = viewDecimalNumber(new BigDecimal("102.1538461538461538"));
-//
-//
-//        System.out.println(numberZero);
-//        System.out.println(numberOne);
-//        System.out.println(numberTwo);
-//        System.out.println(numberThree);
-        //endregion
+
 //        combinationDivideValidNegative(valueOf(44.568), valueOf(879), "0.0507030716723549");
 //        combinationDivideValidNegative(valueOf(191.64), valueOf(7071), "0.0271022486211286");
 //        BigDecimal x = valueOf(44.568);
@@ -89,23 +79,70 @@ public class Exp {
 //        System.out.println(new DecimalFormat("#.################").format(r));
 //        System.out.println(new DecimalFormat("#.################").format(r2));
 //
-        String text = "16854675687654";
-        StringBuilder p= new StringBuilder(text); //16 854 675 687 654      10
-        int h = p.length()-3;
-        for (int i = p.length(); i > 0; i--) {
-                if (i%h == 0){
-                    p.insert(i, " ");
-                    h-=3;
-            }
+
+//        int CHARACTERS_IN_LINE = 3;
+//        StringBuilder fibonacci = new StringBuilder("1685467568765");
+//        int insertSeparator = fibonacci.length()- CHARACTERS_IN_LINE;
+//        for (int i = fibonacci.length(); i > 0; i--) {
+//            if (i == insertSeparator) {
+//                fibonacci.insert(i, " ");
+//                insertSeparator -= (CHARACTERS_IN_LINE);
+//            }
+//        }
+//        System.out.println(fibonacci.toString());
+//
+//        BigDecimal  numberZero = viewDecimalNumber(new BigDecimal("0.0665163472378805"));
+//        BigDecimal  numberOne = viewDecimalNumber(new BigDecimal("1.0665163472378805"));
+//        BigDecimal  numberTwo = viewDecimalNumber(new BigDecimal("13.8082191780821918"));
+//        BigDecimal  numberThree = viewDecimalNumber(new BigDecimal("102.1538461538461538"));
+//        BigDecimal sum = viewDecimalNumber(Arithmetic.sum(BigDecimal.valueOf(9999999999999999L), BigDecimal.valueOf(9999999999999999L)));
+        BigDecimal result = Arithmetic.sum(BigDecimal.valueOf(8.999999999999999), BigDecimal.valueOf(8.999999999999999));
+        BigDecimal result2 = Arithmetic.sum(BigDecimal.valueOf(9999999999999999L), BigDecimal.valueOf(9999999999999999L));
+        BigDecimal result4 = Arithmetic.sum(BigDecimal.valueOf(8888888888888888L), BigDecimal.valueOf(8888888888888888L));
+        BigDecimal result3 = Arithmetic.sum(BigDecimal.valueOf(7777777777777777L), BigDecimal.valueOf(7777777777777777L));
+//        if (result.toString().length() > 16){
+
+//        }
+        BigDecimal x = BigDecimal.valueOf(9999999999999999L); //2,e+16
+        BigDecimal y = BigDecimal.valueOf(9999999999999999L); //2,e+16  5,999999999999999e+16
+
+        DecimalFormat decimalFormat = new DecimalFormat("#.E0");
+        DecimalFormat decimalFormat2 = new DecimalFormat("##.E0");
+
+        result4 = result4.add(BigDecimal.valueOf(5));
+        if (result4.toString().length() > 16) {
+            result4 = result4.divide(BigDecimal.TEN, new MathContext(16));
+            result4 = result4.multiply(BigDecimal.TEN);
         }
+        System.out.println(decimalFormat.format(result2.stripTrailingZeros()));
+        System.out.println(result2);
+        System.out.println(result2.toString().chars().filter(num -> num == '9').count());
+        System.out.println("--------");
+        System.out.println(decimalFormat2.format(result4));
+        System.out.println(result4.stripTrailingZeros());
+        System.out.println(result4.toString().chars().filter(num -> num == '9').count());
 
-
-
-        System.out.println(p.toString());
 
 
     }
-    public static BigDecimal viewDecimalNumber(BigDecimal number){
+
+    private static void test(StringBuilder p, int perCent) {
+        int temporary = p.length() - 1;
+        for (int i = temporary; i > 0; i--) {
+            if (temporary % 3 == perCent) {
+
+                if (i % 3 == perCent && i != perCent) {
+                    p.insert(i, " ");
+                    temporary += 1;
+                }
+
+            }
+
+        }
+        System.out.println(p.toString());
+    }
+
+    public static BigDecimal viewDecimalNumber(BigDecimal number) {
         int scale;
         if (number.compareTo(BigDecimal.ONE) > 0 || number.compareTo(BigDecimal.valueOf(-1)) < 0) {
             int indexPoint = new StringBuilder(number.toPlainString()).indexOf(".");
@@ -115,16 +152,17 @@ public class Exp {
         return number;
     }
 
-    public static BigDecimal scaleForBigdecimal(BigDecimal numberDouble){
+    public static BigDecimal scaleForBigdecimal(BigDecimal numberDouble) {
 
-        if (numberDouble.scale() < 0){
+        if (numberDouble.scale() < 0) {
             numberDouble = numberDouble.setScale(0);
         }
         return numberDouble;
     }
-//    public static String exponent(String i){
-//        String result = i.replace("E", "e+" );
-//
-//        return result;
-//    }
+
+    public static String exponent(String i) {
+        String result = i.replace("E", "e+");
+
+        return result;
+    }
 }
