@@ -103,26 +103,32 @@ public class Exp {
 //        if (result.toString().length() > 16){
 
 //        }
-        BigDecimal x = BigDecimal.valueOf(9999999999999999L); //2,e+16
-        BigDecimal y = BigDecimal.valueOf(9999999999999999L); //2,e+16  5,999999999999999e+16
+//        BigDecimal x = BigDecimal.valueOf(9999999999999999L); //2,e+16
+//        BigDecimal y = BigDecimal.valueOf(9999999999999999L); //2,e+16  5,999999999999999e+16
+//
+//        DecimalFormat decimalFormat = new DecimalFormat("#.E0");
+//        DecimalFormat decimalFormat2 = new DecimalFormat("##.E0");
+//
+//        result4 = result4.add(BigDecimal.valueOf(5));
+//        if (result4.toString().length() > 16) {
+//            result4 = result4.divide(BigDecimal.TEN, new MathContext(16));
+//            result4 = result4.multiply(BigDecimal.TEN);
+//        }
+//        System.out.println(decimalFormat.format(result2.stripTrailingZeros()));
+//        System.out.println(result2);
+//        System.out.println(result2.toString().chars().filter(num -> num == '9').count());
+//        System.out.println("--------");
+//        System.out.println(decimalFormat2.format(result4));
+//        System.out.println(result4.stripTrailingZeros());
+//        System.out.println(result4.toString().chars().filter(num -> num == '9').count());
 
-        DecimalFormat decimalFormat = new DecimalFormat("#.E0");
-        DecimalFormat decimalFormat2 = new DecimalFormat("##.E0");
 
-        result4 = result4.add(BigDecimal.valueOf(5));
-        if (result4.toString().length() > 16) {
-            result4 = result4.divide(BigDecimal.TEN, new MathContext(16));
-            result4 = result4.multiply(BigDecimal.TEN);
-        }
-        System.out.println(decimalFormat.format(result2.stripTrailingZeros()));
-        System.out.println(result2);
-        System.out.println(result2.toString().chars().filter(num -> num == '9').count());
-        System.out.println("--------");
-        System.out.println(decimalFormat2.format(result4));
-        System.out.println(result4.stripTrailingZeros());
-        System.out.println(result4.toString().chars().filter(num -> num == '9').count());
+        BigDecimal x = new BigDecimal("10.0000000000");
 
-
+         x = x.stripTrailingZeros();
+        System.out.println(x);
+        System.out.println(x.scale());
+        System.out.println(x.setScale(0));
 
     }
 

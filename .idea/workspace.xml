@@ -7,10 +7,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="feaeb0c2-feb2-4a9c-98e3-48b1d1a339aa" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/target/classes/View/calculator_view.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/View/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Model/Exp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Exp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/View/Calculator_Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/Calculator_Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/View/calculator_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/calculator_view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/View/calculator_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/calculator_view.fxml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -31,12 +33,10 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/main/java/View/Calculator_Controller.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="129">
-                  <caret line="244" lean-forward="true" selection-start-line="244" selection-end-line="244" />
+                <state relative-caret-position="197">
+                  <caret line="690" column="1" lean-forward="true" selection-start-line="690" selection-start-column="1" selection-end-line="690" selection-end-column="1" />
                   <folding>
                     <element signature="imports" expanded="true" />
-                    <element signature="e#2946#2947#0" expanded="true" />
-                    <element signature="e#2997#2998#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -45,8 +45,8 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/main/java/Model/Exp.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="327">
-                  <caret line="122" column="87" selection-start-line="122" selection-start-column="34" selection-end-line="122" selection-end-column="87" />
+                <state relative-caret-position="174">
+                  <caret line="130" column="39" selection-start-line="130" selection-start-column="39" selection-end-line="130" selection-end-column="39" />
                   <folding>
                     <element signature="method#test#0;class#Exp#0" />
                   </folding>
@@ -57,8 +57,8 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/main/java/Model/Arithmetic.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="148">
-                  <caret line="112" column="7" selection-start-line="112" selection-start-column="7" selection-end-line="114" selection-end-column="9" />
+                <state relative-caret-position="123">
+                  <caret line="84" column="22" selection-start-line="84" selection-start-column="22" selection-end-line="84" selection-end-column="22" />
                 </state>
               </provider>
             </entry>
@@ -71,7 +71,7 @@
             <entry file="file://$PROJECT_DIR$/src/main/java/View/Calculator_Controller.java">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="180">
-                  <caret line="599" column="79" selection-start-line="599" selection-start-column="54" selection-end-line="599" selection-end-column="79" />
+                  <caret line="597" column="79" selection-start-line="597" selection-start-column="54" selection-end-line="597" selection-end-column="79" />
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
@@ -102,6 +102,10 @@
       <find>99999999</find>
       <find>E</find>
       <find>textWithoutSeparateOld</find>
+      <find>charactersNumber</find>
+      <find>ActionEvent</find>
+      <find>textWithoutSeparateNew = &quot;&quot;;</find>
+      <find>MouseEvent</find>
     </findStrings>
     <replaceStrings>
       <replace>7777777777777777</replace>
@@ -135,6 +139,7 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/main/java/Model/Exp.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Model/Arithmetic.java" />
         <option value="$PROJECT_DIR$/src/main/java/View/Calculator_Controller.java" />
       </list>
     </option>
@@ -252,17 +257,17 @@
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="Model" />
     </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="Model" />
-    </key>
-    <key name="CreateTestDialog.Recents.Supers">
-      <recent name="" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Дарья\IdeaProjects\Calculator\target\classes\View" />
       <recent name="D:\Calculator\target\classes\View" />
       <recent name="D:\Calculator\src\main\java\View" />
       <recent name="C:\Users\Дарья\IdeaProjects\Calculator\src\test\java\Model" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="Model" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -617,7 +622,14 @@
       <option name="project" value="LOCAL" />
       <updated>1568976820980</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="delete textWithoutSeparateOld">
+      <created>1569586413133</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1569586413133</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -740,7 +752,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="All works, before optimizing tests" />
     <MESSAGE value="new test sum" />
     <MESSAGE value="new workspace" />
     <MESSAGE value="all work" />
@@ -765,46 +776,53 @@
     <MESSAGE value="plus backspace" />
     <MESSAGE value="all are working, before old and new text" />
     <MESSAGE value="all are working, before refactoring" />
-    <option name="LAST_COMMIT_MESSAGE" value="all are working, before refactoring" />
+    <MESSAGE value="delete textWithoutSeparateOld" />
+    <option name="LAST_COMMIT_MESSAGE" value="delete textWithoutSeparateOld" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
+        <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/View/Calculator_Controller.java</url>
-          <line>203</line>
+          <line>205</line>
           <properties />
           <option name="timeStamp" value="60" />
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/View/Calculator_Controller.java</url>
-          <line>196</line>
+          <line>198</line>
           <properties />
           <option name="timeStamp" value="63" />
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/View/Calculator_Controller.java</url>
-          <line>671</line>
+          <line>492</line>
           <properties />
-          <option name="timeStamp" value="65" />
+          <option name="timeStamp" value="76" />
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/View/Calculator_Controller.java</url>
-          <line>230</line>
+          <line>468</line>
           <properties />
-          <option name="timeStamp" value="68" />
+          <option name="timeStamp" value="78" />
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/View/Calculator_Controller.java</url>
-          <line>327</line>
+          <line>502</line>
           <properties />
-          <option name="timeStamp" value="71" />
+          <option name="timeStamp" value="81" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/View/Calculator_Controller.java</url>
+          <line>163</line>
+          <properties />
+          <option name="timeStamp" value="83" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/View/Calculator_Controller.java</url>
-          <line>495</line>
+          <line>261</line>
           <properties />
-          <option name="timeStamp" value="74" />
+          <option name="timeStamp" value="85" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -846,6 +864,19 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Model/Exp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="174">
+          <caret line="130" column="39" selection-start-line="130" selection-start-column="39" selection-end-line="130" selection-end-column="39" />
+          <folding>
+            <element signature="method#test#0;class#Exp#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/target/classes/View/style.css">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/View/calculator_view.fxml">
       <provider selected="true" editor-type-id="JavaFX-Scene-Builder" />
       <provider editor-type-id="text-editor" />
@@ -854,35 +885,23 @@
       <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
-          <caret line="13" column="45" lean-forward="true" selection-start-line="13" selection-start-column="45" selection-end-line="13" selection-end-column="45" />
+          <caret line="13" column="45" selection-start-line="13" selection-start-column="45" selection-end-line="13" selection-end-column="45" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Model/Arithmetic.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="148">
-          <caret line="112" column="7" selection-start-line="112" selection-start-column="7" selection-end-line="114" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Model/Exp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="327">
-          <caret line="122" column="87" selection-start-line="122" selection-start-column="34" selection-end-line="122" selection-end-column="87" />
-          <folding>
-            <element signature="method#test#0;class#Exp#0" />
-          </folding>
+        <state relative-caret-position="123">
+          <caret line="84" column="22" selection-start-line="84" selection-start-column="22" selection-end-line="84" selection-end-column="22" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/View/Calculator_Controller.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="129">
-          <caret line="244" lean-forward="true" selection-start-line="244" selection-end-line="244" />
+        <state relative-caret-position="197">
+          <caret line="690" column="1" lean-forward="true" selection-start-line="690" selection-start-column="1" selection-end-line="690" selection-end-column="1" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2946#2947#0" expanded="true" />
-            <element signature="e#2997#2998#0" expanded="true" />
           </folding>
         </state>
       </provider>
