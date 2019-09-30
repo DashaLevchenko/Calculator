@@ -3,12 +3,12 @@ package View;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
-
 import Model.Arithmetic;
 import Model.OperationsEnum;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.*;
 import javafx.scene.layout.AnchorPane;
@@ -19,6 +19,7 @@ import javafx.util.Duration;
 
 public class Calculator_Controller {
     private static final BigDecimal MAX_INPUT_NUMBER = BigDecimal.valueOf(9999999999999999L);
+    private static final double MAX_FONT_SIZE = 71;
     @FXML
     private Label outText;
 
@@ -32,7 +33,7 @@ public class Calculator_Controller {
     private Button sqrX;
 
     @FXML
-    private Button OneDivideX;
+    private Button oneDivideX;
 
     @FXML
     private Button CE;
@@ -68,7 +69,7 @@ public class Calculator_Controller {
     private Button six;
 
     @FXML
-    private Button difference;
+    private Button subscribe;
 
     @FXML
     private Button one;
@@ -80,7 +81,7 @@ public class Calculator_Controller {
     private Button three;
 
     @FXML
-    private Button sum;
+    private Button add;
 
     @FXML
     private Button plusMinus;
@@ -150,6 +151,7 @@ public class Calculator_Controller {
     private double moveScroll;
     private boolean equalWasPress;
     private boolean showLeftMenu = false;
+    private boolean isError = false;
     private double xOffset = 0;
     private double yOffset = 0;
 
@@ -157,6 +159,7 @@ public class Calculator_Controller {
     void initialize() {
         firstStyleLabel = outText.getFont();
         charactersNumber = CHAR_MAX;
+
     }
 
     @FXML
@@ -226,7 +229,9 @@ public class Calculator_Controller {
         outOperationMemory.setText(historyOperations);
         scrollOutOperationMemory();
         oldBinaryOperation = newBinaryOperation;
-        CE.fire();
+        textWithoutSeparateNew = "";
+        resizeOutputText();
+        textWithoutSeparateNew = "";
     }
 
     private void printResult() {
@@ -279,8 +284,10 @@ public class Calculator_Controller {
         calculateUnaryOperations();
 
         outOperationMemory.setText(historyOperations + historyUnaryOperations);
+//        textWithoutSeparateNew = "";
+        resizeOutputText();
         scrollOutOperationMemory();
-        CE.fire();
+        textWithoutSeparateNew = "";
     }
 
     @FXML
@@ -345,7 +352,7 @@ public class Calculator_Controller {
                 outOperationMemory.setText(historyOperations);
                 scrollOutOperationMemory();
                 resizeOutputText();
-                CE.fire();
+                textWithoutSeparateNew = "";
             }
         }
     }
@@ -365,30 +372,11 @@ public class Calculator_Controller {
                 textWithoutSeparateNew = new StringBuilder(textWithoutSeparateNew).deleteCharAt(textWithoutSeparateNew.length() - 1).toString();
                 printInputText();
             }
-
         }
     }
-//    @FXML
-//    void backspace(ActionEvent actionEvent) {
-//        if (textWithoutSeparateOld != null && textWithoutSeparateOld.length() > 0) {
-//            if (textWithoutSeparateOld.length() == 1) {
-//                CE.fire();
-//            }
-//            if (!textWithoutSeparateOld.isEmpty()) {
-//                if (textWithoutSeparateOld.charAt(textWithoutSeparateOld.length() - 1) == ',') {
-//                    pointInText = false;
-//                    charactersNumber = CHAR_MAX;
-//                }
-//                textWithoutSeparateNew = new StringBuilder(textWithoutSeparateOld).deleteCharAt(textWithoutSeparateOld.length() - 1).toString();
-//                printInputText();
-//            }
-//
-//        }
-//    }
 
     @FXML
     void clearAllC(ActionEvent actionEvent) {
-        textWithoutSeparateNew = "";
         outText.setStyle(firstStyleLabel.getStyle());
         outText.setText("0");
         outOperationMemory.setText("");
@@ -405,17 +393,25 @@ public class Calculator_Controller {
         historyUnaryOperations = "";
         numberUnaryOperations = null;
         equalWasPress = false;
+        textWithoutSeparateNew = "";
+        resizeOutputText();
+        textWithoutSeparateNew = "";
+        operationsIsDisable(false);
+        isError = false;
     }
 
     @FXML
     void clearNumberCE(ActionEvent actionEvent) {
-        textWithoutSeparateNew = "";
-        if (!start) {
-            outText.setStyle(firstStyleLabel.getStyle());
-            outText.setText("0");
-            start = true;
-            pointInText = false;
+        outText.setStyle(firstStyleLabel.getStyle());
+        outText.setText("0");
+        start = true;
+        pointInText = false;
+        if (isError) {
+            C.fire();
         }
+        textWithoutSeparateNew = "";
+        resizeOutputText();
+        textWithoutSeparateNew = "";
     }
 
     @FXML
@@ -452,9 +448,9 @@ public class Calculator_Controller {
         } else if (keyCode == KeyCode.PERIOD) {
             point.fire();
         } else if (keyCode == KeyCode.ADD || (keyCode == KeyCode.EQUALS && event.isShiftDown())) {
-            sum.fire();
+            add.fire();
         } else if (keyCode == KeyCode.MINUS || keyCode == KeyCode.SUBTRACT) {
-            difference.fire();
+            subscribe.fire();
         } else if (keyCode == KeyCode.MULTIPLY) {
             multiply.fire();
         } else if (keyCode == KeyCode.SLASH || keyCode == KeyCode.DIVIDE) {
@@ -479,7 +475,6 @@ public class Calculator_Controller {
         if (historyOperations.isEmpty()) {
             numberFirstBinaryOperations = null;
         }
-
     }
 
     @FXML
@@ -498,9 +493,53 @@ public class Calculator_Controller {
             stage.setMaximized(false);
             maximizeButton.setText("\uE922");
         }
-
+        maximizeFontButton();
         resizeOutputText();
         scrollOutOperationMemory();
+    }
+
+    private void maximizeFontButton() {
+        Stage stage = (Stage) maximizeButton.getScene().getWindow();
+        Font newFontNumber = null;
+        Font newFontOperations = null;
+        if (stage.isMaximized()) {
+            newFontNumber = Font.font("Segoe UI Semibold", 34);
+            newFontOperations = Font.font("Segoe MDL2 Assets", 20);
+            per_cent.setFont(Font.font("Calculator MDL2 Assets", 20));
+            sqrX.setFont(Font.font("Calculator MDL2 Assets", 25));
+            oneDivideX.setFont(Font.font("Calculator MDL2 Assets", 22));
+            divide.setFont(Font.font("Calculator MDL2 Assets", 20));
+            equal.setFont(Font.font("Calculator MDL2 Assets", 20));
+        } else {
+            newFontNumber = Font.font("Segoe UI Semibold", 24);
+            newFontOperations = Font.font("Segoe MDL2 Assets", 15);
+            per_cent.setFont(Font.font("Calculator MDL2 Assets", 15));
+            sqrX.setFont(Font.font("Calculator MDL2 Assets", 19));
+            oneDivideX.setFont(Font.font("Calculator MDL2 Assets", 17));
+            divide.setFont(Font.font("Calculator MDL2 Assets", 15));
+            equal.setFont(Font.font("Calculator MDL2 Assets", 15));
+        }
+
+        one.setFont(newFontNumber);
+        two.setFont(newFontNumber);
+        three.setFont(newFontNumber);
+        four.setFont(newFontNumber);
+        five.setFont(newFontNumber);
+        six.setFont(newFontNumber);
+        seven.setFont(newFontNumber);
+        eight.setFont(newFontNumber);
+        nine.setFont(newFontNumber);
+        zero.setFont(newFontNumber);
+        point.setFont(newFontNumber);
+
+        plusMinus.setFont(newFontOperations);
+        add.setFont(newFontOperations);
+        multiply.setFont(newFontOperations);
+        subscribe.setFont(newFontOperations);
+        sqrt.setFont(newFontOperations);
+        CE.setFont(newFontOperations);
+        C.setFont(newFontOperations);
+        Backspace.setFont(newFontOperations);
     }
 
     @FXML
@@ -575,9 +614,14 @@ public class Calculator_Controller {
 
         percentOfChange = widthMaxTextOutput / textWidthNew;
         newSize = presentSize * percentOfChange;
+        Stage stage = (Stage) maximizeButton.getScene().getWindow();
 
-        if (newSize > firstStyleLabel.getSize()) {
+
+        if (newSize > firstStyleLabel.getSize() && !stage.isMaximized()) {
             newSize = firstStyleLabel.getSize();
+        }
+        if (stage.isMaximized()) {
+            newSize = MAX_FONT_SIZE;
         }
 
         outText.setStyle("-fx-font-size: " + newSize + "px;" +
@@ -587,42 +631,53 @@ public class Calculator_Controller {
     }
 
     private String separateNumber(String text) {
-        String textAfterComma = "";
-        StringBuilder stringBuilderText;
-        if (text.contains(".")) {
-            text = text.replace(".", ",");
-        }
-        if (text.contains(",")) {
-            int commaIndex = text.indexOf(",");
-            textAfterComma = text.substring(commaIndex);
-            stringBuilderText = new StringBuilder(text.substring(0, commaIndex));
-        } else {
-            stringBuilderText = new StringBuilder(text);
-        }
-
-        int insertSeparator = stringBuilderText.length() - 3;
-        for (int i = stringBuilderText.length(); i > 0; i--) {
-            if (i == insertSeparator) {
-                stringBuilderText.insert(i, " ");
-                insertSeparator -= (3);
+        if (isNumeric(text)) {
+            String textAfterComma = "";
+            StringBuilder stringBuilderText;
+            if (text.contains(".")) {
+                text = text.replace(".", ",");
             }
-        }
-        text = stringBuilderText.toString() + textAfterComma;
-
-        if (text.contains("E")) {
-            if (!text.contains(",")) {
-                text = text.replace("E", ",e");
+            if (text.contains(",")) {
+                int commaIndex = text.indexOf(",");
+                textAfterComma = text.substring(commaIndex);
+                stringBuilderText = new StringBuilder(text.substring(0, commaIndex));
             } else {
-                text = text.replace("E", "e");
+                stringBuilderText = new StringBuilder(text);
+            }
+
+            int insertSeparator = stringBuilderText.length() - 3;
+            for (int i = stringBuilderText.length(); i > 0; i--) {
+                if (i == insertSeparator) {
+                    stringBuilderText.insert(i, " ");
+                    insertSeparator -= (3);
+                }
+            }
+            text = stringBuilderText.toString() + textAfterComma;
+
+            if (text.contains("E")) {
+                if (!text.contains(",")) {
+                    text = text.replace("E", ",e");
+                } else {
+                    text = text.replace("E", "e");
+                }
             }
         }
 
         return text;
     }
 
+    public static boolean isNumeric(String strNum) {
+        try {
+            BigDecimal d = new BigDecimal(strNum);
+        } catch (NumberFormatException | NullPointerException nfe) {
+            return false;
+        }
+        return true;
+    }
+
 
     private void scrollOutOperationMemory() {
-        Text history = new Text(historyOperations);
+        Text history = new Text(historyOperations+historyUnaryOperations);
         history.setFont(outOperationMemory.getFont());
         double maxWidthForLabelOperation = scrollPaneOperation.getWidth() - scrollPaneOperation.getPadding().getLeft() - scrollPaneOperation.getPadding().getRight();
         if (history.getBoundsInLocal().getWidth() > maxWidthForLabelOperation) {
@@ -680,15 +735,33 @@ public class Calculator_Controller {
                 numberFirstBinaryOperations = result;
                 start = true;
             } catch (Exception e) {
-                outText.setFont(firstStyleLabel);
-                outText.setText(e.getMessage());
-                textWithoutSeparateNew = "";
-                resizeOutputText();
+                printError(e);
             }
         }
+    }
 
+    private void printError(Exception e) {
+        isError = true;
+        operationsIsDisable(true);
+        outText.setFont(firstStyleLabel);
+        textWithoutSeparateNew = e.getMessage();
+        resizeOutputText();
+        outText.setText(textWithoutSeparateNew);
+        textWithoutSeparateNew = "";
+    }
 
-}
+    private void operationsIsDisable(boolean disable) {
+        per_cent.setDisable(disable);
+        sqrt.setDisable(disable);
+        sqrX.setDisable(disable);
+        oneDivideX.setDisable(disable);
+        divide.setDisable(disable);
+        multiply.setDisable(disable);
+        subscribe.setDisable(disable);
+        add.setDisable(disable);
+        plusMinus.setDisable(disable);
+        point.setDisable(disable);
+    }
 
     private void calculateUnaryOperations() {
         if (numberUnaryOperations != null) {
@@ -700,18 +773,13 @@ public class Calculator_Controller {
                 } else {
                     numberSecondBinaryOperations = result;
                 }
-
                 start = true;
                 unaryOperation = null;
                 numberUnaryOperations = result;
                 printResult();
             } catch (Exception e) {
-                outText.setFont(firstStyleLabel);
-                outText.setText(e.getMessage());
-                resizeOutputText();
+                printError(e);
             }
-
-
         }
     }
 

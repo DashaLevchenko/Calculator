@@ -95,11 +95,11 @@ public class Exp {
 //        BigDecimal  numberOne = viewDecimalNumber(new BigDecimal("1.0665163472378805"));
 //        BigDecimal  numberTwo = viewDecimalNumber(new BigDecimal("13.8082191780821918"));
 //        BigDecimal  numberThree = viewDecimalNumber(new BigDecimal("102.1538461538461538"));
-//        BigDecimal sum = viewDecimalNumber(Arithmetic.sum(BigDecimal.valueOf(9999999999999999L), BigDecimal.valueOf(9999999999999999L)));
-        BigDecimal result = Arithmetic.sum(BigDecimal.valueOf(8.999999999999999), BigDecimal.valueOf(8.999999999999999));
-        BigDecimal result2 = Arithmetic.sum(BigDecimal.valueOf(9999999999999999L), BigDecimal.valueOf(9999999999999999L));
-        BigDecimal result4 = Arithmetic.sum(BigDecimal.valueOf(8888888888888888L), BigDecimal.valueOf(8888888888888888L));
-        BigDecimal result3 = Arithmetic.sum(BigDecimal.valueOf(7777777777777777L), BigDecimal.valueOf(7777777777777777L));
+////        BigDecimal sum = viewDecimalNumber(Arithmetic.sum(BigDecimal.valueOf(9999999999999999L), BigDecimal.valueOf(9999999999999999L)));
+//        BigDecimal result = Arithmetic.sum(BigDecimal.valueOf(8.999999999999999), BigDecimal.valueOf(8.999999999999999));
+//        BigDecimal result2 = Arithmetic.sum(BigDecimal.valueOf(9999999999999999L), BigDecimal.valueOf(9999999999999999L));
+//        BigDecimal result4 = Arithmetic.sum(BigDecimal.valueOf(8888888888888888L), BigDecimal.valueOf(8888888888888888L));
+//        BigDecimal result3 = Arithmetic.sum(BigDecimal.valueOf(7777777777777777L), BigDecimal.valueOf(7777777777777777L));
 //        if (result.toString().length() > 16){
 
 //        }
@@ -122,13 +122,6 @@ public class Exp {
 //        System.out.println(result4.stripTrailingZeros());
 //        System.out.println(result4.toString().chars().filter(num -> num == '9').count());
 
-
-        BigDecimal x = new BigDecimal("10.0000000000");
-
-         x = x.stripTrailingZeros();
-        System.out.println(x);
-        System.out.println(x.scale());
-        System.out.println(x.setScale(0));
 
     }
 

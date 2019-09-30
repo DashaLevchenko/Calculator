@@ -4,10 +4,13 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 
 
-
 public class Arithmetic {
-    /**
+    private static final BigDecimal MAX_NUMBER = new BigDecimal("9.999999999999995E9999");
+    private static final BigDecimal MIN_NUMBER = new BigDecimal("-9.999999999999995E9999");
+
+    /**9
      * Method calculates sum of numbers
+     *
      * @param x First parameter
      * @param y Second parameter value to be added to {@code x}.
      * @return Sum of x and y
@@ -18,6 +21,7 @@ public class Arithmetic {
 
     /**
      * Method calculates difference of numbers
+     *
      * @param x First parameter
      * @param y Second parameter value to be subtracted from {@code x}.
      * @return Difference of {@code x} and {@code y}
@@ -59,61 +63,70 @@ public class Arithmetic {
         }
     }
 
-    public  static BigDecimal percent(BigDecimal x, BigDecimal percent){
+    public static BigDecimal percent(BigDecimal x, BigDecimal percent) {
         return scaleForBigDecimal(x.multiply(percent.movePointLeft(2), MathContext.DECIMAL128));
     }
 
-    public static BigDecimal negate(BigDecimal x){
+    public static BigDecimal negate(BigDecimal x) {
         return scaleForBigDecimal(x.negate());
     }
 
-    public static BigDecimal calculateBinaryOperations(BigDecimal number1, BigDecimal number2, OperationsEnum operation){
+    public static BigDecimal calculateBinaryOperations(BigDecimal number1, BigDecimal number2, OperationsEnum operation) {
         BigDecimal result = BigDecimal.ZERO;
 
-        if (operation.equals(OperationsEnum.PLUS)){
+        if (operation.equals(OperationsEnum.PLUS)) {
             result = sum(number1, number2);
-        } else if (operation.equals(OperationsEnum.MINUS)){
+        } else if (operation.equals(OperationsEnum.MINUS)) {
             result = minus(number1, number2);
-        } else if (operation.equals(OperationsEnum.MULTIPLY)){
+        } else if (operation.equals(OperationsEnum.MULTIPLY)) {
             result = multiply(number1, number2);
-        }else if (operation.equals(OperationsEnum.PERCENT)){
+        } else if (operation.equals(OperationsEnum.PERCENT)) {
             result = percent(number1, number2);
-        } else if(operation.equals(OperationsEnum.DIVIDE)){
+        } else if (operation.equals(OperationsEnum.DIVIDE)) {
             try {
                 result = divide(number1, number2);
             } catch (ArithmeticException e) {
                 throw new ArithmeticException("Cannot divide by zero");
             }
-        } else if (operation.equals(OperationsEnum.SQRT)){
+        } else if (operation.equals(OperationsEnum.SQRT)) {
             result = squareRoot(number1);
-        } else if (operation.equals(OperationsEnum.SQRX)){
+        } else if (operation.equals(OperationsEnum.SQRX)) {
             result = xSquare(number1);
-        }else if (operation.equals(OperationsEnum.ONE_DIVIDE_X)){
+        } else if (operation.equals(OperationsEnum.ONE_DIVIDE_X)) {
             result = oneDivideX(number1);
         }
-
+        isOverflow(result);
         return result;
     }
-    public static BigDecimal calculateUnaryOperations(BigDecimal number1, OperationsEnum operation){
+
+    public static BigDecimal calculateUnaryOperations(BigDecimal number1, OperationsEnum operation) {
         BigDecimal result = BigDecimal.ZERO;
 
-        if (operation.equals(OperationsEnum.SQRT)){
+        if (operation.equals(OperationsEnum.SQRT)) {
             result = squareRoot(number1);
-        } else if (operation.equals(OperationsEnum.SQRX)){
+        } else if (operation.equals(OperationsEnum.SQRX)) {
             result = xSquare(number1);
-        }else if (operation.equals(OperationsEnum.ONE_DIVIDE_X)){
+        } else if (operation.equals(OperationsEnum.ONE_DIVIDE_X)) {
             result = oneDivideX(number1);
         }
-
+        isOverflow(result);
         return result;
     }
 
-    public static BigDecimal scaleForBigDecimal(BigDecimal numberDouble){
+    public static BigDecimal scaleForBigDecimal(BigDecimal numberDouble) {
         numberDouble = numberDouble.stripTrailingZeros();
-        if (numberDouble.scale() < 0){
+        if (numberDouble.scale() < 0) {
             numberDouble = numberDouble.setScale(0);
         }
         return numberDouble;
     }
+
+    private static void isOverflow(BigDecimal result) {
+        if (result.compareTo(MAX_NUMBER) > 0 || result.compareTo(MIN_NUMBER) < 0) {
+            throw new ArithmeticException("Overflow");
+        }
+
+    }
+
 
 }
