@@ -3,6 +3,7 @@ package View;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
+
 import Model.Arithmetic;
 import Model.OperationsEnum;
 import javafx.animation.TranslateTransition;
@@ -159,6 +160,7 @@ public class Calculator_Controller {
     void initialize() {
         firstStyleLabel = outText.getFont();
         charactersNumber = CHAR_MAX;
+        outText.setText("0");
 
     }
 
@@ -293,7 +295,6 @@ public class Calculator_Controller {
     @FXML
     public void per_centOperation(ActionEvent actionEvent) {
         Character buttonText = ((Button) actionEvent.getSource()).getText().charAt(0);
-
         if (buttonText.equals(OperationsEnum.PERCENT.getOperations())) {
             percentOperation = OperationsEnum.PERCENT;
         }
@@ -329,32 +330,25 @@ public class Calculator_Controller {
     @FXML
     public void pressedEqual(ActionEvent actionEvent) {
         Character buttonText = ((Button) actionEvent.getSource()).getText().charAt(0);
+        historyOperations = "";
         if (buttonText.equals(OperationsEnum.EQUAL.getOperations())) {
             if (newBinaryOperation != null) {
-                if (!equalWasPress) {
-                    setNum2();
-                    if (numberSecondBinaryOperations == null) {
-                        numberSecondBinaryOperations = numberFirstBinaryOperations;
-                        historyOperations += numberSecondBinaryOperations;
-                    } else {
-                        historyOperations = "";
-                    }
-                    equalWasPress = true;
-                } else {
-                    if (historyOperations.isEmpty()) {
-                        historyOperations += numberFirstBinaryOperations + newBinaryOperation.getSymbol() + numberSecondBinaryOperations;
-                    } else {
-                        historyOperations += newBinaryOperation.getSymbol() + numberSecondBinaryOperations;
-                    }
+//                if (!equalWasPress) {
+                setNum2();
+                if (numberSecondBinaryOperations == null) {
+                    numberSecondBinaryOperations = numberFirstBinaryOperations;
                 }
 
-                calculateBinaryOperation();
-                outOperationMemory.setText(historyOperations);
-                scrollOutOperationMemory();
-                resizeOutputText();
-                textWithoutSeparateNew = "";
+                equalWasPress = true;
             }
+
+
+            calculateBinaryOperation();
+            outOperationMemory.setText(historyOperations);
+            resizeOutputText();
+            textWithoutSeparateNew = "";
         }
+//        }
     }
 
 
@@ -394,10 +388,9 @@ public class Calculator_Controller {
         numberUnaryOperations = null;
         equalWasPress = false;
         textWithoutSeparateNew = "";
-        resizeOutputText();
-        textWithoutSeparateNew = "";
         operationsIsDisable(false);
         isError = false;
+        charactersNumber = CHAR_MAX;
     }
 
     @FXML
@@ -412,6 +405,7 @@ public class Calculator_Controller {
         textWithoutSeparateNew = "";
         resizeOutputText();
         textWithoutSeparateNew = "";
+        charactersNumber = CHAR_MAX;
     }
 
     @FXML
@@ -463,9 +457,15 @@ public class Calculator_Controller {
     @FXML
     public void number(ActionEvent actionEvent) {
         String buttonText = ((Button) actionEvent.getSource()).getText();
-        if (textWithoutSeparateNew.length() < charactersNumber) {
-            textWithoutSeparateNew += buttonText;
-        }
+            if (textWithoutSeparateNew.length() < charactersNumber) {
+                textWithoutSeparateNew += buttonText;
+                if (outText.getText().equals("0") && buttonText.equals("0")) {
+                    textWithoutSeparateNew = "";
+                    outText.setText("0");
+                    start = false;
+                }
+            }
+
         printInputText();
         if (numberFirstBinaryOperations != null) {
             canChangeOperator = false;
@@ -563,8 +563,12 @@ public class Calculator_Controller {
 
     @FXML
     public void negate(ActionEvent actionEvent) {
-        BigDecimal numberNeedChange = Arithmetic.negate(new BigDecimal(textWithoutSeparateNew.replace(",", ".")));
-        textWithoutSeparateNew = numberNeedChange.toString().replace(".", ",");
+        if (textWithoutSeparateNew.isEmpty() && !outText.getText().isEmpty()) {
+            textWithoutSeparateNew = outText.getText().replace(" ", "");
+        }
+        result = Arithmetic.negate(new BigDecimal(textWithoutSeparateNew.replace(",", ".")));
+        numberFirstBinaryOperations = result;
+        textWithoutSeparateNew = result.toString().replace(".", ",");
         if (textWithoutSeparateNew.contains("-")) {
             charactersNumber++;
         } else {
@@ -577,7 +581,8 @@ public class Calculator_Controller {
     public void commaMouseClick(ActionEvent actionEvent) {
         String buttonText = ((Button) actionEvent.getSource()).getText();
         if (!pointInText) {
-            if (start) {
+            if (start || outText.getText().equals("0")) {
+                charactersNumber++;
                 textWithoutSeparateNew += "0" + buttonText;
                 start = false;
             } else {
@@ -594,13 +599,17 @@ public class Calculator_Controller {
             outText.setText(textWithoutSeparateNew);
             start = false;
         } else {
-            resizeOutputText();
-            outText.setText(separateNumber(textWithoutSeparateNew));
+            if (!textWithoutSeparateNew.isEmpty()) {
+                resizeOutputText();
+                outText.setText(separateNumber(textWithoutSeparateNew));
+            }
         }
+
+
     }
 
     private void resizeOutputText() {
-        if (textWithoutSeparateNew.isEmpty() && !outText.getText().isEmpty()) {
+        if (textWithoutSeparateNew.isEmpty() && !outText.getText().isEmpty() && !start) {
             textWithoutSeparateNew = outText.getText();
         }
         Text textNew = new Text(separateNumber(textWithoutSeparateNew));
@@ -668,7 +677,7 @@ public class Calculator_Controller {
 
     public static boolean isNumeric(String strNum) {
         try {
-            BigDecimal d = new BigDecimal(strNum);
+            BigDecimal d = new BigDecimal(strNum.replace(",", "."));
         } catch (NumberFormatException | NullPointerException nfe) {
             return false;
         }
@@ -677,7 +686,7 @@ public class Calculator_Controller {
 
 
     private void scrollOutOperationMemory() {
-        Text history = new Text(historyOperations+historyUnaryOperations);
+        Text history = new Text(historyOperations + historyUnaryOperations);
         history.setFont(outOperationMemory.getFont());
         double maxWidthForLabelOperation = scrollPaneOperation.getWidth() - scrollPaneOperation.getPadding().getLeft() - scrollPaneOperation.getPadding().getRight();
         if (history.getBoundsInLocal().getWidth() > maxWidthForLabelOperation) {
@@ -699,7 +708,6 @@ public class Calculator_Controller {
                 }
                 numberFirstBinaryOperations = new BigDecimal(textWithoutSeparateNew);
                 start = true;
-//                textWithoutSeparateNew = "";
             } else if (result != null) {
                 numberFirstBinaryOperations = result;
             } else {
@@ -714,9 +722,10 @@ public class Calculator_Controller {
         if (!canChangeOperator) {
             if (!textWithoutSeparateNew.isEmpty()) {
                 numberSecondBinaryOperations = new BigDecimal(textWithoutSeparateNew.replace(",", "."));
-//                textWithoutSeparateNew = "";
                 start = true;
             }
+        } else {
+            numberSecondBinaryOperations = null;
         }
     }
 
