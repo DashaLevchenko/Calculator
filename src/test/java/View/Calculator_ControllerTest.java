@@ -40,104 +40,134 @@ class Calculator_ControllerTest extends ApplicationTest {
     }
 
     @Test
-    void clickNumberValid() {
+    void clickMouseNumberValid() {
 //Integer number
-//        inputNumber("0", "0", "");
-        inputNumber("1", "001", "C");
-        inputNumber("99", "99", "C");
-        inputNumber("1", "001", "C");
-        inputNumber("999", "999", "C");
-        inputNumber("1", "0001", "C");
-        inputNumber("9 999", "9999", "C");
-        inputNumber("1", "00001", "C");
-        inputNumber("99 999", "99999", "C");
-        inputNumber("1", "000001", "C");
-        inputNumber("999 999", "999999", "C");
-        inputNumber("1", "0000001", "C");
-        inputNumber("9 999 999", "9999999", "C");
-        inputNumber("1", "00000001", "C");
-        inputNumber("99 999 999", "99999999", "C");
-        inputNumber("1", "000000001", "C");
-        inputNumber("999 999 999", "999999999", "C");
-        inputNumber("1", "0000000001", "C");
-        inputNumber("9 999 999 999", "9999999999", "C");
-        inputNumber("1", "00000000001", "C");
-        inputNumber("99 999 999 999", "99999999999", "C");
-        inputNumber("1", "000000000001", "C");
-        inputNumber("999 999 999 999", "999999999999", "C");
-        inputNumber("1", "0000000000001", "C");
-        inputNumber("9 999 999 999 999", "9999999999999", "C");
-        inputNumber("1", "00000000000001", "C");
-        inputNumber("99 999 999 999 999", "99999999999999", "C");
-        inputNumber("1", "000000000000001", "C");
-        inputNumber("999 999 999 999 999", "999999999999999", "C");
-        inputNumber("1", "0000000000000001", "C");
-        inputNumber("9 999 999 999 999 999", "9999999999999999", "CE");
-        inputNumber("1", "00000000000000001", "C");
-        inputNumber("9 999 999 999 999 999", "99999999999999999", "CE");
+        checkMouseInputNumber("1", "001");
+        checkMouseInputNumber("99", "99");
+        checkMouseInputNumber("1", "001");
+        checkMouseInputNumber("999", "999");
+        checkMouseInputNumber("1", "0001");
+        checkMouseInputNumber("9 999", "9999");
+        checkMouseInputNumber("1", "00001");
+        checkMouseInputNumber("99 999", "99999");
+        checkMouseInputNumber("1", "000001");
+        checkMouseInputNumber("999 999", "999999");
+        checkMouseInputNumber("1", "0000001");
+        checkMouseInputNumber("9 999 999", "9999999");
+        checkMouseInputNumber("1", "00000001");
+        checkMouseInputNumber("99 999 999", "99999999");
+        checkMouseInputNumber("1", "000000001");
+        checkMouseInputNumber("999 999 999", "999999999");
+        checkMouseInputNumber("1", "0000000001");
+        checkMouseInputNumber("9 999 999 999", "9999999999");
+        checkMouseInputNumber("1", "00000000001");
+        checkMouseInputNumber("99 999 999 999", "99999999999");
+        checkMouseInputNumber("1", "000000000001");
+        checkMouseInputNumber("999 999 999 999", "999999999999");
+        checkMouseInputNumber("1", "0000000000001");
+        checkMouseInputNumber("9 999 999 999 999", "9999999999999");
+        checkMouseInputNumber("1", "00000000000001");
+        checkMouseInputNumber("99 999 999 999 999", "99999999999999");
+        checkMouseInputNumber("1", "000000000000001");
+        checkMouseInputNumber("999 999 999 999 999", "999999999999999");
+        checkMouseInputNumber("1", "0000000000000001");
+        checkMouseInputNumber("9 999 999 999 999 999", "9999999999999999");
+        checkMouseInputNumber("1", "00000000000000001");
+        checkMouseInputNumber("9 999 999 999 999 999", "99999999999999999");
         //Double
-//        inputNumber("0,9999999999999999", "0,9999999999999999", "CE");
-//        inputNumber("999 999 999 999 999,9", "999999999999999,9", "CE");
-//        inputNumber("99 999 999 999 999,99", "99999999999999,99", "CE");
-//        inputNumber("9 999 999 999 999,999", "9999999999999,999", "CE");
-//        inputNumber("999 999 999 999,9999", "999999999999,9999", "CE");
-//        inputNumber("99 999 999 999,99999", "99999999999,99999", "CE");
-//        inputNumber("9 999 999 999,999999", "9999999999,999999", "CE");
-//        inputNumber("999 999 999,9999999", "999999999,9999999", "CE");
-//        inputNumber("99 999 999,99999999", "99999999,99999999", "CE");
-//        inputNumber("9 999 999,999999999", "9999999,999999999", "CE");
-//        inputNumber("999 999,9999999999", "999999,9999999999", "CE");
-//        inputNumber("99 999,99999999999", "99999,99999999999", "CE");
-//        inputNumber("9 999,999999999999", "9999,999999999999", "CE");
-//        inputNumber("999,9999999999999", "999,9999999999999", "CE");
-//        inputNumber("99,99999999999999", "99,99999999999999", "CE");
-//        inputNumber("9,999999999999999", "9,999999999999999", "CE");
-
-    }
-    private void inputNumber(String result, String buttonsPressed, String afterInput) {
-        checkInputNumber("-"+result, buttonsPressed+"n", afterInput);
-        checkInputNumber(result, buttonsPressed+"nn", afterInput);
-        checkInputNumber(result, buttonsPressed, afterInput);
+        checkMouseInputNumber("0,9999999999999999", "0,9999999999999999");
+        checkMouseInputNumber("999 999 999 999 999,9", "999999999999999,9");
+        checkMouseInputNumber("99 999 999 999 999,99", "99999999999999,99");
+        checkMouseInputNumber("9 999 999 999 999,999", "9999999999999,999");
+        checkMouseInputNumber("999 999 999 999,9999", "999999999999,9999");
+        checkMouseInputNumber("99 999 999 999,99999", "99999999999,99999");
+        checkMouseInputNumber("9 999 999 999,999999", "9999999999,999999");
+        checkMouseInputNumber("999 999 999,9999999", "999999999,9999999");
+        checkMouseInputNumber("99 999 999,99999999", "99999999,99999999");
+        checkMouseInputNumber("9 999 999,999999999", "9999999,999999999");
+        checkMouseInputNumber("999 999,9999999999", "999999,9999999999");
+        checkMouseInputNumber("99 999,99999999999", "99999,99999999999");
+        checkMouseInputNumber("9 999,999999999999", "9999,999999999999");
+        checkMouseInputNumber("999,9999999999999", "999,9999999999999");
+        checkMouseInputNumber("99,99999999999999", "99,99999999999999");
+        checkMouseInputNumber("9,999999999999999", "9,999999999999999");
     }
 
-    void checkInputNumber(String result, String buttonsPressed, String afterInput) {
-        mouseClicked(result, buttonsPressed, afterInput);
-        assertEquals(result, outLabel.getText());
-        clearDisplay(afterInput);
-
-        keyNumpadTyped(result, buttonsPressed);
-        assertEquals(result, outLabel.getText());
-        clearDisplay(afterInput);
-
-        keyTyped(result, buttonsPressed);
-        assertEquals(result, outLabel.getText());
-        clearDisplay(afterInput);
-    }
-    
-    private void keyTyped(String result, String buttonsPressed) {
-        for (char buttonPressed : buttonsPressed.toCharArray()) {
-            type(keyboardInput(String.valueOf(buttonPressed)));
-        }
-
-    }
-
-    private void keyNumpadTyped(String result, String buttonsPressed) {
-        for (char buttonPressed : buttonsPressed.toCharArray()) {
-            type(keyboardNumpadInput(String.valueOf(buttonPressed)));
-        }
-    }
-
-    private void mouseClicked(String result, String buttonsPressed, String afterInput) {
+    void checkMouseInputNumber(String result, String buttonsPressed) {
         for (char buttonPressed : buttonsPressed.toCharArray()) {
             clickOn((Button) from(root).lookup("#" + mouseInput(String.valueOf(buttonPressed))).query());
         }
+        assertEquals(result, outLabel.getText());
+        clickOn((Button) from(root).lookup("#C").query());
     }
 
-    void clearDisplay(String clearButton) {
-        if (clearButton.equals("C") || clearButton.equals("CE")) {
-            clickOn((Button) from(root).lookup("#" + clearButton).query());
-            assertEquals("0", outLabel.getText());
-        }
+    @Test
+    void typeKeyNumberValid() {
+//Integer number
+        keyNumberInputInteger("1", "1", 1);
+        keyNumberInputInteger("22", "2", 2);
+        keyNumberInputInteger("333", "3", 3);
+        keyNumberInputInteger("4 444", "4", 4);
+        keyNumberInputInteger("55 555", "5", 5);
+        keyNumberInputInteger("666 666", "6", 6);
+        keyNumberInputInteger("7 777 777", "7", 7);
+        keyNumberInputInteger("88 888 888", "8", 8);
+        keyNumberInputInteger("999 999 999", "9", 9);
+        keyNumberInputInteger("1 111 111 111", "1", 10);
+        keyNumberInputInteger("22 222 222 222", "2", 11);
+        keyNumberInputInteger("333 333 333 333", "3", 12);
+        keyNumberInputInteger("4 444 444 444 444", "4", 13);
+        keyNumberInputInteger("55 555 555 555 555", "5", 14);
+        keyNumberInputInteger("666 666 666 666 666", "6", 15);
+        keyNumberInputInteger("7 777 777 777 777 777", "7", 16);
+        keyNumberInputInteger("8 888 888 888 888 888", "8", 17);
+
+        keyNumberInputDouble("0,9999999999999999", "0", 1, "9", 16);
+        keyNumberInputDouble("9 999 999 999 999 999,", "9", 16, "9", 1);
+        keyNumberInputDouble("999 999 999 999 999,9", "9", 15, "9", 1);
+        keyNumberInputDouble("99 999 999 999 999,99", "9", 14, "9", 2);
+        keyNumberInputDouble("9 999 999 999 999,999", "9", 13, "9", 3);
+        keyNumberInputDouble("999 999 999 999,9999", "9", 12, "9", 4);
+        keyNumberInputDouble("99 999 999 999,99999", "9", 11, "9", 5);
+        keyNumberInputDouble("9 999 999 999,999999", "9", 10, "9", 6);
+        keyNumberInputDouble("999 999 999,9999999", "9", 9, "9", 7);
+        keyNumberInputDouble("99 999 999,99999999", "9", 8, "9", 8);
+        keyNumberInputDouble("9 999 999,999999999", "9", 7, "9", 9);
+        keyNumberInputDouble("999 999,9999999999", "9", 6, "9", 10);
+        keyNumberInputDouble("99 999,99999999999", "9", 5, "9", 11);
+        keyNumberInputDouble("9 999,999999999999", "9", 4, "9", 12);
+        keyNumberInputDouble("999,9999999999999", "9", 3, "9", 13);
+        keyNumberInputDouble("99,99999999999999", "9", 2, "9", 14);
+        keyNumberInputDouble("9,999999999999999", "9", 1, "9", 15);
+
+    }
+
+    private void keyNumberInputInteger(String result, String numberWillRepeat, int timesRepeatNumber) {
+        type(keyboardNumpadInput(numberWillRepeat), timesRepeatNumber);
+        assertEquals(result, outLabel.getText());
+        clickOn((Button) from(root).lookup("#C").query());
+        assertEquals("0", outLabel.getText());
+
+        type(keyboardInput(numberWillRepeat), timesRepeatNumber);
+        assertEquals(result, outLabel.getText());
+        clickOn((Button) from(root).lookup("#C").query());
+        assertEquals("0", outLabel.getText());
+    }
+
+    private void keyNumberInputDouble(String result, String numberWillRepeatBeforePoint, int timesRepeatNumberBeforePoint, String numberWillRepeatAfterPoint, int timesRepeatNumberAfterPoint) {
+        type(keyboardNumpadInput(numberWillRepeatBeforePoint), timesRepeatNumberBeforePoint);
+        type(keyboardNumpadInput(","));
+        type(keyboardNumpadInput(numberWillRepeatAfterPoint), timesRepeatNumberAfterPoint);
+        assertEquals(result, outLabel.getText());
+        clickOn((Button) from(root).lookup("#C").query());
+        assertEquals("0", outLabel.getText());
+
+        type(keyboardInput(numberWillRepeatBeforePoint), timesRepeatNumberBeforePoint);
+        type(keyboardInput(","));
+        type(keyboardInput(numberWillRepeatAfterPoint), timesRepeatNumberAfterPoint);
+        assertEquals(result, outLabel.getText());
+        clickOn((Button) from(root).lookup("#C").query());
+        assertEquals("0", outLabel.getText());
     }
 
     KeyCode keyboardNumpadInput(String idButtonClickedMouse) {
@@ -172,6 +202,7 @@ class Calculator_ControllerTest extends ApplicationTest {
 
         return keyCode;
     }
+
     KeyCode keyboardInput(String idButtonClickedMouse) {
         KeyCode keyCode;
         if (idButtonClickedMouse.equals("1")) {

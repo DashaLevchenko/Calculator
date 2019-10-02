@@ -469,14 +469,14 @@ public class Calculator_Controller {
             }
 
         printInputText();
-        if (numberFirstBinaryOperations != null) {
-            canChangeOperator = false;
-            equalWasPress = false;
-            pointInText = false;
-        }
-        if (historyOperations.isEmpty()) {
-            numberFirstBinaryOperations = null;
-        }
+//        if (numberFirstBinaryOperations != null) {
+//            canChangeOperator = false;
+//            equalWasPress = false;
+//            pointInText = false;
+//        }
+//        if (historyOperations.isEmpty()) {
+//            numberFirstBinaryOperations = null;
+//        }
     }
 
     @FXML

@@ -7,13 +7,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="feaeb0c2-feb2-4a9c-98e3-48b1d1a339aa" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/User.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/User.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Exp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Exp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/View/Calculator_Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/Calculator_Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/View/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/View/Calculator_ControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/View/Calculator_ControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/View/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/style.css" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -124,26 +120,13 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.Calculator_ControllerTest.clickNumberValid">
+  <component name="RunManager" selected="JUnit.Calculator_ControllerTest">
     <configuration name="Calculator_Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="View.Calculator_Main" />
       <module name="Calculator" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="View.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Exp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Model.Exp" />
-      <module name="Calculator" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Model.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -166,7 +149,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Calculator_ControllerTest.clickNumber" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="Calculator_ControllerTest.clickMouseNumberValid" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Calculator" />
       <extension name="coverage">
         <pattern>
@@ -176,13 +159,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="View" />
       <option name="MAIN_CLASS_NAME" value="View.Calculator_ControllerTest" />
-      <option name="METHOD_NAME" value="clickNumber" />
+      <option name="METHOD_NAME" value="clickMouseNumberValid" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Calculator_ControllerTest.clickNumberValid" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="Calculator_ControllerTest.typeKeyNumberValid" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Calculator" />
       <extension name="coverage">
         <pattern>
@@ -192,26 +175,40 @@
       </extension>
       <option name="PACKAGE_NAME" value="View" />
       <option name="MAIN_CLASS_NAME" value="View.Calculator_ControllerTest" />
-      <option name="METHOD_NAME" value="clickNumberValid" />
+      <option name="METHOD_NAME" value="typeKeyNumberValid" />
       <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Model in Calculator" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Calculator" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Model.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Model" />
+      <option name="TEST_OBJECT" value="package" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <list>
       <item itemvalue="Application.Calculator_Main" />
+      <item itemvalue="JUnit.Calculator_ControllerTest.clickMouseNumberValid" />
+      <item itemvalue="JUnit.Calculator_ControllerTest.typeKeyNumberValid" />
       <item itemvalue="JUnit.Calculator_ControllerTest" />
-      <item itemvalue="JUnit.Calculator_ControllerTest.clickNumber" />
-      <item itemvalue="JUnit.Calculator_ControllerTest.clickNumberValid" />
-      <item itemvalue="Application.Exp" />
+      <item itemvalue="JUnit.Model in Calculator" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.Calculator_ControllerTest.clickNumberValid" />
-        <item itemvalue="Application.Calculator_Main" />
-        <item itemvalue="Application.Exp" />
-        <item itemvalue="JUnit.Calculator_ControllerTest.clickNumber" />
         <item itemvalue="JUnit.Calculator_ControllerTest" />
+        <item itemvalue="JUnit.Calculator_ControllerTest.clickMouseNumberValid" />
+        <item itemvalue="JUnit.Calculator_ControllerTest.typeKeyNumberValid" />
+        <item itemvalue="JUnit.Model in Calculator" />
+        <item itemvalue="Application.Calculator_Main" />
       </list>
     </recent_temporary>
   </component>
@@ -484,7 +481,14 @@
       <option name="project" value="LOCAL" />
       <updated>1569942587427</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="input tests are working slow">
+      <created>1570022417968</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1570022417968</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -545,7 +549,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="all work" />
     <MESSAGE value="test" />
     <MESSAGE value="All tests before sort" />
     <MESSAGE value="Problem with scale in sum() Expect 2, got 2.0" />
@@ -570,7 +573,8 @@
     <MESSAGE value="delete textWithoutSeparateOld" />
     <MESSAGE value="write Tests, &#10;how use robotFX?" />
     <MESSAGE value="write Tests," />
-    <option name="LAST_COMMIT_MESSAGE" value="write Tests," />
+    <MESSAGE value="input tests are working slow" />
+    <option name="LAST_COMMIT_MESSAGE" value="input tests are working slow" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
