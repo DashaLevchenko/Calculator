@@ -122,6 +122,12 @@ public class Exp {
 //        System.out.println(result4.stripTrailingZeros());
 //        System.out.println(result4.toString().chars().filter(num -> num == '9').count());
 
+        String a = "123456";
+
+        for(char s : a.toCharArray()){
+            System.out.println(String.valueOf(s));
+        }
+
 
     }
 

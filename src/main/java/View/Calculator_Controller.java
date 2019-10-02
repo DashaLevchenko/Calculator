@@ -135,7 +135,7 @@ public class Calculator_Controller {
     private final int CHAR_MAX = 16;
     private int charactersNumber;
     private String textWithoutSeparateNew = "";
-    private Font firstStyleLabel;
+    private String firstStyleLabel;
     private boolean start = true;
     private boolean pointInText = false;
     private BigDecimal numberFirstBinaryOperations;
@@ -158,7 +158,7 @@ public class Calculator_Controller {
 
     @FXML
     void initialize() {
-        firstStyleLabel = outText.getFont();
+        firstStyleLabel = outText.getStyle();
         charactersNumber = CHAR_MAX;
         outText.setText("0");
 
@@ -371,7 +371,7 @@ public class Calculator_Controller {
 
     @FXML
     void clearAllC(ActionEvent actionEvent) {
-        outText.setStyle(firstStyleLabel.getStyle());
+        outText.setStyle(firstStyleLabel);
         outText.setText("0");
         outOperationMemory.setText("");
         start = true;
@@ -395,7 +395,7 @@ public class Calculator_Controller {
 
     @FXML
     void clearNumberCE(ActionEvent actionEvent) {
-        outText.setStyle(firstStyleLabel.getStyle());
+        outText.setStyle(firstStyleLabel);
         outText.setText("0");
         start = true;
         pointInText = false;
@@ -451,6 +451,8 @@ public class Calculator_Controller {
             divide.fire();
         } else if (keyCode == KeyCode.ENTER) {
             equal.fire();
+        }else if (keyCode == KeyCode.F9) {
+            plusMinus.fire();
         }
     }
 
@@ -626,8 +628,8 @@ public class Calculator_Controller {
         Stage stage = (Stage) maximizeButton.getScene().getWindow();
 
 
-        if (newSize > firstStyleLabel.getSize() && !stage.isMaximized()) {
-            newSize = firstStyleLabel.getSize();
+        if (newSize > 46 && !stage.isMaximized()) {
+            newSize = 46;
         }
         if (stage.isMaximized()) {
             newSize = MAX_FONT_SIZE;
@@ -642,9 +644,14 @@ public class Calculator_Controller {
     private String separateNumber(String text) {
         if (isNumeric(text)) {
             String textAfterComma = "";
+            String minus = "";
             StringBuilder stringBuilderText;
             if (text.contains(".")) {
                 text = text.replace(".", ",");
+            }
+            if (text.contains("-")){
+                text = text.replace("-", "");
+                minus="-";
             }
             if (text.contains(",")) {
                 int commaIndex = text.indexOf(",");
@@ -661,7 +668,7 @@ public class Calculator_Controller {
                     insertSeparator -= (3);
                 }
             }
-            text = stringBuilderText.toString() + textAfterComma;
+            text = minus + stringBuilderText.toString() + textAfterComma;
 
             if (text.contains("E")) {
                 if (!text.contains(",")) {
@@ -752,7 +759,7 @@ public class Calculator_Controller {
     private void printError(Exception e) {
         isError = true;
         operationsIsDisable(true);
-        outText.setFont(firstStyleLabel);
+        outText.setStyle(firstStyleLabel);
         textWithoutSeparateNew = e.getMessage();
         resizeOutputText();
         outText.setText(textWithoutSeparateNew);
