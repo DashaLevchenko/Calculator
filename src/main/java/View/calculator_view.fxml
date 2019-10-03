@@ -18,7 +18,7 @@
 
 <AnchorPane fx:id="generalAnchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="320.0" onKeyPressed="#keyPressed" onMouseExited="#resizeWindow" prefHeight="500.0" prefWidth="320.0" style="-fx-background-color: e6e6e6;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Calculator_Controller">
    <children>
-      <GridPane layoutY="92.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="92.0">
+      <GridPane layoutY="92.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="92.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
          </columnConstraints>
@@ -63,7 +63,7 @@
                         <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <Button alignment="TOP_CENTER" disable="true" minHeight="30.0" minWidth="50.0" mnemonicParsing="false" style="-fx-background-color: e6e6e6; -fx-background-radius: 0; -fx-border-radius: 0;" text="MC">
+                        <Button alignment="TOP_CENTER" disable="true" focusTraversable="false" minHeight="30.0" minWidth="50.0" mnemonicParsing="false" style="-fx-background-color: e6e6e6; -fx-background-radius: 0; -fx-border-radius: 0;" text="MC">
                            <font>
                               <Font name="Segoe UI Historic" size="12.0" />
                            </font>
@@ -71,7 +71,7 @@
                               <Insets />
                            </GridPane.margin>
                         </Button>
-                        <Button alignment="TOP_CENTER" disable="true" minHeight="30.0" minWidth="50.0" mnemonicParsing="false" style="-fx-background-color: e6e6e6; -fx-background-radius: 0; -fx-border-radius: 0;" text="MR" GridPane.columnIndex="1">
+                        <Button alignment="TOP_CENTER" disable="true" focusTraversable="false" minHeight="30.0" minWidth="50.0" mnemonicParsing="false" style="-fx-background-color: e6e6e6; -fx-background-radius: 0; -fx-border-radius: 0;" text="MR" GridPane.columnIndex="1">
                            <font>
                               <Font name="Segoe UI Historic" size="12.0" />
                            </font>
@@ -79,7 +79,7 @@
                               <Insets left="2.0" right="2.0" />
                            </GridPane.margin>
                         </Button>
-                        <Button alignment="BOTTOM_CENTER" minHeight="30.0" minWidth="50.0" mnemonicParsing="false" style="-fx-background-color: e6e6e6; -fx-background-radius: 0; -fx-border-radius: 0;" stylesheets="@style.css" text="M+" GridPane.columnIndex="2">
+                        <Button alignment="BOTTOM_CENTER" focusTraversable="false" minHeight="30.0" minWidth="50.0" mnemonicParsing="false" style="-fx-background-color: e6e6e6; -fx-background-radius: 0; -fx-border-radius: 0;" stylesheets="@style.css" text="M+" GridPane.columnIndex="2">
                            <font>
                               <Font name="Segoe UI Semibold" size="13.0" />
                            </font>
@@ -90,7 +90,7 @@
                               <Insets bottom="6.0" />
                            </padding>
                         </Button>
-                        <Button alignment="BOTTOM_CENTER" minHeight="30.0" minWidth="50.0" mnemonicParsing="false" style="-fx-background-color: e6e6e6; -fx-background-radius: 0; -fx-border-radius: 0;" stylesheets="@style.css" text="M-" GridPane.columnIndex="3">
+                        <Button alignment="BOTTOM_CENTER" focusTraversable="false" minHeight="30.0" minWidth="50.0" mnemonicParsing="false" style="-fx-background-color: e6e6e6; -fx-background-radius: 0; -fx-border-radius: 0;" stylesheets="@style.css" text="M-" GridPane.columnIndex="3">
                            <font>
                               <Font name="Segoe UI Semibold" size="13.0" />
                            </font>
@@ -101,7 +101,7 @@
                               <Insets bottom="6.0" />
                            </padding>
                         </Button>
-                        <Button alignment="BOTTOM_CENTER" minHeight="30.0" minWidth="50.0" mnemonicParsing="false" style="-fx-background-color: e6e6e6; -fx-background-radius: 0; -fx-border-radius: 0;" styleClass="memory_bold" stylesheets="@style.css" text="MS" GridPane.columnIndex="4">
+                        <Button alignment="BOTTOM_CENTER" focusTraversable="false" minHeight="30.0" minWidth="50.0" mnemonicParsing="false" style="-fx-background-color: e6e6e6; -fx-background-radius: 0; -fx-border-radius: 0;" styleClass="memory_bold" stylesheets="@style.css" text="MS" GridPane.columnIndex="4">
                            <font>
                               <Font name="Segoe UI Semibold" size="13.0" />
                            </font>
@@ -112,7 +112,7 @@
                               <Insets bottom="6.0" />
                            </padding>
                         </Button>
-                        <MenuButton alignment="CENTER_RIGHT" disable="true" minHeight="30.0" minWidth="50.0" mnemonicParsing="false" style="-fx-background-color: e6e6e6; -fx-background-radius: 0; -fx-border-radius: 0;" styleClass="memory_down" stylesheets="@style.css" text="M" textAlignment="RIGHT" GridPane.columnIndex="5">
+                        <MenuButton alignment="CENTER_RIGHT" disable="true" focusTraversable="false" minHeight="30.0" minWidth="50.0" mnemonicParsing="false" style="-fx-background-color: e6e6e6; -fx-background-radius: 0; -fx-border-radius: 0;" styleClass="memory_down" stylesheets="@style.css" text="M" textAlignment="RIGHT" GridPane.columnIndex="5">
                            <items>
                               <MenuItem mnemonicParsing="false" text="Action 1" />
                               <MenuItem mnemonicParsing="false" text="Action 2" />
@@ -144,7 +144,7 @@
                   <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="46.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Button fx:id="per_cent" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#per_centOperation" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation" stylesheets="@style.css" text="">
+                  <Button fx:id="percent" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#percentOperation" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation" stylesheets="@style.css" text="">
                      <rotationAxis>
                         <Point3D />
                      </rotationAxis>
@@ -155,7 +155,7 @@
                         <Insets />
                      </GridPane.margin>
                   </Button>
-                  <Button fx:id="sqrt" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#unaryOperations" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation" stylesheets="@style.css" text="" GridPane.columnIndex="1">
+                  <Button fx:id="sqrt" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#unaryOperations" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation" stylesheets="@style.css" text="" GridPane.columnIndex="1">
                      <rotationAxis>
                         <Point3D />
                      </rotationAxis>
@@ -166,7 +166,7 @@
                         <Insets />
                      </GridPane.margin>
                   </Button>
-                  <Button fx:id="sqrX" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#unaryOperations" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation" stylesheets="@style.css" text="" GridPane.columnIndex="2">
+                  <Button fx:id="sqrX" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#unaryOperations" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation" stylesheets="@style.css" text="" GridPane.columnIndex="2">
                      <rotationAxis>
                         <Point3D />
                      </rotationAxis>
@@ -177,7 +177,7 @@
                         <Insets />
                      </GridPane.margin>
                   </Button>
-                  <Button fx:id="oneDivideX" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#unaryOperations" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation" stylesheets="@style.css" text="" GridPane.columnIndex="3">
+                  <Button fx:id="oneDivideX" contentDisplay="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#unaryOperations" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation" stylesheets="@style.css" text="" GridPane.columnIndex="3">
                      <rotationAxis>
                         <Point3D />
                      </rotationAxis>
@@ -188,7 +188,7 @@
                         <Insets />
                      </GridPane.margin>
                   </Button>
-                  <Button fx:id="CE" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#clearNumberCE" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation" stylesheets="@style.css" text="CE" GridPane.rowIndex="1">
+                  <Button fx:id="CE" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#clearNumberCE" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation" stylesheets="@style.css" text="CE" GridPane.rowIndex="1">
                      <rotationAxis>
                         <Point3D />
                      </rotationAxis>
@@ -199,7 +199,7 @@
                         <Insets />
                      </GridPane.margin>
                   </Button>
-                  <Button fx:id="C" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#clearAllC" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation" stylesheets="@style.css" text="C" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <Button fx:id="C" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#clearAllC" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation" stylesheets="@style.css" text="C" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <rotationAxis>
                         <Point3D />
                      </rotationAxis>
@@ -210,7 +210,7 @@
                         <Insets />
                      </GridPane.margin>
                   </Button>
-                  <Button fx:id="Backspace" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#backspace" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation" stylesheets="@style.css" text="" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                  <Button fx:id="Backspace" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#backspace" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation" stylesheets="@style.css" text="" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <rotationAxis>
                         <Point3D />
                      </rotationAxis>
@@ -221,7 +221,7 @@
                         <Insets />
                      </GridPane.margin>
                   </Button>
-                  <Button fx:id="divide" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#binaryOperation" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation_arithmetic" stylesheets="@style.css" text="" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                  <Button fx:id="divide" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#binaryOperation" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation_arithmetic" stylesheets="@style.css" text="" GridPane.columnIndex="3" GridPane.rowIndex="1">
                      <rotationAxis>
                         <Point3D />
                      </rotationAxis>
@@ -232,7 +232,7 @@
                         <Insets />
                      </GridPane.margin>
                   </Button>
-                  <Button fx:id="seven" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#number" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_number" stylesheets="@style.css" text="7" GridPane.rowIndex="2">
+                  <Button fx:id="seven" alignment="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#number" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_number" stylesheets="@style.css" text="7" GridPane.rowIndex="2">
                      <rotationAxis>
                         <Point3D />
                      </rotationAxis>
@@ -243,7 +243,7 @@
                         <Insets />
                      </GridPane.margin>
                   </Button>
-                  <Button fx:id="eight" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#number" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_number" stylesheets="@style.css" text="8" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <Button fx:id="eight" alignment="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#number" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_number" stylesheets="@style.css" text="8" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <rotationAxis>
                         <Point3D />
                      </rotationAxis>
@@ -254,7 +254,7 @@
                         <Insets />
                      </GridPane.margin>
                   </Button>
-                  <Button fx:id="nine" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#number" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_number" stylesheets="@style.css" text="9" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                  <Button fx:id="nine" alignment="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#number" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_number" stylesheets="@style.css" text="9" GridPane.columnIndex="2" GridPane.rowIndex="2">
                      <rotationAxis>
                         <Point3D />
                      </rotationAxis>
@@ -265,7 +265,7 @@
                         <Insets />
                      </GridPane.margin>
                   </Button>
-                  <Button fx:id="multiply" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#binaryOperation" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation_arithmetic" stylesheets="@style.css" text="" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                  <Button fx:id="multiply" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#binaryOperation" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation_arithmetic" stylesheets="@style.css" text="" GridPane.columnIndex="3" GridPane.rowIndex="2">
                      <rotationAxis>
                         <Point3D />
                      </rotationAxis>
@@ -276,7 +276,7 @@
                         <Insets />
                      </GridPane.margin>
                   </Button>
-                  <Button fx:id="four" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#number" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_number" stylesheets="@style.css" text="4" GridPane.rowIndex="3">
+                  <Button fx:id="four" alignment="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#number" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_number" stylesheets="@style.css" text="4" GridPane.rowIndex="3">
                      <rotationAxis>
                         <Point3D />
                      </rotationAxis>
@@ -287,7 +287,7 @@
                         <Insets />
                      </GridPane.margin>
                   </Button>
-                  <Button fx:id="five" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#number" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_number" stylesheets="@style.css" text="5" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                  <Button fx:id="five" alignment="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#number" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_number" stylesheets="@style.css" text="5" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <rotationAxis>
                         <Point3D />
                      </rotationAxis>
@@ -298,7 +298,7 @@
                         <Insets />
                      </GridPane.margin>
                   </Button>
-                  <Button fx:id="six" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#number" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_number" stylesheets="@style.css" text="6" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                  <Button fx:id="six" alignment="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#number" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_number" stylesheets="@style.css" text="6" GridPane.columnIndex="2" GridPane.rowIndex="3">
                      <rotationAxis>
                         <Point3D />
                      </rotationAxis>
@@ -309,7 +309,7 @@
                         <Insets />
                      </GridPane.margin>
                   </Button>
-                  <Button fx:id="subscribe" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#binaryOperation" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation_arithmetic" stylesheets="@style.css" text="" GridPane.columnIndex="3" GridPane.rowIndex="3">
+                  <Button fx:id="subtract" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#binaryOperation" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation_arithmetic" stylesheets="@style.css" text="" GridPane.columnIndex="3" GridPane.rowIndex="3">
                      <rotationAxis>
                         <Point3D />
                      </rotationAxis>
@@ -320,7 +320,7 @@
                         <Insets />
                      </GridPane.margin>
                   </Button>
-                  <Button fx:id="one" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#number" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_number" stylesheets="@style.css" text="1" GridPane.rowIndex="4">
+                  <Button fx:id="one" alignment="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#number" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_number" stylesheets="@style.css" text="1" GridPane.rowIndex="4">
                      <rotationAxis>
                         <Point3D />
                      </rotationAxis>
@@ -331,7 +331,7 @@
                         <Insets />
                      </GridPane.margin>
                   </Button>
-                  <Button fx:id="two" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#number" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_number" stylesheets="@style.css" text="2" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                  <Button fx:id="two" alignment="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#number" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_number" stylesheets="@style.css" text="2" GridPane.columnIndex="1" GridPane.rowIndex="4">
                      <rotationAxis>
                         <Point3D />
                      </rotationAxis>
@@ -342,7 +342,7 @@
                         <Insets />
                      </GridPane.margin>
                   </Button>
-                  <Button fx:id="three" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#number" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_number" stylesheets="@style.css" text="3" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                  <Button fx:id="three" alignment="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#number" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_number" stylesheets="@style.css" text="3" GridPane.columnIndex="2" GridPane.rowIndex="4">
                      <rotationAxis>
                         <Point3D />
                      </rotationAxis>
@@ -353,7 +353,7 @@
                         <Insets />
                      </GridPane.margin>
                   </Button>
-                  <Button fx:id="add" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#binaryOperation" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation_arithmetic" stylesheets="@style.css" text="" GridPane.columnIndex="3" GridPane.rowIndex="4">
+                  <Button fx:id="add" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#binaryOperation" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation_arithmetic" stylesheets="@style.css" text="" GridPane.columnIndex="3" GridPane.rowIndex="4">
                      <rotationAxis>
                         <Point3D />
                      </rotationAxis>
@@ -364,7 +364,7 @@
                         <Insets />
                      </GridPane.margin>
                   </Button>
-                  <Button fx:id="plusMinus" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#negate" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation" stylesheets="@style.css" text="" GridPane.rowIndex="5">
+                  <Button fx:id="plusMinus" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#negate" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation" stylesheets="@style.css" text="" GridPane.rowIndex="5">
                      <rotationAxis>
                         <Point3D />
                      </rotationAxis>
@@ -375,7 +375,7 @@
                         <Insets />
                      </GridPane.margin>
                   </Button>
-                  <Button fx:id="zero" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#number" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_number" stylesheets="@style.css" text="0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                  <Button fx:id="zero" alignment="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#number" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_number" stylesheets="@style.css" text="0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="5">
                      <rotationAxis>
                         <Point3D />
                      </rotationAxis>
@@ -386,7 +386,7 @@
                         <Insets />
                      </GridPane.margin>
                   </Button>
-                  <Button fx:id="point" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#commaMouseClick" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation" stylesheets="@style.css" text="," GridPane.columnIndex="2" GridPane.rowIndex="5">
+                  <Button fx:id="point" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#commaMouseClick" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation" stylesheets="@style.css" text="," GridPane.columnIndex="2" GridPane.rowIndex="5">
                      <rotationAxis>
                         <Point3D />
                      </rotationAxis>
@@ -397,7 +397,7 @@
                         <Insets />
                      </GridPane.margin>
                   </Button>
-                  <Button fx:id="equal" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#pressedEqual" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation_arithmetic" stylesheets="@style.css" text="" GridPane.columnIndex="3" GridPane.rowIndex="5">
+                  <Button fx:id="equal" defaultButton="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#pressedEqual" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation_arithmetic" stylesheets="@style.css" text="" GridPane.columnIndex="3" GridPane.rowIndex="5">
                      <rotationAxis>
                         <Point3D />
                      </rotationAxis>
@@ -412,7 +412,7 @@
             </GridPane>
          </children>
       </GridPane>
-      <Button alignment="CENTER" layoutX="280.0" layoutY="30.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" pickOnBounds="false" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: e6e6e6; -fx-background-radius: 0; -fx-border-radius: 0;" text="" AnchorPane.rightAnchor="0.0" GridPane.columnIndex="2">
+      <Button alignment="CENTER" focusTraversable="false" layoutX="280.0" layoutY="30.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" pickOnBounds="false" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: e6e6e6; -fx-background-radius: 0; -fx-border-radius: 0;" text="" AnchorPane.rightAnchor="0.0" GridPane.columnIndex="2">
          <font>
             <Font name="Calculator MDL2 Assets" size="16.0" />
          </font>
@@ -451,7 +451,7 @@
             <Insets left="18.0" right="18.0" />
          </padding>
       </ScrollPane>
-      <Button fx:id="scrollButtonLeft" layoutX="2.0" layoutY="76.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="17.0" minWidth="20.0" mnemonicParsing="false" onAction="#scrollButtonLeftPressed" styleClass="scrollButton" stylesheets="@style.css" text="" visible="false" AnchorPane.leftAnchor="2.0">
+      <Button fx:id="scrollButtonLeft" focusTraversable="false" layoutX="2.0" layoutY="76.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="17.0" minWidth="20.0" mnemonicParsing="false" onAction="#scrollButtonLeftPressed" styleClass="scrollButton" stylesheets="@style.css" text="" visible="false" AnchorPane.leftAnchor="2.0">
          <font>
             <Font name="Calculator MDL2 Assets" size="12.0" />
          </font>
@@ -459,7 +459,7 @@
             <Insets bottom="-2.0" left="-5.0" right="-3.0" top="-2.0" />
          </padding>
       </Button>
-      <Button fx:id="scrollButtonRight" layoutX="298.0" layoutY="76.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="17.0" minWidth="20.0" mnemonicParsing="false" onAction="#scrollButtonRightPressed" styleClass="scrollButton" stylesheets="@style.css" text="" visible="false" AnchorPane.rightAnchor="1.0">
+      <Button fx:id="scrollButtonRight" focusTraversable="false" layoutX="298.0" layoutY="76.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="17.0" minWidth="20.0" mnemonicParsing="false" onAction="#scrollButtonRightPressed" styleClass="scrollButton" stylesheets="@style.css" text="" visible="false" AnchorPane.rightAnchor="1.0">
          <font>
             <Font name="Calculator MDL2 Assets" size="12.0" />
          </font>
@@ -489,7 +489,7 @@
                               <Insets left="10.0" />
                            </padding>
                         </Label>
-                        <Button alignment="BASELINE_LEFT" layoutY="80.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" styleClass="leftMenuButton" stylesheets="@style.css" text="Scientific">
+                        <Button alignment="BASELINE_LEFT" focusTraversable="false" layoutY="80.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" styleClass="leftMenuButton" stylesheets="@style.css" text="Scientific">
                            <font>
                               <Font name="Segoe MDL2 Assets" size="15.0" />
                            </font>
@@ -508,7 +508,7 @@
                               </AnchorPane>
                            </graphic>
                         </Button>
-                        <Button alignment="BASELINE_LEFT" layoutY="120.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" styleClass="leftMenuButton" stylesheets="@style.css" text="Programmer">
+                        <Button alignment="BASELINE_LEFT" focusTraversable="false" layoutY="120.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" styleClass="leftMenuButton" stylesheets="@style.css" text="Programmer">
                            <font>
                               <Font name="Segoe MDL2 Assets" size="15.0" />
                            </font>
@@ -527,7 +527,7 @@
                               </AnchorPane>
                            </graphic>
                         </Button>
-                        <Button alignment="BASELINE_LEFT" layoutY="160.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" styleClass="leftMenuButton" stylesheets="@style.css" text="Date Calculation">
+                        <Button alignment="BASELINE_LEFT" focusTraversable="false" layoutY="160.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" styleClass="leftMenuButton" stylesheets="@style.css" text="Date Calculation">
                            <font>
                               <Font name="Segoe MDL2 Assets" size="15.0" />
                            </font>
@@ -546,7 +546,7 @@
                               </AnchorPane>
                            </graphic>
                         </Button>
-                        <Button alignment="BASELINE_LEFT" layoutY="240.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" styleClass="leftMenuButton" stylesheets="@style.css" text="Currency">
+                        <Button alignment="BASELINE_LEFT" focusTraversable="false" layoutY="240.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" styleClass="leftMenuButton" stylesheets="@style.css" text="Currency">
                            <font>
                               <Font name="Segoe MDL2 Assets" size="15.0" />
                            </font>
@@ -565,7 +565,7 @@
                               </AnchorPane>
                            </graphic>
                         </Button>
-                        <Button alignment="BASELINE_LEFT" layoutY="280.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" styleClass="leftMenuButton" stylesheets="@style.css" text="Volume">
+                        <Button alignment="BASELINE_LEFT" focusTraversable="false" layoutY="280.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" styleClass="leftMenuButton" stylesheets="@style.css" text="Volume">
                            <font>
                               <Font name="Segoe MDL2 Assets" size="15.0" />
                            </font>
@@ -584,7 +584,7 @@
                               </AnchorPane>
                            </graphic>
                         </Button>
-                        <Button alignment="BASELINE_LEFT" layoutY="360.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" styleClass="leftMenuButton" stylesheets="@style.css" text="Weight and Mass">
+                        <Button alignment="BASELINE_LEFT" focusTraversable="false" layoutY="360.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" styleClass="leftMenuButton" stylesheets="@style.css" text="Weight and Mass">
                            <font>
                               <Font name="Segoe MDL2 Assets" size="15.0" />
                            </font>
@@ -603,7 +603,7 @@
                               </AnchorPane>
                            </graphic>
                         </Button>
-                        <Button alignment="BASELINE_LEFT" layoutY="440.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" styleClass="leftMenuButton" stylesheets="@style.css" text="Energy">
+                        <Button alignment="BASELINE_LEFT" focusTraversable="false" layoutY="440.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" styleClass="leftMenuButton" stylesheets="@style.css" text="Energy">
                            <font>
                               <Font name="Segoe MDL2 Assets" size="15.0" />
                            </font>
@@ -622,7 +622,7 @@
                               </AnchorPane>
                            </graphic>
                         </Button>
-                        <Button alignment="BASELINE_LEFT" layoutY="480.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" styleClass="leftMenuButton" stylesheets="@style.css" text="Area">
+                        <Button alignment="BASELINE_LEFT" focusTraversable="false" layoutY="480.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" styleClass="leftMenuButton" stylesheets="@style.css" text="Area">
                            <font>
                               <Font name="Segoe MDL2 Assets" size="15.0" />
                            </font>
@@ -641,7 +641,7 @@
                               </AnchorPane>
                            </graphic>
                         </Button>
-                        <Button alignment="BASELINE_LEFT" layoutY="520.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" styleClass="leftMenuButton" stylesheets="@style.css" text="Speed">
+                        <Button alignment="BASELINE_LEFT" focusTraversable="false" layoutY="520.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" styleClass="leftMenuButton" stylesheets="@style.css" text="Speed">
                            <font>
                               <Font name="Segoe MDL2 Assets" size="15.0" />
                            </font>
@@ -660,7 +660,7 @@
                               </AnchorPane>
                            </graphic>
                         </Button>
-                        <Button alignment="BASELINE_LEFT" layoutY="560.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" styleClass="leftMenuButton" stylesheets="@style.css" text="Time">
+                        <Button alignment="BASELINE_LEFT" focusTraversable="false" layoutY="560.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" styleClass="leftMenuButton" stylesheets="@style.css" text="Time">
                            <font>
                               <Font name="Segoe MDL2 Assets" size="15.0" />
                            </font>
@@ -679,7 +679,7 @@
                               </AnchorPane>
                            </graphic>
                         </Button>
-                        <Button alignment="BASELINE_LEFT" layoutY="600.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" styleClass="leftMenuButton" stylesheets="@style.css" text="Power">
+                        <Button alignment="BASELINE_LEFT" focusTraversable="false" layoutY="600.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" styleClass="leftMenuButton" stylesheets="@style.css" text="Power">
                            <font>
                               <Font name="Segoe MDL2 Assets" size="15.0" />
                            </font>
@@ -698,7 +698,7 @@
                               </AnchorPane>
                            </graphic>
                         </Button>
-                        <Button alignment="BASELINE_LEFT" layoutY="640.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" styleClass="leftMenuButton" stylesheets="@style.css" text="Data">
+                        <Button alignment="BASELINE_LEFT" focusTraversable="false" layoutY="640.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" styleClass="leftMenuButton" stylesheets="@style.css" text="Data">
                            <font>
                               <Font name="Segoe MDL2 Assets" size="15.0" />
                            </font>
@@ -717,7 +717,7 @@
                               </AnchorPane>
                            </graphic>
                         </Button>
-                        <Button alignment="BASELINE_LEFT" layoutY="680.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" styleClass="leftMenuButton" stylesheets="@style.css" text="Pressure">
+                        <Button alignment="BASELINE_LEFT" focusTraversable="false" layoutY="680.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" styleClass="leftMenuButton" stylesheets="@style.css" text="Pressure">
                            <font>
                               <Font name="Segoe MDL2 Assets" size="15.0" />
                            </font>
@@ -736,7 +736,7 @@
                               </AnchorPane>
                            </graphic>
                         </Button>
-                        <Button alignment="BASELINE_LEFT" layoutY="720.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" styleClass="leftMenuButton" stylesheets="@style.css" text="Angle">
+                        <Button alignment="BASELINE_LEFT" focusTraversable="false" layoutY="720.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" styleClass="leftMenuButton" stylesheets="@style.css" text="Angle">
                            <font>
                               <Font name="Segoe MDL2 Assets" size="15.0" />
                            </font>
@@ -755,7 +755,7 @@
                               </AnchorPane>
                            </graphic>
                         </Button>
-                        <Button alignment="BASELINE_LEFT" layoutY="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" styleClass="leftMenuButton" stylesheets="@style.css" text="Standard">
+                        <Button alignment="BASELINE_LEFT" focusTraversable="false" layoutY="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" styleClass="leftMenuButton" stylesheets="@style.css" text="Standard">
                            <font>
                               <Font name="Segoe MDL2 Assets" size="15.0" />
                            </font>
@@ -775,7 +775,7 @@
                               </AnchorPane>
                            </graphic>
                         </Button>
-                        <Button alignment="BASELINE_LEFT" layoutY="400.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" styleClass="leftMenuButton" stylesheets="@style.css" text="Temperature">
+                        <Button alignment="BASELINE_LEFT" focusTraversable="false" layoutY="400.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" styleClass="leftMenuButton" stylesheets="@style.css" text="Temperature">
                            <font>
                               <Font name="Segoe MDL2 Assets" size="15.0" />
                            </font>
@@ -794,7 +794,7 @@
                               </AnchorPane>
                            </graphic>
                         </Button>
-                        <Button alignment="BASELINE_LEFT" layoutY="320.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" styleClass="leftMenuButton" stylesheets="@style.css" text="Length">
+                        <Button alignment="BASELINE_LEFT" focusTraversable="false" layoutY="320.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" styleClass="leftMenuButton" stylesheets="@style.css" text="Length">
                            <font>
                               <Font name="Segoe MDL2 Assets" size="15.0" />
                            </font>
@@ -819,7 +819,7 @@
             </ScrollPane>
             <AnchorPane layoutY="352.0" minWidth="226.0" prefHeight="73.0" style="-fx-background-color: e8e8e8;" translateX="-7.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
                <children>
-                  <Button alignment="BASELINE_LEFT" layoutY="22.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" style="-fx-background-color: transparent;" styleClass="leftMenuButton" stylesheets="@style.css" text="About" translateX="8.0">
+                  <Button alignment="BASELINE_LEFT" focusTraversable="false" layoutY="22.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" style="-fx-background-color: transparent;" styleClass="leftMenuButton" stylesheets="@style.css" text="About" translateX="8.0">
                      <font>
                         <Font name="Segoe MDL2 Assets" size="15.0" />
                      </font>
@@ -842,24 +842,24 @@
             </AnchorPane>
          </children>
       </AnchorPane>
-      <Button fx:id="buttonMenu" layoutX="0.5" layoutY="30.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onAction="#showLeftMenu" prefHeight="40.0" prefWidth="40.0" styleClass="menu" stylesheets="@style.css" text="">
+      <Button fx:id="buttonMenu" focusTraversable="false" layoutX="0.5" layoutY="30.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onAction="#showLeftMenu" prefHeight="40.0" prefWidth="40.0" styleClass="menu" stylesheets="@style.css" text="">
          <font>
             <Font name="Segoe MDL2 Assets" size="16.0" />
          </font>
       </Button>
       <GridPane layoutY="0.5" AnchorPane.rightAnchor="0.0">
          <children>
-            <Button fx:id="cancel" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="30.0" minWidth="46.0" mnemonicParsing="false" onAction="#cancelButton" pickOnBounds="false" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="init_close" stylesheets="@style.css" text="" GridPane.columnIndex="3">
+            <Button fx:id="cancel" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="30.0" minWidth="46.0" mnemonicParsing="false" onAction="#cancelButton" pickOnBounds="false" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="init_close" stylesheets="@style.css" text="" GridPane.columnIndex="3">
                <font>
                   <Font name="Segoe MDL2 Assets" size="12.0" />
                </font>
             </Button>
-            <Button fx:id="maximizeButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="30.0" minWidth="46.0" mnemonicParsing="false" onAction="#maximizeWindow" pickOnBounds="false" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="init_other" stylesheets="@style.css" text="" GridPane.columnIndex="2">
+            <Button fx:id="maximizeButton" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="30.0" minWidth="46.0" mnemonicParsing="false" onAction="#maximizeWindow" pickOnBounds="false" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="init_other" stylesheets="@style.css" text="" GridPane.columnIndex="2">
                <font>
                   <Font name="Segoe MDL2 Assets" size="10.0" />
                </font>
             </Button>
-            <Button fx:id="hideButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="30.0" minWidth="46.0" mnemonicParsing="false" onAction="#hideWindow" pickOnBounds="false" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="init_other" stylesheets="@style.css" text="" GridPane.columnIndex="1">
+            <Button fx:id="hideButton" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="30.0" minWidth="46.0" mnemonicParsing="false" onAction="#hideWindow" pickOnBounds="false" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="init_other" stylesheets="@style.css" text="" GridPane.columnIndex="1">
                <font>
                   <Font name="Segoe MDL2 Assets" size="10.0" />
                </font>

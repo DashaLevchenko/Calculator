@@ -4,13 +4,11 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 
 public class Calculator_Main extends Application {
-    private Scene scene;
     public static void main(String[] args) {
         launch(args);
     }
@@ -22,14 +20,11 @@ public class Calculator_Main extends Application {
         stage.setTitle("Calculator");
         stage.setMinHeight(500);
         stage.setMinWidth(320);
-        scene = new Scene(root);
-        stage.setScene(scene);
+        stage.setScene(new Scene(root));
         stage.initStyle(StageStyle.UNDECORATED);
 
         stage.show();
     }
-    public Scene getScene() {
-        return scene;
-    }
+
 
 }
