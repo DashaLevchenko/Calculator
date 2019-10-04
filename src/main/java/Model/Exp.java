@@ -109,26 +109,10 @@ public class Exp {
 //        DecimalFormat decimalFormat = new DecimalFormat("#.E0");
 //        DecimalFormat decimalFormat2 = new DecimalFormat("##.E0");
 //
-//        result4 = result4.add(BigDecimal.valueOf(5));
-//        if (result4.toString().length() > 16) {
-//            result4 = result4.divide(BigDecimal.TEN, new MathContext(16));
-//            result4 = result4.multiply(BigDecimal.TEN);
-//        }
-//        System.out.println(decimalFormat.format(result2.stripTrailingZeros()));
-//        System.out.println(result2);
-//        System.out.println(result2.toString().chars().filter(num -> num == '9').count());
-//        System.out.println("--------");
-//        System.out.println(decimalFormat2.format(result4));
-//        System.out.println(result4.stripTrailingZeros());
-//        System.out.println(result4.toString().chars().filter(num -> num == '9').count());
 
-        String a = "123456";
+        BigDecimal bigDecimal = BigDecimal.valueOf(0.000001234567891234567);
 
-        for(char s : a.toCharArray()){
-            System.out.println(String.valueOf(s));
-        }
-
-
+//        System.out.println(bigDecimal.m);
     }
 
     private static void test(StringBuilder p, int perCent) {

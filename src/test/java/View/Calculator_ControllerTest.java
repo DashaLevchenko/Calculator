@@ -34,12 +34,12 @@ class Calculator_ControllerTest extends ApplicationTest {
 
     @BeforeAll
     static void config() throws Exception {
-        System.setProperty("testfx.robot", "awt");
-//        System.setProperty("testfx.robot", "glass");
-//        System.setProperty("testfx.headless", "true");
-//        System.setProperty("prism.order", "d3d");
-//        System.setProperty("prism.text", "t2k");
-//        System.setProperty("java.awt.headless", "true");
+//        System.setProperty("testfx.robot", "awt");
+        System.setProperty("testfx.robot", "glass");
+        System.setProperty("testfx.headless", "true");
+        System.setProperty("prism.order", "d3d");
+        System.setProperty("prism.text", "t2k");
+        System.setProperty("java.awt.headless", "true");
     }
 
 
@@ -99,46 +99,114 @@ class Calculator_ControllerTest extends ApplicationTest {
 
     @Test
     void checkBinaryOperations() {
+    //One operand
+        //One operand with one operation
         assertInputNumber("2", "2=", "c");
-        assertInputNumber("2", "2+", "c");
-        assertInputNumber("2", "2-", "c");
-        assertInputNumber("2", "2*", "c");
-        assertInputNumber("2", "2/", "c");
-
-        assertInputNumber("3", "2+3", "c");
-        assertInputNumber("3", "2-3", "c");
-        assertInputNumber("3", "2*3", "c");
-        assertInputNumber("3", "2/3", "c");
-
-        assertInputNumber("5", "2+3=", "c");
-        assertInputNumber("-1", "2-3=", "c");
-        assertInputNumber("6", "2*3=", "c");
-        assertInputNumber("0,6666666666666667", "2/3=", "c");
-
-        assertInputNumber("5", "2+3-", "c");
-        assertInputNumber("-1", "2-3*", "c");
-        assertInputNumber("6", "2*3/", "c");
-        assertInputNumber("0,6666666666666667", "2/3-", "c");
-//write combinations
-//        assertInputNumber("5", "2+3-", "c");
-//        assertInputNumber("-1", "2-3*", "c");
-//        assertInputNumber("6", "2*3/", "c");
-//        assertInputNumber("0,6666666666666667", "2/3-", "c");
-
-        assertInputNumber("0", "2+3-=", "c");
-        assertInputNumber("1", "2-3*=", "c");
-        assertInputNumber("1", "2*3/=", "c");
-        assertInputNumber("0", "2/3-=", "c");
-
+        assertInputNumber("3", "3+", "c");
+        assertInputNumber("4", "4-", "c");
+        assertInputNumber("5", "5*", "c");
+        assertInputNumber("6", "6/", "c");
+        //One operand and change operation
+        assertInputNumber("13", "13+-*/", "c");
+        assertInputNumber("16", "16-*/+", "c");
+        assertInputNumber("18", "18*/+-", "c");
+        assertInputNumber("19", "19/+-*", "c");
+        //One operand and change operation with equal
         assertInputNumber("1", "2+-*/=", "c");
         assertInputNumber("4", "2-*/+=", "c");
         assertInputNumber("0", "2*/+-=", "c");
         assertInputNumber("4", "2/+-*=", "c");
+    //Two operands
+        //Two operands with one operation
+        assertInputNumber("33", "24+33", "c");
+        assertInputNumber("47", "37-47", "c");
+        assertInputNumber("55", "49*55", "c");
+        assertInputNumber("69", "52/69", "c");
+        //Two operands with one operation and equal
+        assertInputNumber("104", "71+33=", "c");
+        assertInputNumber("26", "43-17=", "c");
+        assertInputNumber("261", "87*3=", "c");
+        assertInputNumber("3,333333333333333", "10/3=", "c");
+        //Two operands and change operation
+        assertInputNumber("728", "54+674-", "c");
+        assertInputNumber("-128", "96n-32*", "c");
+        assertInputNumber("-3 234", "98*33n/", "c");
+        assertInputNumber("4,333333333333333", "13/3-", "c");
+        //region combinations two operands with equal
+        assertInputNumber("39,998", "19+0,999+=", "c");
+        assertInputNumber("0", "239+,9-=", "c");
+        assertInputNumber("904 401", "77+874*=", "c");
+        assertInputNumber("1", "122+95/=", "c");
+        assertInputNumber("0", "9-873-=", "c");
+        assertInputNumber("-222", "876-987+=", "c");
+        assertInputNumber("330 613,5001", "9,99n-565*=", "c");
+        assertInputNumber("1", "98,7-856/=", "c");
+        assertInputNumber("3 999 200,04", "2*999,9*=", "c");
+        assertInputNumber("-243,54", "123n*,99+=", "c");
+        assertInputNumber("0", "65*987-=", "c");
+        assertInputNumber("1", "998*6/=", "c");
+        assertInputNumber("1", "234,1/76n/=", "c");
+        assertInputNumber("199,8199819981998", "666/6,666+=", "c");
+        assertInputNumber("0", "0/786,87-=", "c");
+        assertInputNumber("416 611,5702479339", "213/,33*=", "c");
+        //endregion
+        //Two operands, one operation and change operation with equal
+        assertInputNumber("1", "241+998-*/=", "c");
+        assertInputNumber("-50", "98-73,*/+=n", "c");
+        assertInputNumber("0", "2*561/+-=", "c");
+        assertInputNumber("0,1111111111111111", "1/3+-*=", "c");
+//Three operands
+        //Three operand without final operation
+        assertInputNumber("8 784", "5612+764-8784", "c");
+        assertInputNumber("-98,52", "2-3*98,52n", "c");
+        assertInputNumber("-0,345564", "6556n*842n/,3455n64", "c");
+        assertInputNumber("0,6", "7767/844-86n2bbb,6", "c");
 
-        assertInputNumber("1", "2+3-*/=", "c");
-        assertInputNumber("-2", "2-3*/+=", "c");
-        assertInputNumber("0", "2*3/+-=", "c");
-        assertInputNumber("0,4444444444444444", "2/3+-*=", "c");
+        //region combinations three operands with equal
+        assertInputNumber("9", "2+3+4=", "c");
+        assertInputNumber("1", "2+3-4=", "c");
+        assertInputNumber("20", "2+3*4=", "c");
+        assertInputNumber("1,25", "2+3/4=", "c");
+        assertInputNumber("-5", "2-3-4=", "c");
+        assertInputNumber("3", "2-3+4=", "c");
+        assertInputNumber("-4", "2-3*4=", "c");
+        assertInputNumber("-0,25", "2-3/4=", "c");
+        assertInputNumber("24", "2*3*4=", "c");
+        assertInputNumber("10", "2*3+4=", "c");
+        assertInputNumber("2", "2*3-4=", "c");
+        assertInputNumber("1,5", "2*3/4=", "c");
+        assertInputNumber("0,1666666666666667", "2/3/4=", "c");
+        assertInputNumber("4,666666666666667", "2/3+4=", "c");
+        assertInputNumber("-3,333333333333333", "2/3-4=", "c");
+        assertInputNumber("2,666666666666667", "2/3*4=", "c");
+//Four operands
+        //Four operands without final operation
+        assertInputNumber("-777,0", "67543+98n-54321*777,nn0n", "c");
+        assertInputNumber("999,2", "99999-0,99999*98764,0/999,213466bbbbb", "c");
+        assertInputNumber("0,9826", "76165*87,198/98751+0,9826", "c");
+        assertInputNumber("9 834 216", "316789/31245+98712-9834216", "c");
+        //region combinations Four operands with equal
+        assertInputNumber("328,6566", ",4566+43,2+242+43=", "c");
+        assertInputNumber("9 999 998,0000001", "9999999+9999999-9999999*0,9999999=", "c");
+//        assertInputNumber("0,0617809442729949", "867,8333+3*4/56382=bbbbbbb", "c");
+        assertInputNumber("455 667 995,6", "2332,+3/0,5+455663325,6=nnnbn", "c");
+
+        assertInputNumber("-690,57", "86-735-8,57-33=", "c");
+        assertInputNumber("-357 684,1186736475", "23n1-65b43*2345/5,73=", "c");
+        assertInputNumber("6 590 252,2", "43-87678nb,4/748+73=", "c");
+        assertInputNumber("-3 929", "2-3957+84-7b58=", "c");
+
+        assertInputNumber("0", "8635*88*65,6*0,1234bbbbn=", "c");
+        assertInputNumber("8 814", "233*38+4-44=", "c");
+        assertInputNumber("-50 623 218 535 195,59", "97548354766n,b452*3874-4/7465=", "c");
+        assertInputNumber("87,533", "973*9/8664+87,533=,=", "c");
+
+        assertInputNumber("0,0155373463599118", "986/76/835/=", "c");
+        assertInputNumber("-789,5563005780347", "972/865+85,32-876=", "c");
+        assertInputNumber("4 055,773333333333", "7784/84-,49*44=", "c");
+        assertInputNumber("35,8938327603227", "297/36*409/94,0064=", "c");
+        //endregion
+
 
     }
 

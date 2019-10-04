@@ -8,11 +8,9 @@
   <component name="ChangeListManager">
     <list default="true" id="feaeb0c2-feb2-4a9c-98e3-48b1d1a339aa" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Exp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Exp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/View/Calculator_Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/Calculator_Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/View/Calculator_Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/Calculator_Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/View/calculator_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/calculator_view.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/View/Calculator_ControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/View/Calculator_ControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/View/calculator_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/calculator_view.fxml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -493,7 +491,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570022417968</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="input tests are working,&#10;started to write binary tests">
+      <created>1570115689737</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1570115689737</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -554,7 +559,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="test" />
     <MESSAGE value="All tests before sort" />
     <MESSAGE value="Problem with scale in sum() Expect 2, got 2.0" />
     <MESSAGE value="No problem with scale in sum()" />
@@ -579,20 +583,31 @@
     <MESSAGE value="write Tests, &#10;how use robotFX?" />
     <MESSAGE value="write Tests," />
     <MESSAGE value="input tests are working slow" />
-    <option name="LAST_COMMIT_MESSAGE" value="input tests are working slow" />
+    <MESSAGE value="input tests are working,&#10;started to write binary tests" />
+    <option name="LAST_COMMIT_MESSAGE" value="input tests are working,&#10;started to write binary tests" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/View/Calculator_Controller.java</url>
-          <line>168</line>
-          <option name="timeStamp" value="83" />
+          <line>618</line>
+          <option name="timeStamp" value="109" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/View/Calculator_Controller.java</url>
+          <line>198</line>
+          <option name="timeStamp" value="110" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/View/Calculator_Controller.java</url>
+          <line>171</line>
+          <option name="timeStamp" value="111" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/View/Calculator_Controller.java</url>
-          <line>212</line>
-          <option name="timeStamp" value="102" />
+          <line>587</line>
+          <option name="timeStamp" value="113" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
