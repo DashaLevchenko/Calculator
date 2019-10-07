@@ -88,26 +88,22 @@ public class Arithmetic {
             } catch (ArithmeticException e) {
                 throw new ArithmeticException("Cannot divide by zero");
             }
-        } else if (operation.equals(OperationsEnum.SQRT)) {
-            result = squareRoot(number1);
-        } else if (operation.equals(OperationsEnum.SQRX)) {
-            result = xSquare(number1);
-        } else if (operation.equals(OperationsEnum.ONE_DIVIDE_X)) {
-            result = oneDivideX(number1);
         }
         isOverflow(result);
         return result;
     }
 
-    public static BigDecimal calculateUnaryOperations(BigDecimal number1, OperationsEnum operation) {
+    public static BigDecimal calculateUnaryOperations(BigDecimal number, OperationsEnum operation) {
         BigDecimal result = BigDecimal.ZERO;
 
         if (operation.equals(OperationsEnum.SQRT)) {
-            result = squareRoot(number1);
+            result = squareRoot(number);
         } else if (operation.equals(OperationsEnum.SQRX)) {
-            result = xSquare(number1);
+            result = xSquare(number);
         } else if (operation.equals(OperationsEnum.ONE_DIVIDE_X)) {
-            result = oneDivideX(number1);
+            result = oneDivideX(number);
+        } else if (operation.equals(OperationsEnum.NEGATE)) {
+            result = negate(number);
         }
         isOverflow(result);
         return result;

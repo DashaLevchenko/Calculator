@@ -193,15 +193,15 @@ class Calculator_ControllerTest extends ApplicationTest {
 
         assertInputNumber("-690,57", "86-735-8,57-33=", "c");
         assertInputNumber("-357 684,1186736475", "23n1-65b43*2345/5,73=", "c");
-        assertInputNumber("6 590 252,2", "43-87678nb,4/748+73=", "c");
+        assertInputNumber("84,77860962566845", "43-87678nb,4/748+73=", "c");
         assertInputNumber("-3 929", "2-3957+84-7b58=", "c");
 
         assertInputNumber("0", "8635*88*65,6*0,1234bbbbn=", "c");
         assertInputNumber("8 814", "233*38+4-44=", "c");
         assertInputNumber("-50 623 218 535 195,59", "97548354766n,b452*3874-4/7465=", "c");
-        assertInputNumber("87,533", "973*9/8664+87,533=,=", "c");
+        assertInputNumber("88,54373407202216", "973*9/8664+87,533=", "c");
 
-        assertInputNumber("0,0155373463599118", "986/76/835/=", "c");
+        assertInputNumber("1", "986/76/835/=", "c");
         assertInputNumber("-789,5563005780347", "972/865+85,32-876=", "c");
         assertInputNumber("4 055,773333333333", "7784/84-,49*44=", "c");
         assertInputNumber("35,8938327603227", "297/36*409/94,0064=", "c");

@@ -224,10 +224,9 @@ public class Calculator_Controller {
             canChangeOperator = true;
             historyOperations += oldBinaryOperation.getSymbol();
         } else {
-            if (!newBinaryOperation.equals(oldBinaryOperation)) {
-                historyOperations = new StringBuilder(historyOperations).delete(historyOperations.length() - 3, historyOperations.length()).toString();
-                historyOperations += newBinaryOperation.getSymbol();
-            }
+            historyOperations = new StringBuilder(historyOperations).delete(historyOperations.length() - 3, historyOperations.length()).toString();
+            historyOperations += newBinaryOperation.getSymbol();
+
         }
 
         historyUnaryOperations = "";
@@ -254,6 +253,7 @@ public class Calculator_Controller {
                 }
             }
             textWithoutSeparateNew = outputResult.toString();
+            textWithoutSeparateNew = outputResult.toString().replace(".", ",");
             resizeOutputText();
 
             outText.setText(separateNumber(textWithoutSeparateNew));
@@ -272,10 +272,7 @@ public class Calculator_Controller {
         }
         if (numberUnaryOperations == null) {
             if (!textWithoutSeparateNew.isEmpty()) {
-                if (textWithoutSeparateNew.contains(",")) {
-                    textWithoutSeparateNew = textWithoutSeparateNew.replace(",", ".");
-                }
-                numberUnaryOperations = new BigDecimal(textWithoutSeparateNew);
+                numberUnaryOperations = new BigDecimal(textWithoutSeparateNew.replace(",", "."));
                 start = true;
             } else if (result != null) {
                 numberUnaryOperations = result;
@@ -284,10 +281,12 @@ public class Calculator_Controller {
             }
             historyUnaryOperations += numberUnaryOperations.toString();
         }
+
+
         historyUnaryOperations = unaryOperation.getSymbol() + historyUnaryOperations + " )";
-        calculateUnaryOperations();
 
         outOperationMemory.setText(historyOperations + historyUnaryOperations);
+        calculateUnaryOperations();
         scrollOutOperationMemory();
         resizeOutputText();
         textWithoutSeparateNew = "";
@@ -347,24 +346,27 @@ public class Calculator_Controller {
             resizeOutputText();
             textWithoutSeparateNew = "";
             pointInText = false;
+            negatePressed = false;
         }
     }
 
 
     @FXML
     void backspace(ActionEvent actionEvent) {
-        if (textWithoutSeparateNew != null && textWithoutSeparateNew.length() > 0) {
-            if ((textWithoutSeparateNew.length() == 2 && textWithoutSeparateNew.contains("-")) ||
-                    textWithoutSeparateNew.length() == 1) {
-                CE.fire();
-            }
-            if (!textWithoutSeparateNew.isEmpty()) {
-                if (textWithoutSeparateNew.charAt(textWithoutSeparateNew.length() - 1) == ',') {
-                    pointInText = false;
-                    charactersNumber = CHAR_MAX;
+        if (!equalWasPress) {
+            if (textWithoutSeparateNew != null && textWithoutSeparateNew.length() > 0) {
+                if ((textWithoutSeparateNew.length() == 2 && textWithoutSeparateNew.contains("-")) ||
+                        textWithoutSeparateNew.length() == 1) {
+                    CE.fire();
                 }
-                textWithoutSeparateNew = new StringBuilder(textWithoutSeparateNew).deleteCharAt(textWithoutSeparateNew.length() - 1).toString();
-                printInputText();
+                if (!textWithoutSeparateNew.isEmpty()) {
+                    if (textWithoutSeparateNew.charAt(textWithoutSeparateNew.length() - 1) == ',') {
+                        pointInText = false;
+                        charactersNumber = CHAR_MAX;
+                    }
+                    textWithoutSeparateNew = new StringBuilder(textWithoutSeparateNew).deleteCharAt(textWithoutSeparateNew.length() - 1).toString();
+                    printInputText();
+                }
             }
         }
     }
@@ -391,6 +393,7 @@ public class Calculator_Controller {
         operationsIsDisable(false);
         isError = false;
         charactersNumber = CHAR_MAX;
+        negatePressed = false;
     }
 
     @FXML
@@ -585,39 +588,36 @@ public class Calculator_Controller {
 
     @FXML
     public void negate(ActionEvent actionEvent) {
-        if(equalWasPress){
-            if (!negatePressed){
-                numberNegate = new BigDecimal(textWithoutSeparateNew);
-                historyNegateNumber = numberNegate.toString();
-            }
-            historyNegateNumber += "negate(" + numberNegate + " )";
-            outOperationMemory.setText(historyOperations+historyNegateNumber);
+        if (textWithoutSeparateNew.isEmpty()){
+            textWithoutSeparateNew = outText.getText();
         }
-        if (textWithoutSeparateNew.isEmpty() && !outText.getText().isEmpty()) {
-            textWithoutSeparateNew = outText.getText().replace(" ", "");
+        if (equalWasPress || newBinaryOperation!=null) {
+            if (!negatePressed) {
+//                numberUnaryOperations = new BigDecimal(textWithoutSeparateNew.replace(",", "."));
+                historyUnaryOperations += textWithoutSeparateNew;
+                negatePressed = true;
+            }
+            historyUnaryOperations = "negate(" + historyUnaryOperations + ")";
+            outOperationMemory.setText(historyOperations + historyUnaryOperations);
         }
 
-        result = Arithmetic.negate(new BigDecimal(textWithoutSeparateNew.replace(",", ".")));
-        if (result.toString().contains("-")) {
+        if (!textWithoutSeparateNew.contains("-")) {
             textWithoutSeparateNew = "-" + textWithoutSeparateNew;
-            if (pointInText && !textWithoutSeparateNew.contains(",")) {
-                textWithoutSeparateNew += ",";
-            }
-            charactersNumber++;
+            charactersNumber ++;
         } else {
             textWithoutSeparateNew = textWithoutSeparateNew.replace("-", "");
             charactersNumber = CHAR_MAX;
         }
 
-
-        printInputText();
-
+        resizeOutputText();
+        outText.setText(separateNumber(textWithoutSeparateNew));
+        scrollOutOperationMemory();
     }
 
     @FXML
     public void commaMouseClick(ActionEvent actionEvent) {
         String buttonText = ((Button) actionEvent.getSource()).getText();
-        if (!pointInText) {
+        if (!pointInText || !outText.getText().contains(",")) {
             if (outText.getText().equals("0")) {
                 textWithoutSeparateNew = outText.getText();
                 start = false;
@@ -732,7 +732,7 @@ public class Calculator_Controller {
 
 
     private void scrollOutOperationMemory() {
-        Text history = new Text(historyOperations + historyUnaryOperations);
+        Text history = new Text(historyOperations + historyUnaryOperations + historyNegateNumber);
         history.setFont(outOperationMemory.getFont());
         double maxWidthForLabelOperation = scrollPaneOperation.getWidth() - scrollPaneOperation.getPadding().getLeft() - scrollPaneOperation.getPadding().getRight();
         if (history.getBoundsInLocal().getWidth() > maxWidthForLabelOperation) {
@@ -792,6 +792,7 @@ public class Calculator_Controller {
                 }
                 numberFirstBinaryOperations = result;
                 start = true;
+                negatePressed = false;
             } catch (Exception e) {
                 printError(e);
             }
@@ -834,6 +835,7 @@ public class Calculator_Controller {
                 start = true;
                 unaryOperation = null;
                 numberUnaryOperations = result;
+                textWithoutSeparateNew = textWithoutSeparateNew.replace(".", ",");
                 printResult();
             } catch (Exception e) {
                 printError(e);

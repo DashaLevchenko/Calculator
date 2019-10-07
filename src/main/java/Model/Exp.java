@@ -110,9 +110,17 @@ public class Exp {
 //        DecimalFormat decimalFormat2 = new DecimalFormat("##.E0");
 //
 
-        BigDecimal bigDecimal = BigDecimal.valueOf(0.000001234567891234567);
+//        BigDecimal bigDecimal = BigDecimal.valueOf(0.000001234567891234567);
+        BigDecimal bigDecimal = new BigDecimal("0.06178094427299493");
+//        BigDecimal x = BigDecimal.valueOf(9999999999999999L);
+//        BigDecimal y = BigDecimal.valueOf(1);
+//        BigDecimal z = x.add(y);
+        BigDecimal z = new BigDecimal("5.999999999999999E16");
+        DecimalFormat decimalFormat = new DecimalFormat("0.00000000E0");
+        String enn = decimalFormat.format(z);
 
-//        System.out.println(bigDecimal.m);
+        System.out.println(enn.replace("E", "e+"));
+        System.out.println(bigDecimal.setScale(16, RoundingMode.HALF_UP));
     }
 
     private static void test(StringBuilder p, int perCent) {
