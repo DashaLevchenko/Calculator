@@ -3,6 +3,7 @@ package View;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
+import java.text.DecimalFormat;
 
 import Model.Arithmetic;
 import Model.OperationsEnum;
@@ -240,20 +241,36 @@ public class Calculator_Controller {
     private void printResult() {
         if (result != null) {
             BigDecimal outputResult = result;
-            if (outputResult.toString().length() > CHAR_MAX) {
-                outputResult = outputResult.divide(BigDecimal.TEN, new MathContext(16, RoundingMode.HALF_UP));
-                outputResult = outputResult.multiply(BigDecimal.TEN);
-                if (result.compareTo(MAX_INPUT_NUMBER) > 0) {
-                    outputResult = outputResult.stripTrailingZeros();
-                } else {
-                    outputResult = outputResult.stripTrailingZeros();
-                    if (outputResult.scale() < 0) {
-                        outputResult = outputResult.setScale(0);
-                    }
-                }
+//            if (outputResult.toString().length() > CHAR_MAX) {
+//                outputResult = outputResult.divide(BigDecimal.TEN, new MathContext(16, RoundingMode.HALF_UP));
+//                outputResult = outputResult.multiply(BigDecimal.TEN);
+//                if (result.compareTo(MAX_INPUT_NUMBER) > 0) {
+//                    outputResult = outputResult.stripTrailingZeros();
+//                } else {
+//                    outputResult = outputResult.stripTrailingZeros();
+//                    if (outputResult.scale() < 0) {
+//                        outputResult = outputResult.setScale(0);
+//                    }
+//                }
+//            }
+
+            outputResult = result.abs(new MathContext(16, RoundingMode.HALF_UP));
+            DecimalFormat decimalFormat;
+
+//            if (outputResult.compareTo(MAX_INPUT_NUMBER) > 0) {
+//                if (outputResult.toString().chars().filter(ch -> ch == '0').count() > 9) {
+//                    decimalFormat = new DecimalFormat("0.E0");
+//                } else {
+//                    decimalFormat = new DecimalFormat("#.###############E0");
+//                }
+//                textWithoutSeparateNew = decimalFormat.format(outputResult);
+//            }
+            if (outputResult.compareTo(MAX_INPUT_NUMBER) > 0) {
+
             }
-            textWithoutSeparateNew = outputResult.toString();
-            textWithoutSeparateNew = outputResult.toString().replace(".", ",");
+
+
+            textWithoutSeparateNew = textWithoutSeparateNew.replace(".", ",");
             resizeOutputText();
 
             outText.setText(separateNumber(textWithoutSeparateNew));
@@ -588,10 +605,10 @@ public class Calculator_Controller {
 
     @FXML
     public void negate(ActionEvent actionEvent) {
-        if (textWithoutSeparateNew.isEmpty()){
+        if (textWithoutSeparateNew.isEmpty()) {
             textWithoutSeparateNew = outText.getText();
         }
-        if (equalWasPress || newBinaryOperation!=null) {
+        if (equalWasPress || newBinaryOperation != null) {
             if (!negatePressed) {
 //                numberUnaryOperations = new BigDecimal(textWithoutSeparateNew.replace(",", "."));
                 historyUnaryOperations += textWithoutSeparateNew;
@@ -603,7 +620,7 @@ public class Calculator_Controller {
 
         if (!textWithoutSeparateNew.contains("-")) {
             textWithoutSeparateNew = "-" + textWithoutSeparateNew;
-            charactersNumber ++;
+            charactersNumber++;
         } else {
             textWithoutSeparateNew = textWithoutSeparateNew.replace("-", "");
             charactersNumber = CHAR_MAX;
@@ -680,42 +697,68 @@ public class Calculator_Controller {
 
     }
 
+
+
+
     private String separateNumber(String text) {
+//        if (isNumeric(text)) {
+//            String textAfterComma = "";
+//            String minus = "";
+//            StringBuilder stringBuilderText;
+//            if (text.contains(".")) {
+//                text = text.replace(".", ",");
+//            }
+//            if (text.contains("-")) {
+//                text = text.replace("-", "");
+//                minus = "-";
+//            }
+//            if (text.contains(",")) {
+//                int commaIndex = text.indexOf(",");
+//                textAfterComma = text.substring(commaIndex);
+//                stringBuilderText = new StringBuilder(text.substring(0, commaIndex));
+//            } else {
+//                stringBuilderText = new StringBuilder(text);
+//            }
+//
+//            int insertSeparator = stringBuilderText.length() - 3;
+//            for (int i = stringBuilderText.length(); i > 0; i--) {
+//                if (i == insertSeparator) {
+//                    stringBuilderText.insert(i, " ");
+//                    insertSeparator -= (3);
+//                }
+//            }
+//            text = minus + stringBuilderText.toString() + textAfterComma;
+//
+//            if (text.contains("E")) {
+//                if (!text.contains(",")) {
+//                    text = text.replace("E", ",e");
+//                } else {
+//                    text = text.replace("E", "e");
+//                }
+//            }
+//        }
         if (isNumeric(text)) {
             String textAfterComma = "";
+            String textBeforeComma = "";
             String minus = "";
             StringBuilder stringBuilderText;
             if (text.contains(".")) {
-                text = text.replace(".", ",");
-            }
-            if (text.contains("-")) {
-                text = text.replace("-", "");
-                minus = "-";
-            }
-            if (text.contains(",")) {
-                int commaIndex = text.indexOf(",");
-                textAfterComma = text.substring(commaIndex);
-                stringBuilderText = new StringBuilder(text.substring(0, commaIndex));
-            } else {
-                stringBuilderText = new StringBuilder(text);
+                textBeforeComma = text.substring(0, text.indexOf("."));
+                textAfterComma = text.substring(text.indexOf("."));
             }
 
-            int insertSeparator = stringBuilderText.length() - 3;
-            for (int i = stringBuilderText.length(); i > 0; i--) {
+           StringBuilder patternBeforeComma = new StringBuilder();
+           StringBuilder patternAfterComma = new StringBuilder();
+            int insertSeparator = textBeforeComma.length() - 3;
+            for (int i = textBeforeComma.length() ; i> 0; i--) {
                 if (i == insertSeparator) {
-                    stringBuilderText.insert(i, " ");
+                    patternBeforeComma.append(" ");
                     insertSeparator -= (3);
+                } else{
+                    patternBeforeComma.append("#");
                 }
             }
-            text = minus + stringBuilderText.toString() + textAfterComma;
 
-            if (text.contains("E")) {
-                if (!text.contains(",")) {
-                    text = text.replace("E", ",e");
-                } else {
-                    text = text.replace("E", "e");
-                }
-            }
         }
 
         return text;

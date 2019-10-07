@@ -111,16 +111,46 @@ public class Exp {
 //
 
 //        BigDecimal bigDecimal = BigDecimal.valueOf(0.000001234567891234567);
-        BigDecimal bigDecimal = new BigDecimal("0.06178094427299493");
-//        BigDecimal x = BigDecimal.valueOf(9999999999999999L);
+        BigDecimal z = new BigDecimal("0.06178094427299493");
+        BigDecimal x = BigDecimal.valueOf(9999999999999999L);
 //        BigDecimal y = BigDecimal.valueOf(1);
+        BigDecimal y = BigDecimal.valueOf(9999999999999999L);
 //        BigDecimal z = x.add(y);
-        BigDecimal z = new BigDecimal("5.999999999999999E16");
-        DecimalFormat decimalFormat = new DecimalFormat("0.00000000E0");
-        String enn = decimalFormat.format(z);
+//        BigDecimal z = new BigDecimal("59999999999999990"); // 5,999999999999999e+16
+//        BigDecimal z = new BigDecimal("110000000000000000"); // 1,1e+17
+//        BigDecimal z = BigDecimal.valueOf(999999999.9999999);
+        z = z.abs(new MathContext(16, RoundingMode.HALF_UP));
 
-        System.out.println(enn.replace("E", "e+"));
-        System.out.println(bigDecimal.setScale(16, RoundingMode.HALF_UP));
+
+        String s = z.toPlainString();
+
+        DecimalFormat decimalFormat = new DecimalFormat(separateNumber(z.toPlainString()));
+        System.out.println(decimalFormat.format(z).replace("E", "e+"));
+
+    }
+
+
+    private static String separateNumber(String text) {
+        String pattern;
+
+        if (new BigDecimal(text).compareTo(BigDecimal.valueOf(9999999999999999L)) > 0) {
+            text = new StringBuilder(text).insert(1, ".").toString();
+            int t = (int) text.substring(1).chars().filter(ch -> ch > '0').count();
+            pattern = "#." + ("#").repeat(t) + "E0";
+        } else {
+            if (text.contains(".")) {
+                int lengthAfterComma = text.substring(text.indexOf(".")).length();
+                if (lengthAfterComma > 16){
+                    lengthAfterComma = 16;
+                }
+                pattern = "###,###." + ("#").repeat(lengthAfterComma);
+            } else {
+                pattern = "###,###";
+            }
+
+        }
+
+        return pattern;
     }
 
     private static void test(StringBuilder p, int perCent) {
