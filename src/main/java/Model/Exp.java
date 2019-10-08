@@ -111,21 +111,23 @@ public class Exp {
 //
 
 //        BigDecimal bigDecimal = BigDecimal.valueOf(0.000001234567891234567);
-        BigDecimal z = new BigDecimal("0.06178094427299493");
+//        BigDecimal z = new BigDecimal("0.06178094427299493");
         BigDecimal x = BigDecimal.valueOf(9999999999999999L);
 //        BigDecimal y = BigDecimal.valueOf(1);
-        BigDecimal y = BigDecimal.valueOf(9999999999999999L);
-//        BigDecimal z = x.add(y);
+//        BigDecimal y = BigDecimal.valueOf(9999999999999999L);
+        BigDecimal y = BigDecimal.valueOf(6);
+        BigDecimal z = x.add(y);
 //        BigDecimal z = new BigDecimal("59999999999999990"); // 5,999999999999999e+16
-//        BigDecimal z = new BigDecimal("110000000000000000"); // 1,1e+17
+//        BigDecimal z = new BigDecimal("19999999999999998"); // 1,1e+17
 //        BigDecimal z = BigDecimal.valueOf(999999999.9999999);
         z = z.abs(new MathContext(16, RoundingMode.HALF_UP));
 
 
         String s = z.toPlainString();
 
-        DecimalFormat decimalFormat = new DecimalFormat(separateNumber(z.toPlainString()));
-        System.out.println(decimalFormat.format(z).replace("E", "e+"));
+
+        System.out.println(separateNumber(z.toString()).replace(".", ",").replace("E", "e"));
+
 
     }
 
@@ -134,9 +136,11 @@ public class Exp {
         String pattern;
 
         if (new BigDecimal(text).compareTo(BigDecimal.valueOf(9999999999999999L)) > 0) {
-            text = new StringBuilder(text).insert(1, ".").toString();
-            int t = (int) text.substring(1).chars().filter(ch -> ch > '0').count();
-            pattern = "#." + ("#").repeat(t) + "E0";
+            String subString = text.substring(text.indexOf(".")).substring(1, text.indexOf("E")-1);
+            if(subString.chars().filter(ch -> ch == '0').count() == subString.length()){
+                text = text.replace("0", "");
+            }
+
         } else {
             if (text.contains(".")) {
                 int lengthAfterComma = text.substring(text.indexOf(".")).length();
@@ -147,10 +151,10 @@ public class Exp {
             } else {
                 pattern = "###,###";
             }
-
+            text = new DecimalFormat(pattern).format(new BigDecimal(text));
         }
 
-        return pattern;
+        return text;
     }
 
     private static void test(StringBuilder p, int perCent) {

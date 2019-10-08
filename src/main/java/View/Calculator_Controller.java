@@ -240,39 +240,8 @@ public class Calculator_Controller {
 
     private void printResult() {
         if (result != null) {
-            BigDecimal outputResult = result;
-//            if (outputResult.toString().length() > CHAR_MAX) {
-//                outputResult = outputResult.divide(BigDecimal.TEN, new MathContext(16, RoundingMode.HALF_UP));
-//                outputResult = outputResult.multiply(BigDecimal.TEN);
-//                if (result.compareTo(MAX_INPUT_NUMBER) > 0) {
-//                    outputResult = outputResult.stripTrailingZeros();
-//                } else {
-//                    outputResult = outputResult.stripTrailingZeros();
-//                    if (outputResult.scale() < 0) {
-//                        outputResult = outputResult.setScale(0);
-//                    }
-//                }
-//            }
-
-            outputResult = result.abs(new MathContext(16, RoundingMode.HALF_UP));
-            DecimalFormat decimalFormat;
-
-//            if (outputResult.compareTo(MAX_INPUT_NUMBER) > 0) {
-//                if (outputResult.toString().chars().filter(ch -> ch == '0').count() > 9) {
-//                    decimalFormat = new DecimalFormat("0.E0");
-//                } else {
-//                    decimalFormat = new DecimalFormat("#.###############E0");
-//                }
-//                textWithoutSeparateNew = decimalFormat.format(outputResult);
-//            }
-            if (outputResult.compareTo(MAX_INPUT_NUMBER) > 0) {
-
-            }
-
-
-            textWithoutSeparateNew = textWithoutSeparateNew.replace(".", ",");
+//            textWithoutSeparateNew = textWithoutSeparateNew.replace(".", ",");
             resizeOutputText();
-
             outText.setText(separateNumber(textWithoutSeparateNew));
         }
     }
@@ -610,7 +579,6 @@ public class Calculator_Controller {
         }
         if (equalWasPress || newBinaryOperation != null) {
             if (!negatePressed) {
-//                numberUnaryOperations = new BigDecimal(textWithoutSeparateNew.replace(",", "."));
                 historyUnaryOperations += textWithoutSeparateNew;
                 negatePressed = true;
             }
@@ -701,19 +669,18 @@ public class Calculator_Controller {
 
 
     private String separateNumber(String text) {
-        String pattern;
-
-
         if (isNumeric(text)) {
-            BigDecimal outNumber = new BigDecimal(text).abs(new MathContext(16, RoundingMode.HALF_UP));
-            text = outNumber.toPlainString();
-            if (new BigDecimal(text).compareTo(BigDecimal.valueOf(9999999999999999L)) > 0) {
-                String textWithComma = new StringBuilder(text).insert(1, ".").toString();
-                int t = (int) textWithComma.substring(1).chars().filter(ch -> ch > '0').count();
-                pattern = "#." + ("#").repeat(t) + "E0";
+            text = new BigDecimal(text.replace(",", "."), new MathContext(CHAR_MAX, RoundingMode.HALF_UP)).toString();
+            if (new BigDecimal(text).compareTo(MAX_INPUT_NUMBER) > 0) {
+                String subString = text.substring(text.indexOf(".")).substring(1, text.indexOf("E")-1);
+                if(subString.chars().filter(ch -> ch == '0').count() == subString.length()){
+                    text = text.replace("0", "");
+                }
             } else {
+                String pattern;
                 if (text.contains(".")) {
                     int lengthAfterComma = text.substring(text.indexOf(".")).length();
+
                     if (lengthAfterComma > 16){
                         lengthAfterComma = 16;
                     }
@@ -721,15 +688,15 @@ public class Calculator_Controller {
                 } else {
                     pattern = "###,###";
                 }
+            text = new DecimalFormat(pattern).format(new BigDecimal(text)).replace("E", "e+").replace(".", ",");
             }
-            text = new DecimalFormat(pattern).format(new BigDecimal(text)).replace("E", "e+");
         }
-
+        textWithoutSeparateNew = text;
 
         return text;
     }
 
-    public static boolean isNumeric(String strNum) {
+    private static boolean isNumeric(String strNum) {
         try {
             BigDecimal d = new BigDecimal(strNum.replace(",", "."));
         } catch (NumberFormatException | NullPointerException nfe) {
@@ -757,11 +724,11 @@ public class Calculator_Controller {
     private void setNum1() {
         if (numberFirstBinaryOperations == null) {
             if (textWithoutSeparateNew.isEmpty() && !outText.getText().isEmpty()) {
-                textWithoutSeparateNew = outText.getText().replace(" ", "");
+                textWithoutSeparateNew = outText.getText().replace(" ", "").replace("e", "E").replace(",", ".");
             }
             if (!textWithoutSeparateNew.isEmpty()) {
-                if (textWithoutSeparateNew.contains(",")) {
-                    textWithoutSeparateNew = textWithoutSeparateNew.replace(",", ".");
+                if (textWithoutSeparateNew.contains(",") || textWithoutSeparateNew.contains("e")) {
+                    textWithoutSeparateNew = textWithoutSeparateNew.replace(",", ".").replace("e", "E");
                 }
                 numberFirstBinaryOperations = new BigDecimal(textWithoutSeparateNew);
                 start = true;

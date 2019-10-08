@@ -8,7 +8,9 @@
   <component name="ChangeListManager">
     <list default="true" id="feaeb0c2-feb2-4a9c-98e3-48b1d1a339aa" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Exp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Exp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/View/Calculator_Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/Calculator_Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/View/Calculator_ControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/View/Calculator_ControllerTest.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -177,7 +179,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Calculator_ControllerTest.checkOperations" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="Calculator_ControllerTest.checkOperationsWithEnotation" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Calculator" />
       <extension name="coverage">
         <pattern>
@@ -187,7 +189,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="View" />
       <option name="MAIN_CLASS_NAME" value="View.Calculator_ControllerTest" />
-      <option name="METHOD_NAME" value="checkOperations" />
+      <option name="METHOD_NAME" value="checkOperationsWithEnotation" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -197,16 +199,16 @@
       <item itemvalue="Application.Calculator_Main" />
       <item itemvalue="Application.Exp" />
       <item itemvalue="JUnit.Calculator_ControllerTest" />
-      <item itemvalue="JUnit.Calculator_ControllerTest.checkOperations" />
       <item itemvalue="JUnit.Calculator_ControllerTest.checkBinaryOperations" />
+      <item itemvalue="JUnit.Calculator_ControllerTest.checkOperationsWithEnotation" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Calculator_Main" />
-        <item itemvalue="Application.Exp" />
         <item itemvalue="JUnit.Calculator_ControllerTest.checkBinaryOperations" />
+        <item itemvalue="JUnit.Calculator_ControllerTest.checkOperationsWithEnotation" />
+        <item itemvalue="Application.Exp" />
         <item itemvalue="JUnit.Calculator_ControllerTest" />
-        <item itemvalue="JUnit.Calculator_ControllerTest.checkOperations" />
       </list>
     </recent_temporary>
   </component>
@@ -500,7 +502,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570440952683</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="DecimalFormat works">
+      <created>1570525978840</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1570525978840</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -561,7 +570,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Problem with scale in sum() Expect 2, got 2.0" />
     <MESSAGE value="No problem with scale in sum()" />
     <MESSAGE value="Before all input in BigDecimal" />
     <MESSAGE value="all tests for minus() work" />
@@ -586,21 +594,12 @@
     <MESSAGE value="input tests are working slow" />
     <MESSAGE value="input tests are working,&#10;started to write binary tests" />
     <MESSAGE value="tests are working,&#10;before DecimalFormater" />
-    <option name="LAST_COMMIT_MESSAGE" value="tests are working,&#10;before DecimalFormater" />
+    <MESSAGE value="DecimalFormat works" />
+    <option name="LAST_COMMIT_MESSAGE" value="DecimalFormat works" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/View/Calculator_Controller.java</url>
-          <line>637</line>
-          <option name="timeStamp" value="109" />
-        </line-breakpoint>
-        <line-breakpoint type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/View/Calculator_Controller.java</url>
-          <line>199</line>
-          <option name="timeStamp" value="110" />
-        </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/View/Calculator_Controller.java</url>
           <line>172</line>
@@ -608,23 +607,18 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/View/Calculator_Controller.java</url>
-          <line>214</line>
-          <option name="timeStamp" value="115" />
+          <line>317</line>
+          <option name="timeStamp" value="133" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/View/Calculator_Controller.java</url>
-          <line>242</line>
-          <option name="timeStamp" value="117" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/Model/Exp.java</url>
-          <line>126</line>
-          <option name="timeStamp" value="119" />
+          <line>576</line>
+          <option name="timeStamp" value="134" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/View/Calculator_Controller.java</url>
-          <line>348</line>
-          <option name="timeStamp" value="128" />
+          <line>603</line>
+          <option name="timeStamp" value="135" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
