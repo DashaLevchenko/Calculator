@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
+import java.text.ParseException;
 
 import static java.math.BigDecimal.valueOf;
 
@@ -19,7 +20,7 @@ public class Exp {
 //        return temp;
 //    }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
 //        System.out.println(Arithmetic.sum(964197523864192L, 9641975238641969L));//10606172762506161//1,060617276250616e+16
 //        long x = 964197523864192L; //1,060617276250616e+16
 //        long y = 9641975238641969L;
@@ -126,7 +127,17 @@ public class Exp {
         String s = z.toPlainString();
 
 
-        System.out.println(separateNumber(z.toString()).replace(".", ",").replace("E", "e"));
+//        System.out.println(separateNumber(z.toString()).replace(".", ",").replace("E", "e"));
+
+        String t = "9999999999999999";
+        String n = "9 999 999 999 999 999";
+//        String n = "9 999 999 999 999 999";
+        DecimalFormat decimalFormat = new DecimalFormat("###,###.#");
+        t = decimalFormat.format(new BigDecimal(t));
+        System.out.println(t);
+        t = decimalFormat.parse(n).toString();
+        System.out.println(t);
+
 
 
     }
