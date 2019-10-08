@@ -701,65 +701,30 @@ public class Calculator_Controller {
 
 
     private String separateNumber(String text) {
-//        if (isNumeric(text)) {
-//            String textAfterComma = "";
-//            String minus = "";
-//            StringBuilder stringBuilderText;
-//            if (text.contains(".")) {
-//                text = text.replace(".", ",");
-//            }
-//            if (text.contains("-")) {
-//                text = text.replace("-", "");
-//                minus = "-";
-//            }
-//            if (text.contains(",")) {
-//                int commaIndex = text.indexOf(",");
-//                textAfterComma = text.substring(commaIndex);
-//                stringBuilderText = new StringBuilder(text.substring(0, commaIndex));
-//            } else {
-//                stringBuilderText = new StringBuilder(text);
-//            }
-//
-//            int insertSeparator = stringBuilderText.length() - 3;
-//            for (int i = stringBuilderText.length(); i > 0; i--) {
-//                if (i == insertSeparator) {
-//                    stringBuilderText.insert(i, " ");
-//                    insertSeparator -= (3);
-//                }
-//            }
-//            text = minus + stringBuilderText.toString() + textAfterComma;
-//
-//            if (text.contains("E")) {
-//                if (!text.contains(",")) {
-//                    text = text.replace("E", ",e");
-//                } else {
-//                    text = text.replace("E", "e");
-//                }
-//            }
-//        }
-        if (isNumeric(text)) {
-            String textAfterComma = "";
-            String textBeforeComma = "";
-            String minus = "";
-            StringBuilder stringBuilderText;
-            if (text.contains(".")) {
-                textBeforeComma = text.substring(0, text.indexOf("."));
-                textAfterComma = text.substring(text.indexOf("."));
-            }
+        String pattern;
 
-           StringBuilder patternBeforeComma = new StringBuilder();
-           StringBuilder patternAfterComma = new StringBuilder();
-            int insertSeparator = textBeforeComma.length() - 3;
-            for (int i = textBeforeComma.length() ; i> 0; i--) {
-                if (i == insertSeparator) {
-                    patternBeforeComma.append(" ");
-                    insertSeparator -= (3);
-                } else{
-                    patternBeforeComma.append("#");
+
+        if (isNumeric(text)) {
+            BigDecimal outNumber = new BigDecimal(text).abs(new MathContext(16, RoundingMode.HALF_UP));
+            text = outNumber.toPlainString();
+            if (new BigDecimal(text).compareTo(BigDecimal.valueOf(9999999999999999L)) > 0) {
+                String textWithComma = new StringBuilder(text).insert(1, ".").toString();
+                int t = (int) textWithComma.substring(1).chars().filter(ch -> ch > '0').count();
+                pattern = "#." + ("#").repeat(t) + "E0";
+            } else {
+                if (text.contains(".")) {
+                    int lengthAfterComma = text.substring(text.indexOf(".")).length();
+                    if (lengthAfterComma > 16){
+                        lengthAfterComma = 16;
+                    }
+                    pattern = "###,###." + ("#").repeat(lengthAfterComma);
+                } else {
+                    pattern = "###,###";
                 }
             }
-
+            text = new DecimalFormat(pattern).format(new BigDecimal(text)).replace("E", "e+");
         }
+
 
         return text;
     }
