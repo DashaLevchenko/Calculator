@@ -236,13 +236,11 @@ public class Calculator_Controller {
         outOperationMemory.setText(historyOperations);
         scrollOutOperationMemory();
         oldBinaryOperation = newBinaryOperation;
-        resizeOutputText();
-//        textWithoutSeparateNew = "";
+        textForOutput = "";
     }
 
     private void printResult() {
         if (result != null) {
-//            textWithoutSeparateNew = textWithoutSeparateNew.replace(".", ",");
             resizeOutputText();
             outText.setText(textForOutput);
         }
@@ -325,16 +323,14 @@ public class Calculator_Controller {
                 if (numberSecondBinaryOperations == null) {
                     numberSecondBinaryOperations = numberFirstBinaryOperations;
                 }
-
                 equalWasPress = true;
             }
 
             calculateBinaryOperation();
             outOperationMemory.setText(historyOperations);
-            resizeOutputText();
-//            textWithoutSeparateNew = "";
             pointInText = false;
             negatePressed = false;
+            textForOutput = "";
         }
     }
 
@@ -469,12 +465,11 @@ public class Calculator_Controller {
             textForOutput = buttonText;
             start = false;
         } else {
-            if (textForOutput.length() < charactersNumber) {
+            if (textForOutput.replaceAll("[^0-9]", "").length() < charactersNumber) {
                 textForOutput += buttonText;
                 if (outText.getText().equals("0") && buttonText.equals("0")) {
                     textForOutput = "0";
                 }
-
             }
         }
         resizeOutputText();
@@ -625,13 +620,12 @@ public class Calculator_Controller {
     }
 
     private void printInputText() {
-
         resizeOutputText();
         outText.setText(textForOutput);
     }
 
     private void resizeOutputText() {
-        if(textForOutput.isEmpty()){
+        if (textForOutput.isEmpty()) {
             textForOutput = outText.getText();
         }
         if (!isError) {
@@ -667,54 +661,94 @@ public class Calculator_Controller {
     }
 
     private DecimalFormat decimalFormat;
+    private String pattern;
 
     private void separateNumber() {
-        String text = null;
 
-        parseNumber();
+            result = parseNumber();
 
-        if (isNumeric(text)) {
-            text = new BigDecimal(text.replace(",", "."), new MathContext(CHAR_MAX, RoundingMode.HALF_UP)).toString();
-            if (new BigDecimal(text).compareTo(MAX_INPUT_NUMBER) > 0) {
-                String subString = text.substring(text.indexOf(".")).substring(1, text.indexOf("E") - 1);
-                if (subString.chars().filter(ch -> ch == '0').count() == subString.length()) {
-                    text = text.replace("0", "");
-                }
+
+        String text = result.toString();
+
+        if (result.compareTo(MAX_INPUT_NUMBER) > 0) {
+
+//            result = new BigDecimal(result.toString(), new MathContext(16, RoundingMode.HALF_UP));
+//            text =result.toString();
+////            if (text.contains("E")) {
+////                String subString = text.substring(text.indexOf(".")).substring(1, text.indexOf("E") - 1);
+//////            if (subString.chars().filter(ch -> ch == '0').count() == subString.length()) {
+//////                text = text.replace("0", "");
+////                pattern = "#."+"#".repeat(subString.length())+"E0";
+//////            }els
+////            }else{
+////                pattern = text.replaceAll("[0-9]", "#");
+////            }
+////            text = result.toEngineeringString();
+//
+//        }else if (new BigDecimal(text).compareTo(BigDecimal.valueOf(-1)) > 0 && new BigDecimal(text).compareTo(BigDecimal.ONE) < 0) {
+////            text = result.toPlainString();
+////            pattern = text.replaceAll("[0-9]", "0")+"E0";
+//            text = result.toPlainString();
+//        }else {
+//            if (text.contains(".")) {
+//                int lengthAfterComma = text.substring(text.indexOf(".") - 1).length();
+//                if (lengthAfterComma > 16) {
+//                    lengthAfterComma = 16;
+//                }
+//                pattern = "###,###." + ("#").repeat(lengthAfterComma);
+//            } else {
+//                pattern = "###,###.#";
+//            }
+//            decimalFormat = new DecimalFormat(pattern);
+//            text = decimalFormat.format(new BigDecimal(text));
+//        }
+            result = new BigDecimal(text, new MathContext(16, RoundingMode.HALF_UP));
+            pattern = "#." + result.toPlainString().replaceAll("[1-9]", "0").replaceAll("0", "#") + "E0";
+            decimalFormat = new DecimalFormat(pattern);//1,1111e+20
+        } else if (result.compareTo(BigDecimal.ONE) < 0 && result.compareTo(BigDecimal.valueOf(-1)) > 0) {
+            if (result.compareTo(BigDecimal.valueOf(0.000000000000001)) < 0) {
+                decimalFormat = null;
+                pattern = "";
             } else {
-                String pattern;
-                if (text.contains(".")) {
-                    int lengthAfterComma = text.substring(text.indexOf(".")).length();
-
-                    if (lengthAfterComma > 16) {
-                        lengthAfterComma = 16;
-                    }
-                    pattern = "###,###." + ("#").repeat(lengthAfterComma);
-                } else {
-                    pattern = "###,###";
-                }
+                pattern = "0.00000000000000##";
                 decimalFormat = new DecimalFormat(pattern);
-                text = decimalFormat.format(new BigDecimal(text));
             }
-            textForOutput = text;
-            if (pointInText && !textForOutput.contains(".")) {
-                textForOutput += ".";
-            }
-        }
 
-        outText.setText(textForOutput.replace("E", "e+").replace(".", ","));
+        }else {
+            pattern = "###,###.#######";
+            decimalFormat = new DecimalFormat(pattern);
+        }
+        if (decimalFormat != null) {
+            text = decimalFormat.format(result);
+        }
+        textForOutput = text.replace("E", "e").replace(".", ",");
+        if (pointInText && !textForOutput.contains(",")) {
+            textForOutput += ",";
+        }
     }
 
-    private void parseNumber() {
-        String text;
-        if (decimalFormat != null) {
-            try {
-                text = decimalFormat.parse(textForOutput).toString();
-            } catch (ParseException e) {
-                e.printStackTrace();
+
+    private BigDecimal parseNumber() {
+        BigDecimal number = result;
+//        textForOutput = textForOutput.replace(",", ".").replace("e", "E");
+//        result = new BigDecimal(textForOutput);
+        if (!start) {
+            if (pattern != null) {
+                try {
+                    String numberText = decimalFormat.parse(textForOutput).toString();
+                    number = new BigDecimal(numberText, new MathContext(CHAR_MAX, RoundingMode.HALF_UP));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                number = new BigDecimal(textForOutput);
             }
-        } else {
-            text = textForOutput;
         }
+//        else{
+//            number = new BigDecimal(textForOutput);
+//        }
+
+        return number;
     }
 
     private static boolean isNumeric(String strNum) {
@@ -746,20 +780,22 @@ public class Calculator_Controller {
 
     private void setNum1() {
         if (numberFirstBinaryOperations == null) {
-            if (textForOutput.isEmpty() && !outText.getText().isEmpty()) {
-                textForOutput = outText.getText().replace(" ", "").replace("e", "E").replace(",", ".");
-            }
-            if (!textForOutput.isEmpty()) {
-                if (textForOutput.contains(",") || textForOutput.contains("e")) {
-                    textForOutput = textForOutput.replace(",", ".").replace("e", "E");
-                }
-                numberFirstBinaryOperations = new BigDecimal(textForOutput);
-                start = true;
-            } else if (result != null) {
-                numberFirstBinaryOperations = result;
-            } else {
-                numberFirstBinaryOperations = BigDecimal.ZERO;
-            }
+//            if (textForOutput.isEmpty() && !outText.getText().isEmpty()) {
+//                textForOutput = outText.getText().replace(" ", "").replace("e", "E").replace(",", ".");
+//            }
+//            if (!textForOutput.isEmpty()) {
+//                if (textForOutput.contains(",") || textForOutput.contains("e")) {
+//                    textForOutput = textForOutput.replace(",", ".").replace("e", "E");
+//                }
+//                numberFirstBinaryOperations = new BigDecimal(textForOutput);
+//                start = true;
+//            } else
+//            if (result != null) {
+//                numberFirstBinaryOperations = result;
+//            } else {
+//                numberFirstBinaryOperations = BigDecimal.ZERO;
+//            }
+            numberFirstBinaryOperations = parseNumber();
             numberSecondBinaryOperations = null;
             historyOperations += numberFirstBinaryOperations;
         }
@@ -768,7 +804,7 @@ public class Calculator_Controller {
     private void setNum2() {
         if (!canChangeOperator) {
             if (!textForOutput.isEmpty()) {
-                numberSecondBinaryOperations = new BigDecimal(textForOutput.replace(",", "."));
+                numberSecondBinaryOperations = parseNumber();
                 start = true;
             }
         } else {
@@ -781,14 +817,19 @@ public class Calculator_Controller {
             try {
                 result = Arithmetic.calculateBinaryOperations(numberFirstBinaryOperations, numberSecondBinaryOperations, newBinaryOperation);
                 textForOutput = result.toString();
+                System.out.println(numberFirstBinaryOperations+" "+numberSecondBinaryOperations+" "+result);
+                if (result.equals(BigDecimal.valueOf(59999999999999999L))){
+                    System.out.println("o");
+                }
                 printResult();
+                numberFirstBinaryOperations = result;
                 canChangeOperator = false;
 
                 if (!equalWasPress) {
                     oldBinaryOperation = null;
                     numberSecondBinaryOperations = null;
                 }
-                numberFirstBinaryOperations = result;
+
                 start = true;
                 negatePressed = false;
             } catch (Exception e) {
@@ -859,11 +900,5 @@ public class Calculator_Controller {
         }
     }
 
-    @FXML
-    void test(KeyEvent event) {
-        if (event.getCode() == KeyCode.ENTER) {
-            System.out.println("Enter Pressed");
-        }
-    }
 }
 

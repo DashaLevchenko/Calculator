@@ -33,12 +33,12 @@ class Calculator_ControllerTest extends ApplicationTest {
 
     @BeforeAll
     static void config() throws Exception {
-//        System.setProperty("testfx.robot", "awt");
-        System.setProperty("testfx.robot", "glass");
-        System.setProperty("testfx.headless", "true");
-        System.setProperty("prism.order", "d3d");
-        System.setProperty("prism.text", "t2k");
-        System.setProperty("java.awt.headless", "true");
+        System.setProperty("testfx.robot", "awt");
+//        System.setProperty("testfx.robot", "glass");
+//        System.setProperty("testfx.headless", "true");
+//        System.setProperty("prism.order", "d3d");
+//        System.setProperty("prism.text", "t2k");
+//        System.setProperty("java.awt.headless", "true");
     }
 
 

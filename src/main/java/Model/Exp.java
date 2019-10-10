@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
+import java.text.Format;
 import java.text.ParseException;
 
 import static java.math.BigDecimal.valueOf;
@@ -77,8 +78,8 @@ public class Exp {
 //        System.out.println(r2);
 //        System.out.println(r2.abs(new MathContext(15))+"\n");
 //
-//        System.out.println(new DecimalFormat("#.################").format(r));
-//        System.out.println(new DecimalFormat("#.################").format(r2));
+//        System.out.println(new DecimalFormat("0.0000000000000000").format(r));
+//        System.out.println(new DecimalFormat("0.0000000000000000").format(r2));
 //
 
 //        int CHARACTERS_IN_LINE = 3;
@@ -107,66 +108,112 @@ public class Exp {
 //        BigDecimal x = BigDecimal.valueOf(9999999999999999L); //2,e+16
 //        BigDecimal y = BigDecimal.valueOf(9999999999999999L); //2,e+16  5,999999999999999e+16
 //
-//        DecimalFormat decimalFormat = new DecimalFormat("#.E0");
-//        DecimalFormat decimalFormat2 = new DecimalFormat("##.E0");
+//        DecimalFormat decimalFormat = new DecimalFormat("0.E0");
+//        DecimalFormat decimalFormat2 = new DecimalFormat("00.E0");
 //
 
 //        BigDecimal bigDecimal = BigDecimal.valueOf(0.000001234567891234567);
-//        BigDecimal z = new BigDecimal("0.06178094427299493");
         BigDecimal x = BigDecimal.valueOf(9999999999999999L);
 //        BigDecimal y = BigDecimal.valueOf(1);
 //        BigDecimal y = BigDecimal.valueOf(9999999999999999L);
-        BigDecimal y = BigDecimal.valueOf(6);
-        BigDecimal z = x.add(y);
-//        BigDecimal z = new BigDecimal("59999999999999990"); // 5,999999999999999e+16
-//        BigDecimal z = new BigDecimal("19999999999999998"); // 1,1e+17
+        BigDecimal y = BigDecimal.valueOf(6); // 1,000000000000001e+16
+//        BigDecimal z = new BigDecimal("0.06178094427299493");//!!
+//        BigDecimal z = x.add(y);
+//        BigDecimal z = new BigDecimal("111110000000000000000"); //1,1111e+20
+        BigDecimal z = new BigDecimal("59999999999999999"); // 5,999999999999999e+16
+//        BigDecimal z = new BigDecimal("19999999999999998");
+//        BigDecimal z = new BigDecimal("0.0000000000000005062500000000001"); //5.062500000000001E-16
 //        BigDecimal z = BigDecimal.valueOf(999999999.9999999);
-        z = z.abs(new MathContext(16, RoundingMode.HALF_UP));
+//        BigDecimal z = new BigDecimal("0.000000000000000001");
+//        BigDecimal z = new BigDecimal("0.000000000000000000");
+//        BigDecimal z = new BigDecimal("0.000000000000001"); //0,000000000000001
+//        BigDecimal z = BigDecimal.valueOf(9999.8888889);
+//        System.out.println(z.scale());
+//        z = new BigDecimal(z.toString(), new MathContext(16, RoundingMode.HALF_UP));
+
+//        String s = z.toPlainString();
+//0,000000000000001
+        System.out.println(separateNumber(z));
+//        System.out.println(z);
+
+//        System.out.println(z.scale());
+//        System.out.println(z.toString());
 
 
-        String s = z.toPlainString();
-
-
-//        System.out.println(separateNumber(z.toString()).replace(".", ",").replace("E", "e"));
-
-        String t = "9999999999999999";
-        String n = "9 999 999 999 999 999";
-//        String n = "9 999 999 999 999 999";
-        DecimalFormat decimalFormat = new DecimalFormat("###,###.#");
-        t = decimalFormat.format(new BigDecimal(t));
-        System.out.println(t);
-        t = decimalFormat.parse(n).toString();
-        System.out.println(t);
-
+//        DecimalFormat decimalFormat = new DecimalFormat("000,000.000");
+//        BigDecimal j = new BigDecimal(decimalFormat.format(BigDecimal.valueOf(8.454)).replace(",", "."));
+//        String k = decimalFormat.parse(j.toString().replace(".", ",")).toString();
+//
+//        System.out.println(j);
+//        System.out.println(k);
 
 
     }
 
+    private static String separateNumber(BigDecimal number) {
+        String out = number.toString();
+        DecimalFormat decimalFormat = null;
+        if (number.compareTo(BigDecimal.valueOf(999999999999999L)) > 0) {
+            number = new BigDecimal(number.toString(), new MathContext(16, RoundingMode.HALF_UP));
 
-    private static String separateNumber(String text) {
-        String pattern;
+            decimalFormat = new DecimalFormat("#." + number.toPlainString().replaceAll("[1-9]", "0").replaceAll("0", "#") + "E0");//1,1111e+20
 
-        if (new BigDecimal(text).compareTo(BigDecimal.valueOf(9999999999999999L)) > 0) {
-            String subString = text.substring(text.indexOf(".")).substring(1, text.indexOf("E")-1);
-            if(subString.chars().filter(ch -> ch == '0').count() == subString.length()){
-                text = text.replace("0", "");
+        } else if (number.compareTo(BigDecimal.ONE) < 0 && number.compareTo(BigDecimal.valueOf(-1)) > 0) {
+
+            if (number.compareTo(BigDecimal.valueOf(0.000000000000001)) < 0) {
+                decimalFormat = null;
+            } else {
+//                number = new BigDecimal(number.toString(), new MathContext(16, RoundingMode.HALF_UP));
+                decimalFormat = new DecimalFormat("0.00000000000000##");
+//                decimalFormat = new DecimalFormat(number.toPlainString().replaceAll("[1-9]", "0").replaceAll("0", "#"));
+
             }
 
         } else {
-            if (text.contains(".")) {
-                int lengthAfterComma = text.substring(text.indexOf(".")).length();
-                if (lengthAfterComma > 16){
-                    lengthAfterComma = 16;
-                }
-                pattern = "###,###." + ("#").repeat(lengthAfterComma);
-            } else {
-                pattern = "###,###";
-            }
-            text = new DecimalFormat(pattern).format(new BigDecimal(text));
+            decimalFormat = new DecimalFormat("###,###.#######");
+        }
+        if (decimalFormat != null) {
+            out = decimalFormat.format(number);
+        }
+        if (out.contains("E") && !out.contains(",")) {
+            out = new StringBuilder(out).insert(1, ",").toString();
         }
 
-        return text;
+        return out;
     }
+
+
+//    private static String separateNumber(String text) {
+//        String pattern;
+//
+//        if (new BigDecimal(text).compareTo(BigDecimal.valueOf(9999999999999999L)) > 0) {
+//            int scale1 = new BigDecimal(text).stripTrailingZeros().scale();
+//            if (scale1 > 0) {
+//                pattern = "0." + "#".repeat(scale1) + "E0";
+//            } else {
+//                pattern = "#.E0";
+//            }
+//                text = new DecimalFormat(pattern).format(new BigDecimal(text));
+//
+//        } else if (new BigDecimal(text).compareTo(BigDecimal.valueOf(-1)) > 0 && new BigDecimal(text).compareTo(BigDecimal.ONE) < 0)  {
+//
+//        } else {
+//            if (text.contains(".")) {
+//                int lengthAfterComma = text.substring(text.indexOf(".") + 1).length();
+//                if (lengthAfterComma > 16) {
+//                    lengthAfterComma = 16;
+//                }
+//                pattern = "###,##0." + ("0").repeat(lengthAfterComma);
+//            } else {
+//                pattern = "###,##0";
+//            }
+//            text = new DecimalFormat(pattern).format(new BigDecimal(text));
+//        }
+//
+//
+//
+//        return text;
+//    }
 
     private static void test(StringBuilder p, int perCent) {
         int temporary = p.length() - 1;
