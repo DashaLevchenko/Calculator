@@ -325,7 +325,6 @@ public class Calculator_Controller {
                 }
                 equalWasPress = true;
             }
-
             calculateBinaryOperation();
             outOperationMemory.setText(historyOperations);
             pointInText = false;
@@ -461,8 +460,12 @@ public class Calculator_Controller {
     @FXML
     public void number(ActionEvent actionEvent) {
         String buttonText = ((Button) actionEvent.getSource()).getText();
+        if (buttonText == "0"){
+            System.out.println("9");
+        }
         if (start) {
             textForOutput = buttonText;
+            pointInText = false;
             start = false;
         } else {
             if (textForOutput.replaceAll("[^0-9]", "").length() < charactersNumber) {
@@ -472,8 +475,7 @@ public class Calculator_Controller {
                 }
             }
         }
-        resizeOutputText();
-        outText.setText(textForOutput);
+        printInputText();
 
         if (numberFirstBinaryOperations != null) {
             canChangeOperator = false;
@@ -663,92 +665,135 @@ public class Calculator_Controller {
     private DecimalFormat decimalFormat;
     private String pattern;
 
-    private void separateNumber() {
-
-            result = parseNumber();
-
-
-        String text = result.toString();
-
-        if (result.compareTo(MAX_INPUT_NUMBER) > 0) {
-
-//            result = new BigDecimal(result.toString(), new MathContext(16, RoundingMode.HALF_UP));
-//            text =result.toString();
-////            if (text.contains("E")) {
-////                String subString = text.substring(text.indexOf(".")).substring(1, text.indexOf("E") - 1);
-//////            if (subString.chars().filter(ch -> ch == '0').count() == subString.length()) {
-//////                text = text.replace("0", "");
-////                pattern = "#."+"#".repeat(subString.length())+"E0";
-//////            }els
-////            }else{
-////                pattern = text.replaceAll("[0-9]", "#");
-////            }
-////            text = result.toEngineeringString();
+    //    private void separateNumber() {
+//        String text;
+//        BigDecimal number;
+////        if (decimalFormat != null) {
+//            result = parseNumber();
+//            text = result.toString();
+//            number = result;
+//        System.out.println(result.precision());
+////        }
 //
-//        }else if (new BigDecimal(text).compareTo(BigDecimal.valueOf(-1)) > 0 && new BigDecimal(text).compareTo(BigDecimal.ONE) < 0) {
-////            text = result.toPlainString();
-////            pattern = text.replaceAll("[0-9]", "0")+"E0";
-//            text = result.toPlainString();
-//        }else {
-//            if (text.contains(".")) {
-//                int lengthAfterComma = text.substring(text.indexOf(".") - 1).length();
-//                if (lengthAfterComma > 16) {
-//                    lengthAfterComma = 16;
-//                }
-//                pattern = "###,###." + ("#").repeat(lengthAfterComma);
-//            } else {
-//                pattern = "###,###.#";
+//
+//        if (result.compareTo(MAX_INPUT_NUMBER) > 0) {
+//            number = new BigDecimal(text, new MathContext(16, RoundingMode.HALF_UP));
+//            pattern = "#." + number.toPlainString().replaceAll("[1-9]", "0").replaceAll("0", "#") + "E0";
+//
+//            if (number.toString().chars().filter(c -> c == '0').count() == 15) {
+//                pattern = "#.E0";
 //            }
 //            decimalFormat = new DecimalFormat(pattern);
-//            text = decimalFormat.format(new BigDecimal(text));
+//
+//        } else if (result.compareTo(BigDecimal.ONE) < 0 && result.compareTo(BigDecimal.valueOf(-1)) > 0) {
+//            if (result.compareTo(BigDecimal.valueOf(0.000000000000001)) < 0) {
+//                decimalFormat = null;
+//                pattern = null;
+//            } else {
+//                pattern = "0.00000000000000##";
+//                decimalFormat = new DecimalFormat(pattern);
+//            }
+//        } else {
+//            if (pointInText) {
+//                pattern = "#.#################";
+//            } else {
+//                pattern = "###,###";
+//            }
+//            decimalFormat = new DecimalFormat(pattern);
 //        }
-            result = new BigDecimal(text, new MathContext(16, RoundingMode.HALF_UP));
-            pattern = "#." + result.toPlainString().replaceAll("[1-9]", "0").replaceAll("0", "#") + "E0";
-            decimalFormat = new DecimalFormat(pattern);//1,1111e+20
+//        if (decimalFormat != null) {
+//            text = decimalFormat.format(number);
+//        }
+//        if (text.contains("E") && !text.contains("-")) {
+//            text = text.replace("E", "e+");
+//        } else if (text.contains("E") && text.contains("-")) {
+//            text = text.replace("E", "e");
+//        }
+//
+//        textForOutput = text;
+//        if (pointInText && !textForOutput.contains(",")) {
+//            textForOutput += ",";
+//        }
+//    }
+    private void separateNumber() {
+        String text;
+        BigDecimal number;
+//        if (decimalFormat != null) {
+        result = parseNumber();
+        System.out.println(result.precision());
+        text = result.toString();
+        number = result;
+//        }
+
+
+        if (result.compareTo(MAX_INPUT_NUMBER) > 0) {
+            number = new BigDecimal(text, new MathContext(16, RoundingMode.HALF_UP));
+            pattern = "#." + number.toPlainString().replaceAll("[1-9]", "0").replaceAll("0", "#") + "E0";
+
+            if (number.toString().chars().filter(c -> c == '0').count() == 15) {
+                pattern = "#.E0";
+            }
+            decimalFormat = new DecimalFormat(pattern);
+
         } else if (result.compareTo(BigDecimal.ONE) < 0 && result.compareTo(BigDecimal.valueOf(-1)) > 0) {
             if (result.compareTo(BigDecimal.valueOf(0.000000000000001)) < 0) {
                 decimalFormat = null;
-                pattern = "";
+                pattern = null;
             } else {
                 pattern = "0.00000000000000##";
                 decimalFormat = new DecimalFormat(pattern);
             }
-
-        }else {
-            pattern = "###,###.#######";
+        } else {
+            if (pointInText) {
+                pattern = "#.#################";
+            } else {
+                pattern = "###,###";
+            }
             decimalFormat = new DecimalFormat(pattern);
         }
         if (decimalFormat != null) {
-            text = decimalFormat.format(result);
+            text = decimalFormat.format(number);
         }
-        textForOutput = text.replace("E", "e").replace(".", ",");
+        if (text.contains("E") && !text.contains("-")) {
+            text = text.replace("E", "e+");
+        } else if (text.contains("E") && text.contains("-")) {
+            text = text.replace("E", "e");
+        }
+
+        textForOutput = text;
         if (pointInText && !textForOutput.contains(",")) {
             textForOutput += ",";
         }
     }
 
 
-    private BigDecimal parseNumber() {
-        BigDecimal number = result;
-//        textForOutput = textForOutput.replace(",", ".").replace("e", "E");
-//        result = new BigDecimal(textForOutput);
-        if (!start) {
-            if (pattern != null) {
-                try {
-                    String numberText = decimalFormat.parse(textForOutput).toString();
-                    number = new BigDecimal(numberText, new MathContext(CHAR_MAX, RoundingMode.HALF_UP));
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-            } else {
-                number = new BigDecimal(textForOutput);
-            }
-        }
-//        else{
+    //    private BigDecimal parseNumber() {
+//        BigDecimal number = result;
+////        if (!start) {
+//        if (pattern != null) {
+//            try {
+//                String numberText = decimalFormat.parse(textForOutput).toString();
+//                number = new BigDecimal(numberText, new MathContext(16, RoundingMode.HALF_UP));
+//            } catch (ParseException e) {
+//                e.printStackTrace();
+//            }
+//        } else {
 //            number = new BigDecimal(textForOutput);
 //        }
-
-        return number;
+////        }
+//
+//
+//        return number;
+//    }
+    private BigDecimal parseNumber() {
+        if (decimalFormat != null) {
+            try {
+                textForOutput = decimalFormat.parse(textForOutput).toString();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+        return new BigDecimal(textForOutput);
     }
 
     private static boolean isNumeric(String strNum) {
@@ -817,10 +862,7 @@ public class Calculator_Controller {
             try {
                 result = Arithmetic.calculateBinaryOperations(numberFirstBinaryOperations, numberSecondBinaryOperations, newBinaryOperation);
                 textForOutput = result.toString();
-                System.out.println(numberFirstBinaryOperations+" "+numberSecondBinaryOperations+" "+result);
-                if (result.equals(BigDecimal.valueOf(59999999999999999L))){
-                    System.out.println("o");
-                }
+                start = true;
                 printResult();
                 numberFirstBinaryOperations = result;
                 canChangeOperator = false;
@@ -830,7 +872,7 @@ public class Calculator_Controller {
                     numberSecondBinaryOperations = null;
                 }
 
-                start = true;
+
                 negatePressed = false;
             } catch (Exception e) {
                 printError(e);

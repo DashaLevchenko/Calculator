@@ -6,11 +6,10 @@
     <option name="CUSTOM_SCOPE_NAME" value="All Places" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="feaeb0c2-feb2-4a9c-98e3-48b1d1a339aa" name="Default Changelist" comment="DecimalFormat works before delete textout,&#10;and write down all in result">
+    <list default="true" id="feaeb0c2-feb2-4a9c-98e3-48b1d1a339aa" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Model/Exp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Exp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/View/Calculator_Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/Calculator_Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/View/Calculator_ControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/View/Calculator_ControllerTest.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -121,7 +120,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Exp">
+  <component name="RunManager" selected="Application.Calculator_Main">
     <configuration name="Calculator_Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="View.Calculator_Main" />
       <module name="Calculator" />
@@ -204,8 +203,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Exp" />
         <item itemvalue="Application.Calculator_Main" />
+        <item itemvalue="Application.Exp" />
         <item itemvalue="JUnit.Calculator_ControllerTest.checkOperationsWithEnotation" />
         <item itemvalue="JUnit.Calculator_ControllerTest.checkBinaryOperations" />
         <item itemvalue="JUnit.Calculator_ControllerTest" />
@@ -523,7 +522,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570544151562</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="before change result and add new variable">
+      <created>1570701553141</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1570701553141</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -584,7 +590,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="all tests for minus() work" />
     <MESSAGE value="all tests for multiply() work" />
     <MESSAGE value="new tests for minus and divide, all work" />
     <MESSAGE value="all tests are working" />
@@ -609,7 +614,8 @@
     <MESSAGE value="DecimalFormat works" />
     <MESSAGE value="Before change textwithoutSeparate" />
     <MESSAGE value="DecimalFormat works before delete textout,&#10;and write down all in result" />
-    <option name="LAST_COMMIT_MESSAGE" value="DecimalFormat works before delete textout,&#10;and write down all in result" />
+    <MESSAGE value="before change result and add new variable" />
+    <option name="LAST_COMMIT_MESSAGE" value="before change result and add new variable" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -621,12 +627,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/View/Calculator_Controller.java</url>
-          <line>579</line>
+          <line>581</line>
           <option name="timeStamp" value="134" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/View/Calculator_Controller.java</url>
-          <line>505</line>
+          <line>507</line>
           <option name="timeStamp" value="140" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -636,8 +642,18 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/View/Calculator_Controller.java</url>
-          <line>821</line>
-          <option name="timeStamp" value="154" />
+          <line>327</line>
+          <option name="timeStamp" value="156" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/View/Calculator_Controller.java</url>
+          <line>608</line>
+          <option name="timeStamp" value="159" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/View/Calculator_Controller.java</url>
+          <line>463</line>
+          <option name="timeStamp" value="161" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

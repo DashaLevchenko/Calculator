@@ -120,8 +120,8 @@ public class Exp {
 //        BigDecimal z = new BigDecimal("0.06178094427299493");//!!
 //        BigDecimal z = x.add(y);
 //        BigDecimal z = new BigDecimal("111110000000000000000"); //1,1111e+20
-        BigDecimal z = new BigDecimal("59999999999999999"); // 5,999999999999999e+16
-//        BigDecimal z = new BigDecimal("19999999999999998");
+//        BigDecimal z = new BigDecimal("59999999999999999"); // 5,999999999999999e+16
+        BigDecimal z = new BigDecimal("19999999999999998");
 //        BigDecimal z = new BigDecimal("0.0000000000000005062500000000001"); //5.062500000000001E-16
 //        BigDecimal z = BigDecimal.valueOf(999999999.9999999);
 //        BigDecimal z = new BigDecimal("0.000000000000000001");
@@ -133,7 +133,8 @@ public class Exp {
 
 //        String s = z.toPlainString();
 //0,000000000000001
-        System.out.println(separateNumber(z));
+//        System.out.println(separateNumber(z));
+        System.out.println(new DecimalFormat("#.E0").format(z));
 //        System.out.println(z);
 
 //        System.out.println(z.scale());
