@@ -7,8 +7,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="feaeb0c2-feb2-4a9c-98e3-48b1d1a339aa" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Exp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Exp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/View/Calculator_Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/Calculator_Controller.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -529,7 +527,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570701553141</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="before change start">
+      <created>1570716522571</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1570716522571</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -590,7 +595,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="all tests for multiply() work" />
     <MESSAGE value="new tests for minus and divide, all work" />
     <MESSAGE value="all tests are working" />
     <MESSAGE value="less tests for sum" />
@@ -615,7 +619,8 @@
     <MESSAGE value="Before change textwithoutSeparate" />
     <MESSAGE value="DecimalFormat works before delete textout,&#10;and write down all in result" />
     <MESSAGE value="before change result and add new variable" />
-    <option name="LAST_COMMIT_MESSAGE" value="before change result and add new variable" />
+    <MESSAGE value="before change start" />
+    <option name="LAST_COMMIT_MESSAGE" value="before change start" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

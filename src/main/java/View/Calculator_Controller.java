@@ -259,7 +259,7 @@ public class Calculator_Controller {
         if (numberUnaryOperations == null) {
             if (!textForOutput.isEmpty()) {
                 numberUnaryOperations = new BigDecimal(textForOutput.replace(",", "."));
-                start = true;
+//                start = true;
             } else if (result != null) {
                 numberUnaryOperations = result;
             } else {
@@ -360,7 +360,7 @@ public class Calculator_Controller {
         textForOutput = "0";
         outText.setText(textForOutput);
         outOperationMemory.setText("");
-        start = true;
+//        start = true;
         pointInText = false;
         canChangeOperator = false;
         newBinaryOperation = null;
@@ -384,7 +384,7 @@ public class Calculator_Controller {
         outText.setStyle(firstStyleLabel);
         textForOutput = "0";
         outText.setText(textForOutput);
-        start = true;
+//        start = true;
         pointInText = false;
         if (isError) {
             C.fire();
@@ -463,18 +463,18 @@ public class Calculator_Controller {
         if (buttonText == "0"){
             System.out.println("9");
         }
-        if (start) {
-            textForOutput = buttonText;
-            pointInText = false;
-            start = false;
-        } else {
+//        if (start) {
+//            textForOutput = buttonText;
+//            pointInText = false;
+//            start = false;
+//        } else {
             if (textForOutput.replaceAll("[^0-9]", "").length() < charactersNumber) {
                 textForOutput += buttonText;
                 if (outText.getText().equals("0") && buttonText.equals("0")) {
                     textForOutput = "0";
                 }
             }
-        }
+//        }
         printInputText();
 
         if (numberFirstBinaryOperations != null) {
@@ -610,7 +610,7 @@ public class Calculator_Controller {
         if (!pointInText || !outText.getText().contains(",")) {
             if (outText.getText().equals("0")) {
                 textForOutput = outText.getText();
-                start = false;
+//                start = false;
             } else if (textForOutput.isEmpty()) {
                 textForOutput += "0";
             }
@@ -850,7 +850,7 @@ public class Calculator_Controller {
         if (!canChangeOperator) {
             if (!textForOutput.isEmpty()) {
                 numberSecondBinaryOperations = parseNumber();
-                start = true;
+//                start = true;
             }
         } else {
             numberSecondBinaryOperations = null;
@@ -862,7 +862,7 @@ public class Calculator_Controller {
             try {
                 result = Arithmetic.calculateBinaryOperations(numberFirstBinaryOperations, numberSecondBinaryOperations, newBinaryOperation);
                 textForOutput = result.toString();
-                start = true;
+//                start = true;
                 printResult();
                 numberFirstBinaryOperations = result;
                 canChangeOperator = false;
@@ -912,7 +912,7 @@ public class Calculator_Controller {
                 } else {
                     numberSecondBinaryOperations = result;
                 }
-                start = true;
+//                start = true;
                 unaryOperation = null;
                 numberUnaryOperations = result;
                 textForOutput = textForOutput.replace(".", ",");
@@ -936,7 +936,7 @@ public class Calculator_Controller {
                 numberFirstBinaryOperations = result;
             }
 
-            start = true;
+//            start = true;
             percentOperation = null;
 
         }
