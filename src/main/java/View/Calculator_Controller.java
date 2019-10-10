@@ -240,10 +240,8 @@ public class Calculator_Controller {
     }
 
     private void printResult() {
-        if (result != null) {
-            resizeOutputText();
-            outText.setText(textForOutput);
-        }
+        resizeOutputText();
+        outText.setText(textForOutput);
     }
 
     @FXML
@@ -348,7 +346,7 @@ public class Calculator_Controller {
                         charactersNumber = CHAR_MAX;
                     }
                     textForOutput = new StringBuilder(textForOutput).deleteCharAt(textForOutput.length() - 1).toString();
-                    printInputText();
+                    printResult();
                 }
             }
         }
@@ -460,22 +458,14 @@ public class Calculator_Controller {
     @FXML
     public void number(ActionEvent actionEvent) {
         String buttonText = ((Button) actionEvent.getSource()).getText();
-        if (buttonText == "0"){
-            System.out.println("9");
-        }
-//        if (start) {
-//            textForOutput = buttonText;
-//            pointInText = false;
-//            start = false;
-//        } else {
-            if (textForOutput.replaceAll("[^0-9]", "").length() < charactersNumber) {
-                textForOutput += buttonText;
-                if (outText.getText().equals("0") && buttonText.equals("0")) {
-                    textForOutput = "0";
-                }
+        if (textForOutput.replaceAll("[^0-9]", "").length() < charactersNumber) {
+            textForOutput += buttonText;
+            if (outText.getText().equals("0") && buttonText.equals("0")) {
+                textForOutput = "0";
             }
-//        }
-        printInputText();
+        }
+
+        printResult();
 
         if (numberFirstBinaryOperations != null) {
             canChangeOperator = false;
@@ -618,13 +608,9 @@ public class Calculator_Controller {
             charactersNumber++;
             pointInText = true;
         }
-        printInputText();
+        printResult();
     }
 
-    private void printInputText() {
-        resizeOutputText();
-        outText.setText(textForOutput);
-    }
 
     private void resizeOutputText() {
         if (textForOutput.isEmpty()) {
@@ -715,7 +701,7 @@ public class Calculator_Controller {
 //            textForOutput += ",";
 //        }
 //    }
-    private void separateNumber() {
+    public void separateNumber() {
         String text;
         BigDecimal number;
 //        if (decimalFormat != null) {
