@@ -7,9 +7,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="feaeb0c2-feb2-4a9c-98e3-48b1d1a339aa" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/View/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/View/Calculator_Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/Calculator_Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/View/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/Main.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -195,9 +194,9 @@
     <list>
       <item itemvalue="Application.Calculator_Main" />
       <item itemvalue="Application.Exp" />
+      <item itemvalue="Application.Main" />
       <item itemvalue="JUnit.Calculator_ControllerTest.checkBinaryOperations" />
       <item itemvalue="JUnit.Calculator_ControllerTest.checkOperationsWithEnotation" />
-      <item itemvalue="Application.Main" />
     </list>
     <recent_temporary>
       <list>
@@ -541,7 +540,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570716827844</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="create new separate method">
+      <created>1570719736675</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1570719736675</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -602,7 +608,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="all tests are working" />
     <MESSAGE value="less tests for sum" />
     <MESSAGE value="need to sort all tests besides sumTest" />
     <MESSAGE value="need to sort all tests besides sumTest,&#10;new method squareRoot(), writing tests" />
@@ -627,7 +632,8 @@
     <MESSAGE value="before change result and add new variable" />
     <MESSAGE value="before change start" />
     <MESSAGE value="before delete textOut" />
-    <option name="LAST_COMMIT_MESSAGE" value="before delete textOut" />
+    <MESSAGE value="create new separate method" />
+    <option name="LAST_COMMIT_MESSAGE" value="create new separate method" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -659,8 +665,8 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/View/Main.java</url>
-          <line>19</line>
-          <option name="timeStamp" value="165" />
+          <line>30</line>
+          <option name="timeStamp" value="175" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
