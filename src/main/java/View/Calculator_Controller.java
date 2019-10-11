@@ -136,6 +136,7 @@ public class Calculator_Controller {
     private final int CHAR_MAX = 16;
     private int charactersNumber;
     private String textForOutput = "";
+    private String textWithoutSeparate = "";
     private String firstStyleLabel;
     private boolean start = true;
     private boolean pointInText = false;
@@ -325,7 +326,7 @@ public class Calculator_Controller {
             }
             calculateBinaryOperation();
             outOperationMemory.setText(historyOperations);
-            pointInText = false;
+//            pointInText = false;
             negatePressed = false;
             textForOutput = "";
         }
@@ -358,6 +359,7 @@ public class Calculator_Controller {
         textForOutput = "0";
         outText.setText(textForOutput);
         outOperationMemory.setText("");
+        textWithoutSeparate = "";
 //        start = true;
         pointInText = false;
         canChangeOperator = false;
@@ -381,6 +383,7 @@ public class Calculator_Controller {
     void clearNumberCE(ActionEvent actionEvent) {
         outText.setStyle(firstStyleLabel);
         textForOutput = "0";
+        textWithoutSeparate = "";
         outText.setText(textForOutput);
 //        start = true;
         pointInText = false;
@@ -458,18 +461,17 @@ public class Calculator_Controller {
     @FXML
     public void number(ActionEvent actionEvent) {
         String buttonText = ((Button) actionEvent.getSource()).getText();
-        if (textForOutput.replaceAll("[^0-9]", "").length() < charactersNumber) {
+        if (textWithoutSeparate.length() < charactersNumber) {
 //            if (textForOutput.equals("0") && !buttonText.equals("0")){
 //                textForOutput = "";
 //            }
             if (outText.getText().equals("0")) {
-                textForOutput = "";
+//                textForOutput = "";
+                textWithoutSeparate = "";
             }
 
-                textForOutput += buttonText;
-            if(textForOutput.length() == 4){
-                System.out.println("o");
-            }
+            textWithoutSeparate += buttonText;
+
         }
 
         printResult();
@@ -604,27 +606,34 @@ public class Calculator_Controller {
     @FXML
     public void commaMouseClick(ActionEvent actionEvent) {
         String buttonText = ((Button) actionEvent.getSource()).getText();
-        if (!pointInText || !outText.getText().contains(",")) {
+
+        if (!pointInText) {
             if (outText.getText().equals("0")) {
-                textForOutput = outText.getText();
+                textWithoutSeparate = outText.getText();
 //                start = false;
-            } else if (textForOutput.isEmpty()) {
-                textForOutput += "0";
+            } else if (textWithoutSeparate.isEmpty()) {
+                textWithoutSeparate += "0";
             }
-            textForOutput += buttonText;
+            textWithoutSeparate += buttonText;
+
             charactersNumber++;
             pointInText = true;
         }
+        System.out.println(textWithoutSeparate + " "+textForOutput);
         printResult();
     }
 
 
     private void resizeOutputText() {
-        if (textForOutput.isEmpty()) {
-            textForOutput = outText.getText();
-        }
+//        if (textForOutput.isEmpty()) {
+//            textForOutput = outText.getText();
+//        }
         if (!isError) {
-            textForOutput = formatterNumber(parseNumber(textForOutput));
+            if (textWithoutSeparate.charAt(textWithoutSeparate.length() - 1) == ',') {
+                textForOutput += ",";
+            } else {
+                textForOutput = formatterNumber(parseNumber(textWithoutSeparate));
+            }
         }
         Text textNew = new Text(textForOutput);
 
@@ -700,12 +709,12 @@ public class Calculator_Controller {
         if (decimalFormat != null && !text.isEmpty()) {
             try {
                 System.out.println(decimalFormat.toPattern());
-                if (text.contains(",")) {
-                    decimalFormat.applyPattern(decimalFormat.toPattern());
+                try {
                     number = BigDecimal.valueOf((Double) decimalFormat.parse(text));
-                }else {
+                } catch (ClassCastException e) {
                     number = BigDecimal.valueOf((Long) decimalFormat.parse(text));
                 }
+
             } catch (ParseException e) {
                 e.printStackTrace();
             }

@@ -6,7 +6,7 @@
     <option name="CUSTOM_SCOPE_NAME" value="All Places" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="feaeb0c2-feb2-4a9c-98e3-48b1d1a339aa" name="Default Changelist" comment="numberFormatter in main is work">
+    <list default="true" id="feaeb0c2-feb2-4a9c-98e3-48b1d1a339aa" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/View/Calculator_Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/Calculator_Controller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/View/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/Main.java" afterDir="false" />
@@ -555,7 +555,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570786751882</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="before textWithoutSeparate">
+      <created>1570794359286</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1570794359286</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -616,7 +623,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="need to sort all tests besides sumTest" />
     <MESSAGE value="need to sort all tests besides sumTest,&#10;new method squareRoot(), writing tests" />
     <MESSAGE value="Model is ready, need to add MovePoint, Memory(method), sort all tests" />
     <MESSAGE value="Model is ready, need to add MovePoint, Memory(method), sort all tests&#10;View without resize done" />
@@ -641,24 +647,25 @@
     <MESSAGE value="before delete textOut" />
     <MESSAGE value="create new separate method" />
     <MESSAGE value="numberFormatter in main is work" />
-    <option name="LAST_COMMIT_MESSAGE" value="numberFormatter in main is work" />
+    <MESSAGE value="before textWithoutSeparate" />
+    <option name="LAST_COMMIT_MESSAGE" value="before textWithoutSeparate" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/View/Calculator_Controller.java</url>
-          <line>177</line>
+          <line>178</line>
           <option name="timeStamp" value="111" />
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/View/Calculator_Controller.java</url>
-          <line>579</line>
+          <line>581</line>
           <option name="timeStamp" value="134" />
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/View/Calculator_Controller.java</url>
-          <line>505</line>
+          <line>507</line>
           <option name="timeStamp" value="140" />
         </line-breakpoint>
         <line-breakpoint type="java-line">
@@ -670,21 +677,6 @@
           <url>file://$PROJECT_DIR$/src/main/java/View/Main.java</url>
           <line>31</line>
           <option name="timeStamp" value="175" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/View/Calculator_Controller.java</url>
-          <line>470</line>
-          <option name="timeStamp" value="180" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/View/Calculator_Controller.java</url>
-          <line>605</line>
-          <option name="timeStamp" value="181" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/View/Calculator_Controller.java</url>
-          <line>459</line>
-          <option name="timeStamp" value="182" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
