@@ -7,13 +7,14 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
+import java.text.ParseException;
 
 import static java.math.BigDecimal.valueOf;
 
 public class Main {
     static DecimalFormat decimalFormat = new DecimalFormat();
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
         BigDecimal z = Arithmetic.calculateBinaryOperations(valueOf(9999999999999999L), valueOf(9999999999999999L), OperationsEnum.PLUS);
         BigDecimal x = Arithmetic.calculateBinaryOperations(valueOf(9999999999999999L), valueOf(6), OperationsEnum.MULTIPLY);
         BigDecimal t = Arithmetic.calculateBinaryOperations(valueOf(1), valueOf(1000000000000000L), OperationsEnum.DIVIDE);
@@ -30,6 +31,7 @@ public class Main {
         System.out.println(formatterNumber(c));
         System.out.println(formatterNumber(r));
         System.out.println(formatterNumber(Arithmetic.calculateBinaryOperations(BigDecimal.valueOf(111), BigDecimal.valueOf(3.33333), OperationsEnum.MINUS)));
+        System.out.println((Double) decimalFormat.parse("9,88"));
     }
 
     private static String formatterNumber(BigDecimal z) {
