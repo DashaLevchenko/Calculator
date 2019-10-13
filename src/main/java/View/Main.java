@@ -32,7 +32,7 @@ public class Main {
 //        System.out.println(formatterNumber(r));
 //        System.out.println(formatterNumber(Arithmetic.calculateBinaryOperations(BigDecimal.valueOf(111), BigDecimal.valueOf(3.33333), OperationsEnum.MINUS)));
 //        System.out.println((Double) decimalFormat.parse("9,88"));
-        System.out.println(("999,".charAt("999,".length()-1))==',');
+//        System.out.println(("999,".charAt("999,".length()-1))==',');
     }
 
     private static String formatterNumber(BigDecimal z) {
