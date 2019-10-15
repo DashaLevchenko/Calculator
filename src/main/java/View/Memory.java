@@ -7,11 +7,11 @@ import java.math.BigDecimal;
 public class Memory {
     private BigDecimal number = null;
 
-    Memory(BigDecimal number) {
-        this.number = number;
-    }
+//    Memory(BigDecimal number) {
+//        this.number = number;
+//    }
 
-    void memoryPlus(BigDecimal numberSecond) {
+    void memoryAdd(BigDecimal numberSecond) {
         if (number != null) {
             number = Arithmetic.sum(number, numberSecond);
         } else{
@@ -19,7 +19,7 @@ public class Memory {
         }
     }
 
-    void memoryMinus(BigDecimal numberSecond) {
+    void memorySubtract(BigDecimal numberSecond) {
         if (number != null) {
             number = Arithmetic.minus(number, numberSecond);
         } else{
@@ -33,4 +33,7 @@ public class Memory {
     }
 
 
+    public void setNumber(BigDecimal number) {
+        this.number = number;
+    }
 }

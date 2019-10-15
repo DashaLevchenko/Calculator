@@ -149,17 +149,21 @@ public class Exp {
 //        System.out.println(j);
 //        System.out.println(k);
 
-        String s;
-DecimalFormatSymbols decimalFormatSymbols = new DecimalFormatSymbols();
-decimalFormatSymbols.setExponentSeparator("e");
-decimalFormatSymbols.setGroupingSeparator(' ');
-decimalFormatSymbols.setDecimalSeparator(',');
+//        String s;
+//        DecimalFormatSymbols decimalFormatSymbols = new DecimalFormatSymbols();
+//        decimalFormatSymbols.setExponentSeparator("e");
+//        decimalFormatSymbols.setGroupingSeparator(' ');
+//        decimalFormatSymbols.setDecimalSeparator(',');
+//
+//        s = new DecimalFormat("0.E0", decimalFormatSymbols).format(BigDecimal.valueOf(199999999999998L));
+//        System.out.println(new DecimalFormat("0.E0", decimalFormatSymbols).format(BigDecimal.valueOf(199999999999998L)));
+//        System.out.println(new DecimalFormat("0.E0", decimalFormatSymbols).format(BigDecimal.valueOf(0.000000000000000001)));
 
-s = new DecimalFormat("0.E0", decimalFormatSymbols).format(BigDecimal.valueOf(199999999999998L));
-        System.out.println(new DecimalFormat("0.E0", decimalFormatSymbols).format(BigDecimal.valueOf(199999999999998L)));
-        System.out.println(new DecimalFormat("0.E0", decimalFormatSymbols).format(BigDecimal.valueOf(0.000000000000000001)));
 
+        BigDecimal f = BigDecimal.valueOf(0.00000000);
 
+        System.out.println(f.scale());
+        System.out.println(f);
 
     }
 

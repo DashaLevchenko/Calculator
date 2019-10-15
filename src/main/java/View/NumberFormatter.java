@@ -1,6 +1,5 @@
 package View;
 
-import java.io.Writer;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
@@ -11,16 +10,19 @@ import java.text.ParseException;
 public class NumberFormatter {
     private static DecimalFormatSymbols symbols = new DecimalFormatSymbols();
     private static DecimalFormat decimalFormat = new DecimalFormat();
-    private static final BigDecimal MIN_DECIMAL_NUMBER = BigDecimal.valueOf(0.0000000000000001);
+    private static final BigDecimal MIN_DECIMAL_NUMBER_WITHOUT_E = BigDecimal.valueOf(0.0000000000000001);
     private static final BigDecimal MAX_NUMBER_INPUT = BigDecimal.valueOf(9999999999999999L);
     private static final int MAX_SCALE = 16;
+    private static final int MAX_SCALE_WITHOUT_E = 18;
+
 
     public static String formatterNumber(BigDecimal number) {
         symbols.setExponentSeparator("e");
         symbols.setGroupingSeparator(' ');
+        symbols.setDecimalSeparator(',');
 
         StringBuilder pattern = new StringBuilder();
-        if (number.compareTo(MAX_NUMBER_INPUT) > 0) {
+        if (number.abs().compareTo(MAX_NUMBER_INPUT) > 0) {
             pattern.append("0.");
             if (number.precision() > MAX_SCALE) {
                 number = number.round(new MathContext(MAX_SCALE, RoundingMode.HALF_UP));
@@ -35,13 +37,21 @@ public class NumberFormatter {
                 pattern.append("0".repeat(number.scale()));
             }
         } else if (number.abs().compareTo(BigDecimal.ONE) < 0 && number.abs().compareTo(BigDecimal.ZERO) != 0) {
-            if (number.abs().compareTo(MIN_DECIMAL_NUMBER) < 0) {
-                number = number.round(new MathContext(MAX_SCALE, RoundingMode.HALF_UP));
-                pattern.append("0.E0");
-            } else {
-                pattern.append("0.").append("#".repeat(MAX_SCALE));
+            number = number.stripTrailingZeros();
+            number = number.setScale(16, RoundingMode.HALF_UP);
+            pattern.append("0.");
+//            if (number.scale() > MAX_SCALE) {
+            if (number.precision() > 14) {
+                pattern.append("#".repeat(number.precision()));
             }
-
+//            } else{
+//                if (number.scale() > MAX_SCALE_WITHOUT_E || number.abs().compareTo(MIN_DECIMAL_NUMBER_WITHOUT_E) < 0) {
+                pattern.append("E0");
+//        }
+//                }
+//            } else {
+//                pattern.append("0".repeat(number.scale()));
+//            }
         } else {
             pattern.append("#,##0");
             if (number.scale() > 0) {
@@ -82,10 +92,14 @@ public class NumberFormatter {
         StringBuilder pattern = new StringBuilder();
         pattern.append("#,##0");
         if (number.scale() > 0) {
-            if (number.scale() < MAX_SCALE) {
+            if (number.scale() <= MAX_SCALE) {
                 pattern.append(".").append("0".repeat(number.scale()));
             } else {
-                pattern.append(".").append("0".repeat(MAX_SCALE - (number.precision() - number.scale())));
+                if (number.precision() > number.scale()) {
+                    pattern.append(".").append("0".repeat(MAX_SCALE - (number.precision() - number.scale())));
+                } else {
+                    pattern.append(".").append("0".repeat(MAX_SCALE));
+                }
             }
         }
 

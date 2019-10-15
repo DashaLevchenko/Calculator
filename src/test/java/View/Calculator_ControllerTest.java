@@ -190,17 +190,14 @@ class Calculator_ControllerTest extends ApplicationTest {
         assertNumber("9 999 998,0000001", "9999999+9999999-9999999*0,9999999=", "c");
         assertNumber("0,0617809442729949", "867,8333+3*4/56382=bbbbbbb", "c");
         assertNumber("455 667 995,6", "2332,+3/0,5+455663325,6=nnnbn", "c");
-
         assertNumber("-690,57", "86-735-8,57-33=", "c");
         assertNumber("-357 684,1186736475", "23n1-65b43*2345/5,73=", "c");
         assertNumber("84,77860962566845", "43-87678nb,4/748+73=", "c");
         assertNumber("-3 929", "2-3957+84-7b58=", "c");
-
         assertNumber("0", "8635*88*65,6*0,1234bbbbn=", "c");
         assertNumber("8 814", "233*38+4-44=", "c");
         assertNumber("-50 623 218 535 195,59", "97548354766n,b452*3874-4/7465=", "c");
         assertNumber("88,54373407202216", "973*9/8664+87,533=", "c");
-
         assertNumber("1", "986/76/835/=", "c");
         assertNumber("-789,5563005780347", "972/865+85,32-876=", "c");
         assertNumber("4 055,773333333333", "7784/84-,49*44=", "c");
@@ -209,21 +206,42 @@ class Calculator_ControllerTest extends ApplicationTest {
     }
 
     @Test
+    void checkUnaryOperations(){
+        assertNumber("", "", "c");
+    }
+
+    @Test
     void checkOperationsWithEnotation(){
-        assertNumber("2,e+16", "9999999999999999+=", "c");
-        assertNumber("3,e+16", "9999999999999999+==", "c");
-        assertNumber("4,e+16", "9999999999999999+===", "c");
-        assertNumber("5,e+16", "9999999999999999+====", "c");
-        assertNumber("5,999999999999999e+16", "9999999999999999+=====", "c");
+        //without e-notation (invalid border)
+        assertNumber("9 999 999 999 999 999", "9999999999999998+1=", "c");
+        assertNumber("-9 999 999 999 999 999", "9999999999999998n-1=", "c");
+        assertNumber("0,0000000000000001", "0,0000000000000001/1=", "c");
+        assertNumber("-0,0000000000000001", "0,0000000000000001n/1=", "c");
+        assertNumber("0,01", "0,0999999999999999/10=", "c");
+
+        //with e-notation(valid border)
         assertNumber("1,e+16", "9999999999999999+1=", "c");
-        assertNumber("1,000000000000001e+16", "9999999999999999+6=", "c");
+        assertNumber("1,e+16", "9999999999999999+2=", "c");
+        assertNumber("-1,e+16", "9999999999999999n-2=", "c");
+        assertNumber("1,e-17", "0,0000000000000001/10=", "c");
+        assertNumber("-1,e-17", "0,0000000000000001/10n=", "c");
+        assertNumber("9,9999999999999e-4", "0,0099999999999999/10=", "c");
+        assertNumber("1,e-18", "0,0000000000000001/100=", "c");
+        assertNumber("-1,e-18", "0,0000000000000001/100n=", "c");
+        assertNumber("9,e-17", "0,0000000000000009/10=", "c");
+        assertNumber("1,1e-16", "0,0000000000000011/10=", "c");
+        assertNumber("2,e+16", "9999999999999999+=", "c");
         assertNumber("3,086419753086419e+31", "5555555555555555*=", "c");
+        assertNumber("1,000000000000001e+16", "9999999999999999+6=", "c");
+        assertNumber("5,999999999999999e+16", "9999999999999999+=====", "c");
+        assertNumber("1,e-31", "0,000000000000001/10000000000000000000=", "c");
+        assertNumber("1,e-31", "0,0000000000000001/10000000000000000000=", "c");
     }
 
     void assertNumber(String result, String buttonsPressed, String clearButtonPressed) {
-//        checkMouseInputNumber(result, buttonsPressed, clearButtonPressed);
+        checkMouseInputNumber(result, buttonsPressed, clearButtonPressed);
         checkKeyInputNumber(result, buttonsPressed, clearButtonPressed);
-//        checkNumpadInputNumber(result, buttonsPressed, clearButtonPressed);
+        checkNumpadInputNumber(result, buttonsPressed, clearButtonPressed);
     }
 
     void checkNumpadInputNumber(String result, String buttonsPressed, String clearButtonPressed) {
@@ -275,7 +293,7 @@ class Calculator_ControllerTest extends ApplicationTest {
         } else if (idButton.equals("0")) {
             type(NUMPAD0);
         } else if (idButton.equals(",")) {
-            type(PERIOD);
+            type(COMMA);
         } else if (idButton.equals("n")) {
             type(F9);
         } else if (idButton.equals("b")) {
@@ -327,7 +345,7 @@ class Calculator_ControllerTest extends ApplicationTest {
         } else if (idButton.equals("0")) {
             type(DIGIT0);
         } else if (idButton.equals(",")) {
-            type(PERIOD);
+            type(COMMA);
         } else if (idButton.equals("n")) {
             type(F9);
         } else if (idButton.equals("b")) {
