@@ -1,5 +1,6 @@
-package View;
+package Controller;
 
+import Controller.Calculator_Main;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -211,8 +212,21 @@ class Calculator_ControllerTest extends ApplicationTest {
 // s-square;
     @Test
     void checkUnaryOperations() {
+        //one operation
         assertNumber("0", "0r", "c");
         assertNumber("0", "0s", "c");
+        assertNumber("1", "1r", "c");
+        assertNumber("1", "1s", "c");
+        assertNumber("1", "1x", "c");
+        assertNumber("3", "9r", "c");
+        assertNumber("25", "5s", "c");
+        assertNumber("0,25", "4x", "c");
+        //two operation
+        assertNumber("3", "3xx", "c");
+        assertNumber("50", "50sr", "c");
+//three operation
+        assertNumber("0,02", "50srx", "c");
+
         assertNumber("9,999999999999998e+31", "9999999999999999s", "c");
         assertNumber("99 999 999,99999999", "9999999999999999r", "c");
     }
@@ -299,6 +313,10 @@ class Calculator_ControllerTest extends ApplicationTest {
     }
 
     void checkKeyInputNumber(String result, String buttonsPressed, String clearButtonPressed) {
+//        for (char buttonPressed : buttonsPressed.toCharArray()) {
+//            keyboardInput(String.valueOf(buttonPressed));
+//        }
+
         for (char buttonPressed : buttonsPressed.toCharArray()) {
             keyboardInput(String.valueOf(buttonPressed));
         }

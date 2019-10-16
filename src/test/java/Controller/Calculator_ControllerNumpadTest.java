@@ -1,4 +1,4 @@
-package View;
+package Controller;
 
 class Calculator_ControllerNumpadTest extends Calculator_ControllerTest {
     @Override

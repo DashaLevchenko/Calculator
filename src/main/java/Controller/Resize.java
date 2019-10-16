@@ -1,4 +1,4 @@
-package View;
+package Controller;
 
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;

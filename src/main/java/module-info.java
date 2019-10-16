@@ -5,5 +5,5 @@ module calculator {
     requires javafx.base;
     requires org.junit.jupiter.api;
 
-    opens View;
+    opens Controller;
 }

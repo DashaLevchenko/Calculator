@@ -1,4 +1,4 @@
-package View;
+package Controller;
 
 import java.math.BigDecimal;
 
@@ -304,7 +304,8 @@ public class Calculator_Controller {
 
         outOperationMemory.setText(historyOperations);
 
-        CE.fire();
+//        CE.fire();
+
     }
 
     @FXML
@@ -760,7 +761,7 @@ public class Calculator_Controller {
                 numberSecondBinaryOperations = NumberFormatter.parseNumber(textWithoutSeparate);
             }
             if (!negatePressed) {
-                if (!equalWasPress) {
+                if (!equalWasPress && percentOperation == null) {
                     if (numberSecondBinaryOperations != null) {
                         if (NumberFormatter.formatterNumber(numberSecondBinaryOperations).contains("e")) {
                             historyOperations += NumberFormatter.formatterNumber(numberSecondBinaryOperations).replace(".", ",");
@@ -842,12 +843,12 @@ public class Calculator_Controller {
     private void calculatePerCent() {
         if (numberFirstBinaryOperations != null && numberSecondBinaryOperations != null) {
             result = Arithmetic.calculateBinaryOperations(numberFirstBinaryOperations, numberSecondBinaryOperations, percentOperation);
-            textForOutput = result.toString();
+            textWithoutSeparate = result.toString();
             printResult();
 
             if (newBinaryOperation != null) {
                 numberSecondBinaryOperations = result;
-                historyOperations += result;
+                historyOperations += NumberFormatter.formatterNumber(result).replace(" ", "");
             } else {
                 numberFirstBinaryOperations = result;
             }

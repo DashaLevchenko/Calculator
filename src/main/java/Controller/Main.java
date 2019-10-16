@@ -1,4 +1,4 @@
-package View;
+package Controller;
 
 import Model.Arithmetic;
 import Model.OperationsEnum;
