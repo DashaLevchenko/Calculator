@@ -7,14 +7,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="feaeb0c2-feb2-4a9c-98e3-48b1d1a339aa" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/test/java/View/Calculator_ControllerMouseTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/View/Calculator_ControllerNumpadTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/User.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/User.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Exp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Exp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/View/Calculator_Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/Calculator_Controller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/View/Memory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/Memory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/View/NumberFormatter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/NumberFormatter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/View/calculator_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/calculator_view.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/View/Calculator_ControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/View/Calculator_ControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/View/calculator_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/calculator_view.fxml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -94,12 +94,13 @@
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="Model" />
     </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="View" />
+      <recent name="Model" />
+    </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="org.testfx.framework.junit.ApplicationTest" />
       <recent name="" />
-    </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="Model" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Calculator\target\classes\View" />
@@ -125,7 +126,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Calculator_Main">
+  <component name="RunManager" selected="JUnit.Calculator_ControllerTest.checkUnaryOperations">
     <configuration name="Calculator_Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="View.Calculator_Main" />
       <module name="Calculator" />
@@ -152,7 +153,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Calculator_ControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="Calculator_ControllerMouseTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Calculator" />
       <extension name="coverage">
         <pattern>
@@ -161,13 +162,13 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="View" />
-      <option name="MAIN_CLASS_NAME" value="View.Calculator_ControllerTest" />
+      <option name="MAIN_CLASS_NAME" value="View.Calculator_ControllerMouseTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Calculator_ControllerTest.checkBinaryOperations" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="Calculator_ControllerTest.checkOperationsEnotationInvalid" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Calculator" />
       <extension name="coverage">
         <pattern>
@@ -177,13 +178,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="View" />
       <option name="MAIN_CLASS_NAME" value="View.Calculator_ControllerTest" />
-      <option name="METHOD_NAME" value="checkBinaryOperations" />
+      <option name="METHOD_NAME" value="checkOperationsEnotationInvalid" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Calculator_ControllerTest.checkOperationsWithEnotation" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="Calculator_ControllerTest.checkUnaryOperations" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Calculator" />
       <extension name="coverage">
         <pattern>
@@ -193,25 +194,41 @@
       </extension>
       <option name="PACKAGE_NAME" value="View" />
       <option name="MAIN_CLASS_NAME" value="View.Calculator_ControllerTest" />
-      <option name="METHOD_NAME" value="checkOperationsWithEnotation" />
+      <option name="METHOD_NAME" value="checkUnaryOperations" />
       <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="View in Calculator" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Calculator" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="View.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="View" />
+      <option name="TEST_OBJECT" value="package" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <list>
       <item itemvalue="Application.Exp" />
+      <item itemvalue="JUnit.Calculator_ControllerTest.checkOperationsEnotationInvalid" />
+      <item itemvalue="JUnit.View in Calculator" />
+      <item itemvalue="JUnit.Calculator_ControllerTest.checkUnaryOperations" />
+      <item itemvalue="JUnit.Calculator_ControllerMouseTest" />
       <item itemvalue="Application.Calculator_Main" />
-      <item itemvalue="JUnit.Calculator_ControllerTest.checkBinaryOperations" />
-      <item itemvalue="JUnit.Calculator_ControllerTest.checkOperationsWithEnotation" />
-      <item itemvalue="JUnit.Calculator_ControllerTest" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.Calculator_ControllerTest.checkUnaryOperations" />
         <item itemvalue="Application.Calculator_Main" />
-        <item itemvalue="JUnit.Calculator_ControllerTest.checkOperationsWithEnotation" />
-        <item itemvalue="JUnit.Calculator_ControllerTest" />
-        <item itemvalue="JUnit.Calculator_ControllerTest.checkBinaryOperations" />
+        <item itemvalue="JUnit.Calculator_ControllerMouseTest" />
+        <item itemvalue="JUnit.View in Calculator" />
+        <item itemvalue="JUnit.Calculator_ControllerTest.checkOperationsEnotationInvalid" />
       </list>
     </recent_temporary>
   </component>
@@ -575,7 +592,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570796535347</updated>
     </task>
-    <option name="localTasksCounter" value="49" />
+    <task id="LOCAL-00049" summary="pattern for 0,111(13)">
+      <created>1571155722455</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1571155722455</updated>
+    </task>
+    <option name="localTasksCounter" value="50" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -636,7 +660,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Model is ready, need to add MovePoint, Memory(method), sort all tests" />
     <MESSAGE value="Model is ready, need to add MovePoint, Memory(method), sort all tests&#10;View without resize done" />
     <MESSAGE value="View without resize 50/50" />
     <MESSAGE value="resize is work" />
@@ -661,7 +684,8 @@
     <MESSAGE value="numberFormatter in main is work" />
     <MESSAGE value="before textWithoutSeparate" />
     <MESSAGE value="change resizeOutput" />
-    <option name="LAST_COMMIT_MESSAGE" value="change resizeOutput" />
+    <MESSAGE value="pattern for 0,111(13)" />
+    <option name="LAST_COMMIT_MESSAGE" value="pattern for 0,111(13)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -673,8 +697,18 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/View/Calculator_Controller.java</url>
+          <line>784</line>
+          <option name="timeStamp" value="217" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/View/Calculator_Controller.java</url>
           <line>341</line>
-          <option name="timeStamp" value="216" />
+          <option name="timeStamp" value="219" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/View/Calculator_Controller.java</url>
+          <line>827</line>
+          <option name="timeStamp" value="221" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

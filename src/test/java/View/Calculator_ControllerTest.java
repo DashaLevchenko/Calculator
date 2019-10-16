@@ -42,7 +42,7 @@ class Calculator_ControllerTest extends ApplicationTest {
     }
 
 
-//n-negate;
+    //n-negate;
 // b-backspace;
 // ,-",";
 // d-clear number;
@@ -98,7 +98,7 @@ class Calculator_ControllerTest extends ApplicationTest {
 
     @Test
     void checkBinaryOperations() {
-    //One operand
+        //One operand
         //One operand with one operation
         assertNumber("2", "2=", "c");
         assertNumber("-2", "2=n", "c");
@@ -116,7 +116,7 @@ class Calculator_ControllerTest extends ApplicationTest {
         assertNumber("4", "2-*/+=", "c");
         assertNumber("0", "2*/+-=", "c");
         assertNumber("4", "2/+-*=", "c");
-    //Two operands
+        //Two operands
         //Two operands with one operation
         assertNumber("33", "24+33", "c");
         assertNumber("47", "37-47", "c");
@@ -205,43 +205,88 @@ class Calculator_ControllerTest extends ApplicationTest {
         //endregion
     }
 
+// r-square root;
+// %-percent;
+// x-one divide x;
+// s-square;
     @Test
-    void checkUnaryOperations(){
-        assertNumber("", "", "c");
+    void checkUnaryOperations() {
+        assertNumber("0", "0r", "c");
+        assertNumber("0", "0s", "c");
+        assertNumber("9,999999999999998e+31", "9999999999999999s", "c");
+        assertNumber("99 999 999,99999999", "9999999999999999r", "c");
     }
 
     @Test
-    void checkOperationsWithEnotation(){
-        //without e-notation (invalid border)
-        assertNumber("9 999 999 999 999 999", "9999999999999998+1=", "c");
-        assertNumber("-9 999 999 999 999 999", "9999999999999998n-1=", "c");
-        assertNumber("0,0000000000000001", "0,0000000000000001/1=", "c");
-        assertNumber("-0,0000000000000001", "0,0000000000000001n/1=", "c");
-        assertNumber("0,01", "0,0999999999999999/10=", "c");
-
-        //with e-notation(valid border)
+    void checkOperationsEnotationValid() {
+        //e-
+        //if scale number more then 16 and count of zero more 2,
+        assertNumber("1,1111111111111e-4", "0,0011111111111111/10=", "c");
+        assertNumber("-1,1111111111111e-4", "0,0011111111111111n/10=", "c");
+        assertNumber("-1,1111111111111e-4", "0,0011111111111111/10n=", "c");
+        assertNumber("9,9999999999999e-4", "0,0099999999999999/10=", "c");
+        assertNumber("1,1111111111111e-5", "0,0011111111111111/100=", "c");
+        assertNumber("1,111111111111111e-4", "0,1111111111111111/1000=", "c");
+        //number less 0,0000000000000001
+        assertNumber("1,e-17", "0,0000000000000001/10=", "c");
+        assertNumber("-1,e-17", "0,0000000000000001/10n=", "c");
+        assertNumber("1,1e-16", "0,0000000000000011/10=", "c");
+        assertNumber("9,e-17", "0,0000000000000009/10=", "c");
+        assertNumber("1,e-18", "0,0000000000000001/100=", "c");
+        assertNumber("-1,e-18", "0,0000000000000001/100n=", "c");
+        assertNumber("1,e-30", "0,000000000000001/10000000000000000000=", "c");
+        assertNumber("1,e-31", "0,0000000000000001/10000000000000000000=", "c");
+        assertNumber("1,111111111111111e-16", "0,1111111111111111/1000000000000000=", "c");
+        //e+
         assertNumber("1,e+16", "9999999999999999+1=", "c");
         assertNumber("1,e+16", "9999999999999999+2=", "c");
         assertNumber("-1,e+16", "9999999999999999n-2=", "c");
-        assertNumber("1,e-17", "0,0000000000000001/10=", "c");
-        assertNumber("-1,e-17", "0,0000000000000001/10n=", "c");
-        assertNumber("9,9999999999999e-4", "0,0099999999999999/10=", "c");
-        assertNumber("1,e-18", "0,0000000000000001/100=", "c");
-        assertNumber("-1,e-18", "0,0000000000000001/100n=", "c");
-        assertNumber("9,e-17", "0,0000000000000009/10=", "c");
-        assertNumber("1,1e-16", "0,0000000000000011/10=", "c");
         assertNumber("2,e+16", "9999999999999999+=", "c");
         assertNumber("3,086419753086419e+31", "5555555555555555*=", "c");
         assertNumber("1,000000000000001e+16", "9999999999999999+6=", "c");
+        assertNumber("5,e+16", "9999999999999999+====", "c");
         assertNumber("5,999999999999999e+16", "9999999999999999+=====", "c");
-        assertNumber("1,e-31", "0,000000000000001/10000000000000000000=", "c");
-        assertNumber("1,e-31", "0,0000000000000001/10000000000000000000=", "c");
+    }
+
+    @Test
+    void checkOperationsEnotationInvalid() {
+        //e-
+        assertNumber("0,01", "0,1/10=", "c");
+        assertNumber("0,001", "0,01/10=", "c");
+        assertNumber("0,0001", "0,001/10=", "c");
+        assertNumber("0,00001", "0,0001/10=", "c");
+        assertNumber("0,000001", "0,00001/10=", "c");
+        assertNumber("0,0000001", "0,000001/10=", "c");
+        assertNumber("0,00000001", "0,0000001/10=", "c");
+        assertNumber("0,000000001", "0,00000001/10=", "c");
+        assertNumber("0,0000000001", "0,000000001/10=", "c");
+        assertNumber("0,00000000001", "0,0000000001/10=", "c");
+        assertNumber("0,000000000001", "0,00000000001/10=", "c");
+        assertNumber("0,0000000000001", "0,000000000001/10=", "c");
+        assertNumber("0,00000000000001", "0,0000000000001/10=", "c");
+        assertNumber("0,000000000000001", "0,00000000000001/10=", "c");
+        assertNumber("0,0000000000000001", "0,000000000000001/10=", "c");
+        assertNumber("0,0111111111111111", "0,1111111111111111/10=", "c");
+        assertNumber("0,1", "0,9999999999999999/10=", "c");
+        assertNumber("0,0011111111111111", "0,1111111111111111/100=", "c");
+        assertNumber("0,01", "0,9999999999999999/100=", "c");
+        assertNumber("0,0000000000000001", "0,0000000000000001/1=", "c");
+        assertNumber("0,000000000000001", "0,0000000000000001*10=", "c");
+        assertNumber("-0,0000000000000001", "0,0000000000000001n/1=", "c");
+        assertNumber("-0,000000000000001", "0,0000000000000001*10n=", "c");
+        assertNumber("0,000000000000001", "1/1000000000000000=", "c");
+        //e+
+        assertNumber("9 999 999 999 999 998", "9999999999999999-1=", "c");
+        assertNumber("-9 999 999 999 999 998", "9999999999999999n+1=", "c");
+        assertNumber("9 999 999 999 999 998", "9999999999999999+1n=", "c");
+        assertNumber("9 999 999 999 999 999", "9999999999999998+1=", "c");
+        assertNumber("9 999 999 999 999 997", "9999999999999998-1=", "c");
+        assertNumber("-9 999 999 999 999 997", "9999999999999998n+1=", "c");
+        assertNumber("-9 999 999 999 999 999", "9999999999999998n-1=", "c");
     }
 
     void assertNumber(String result, String buttonsPressed, String clearButtonPressed) {
-        checkMouseInputNumber(result, buttonsPressed, clearButtonPressed);
         checkKeyInputNumber(result, buttonsPressed, clearButtonPressed);
-        checkNumpadInputNumber(result, buttonsPressed, clearButtonPressed);
     }
 
     void checkNumpadInputNumber(String result, String buttonsPressed, String clearButtonPressed) {
@@ -410,7 +455,8 @@ class Calculator_ControllerTest extends ApplicationTest {
         } else if (idButtonClickedMouse.equals("+")) {
             clickOn((Button) from(root).lookup("#add").query());
         } else if (idButtonClickedMouse.equals("-")) {
-            clickOn((Button) from(root).lookup("#subtract").query());type();
+            clickOn((Button) from(root).lookup("#subtract").query());
+            type();
         } else if (idButtonClickedMouse.equals("*")) {
             clickOn((Button) from(root).lookup("#multiply").query());
         } else if (idButtonClickedMouse.equals("r")) {

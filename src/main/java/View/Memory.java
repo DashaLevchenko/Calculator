@@ -7,10 +7,6 @@ import java.math.BigDecimal;
 public class Memory {
     private BigDecimal number = null;
 
-//    Memory(BigDecimal number) {
-//        this.number = number;
-//    }
-
     void memoryAdd(BigDecimal numberSecond) {
         if (number != null) {
             number = Arithmetic.sum(number, numberSecond);

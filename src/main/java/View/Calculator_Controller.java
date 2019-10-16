@@ -833,7 +833,6 @@ public class Calculator_Controller {
                 }
                 unaryOperation = null;
                 numberUnaryOperations = result;
-//                textForOutput = textForOutput.replace(".", ",");
             } catch (Exception e) {
                 printError(e);
             }

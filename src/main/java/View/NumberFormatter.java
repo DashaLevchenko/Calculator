@@ -13,7 +13,6 @@ public class NumberFormatter {
     private static final BigDecimal MIN_DECIMAL_NUMBER_WITHOUT_E = BigDecimal.valueOf(0.0000000000000001);
     private static final BigDecimal MAX_NUMBER_INPUT = BigDecimal.valueOf(9999999999999999L);
     private static final int MAX_SCALE = 16;
-    private static final int MAX_SCALE_WITHOUT_E = 18;
 
 
     public static String formatterNumber(BigDecimal number) {
@@ -37,21 +36,22 @@ public class NumberFormatter {
                 pattern.append("0".repeat(number.scale()));
             }
         } else if (number.abs().compareTo(BigDecimal.ONE) < 0 && number.abs().compareTo(BigDecimal.ZERO) != 0) {
-            number = number.stripTrailingZeros();
-            number = number.setScale(16, RoundingMode.HALF_UP);
             pattern.append("0.");
-//            if (number.scale() > MAX_SCALE) {
-            if (number.precision() > 14) {
-                pattern.append("#".repeat(number.precision()));
+            if (number.scale() > MAX_SCALE) {
+                if (number.scale() - number.precision() > 2 || number.compareTo(MIN_DECIMAL_NUMBER_WITHOUT_E) < 0) {
+//                    number = number.setScale(16, RoundingMode.HALF_UP);
+                    if (number.precision() != 1 && number.precision() <= MAX_SCALE) {
+                        pattern.append("#".repeat(number.precision()));
+                    }
+                    pattern.append("E0");
+
+                } else {
+                    number = number.setScale(16, RoundingMode.HALF_UP);
+                    pattern.append("#".repeat(MAX_SCALE));
+                }
+            } else {
+                pattern.append("#".repeat(number.scale()));
             }
-//            } else{
-//                if (number.scale() > MAX_SCALE_WITHOUT_E || number.abs().compareTo(MIN_DECIMAL_NUMBER_WITHOUT_E) < 0) {
-                pattern.append("E0");
-//        }
-//                }
-//            } else {
-//                pattern.append("0".repeat(number.scale()));
-//            }
         } else {
             pattern.append("#,##0");
             if (number.scale() > 0) {
