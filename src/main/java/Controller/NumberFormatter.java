@@ -14,11 +14,15 @@ public class NumberFormatter {
     private static final BigDecimal MAX_NUMBER_INPUT = BigDecimal.valueOf(9999999999999999L);
     private static final int MAX_SCALE = 16;
 
-
-    public static String formatterNumber(BigDecimal number) {
+    static {
         symbols.setExponentSeparator("e");
         symbols.setGroupingSeparator(' ');
         symbols.setDecimalSeparator(',');
+        decimalFormat.setDecimalFormatSymbols(symbols);
+    }
+
+    public static String formatterNumber(BigDecimal number) {
+
 
         StringBuilder pattern = new StringBuilder();
         if (number.abs().compareTo(MAX_NUMBER_INPUT) > 0) {
