@@ -44,6 +44,7 @@ public class NumberFormatter {
             if (number.scale() > MAX_SCALE) {
                 if (number.scale() - number.precision() > 2 || number.compareTo(MIN_DECIMAL_NUMBER_WITHOUT_E) < 0) {
 //                    number = number.setScale(16, RoundingMode.HALF_UP);
+                    number = number.round(new MathContext(MAX_SCALE, RoundingMode.HALF_UP));
                     if (number.precision() != 1 && number.precision() <= MAX_SCALE) {
                         pattern.append("#".repeat(number.precision()));
                     }

@@ -98,7 +98,7 @@ public class Arithmetic {
 
         if (operation.equals(OperationsEnum.SQRT)) {
             result = squareRoot(number);
-        } else if (operation.equals(OperationsEnum.SQRX)) {
+        } else if (operation.equals(OperationsEnum.SQR)) {
             result = xSquare(number);
         } else if (operation.equals(OperationsEnum.ONE_DIVIDE_X)) {
             result = oneDivideX(number);
