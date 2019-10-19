@@ -347,13 +347,19 @@ public class Calculator_Controller {
         Character buttonText = ((Button) actionEvent.getSource()).getText().charAt(0);
         if (buttonText.equals(OperationsEnum.EQUAL.getOperations())) {
             if (newBinaryOperation != null) {
-                setNum2();
-                if (numberSecondBinaryOperations == null) {
-                    numberSecondBinaryOperations = numberFirstBinaryOperations;
+                if (!equalWasPress) {
+                    setNum2();
+                    if (numberSecondBinaryOperations == null) {
+                        numberSecondBinaryOperations = numberFirstBinaryOperations;
+                    }
+                    equalWasPress = true;
                 }
+                calculateBinaryOperation();
+            } else {
+                setNum1();
+                result = numberFirstBinaryOperations;
             }
-            equalWasPress = true;
-            calculateBinaryOperation();
+
             historyOperations = "";
             outOperationMemory.setText(historyOperations);
             negatePressed = false;
@@ -366,19 +372,17 @@ public class Calculator_Controller {
 
     @FXML
     void backspace(ActionEvent actionEvent) {
-        if (!equalWasPress) {
-            if (textWithoutSeparate != null && textWithoutSeparate.length() > 0) {
-                if ((textWithoutSeparate.length() == 2 && textWithoutSeparate.contains("-")) ||
-                        textWithoutSeparate.length() == 1) {
-                    CE.fire();
+        if (textWithoutSeparate != null && textWithoutSeparate.length() > 0) {
+            if ((textWithoutSeparate.length() == 2 && textWithoutSeparate.contains("-")) ||
+                    textWithoutSeparate.length() == 1) {
+                CE.fire();
+            }
+            if (!textWithoutSeparate.isEmpty() && !textWithoutSeparate.equals("0")) {
+                if (textWithoutSeparate.charAt(textWithoutSeparate.length() - 1) == ',') {
+                    pointInText = false;
                 }
-                if (!textWithoutSeparate.isEmpty() && !textWithoutSeparate.equals("0")) {
-                    if (textWithoutSeparate.charAt(textWithoutSeparate.length() - 1) == ',') {
-                        pointInText = false;
-                    }
-                    textWithoutSeparate = new StringBuilder(textWithoutSeparate).deleteCharAt(textWithoutSeparate.length() - 1).toString();
-                    printInput();
-                }
+                textWithoutSeparate = new StringBuilder(textWithoutSeparate).deleteCharAt(textWithoutSeparate.length() - 1).toString();
+                printInput();
             }
         }
     }
@@ -505,6 +509,7 @@ public class Calculator_Controller {
         if (numberFirstBinaryOperations != null) {
             canChangeOperator = false;
             equalWasPress = false;
+            result = null;
             if (!textForOutput.contains(",")) {
                 pointInText = false;
             }
@@ -518,14 +523,13 @@ public class Calculator_Controller {
 
     private void printInput() {
         textForOutput = NumberFormatter.formatterInputNumber(new BigDecimal(textWithoutSeparate.replace(",", ".").replace("e", "E")));
-
-        result = NumberFormatter.parseNumber(textWithoutSeparate);
         if (pointInText && textWithoutSeparate.charAt(textWithoutSeparate.length() - 1) == ',') {
             textForOutput += ",";
         }
 
         resizeOutputText();
         outText.setText(textForOutput);
+
     }
 
     @FXML
@@ -615,20 +619,17 @@ public class Calculator_Controller {
 
     @FXML
     public void negate(ActionEvent actionEvent) {
-        System.out.println(newBinaryOperation+" "+equalWasPress+" "+textWithoutSeparate);
-            if (textWithoutSeparate.isEmpty()) {
-        if(newBinaryOperation != null || equalWasPress){
-                textWithoutSeparate = NumberFormatter.parseNumber(outText.getText()).toString();
-
-                if (!negatePressed) {
-                    historyUnaryOperations += textWithoutSeparate;
-                    negatePressed = true;
-                }
-                historyUnaryOperations = "negate(" + historyUnaryOperations + ")";
-                outOperationMemory.setText(historyOperations + historyUnaryOperations);
+        if (result != null) {
+            if (!negatePressed) {
+                historyUnaryOperations += NumberFormatter.parseNumber(NumberFormatter.formatterNumber(result)).toString().replace(".", ",");
+                negatePressed = true;
             }
+            historyUnaryOperations = "negate(" + historyUnaryOperations + ")";
+            outOperationMemory.setText(historyOperations + historyUnaryOperations);
         }
-
+        if (textWithoutSeparate.isEmpty()) {
+            textWithoutSeparate = NumberFormatter.parseNumber(outText.getText()).toString();
+        }
 
         if (!textWithoutSeparate.contains("-")) {
             textWithoutSeparate = "-" + textWithoutSeparate;
@@ -640,9 +641,11 @@ public class Calculator_Controller {
 
 
         printInput();
-        canChangeOperator = false;
+//        canChangeOperator = false;
         scrollOutOperationMemory();
-
+        if (result != null || equalWasPress) {
+            textWithoutSeparate = "";
+        }
     }
 
 
@@ -763,36 +766,35 @@ public class Calculator_Controller {
         }
         if (historyOperations.isEmpty()) {
             if (historyUnaryOperations.isEmpty()) {
-//                if (NumberFormatter.formatterNumber(numberFirstBinaryOperations).contains("e")) {
-                historyOperations += NumberFormatter.formatterNumber(numberFirstBinaryOperations).replace(".", ",");
-//                } else {
-//                    historyOperations += NumberFormatter.formatterInputNumber(numberFirstBinaryOperations).replace(".", ",");
-//                }
+                if (NumberFormatter.formatterNumber(numberFirstBinaryOperations).contains("e")) {
+                    historyOperations += NumberFormatter.formatterNumber(numberFirstBinaryOperations).replace(".", ",");
+                } else {
+                    historyOperations += numberFirstBinaryOperations.toString().replace(".", ",");
+                }
             }
         }
 
     }
 
     private void setNum2() {
-        if (!canChangeOperator) {
-            if (!textWithoutSeparate.isEmpty()) {
-                numberSecondBinaryOperations = NumberFormatter.parseNumber(textWithoutSeparate);
-            }
-            if (!negatePressed) {
-                if (!equalWasPress && percentOperation == null) {
-                    if (numberSecondBinaryOperations != null) {
-                        if (NumberFormatter.formatterNumber(numberSecondBinaryOperations).contains("e")) {
-                            historyOperations += NumberFormatter.formatterNumber(numberSecondBinaryOperations).replace(".", ",");
-                        } else {
-                            historyOperations += numberSecondBinaryOperations.toString().replace(".", ",");
-                        }
+        if (equalWasPress) {
+            numberSecondBinaryOperations = null;
+        } else {
+            numberSecondBinaryOperations = NumberFormatter.parseNumber(textWithoutSeparate);
+
+//        if (!textWithoutSeparate.isEmpty()) {
+//        }
+//        if (!negatePressed) {
+            if (!equalWasPress && percentOperation == null) {
+                if (numberSecondBinaryOperations != null) {
+                    if (NumberFormatter.formatterNumber(numberSecondBinaryOperations).contains("e")) {
+                        historyOperations += NumberFormatter.formatterNumber(numberSecondBinaryOperations).replace(".", ",");
+                    } else {
+                        historyOperations += numberSecondBinaryOperations.toString().replace(".", ",");
                     }
                 }
             }
-        } else {
-            numberSecondBinaryOperations = null;
         }
-
     }
 
     private void calculateBinaryOperation() {
@@ -808,7 +810,7 @@ public class Calculator_Controller {
                     numberSecondBinaryOperations = null;
                 }
 
-                canChangeOperator = false;
+//                canChangeOperator = false;
                 negatePressed = false;
             } catch (Exception e) {
                 printError(e);
@@ -871,7 +873,6 @@ public class Calculator_Controller {
                 numberFirstBinaryOperations = result;
             }
 
-//            start = true;
             percentOperation = null;
 
         }
