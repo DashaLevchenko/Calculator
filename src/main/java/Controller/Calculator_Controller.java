@@ -278,16 +278,7 @@ public class Calculator_Controller {
         } else if (buttonText.equals(OperationsEnum.ONE_DIVIDE_X.getOperations())) {
             unaryOperation = OperationsEnum.ONE_DIVIDE_X;
         }
-//        if (numberUnaryOperations == null) {
-//            if (!textWithoutSeparate.isEmpty()) {
-//                numberUnaryOperations = NumberFormatter.parseNumber(textWithoutSeparate);
-//            } else if (result != null) {
-//                numberUnaryOperations = result;
-//            } else {
-//                numberUnaryOperations = BigDecimal.ZERO;
-//            }
-//            historyUnaryOperations += numberUnaryOperations.toString();
-//        }
+
         if (numberUnaryOperations == null) {
             if (!textWithoutSeparate.isEmpty()) {
                 numberUnaryOperations = new BigDecimal(textWithoutSeparate.replace(",", "."));

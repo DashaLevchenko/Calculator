@@ -8,7 +8,8 @@ public class Arithmetic {
     private static final BigDecimal MAX_NUMBER = new BigDecimal("9.999999999999995E9999");
     private static final BigDecimal MIN_NUMBER = new BigDecimal("-9.999999999999995E9999");
 
-    /**9
+    /**
+     * 9
      * Method calculates sum of numbers
      *
      * @param x First parameter
@@ -26,7 +27,7 @@ public class Arithmetic {
      * @param y Second parameter value to be subtracted from {@code x}.
      * @return Difference of {@code x} and {@code y}
      */
-    public static BigDecimal minus(BigDecimal x, BigDecimal y) {
+    static BigDecimal minus(BigDecimal x, BigDecimal y) {
         return scaleForBigDecimal(x.subtract(y));
     }
 
@@ -34,40 +35,33 @@ public class Arithmetic {
         return scaleForBigDecimal(x.multiply(y));
     }
 
-    public static BigDecimal divide(BigDecimal x, BigDecimal y) throws ArithmeticException {
-        if(y.equals(BigDecimal.ZERO)){
-
-        }
-
-        try {
-            BigDecimal result = x.divide(y, MathContext.DECIMAL128);
-            return scaleForBigDecimal(result);
-        } catch (ArithmeticException e) {
+    static BigDecimal divide(BigDecimal x, BigDecimal y) throws ArithmeticException {
+        if (x.equals(BigDecimal.ZERO) && y.equals(BigDecimal.ZERO)) {
+            throw new ArithmeticException("Result is undefined");
+        } else if (y.equals(BigDecimal.ZERO)) {
             throw new ArithmeticException("Cannot divide by zero");
+        } else {
+            return scaleForBigDecimal(x.divide(y, MathContext.DECIMAL128));
         }
     }
 
-    public static BigDecimal squareRoot(BigDecimal x) throws ArithmeticException {
-        try {
-            return x.sqrt(MathContext.DECIMAL128);
-        } catch (ArithmeticException e) {
+    static BigDecimal squareRoot(BigDecimal x) throws ArithmeticException {
+        if(x.compareTo(BigDecimal.ZERO) < 0){
             throw new ArithmeticException("Invalid input");
+        }else{
+            return x.sqrt(MathContext.DECIMAL128);
         }
     }
 
-    public static BigDecimal xSquare(BigDecimal x) {
+    static BigDecimal xSquare(BigDecimal x) {
         return scaleForBigDecimal(x.pow(2));
     }
 
-    public static BigDecimal oneDivideX(BigDecimal x) throws ArithmeticException {
-        try {
-            return scaleForBigDecimal(BigDecimal.ONE.divide(x, MathContext.DECIMAL128));
-        } catch (ArithmeticException e) {
-            throw new ArithmeticException("Cannot divide by zero");
-        }
+    static BigDecimal oneDivideX(BigDecimal y) throws ArithmeticException {
+        return scaleForBigDecimal(Arithmetic.divide(BigDecimal.ONE, y));
     }
 
-    public static BigDecimal percent(BigDecimal x, BigDecimal percent) {
+    static BigDecimal percent(BigDecimal x, BigDecimal percent) {
         return scaleForBigDecimal(x.multiply(percent.movePointLeft(2), MathContext.DECIMAL128));
     }
 
@@ -87,11 +81,7 @@ public class Arithmetic {
         } else if (operation.equals(OperationsEnum.PERCENT)) {
             result = percent(number1, number2);
         } else if (operation.equals(OperationsEnum.DIVIDE)) {
-            try {
-                result = divide(number1, number2);
-            } catch (ArithmeticException e) {
-                throw new ArithmeticException("Cannot divide by zero");
-            }
+            result = divide(number1, number2);
         }
         isOverflow(result);
         return result;

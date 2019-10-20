@@ -360,11 +360,21 @@ class Calculator_ControllerTest extends ApplicationTest {
         @Test
         void checkExceptions(){
         //Divide zero
-            assertNumber("Cannot divide by zero", "9 / 0 =", "9 ÷ ");
+            assertNumber("Result is undefined", "0 / 0 =", "0 ÷ ");
+            assertNumber("Cannot divide by zero", "1 / 0 =", "1 ÷ ");
             assertNumber("Cannot divide by zero", "0 1/x", "1/(0)");
-            assertNumber("Cannot divide by zero", "0 1/x", "1/(0)");
+            assertNumber("Cannot divide by zero", "0 sqrt 1/x", "1/(√(0))");
+            assertNumber("Cannot divide by zero", "2 + 4 - 1 + 3 / 0 =", "2 + 4 - 1 + 3 ÷ ");
+            assertNumber("Cannot divide by zero", "4 + 5 - 9 + 1/x ", "4 + 5 - 9 + 1/(0)");
+        //Square root negative number
+            assertNumber("Invalid input", "1 +/- sqrt", "√(-1)");
+            assertNumber("Invalid input", "2 - 3 = sqrt", "√(-1)");
+            assertNumber("Invalid input", "2 + 3 = +/- sqrt", "√(negate(-5))");
+
+
 
     }
+
 
         void assertNumber (String result, String buttonsPressed, String outOperationMemoryResult){
             checkKeyInputNumber(result, buttonsPressed, outOperationMemoryResult);
