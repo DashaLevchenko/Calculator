@@ -35,6 +35,10 @@ public class Arithmetic {
     }
 
     public static BigDecimal divide(BigDecimal x, BigDecimal y) throws ArithmeticException {
+        if(y.equals(BigDecimal.ZERO)){
+
+        }
+
         try {
             BigDecimal result = x.divide(y, MathContext.DECIMAL128);
             return scaleForBigDecimal(result);

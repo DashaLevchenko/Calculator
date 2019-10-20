@@ -236,6 +236,7 @@ public class Calculator_Controller {
         } else if (buttonText.equals(OperationsEnum.MULTIPLY.getOperations())) {
             newBinaryOperation = OperationsEnum.MULTIPLY;
         }
+
         if (!canChangeOperator) {
             oldBinaryOperation = newBinaryOperation;
             canChangeOperator = true;
@@ -360,11 +361,14 @@ public class Calculator_Controller {
                 result = numberFirstBinaryOperations;
             }
 
-            historyOperations = "";
-            outOperationMemory.setText(historyOperations);
-            negatePressed = false;
-            textForOutput = "";
-            textWithoutSeparate = "";
+            if (!isError) {
+                historyOperations = "";
+                outOperationMemory.setText(historyOperations);
+                negatePressed = false;
+                canChangeOperator = false;
+                textForOutput = "";
+                textWithoutSeparate = "";
+            }
 
         }
     }
@@ -620,7 +624,7 @@ public class Calculator_Controller {
     @FXML
     public void negate(ActionEvent actionEvent) {
         if (result != null) {
-            if (!negatePressed) {
+            if (!negatePressed && historyUnaryOperations.isEmpty()) {
                 historyUnaryOperations += NumberFormatter.parseNumber(NumberFormatter.formatterNumber(result)).toString().replace(".", ",");
                 negatePressed = true;
             }
@@ -628,7 +632,7 @@ public class Calculator_Controller {
             outOperationMemory.setText(historyOperations + historyUnaryOperations);
         }
         if (textWithoutSeparate.isEmpty()) {
-            textWithoutSeparate = NumberFormatter.parseNumber(outText.getText()).toString();
+            textWithoutSeparate = NumberFormatter.parseNumber(outText.getText()).toPlainString();
         }
 
         if (!textWithoutSeparate.contains("-")) {
@@ -639,8 +643,8 @@ public class Calculator_Controller {
             charValidInText = CHAR_MAX;
         }
 
-
-        printInput();
+//        printInput();
+        printResult();
 //        canChangeOperator = false;
         scrollOutOperationMemory();
         if (result != null || equalWasPress) {

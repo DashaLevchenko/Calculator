@@ -9,6 +9,8 @@
     <list default="true" id="feaeb0c2-feb2-4a9c-98e3-48b1d1a339aa" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Calculator_Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Calculator_Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Memory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Memory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/NumberFormatter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/NumberFormatter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/Controller/Calculator_ControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Controller/Calculator_ControllerTest.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -22,6 +24,10 @@
   </component>
   <component name="CoverageViewManager">
     <option name="myElementSize" value="214" />
+  </component>
+  <component name="ErrorTreeViewConfiguration">
+    <option name="hideWarnings" value="true" />
+    <option name="HIDE_WARNINGS" value="true" />
   </component>
   <component name="FavoritesManager">
     <favorites_list name="Calculator" />
@@ -127,7 +133,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.Calculator_ControllerTest.checkBinaryOperations">
+  <component name="RunManager" selected="JUnit.Calculator_ControllerTest.checkExceptions">
     <configuration name="Calculator_Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Controller.Calculator_Main" />
       <module name="Calculator" />
@@ -169,7 +175,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Calculator_ControllerTest.checkBinaryOperations" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="Calculator_ControllerTest.checkExceptions" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Calculator" />
       <extension name="coverage">
         <pattern>
@@ -179,13 +185,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="Controller" />
       <option name="MAIN_CLASS_NAME" value="Controller.Calculator_ControllerTest" />
-      <option name="METHOD_NAME" value="checkBinaryOperations" />
+      <option name="METHOD_NAME" value="checkExceptions" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Calculator_ControllerTest.checkInput" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="Calculator_ControllerTest.checkOperationMemory" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Calculator" />
       <extension name="coverage">
         <pattern>
@@ -195,13 +201,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="Controller" />
       <option name="MAIN_CLASS_NAME" value="Controller.Calculator_ControllerTest" />
-      <option name="METHOD_NAME" value="checkInput" />
+      <option name="METHOD_NAME" value="checkOperationMemory" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Controller in Calculator" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="Calculator_ControllerTest.checkUnaryOperations" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Calculator" />
       <extension name="coverage">
         <pattern>
@@ -210,7 +216,9 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="Controller" />
-      <option name="TEST_OBJECT" value="package" />
+      <option name="MAIN_CLASS_NAME" value="Controller.Calculator_ControllerTest" />
+      <option name="METHOD_NAME" value="checkUnaryOperations" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -219,17 +227,17 @@
       <item itemvalue="Application.Exp" />
       <item itemvalue="Application.Calculator_Main" />
       <item itemvalue="JUnit.Calculator_ControllerTest" />
-      <item itemvalue="JUnit.Calculator_ControllerTest.checkInput" />
-      <item itemvalue="JUnit.Controller in Calculator" />
-      <item itemvalue="JUnit.Calculator_ControllerTest.checkBinaryOperations" />
+      <item itemvalue="JUnit.Calculator_ControllerTest.checkUnaryOperations" />
+      <item itemvalue="JUnit.Calculator_ControllerTest.checkOperationMemory" />
+      <item itemvalue="JUnit.Calculator_ControllerTest.checkExceptions" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.Calculator_ControllerTest.checkBinaryOperations" />
+        <item itemvalue="JUnit.Calculator_ControllerTest.checkExceptions" />
         <item itemvalue="Application.Calculator_Main" />
-        <item itemvalue="JUnit.Controller in Calculator" />
-        <item itemvalue="JUnit.Calculator_ControllerTest.checkInput" />
         <item itemvalue="JUnit.Calculator_ControllerTest" />
+        <item itemvalue="JUnit.Calculator_ControllerTest.checkOperationMemory" />
+        <item itemvalue="JUnit.Calculator_ControllerTest.checkUnaryOperations" />
       </list>
     </recent_temporary>
   </component>
@@ -698,23 +706,38 @@
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/Controller/Calculator_Controller.java</url>
-          <line>864</line>
+          <line>868</line>
           <option name="timeStamp" value="222" />
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/Controller/Calculator_Controller.java</url>
-          <line>384</line>
+          <line>388</line>
           <option name="timeStamp" value="228" />
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/Controller/Calculator_Controller.java</url>
-          <line>277</line>
+          <line>278</line>
           <option name="timeStamp" value="230" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/Controller/Calculator_Controller.java</url>
-          <line>346</line>
-          <option name="timeStamp" value="241" />
+          <line>230</line>
+          <option name="timeStamp" value="244" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Controller/Calculator_Controller.java</url>
+          <line>347</line>
+          <option name="timeStamp" value="245" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Controller/Calculator_Controller.java</url>
+          <line>357</line>
+          <option name="timeStamp" value="246" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Controller/Calculator_Controller.java</url>
+          <line>646</line>
+          <option name="timeStamp" value="250" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

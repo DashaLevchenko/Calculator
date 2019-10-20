@@ -22,9 +22,8 @@ public class NumberFormatter {
     }
 
     public static String formatterNumber(BigDecimal number) {
-
-
         StringBuilder pattern = new StringBuilder();
+        int zeroAfterComma = number.scale() - number.precision();
         if (number.abs().compareTo(MAX_NUMBER_INPUT) > 0) {
             pattern.append("0.");
             if (number.precision() > MAX_SCALE) {
@@ -42,14 +41,14 @@ public class NumberFormatter {
         } else if (number.abs().compareTo(BigDecimal.ONE) < 0 && number.abs().compareTo(BigDecimal.ZERO) != 0) {
             pattern.append("0.");
             if (number.scale() > MAX_SCALE) {
-                if (number.scale() - number.precision() > 2 || number.compareTo(MIN_DECIMAL_NUMBER_WITHOUT_E) < 0) {
-//                    number = number.setScale(16, RoundingMode.HALF_UP);
-                    number = number.round(new MathContext(MAX_SCALE, RoundingMode.HALF_UP));
+                number = number.round(new MathContext(MAX_SCALE, RoundingMode.HALF_UP));
+//                number = number.setScale(16, RoundingMode.HALF_UP);
+                number = number.stripTrailingZeros();
+                if (zeroAfterComma > 2 || number.abs().compareTo(MIN_DECIMAL_NUMBER_WITHOUT_E) < 0) {
                     if (number.precision() != 1 && number.precision() <= MAX_SCALE) {
                         pattern.append("#".repeat(number.precision()));
                     }
                     pattern.append("E0");
-
                 } else {
                     number = number.setScale(16, RoundingMode.HALF_UP);
                     pattern.append("#".repeat(MAX_SCALE));
@@ -78,9 +77,11 @@ public class NumberFormatter {
 
     public static BigDecimal parseNumber(String text) {
         BigDecimal number = null;
+        text = text.replace("+", "");
         if (decimalFormat != null && !text.isEmpty()) {
             try {
                 try {
+                    String p = decimalFormat.toPattern();
                     number = BigDecimal.valueOf((Double) decimalFormat.parse(text));
                 } catch (ClassCastException e) {
                     number = BigDecimal.valueOf((Long) decimalFormat.parse(text));

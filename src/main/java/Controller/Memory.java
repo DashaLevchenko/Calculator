@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.Arithmetic;
+import Model.OperationsEnum;
 
 import java.math.BigDecimal;
 
@@ -17,7 +18,8 @@ public class Memory {
 
     void memorySubtract(BigDecimal numberSecond) {
         if (number != null) {
-            number = Arithmetic.minus(number, numberSecond);
+//            number = Arithmetic.minus(number, numberSecond);
+            number = Arithmetic.calculateBinaryOperations(number, numberSecond, OperationsEnum.MINUS);
         } else{
             number = numberSecond;
         }
