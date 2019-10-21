@@ -9,6 +9,7 @@
     <list default="true" id="feaeb0c2-feb2-4a9c-98e3-48b1d1a339aa" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Calculator_Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Calculator_Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/NumberFormatter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/NumberFormatter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Model/Arithmetic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Arithmetic.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/Controller/Calculator_ControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Controller/Calculator_ControllerTest.java" afterDir="false" />
     </list>
@@ -132,7 +133,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Calculator_Main">
+  <component name="RunManager" selected="JUnit.Calculator_ControllerTest">
     <configuration name="Calculator_Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Controller.Calculator_Main" />
       <module name="Calculator" />
@@ -225,18 +226,18 @@
     <list>
       <item itemvalue="Application.Exp" />
       <item itemvalue="Application.Calculator_Main" />
-      <item itemvalue="JUnit.Calculator_ControllerTest" />
-      <item itemvalue="JUnit.Calculator_ControllerTest.checkUnaryOperations" />
-      <item itemvalue="JUnit.Calculator_ControllerTest.checkOperationMemory" />
       <item itemvalue="JUnit.Calculator_ControllerTest.checkExceptions" />
+      <item itemvalue="JUnit.Calculator_ControllerTest" />
+      <item itemvalue="JUnit.Calculator_ControllerTest.checkOperationMemory" />
+      <item itemvalue="JUnit.Calculator_ControllerTest.checkUnaryOperations" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Calculator_Main" />
-        <item itemvalue="JUnit.Calculator_ControllerTest.checkExceptions" />
         <item itemvalue="JUnit.Calculator_ControllerTest" />
-        <item itemvalue="JUnit.Calculator_ControllerTest.checkOperationMemory" />
+        <item itemvalue="Application.Calculator_Main" />
         <item itemvalue="JUnit.Calculator_ControllerTest.checkUnaryOperations" />
+        <item itemvalue="JUnit.Calculator_ControllerTest.checkOperationMemory" />
+        <item itemvalue="JUnit.Calculator_ControllerTest.checkExceptions" />
       </list>
     </recent_temporary>
   </component>
@@ -263,13 +264,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1565432602101</updated>
-    </task>
-    <task id="LOCAL-00004" summary="new test sum">
-      <created>1566312788450</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1566312788450</updated>
     </task>
     <task id="LOCAL-00005" summary="new workspace">
       <created>1566313071238</created>
@@ -607,7 +601,14 @@
       <option name="project" value="LOCAL" />
       <updated>1571598530633</updated>
     </task>
-    <option name="localTasksCounter" value="53" />
+    <task id="LOCAL-00053" summary="before change unary operations in controller">
+      <created>1571600228370</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1571600228370</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -668,7 +669,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="start controller" />
     <MESSAGE value="resize is working,&#10;start controller, I want to change textField" />
     <MESSAGE value="plus backspace" />
     <MESSAGE value="all are working, before old and new text" />
@@ -693,55 +693,26 @@
     <MESSAGE value="all work,&#10;before change tests" />
     <MESSAGE value="before change test format" />
     <MESSAGE value="before test exceptions" />
-    <option name="LAST_COMMIT_MESSAGE" value="before test exceptions" />
+    <MESSAGE value="before change unary operations in controller" />
+    <option name="LAST_COMMIT_MESSAGE" value="before change unary operations in controller" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/Model/Exp.java</url>
-          <line>162</line>
-          <option name="timeStamp" value="212" />
-        </line-breakpoint>
-        <line-breakpoint type="java-line">
+        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/Controller/Calculator_Controller.java</url>
-          <line>859</line>
-          <option name="timeStamp" value="222" />
-        </line-breakpoint>
-        <line-breakpoint type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/Controller/Calculator_Controller.java</url>
-          <line>379</line>
-          <option name="timeStamp" value="228" />
-        </line-breakpoint>
-        <line-breakpoint type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/Controller/Calculator_Controller.java</url>
-          <line>278</line>
-          <option name="timeStamp" value="230" />
+          <line>279</line>
+          <option name="timeStamp" value="265" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/Controller/Calculator_Controller.java</url>
-          <line>230</line>
-          <option name="timeStamp" value="244" />
+          <line>277</line>
+          <option name="timeStamp" value="266" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/Controller/Calculator_Controller.java</url>
-          <line>338</line>
-          <option name="timeStamp" value="245" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/Controller/Calculator_Controller.java</url>
-          <line>348</line>
-          <option name="timeStamp" value="246" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/Controller/Calculator_Controller.java</url>
-          <line>637</line>
-          <option name="timeStamp" value="250" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/Controller/Calculator_Controller.java</url>
-          <line>295</line>
-          <option name="timeStamp" value="251" />
+          <line>839</line>
+          <option name="timeStamp" value="267" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

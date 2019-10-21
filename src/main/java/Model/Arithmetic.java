@@ -7,6 +7,7 @@ import java.math.MathContext;
 public class Arithmetic {
     private static final BigDecimal MAX_NUMBER = new BigDecimal("9.999999999999995E9999");
     private static final BigDecimal MIN_NUMBER = new BigDecimal("-9.999999999999995E9999");
+    private static final int MAX_SCALE = 10000;
 
     /**
      * 9
@@ -54,7 +55,7 @@ public class Arithmetic {
     }
 
     static BigDecimal xSquare(BigDecimal x) {
-        return scaleForBigDecimal(x.pow(2));
+        return scaleForBigDecimal(x.pow(2).round(MathContext.DECIMAL128));
     }
 
     static BigDecimal oneDivideX(BigDecimal y) throws ArithmeticException {
@@ -83,6 +84,7 @@ public class Arithmetic {
         } else if (operation.equals(OperationsEnum.DIVIDE)) {
             result = divide(number1, number2);
         }
+
         isOverflow(result);
         return result;
     }
@@ -112,7 +114,7 @@ public class Arithmetic {
     }
 
     private static void isOverflow(BigDecimal result) {
-        if (result.compareTo(MAX_NUMBER) > 0 || result.compareTo(MIN_NUMBER) < 0) {
+        if (result.compareTo(MAX_NUMBER) > 0 || result.compareTo(MIN_NUMBER) < 0 || result.scale() > MAX_SCALE) {
             throw new ArithmeticException("Overflow");
         }
 

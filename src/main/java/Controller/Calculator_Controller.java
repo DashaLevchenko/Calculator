@@ -19,6 +19,8 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 
 public class Calculator_Controller {
     private static final BigDecimal MAX_INPUT_NUMBER = BigDecimal.valueOf(9999999999999999L);
@@ -254,6 +256,7 @@ public class Calculator_Controller {
         scrollOutOperationMemory();
         oldBinaryOperation = newBinaryOperation;
         textWithoutSeparate = "";
+        equalWasPress = false;
     }
 
     private void printResult() {
@@ -280,14 +283,15 @@ public class Calculator_Controller {
         }
 
         if (numberUnaryOperations == null) {
-            if (!textWithoutSeparate.isEmpty()) {
-                numberUnaryOperations = new BigDecimal(textWithoutSeparate.replace(",", "."));
-            } else if (result != null) {
-                numberUnaryOperations = result;
+            if (textWithoutSeparate.isEmpty()) {
+                numberUnaryOperations = NumberFormatter.parseNumber(outText.getText());
+                numberUnaryOperations = numberUnaryOperations.round(new MathContext(16, RoundingMode.HALF_UP));
             } else {
-                numberUnaryOperations = BigDecimal.ZERO;
+                numberUnaryOperations = NumberFormatter.parseNumber(textWithoutSeparate);
             }
-            historyUnaryOperations += numberUnaryOperations.toString().replace(".", ",");
+            if (!negatePressed) {
+                historyUnaryOperations += NumberFormatter.formatterNumber(numberUnaryOperations).replace(" ", "");
+            }
         }
 
 
@@ -351,7 +355,6 @@ public class Calculator_Controller {
                 setNum1();
                 result = numberFirstBinaryOperations;
             }
-
             if (!isError) {
                 historyOperations = "";
                 outOperationMemory.setText(historyOperations);
@@ -754,7 +757,7 @@ public class Calculator_Controller {
 
     private void setNum1() {
         if (numberFirstBinaryOperations == null) {
-            numberFirstBinaryOperations = new BigDecimal(textWithoutSeparate.replace(",", "."));
+            numberFirstBinaryOperations = NumberFormatter.parseNumber(textWithoutSeparate);
             numberSecondBinaryOperations = null;
             textWithoutSeparate = "";
 
@@ -764,7 +767,7 @@ public class Calculator_Controller {
                 if (NumberFormatter.formatterNumber(numberFirstBinaryOperations).contains("e")) {
                     historyOperations += NumberFormatter.formatterNumber(numberFirstBinaryOperations).replace(".", ",");
                 } else {
-                    historyOperations += numberFirstBinaryOperations.toString().replace(".", ",");
+                    historyOperations += numberFirstBinaryOperations;
                 }
             }
         }
@@ -776,10 +779,6 @@ public class Calculator_Controller {
             numberSecondBinaryOperations = null;
         } else {
             numberSecondBinaryOperations = NumberFormatter.parseNumber(textWithoutSeparate);
-
-//        if (!textWithoutSeparate.isEmpty()) {
-//        }
-//        if (!negatePressed) {
             if (!equalWasPress && percentOperation == null) {
                 if (numberSecondBinaryOperations != null) {
                     if (NumberFormatter.formatterNumber(numberSecondBinaryOperations).contains("e")) {
@@ -842,13 +841,16 @@ public class Calculator_Controller {
                 result = Arithmetic.calculateUnaryOperations(numberUnaryOperations, unaryOperation);
                 textWithoutSeparate = result.toString();
                 printResult();
+                numberUnaryOperations = result;
+                result = result.round(new MathContext(16, RoundingMode.HALF_UP));
+                unaryOperation = null;
                 if (newBinaryOperation == null) {
                     numberFirstBinaryOperations = result;
                 } else {
                     numberSecondBinaryOperations = result;
                 }
-                unaryOperation = null;
-                numberUnaryOperations = result;
+
+
             } catch (Exception e) {
                 printError(e);
             }

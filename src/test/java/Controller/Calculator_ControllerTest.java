@@ -369,10 +369,17 @@ class Calculator_ControllerTest extends ApplicationTest {
         //Square root negative number
             assertNumber("Invalid input", "1 +/- sqrt", "√(-1)");
             assertNumber("Invalid input", "2 - 3 = sqrt", "√(-1)");
-            assertNumber("Invalid input", "2 + 3 = +/- sqrt", "√(negate(-5))");
+            assertNumber("Invalid input", "2 + 3 = +/- sqrt", "√(negate(5))");
+        //Overflow
+            assertNumber("Overflow", "9999999999999999 sqr  sqr  sqr  sqr  sqr  sqr  sqr  sqr  sqr  sqr ", "sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(9999999999999999))))))))))");
+            assertNumber("Overflow", "9999999999999999 / 1000000000000000 = = = sqr  sqr  sqr  sqr  sqr  sqr  sqr  sqr sqr", "sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(9,999999999999999e-30)))))))))");
+            assertNumber("Overflow", "9999999999999999 * = = = = = = = = = = = = = = = * = = = = = = * = = = = + = = = = = = = = = = + = + = * =", "4,399999999999754e+8961 x ");
 
+    }
 
-
+    @Test
+    void checkPercent(){
+        assertNumber("9,999999999999999e+28", "9999999999999999 + 1000000000000000 %", "9999999999999999 + 9,999999999999999e+28");
     }
 
 

@@ -42,7 +42,6 @@ public class NumberFormatter {
             pattern.append("0.");
             if (number.scale() > MAX_SCALE) {
                 number = number.round(new MathContext(MAX_SCALE, RoundingMode.HALF_UP));
-//                number = number.setScale(16, RoundingMode.HALF_UP);
                 number = number.stripTrailingZeros();
                 if (zeroAfterComma > 2 || number.abs().compareTo(MIN_DECIMAL_NUMBER_WITHOUT_E) < 0) {
                     if (number.precision() != 1 && number.precision() <= MAX_SCALE) {
@@ -62,7 +61,8 @@ public class NumberFormatter {
                 if (number.scale() < MAX_SCALE) {
                     pattern.append(".").append("#".repeat(number.scale()));
                 } else {
-                    pattern.append(".").append("#".repeat(MAX_SCALE - (number.precision() - number.scale())));
+                    number = number.round(new MathContext(MAX_SCALE, RoundingMode.HALF_EVEN));
+                    pattern.append(".").append("#".repeat(MAX_SCALE));
                 }
             }
         }
@@ -80,11 +80,12 @@ public class NumberFormatter {
         text = text.replace("+", "");
         if (decimalFormat != null && !text.isEmpty()) {
             try {
-                try {
-                    String p = decimalFormat.toPattern();
-                    number = BigDecimal.valueOf((Double) decimalFormat.parse(text));
-                } catch (ClassCastException e) {
-                    number = BigDecimal.valueOf((Long) decimalFormat.parse(text));
+                decimalFormat.setParseBigDecimal(true);
+                number = (BigDecimal) decimalFormat.parse(text);
+
+                number = number.stripTrailingZeros();
+                if(number.scale() < 0){
+                    number= number.setScale(0);
                 }
 
             } catch (ParseException e) {
