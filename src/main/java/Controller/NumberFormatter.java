@@ -58,6 +58,7 @@ public class NumberFormatter {
         } else {
             pattern.append("#,##0");
             if (number.scale() > 0) {
+                number = number.setScale(16, RoundingMode.HALF_UP);
                 if (number.scale() < MAX_SCALE) {
                     pattern.append(".").append("#".repeat(number.scale()));
                 } else {
@@ -109,7 +110,6 @@ public class NumberFormatter {
                 }
             }
         }
-
 
         return new DecimalFormat(pattern.toString(), symbols).format(number);
     }

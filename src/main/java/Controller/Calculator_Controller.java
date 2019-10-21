@@ -220,9 +220,9 @@ public class Calculator_Controller {
 
     @FXML
     public void binaryOperation(ActionEvent actionEvent) {
+        Character buttonText = ((Button) actionEvent.getSource()).getText().charAt(0);
         numberUnaryOperations = null;
         historyOperations += historyUnaryOperations;
-        Character buttonText = ((Button) actionEvent.getSource()).getText().charAt(0);
         if (newBinaryOperation != null && numberFirstBinaryOperations != null && !equalWasPress) {
             setNum2();
             calculateBinaryOperation();
@@ -248,7 +248,6 @@ public class Calculator_Controller {
                 historyOperations = new StringBuilder(historyOperations).delete(historyOperations.length() - 3, historyOperations.length()).toString();
                 historyOperations += newBinaryOperation.getSymbol();
             }
-
         }
 
         historyUnaryOperations = "";
@@ -285,7 +284,7 @@ public class Calculator_Controller {
         if (numberUnaryOperations == null) {
             if (textWithoutSeparate.isEmpty()) {
                 numberUnaryOperations = NumberFormatter.parseNumber(outText.getText());
-                numberUnaryOperations = numberUnaryOperations.round(new MathContext(16, RoundingMode.HALF_UP));
+//                numberUnaryOperations = numberUnaryOperations.round(new MathContext(16, RoundingMode.HALF_UP));
             } else {
                 numberUnaryOperations = NumberFormatter.parseNumber(textWithoutSeparate);
             }
@@ -308,14 +307,16 @@ public class Calculator_Controller {
         if (buttonText.equals(OperationsEnum.PERCENT.getOperations())) {
             percentOperation = OperationsEnum.PERCENT;
         }
-        setNum1();
+        if (numberFirstBinaryOperations == null) {
+            setNum1();
+        }
         setNum2();
+
         calculatePerCent();
 
         outOperationMemory.setText(historyOperations);
-
-//        CE.fire();
-
+        canChangeOperator = false;
+        scrollOutOperationMemory();
     }
 
     @FXML
@@ -362,8 +363,9 @@ public class Calculator_Controller {
                 canChangeOperator = false;
                 textForOutput = "";
                 textWithoutSeparate = "";
+                historyUnaryOperations = "";
+                numberUnaryOperations = null;
             }
-
         }
     }
 
@@ -757,30 +759,24 @@ public class Calculator_Controller {
 
     private void setNum1() {
         if (numberFirstBinaryOperations == null) {
-            numberFirstBinaryOperations = NumberFormatter.parseNumber(textWithoutSeparate);
+            numberFirstBinaryOperations = NumberFormatter.parseNumber(outText.getText());
             numberSecondBinaryOperations = null;
             textWithoutSeparate = "";
-
         }
-        if (historyOperations.isEmpty()) {
-            if (historyUnaryOperations.isEmpty()) {
-                if (NumberFormatter.formatterNumber(numberFirstBinaryOperations).contains("e")) {
-                    historyOperations += NumberFormatter.formatterNumber(numberFirstBinaryOperations).replace(".", ",");
-                } else {
-                    historyOperations += numberFirstBinaryOperations;
+            if (historyOperations.isEmpty()) {
+                if (historyUnaryOperations.isEmpty()) {
+                    historyOperations += NumberFormatter.formatterNumber(numberFirstBinaryOperations).replace(" ", "");
                 }
             }
-        }
-
     }
 
     private void setNum2() {
         if (equalWasPress) {
             numberSecondBinaryOperations = null;
         } else {
-            numberSecondBinaryOperations = NumberFormatter.parseNumber(textWithoutSeparate);
-            if (!equalWasPress && percentOperation == null) {
-                if (numberSecondBinaryOperations != null) {
+            if (numberSecondBinaryOperations == null) {
+                numberSecondBinaryOperations = NumberFormatter.parseNumber(textWithoutSeparate);
+                if (!equalWasPress && percentOperation == null) {
                     if (NumberFormatter.formatterNumber(numberSecondBinaryOperations).contains("e")) {
                         historyOperations += NumberFormatter.formatterNumber(numberSecondBinaryOperations).replace(".", ",");
                     } else {
@@ -804,7 +800,6 @@ public class Calculator_Controller {
                     numberSecondBinaryOperations = null;
                 }
 
-//                canChangeOperator = false;
                 negatePressed = false;
             } catch (Exception e) {
                 printError(e);
@@ -858,21 +853,26 @@ public class Calculator_Controller {
     }
 
     private void calculatePerCent() {
-        if (numberFirstBinaryOperations != null && numberSecondBinaryOperations != null) {
-            result = Arithmetic.calculateBinaryOperations(numberFirstBinaryOperations, numberSecondBinaryOperations, percentOperation);
-            textWithoutSeparate = result.toString();
-            printResult();
-
-            if (newBinaryOperation != null) {
-                numberSecondBinaryOperations = result;
-                historyOperations += NumberFormatter.formatterNumber(result).replace(" ", "");
-            } else {
-                numberFirstBinaryOperations = result;
+        if (newBinaryOperation != null) {
+            if (numberSecondBinaryOperations == null) {
+                numberSecondBinaryOperations = numberFirstBinaryOperations;
             }
-
-            percentOperation = null;
-
+            if (newBinaryOperation.equals(OperationsEnum.DIVIDE) || newBinaryOperation.equals(OperationsEnum.MULTIPLY)) {
+                result = Arithmetic.calculateBinaryOperations(BigDecimal.ONE, numberSecondBinaryOperations, percentOperation);
+            } else {
+                result = Arithmetic.calculateBinaryOperations(numberFirstBinaryOperations, numberSecondBinaryOperations, percentOperation);
+            }
+            numberSecondBinaryOperations = result;
+            historyOperations += NumberFormatter.formatterNumber(result).replace(" ", "");
+        } else {
+            result = Arithmetic.calculateUnaryOperations(numberFirstBinaryOperations, percentOperation);
+            numberFirstBinaryOperations = result;
+            historyOperations = NumberFormatter.formatterNumber(result).replace(" ", "");
         }
+        textWithoutSeparate = result.toString();
+        printResult();
+        percentOperation = null;
+
     }
 
 }

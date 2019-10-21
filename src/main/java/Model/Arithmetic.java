@@ -100,6 +100,8 @@ public class Arithmetic {
             result = oneDivideX(number);
         } else if (operation.equals(OperationsEnum.NEGATE)) {
             result = negate(number);
+        }else if (operation.equals(OperationsEnum.PERCENT)) {
+            result = percent(number, BigDecimal.ZERO);
         }
         isOverflow(result);
         return result;
