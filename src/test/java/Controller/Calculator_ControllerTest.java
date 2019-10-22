@@ -379,9 +379,15 @@ class Calculator_ControllerTest extends ApplicationTest {
     void checkPercent(){
         assertNumber("0", "8 %", "0");
         assertNumber("0", "0 + 1 %", "0 + 0");
-        assertNumber("0", "0 * 1 %", "0 + 0,01");
-        assertNumber("0", "2 + 7 = %", "0 + 0,01");
-        assertNumber("0,81", "32 + 8 +/- % ", "0,81");
+        assertNumber("0", "0 - 1 %", "0 - 0");
+        assertNumber("0,01", "0 * 1 %", "0 x 0,01");
+        assertNumber("0,01", "0 / 1 %", "0 ÷ 0,01");
+        assertNumber("0,81", "2 + 7 = %", "0,81");
+        assertNumber("0,01", "3 - 4 = %", "0,01");
+        assertNumber("0,0071428571428571", "5 / 7 = %", "0,0071428571428571");
+        assertNumber("0,54", "6 * 9 = %", "0,54");
+        assertNumber("-14,68", "9 - 11 = 734 %", "-14,68");
+        assertNumber("-2,56", "32 + 8 +/- % ", "32 + -2,56");
         assertNumber("0", "8 sqr %", "0");
         assertNumber("-63,36", "12 sqr - % =", "");
         assertNumber("8,19", "9 - % +", "9 - 0,81 + ");
@@ -390,9 +396,9 @@ class Calculator_ControllerTest extends ApplicationTest {
         assertNumber("-17,3578685327433", "284 sqrt + 3 % = +/-", "negate(17,3578685327433)");
         assertNumber("-234,21", "100 + 88 - 11 + 34 - % +", "100 + 88 - 11 + 34 - 445,21 + ");
         assertNumber("1,03122e-13", "0,0000000000001011 + 2 % - ", "0,0000000000001011 + 2,022e-15 - ");
-        assertNumber("9,999999999999999e+28", "9999999999999999 + 1000000000000000 %", "9999999999999999 + 9,999999999999999e+28");
         assertNumber("-3,08641975312477e+29", "5555555555555555 + 34566 - % +", "5555555555555555 + 34566 - 3,086419753124826e+29 + ");
-        assertNumber("-9,776196932024121e+17", "987987 + 664 - 3,3335 + 999999,999999 % - % +", "987987 + 664 - 3,3335 + 9886476664,990114 - 9,776197030898774e+17 + ");
+        assertNumber("9,999999999999999e+28", "9999999999999999 + 1000000000000000 %", "9999999999999999 + 9,999999999999999e+28");
+        assertNumber("-9,776196932024122e+17", "987987 + 664 - 3,3335 + 999999,999999 % - % +", "987987 + 664 - 3,3335 + 9886476664,990114 - 9,776197030898775e+17 + ");
     }
 
     @Test
@@ -415,7 +421,8 @@ class Calculator_ControllerTest extends ApplicationTest {
                     keyboardInput(buttonPressed);
                 }
             }
-            assertEquals(result, outLabel.getText());
+            String outDisplay =  outLabel.getText();
+            assertEquals(result, outDisplay);
             assertEquals(outOperationMemoryResult, outOperationMemory.getText());
             type(ESCAPE);
         }
