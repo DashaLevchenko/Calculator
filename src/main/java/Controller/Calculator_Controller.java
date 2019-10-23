@@ -23,8 +23,7 @@ import java.math.MathContext;
 import java.math.RoundingMode;
 
 public class Calculator_Controller {
-    private static final BigDecimal MAX_INPUT_NUMBER = BigDecimal.valueOf(9999999999999999L);
-    private static final double MAX_FONT_SIZE = 71;
+    //region FXML
     @FXML
     private Label outText;
     @FXML
@@ -34,8 +33,7 @@ public class Calculator_Controller {
     private Button memoryRecall;
 
     @FXML
-    private Button memoreStore;
-
+    private Button memoryStore;
 
     @FXML
     private MenuButton memoryHistory;
@@ -156,36 +154,38 @@ public class Calculator_Controller {
 
     @FXML
     private Label textStandard;
-
+    //endregion
+    private static final double MAX_FONT_SIZE = 71;
     private final int CHAR_MAX = 16;
-    private int charValidInText = 16;
-    //    private String textForOutput = "";
-//    private String textWithoutSeparate = "";
-    private String firstStyleLabel;
-    private boolean pointInText = false;
-    private BigDecimal numberFirstBinaryOperations;
-    private BigDecimal numberSecondBinaryOperations;
-    private BigDecimal result;
-    private BigDecimal numberUnaryOperations;
+
     private OperationsEnum newBinaryOperation;
     private OperationsEnum oldBinaryOperation;
     private OperationsEnum unaryOperation;
     private OperationsEnum percentOperation;
-    private boolean canChangeOperator = false;
+    private int charValidInText;
+    private String firstStyleLabel;
     private String historyOperations = "";
     private String historyUnaryOperations = "";
-    private String historyNegateNumber = "";
-    private double moveScroll;
+    private boolean pointInText = false;
+    private boolean canChangeOperator = false;
     private boolean equalWasPress;
     private boolean showLeftMenu = false;
     private boolean isError = false;
     private boolean negatePressed = false;
+    private boolean memoryPressed = false;
+    private BigDecimal numberFirstBinaryOperations;
+    private BigDecimal numberSecondBinaryOperations;
+    private BigDecimal result;
+    private BigDecimal numberUnaryOperations;
+    private double moveScroll;
     private double xOffset = 0;
     private double yOffset = 0;
+    private Memory memory;
 
     @FXML
     void initialize() {
         firstStyleLabel = outText.getStyle();
+        charValidInText = CHAR_MAX;
         outText.setText("0");
         equal.setDefaultButton(true);
 
@@ -199,7 +199,6 @@ public class Calculator_Controller {
         scrollOutOperationMemory();
 
     }
-
 
     @FXML
     void showLeftMenu(ActionEvent actionEvent) {
@@ -225,8 +224,7 @@ public class Calculator_Controller {
 
         if (!equalWasPress && numberFirstBinaryOperations != null) {
             setNum2();
-        }else
-        {
+        } else {
             numberSecondBinaryOperations = null;
         }
         if (newBinaryOperation != null) {
@@ -262,18 +260,6 @@ public class Calculator_Controller {
         equalWasPress = false;
     }
 
-//    private void printResult() {
-//        if (!isError) {
-//            textForOutput = NumberFormatter.formatterNumber(new BigDecimal(textWithoutSeparate.replace(",", ".")));
-//            if (pointInText && textWithoutSeparate.charAt(textWithoutSeparate.length() - 1) == ',') {
-//                textForOutput += ",";
-//            }
-//
-//        }
-//        resizeOutputText();
-//        outText.setText(textForOutput);
-//    }
-
     @FXML
     public void unaryOperations(ActionEvent actionEvent) {
         Character buttonText = ((Button) actionEvent.getSource()).getText().charAt(0);
@@ -286,12 +272,7 @@ public class Calculator_Controller {
         }
 
         if (numberUnaryOperations == null) {
-//            if (textWithoutSeparate.isEmpty()) {
             numberUnaryOperations = NumberFormatter.parseNumber(outText.getText().replace(" ", ""));
-////                numberUnaryOperations = numberUnaryOperations.round(new MathContext(16, RoundingMode.HALF_UP));
-//            } else {
-//                numberUnaryOperations = NumberFormatter.parseNumber(textWithoutSeparate);
-//            }
             if (!negatePressed) {
                 historyUnaryOperations += NumberFormatter.formatterNumber(numberUnaryOperations).replace(" ", "");
             }
@@ -314,7 +295,6 @@ public class Calculator_Controller {
         if (equalWasPress) {
             numberFirstBinaryOperations = result;
             numberSecondBinaryOperations = numberFirstBinaryOperations;
-//            outOperationMemory.setText();
             equalWasPress = false;
         } else {
             setNum1();
@@ -352,7 +332,6 @@ public class Calculator_Controller {
         Character buttonText = ((Button) actionEvent.getSource()).getText().charAt(0);
         if (buttonText.equals(OperationsEnum.EQUAL.getOperations())) {
             if (newBinaryOperation != null) {
-//                if (!equalWasPress) {
                 setNum2();
                 if (!equalWasPress && canChangeOperator) {
                     if (numberSecondBinaryOperations == null) {
@@ -366,7 +345,6 @@ public class Calculator_Controller {
                 result = numberFirstBinaryOperations;
                 equalWasPress = true;
             }
-//            equalWasPress = true;
             if (!isError) {
                 historyOperations = "";
                 outOperationMemory.setText(historyOperations);
@@ -374,14 +352,18 @@ public class Calculator_Controller {
                 canChangeOperator = false;
                 historyUnaryOperations = "";
                 numberUnaryOperations = null;
-//                newBinaryOperation = null;
+            }else {
+                C.fire();
             }
+
         }
     }
 
-
     @FXML
     void backspace(ActionEvent actionEvent) {
+        if (isError){
+            C.fire();
+        }
         String out = outText.getText();
         if (!equalWasPress && result == null) {
             if (out.replace(",", "").length() > 0) {
@@ -423,6 +405,7 @@ public class Calculator_Controller {
         isError = false;
         negatePressed = false;
         charValidInText = CHAR_MAX;
+        resizeOutputText();
     }
 
     @FXML
@@ -434,6 +417,7 @@ public class Calculator_Controller {
         if (isError) {
             C.fire();
         }
+        resizeOutputText();
     }
 
     @FXML
@@ -492,20 +476,36 @@ public class Calculator_Controller {
         } else if (keyCode == KeyCode.DELETE) {
             CE.fire();
         } else if (keyCode == KeyCode.R) {
-            oneDivideX.fire();
+            if (event.isControlDown()) {
+                memoryRecall.fire();
+            } else {
+                oneDivideX.fire();
+            }
         } else if (keyCode == KeyCode.Q) {
-            sqrX.fire();
+            if (event.isControlDown()) {
+                memorySubtract.fire();
+            } else {
+                sqrX.fire();
+            }
+        } else if ((keyCode == KeyCode.M && event.isControlDown())) {
+            memoryStore.fire();
+        } else if ((keyCode == KeyCode.P && event.isControlDown())) {
+            memoryAdd.fire();
+        } else if ((keyCode == KeyCode.L && event.isControlDown())) {
+            memoryClear.fire();
         }
     }
-
 
     @FXML
     public void number(ActionEvent actionEvent) {
         String buttonText = ((Button) actionEvent.getSource()).getText();
+        if (isError) {
+            C.fire();
+        }
         String out = outText.getText().replace(" ", "");
-
-        if (canChangeOperator || equalWasPress) {
+        if (canChangeOperator || equalWasPress || memoryPressed) {
             canChangeOperator = false;
+            memoryPressed = false;
             charValidInText = CHAR_MAX;
             out = "";
             pointInText = false;
@@ -521,23 +521,10 @@ public class Calculator_Controller {
         resizeOutputText();
         equalWasPress = false;
 
-
-//        if (numberFirstBinaryOperations != null) {
-//            canChangeOperator = false;
-////            equalWasPress = false;
-////            result = null;
-//            if (!h.contains(",")) {
-//                pointInText = false;
-//            }
-//        }
-//        if (historyOperations.isEmpty()) {
-//            numberFirstBinaryOperations = null;
-//        }
         operationsIsDisable(false);
-        isError = false;
+//        isError = false;
         numberSecondBinaryOperations = null;
     }
-
 
     @FXML
     public void cancelButton(ActionEvent actionEvent) {
@@ -648,54 +635,50 @@ public class Calculator_Controller {
         resizeOutputText();
     }
 
-
-    Memory memory;
-    boolean memoryPressed = false;
-
-    void memoryButtonDisable(boolean disable) {
+    private void memoryButtonDisable(boolean disable) {
         memoryClear.setDisable(disable);
         memoryRecall.setDisable(disable);
     }
 
     @FXML
     void memoryAdd(ActionEvent event) {
-        if (memoryPressed) {
-            memory.memoryAdd(result);
+        if (memory != null) {
+            memory.memoryAdd(NumberFormatter.parseNumber(outText.getText()));
         } else {
             memory = new Memory();
-            memory.memoryAdd(result);
+            memory.memoryAdd(NumberFormatter.parseNumber(outText.getText()));
             memoryButtonDisable(false);
-            memoryPressed = true;
         }
+        memoryPressed = true;
     }
 
     @FXML
     void memoryClear(ActionEvent event) {
-        memoryPressed = false;
-        memory.setNumber(null);
+        memoryPressed = true;
+        memory = null;
         memoryButtonDisable(true);
     }
 
     @FXML
     void memoryRecall(ActionEvent event) {
-//        textWithoutSeparate =
-        result = memory.memoryRecall();
-//        printResult();
-        String out = memory.memoryRecall().toString();
-        outText.setText(NumberFormatter.formatterInputNumber(out.replace(" ", "")));
-        resizeOutputText();
+        if (memory != null) {
+            String out = memory.memoryRecall().toString();
+            outText.setText(NumberFormatter.formatterInputNumber(out.replace(" ", "")));
+            resizeOutputText();
+        }
+        memoryPressed = true;
     }
 
     @FXML
     void memorySubtract(ActionEvent event) {
-        if (memoryPressed) {
-            memory.memorySubtract(result);
+        if (memory != null) {
+            memory.memorySubtract(NumberFormatter.parseNumber(outText.getText()));
         } else {
             memory = new Memory();
-            memory.memorySubtract(result);
+            memory.memorySubtract(NumberFormatter.parseNumber("-" + outText.getText()));
             memoryButtonDisable(false);
-            memoryPressed = true;
         }
+        memoryPressed = true;
     }
 
     @FXML
@@ -719,7 +702,6 @@ public class Calculator_Controller {
         outText.setText(out);
         resizeOutputText();
     }
-
 
     private void resizeOutputText() {
         Text textNew = new Text(outText.getText());
@@ -749,8 +731,8 @@ public class Calculator_Controller {
 
     }
 
-
     private void scrollOutOperationMemory() {
+        String historyNegateNumber = "";
         Text history = new Text(historyOperations + historyUnaryOperations + historyNegateNumber);
         history.setFont(outOperationMemory.getFont());
         double maxWidthForLabelOperation = scrollPaneOperation.getWidth() - scrollPaneOperation.getPadding().getLeft() - scrollPaneOperation.getPadding().getRight();
@@ -767,9 +749,8 @@ public class Calculator_Controller {
 
     private void setNum1() {
         if (numberFirstBinaryOperations == null) {
-            numberFirstBinaryOperations = NumberFormatter.parseNumber(outText.getText().replace(" ", ""));
+            numberFirstBinaryOperations = NumberFormatter.parseNumber(outText.getText());
             numberSecondBinaryOperations = null;
-//            textWithoutSeparate = "";
         }
         if (historyOperations.isEmpty()) {
             if (historyUnaryOperations.isEmpty()) {
@@ -785,7 +766,7 @@ public class Calculator_Controller {
             numberSecondBinaryOperations = null;
         } else {
             if (numberSecondBinaryOperations == null) {
-                numberSecondBinaryOperations = NumberFormatter.parseNumber(outText.getText().replace(" ", ""));
+                numberSecondBinaryOperations = NumberFormatter.parseNumber(outText.getText());
                 if (percentOperation == null) {
                     if (NumberFormatter.formatterNumber(numberSecondBinaryOperations).contains("e")) {
                         historyOperations += NumberFormatter.formatterNumber(numberSecondBinaryOperations).replace(".", ",");
@@ -821,7 +802,6 @@ public class Calculator_Controller {
         operationsIsDisable(true);
         outText.setStyle(firstStyleLabel);
 
-        resizeOutputText();
         outText.setText(e.getMessage());
         resizeOutputText();
     }
@@ -844,8 +824,7 @@ public class Calculator_Controller {
         if (numberUnaryOperations != null) {
             try {
                 result = Arithmetic.calculateUnaryOperations(numberUnaryOperations, unaryOperation);
-//                textWithoutSeparate = result.toString();
-//                printResult();
+
 
                 outText.setText(NumberFormatter.formatterNumber(result));
                 resizeOutputText();

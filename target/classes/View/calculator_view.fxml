@@ -100,7 +100,7 @@
                               <Insets bottom="6.0" />
                            </padding>
                         </Button>
-                        <Button fx:id="memoreStore" alignment="BOTTOM_CENTER" focusTraversable="false" minHeight="30.0" minWidth="50.0" mnemonicParsing="false" style="-fx-background-color: e6e6e6; -fx-background-radius: 0; -fx-border-radius: 0;" styleClass="memory_bold" stylesheets="@style.css" text="MS" GridPane.columnIndex="4">
+                        <Button fx:id="memoryStore" alignment="BOTTOM_CENTER" focusTraversable="false" minHeight="30.0" minWidth="50.0" mnemonicParsing="false" style="-fx-background-color: e6e6e6; -fx-background-radius: 0; -fx-border-radius: 0;" styleClass="memory_bold" stylesheets="@style.css" text="MS" GridPane.columnIndex="4">
                            <font>
                               <Font name="Segoe UI Semibold" size="13.0" />
                            </font>

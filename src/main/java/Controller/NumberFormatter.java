@@ -78,7 +78,7 @@ public class NumberFormatter {
 
     public static BigDecimal parseNumber(String text) {
         BigDecimal number = null;
-        text = text.replace("+", "");
+        text = text.replace("+", "").replace(" ", "");
         if (decimalFormat != null && !text.isEmpty()) {
             try {
                 decimalFormat.setParseBigDecimal(true);

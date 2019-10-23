@@ -404,14 +404,15 @@ class Calculator_ControllerTest extends ApplicationTest {
 
     @Test
     void checkMemory(){
-        assertNumber("", "5", "");
+        assertNumber("88", "5 M+ 88 MC", "");
+        assertNumber("12", "12 M+ 88 MR", "");
+
 
     }
 
     @Test
     void checkAllOperations(){
         assertNumber("0,0178571428571429", "87 + 324 - 443 / ,56 +/- sqr sqrt 1/x %", "87 + 324 - 443 ÷ 0,0178571428571429");
-    //1,785714285714286 0,0178571428571429
     }
 
         void assertNumber (String result, String buttonsPressed, String outOperationMemoryResult){
@@ -475,7 +476,6 @@ class Calculator_ControllerTest extends ApplicationTest {
 
             String actual = outLabel.getText();
             assertEquals(result, actual);
-//        keyboardInput(String.valueOf(clearButtonPressed));
             type(ESCAPE);
         }
 
@@ -529,6 +529,16 @@ class Calculator_ControllerTest extends ApplicationTest {
                 type(DIVIDE);
             } else if (idButton.equals("=")) {
                 type(ENTER);
+            }else if (idButton.equals("MS")) {
+                push(new KeyCodeCombination(M, KeyCombination.CONTROL_DOWN));
+            }else if (idButton.equals("M+")) {
+                push(new KeyCodeCombination(P, KeyCombination.CONTROL_DOWN));
+            }else if (idButton.equals("M-")) {
+                push(new KeyCodeCombination(Q, KeyCombination.CONTROL_DOWN));
+            }else if (idButton.equals("MC")) {
+                push(new KeyCodeCombination(L, KeyCombination.CONTROL_DOWN));
+            }else if (idButton.equals("MR")) {
+                push(new KeyCodeCombination(R, KeyCombination.CONTROL_DOWN));
             }
         }
 
@@ -581,8 +591,17 @@ class Calculator_ControllerTest extends ApplicationTest {
                 type(SLASH);
             } else if (idButton.equals("=")) {
                 type(ENTER);
+            }else if (idButton.equals("MS")) {
+                push(new KeyCodeCombination(M, KeyCombination.CONTROL_DOWN));
+            }else if (idButton.equals("M+")) {
+                push(new KeyCodeCombination(P, KeyCombination.CONTROL_DOWN));
+            }else if (idButton.equals("M-")) {
+                push(new KeyCodeCombination(Q, KeyCombination.CONTROL_DOWN));
+            }else if (idButton.equals("MC")) {
+                push(new KeyCodeCombination(L, KeyCombination.CONTROL_DOWN));
+            }else if (idButton.equals("MR")) {
+                push(new KeyCodeCombination(R, KeyCombination.CONTROL_DOWN));
             }
-
         }
 
         void mouseInput (String idButtonClickedMouse){
@@ -635,9 +654,20 @@ class Calculator_ControllerTest extends ApplicationTest {
                 button = from(root).lookup("#divide").query();
             } else if (idButtonClickedMouse.equals("=")) {
                 button = from(root).lookup("#equal").query();
+            }else if (idButtonClickedMouse.equals("MS")) {
+                button = from(root).lookup("#memoryStore").query();
+            }else if (idButtonClickedMouse.equals("M+")) {
+                button = from(root).lookup("#memoryAdd").query();
+            }else if (idButtonClickedMouse.equals("M-")) {
+                button = from(root).lookup("#memorySubtract").query();
+            }else if (idButtonClickedMouse.equals("MC")) {
+                button = from(root).lookup("#memoryClear").query();
+            }else if (idButtonClickedMouse.equals("MR")) {
+                button = from(root).lookup("#memoryRecall").query();
             }
+            
+            
             if (button != null) {
-//            System.out.println(button.getBoundsInParent().getCenterX() + " " +button.getBoundsInParent().getCenterY());
                 Scene scene = button.getScene();
                 double sceneX = scene.getWindow().getX();
                 double sceneY = scene.getWindow().getY();
@@ -646,7 +676,6 @@ class Calculator_ControllerTest extends ApplicationTest {
                 int buttonY = (int) (sceneY + button.getBoundsInParent().getCenterY() + button.getParent().getBoundsInParent().getMinY() + button.getParent().getParent().getLayoutY());
 
                 robot.mouseMove(buttonX, buttonY);
-//        FXTestUtils.
                 try {
                     Thread.sleep(100);
                     robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
@@ -654,12 +683,6 @@ class Calculator_ControllerTest extends ApplicationTest {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-
-
-//        robot.mousePress(1);
-
-//        moveTo(buttonX, buttonY);
-//            clickOn(buttonX, buttonY, MouseButton.PRIMARY);
 
             }
         }
