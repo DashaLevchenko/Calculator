@@ -190,7 +190,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Calculator_ControllerTest.checkBinaryOperations" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="Calculator_ControllerTest.checkExceptions" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Calculator" />
       <extension name="coverage">
         <pattern>
@@ -200,13 +200,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="Controller" />
       <option name="MAIN_CLASS_NAME" value="Controller.Calculator_ControllerTest" />
-      <option name="METHOD_NAME" value="checkBinaryOperations" />
+      <option name="METHOD_NAME" value="checkExceptions" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Calculator_ControllerTest.checkOperationMemory" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="Calculator_ControllerTest.checkPercent" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Calculator" />
       <extension name="coverage">
         <pattern>
@@ -216,7 +216,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="Controller" />
       <option name="MAIN_CLASS_NAME" value="Controller.Calculator_ControllerTest" />
-      <option name="METHOD_NAME" value="checkOperationMemory" />
+      <option name="METHOD_NAME" value="checkPercent" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -224,19 +224,19 @@
     </configuration>
     <list>
       <item itemvalue="Application.Exp" />
-      <item itemvalue="JUnit.Calculator_ControllerTest.checkAllOperations" />
       <item itemvalue="Application.Calculator_Main" />
-      <item itemvalue="JUnit.Calculator_ControllerTest.checkBinaryOperations" />
+      <item itemvalue="JUnit.Calculator_ControllerTest.checkPercent" />
+      <item itemvalue="JUnit.Calculator_ControllerTest.checkExceptions" />
       <item itemvalue="JUnit.Calculator_ControllerTest" />
-      <item itemvalue="JUnit.Calculator_ControllerTest.checkOperationMemory" />
+      <item itemvalue="JUnit.Calculator_ControllerTest.checkAllOperations" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Calculator_Main" />
-        <item itemvalue="JUnit.Calculator_ControllerTest.checkOperationMemory" />
         <item itemvalue="JUnit.Calculator_ControllerTest" />
-        <item itemvalue="JUnit.Calculator_ControllerTest.checkBinaryOperations" />
         <item itemvalue="JUnit.Calculator_ControllerTest.checkAllOperations" />
+        <item itemvalue="JUnit.Calculator_ControllerTest.checkPercent" />
+        <item itemvalue="JUnit.Calculator_ControllerTest.checkExceptions" />
       </list>
     </recent_temporary>
   </component>
@@ -263,13 +263,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1565432602101</updated>
-    </task>
-    <task id="LOCAL-00007" summary="new workspace">
-      <created>1566314554192</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1566314554192</updated>
     </task>
     <task id="LOCAL-00008" summary="test">
       <created>1566315859678</created>
@@ -607,7 +600,14 @@
       <option name="project" value="LOCAL" />
       <updated>1571675554146</updated>
     </task>
-    <option name="localTasksCounter" value="56" />
+    <task id="LOCAL-00056" summary="before delete">
+      <created>1571748917294</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1571748917295</updated>
+    </task>
+    <option name="localTasksCounter" value="57" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -668,7 +668,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="all are working, before old and new text" />
     <MESSAGE value="all are working, before refactoring" />
     <MESSAGE value="delete textWithoutSeparateOld" />
     <MESSAGE value="write Tests, &#10;how use robotFX?" />
@@ -693,25 +692,41 @@
     <MESSAGE value="before change unary operations in controller" />
     <MESSAGE value="tests work" />
     <MESSAGE value="refactor %" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor %" />
+    <MESSAGE value="before delete" />
+    <option name="LAST_COMMIT_MESSAGE" value="before delete" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
+        <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/Controller/Calculator_ControllerTest.java</url>
           <line>400</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
+        <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/Controller/Calculator_Controller.java</url>
           <line>349</line>
           <option name="timeStamp" value="8" />
         </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Controller/Calculator_Controller.java</url>
+          <line>636</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Controller/Calculator_Controller.java</url>
+          <line>237</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/Controller/Calculator_Controller.java</url>
-          <line>628</line>
-          <option name="timeStamp" value="9" />
+          <line>307</line>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Controller/Calculator_Controller.java</url>
+          <line>221</line>
+          <option name="timeStamp" value="15" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

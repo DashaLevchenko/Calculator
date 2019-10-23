@@ -96,7 +96,8 @@ public class NumberFormatter {
         return number;
     }
 
-    public static String formatterInputNumber(BigDecimal number) {
+    public static String formatterInputNumber(String  text) {
+        BigDecimal number = new BigDecimal(text.replace(",", "."));
         StringBuilder pattern = new StringBuilder();
         pattern.append("#,##0");
         if (number.scale() > 0) {

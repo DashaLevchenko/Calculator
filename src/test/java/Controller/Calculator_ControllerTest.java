@@ -198,7 +198,7 @@ class Calculator_ControllerTest extends ApplicationTest {
     }
 
     @Test
-    void checkOperationMemory() {
+    void checkOperationHistory() {
         //One operation
         assertNumber("-2", "2 = +/-", "negate(2)");
         assertNumber("3", "3 +", "3 + ");
@@ -398,7 +398,7 @@ class Calculator_ControllerTest extends ApplicationTest {
         assertNumber("1,03122e-13", "0,0000000000001011 + 2 % - ", "0,0000000000001011 + 2,022e-15 - ");
         assertNumber("-3,08641975312477e+29", "5555555555555555 + 34566 - % +", "5555555555555555 + 34566 - 3,086419753124826e+29 + ");
         assertNumber("9,999999999999999e+28", "9999999999999999 + 1000000000000000 %", "9999999999999999 + 9,999999999999999e+28");
-        assertNumber("-9,776196932024122e+17", "987987 + 664 - 3,3335 + 999999,999999 % - % +", "987987 + 664 - 3,3335 + 9886476664,990114 - 9,776197030898775e+17 + ");
+        assertNumber("-9,776196932024121e+17", "987987 + 664 - 3,3335 + 999999,999999 % - % +", "987987 + 664 - 3,3335 + 9886476664,990114 - 9,776197030898774e+17 + ");
     }
 
     @Test
@@ -421,8 +421,7 @@ class Calculator_ControllerTest extends ApplicationTest {
                     keyboardInput(buttonPressed);
                 }
             }
-            String outDisplay =  outLabel.getText();
-            assertEquals(result, outDisplay);
+            assertEquals(result, outLabel.getText());
             assertEquals(outOperationMemoryResult, outOperationMemory.getText());
             type(ESCAPE);
         }
