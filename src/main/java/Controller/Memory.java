@@ -5,12 +5,12 @@ import Model.OperationsEnum;
 
 import java.math.BigDecimal;
 
-public class Memory {
+class Memory {
     private BigDecimal number = null;
 
     void memoryAdd(BigDecimal numberSecond) {
         if (number != null) {
-            number = Arithmetic.sum(number, numberSecond);
+            number = Arithmetic.calculateBinaryOperations(number, numberSecond, OperationsEnum.PLUS);
         } else{
             number = numberSecond;
         }
@@ -18,7 +18,6 @@ public class Memory {
 
     void memorySubtract(BigDecimal numberSecond) {
         if (number != null) {
-//            number = Arithmetic.minus(number, numberSecond);
             number = Arithmetic.calculateBinaryOperations(number, numberSecond, OperationsEnum.MINUS);
         } else{
             number = numberSecond;
@@ -26,12 +25,11 @@ public class Memory {
     }
 
     BigDecimal memoryRecall() {
-
         return number;
     }
 
 
-    public void setNumber(BigDecimal number) {
+    void setNumber(BigDecimal number) {
         this.number = number;
     }
 }

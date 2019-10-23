@@ -138,12 +138,14 @@ class Calculator_ControllerTest extends ApplicationTest {
 
         //region combinations two operands with equal
         assertNumber("39,998", "19 + 0,999 + =", "");
+        assertNumber("2", "1 + 0,9999999999999999 =", "");
         assertNumber("0", "239 + ,9 - =", "");
         assertNumber("904 401", "77 + 874 * =", "");
         assertNumber("1", "122 + 95 / =", "");
         assertNumber("0", "9 - 873 - =", "");
         assertNumber("-222", "876 - 987 + =", "");
         assertNumber("330 613,5001", "9,99 +/- - 565 * =", "");
+        assertNumber("8", "33 + 9,7 = 8 -", "8 - ");
         assertNumber("1", "98,7 - 856 / =", "");
         assertNumber("3 999 200,04", "2 * 999,9 * =", "");
         assertNumber("-243,54", "123 +/- * ,99 + =", "");
@@ -405,8 +407,20 @@ class Calculator_ControllerTest extends ApplicationTest {
     @Test
     void checkMemory(){
         assertNumber("88", "5 M+ 88 MC", "");
-        assertNumber("12", "12 M+ 88 MR", "");
-
+        assertNumber("7", "7 M+ M- MC", "");
+        assertNumber("12", "12 M+ 88 MR MC", "");
+        assertNumber("0", "24 M- M+ MR", "");
+        assertNumber("256", "M- 256 M+ 876 MR MC", "");
+        assertNumber("776", "M+ 776 M- MC", "");
+        assertNumber("95", "67 M+ 95 M- MS MR MC", "");
+        assertNumber("18 693", "6231 M+ M+ M+ 56 MR MC", "");
+        assertNumber("99 640", "98765 M- M- M- MC MS 875 M+ MR ", "");
+        assertNumber("99 640,75136", "0,88776 M+ 0,1364 M- = MR = MC", "");
+        assertNumber("2", "1 M+ 0,9999999999999999 M+ 0 MR MC", "");
+        assertNumber("29 999 996,99981057", "9999999 M+ M+ M+ 0,00018943 M- 898 MR MC", "");
+        assertNumber("99 999 999", "MS 9,9999999999999911 M- M+ 99999999 M+ 99999999 MR MC", "");
+        assertNumber("9 999 999 999 999 999", "9999999999999999 MS 9999999999999999 M- M+ 00000000000001 MR MC", "");
+        assertNumber("1,8e+18", "9999999999999999 M+ M+ M+ M+ M+ MR M+ M+ M+ M+ M+  MR M+ M+ M+ M+ M+ MR MC", "");
 
     }
 

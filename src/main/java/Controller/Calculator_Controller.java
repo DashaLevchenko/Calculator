@@ -162,7 +162,7 @@ public class Calculator_Controller {
     private OperationsEnum oldBinaryOperation;
     private OperationsEnum unaryOperation;
     private OperationsEnum percentOperation;
-    private int charValidInText;
+    private int charValidInText = 16;
     private String firstStyleLabel;
     private String historyOperations = "";
     private String historyUnaryOperations = "";
@@ -185,10 +185,8 @@ public class Calculator_Controller {
     @FXML
     void initialize() {
         firstStyleLabel = outText.getStyle();
-        charValidInText = CHAR_MAX;
         outText.setText("0");
         equal.setDefaultButton(true);
-
     }
 
     @FXML
@@ -352,16 +350,15 @@ public class Calculator_Controller {
                 canChangeOperator = false;
                 historyUnaryOperations = "";
                 numberUnaryOperations = null;
-            }else {
+            } else {
                 C.fire();
             }
-
         }
     }
 
     @FXML
     void backspace(ActionEvent actionEvent) {
-        if (isError){
+        if (isError) {
             C.fire();
         }
         String out = outText.getText();
@@ -510,6 +507,7 @@ public class Calculator_Controller {
             out = "";
             pointInText = false;
             result = null;
+            numberSecondBinaryOperations = null;
         }
         if (out.isEmpty() || out.equals("0")) {
             outText.setText(buttonText);
@@ -519,7 +517,7 @@ public class Calculator_Controller {
             }
         }
         resizeOutputText();
-        equalWasPress = false;
+//        equalWasPress = false;
 
         operationsIsDisable(false);
 //        isError = false;
@@ -641,6 +639,16 @@ public class Calculator_Controller {
     }
 
     @FXML
+    void memoryStore(ActionEvent event) {
+        if (memory == null) {
+            memory = new Memory();
+        }
+        memory.setNumber(NumberFormatter.parseNumber(outText.getText()));
+        memoryButtonDisable(false);
+        memoryPressed = true;
+    }
+
+    @FXML
     void memoryAdd(ActionEvent event) {
         if (memory != null) {
             memory.memoryAdd(NumberFormatter.parseNumber(outText.getText()));
@@ -662,8 +670,7 @@ public class Calculator_Controller {
     @FXML
     void memoryRecall(ActionEvent event) {
         if (memory != null) {
-            String out = memory.memoryRecall().toString();
-            outText.setText(NumberFormatter.formatterInputNumber(out.replace(" ", "")));
+            outText.setText(NumberFormatter.formatterNumber(memory.memoryRecall()));
             resizeOutputText();
         }
         memoryPressed = true;
@@ -689,7 +696,7 @@ public class Calculator_Controller {
             out = "0";
             canChangeOperator = false;
             pointInText = false;
-            charValidInText--;
+//            charValidInText--;
         }
         if (!pointInText) {
             if (out.equals("0")) {

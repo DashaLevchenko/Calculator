@@ -9,10 +9,9 @@
     <list default="true" id="feaeb0c2-feb2-4a9c-98e3-48b1d1a339aa" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Calculator_Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Calculator_Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Memory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Memory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controller/NumberFormatter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/NumberFormatter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Exp.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Model/PrintTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Arithmetic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Arithmetic.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/View/calculator_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/calculator_view.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/Controller/Calculator_ControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Controller/Calculator_ControllerTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/View/calculator_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/calculator_view.fxml" afterDir="false" />
@@ -137,7 +136,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Calculator_Main">
+  <component name="RunManager" selected="JUnit.Calculator_ControllerTest.checkMemory">
     <configuration name="Calculator_Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Controller.Calculator_Main" />
       <module name="Calculator" />
@@ -237,10 +236,10 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.Calculator_ControllerTest.checkMemory" />
         <item itemvalue="Application.Calculator_Main" />
         <item itemvalue="JUnit.Calculator_ControllerTest.checkBinaryOperations" />
         <item itemvalue="JUnit.Calculator_ControllerTest" />
-        <item itemvalue="JUnit.Calculator_ControllerTest.checkMemory" />
         <item itemvalue="JUnit.Calculator_ControllerTest.checkPercent" />
       </list>
     </recent_temporary>
@@ -705,33 +704,33 @@
       <breakpoints>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/Controller/Calculator_Controller.java</url>
-          <line>331</line>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-        <line-breakpoint type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/Controller/Calculator_Controller.java</url>
-          <line>623</line>
+          <line>621</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/Controller/Calculator_Controller.java</url>
-          <line>237</line>
+          <line>235</line>
           <option name="timeStamp" value="13" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/Controller/Calculator_Controller.java</url>
-          <line>290</line>
+          <line>288</line>
           <option name="timeStamp" value="14" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/Controller/Calculator_Controller.java</url>
-          <line>220</line>
-          <option name="timeStamp" value="18" />
+          <line>495</line>
+          <option name="timeStamp" value="23" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/Controller/Calculator_Controller.java</url>
-          <line>498</line>
-          <option name="timeStamp" value="23" />
+          <line>329</line>
+          <option name="timeStamp" value="24" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Controller/Calculator_Controller.java</url>
+          <line>339</line>
+          <option name="timeStamp" value="25" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

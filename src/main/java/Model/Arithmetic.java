@@ -18,7 +18,7 @@ public class Arithmetic {
      * @return Sum of x and y
      */
     public static BigDecimal sum(BigDecimal x, BigDecimal y) {
-        return scaleForBigDecimal(x.add(y));
+        return scaleForBigDecimal(x.add(y).round(MathContext.DECIMAL128));
     }
 
     /**

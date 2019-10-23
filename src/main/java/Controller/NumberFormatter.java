@@ -7,7 +7,7 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.ParseException;
 
-public class NumberFormatter {
+class NumberFormatter {
     private static DecimalFormatSymbols symbols = new DecimalFormatSymbols();
     private static DecimalFormat decimalFormat = new DecimalFormat();
     private static final BigDecimal MIN_DECIMAL_NUMBER_WITHOUT_E = BigDecimal.valueOf(0.0000000000000001);
@@ -21,7 +21,7 @@ public class NumberFormatter {
         decimalFormat.setDecimalFormatSymbols(symbols);
     }
 
-    public static String formatterNumber(BigDecimal number) {
+    static String formatterNumber(BigDecimal number) {
         StringBuilder pattern = new StringBuilder();
         if (number.abs().compareTo(MAX_NUMBER_INPUT) > 0) {
             pattern.append("0.");
@@ -40,7 +40,6 @@ public class NumberFormatter {
         } else if (number.abs().compareTo(BigDecimal.ONE) < 0 && number.abs().compareTo(BigDecimal.ZERO) != 0) {
             pattern.append("0.");
             if (number.scale() > MAX_SCALE) {
-//                number = number.round(new MathContext(MAX_SCALE, RoundingMode.HALF_UP));
                 number = number.round(new MathContext(MAX_SCALE, RoundingMode.HALF_UP));
                 number = number.stripTrailingZeros();
                 if (number.scale() - number.precision() > 2 || number.abs().compareTo(MIN_DECIMAL_NUMBER_WITHOUT_E) < 0) {
@@ -76,7 +75,7 @@ public class NumberFormatter {
         return outNumber;
     }
 
-    public static BigDecimal parseNumber(String text) {
+    static BigDecimal parseNumber(String text) {
         BigDecimal number = null;
         text = text.replace("+", "").replace(" ", "");
         if (decimalFormat != null && !text.isEmpty()) {
@@ -96,7 +95,7 @@ public class NumberFormatter {
         return number;
     }
 
-    public static String formatterInputNumber(String  text) {
+    static String formatterInputNumber(String text) {
         BigDecimal number = new BigDecimal(text.replace(",", "."));
         StringBuilder pattern = new StringBuilder();
         pattern.append("#,##0");
