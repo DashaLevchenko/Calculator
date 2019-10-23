@@ -223,9 +223,11 @@ public class Calculator_Controller {
         numberUnaryOperations = null;
         historyOperations += historyUnaryOperations;
 
-//        if (numberSecondBinaryOperations == null && numberFirstBinaryOperations != null && newBinaryOperation != null) {
-        if (!canChangeOperator && newBinaryOperation != null) {
+        if (!equalWasPress && numberFirstBinaryOperations != null) {
             setNum2();
+        }else
+        {
+            numberSecondBinaryOperations = null;
         }
         if (newBinaryOperation != null) {
             calculateBinaryOperation();
@@ -536,16 +538,6 @@ public class Calculator_Controller {
         numberSecondBinaryOperations = null;
     }
 
-    private void printInput() {
-//        textForOutput = NumberFormatter.formatterInputNumber(new BigDecimal(textWithoutSeparate.replace(",", ".").replace("e", "E")));
-//        if (pointInText && textWithoutSeparate.charAt(textWithoutSeparate.length() - 1) == ',') {
-//            textForOutput += ",";
-//        }
-
-//        resizeOutputText();/
-//        outText.setText(textForOutput);
-
-    }
 
     @FXML
     public void cancelButton(ActionEvent actionEvent) {
@@ -801,7 +793,6 @@ public class Calculator_Controller {
                         historyOperations += numberSecondBinaryOperations.toString().replace(".", ",");
                     }
                 }
-
             }
         }
     }

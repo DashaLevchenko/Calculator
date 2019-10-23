@@ -3,17 +3,13 @@ package Controller;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.event.EventType;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
-import javafx.scene.text.Font;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 
 public class Resize {
     private Stage stage;
@@ -30,7 +26,6 @@ public class Resize {
         this.scene = stage.getScene();
     }
 
-    //    public static void addResizeListener(Stage stage, double minWidth, double minHeight, double maxWidth, double maxHeight) {
     public void resizeAllStage() {
         EventHandler<MouseEvent> event = resizeWindow();
 
@@ -39,7 +34,7 @@ public class Resize {
         stage.getScene().addEventHandler(MouseEvent.MOUSE_DRAGGED, event);
         stage.getScene().addEventHandler(MouseEvent.MOUSE_EXITED, event);
         stage.getScene().addEventHandler(MouseEvent.MOUSE_EXITED_TARGET, event);
-//
+
         ObservableList<Node> children = stage.getScene().getRoot().getChildrenUnmodifiable();
         for (Node child : children) {
             addListenerDeeply(child, event);

@@ -387,6 +387,7 @@ class Calculator_ControllerTest extends ApplicationTest {
         assertNumber("0,0071428571428571", "5 / 7 = %", "0,0071428571428571");
         assertNumber("0,54", "6 * 9 = %", "0,54");
         assertNumber("-14,68", "9 - 11 = 734 %", "-14,68");
+        assertNumber("8 999,91", "2 + 7 = 99999 %", "8999,91");
         assertNumber("-2,56", "32 + 8 +/- % ", "32 + -2,56");
         assertNumber("0", "8 sqr %", "0");
         assertNumber("-63,36", "12 sqr - % =", "");
@@ -399,6 +400,12 @@ class Calculator_ControllerTest extends ApplicationTest {
         assertNumber("-3,08641975312477e+29", "5555555555555555 + 34566 - % +", "5555555555555555 + 34566 - 3,086419753124826e+29 + ");
         assertNumber("9,999999999999999e+28", "9999999999999999 + 1000000000000000 %", "9999999999999999 + 9,999999999999999e+28");
         assertNumber("-9,776196932024121e+17", "987987 + 664 - 3,3335 + 999999,999999 % - % +", "987987 + 664 - 3,3335 + 9886476664,990114 - 9,776197030898774e+17 + ");
+    }
+
+    @Test
+    void checkMemory(){
+        assertNumber("", "5", "");
+
     }
 
     @Test
