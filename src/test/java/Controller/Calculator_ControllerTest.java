@@ -111,6 +111,28 @@ class Calculator_ControllerTest extends ApplicationTest {
     }
 
     @Test
+    void checkBackspace(){
+        assertNumber("0", "5 bs", "");
+        assertNumber("0", "8 +/- bs", "");
+        assertNumber("-44", "444 +/- bs", "");
+        assertNumber("234 567", "234567, bs", "");
+        assertNumber("0", "679 + 67 bs bs", "679 + ");
+        assertNumber("-678 395", "678395, +/- bs", "");
+        assertNumber("9", "3 1/x + 987 bs bs", "1/(3) + ");
+        assertNumber("7 396", "86 sqr bs bs", "sqr(86)");
+        assertNumber("0,00", "3 sqr - ,0000 bs bs", "sqr(3) - ");
+        assertNumber("88 888 888", "8888888888 bs bs", "");
+        assertNumber("334", "347 - 13 - bs bs", "347 - 13 - ");
+        assertNumber("7", "2456 * 2 - 789 bs bs", "2456 x 2 - ");
+        assertNumber("0", "7838765 +/- bs bs bs bs bs bs bs", "");
+        assertNumber("299,422778024652", "89654 sqrt = bs bs bs", "");
+        assertNumber("435 611 087", "435576762 + 34325 = bs bs bs bs bs bs bs", "");
+        assertNumber("9,999999999999996e+63", "9999999999999999 sqr sqr bs bs bs bs = bs bs bs", "");
+        assertNumber("0,0000000000000001", ",0000000000000000 bs 1 * 2 / 0,0000000000000000 bs 1", "0,0000000000000001 x 2 ÷ ");
+        assertNumber("0,0000000000000001", "2,555555 bs 1 sqr * 0,0000000000000000 bs 1", "sqr(2,555551) x ");
+    }
+
+    @Test
     void checkBinaryOperations() {
         //O1/10
         // ne operand
@@ -355,6 +377,8 @@ class Calculator_ControllerTest extends ApplicationTest {
             assertNumber("9 999 999 999 999 997", "9999999999999998 - 1 =", "");
             assertNumber("-9 999 999 999 999 997", "9999999999999998 +/- + 1 =", "");
             assertNumber("-9 999 999 999 999 999", "9999999999999998 +/- - 1 =", "");
+
+            assertNumber("1,e-9999", "0,0000000000000001 sqr * ,0000001 = sqr sqr  sqr  sqr  sqr  sqr  sqr  sqr  sqr * 0,000000000000001 =", "sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(0,0000001)))))))))");
         }
 
         @Test
@@ -371,9 +395,11 @@ class Calculator_ControllerTest extends ApplicationTest {
             assertNumber("Invalid input", "2 - 3 = sqrt", "√(-1)");
             assertNumber("Invalid input", "2 + 3 = +/- sqrt", "√(negate(5))");
         //Overflow
-            assertNumber("Overflow", "9999999999999999 sqr  sqr  sqr  sqr  sqr  sqr  sqr  sqr  sqr  sqr ", "sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(9999999999999999))))))))))");
+            assertNumber("Overflow", "9999999999999999 sqr sqr sqr  sqr  sqr  sqr  sqr  sqr  sqr  sqr ", "sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(9999999999999999))))))))))");
+            assertNumber("Overflow", "0,0000000000000001 sqr  sqr sqr  sqr  sqr  sqr  sqr  sqr  sqr sqr", "sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(0,0000000000000001))))))))))");
             assertNumber("Overflow", "9999999999999999 / 1000000000000000 = = = sqr  sqr  sqr  sqr  sqr  sqr  sqr  sqr sqr", "sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(9,999999999999999e-30)))))))))");
             assertNumber("Overflow", "9999999999999999 * = = = = = = = = = = = = = = = * = = = = = = * = = = = + = = = = = = = = = = + = + = * =", "4,399999999999754e+8961 x ");
+            assertNumber("Overflow", "0,0000000000000001 sqr * ,0000001 * sqr sqr  sqr  sqr  sqr  sqr  sqr  sqr  sqr * 0,0000000000000001 =", "sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(0,0000001)))))))))");
 
     }
 
@@ -426,6 +452,7 @@ class Calculator_ControllerTest extends ApplicationTest {
 
     @Test
     void checkAllOperations(){
+        assertNumber("25", "5 sqr +", "sqr(5) + ");
         assertNumber("0,0178571428571429", "87 + 324 - 443 / ,56 +/- sqr sqrt 1/x %", "87 + 324 - 443 ÷ 0,0178571428571429");
     }
 

@@ -42,13 +42,14 @@ class NumberFormatter {
             if (number.scale() > MAX_SCALE) {
                 number = number.round(new MathContext(MAX_SCALE, RoundingMode.HALF_UP));
                 number = number.stripTrailingZeros();
-                if (number.scale() - number.precision() > 2 || number.abs().compareTo(MIN_DECIMAL_NUMBER_WITHOUT_E) < 0) {
+                if ((number.scale() - number.precision() > 2 && number.scale() == MAX_SCALE) || number.abs().compareTo(MIN_DECIMAL_NUMBER_WITHOUT_E) < 0) {
                     if (number.precision() != 1 && number.precision() <= MAX_SCALE) {
                         pattern.append("#".repeat(number.precision()));
                     }
                     pattern.append("E0");
                 } else {
-                    number = number.setScale(16, RoundingMode.HALF_UP);
+//                    number = number.setScale(16, RoundingMode.HALF_UP);
+                    number = number.setScale(16, RoundingMode.HALF_EVEN);
                     pattern.append("#".repeat(MAX_SCALE));
                 }
             } else {

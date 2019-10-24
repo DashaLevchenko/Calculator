@@ -220,7 +220,7 @@ public class Calculator_Controller {
         numberUnaryOperations = null;
         historyOperations += historyUnaryOperations;
 
-        if (!equalWasPress && numberFirstBinaryOperations != null) {
+        if (!equalWasPress && numberFirstBinaryOperations != null && !historyOperations.isEmpty() && historyUnaryOperations.isEmpty()) {
             setNum2();
         } else {
             numberSecondBinaryOperations = null;
@@ -328,31 +328,35 @@ public class Calculator_Controller {
     @FXML
     public void pressedEqual(ActionEvent actionEvent) {
         Character buttonText = ((Button) actionEvent.getSource()).getText().charAt(0);
-        if (buttonText.equals(OperationsEnum.EQUAL.getOperations())) {
-            if (newBinaryOperation != null) {
-                setNum2();
-                if (!equalWasPress && canChangeOperator) {
+        if (!isError) {
+            if (buttonText.equals(OperationsEnum.EQUAL.getOperations())) {
+                if (newBinaryOperation != null) {
                     if (numberSecondBinaryOperations == null) {
-                        numberSecondBinaryOperations = numberFirstBinaryOperations;
+                        setNum2();
+                        if (!equalWasPress && canChangeOperator) {
+                            if (numberSecondBinaryOperations == null) {
+                                numberSecondBinaryOperations = numberFirstBinaryOperations;
+                            }
+                        }
                     }
+                    equalWasPress = true;
+                    calculateBinaryOperation();
+                } else {
+                    setNum1();
+                    result = numberFirstBinaryOperations;
+                    equalWasPress = true;
                 }
-                equalWasPress = true;
-                calculateBinaryOperation();
-            } else {
-                setNum1();
-                result = numberFirstBinaryOperations;
-                equalWasPress = true;
+                if (!isError) {
+                    historyOperations = "";
+                    outOperationMemory.setText(historyOperations);
+                    negatePressed = false;
+                    canChangeOperator = false;
+                    historyUnaryOperations = "";
+                    numberUnaryOperations = null;
+                }
             }
-            if (!isError) {
-                historyOperations = "";
-                outOperationMemory.setText(historyOperations);
-                negatePressed = false;
-                canChangeOperator = false;
-                historyUnaryOperations = "";
-                numberUnaryOperations = null;
-            } else {
-                C.fire();
-            }
+        } else {
+            C.fire();
         }
     }
 
@@ -500,14 +504,14 @@ public class Calculator_Controller {
             C.fire();
         }
         String out = outText.getText().replace(" ", "");
-        if (canChangeOperator || equalWasPress || memoryPressed) {
+        if (canChangeOperator || equalWasPress || memoryPressed || result != null) {
             canChangeOperator = false;
             memoryPressed = false;
+            equalWasPress = false;
             charValidInText = CHAR_MAX;
             out = "";
             pointInText = false;
             result = null;
-            numberSecondBinaryOperations = null;
         }
         if (out.isEmpty() || out.equals("0")) {
             outText.setText(buttonText);
@@ -517,10 +521,9 @@ public class Calculator_Controller {
             }
         }
         resizeOutputText();
-//        equalWasPress = false;
 
+//        result = null;
         operationsIsDisable(false);
-//        isError = false;
         numberSecondBinaryOperations = null;
     }
 
@@ -831,7 +834,6 @@ public class Calculator_Controller {
         if (numberUnaryOperations != null) {
             try {
                 result = Arithmetic.calculateUnaryOperations(numberUnaryOperations, unaryOperation);
-
 
                 outText.setText(NumberFormatter.formatterNumber(result));
                 resizeOutputText();
