@@ -63,6 +63,9 @@ public class Arithmetic {
     }
 
     static BigDecimal percent(BigDecimal x, BigDecimal percent) {
+        if(percent.equals(BigDecimal.ZERO)){
+            return BigDecimal.ZERO;
+        }
         return scaleForBigDecimal(x.multiply(percent.movePointLeft(2), MathContext.DECIMAL128));
     }
 
