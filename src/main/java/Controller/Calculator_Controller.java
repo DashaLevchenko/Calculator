@@ -604,11 +604,12 @@ public class Calculator_Controller {
 
     @FXML
     public void negate(ActionEvent actionEvent) {
-        if (equalWasPress || canChangeOperator || numberUnaryOperations != null) {
-            if (!negatePressed && historyUnaryOperations.isEmpty()) {
+        if (numberSecondBinaryOperations == null  && !equalWasPress && result != null) {
+            if (historyUnaryOperations.isEmpty()) {
                 historyUnaryOperations += NumberFormatter.formatterNumber(NumberFormatter.parseNumber(outText.getText())).replace(" ", "");
-
             }
+        }
+        if (!historyUnaryOperations.isEmpty()) {
             historyUnaryOperations = "negate(" + historyUnaryOperations + ")";
             outOperationMemory.setText(historyOperations + historyUnaryOperations);
         }
@@ -781,6 +782,7 @@ public class Calculator_Controller {
                 } else {
                     percentOperation = null;
                 }
+                numberSecondBinaryOperations = null;
             } catch (Exception e) {
                 printError(e);
             }
