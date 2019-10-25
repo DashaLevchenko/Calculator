@@ -5,9 +5,11 @@ import java.math.MathContext;
 
 
 public class Arithmetic {
-    private static final BigDecimal MAX_NUMBER = new BigDecimal("9.999999999999995E9999");
-    private static final BigDecimal MIN_NUMBER = new BigDecimal("-9.999999999999995E9999");
-    private static final int MAX_SCALE = 10000;
+    private static final BigDecimal MAX_NUMBER_DECIMAL = new BigDecimal("9.999999999999999E-9999");
+    private static final BigDecimal MIN_NUMBER_INTEGER = new BigDecimal("9.999999999999999E9999");
+    private static final int MAX_SCALE_DECIMAL = MAX_NUMBER_DECIMAL.scale() - MAX_NUMBER_DECIMAL.precision() + 1;
+    private static final int MAX_SCALE_INTEGER = (MIN_NUMBER_INTEGER.scale() - MIN_NUMBER_INTEGER.precision());
+
 
     /**
      * 9
@@ -28,7 +30,7 @@ public class Arithmetic {
      * @param y Second parameter value to be subtracted from {@code x}.
      * @return Difference of {@code x} and {@code y}
      */
-    static BigDecimal minus(BigDecimal x, BigDecimal y) {
+    public static BigDecimal minus(BigDecimal x, BigDecimal y) {
         return scaleForBigDecimal(x.subtract(y));
     }
 
@@ -47,9 +49,9 @@ public class Arithmetic {
     }
 
     static BigDecimal squareRoot(BigDecimal x) throws ArithmeticException {
-        if(x.compareTo(BigDecimal.ZERO) < 0){
+        if (x.compareTo(BigDecimal.ZERO) < 0) {
             throw new ArithmeticException("Invalid input");
-        }else{
+        } else {
             return x.sqrt(MathContext.DECIMAL128);
         }
     }
@@ -63,7 +65,7 @@ public class Arithmetic {
     }
 
     static BigDecimal percent(BigDecimal x, BigDecimal percent) {
-        if(percent.equals(BigDecimal.ZERO)){
+        if (percent.equals(BigDecimal.ZERO)) {
             return BigDecimal.ZERO;
         }
         return scaleForBigDecimal(x.multiply(percent.movePointLeft(2), MathContext.DECIMAL128));
@@ -87,7 +89,7 @@ public class Arithmetic {
         } else if (operation.equals(OperationsEnum.DIVIDE)) {
             result = divide(number1, number2);
         }
-
+        result = result.round(MathContext.DECIMAL128);
         isOverflow(result);
         return result;
     }
@@ -103,9 +105,10 @@ public class Arithmetic {
             result = oneDivideX(number);
         } else if (operation.equals(OperationsEnum.NEGATE)) {
             result = negate(number);
-        }else if (operation.equals(OperationsEnum.PERCENT)) {
+        } else if (operation.equals(OperationsEnum.PERCENT)) {
             result = percent(number, BigDecimal.ZERO);
         }
+        result = result.round(MathContext.DECIMAL128);
         isOverflow(result);
         return result;
     }
@@ -118,9 +121,18 @@ public class Arithmetic {
         return numberDouble;
     }
 
-    private static void isOverflow(BigDecimal result) {
-        if (result.compareTo(MAX_NUMBER) > 0 || result.compareTo(MIN_NUMBER) < 0 || result.scale() > MAX_SCALE) {
+    public static BigDecimal isOverflow(BigDecimal result) {
+        boolean needOverflow = false;
+        if (result.scale() > 0) {
+            needOverflow = result.scale() > MAX_SCALE_DECIMAL;
+        } else if (result.scale() < 0) {
+            needOverflow = result.scale() - result.precision() < MAX_SCALE_INTEGER;
+        }
+
+        if (needOverflow) {
             throw new ArithmeticException("Overflow");
+        } else {
+            return result;
         }
 
     }

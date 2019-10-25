@@ -28,4 +28,7 @@ public enum OperationsEnum {
     public Character getOperations() {
         return operation;
     }
+
+
+
 }

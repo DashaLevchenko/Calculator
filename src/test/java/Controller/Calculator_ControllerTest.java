@@ -119,17 +119,17 @@ class Calculator_ControllerTest extends ApplicationTest {
         assertNumber("0", "679 + 67 bs bs", "679 + ");
         assertNumber("-678 395", "678395, +/- bs", "");
         assertNumber("9", "3 1/x + 987 bs bs", "1/(3) + ");
-        assertNumber("7 396", "86 sqr bs bs", "sqr(86)");
-        assertNumber("0,00", "3 sqr - ,0000 bs bs", "sqr(3) - ");
+        assertNumber("7 396", "86 x² bs bs", "sqr(86)");
+        assertNumber("0,00", "3 x² - ,0000 bs bs", "sqr(3) - ");
         assertNumber("88 888 888", "8888888888 bs bs", "");
         assertNumber("334", "347 - 13 - bs bs", "347 - 13 - ");
         assertNumber("7", "2456 * 2 - 789 bs bs", "2456 x 2 - ");
         assertNumber("0", "7838765 +/- bs bs bs bs bs bs bs", "");
-        assertNumber("299,422778024652", "89654 sqrt = bs bs bs", "");
+        assertNumber("299,422778024652", "89654 √ = bs bs bs", "");
         assertNumber("435 611 087", "435576762 + 34325 = bs bs bs bs bs bs bs", "");
-        assertNumber("9,999999999999996e+63", "9999999999999999 sqr sqr bs bs bs bs = bs bs bs", "");
+        assertNumber("9,999999999999996e+63", "9999999999999999 x² x² bs bs bs bs = bs bs bs", "");
         assertNumber("0,0000000000000001", ",0000000000000000 bs 1 * 2 / 0,0000000000000000 bs 1", "0,0000000000000001 x 2 ÷ ");
-        assertNumber("0,0000000000000001", "2,555555 bs 1 sqr * 0,0000000000000000 bs 1", "sqr(2,555551) x ");
+        assertNumber("0,0000000000000001", "2,555555 bs 1 x² * 0,0000000000000000 bs 1", "sqr(2,555551) x ");
     }
 
     @Test
@@ -258,46 +258,47 @@ class Calculator_ControllerTest extends ApplicationTest {
         @Test
         void checkUnaryOperations () {
             //one operation
-            assertNumber("0", "0 sqrt", "√(0)");
-            assertNumber("0", "0 sqr", "sqr(0)");
-            assertNumber("1", "1 sqrt", "√(1)");
-            assertNumber("1", "1 sqr", "sqr(1)");
+            assertNumber("0", "0 √", "√(0)");
+            assertNumber("0", "0 x²", "sqr(0)");
+            assertNumber("1", "1 √", "√(1)");
+            assertNumber("1", "1 x²", "sqr(1)");
+            assertNumber("3", "1 x² 3", "");
             assertNumber("1", "1 1/x", "1/(1)");
-            assertNumber("547,56", "23,4 sqr", "sqr(23,4)");
-            assertNumber("-7,071067811865475", "50 sqrt +/-", "negate(√(50))");
+            assertNumber("547,56", "23,4 x²", "sqr(23,4)");
+            assertNumber("-7,071067811865475", "50 √ +/-", "negate(√(50))");
             assertNumber("0,0017789321070561", "562,135 1/x", "1/(562,135)");
             //two operation
-            assertNumber("5,259663116753397", "765,3 sqrt +/- +/- sqrt ", "√(negate(negate(√(765,3))))");
-            assertNumber("952 217 706 900 625", "5555 sqr sqr", "sqr(sqr(5555))");
+            assertNumber("5,259663116753397", "765,3 √ +/- +/- √ ", "√(negate(negate(√(765,3))))");
+            assertNumber("952 217 706 900 625", "5555 x² x²", "sqr(sqr(5555))");
             assertNumber("9 009", "9009 1/x 1/x", "1/(1/(9009))");
-            assertNumber("15 678", "15678 sqrt sqr ", "sqr(√(15678))");
-            assertNumber("1,000020000300004e-10", "99999 sqr 1/x", "1/(sqr(99999))");
-            assertNumber("0,00108190582506", "854321 1/x sqrt", "√(1/(854321))");
-            assertNumber("-0,0010000005000004", "999999 sqrt 1/x  +/-", "negate(1/(√(999999)))");
-            assertNumber("9 874 562", "9874562 sqr sqrt", "√(sqr(9874562))");
-            assertNumber("1,00000020000003e-14", "9999999 1/x sqr", "sqr(1/(9999999))");
+            assertNumber("15 678", "15678 √ x² ", "sqr(√(15678))");
+            assertNumber("1,000020000300004e-10", "99999 x² 1/x", "1/(sqr(99999))");
+            assertNumber("0,00108190582506", "854321 1/x √", "√(1/(854321))");
+            assertNumber("-0,0010000005000004", "999999 √ 1/x  +/-", "negate(1/(√(999999)))");
+            assertNumber("9 874 562", "9874562 x² √", "√(sqr(9874562))");
+            assertNumber("1,00000020000003e-14", "9999999 1/x x²", "sqr(1/(9999999))");
             //three operation
-            assertNumber("9,956168238447662", "96546784,32415 sqrt sqrt sqrt ", "√(√(√(96546784,32415)))");
-            assertNumber("9 999,9999500005", "99999999,00001 sqrt sqrt sqr ", "sqr(√(√(99999999,00001)))");
-            assertNumber("0,0056425927787405", "986472913,876543 sqrt sqrt 1/x ", "1/(√(√(986472913,876543)))");
-            assertNumber("31 622,77658587241", "999999999 sqrt sqr sqrt ", "√(sqr(√(999999999)))");
-            assertNumber("0,0032577870844877", "8877878787,65 sqrt 1/x sqrt ", "√(1/(√(8877878787,65)))");
-            assertNumber("99 999,999995", "9999999999 sqr sqrt sqrt ", "√(√(sqr(9999999999)))");
-            assertNumber("0,0017837042774312", "98788998999,874 1/x sqrt sqrt ", "√(√(1/(98788998999,874)))");
-            assertNumber("2,036161793239094e+84", "34562212456 sqr sqr sqr ", "sqr(sqr(sqr(34562212456)))");
-            assertNumber("9,9999999998e+21", "99999999999 sqr sqr sqrt +/- +/-", "negate(negate(√(sqr(sqr(99999999999)))))");
-            assertNumber("2,596893369539549e-48", "787746478889,98787 sqr sqr 1/x ", "1/(sqr(sqr(787746478889,9878)))");
-            assertNumber("9,99999999999537e+23", "999999999999,768565 sqr sqrt sqr ", "sqr(√(sqr(999999999999,7685)))");
-            assertNumber("2,598079199785716e-52", "7876565765566 sqr 1/x sqr ", "sqr(1/(sqr(7876565765566)))");
-            assertNumber("9,999999999999998e+25", "9999999999999,999999 sqrt sqr sqr ", "sqr(sqr(√(9999999999999,999)))");
-            assertNumber("1,060361063588689e-56", "98545445454546 1/x sqr sqr ", "sqr(sqr(1/(98545445454546)))");
+            assertNumber("9,956168238447662", "96546784,32415 √ √ √ ", "√(√(√(96546784,32415)))");
+            assertNumber("9 999,9999500005", "99999999,00001 √ √ x² ", "sqr(√(√(99999999,00001)))");
+            assertNumber("0,0056425927787405", "986472913,876543 √ √ 1/x ", "1/(√(√(986472913,876543)))");
+            assertNumber("31 622,77658587241", "999999999 √ x² √ ", "√(sqr(√(999999999)))");
+            assertNumber("0,0032577870844877", "8877878787,65 √ 1/x √ ", "√(1/(√(8877878787,65)))");
+            assertNumber("99 999,999995", "9999999999 x² √ √ ", "√(√(sqr(9999999999)))");
+            assertNumber("0,0017837042774312", "98788998999,874 1/x √ √ ", "√(√(1/(98788998999,874)))");
+            assertNumber("2,036161793239094e+84", "34562212456 x² x² x² ", "sqr(sqr(sqr(34562212456)))");
+            assertNumber("9,9999999998e+21", "99999999999 x² x² √ +/- +/-", "negate(negate(√(sqr(sqr(99999999999)))))");
+            assertNumber("2,596893369539549e-48", "787746478889,98787 x² x² 1/x ", "1/(sqr(sqr(787746478889,9878)))");
+            assertNumber("9,99999999999537e+23", "999999999999,768565 x² √ x² ", "sqr(√(sqr(999999999999,7685)))");
+            assertNumber("2,598079199785716e-52", "7876565765566 x² 1/x x² ", "sqr(1/(sqr(7876565765566)))");
+            assertNumber("9,999999999999998e+25", "9999999999999,999999 √ x² x² ", "sqr(sqr(√(9999999999999,999)))");
+            assertNumber("1,060361063588689e-56", "98545445454546 1/x x² x² ", "sqr(sqr(1/(98545445454546)))");
             assertNumber("1,00000000000001e-14", "99999999999999 1/x 1/x 1/x ", "1/(1/(1/(99999999999999)))");
-            assertNumber("25 991 214,58828613", "675543235774338 1/x 1/x sqrt ", "√(1/(1/(675543235774338)))");
-            assertNumber("9,99999999999998e+29", "999999999999999 1/x 1/x sqr ", "sqr(1/(1/(999999999999999)))");
-            assertNumber("8,100000065610006e-16", "1234567891234567 sqr sqrt 1/x ", "1/(√(sqr(1234567891234567)))");
-            assertNumber("1,173436304521581e+31", "3425545656565653 1/x sqr 1/x ", "1/(sqr(1/(3425545656565653)))");
-            assertNumber("6 654 638 824 545 454", "6654638824545454 sqr = sqrt", "√(4,42842178851477e+31)");
-            assertNumber("-999 998 000 001,0002", "999999,0000000001 +/- sqr 1/x 1/x +/-", "negate(1/(1/(sqr(-999999,0000000001))))");
+            assertNumber("25 991 214,58828613", "675543235774338 1/x 1/x √ ", "√(1/(1/(675543235774338)))");
+            assertNumber("9,99999999999998e+29", "999999999999999 1/x 1/x x² ", "sqr(1/(1/(999999999999999)))");
+            assertNumber("8,100000065610006e-16", "1234567891234567 x² √ 1/x ", "1/(√(sqr(1234567891234567)))");
+            assertNumber("1,173436304521581e+31", "3425545656565653 1/x x² 1/x ", "1/(sqr(1/(3425545656565653)))");
+            assertNumber("6 654 638 824 545 454", "6654638824545454 x² = √", "√(4,42842178851477e+31)");
+            assertNumber("-999 998 000 001,0002", "999999,0000000001 +/- x² 1/x 1/x +/-", "negate(1/(1/(sqr(-999999,0000000001))))");
 
         }
 
@@ -377,9 +378,7 @@ class Calculator_ControllerTest extends ApplicationTest {
             assertNumber("9 999 999 999 999 997", "9999999999999998 - 1 =", "");
             assertNumber("-9 999 999 999 999 997", "9999999999999998 +/- + 1 =", "");
             assertNumber("-9 999 999 999 999 999", "9999999999999998 +/- - 1 =", "");
-
-            assertNumber("1,e-9999", "0,0000000000000001 sqr * ,0000001 = sqr sqr  sqr  sqr  sqr  sqr  sqr  sqr  sqr * 0,000000000000001 =", "sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(0,0000001)))))))))");
-        }
+     }
 
         @Test
         void checkExceptions(){
@@ -387,20 +386,19 @@ class Calculator_ControllerTest extends ApplicationTest {
             assertNumber("Result is undefined", "0 / 0 =", "0 ÷ ");
             assertNumber("Cannot divide by zero", "1 / 0 =", "1 ÷ ");
             assertNumber("Cannot divide by zero", "0 1/x", "1/(0)");
-            assertNumber("Cannot divide by zero", "0 sqrt 1/x", "1/(√(0))");
+            assertNumber("Cannot divide by zero", "0 √ 1/x", "1/(√(0))");
             assertNumber("Cannot divide by zero", "2 + 4 - 1 + 3 / 0 =", "2 + 4 - 1 + 3 ÷ ");
             assertNumber("Cannot divide by zero", "4 + 5 - 9 + 1/x ", "4 + 5 - 9 + 1/(0)");
         //Square root negative number
-            assertNumber("Invalid input", "1 +/- sqrt", "√(-1)");
-            assertNumber("Invalid input", "2 - 3 = sqrt", "√(-1)");
-            assertNumber("Invalid input", "2 + 3 = +/- sqrt", "√(negate(5))");
+            assertNumber("Invalid input", "1 +/- √", "√(-1)");
+            assertNumber("Invalid input", "2 - 3 = √", "√(-1)");
+            assertNumber("Invalid input", "2 + 3 = +/- √", "√(negate(5))");
         //Overflow
-            assertNumber("Overflow", "9999999999999999 sqr sqr sqr  sqr  sqr  sqr  sqr  sqr  sqr  sqr ", "sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(9999999999999999))))))))))");
-            assertNumber("Overflow", "0,0000000000000001 sqr  sqr sqr  sqr  sqr  sqr  sqr  sqr  sqr sqr", "sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(0,0000000000000001))))))))))");
-            assertNumber("Overflow", "9999999999999999 / 1000000000000000 = = = sqr  sqr  sqr  sqr  sqr  sqr  sqr  sqr sqr", "sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(9,999999999999999e-30)))))))))");
-            assertNumber("Overflow", "9999999999999999 * = = = = = = = = = = = = = = = * = = = = = = * = = = = + = = = = = = = = = = + = + = * =", "4,399999999999754e+8961 x ");
-            assertNumber("Overflow", "0,0000000000000001 sqr * ,0000001 * sqr sqr  sqr  sqr  sqr  sqr  sqr  sqr  sqr * 0,0000000000000001 =", "sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(0,0000001)))))))))");
-
+            assertNumber("Overflow", "9999999999999999 x²  x²  x²  x²  x²  x²  x²  x²  x²  x²   x² ", "sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(9999999999999999))))))))))");
+            assertNumber("Overflow", "0,0000000000000001 x²  x² x²  x²  x²  x²  x²  x²  x² x²", "sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(0,0000000000000001))))))))))");
+            assertNumber("Overflow", "9999999999999999 / 1000000000000000 = = = x²  x²  x²  x²  x²  x²  x²  x² x²", "sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(9,999999999999999e-30)))))))))");
+            assertNumber("Overflow", "0,0000000000000001 x² * ,0000001 = x² x² x² x² x² x² x² x² * 0,0000000000000001 =", "sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(1,e-39)))))))) x ");
+            assertNumber("Overflow", "1000000000000000 x² * 1000000000 = x² x² x² x² x² x² x² x² MS 9999999999999999 * MR = * 10 = MC", "9,999999999999999e+9999 x ");
     }
 
     @Test
@@ -418,11 +416,11 @@ class Calculator_ControllerTest extends ApplicationTest {
         assertNumber("8 999,91", "2 + 7 = 99999 %", "8999,91");
         assertNumber("-2,56", "32 + 8 +/- % ", "32 + -2,56");
         assertNumber("0", "8 sqr %", "0");
-        assertNumber("-63,36", "12 sqr - % =", "");
+        assertNumber("-63,36", "12 x² - % =", "");
         assertNumber("8,19", "9 - % +", "9 - 0,81 + ");
         assertNumber("-4,75", "3 - 8 + % *", "3 - 8 + 0,25 x ");
         assertNumber("-28 638,844416", "984 - 356 % + 876 - % - ", "984 - 3503,04 + 876 - 26995,804416 - ");
-        assertNumber("-17,3578685327433", "284 sqrt + 3 % = +/-", "negate(17,3578685327433)");
+        assertNumber("-17,3578685327433", "284 √ + 3 % = +/-", "negate(17,3578685327433)");
         assertNumber("-234,21", "100 + 88 - 11 + 34 - % +", "100 + 88 - 11 + 34 - 445,21 + ");
         assertNumber("1,03122e-13", "0,0000000000001011 + 2 % - ", "0,0000000000001011 + 2,022e-15 - ");
         assertNumber("-3,08641975312477e+29", "5555555555555555 + 34566 - % +", "5555555555555555 + 34566 - 3,086419753124826e+29 + ");
@@ -452,8 +450,13 @@ class Calculator_ControllerTest extends ApplicationTest {
 
     @Test
     void checkAllOperations(){
-        assertNumber("25", "5 sqr +", "sqr(5) + ");
-        assertNumber("0,0178571428571429", "87 + 324 - 443 / ,56 +/- sqr sqrt 1/x %", "87 + 324 - 443 ÷ 0,0178571428571429");
+        assertNumber("25", "5 x² +", "sqr(5) + ");
+       assertNumber("5", "2 MS 3 + MR - MC", "3 + 2 - ");
+        assertNumber("1,e-9999", "0,0000000000000001 x² * ,0000001 = x² x² x² x² x² x² x² x² * 0,000000000000001 =", "");
+//        assertNumber("9,999999999999999e-9999", "0,0000000000000001 x² * ,0000001 = x² x² x² x² x² x² x² x² MS 0,9999999999999999 * MR * 0,00000000000001 = MC", "");
+        assertNumber("9,999999999999999e+9999", "1000000000000000 x² * 1000000000 = x² x² x² x² x² x² x² x² MS 9999999999999999 * MR = MC", "");
+
+        assertNumber("0,0178571428571429", "87 + 324 - 443 / ,56 +/- x² √ 1/x %", "87 + 324 - 443 ÷ 0,0178571428571429");
     }
 
         void assertNumber (String result, String buttonsPressed, String outOperationMemoryResult){
@@ -558,13 +561,13 @@ class Calculator_ControllerTest extends ApplicationTest {
                 type(SUBTRACT);
             } else if (idButton.equals("*")) {
                 type(MULTIPLY);
-            } else if (idButton.equals("sqrt")) {
+            } else if (idButton.equals("√")) {
                 push(new KeyCodeCombination(DIGIT2, KeyCombination.SHIFT_DOWN));
             } else if (idButton.equals("%")) {
                 push(new KeyCodeCombination(DIGIT5, KeyCombination.SHIFT_DOWN));
             } else if (idButton.equals("1/x")) {
                 type(R);
-            } else if (idButton.equals("sqr")) {
+            } else if (idButton.equals("x²")) {
                 type(Q);
             } else if (idButton.equals("/")) {
                 type(DIVIDE);
@@ -620,13 +623,13 @@ class Calculator_ControllerTest extends ApplicationTest {
                 type(MINUS);
             } else if (idButton.equals("*")) {
                 push(new KeyCodeCombination(DIGIT8, KeyCombination.SHIFT_DOWN));
-            } else if (idButton.equals("sqrt")) {
+            } else if (idButton.equals("√")) {
                 push(new KeyCodeCombination(DIGIT2, KeyCombination.SHIFT_DOWN));
             } else if (idButton.equals("%")) {
                 push(new KeyCodeCombination(DIGIT5, KeyCombination.SHIFT_DOWN));
             } else if (idButton.equals("1/x")) {
                 type(R);
-            } else if (idButton.equals("sqr")) {
+            } else if (idButton.equals("x²")) {
                 type(Q);
             } else if (idButton.equals("/")) {
                 type(SLASH);
@@ -683,13 +686,13 @@ class Calculator_ControllerTest extends ApplicationTest {
                 button = from(root).lookup("#subtract").query();
             } else if (idButtonClickedMouse.equals("*")) {
                 button = from(root).lookup("#multiply").query();
-            } else if (idButtonClickedMouse.equals("sqrt")) {
-                button = from(root).lookup("#sqrt").query();
+            } else if (idButtonClickedMouse.equals("√")) {
+                button = from(root).lookup("#√").query();
             } else if (idButtonClickedMouse.equals("%")) {
                 button = from(root).lookup("#percent").query();
             } else if (idButtonClickedMouse.equals("1/x")) {
                 button = from(root).lookup("#oneDivideX").query();
-            } else if (idButtonClickedMouse.equals("sqr")) {
+            } else if (idButtonClickedMouse.equals("x²")) {
                 button = from(root).lookup("#sqrX").query();
             } else if (idButtonClickedMouse.equals("/")) {
                 button = from(root).lookup("#divide").query();

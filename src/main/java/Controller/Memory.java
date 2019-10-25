@@ -1,16 +1,15 @@
 package Controller;
 
 import Model.Arithmetic;
-import Model.OperationsEnum;
 
 import java.math.BigDecimal;
 
 class Memory {
     private BigDecimal number = null;
 
-    void memoryAdd(BigDecimal numberSecond) {
+    void memoryAdd(BigDecimal numberSecond) throws ArithmeticException {
         if (number != null) {
-            number = Arithmetic.calculateBinaryOperations(number, numberSecond, OperationsEnum.PLUS);
+            number = Arithmetic.sum(number, numberSecond);
         } else{
             number = numberSecond;
         }
@@ -18,7 +17,7 @@ class Memory {
 
     void memorySubtract(BigDecimal numberSecond) {
         if (number != null) {
-            number = Arithmetic.calculateBinaryOperations(number, numberSecond, OperationsEnum.MINUS);
+            number = Arithmetic.minus(number, numberSecond);
         } else{
             number = numberSecond;
         }
