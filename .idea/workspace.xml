@@ -7,11 +7,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="feaeb0c2-feb2-4a9c-98e3-48b1d1a339aa" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/test/java/Controller/TestContr.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Calculator_Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Calculator_Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/NumberFormatter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/NumberFormatter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Controller/Calculator_ControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Controller/Calculator_ControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Arithmetic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Arithmetic.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/OperationsEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/OperationsEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/View/calculator_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/calculator_view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/View/calculator_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/calculator_view.fxml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -100,13 +101,13 @@
       <recent name="Controller" />
       <recent name="Model" />
     </key>
-    <key name="CreateTestDialog.Recents.Supers">
-      <recent name="" />
-      <recent name="org.testfx.framework.junit.ApplicationTest" />
-    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="View" />
       <recent name="Model" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+      <recent name="org.testfx.framework.junit.ApplicationTest" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Calculator\target\classes\View" />
@@ -298,13 +299,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1565432602101</updated>
-    </task>
-    <task id="LOCAL-00011" summary="test">
-      <created>1566317445760</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1566317445760</updated>
     </task>
     <task id="LOCAL-00012" summary="All tests before sort">
       <created>1566388514589</created>
@@ -642,7 +636,14 @@
       <option name="project" value="LOCAL" />
       <updated>1572021783669</updated>
     </task>
-    <option name="localTasksCounter" value="60" />
+    <task id="LOCAL-00060" summary="all work">
+      <created>1572263908770</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1572263908770</updated>
+    </task>
+    <option name="localTasksCounter" value="61" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -703,7 +704,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="write Tests," />
     <MESSAGE value="input tests are working slow" />
     <MESSAGE value="input tests are working,&#10;started to write binary tests" />
     <MESSAGE value="tests are working,&#10;before DecimalFormater" />
@@ -728,18 +728,10 @@
     <MESSAGE value="before change binary operation" />
     <MESSAGE value="before change set number 2" />
     <MESSAGE value="all work, change negate" />
-    <option name="LAST_COMMIT_MESSAGE" value="all work, change negate" />
+    <MESSAGE value="all work" />
+    <option name="LAST_COMMIT_MESSAGE" value="all work" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/Controller/Calculator_Controller.java</url>
-          <line>219</line>
-          <option name="timeStamp" value="23" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="JUnit">
         <watch expression="calculator" language="JAVA" />

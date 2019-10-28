@@ -78,9 +78,9 @@ public class Arithmetic {
     public static BigDecimal calculateBinaryOperations(BigDecimal number1, BigDecimal number2, OperationsEnum operation) {
         BigDecimal result = BigDecimal.ZERO;
 
-        if (operation.equals(OperationsEnum.PLUS)) {
+        if (operation.equals(OperationsEnum.ADD)) {
             result = sum(number1, number2);
-        } else if (operation.equals(OperationsEnum.MINUS)) {
+        } else if (operation.equals(OperationsEnum.SUBTRACT)) {
             result = minus(number1, number2);
         } else if (operation.equals(OperationsEnum.MULTIPLY)) {
             result = multiply(number1, number2);

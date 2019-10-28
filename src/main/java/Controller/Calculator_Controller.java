@@ -7,7 +7,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.MenuButton;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -21,53 +20,10 @@ import javafx.util.Duration;
 import java.math.BigDecimal;
 
 public class Calculator_Controller {
-    //region FXML
+    //region FXML object
+    //region Number Button
     @FXML
-    private Label outText;
-    @FXML
-    private Button memoryClear;
-
-    @FXML
-    private Button memoryRecall;
-
-    @FXML
-    private Button memoryStore;
-
-    @FXML
-    private MenuButton memoryHistory;
-
-    @FXML
-    private Button memoryAdd;
-
-    @FXML
-    private Button memorySubtract;
-
-    @FXML
-    private MenuButton memoryList;
-
-    @FXML
-    private Button percent;
-
-    @FXML
-    private Button sqrt;
-
-    @FXML
-    private Button sqrX;
-
-    @FXML
-    private Button oneDivideX;
-
-    @FXML
-    private Button CE;
-
-    @FXML
-    private Button C;
-
-    @FXML
-    private Button Backspace;
-
-    @FXML
-    private Button divide;
+    private Button zero;
 
     @FXML
     private Button seven;
@@ -79,9 +35,6 @@ public class Calculator_Controller {
     private Button nine;
 
     @FXML
-    private Button multiply;
-
-    @FXML
     private Button four;
 
     @FXML
@@ -91,9 +44,6 @@ public class Calculator_Controller {
     private Button six;
 
     @FXML
-    private Button subtract;
-
-    @FXML
     private Button one;
 
     @FXML
@@ -101,36 +51,64 @@ public class Calculator_Controller {
 
     @FXML
     private Button three;
+    //endregion
+
+    //region Memory
+    @FXML
+    private Button memoryClear;
 
     @FXML
-    private Button add;
+    private Button memoryRecall;
 
     @FXML
-    private Button plusMinus;
+    private Button memoryStore;
 
     @FXML
-    private Button zero;
+    private Button memoryAdd;
 
     @FXML
-    private Button point;
+    private Button memorySubtract;
+
+    //endregion
+
+    //region Operations
+    @FXML
+    private Button DIVIDE;
 
     @FXML
-    private Button equal;
+    private Button MULTIPLY;
 
     @FXML
-    private Label title;
+    private Button SUBTRACT;
 
     @FXML
-    private Button cancel;
+    private Button ADD;
 
     @FXML
-    private Button maximizeButton;
+    private Button EQUAL;
 
     @FXML
-    private Button hideButton;
+    private Button PERCENT;
+
+    @FXML
+    private Button SQRT;
+
+    @FXML
+    private Button SQR;
+
+    @FXML
+    private Button ONE_DIVIDE_X;
+    //endregion
+
+    //region Change text
+    @FXML
+    private Label outText;
 
     @FXML
     private Label outOperationMemory;
+
+    @FXML
+    private ScrollPane scrollPaneOperation;
 
     @FXML
     private Button scrollButtonLeft;
@@ -139,7 +117,35 @@ public class Calculator_Controller {
     private Button scrollButtonRight;
 
     @FXML
-    private ScrollPane scrollPaneOperation;
+    private Button CE;
+
+    @FXML
+    private Button C;
+
+    @FXML
+    private Button Backspace;
+
+    @FXML
+    private Button plusMinus;
+
+    @FXML
+    private Button point;
+
+    @FXML
+    private Label title;
+
+    @FXML
+    private Label textStandard;
+    //endregion
+
+    //region Window resize button
+    @FXML
+    private Button cancel;
+
+    @FXML
+    private Button maximizeButton;
+
+    //endregion
 
     @FXML
     private AnchorPane leftMenu;
@@ -147,17 +153,13 @@ public class Calculator_Controller {
     @FXML
     private AnchorPane generalAnchorPane;
 
-    @FXML
-    private Button buttonMenu;
 
-    @FXML
-    private Label textStandard;
     //endregion
+
     private static final double MAX_FONT_SIZE = 71;
     private final int CHAR_MAX = 16;
 
     private OperationsEnum newBinaryOperation;
-    private OperationsEnum oldBinaryOperation;
     private OperationsEnum unaryOperation;
     private OperationsEnum percentOperation;
     private int charValidInText = 16;
@@ -185,11 +187,11 @@ public class Calculator_Controller {
     void initialize() {
         firstStyleLabel = outText.getStyle();
         outText.setText("0");
-        equal.setDefaultButton(true);
+        EQUAL.setDefaultButton(true);
     }
 
     @FXML
-    void resizeWindow(MouseEvent event) {
+    void resizeWindow() {
         Stage stage = (Stage) generalAnchorPane.getScene().getWindow();
         Resize resize = new Resize(stage);
         resize.resizeAllStage();
@@ -198,7 +200,7 @@ public class Calculator_Controller {
     }
 
     @FXML
-    void showLeftMenu(ActionEvent actionEvent) {
+    void showLeftMenu() {
         TranslateTransition transition = new TranslateTransition(Duration.seconds(0.1), leftMenu);
         if (!showLeftMenu) {
             transition.setToX(leftMenu.getWidth());
@@ -215,7 +217,6 @@ public class Calculator_Controller {
 
     @FXML
     public void binaryOperation(ActionEvent actionEvent) {
-        Character buttonText = ((Button) actionEvent.getSource()).getText().charAt(0);
         numberUnaryOperations = null;
         historyOperations += historyUnaryOperations;
 
@@ -225,24 +226,15 @@ public class Calculator_Controller {
             setNum1();
             numberSecondBinaryOperations = null;
         }
-//        if (percentPressed && newBinaryOperation != null) {
-//            numberSecondBinaryOperations = result;
-//        }
 
         if (!canChangeOperator) {
             calculateBinaryOperation();
             numberSecondBinaryOperations = null;
         }
 
-        if (buttonText.equals(OperationsEnum.MINUS.getOperations())) {
-            newBinaryOperation = OperationsEnum.MINUS;
-        } else if (buttonText.equals(OperationsEnum.PLUS.getOperations())) {
-            newBinaryOperation = OperationsEnum.PLUS;
-        } else if (buttonText.equals(OperationsEnum.DIVIDE.getOperations())) {
-            newBinaryOperation = OperationsEnum.DIVIDE;
-        } else if (buttonText.equals(OperationsEnum.MULTIPLY.getOperations())) {
-            newBinaryOperation = OperationsEnum.MULTIPLY;
-        }
+
+        newBinaryOperation = OperationsEnum.valueOf(((Button) actionEvent.getSource()).getId());
+        OperationsEnum oldBinaryOperation;
         if (!canChangeOperator) {
             oldBinaryOperation = newBinaryOperation;
             canChangeOperator = true;
@@ -257,24 +249,16 @@ public class Calculator_Controller {
         historyUnaryOperations = "";
         outOperationMemory.setText(historyOperations);
         scrollOutOperationMemory();
-        oldBinaryOperation = newBinaryOperation;
         equalWasPress = false;
     }
 
     @FXML
     public void unaryOperations(ActionEvent actionEvent) {
-        Character buttonText = ((Button) actionEvent.getSource()).getText().charAt(0);
         if (historyOperations.isEmpty()) {
             newBinaryOperation = null;
         }
-        if (buttonText.equals(OperationsEnum.SQRT.getOperations())) {
-            unaryOperation = OperationsEnum.SQRT;
-        } else if (buttonText.equals(OperationsEnum.SQR.getOperations())) {
-            unaryOperation = OperationsEnum.SQR;
-        } else if (buttonText.equals(OperationsEnum.ONE_DIVIDE_X.getOperations())) {
-            unaryOperation = OperationsEnum.ONE_DIVIDE_X;
-        }
 
+        unaryOperation = OperationsEnum.valueOf(((Button) actionEvent.getSource()).getId());
         if (numberUnaryOperations == null) {
             numberUnaryOperations = NumberFormatter.parseNumber(outText.getText().replace(" ", ""));
             if (historyUnaryOperations.isEmpty()) {
@@ -285,7 +269,6 @@ public class Calculator_Controller {
             numberUnaryOperations = numberUnaryOperations.negate();
         }
 
-
         historyUnaryOperations = unaryOperation.getSymbol() + historyUnaryOperations + ")";
         outOperationMemory.setText(historyOperations + historyUnaryOperations);
         calculateUnaryOperations();
@@ -295,18 +278,53 @@ public class Calculator_Controller {
     }
 
     @FXML
-    public void percentOperation(ActionEvent actionEvent) {
+    public void percentOperation() {
         percentOperation = OperationsEnum.PERCENT;
-        calculatePerCent();
+        if (newBinaryOperation != null) {
+            if (newBinaryOperation.equals(OperationsEnum.DIVIDE) || newBinaryOperation.equals(OperationsEnum.MULTIPLY)) {
+                if (!equalWasPress) {
+                    if (numberSecondBinaryOperations == null) {
+                        numberSecondBinaryOperations = numberFirstBinaryOperations;
+                    }
+                    result = Arithmetic.calculateBinaryOperations(BigDecimal.ONE, numberSecondBinaryOperations, percentOperation);
+                    numberSecondBinaryOperations = result;
+                } else {
+                    result = Arithmetic.calculateBinaryOperations(BigDecimal.ONE, numberFirstBinaryOperations, percentOperation);
+                    numberFirstBinaryOperations = result;
+                    historyOperations = "";
+                    outOperationMemory.setText(historyOperations);
+                }
+            } else {
+                if (!equalWasPress) {
+                    if (numberSecondBinaryOperations == null) {
+                        numberSecondBinaryOperations = numberFirstBinaryOperations;
+                    }
+                    result = Arithmetic.calculateBinaryOperations(numberFirstBinaryOperations, numberSecondBinaryOperations, percentOperation);
+                    numberSecondBinaryOperations = result;
+                    percentPressed = true;
+                } else {
+                    if (!percentPressed) {
+                        numberSecondBinaryOperations = numberFirstBinaryOperations;
+                        percentPressed = true;
+                    }
+                    result = Arithmetic.calculateBinaryOperations(NumberFormatter.parseNumber(outText.getText()), numberFirstBinaryOperations, percentOperation);
+                    historyOperations = "";
+                    outOperationMemory.setText(historyOperations);
+                }
+            }
+        } else {
+            result = Arithmetic.calculateUnaryOperations(numberFirstBinaryOperations, percentOperation);
+        }
+        historyOperations += NumberFormatter.formatterNumber(result).replace(" ", "");
+        printResult(NumberFormatter.formatterNumber(result));
 
         outOperationMemory.setText(historyOperations);
         canChangeOperator = false;
-//        percentPressed = true;
         scrollOutOperationMemory();
     }
 
     @FXML
-    void scrollButtonLeftPressed(ActionEvent event) {
+    void scrollButtonLeftPressed() {
         scrollPaneOperation.setHvalue(scrollPaneOperation.getHvalue() + moveScroll);
         scrollButtonRight.setVisible(true);
         if (scrollPaneOperation.getHvalue() == scrollPaneOperation.getHmax()) {
@@ -316,7 +334,7 @@ public class Calculator_Controller {
     }
 
     @FXML
-    void scrollButtonRightPressed(ActionEvent event) {
+    void scrollButtonRightPressed() {
         scrollPaneOperation.setHvalue(scrollPaneOperation.getHvalue() - moveScroll);
         scrollButtonLeft.setVisible(true);
         if (scrollPaneOperation.getHvalue() == 0) {
@@ -327,14 +345,12 @@ public class Calculator_Controller {
 
     @FXML
     public void pressedEqual(ActionEvent actionEvent) {
-        Character buttonText = ((Button) actionEvent.getSource()).getText().charAt(0);
         if (!isError) {
-            if (buttonText.equals(OperationsEnum.EQUAL.getOperations())) {
                 if (newBinaryOperation != null) {
                     if (numberSecondBinaryOperations == null) {
                         numberSecondBinaryOperations = numberFirstBinaryOperations;
                     }
-                    if(percentPressed && equalWasPress){
+                    if (percentPressed && equalWasPress) {
                         setNum1();
                     }
                     equalWasPress = true;
@@ -351,7 +367,7 @@ public class Calculator_Controller {
                     equalWasPress = true;
                     percentOperation = null;
                 }
-            }
+
         } else {
             C.fire();
         }
@@ -359,7 +375,7 @@ public class Calculator_Controller {
     }
 
     @FXML
-    void backspace(ActionEvent actionEvent) {
+    void backspace() {
         if (isError) {
             C.fire();
         }
@@ -388,7 +404,7 @@ public class Calculator_Controller {
     }
 
     @FXML
-    void clearAllC(ActionEvent actionEvent) {
+    void clearAllC() {
         outText.setStyle(firstStyleLabel);
         outText.setText("0");
         historyOperations = "";
@@ -414,7 +430,7 @@ public class Calculator_Controller {
     }
 
     @FXML
-    void clearNumberCE(ActionEvent actionEvent) {
+    void clearNumberCE() {
         outText.setStyle(firstStyleLabel);
         outText.setText("0");
         pointInText = false;
@@ -432,7 +448,7 @@ public class Calculator_Controller {
             one.fire();
         } else if (keyCode == KeyCode.DIGIT2 || keyCode == KeyCode.NUMPAD2) {
             if (event.isShiftDown()) {
-                sqrt.fire();
+                SQRT.fire();
             } else {
                 two.fire();
             }
@@ -442,7 +458,7 @@ public class Calculator_Controller {
             four.fire();
         } else if (keyCode == KeyCode.DIGIT5 || keyCode == KeyCode.NUMPAD5) {
             if (event.isShiftDown()) {
-                percent.fire();
+                PERCENT.fire();
             } else {
                 five.fire();
             }
@@ -452,7 +468,7 @@ public class Calculator_Controller {
             seven.fire();
         } else if (keyCode == KeyCode.DIGIT8 || keyCode == KeyCode.NUMPAD8) {
             if (event.isShiftDown()) {
-                multiply.fire();
+                MULTIPLY.fire();
             } else {
                 eight.fire();
             }
@@ -467,15 +483,15 @@ public class Calculator_Controller {
         } else if (keyCode == KeyCode.COMMA) {
             point.fire();
         } else if (keyCode == KeyCode.ADD || (keyCode == KeyCode.EQUALS && event.isShiftDown())) {
-            add.fire();
+            ADD.fire();
         } else if (keyCode == KeyCode.MINUS || keyCode == KeyCode.SUBTRACT) {
-            subtract.fire();
+            SUBTRACT.fire();
         } else if (keyCode == KeyCode.MULTIPLY) {
-            multiply.fire();
+            MULTIPLY.fire();
         } else if (keyCode == KeyCode.SLASH || keyCode == KeyCode.DIVIDE) {
-            divide.fire();
+            DIVIDE.fire();
         } else if (keyCode == KeyCode.ENTER) {
-            equal.fire();
+            EQUAL.fire();
         } else if (keyCode == KeyCode.F9) {
             plusMinus.fire();
         } else if (keyCode == KeyCode.DELETE) {
@@ -484,13 +500,13 @@ public class Calculator_Controller {
             if (event.isControlDown()) {
                 memoryRecall.fire();
             } else {
-                oneDivideX.fire();
+                ONE_DIVIDE_X.fire();
             }
         } else if (keyCode == KeyCode.Q) {
             if (event.isControlDown()) {
                 memorySubtract.fire();
             } else {
-                sqrX.fire();
+                SQR.fire();
             }
         } else if ((keyCode == KeyCode.M && event.isControlDown())) {
             memoryStore.fire();
@@ -540,13 +556,13 @@ public class Calculator_Controller {
     }
 
     @FXML
-    public void cancelButton(ActionEvent actionEvent) {
+    public void cancelButton() {
         Stage stage = (Stage) cancel.getScene().getWindow();
         stage.close();
     }
 
     @FXML
-    public void maximizeWindow(ActionEvent actionEvent) {
+    public void maximizeWindow() {
         Stage stage = (Stage) maximizeButton.getScene().getWindow();
 
         if (!stage.isMaximized()) {
@@ -563,24 +579,24 @@ public class Calculator_Controller {
 
     private void maximizeFontButton() {
         Stage stage = (Stage) maximizeButton.getScene().getWindow();
-        Font newFontNumber = null;
-        Font newFontOperations = null;
+        Font newFontNumber;
+        Font newFontOperations;
         if (stage.isMaximized()) {
             newFontNumber = Font.font("Segoe UI Semibold", 34);
             newFontOperations = Font.font("Segoe MDL2 Assets", 20);
-            percent.setFont(Font.font("Calculator MDL2 Assets", 20));
-            sqrX.setFont(Font.font("Calculator MDL2 Assets", 25));
-            oneDivideX.setFont(Font.font("Calculator MDL2 Assets", 22));
-            divide.setFont(Font.font("Calculator MDL2 Assets", 20));
-            equal.setFont(Font.font("Calculator MDL2 Assets", 20));
+            PERCENT.setFont(Font.font("Calculator MDL2 Assets", 20));
+            SQR.setFont(Font.font("Calculator MDL2 Assets", 25));
+            ONE_DIVIDE_X.setFont(Font.font("Calculator MDL2 Assets", 22));
+            DIVIDE.setFont(Font.font("Calculator MDL2 Assets", 20));
+            EQUAL.setFont(Font.font("Calculator MDL2 Assets", 20));
         } else {
             newFontNumber = Font.font("Segoe UI Semibold", 24);
             newFontOperations = Font.font("Segoe MDL2 Assets", 15);
-            percent.setFont(Font.font("Calculator MDL2 Assets", 15));
-            sqrX.setFont(Font.font("Calculator MDL2 Assets", 19));
-            oneDivideX.setFont(Font.font("Calculator MDL2 Assets", 17));
-            divide.setFont(Font.font("Calculator MDL2 Assets", 15));
-            equal.setFont(Font.font("Calculator MDL2 Assets", 15));
+            PERCENT.setFont(Font.font("Calculator MDL2 Assets", 15));
+            SQR.setFont(Font.font("Calculator MDL2 Assets", 19));
+            ONE_DIVIDE_X.setFont(Font.font("Calculator MDL2 Assets", 17));
+            DIVIDE.setFont(Font.font("Calculator MDL2 Assets", 15));
+            EQUAL.setFont(Font.font("Calculator MDL2 Assets", 15));
         }
 
         one.setFont(newFontNumber);
@@ -596,17 +612,17 @@ public class Calculator_Controller {
         point.setFont(newFontNumber);
 
         plusMinus.setFont(newFontOperations);
-        add.setFont(newFontOperations);
-        multiply.setFont(newFontOperations);
-        subtract.setFont(newFontOperations);
-        sqrt.setFont(newFontOperations);
+        ADD.setFont(newFontOperations);
+        MULTIPLY.setFont(newFontOperations);
+        SUBTRACT.setFont(newFontOperations);
+        SQRT.setFont(newFontOperations);
         CE.setFont(newFontOperations);
         C.setFont(newFontOperations);
         Backspace.setFont(newFontOperations);
     }
 
     @FXML
-    public void hideWindow(ActionEvent actionEvent) {
+    public void hideWindow() {
         Stage stage = (Stage) maximizeButton.getScene().getWindow();
         stage.setIconified(true);
     }
@@ -625,7 +641,7 @@ public class Calculator_Controller {
     }
 
     @FXML
-    public void negate(ActionEvent actionEvent) {
+    public void negate() {
         if (numberSecondBinaryOperations == null && equalWasPress || result != null) {
             if (historyUnaryOperations.isEmpty()) {
                 historyUnaryOperations += NumberFormatter.formatterNumber(NumberFormatter.parseNumber(outText.getText())).replace(" ", "");
@@ -662,7 +678,7 @@ public class Calculator_Controller {
     }
 
     @FXML
-    void memoryStore(ActionEvent event) {
+    void memoryStore() {
         if (memory == null) {
             memory = new Memory();
         }
@@ -672,7 +688,7 @@ public class Calculator_Controller {
     }
 
     @FXML
-    void memoryAdd(ActionEvent event) {
+    void memoryAdd() {
         if (memory != null) {
             memory.memoryAdd(NumberFormatter.parseNumber(outText.getText()));
         } else {
@@ -684,14 +700,14 @@ public class Calculator_Controller {
     }
 
     @FXML
-    void memoryClear(ActionEvent event) {
+    void memoryClear() {
         memoryPressed = true;
         memory = null;
         memoryButtonDisable(true);
     }
 
     @FXML
-    void memoryRecall(ActionEvent event) {
+    void memoryRecall() {
         if (memory != null) {
             try {
                 printResult(NumberFormatter.formatterNumber(Arithmetic.isOverflow(memory.memoryRecall())));
@@ -704,7 +720,7 @@ public class Calculator_Controller {
     }
 
     @FXML
-    void memorySubtract(ActionEvent event) {
+    void memorySubtract() {
         if (memory != null) {
             memory.memorySubtract(NumberFormatter.parseNumber(outText.getText()));
         } else {
@@ -788,11 +804,7 @@ public class Calculator_Controller {
         }
         if (historyOperations.isEmpty()) {
             if (historyUnaryOperations.isEmpty()) {
-//                if (outText.getText().contains("e")) {
                 historyOperations += NumberFormatter.formatterNumber(NumberFormatter.parseNumber(outText.getText())).replace(" ", "");
-//                }else{
-//                    historyOperations += outText.getText().replace(" ", "");
-//                }
             }
         }
     }
@@ -830,14 +842,14 @@ public class Calculator_Controller {
     }
 
     private void operationsIsDisable(boolean disable) {
-        percent.setDisable(disable);
-        sqrt.setDisable(disable);
-        sqrX.setDisable(disable);
-        oneDivideX.setDisable(disable);
-        divide.setDisable(disable);
-        multiply.setDisable(disable);
-        subtract.setDisable(disable);
-        add.setDisable(disable);
+        PERCENT.setDisable(disable);
+        SQRT.setDisable(disable);
+        SQR.setDisable(disable);
+        ONE_DIVIDE_X.setDisable(disable);
+        DIVIDE.setDisable(disable);
+        MULTIPLY.setDisable(disable);
+        SUBTRACT.setDisable(disable);
+        ADD.setDisable(disable);
         plusMinus.setDisable(disable);
         point.setDisable(disable);
 
@@ -906,8 +918,9 @@ public class Calculator_Controller {
         printResult(NumberFormatter.formatterNumber(result));
     }
 
-    void printResult(String out) {
+    private void printResult(String out) {
         outText.setText(out);
         resizeOutputText();
     }
+
 }
