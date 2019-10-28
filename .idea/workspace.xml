@@ -7,8 +7,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="feaeb0c2-feb2-4a9c-98e3-48b1d1a339aa" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/test/java/Controller/TestContr.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Calculator_Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Calculator_Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/NumberFormatter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/NumberFormatter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Controller/Calculator_ControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Controller/Calculator_ControllerTest.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -131,7 +134,7 @@
     </option>
   </component>
   <component name="RunManager" selected="Application.Calculator_Main">
-    <configuration name="Calculator_Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="Calculator_Main" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Controller.Calculator_Main" />
       <module name="Calculator" />
       <extension name="coverage">
@@ -157,7 +160,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Calculator_ControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="Calculator_ControllerTest" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
       <module name="Calculator" />
       <extension name="coverage">
         <pattern>
@@ -188,6 +191,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Calculator_ControllerTest.checkEqual" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Calculator" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Controller" />
+      <option name="MAIN_CLASS_NAME" value="Controller.Calculator_ControllerTest" />
+      <option name="METHOD_NAME" value="checkEqual" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Calculator_ControllerTest.checkExceptions" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Calculator" />
       <extension name="coverage">
@@ -204,7 +223,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Calculator_ControllerTest.checkUnaryOperations" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="Calculator_ControllerTest.checkMemory" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Calculator" />
       <extension name="coverage">
         <pattern>
@@ -214,7 +233,23 @@
       </extension>
       <option name="PACKAGE_NAME" value="Controller" />
       <option name="MAIN_CLASS_NAME" value="Controller.Calculator_ControllerTest" />
-      <option name="METHOD_NAME" value="checkUnaryOperations" />
+      <option name="METHOD_NAME" value="checkMemory" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Calculator_ControllerTest.checkOperationsEnotationValid" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Calculator" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Controller" />
+      <option name="MAIN_CLASS_NAME" value="Controller.Calculator_ControllerTest" />
+      <option name="METHOD_NAME" value="checkOperationsEnotationValid" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -223,18 +258,20 @@
     <list>
       <item itemvalue="Application.Exp" />
       <item itemvalue="Application.Calculator_Main" />
-      <item itemvalue="JUnit.Calculator_ControllerTest.checkAllOperations" />
-      <item itemvalue="JUnit.Calculator_ControllerTest.checkExceptions" />
       <item itemvalue="JUnit.Calculator_ControllerTest" />
-      <item itemvalue="JUnit.Calculator_ControllerTest.checkUnaryOperations" />
+      <item itemvalue="JUnit.Calculator_ControllerTest.checkExceptions" />
+      <item itemvalue="JUnit.Calculator_ControllerTest.checkMemory" />
+      <item itemvalue="JUnit.Calculator_ControllerTest.checkOperationsEnotationValid" />
+      <item itemvalue="JUnit.Calculator_ControllerTest.checkAllOperations" />
+      <item itemvalue="JUnit.Calculator_ControllerTest.checkEqual" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Calculator_Main" />
-        <item itemvalue="JUnit.Calculator_ControllerTest" />
-        <item itemvalue="JUnit.Calculator_ControllerTest.checkExceptions" />
+        <item itemvalue="JUnit.Calculator_ControllerTest.checkEqual" />
         <item itemvalue="JUnit.Calculator_ControllerTest.checkAllOperations" />
-        <item itemvalue="JUnit.Calculator_ControllerTest.checkUnaryOperations" />
+        <item itemvalue="JUnit.Calculator_ControllerTest.checkExceptions" />
+        <item itemvalue="JUnit.Calculator_ControllerTest.checkOperationsEnotationValid" />
+        <item itemvalue="JUnit.Calculator_ControllerTest.checkMemory" />
       </list>
     </recent_temporary>
   </component>
@@ -698,8 +735,8 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/Controller/Calculator_Controller.java</url>
-          <line>693</line>
-          <option name="timeStamp" value="60" />
+          <line>219</line>
+          <option name="timeStamp" value="23" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -710,8 +747,6 @@
       <configuration name="Application">
         <watch expression="text.txBounds" language="JAVA" />
         <watch expression="number.stringCache" />
-        <watch expression="numberSecondBinaryOperations" language="JAVA" />
-        <watch expression="numberSecondBinaryOperations" language="JAVA" />
       </configuration>
     </watches-manager>
   </component>
