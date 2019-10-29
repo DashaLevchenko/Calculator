@@ -6,17 +6,17 @@
     <option name="CUSTOM_SCOPE_NAME" value="All Places" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="feaeb0c2-feb2-4a9c-98e3-48b1d1a339aa" name="Default Changelist" comment="before change model">
-      <change afterPath="$PROJECT_DIR$/src/test/java/View/Calculator_ViewTest.java" afterDir="false" />
+    <list default="true" id="feaeb0c2-feb2-4a9c-98e3-48b1d1a339aa" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Calculator_Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Calculator_Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Arithmetic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Arithmetic.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/View/calculator_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/calculator_view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Controller/Calculator_ControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Controller/Calculator_ControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Controller/TestContr.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/Model/ArithmeticDivideTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/ArithmeticDivideTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/Model/ArithmeticMinusTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/ArithmeticMinusTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/View/calculator_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/calculator_view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Model/ArithmeticMultiplyTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/ArithmeticMultiplyTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Model/ArithmeticOneDivideXTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/ArithmeticOneDivideXTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Model/ArithmeticPercentTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/ArithmeticPercentTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Model/ArithmeticPlusMinusTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/ArithmeticPlusMinusTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Model/ArithmeticSquerRootTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/ArithmeticSquerRootTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Model/ArithmeticSumTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/ArithmeticSumTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Model/ArithmeticXSquerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/ArithmeticXSquerTest.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -44,8 +44,8 @@
         <option value="module-info" />
         <option value="FxmlFile" />
         <option value="Enum" />
-        <option value="JUnit5 Test Class" />
         <option value="Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -97,13 +97,20 @@
   </component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.RecentsKey">
+      <recent name="Model" />
       <recent name="Controller" />
       <recent name="View" />
-      <recent name="Model" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="Controller" />
       <recent name="Model" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Calculator\target\classes\View" />
+      <recent name="D:\Calculator\target\classes" />
+      <recent name="C:\Users\Дарья\IdeaProjects\Calculator\target\classes\View" />
+      <recent name="D:\Calculator\src\main\java\View" />
+      <recent name="C:\Users\Дарья\IdeaProjects\Calculator\src\test\java\Model" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="View" />
@@ -112,13 +119,6 @@
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
       <recent name="org.testfx.framework.junit.ApplicationTest" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Calculator\target\classes\View" />
-      <recent name="D:\Calculator\target\classes" />
-      <recent name="C:\Users\Дарья\IdeaProjects\Calculator\target\classes\View" />
-      <recent name="D:\Calculator\src\main\java\View" />
-      <recent name="C:\Users\Дарья\IdeaProjects\Calculator\src\test\java\Model" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -138,7 +138,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.ArithmeticDivideTest.divideValidInputIntegerDouble">
+  <component name="RunManager" selected="JUnit.Model in Calculator">
     <configuration name="Calculator_Main" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Controller.Calculator_Main" />
       <module name="Calculator" />
@@ -165,7 +165,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ArithmeticDivideTest.divideValidInputIntegerDouble" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ArithmeticPercentTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Calculator" />
       <extension name="coverage">
         <pattern>
@@ -174,9 +174,53 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="Model" />
-      <option name="MAIN_CLASS_NAME" value="Model.ArithmeticDivideTest" />
-      <option name="METHOD_NAME" value="divideValidInputIntegerDouble" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="MAIN_CLASS_NAME" value="Model.ArithmeticPercentTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ArithmeticPlusMinusTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Calculator" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Model.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Model" />
+      <option name="MAIN_CLASS_NAME" value="Model.ArithmeticPlusMinusTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ArithmeticSquerRootTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Calculator" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Model.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Model" />
+      <option name="MAIN_CLASS_NAME" value="Model.ArithmeticSquerRootTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ArithmeticXSquerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Calculator" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Model.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Model" />
+      <option name="MAIN_CLASS_NAME" value="Model.ArithmeticXSquerTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -192,54 +236,6 @@
       <option name="PACKAGE_NAME" value="Controller" />
       <option name="MAIN_CLASS_NAME" value="Controller.Calculator_ControllerTest" />
       <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Calculator_ViewTest.checkButtonColor" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Calculator" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="View.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="View" />
-      <option name="MAIN_CLASS_NAME" value="View.Calculator_ViewTest" />
-      <option name="METHOD_NAME" value="checkButtonColor" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Calculator_ViewTest.checkResize" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Calculator" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="View.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="View" />
-      <option name="MAIN_CLASS_NAME" value="View.Calculator_ViewTest" />
-      <option name="METHOD_NAME" value="checkResize" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Calculator_ViewTest.checkResizeCursor" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Calculator" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="View.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="View" />
-      <option name="MAIN_CLASS_NAME" value="View.Calculator_ViewTest" />
-      <option name="METHOD_NAME" value="checkResizeCursor" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -262,19 +258,19 @@
       <item itemvalue="Application.Exp" />
       <item itemvalue="Application.Calculator_Main" />
       <item itemvalue="JUnit.Calculator_ControllerTest" />
-      <item itemvalue="JUnit.Calculator_ViewTest.checkResizeCursor" />
-      <item itemvalue="JUnit.Calculator_ViewTest.checkResize" />
-      <item itemvalue="JUnit.Calculator_ViewTest.checkButtonColor" />
+      <item itemvalue="JUnit.ArithmeticPercentTest" />
+      <item itemvalue="JUnit.ArithmeticPlusMinusTest" />
+      <item itemvalue="JUnit.ArithmeticSquerRootTest" />
+      <item itemvalue="JUnit.ArithmeticXSquerTest" />
       <item itemvalue="JUnit.Model in Calculator" />
-      <item itemvalue="JUnit.ArithmeticDivideTest.divideValidInputIntegerDouble" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.ArithmeticDivideTest.divideValidInputIntegerDouble" />
         <item itemvalue="JUnit.Model in Calculator" />
-        <item itemvalue="JUnit.Calculator_ViewTest.checkButtonColor" />
-        <item itemvalue="JUnit.Calculator_ViewTest.checkResize" />
-        <item itemvalue="JUnit.Calculator_ViewTest.checkResizeCursor" />
+        <item itemvalue="JUnit.ArithmeticXSquerTest" />
+        <item itemvalue="JUnit.ArithmeticSquerRootTest" />
+        <item itemvalue="JUnit.ArithmeticPlusMinusTest" />
+        <item itemvalue="JUnit.ArithmeticPercentTest" />
       </list>
     </recent_temporary>
   </component>
@@ -301,13 +297,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1565432602101</updated>
-    </task>
-    <task id="LOCAL-00013" summary="Problem with scale in sum() Expect 2, got 2.0">
-      <created>1566388566448</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1566388566448</updated>
     </task>
     <task id="LOCAL-00014" summary="No problem with scale in sum()">
       <created>1566395525600</created>
@@ -645,7 +634,14 @@
       <option name="project" value="LOCAL" />
       <updated>1572265488128</updated>
     </task>
-    <option name="localTasksCounter" value="62" />
+    <task id="LOCAL-00062" summary="before change model">
+      <created>1572344135142</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1572344135142</updated>
+    </task>
+    <option name="localTasksCounter" value="63" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -734,15 +730,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="before change model" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/Model/ArithmeticDivideTest.java</url>
-          <line>1541</line>
-          <option name="timeStamp" value="25" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="JUnit">
         <watch expression="calculator" language="JAVA" />
