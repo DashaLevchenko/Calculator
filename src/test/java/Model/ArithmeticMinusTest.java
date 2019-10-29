@@ -3,16 +3,14 @@ package Model;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
-import java.math.MathContext;
-import java.math.RoundingMode;
 
 import static java.math.BigDecimal.valueOf;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ArithmeticMinusTest {
 
     @Test
-    void minusValidInputIntegerInteger() {
+    void subtract() {
         combinationMinusValidNegative(valueOf(0), valueOf(0), "0", "0");
         combinationMinusValidNegative(valueOf(0), valueOf(1), "1", "1");
         combinationMinusValidNegative(valueOf(1), valueOf(1), "2", "0");
@@ -575,12 +573,7 @@ class ArithmeticMinusTest {
         combinationMinusValidNegative(valueOf(10289622287797479L), valueOf(349675), "10289622288147154", "10289622287447804");
         combinationMinusValidNegative(valueOf(10000000000000000L), valueOf(10000000000000000L), "20000000000000000", "0");
 
-
-
-    }
-
-    @Test
-    void minusValidInputIntegerDouble() {
+        //With Decimal
         combinationMinusValidNegative(valueOf(1), valueOf(0.1), "1.1", "0.9");
         combinationMinusValidNegative(valueOf(2), valueOf(0.1), "2.1", "1.9");
         combinationMinusValidNegative(valueOf(3), valueOf(0.3), "3.3", "2.7");
@@ -1140,10 +1133,13 @@ class ArithmeticMinusTest {
         combinationMinusValidNegative(valueOf(9565533382416259L), valueOf(4.5214), "9565533382416263.5214", "9565533382416254.4786");
         combinationMinusValidNegative(valueOf(9999999999999999L), valueOf(999999999999999.9), "10999999999999998.9", "8999999999999999.1");
         combinationMinusValidNegative(valueOf(10000000000000000L), valueOf(0.1), "10000000000000000.1", "9999999999999999.9");
-        combinationMinusValidNegative(valueOf(10289622287797479L), valueOf(349.10675), "10289622287797828.10675", "10289622287797129.89325");
+
+
 
 
     }
+
+
 
     void assertionMinusValid(BigDecimal x, BigDecimal y, BigDecimal minus) {
         minus = scaleForBigdecimal(minus);

@@ -1539,13 +1539,13 @@ class ArithmeticDivideTest {
         combinationDivideValidNegative(valueOf(8888888888888888L), valueOf(888888888888888.8), "10");
         combinationDivideValidNegative(valueOf(9565533382416259L), valueOf(4.5214), "2115613169022041.624275666828858318");
         combinationDivideValidNegative(valueOf(9999999999999999L), valueOf(999999999999999.9), "10");
+        combinationDivideValidNegative(new BigDecimal("1.E-9999"), BigDecimal.TEN, "9");
     }
 
     void assertionDivideValid(BigDecimal x, BigDecimal y, BigDecimal divide) {
         BigDecimal divisionActual = Arithmetic.divide(x, y);
         divide = scaleForBigdecimal(divide.stripTrailingZeros());
         assertEquals(divide, divisionActual);
-//        assertEquals(divide, scaleForBigdecimal(x.divide(y, 16, RoundingMode.HALF_UP).stripTrailingZeros()));
     }
 
     void assertionDivideNotValid(BigDecimal x, BigDecimal y) {
@@ -1553,15 +1553,16 @@ class ArithmeticDivideTest {
             Arithmetic.divide(x, y);
             fail();
         } catch (ArithmeticException e) {
-            assertEquals("Cannot divide by zero", e.getMessage());
+            if(x.equals(BigDecimal.ZERO)){
+                assertEquals("Result is undefined", e.getMessage());
+            }else {
+                assertEquals("Cannot divide by zero", e.getMessage());
+            }
         }
 
     }
 
     void combinationDivideValidNegative(BigDecimal x, BigDecimal y, String divideXY) {
-//        BigDecimal c = x.multiply(y.movePointLeft(2), MathContext.DECIMAL128);
-//        System.out.println("combinationDivideValidNegative(valueOf("+x+"), valueOf("+y+"), \""+scaleForBigdecimal(c).toPlainString()+"\");");
-
         BigDecimal xNegative = x.negate();
         BigDecimal yNegative = y.negate();
         BigDecimal divideXYNegative =new BigDecimal(divideXY).negate();

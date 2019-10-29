@@ -75,7 +75,7 @@ public class Arithmetic {
         return scaleForBigDecimal(x.negate());
     }
 
-    public static BigDecimal calculateBinaryOperations(BigDecimal number1, BigDecimal number2, OperationsEnum operation) {
+    public static BigDecimal calculate(BigDecimal number1, BigDecimal number2, OperationsEnum operation) {
         BigDecimal result = BigDecimal.ZERO;
 
         if (operation.equals(OperationsEnum.ADD)) {
@@ -94,7 +94,8 @@ public class Arithmetic {
         return result;
     }
 
-    public static BigDecimal calculateUnaryOperations(BigDecimal number, OperationsEnum operation) {
+
+    public static BigDecimal calculate(BigDecimal number, OperationsEnum operation) {
         BigDecimal result = BigDecimal.ZERO;
 
         if (operation.equals(OperationsEnum.SQRT)) {
@@ -103,8 +104,6 @@ public class Arithmetic {
             result = xSquare(number);
         } else if (operation.equals(OperationsEnum.ONE_DIVIDE_X)) {
             result = oneDivideX(number);
-        } else if (operation.equals(OperationsEnum.NEGATE)) {
-            result = negate(number);
         } else if (operation.equals(OperationsEnum.PERCENT)) {
             result = percent(number, BigDecimal.ZERO);
         }

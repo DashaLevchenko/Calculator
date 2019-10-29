@@ -160,7 +160,6 @@ public class Calculator_Controller {
     private final int CHAR_MAX = 16;
 
     private OperationsEnum newBinaryOperation;
-    private OperationsEnum unaryOperation;
     private OperationsEnum percentOperation;
     private int charValidInText = 16;
     private String firstStyleLabel;
@@ -212,7 +211,6 @@ public class Calculator_Controller {
             textStandard.setVisible(true);
         }
         transition.play();
-
     }
 
     @FXML
@@ -258,7 +256,7 @@ public class Calculator_Controller {
             newBinaryOperation = null;
         }
 
-        unaryOperation = OperationsEnum.valueOf(((Button) actionEvent.getSource()).getId());
+        OperationsEnum unaryOperation = OperationsEnum.valueOf(((Button) actionEvent.getSource()).getId());
         if (numberUnaryOperations == null) {
             numberUnaryOperations = NumberFormatter.parseNumber(outText.getText().replace(" ", ""));
             if (historyUnaryOperations.isEmpty()) {
@@ -271,7 +269,17 @@ public class Calculator_Controller {
 
         historyUnaryOperations = unaryOperation.getSymbol() + historyUnaryOperations + ")";
         outOperationMemory.setText(historyOperations + historyUnaryOperations);
-        calculateUnaryOperations();
+        if (numberUnaryOperations != null) {
+            try {
+                result = Arithmetic.calculate(numberUnaryOperations, unaryOperation);
+                numberUnaryOperations = result;
+                printResult(NumberFormatter.formatterNumber(result));
+
+                setNumberResultUnary();
+            } catch (Exception e) {
+                printError(e);
+            }
+        }
 
         scrollOutOperationMemory();
         resizeOutputText();
@@ -286,10 +294,10 @@ public class Calculator_Controller {
                     if (numberSecondBinaryOperations == null) {
                         numberSecondBinaryOperations = numberFirstBinaryOperations;
                     }
-                    result = Arithmetic.calculateBinaryOperations(BigDecimal.ONE, numberSecondBinaryOperations, percentOperation);
+                    result = Arithmetic.calculate(BigDecimal.ONE, numberSecondBinaryOperations, percentOperation);
                     numberSecondBinaryOperations = result;
                 } else {
-                    result = Arithmetic.calculateBinaryOperations(BigDecimal.ONE, numberFirstBinaryOperations, percentOperation);
+                    result = Arithmetic.calculate(BigDecimal.ONE, numberFirstBinaryOperations, percentOperation);
                     numberFirstBinaryOperations = result;
                     historyOperations = "";
                     outOperationMemory.setText(historyOperations);
@@ -299,7 +307,7 @@ public class Calculator_Controller {
                     if (numberSecondBinaryOperations == null) {
                         numberSecondBinaryOperations = numberFirstBinaryOperations;
                     }
-                    result = Arithmetic.calculateBinaryOperations(numberFirstBinaryOperations, numberSecondBinaryOperations, percentOperation);
+                    result = Arithmetic.calculate(numberFirstBinaryOperations, numberSecondBinaryOperations, percentOperation);
                     numberSecondBinaryOperations = result;
                     percentPressed = true;
                 } else {
@@ -307,13 +315,13 @@ public class Calculator_Controller {
                         numberSecondBinaryOperations = numberFirstBinaryOperations;
                         percentPressed = true;
                     }
-                    result = Arithmetic.calculateBinaryOperations(NumberFormatter.parseNumber(outText.getText()), numberFirstBinaryOperations, percentOperation);
+                    result = Arithmetic.calculate(NumberFormatter.parseNumber(outText.getText()), numberFirstBinaryOperations, percentOperation);
                     historyOperations = "";
                     outOperationMemory.setText(historyOperations);
                 }
             }
         } else {
-            result = Arithmetic.calculateUnaryOperations(numberFirstBinaryOperations, percentOperation);
+            result = Arithmetic.calculate(numberFirstBinaryOperations, percentOperation);
         }
         historyOperations += NumberFormatter.formatterNumber(result).replace(" ", "");
         printResult(NumberFormatter.formatterNumber(result));
@@ -344,7 +352,7 @@ public class Calculator_Controller {
     }
 
     @FXML
-    public void pressedEqual(ActionEvent actionEvent) {
+    public void pressedEqual() {
         if (!isError) {
                 if (newBinaryOperation != null) {
                     if (numberSecondBinaryOperations == null) {
@@ -819,7 +827,7 @@ public class Calculator_Controller {
     private void calculateBinaryOperation() {
         if (numberFirstBinaryOperations != null && numberSecondBinaryOperations != null) {
             try {
-                result = Arithmetic.calculateBinaryOperations(numberFirstBinaryOperations, numberSecondBinaryOperations, newBinaryOperation);
+                result = Arithmetic.calculate(numberFirstBinaryOperations, numberSecondBinaryOperations, newBinaryOperation);
                 numberFirstBinaryOperations = result;
                 printResult(NumberFormatter.formatterNumber(result));
                 negatePressed = false;
@@ -855,19 +863,6 @@ public class Calculator_Controller {
 
     }
 
-    private void calculateUnaryOperations() {
-        if (numberUnaryOperations != null) {
-            try {
-                result = Arithmetic.calculateUnaryOperations(numberUnaryOperations, unaryOperation);
-                numberUnaryOperations = result;
-                printResult(NumberFormatter.formatterNumber(result));
-
-                setNumberResultUnary();
-            } catch (Exception e) {
-                printError(e);
-            }
-        }
-    }
 
     private void setNumberResultUnary() {
         if (numberFirstBinaryOperations != null && newBinaryOperation != null) {
@@ -878,45 +873,6 @@ public class Calculator_Controller {
         }
     }
 
-    private void calculatePerCent() {
-        if (newBinaryOperation != null) {
-            if (newBinaryOperation.equals(OperationsEnum.DIVIDE) || newBinaryOperation.equals(OperationsEnum.MULTIPLY)) {
-                if (!equalWasPress) {
-                    if (numberSecondBinaryOperations == null) {
-                        numberSecondBinaryOperations = numberFirstBinaryOperations;
-                    }
-                    result = Arithmetic.calculateBinaryOperations(BigDecimal.ONE, numberSecondBinaryOperations, percentOperation);
-                    numberSecondBinaryOperations = result;
-                } else {
-                    result = Arithmetic.calculateBinaryOperations(BigDecimal.ONE, numberFirstBinaryOperations, percentOperation);
-                    numberFirstBinaryOperations = result;
-                    historyOperations = "";
-                    outOperationMemory.setText(historyOperations);
-                }
-            } else {
-                if (!equalWasPress) {
-                    if (numberSecondBinaryOperations == null) {
-                        numberSecondBinaryOperations = numberFirstBinaryOperations;
-                    }
-                    result = Arithmetic.calculateBinaryOperations(numberFirstBinaryOperations, numberSecondBinaryOperations, percentOperation);
-                    numberSecondBinaryOperations = result;
-                    percentPressed = true;
-                } else {
-                    if (!percentPressed) {
-                        numberSecondBinaryOperations = numberFirstBinaryOperations;
-                        percentPressed = true;
-                    }
-                    result = Arithmetic.calculateBinaryOperations(NumberFormatter.parseNumber(outText.getText()), numberFirstBinaryOperations, percentOperation);
-                    historyOperations = "";
-                    outOperationMemory.setText(historyOperations);
-                }
-            }
-        } else {
-            result = Arithmetic.calculateUnaryOperations(numberFirstBinaryOperations, percentOperation);
-        }
-        historyOperations += NumberFormatter.formatterNumber(result).replace(" ", "");
-        printResult(NumberFormatter.formatterNumber(result));
-    }
 
     private void printResult(String out) {
         outText.setText(out);
