@@ -157,7 +157,11 @@ public class Calculator_Controller {
     //endregion
 
     private static final double MAX_FONT_SIZE = 71;
-    private final int CHAR_MAX = 16;
+    private final int CHAR_MAX_INPUT = 16;
+    private static final BigDecimal MAX_NUMBER_DECIMAL = new BigDecimal("9.999999999999999E-9999");
+    private static final BigDecimal MIN_NUMBER_INTEGER = new BigDecimal("9.999999999999999E9999");
+    private static final int MAX_SCALE_DECIMAL = MAX_NUMBER_DECIMAL.scale() - MAX_NUMBER_DECIMAL.precision() + 1;
+    private static final int MAX_SCALE_INTEGER = (MIN_NUMBER_INTEGER.scale() - MIN_NUMBER_INTEGER.precision());
 
     private OperationsEnum newBinaryOperation;
     private OperationsEnum percentOperation;
@@ -272,6 +276,7 @@ public class Calculator_Controller {
         if (numberUnaryOperations != null) {
             try {
                 result = Arithmetic.calculate(numberUnaryOperations, unaryOperation);
+                isOverflow(result);
                 numberUnaryOperations = result;
                 printResult(NumberFormatter.formatterNumber(result));
 
@@ -288,40 +293,48 @@ public class Calculator_Controller {
     @FXML
     public void percentOperation() {
         percentOperation = OperationsEnum.PERCENT;
-        if (newBinaryOperation != null) {
-            if (newBinaryOperation.equals(OperationsEnum.DIVIDE) || newBinaryOperation.equals(OperationsEnum.MULTIPLY)) {
-                if (!equalWasPress) {
-                    if (numberSecondBinaryOperations == null) {
-                        numberSecondBinaryOperations = numberFirstBinaryOperations;
+        try {
+            if (newBinaryOperation != null) {
+                if (newBinaryOperation.equals(OperationsEnum.DIVIDE) || newBinaryOperation.equals(OperationsEnum.MULTIPLY)) {
+                    if (!equalWasPress) {
+                        if (numberSecondBinaryOperations == null) {
+                            numberSecondBinaryOperations = numberFirstBinaryOperations;
+                        }
+                        result = Arithmetic.calculate(BigDecimal.ONE, numberSecondBinaryOperations, percentOperation);
+                        isOverflow(result);
+                        numberSecondBinaryOperations = result;
+                    } else {
+                        result = Arithmetic.calculate(BigDecimal.ONE, numberFirstBinaryOperations, percentOperation);
+                        isOverflow(result);
+                        numberFirstBinaryOperations = result;
+                        historyOperations = "";
+                        outOperationMemory.setText(historyOperations);
                     }
-                    result = Arithmetic.calculate(BigDecimal.ONE, numberSecondBinaryOperations, percentOperation);
-                    numberSecondBinaryOperations = result;
                 } else {
-                    result = Arithmetic.calculate(BigDecimal.ONE, numberFirstBinaryOperations, percentOperation);
-                    numberFirstBinaryOperations = result;
-                    historyOperations = "";
-                    outOperationMemory.setText(historyOperations);
+                    if (!equalWasPress) {
+                        if (numberSecondBinaryOperations == null) {
+                            numberSecondBinaryOperations = numberFirstBinaryOperations;
+                        }
+                        result = Arithmetic.calculate(numberFirstBinaryOperations, numberSecondBinaryOperations, percentOperation);
+                        isOverflow(result);
+                        numberSecondBinaryOperations = result;
+                        percentPressed = true;
+                    } else {
+                        if (!percentPressed) {
+                            numberSecondBinaryOperations = numberFirstBinaryOperations;
+                            percentPressed = true;
+                        }
+                        result = Arithmetic.calculate(NumberFormatter.parseNumber(outText.getText()), numberFirstBinaryOperations, percentOperation);
+                        isOverflow(result);
+                        historyOperations = "";
+                        outOperationMemory.setText(historyOperations);
+                    }
                 }
             } else {
-                if (!equalWasPress) {
-                    if (numberSecondBinaryOperations == null) {
-                        numberSecondBinaryOperations = numberFirstBinaryOperations;
-                    }
-                    result = Arithmetic.calculate(numberFirstBinaryOperations, numberSecondBinaryOperations, percentOperation);
-                    numberSecondBinaryOperations = result;
-                    percentPressed = true;
-                } else {
-                    if (!percentPressed) {
-                        numberSecondBinaryOperations = numberFirstBinaryOperations;
-                        percentPressed = true;
-                    }
-                    result = Arithmetic.calculate(NumberFormatter.parseNumber(outText.getText()), numberFirstBinaryOperations, percentOperation);
-                    historyOperations = "";
-                    outOperationMemory.setText(historyOperations);
-                }
+                result = Arithmetic.calculate(numberFirstBinaryOperations, percentOperation);
             }
-        } else {
-            result = Arithmetic.calculate(numberFirstBinaryOperations, percentOperation);
+        } catch (ArithmeticException e) {
+            printError(e);
         }
         historyOperations += NumberFormatter.formatterNumber(result).replace(" ", "");
         printResult(NumberFormatter.formatterNumber(result));
@@ -432,7 +445,7 @@ public class Calculator_Controller {
         isError = false;
         negatePressed = false;
         percentPressed = false;
-        charValidInText = CHAR_MAX;
+        charValidInText = CHAR_MAX_INPUT;
         resizeOutputText();
         percentOperation = null;
     }
@@ -442,7 +455,7 @@ public class Calculator_Controller {
         outText.setStyle(firstStyleLabel);
         outText.setText("0");
         pointInText = false;
-        charValidInText = CHAR_MAX;
+        charValidInText = CHAR_MAX_INPUT;
         if (isError) {
             C.fire();
         }
@@ -553,7 +566,7 @@ public class Calculator_Controller {
             canChangeOperator = false;
             memoryPressed = false;
             equalWasPress = false;
-            charValidInText = CHAR_MAX;
+            charValidInText = CHAR_MAX_INPUT;
             out = "";
             percentOperation = null;
             pointInText = false;
@@ -667,7 +680,7 @@ public class Calculator_Controller {
                 charValidInText++;
             } else {
                 outText.setText(out.replace("-", ""));
-                charValidInText = CHAR_MAX;
+                charValidInText = CHAR_MAX_INPUT;
             }
         }
         if (numberUnaryOperations == null) {
@@ -718,7 +731,7 @@ public class Calculator_Controller {
     void memoryRecall() {
         if (memory != null) {
             try {
-                printResult(NumberFormatter.formatterNumber(Arithmetic.isOverflow(memory.memoryRecall())));
+                printResult(NumberFormatter.formatterNumber(isOverflow(memory.memoryRecall())));
             } catch (Exception e) {
                 printError(e);
             }
@@ -828,7 +841,9 @@ public class Calculator_Controller {
         if (numberFirstBinaryOperations != null && numberSecondBinaryOperations != null) {
             try {
                 result = Arithmetic.calculate(numberFirstBinaryOperations, numberSecondBinaryOperations, newBinaryOperation);
+                isOverflow(result);
                 numberFirstBinaryOperations = result;
+
                 printResult(NumberFormatter.formatterNumber(result));
                 negatePressed = false;
                 if (percentOperation == null && historyUnaryOperations.isEmpty()) {
@@ -877,6 +892,21 @@ public class Calculator_Controller {
     private void printResult(String out) {
         outText.setText(out);
         resizeOutputText();
+    }
+    public static BigDecimal isOverflow(BigDecimal result) throws ArithmeticException {
+        boolean needOverflow = false;
+        if (result.scale() > 0) {
+            needOverflow = result.scale() > MAX_SCALE_DECIMAL;
+        } else if (result.scale() < 0) {
+            needOverflow = result.scale() - result.precision() < MAX_SCALE_INTEGER;
+        }
+
+        if (needOverflow) {
+            throw new ArithmeticException("Overflow");
+        } else {
+            return result;
+        }
+
     }
 
 }

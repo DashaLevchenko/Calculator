@@ -7,16 +7,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="feaeb0c2-feb2-4a9c-98e3-48b1d1a339aa" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Model/ArithmeticDivideTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/ArithmeticDivideTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Model/ArithmeticMinusTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/ArithmeticMinusTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Model/ArithmeticMultiplyTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/ArithmeticMultiplyTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Model/ArithmeticOneDivideXTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/ArithmeticOneDivideXTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Model/ArithmeticPercentTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/ArithmeticPercentTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Model/ArithmeticPlusMinusTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/ArithmeticPlusMinusTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Model/ArithmeticSquerRootTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/ArithmeticSquerRootTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Model/ArithmeticSumTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/ArithmeticSumTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Model/ArithmeticXSquerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/ArithmeticXSquerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Calculator_Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Calculator_Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Arithmetic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Arithmetic.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -138,7 +130,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.Model in Calculator">
+  <component name="RunManager" selected="JUnit.Calculator_ControllerTest.checkExceptions">
     <configuration name="Calculator_Main" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Controller.Calculator_Main" />
       <module name="Calculator" />
@@ -161,21 +153,6 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ArithmeticPercentTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Calculator" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Model.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="Model" />
-      <option name="MAIN_CLASS_NAME" value="Model.ArithmeticPercentTest" />
-      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -240,6 +217,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Calculator_ControllerTest.checkExceptions" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Calculator" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Controller" />
+      <option name="MAIN_CLASS_NAME" value="Controller.Calculator_ControllerTest" />
+      <option name="METHOD_NAME" value="checkExceptions" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Model in Calculator" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Calculator" />
       <extension name="coverage">
@@ -258,19 +251,19 @@
       <item itemvalue="Application.Exp" />
       <item itemvalue="Application.Calculator_Main" />
       <item itemvalue="JUnit.Calculator_ControllerTest" />
-      <item itemvalue="JUnit.ArithmeticPercentTest" />
       <item itemvalue="JUnit.ArithmeticPlusMinusTest" />
       <item itemvalue="JUnit.ArithmeticSquerRootTest" />
       <item itemvalue="JUnit.ArithmeticXSquerTest" />
       <item itemvalue="JUnit.Model in Calculator" />
+      <item itemvalue="JUnit.Calculator_ControllerTest.checkExceptions" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.Calculator_ControllerTest.checkExceptions" />
         <item itemvalue="JUnit.Model in Calculator" />
         <item itemvalue="JUnit.ArithmeticXSquerTest" />
         <item itemvalue="JUnit.ArithmeticSquerRootTest" />
         <item itemvalue="JUnit.ArithmeticPlusMinusTest" />
-        <item itemvalue="JUnit.ArithmeticPercentTest" />
       </list>
     </recent_temporary>
   </component>
@@ -297,13 +290,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1565432602101</updated>
-    </task>
-    <task id="LOCAL-00014" summary="No problem with scale in sum()">
-      <created>1566395525600</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1566395525600</updated>
     </task>
     <task id="LOCAL-00015" summary="Before all input in BigDecimal">
       <created>1566395569586</created>
@@ -641,7 +627,14 @@
       <option name="project" value="LOCAL" />
       <updated>1572344135142</updated>
     </task>
-    <option name="localTasksCounter" value="63" />
+    <task id="LOCAL-00063" summary="before overflow in controller">
+      <created>1572347179450</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1572347179450</updated>
+    </task>
+    <option name="localTasksCounter" value="64" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -702,7 +695,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="tests are working,&#10;before DecimalFormater" />
     <MESSAGE value="DecimalFormat works" />
     <MESSAGE value="Before change textwithoutSeparate" />
     <MESSAGE value="DecimalFormat works before delete textout,&#10;and write down all in result" />
@@ -727,7 +719,8 @@
     <MESSAGE value="all work" />
     <MESSAGE value="before delete methods" />
     <MESSAGE value="before change model" />
-    <option name="LAST_COMMIT_MESSAGE" value="before change model" />
+    <MESSAGE value="before overflow in controller" />
+    <option name="LAST_COMMIT_MESSAGE" value="before overflow in controller" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

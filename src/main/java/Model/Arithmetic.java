@@ -5,10 +5,6 @@ import java.math.MathContext;
 
 
 public class Arithmetic {
-    private static final BigDecimal MAX_NUMBER_DECIMAL = new BigDecimal("9.999999999999999E-9999");
-    private static final BigDecimal MIN_NUMBER_INTEGER = new BigDecimal("9.999999999999999E9999");
-    private static final int MAX_SCALE_DECIMAL = MAX_NUMBER_DECIMAL.scale() - MAX_NUMBER_DECIMAL.precision() + 1;
-    private static final int MAX_SCALE_INTEGER = (MIN_NUMBER_INTEGER.scale() - MIN_NUMBER_INTEGER.precision());
 
 
     /**
@@ -90,7 +86,7 @@ public class Arithmetic {
             result = divide(number1, number2);
         }
         result = result.round(MathContext.DECIMAL128);
-        isOverflow(result);
+
         return result;
     }
 
@@ -108,7 +104,7 @@ public class Arithmetic {
             result = percent(number, BigDecimal.ZERO);
         }
         result = result.round(MathContext.DECIMAL128);
-        isOverflow(result);
+
         return result;
     }
 
@@ -120,21 +116,7 @@ public class Arithmetic {
         return numberDouble;
     }
 
-    public static BigDecimal isOverflow(BigDecimal result) {
-        boolean needOverflow = false;
-        if (result.scale() > 0) {
-            needOverflow = result.scale() > MAX_SCALE_DECIMAL;
-        } else if (result.scale() < 0) {
-            needOverflow = result.scale() - result.precision() < MAX_SCALE_INTEGER;
-        }
 
-        if (needOverflow) {
-            throw new ArithmeticException("Overflow");
-        } else {
-            return result;
-        }
-
-    }
 
 
 }
