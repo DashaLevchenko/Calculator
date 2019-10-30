@@ -50,6 +50,7 @@ class ArithmeticDivideTest {
         assertionDivideValid("9", "-9", "-1");
         assertionDivideValid("-9", "9", "-1");
         assertionDivideValid("-9", "-9", "1");
+        //2 digits
         assertionDivideValid("10", "100", "0.1");
         assertionDivideValid("10", "-100", "-0.1");
         assertionDivideValid("-10", "100", "-0.1");
@@ -154,6 +155,7 @@ class ArithmeticDivideTest {
         assertionDivideValid("99", "-99", "-1");
         assertionDivideValid("-99", "99", "-1");
         assertionDivideValid("-99", "-99", "1");
+        //3 digits
         assertionDivideValid("100", "1000", "0.1");
         assertionDivideValid("100", "-1000", "-0.1");
         assertionDivideValid("-100", "1000", "-0.1");
@@ -558,6 +560,7 @@ class ArithmeticDivideTest {
         assertionDivideValid("999", "-999", "-1");
         assertionDivideValid("-999", "999", "-1");
         assertionDivideValid("-999", "-999", "1");
+        //4 digits
         assertionDivideValid("1000", "10000", "0.1");
         assertionDivideValid("1000", "-10000", "-0.1");
         assertionDivideValid("-1000", "10000", "-0.1");
@@ -986,6 +989,7 @@ class ArithmeticDivideTest {
         assertionDivideValid("55555", "-55555", "-1");
         assertionDivideValid("-55555", "55555", "-1");
         assertionDivideValid("-55555", "-55555", "1");
+        //5 digits
         assertionDivideValid("82534", "88", "937.8863636363636363636363636363636");
         assertionDivideValid("82534", "-88", "-937.8863636363636363636363636363636");
         assertionDivideValid("-82534", "88", "-937.8863636363636363636363636363636");

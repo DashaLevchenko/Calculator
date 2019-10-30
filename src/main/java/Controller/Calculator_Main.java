@@ -25,6 +25,4 @@ public class Calculator_Main extends Application {
 
         stage.show();
     }
-
-
 }

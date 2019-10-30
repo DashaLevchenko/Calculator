@@ -222,13 +222,13 @@ public class Calculator_Controller {
         numberUnaryOperations = null;
         historyOperations += historyUnaryOperations;
 
-        if (historyOperations.isEmpty() && result == null) {
+        if (historyOperations.isEmpty()) {
             setNum1();
         } else if (historyOperations.equals(NumberFormatter.formatterNumber(NumberFormatter.parseNumber(outText.getText())).replace(" ", ""))) {
             setNum1();
             numberSecondBinaryOperations = null;
         }
-        System.out.println(numberSecondBinaryOperations);
+
         if (!canChangeOperator) {
             calculateBinaryOperation();
             numberSecondBinaryOperations = null;
@@ -820,7 +820,9 @@ public class Calculator_Controller {
     }
 
     private void setNum1() {
-        numberFirstBinaryOperations = NumberFormatter.parseNumber(outText.getText());
+        if (!equalWasPress || percentPressed) {
+            numberFirstBinaryOperations = NumberFormatter.parseNumber(outText.getText());
+        }
         if (!percentPressed) {
             numberSecondBinaryOperations = null;
         }
@@ -844,7 +846,6 @@ public class Calculator_Controller {
                 result = Arithmetic.calculate(numberFirstBinaryOperations, numberSecondBinaryOperations, newBinaryOperation);
                 isOverflow(result);
                 numberFirstBinaryOperations = result;
-
 
                 printResult(NumberFormatter.formatterNumber(result));
                 negatePressed = false;

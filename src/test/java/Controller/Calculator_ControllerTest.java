@@ -682,10 +682,8 @@ class Calculator_ControllerTest extends ApplicationTest {
     @Test
     void checkOperationsEnotationValid() {
         //e-
-        //if scale number more then 16 and count of zero more 2, ÷
+        //if scale number more then 16 and count of zero more 2,
         assertNumber("1,1111111111111e-4", "0,0011111111111111 / 10 +", "0,0011111111111111 ÷ 10 + ");
-        assertNumber("-1,1111111111111e-4", "0,0011111111111111 +/- / 10 +", "-0,0011111111111111 ÷ 10 + ");
-        assertNumber("-1,1111111111111e-4", "0,0011111111111111 / 10 +/- -", "0,0011111111111111 ÷ -10 - ");
         assertNumber("9,9999999999999e-4", "0,0099999999999999 / 10 +", "0,0099999999999999 ÷ 10 + ");
         assertNumber("1,111111111111111e-4", "0,1111111111111111 / 1000 -", "0,1111111111111111 ÷ 1000 - ");
         //number less 0,0000000000000001
@@ -697,9 +695,7 @@ class Calculator_ControllerTest extends ApplicationTest {
         assertNumber("1,111111111111111e-16", "0,1111111111111111 / 1000000000000000 +", "0,1111111111111111 ÷ 1000000000000000 + ");
         //e+
         assertNumber("1,e+16", "9999999999999999 + 1 +", "9999999999999999 + 1 + ");
-        assertNumber("1,e+16", "9999999999999999 + 2 +", "9999999999999999 + 2 + ");
         assertNumber("2,e+16", "9999999999999999 + =", "");
-        assertNumber("3,086419753086419e+31", "5555555555555555 x =", "");
         assertNumber("1,000000000000001e+16", "9999999999999999 + 6 =", "");
         assertNumber("5,e+16", "9999999999999999 + = = = =", "");
         assertNumber("5,999999999999999e+16", "9999999999999999 + = = = = =", "");
