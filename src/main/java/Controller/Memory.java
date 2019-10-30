@@ -17,7 +17,7 @@ class Memory {
 
     void memorySubtract(BigDecimal numberSecond) {
         if (number != null) {
-            number = Arithmetic.minus(number, numberSecond);
+            number = Arithmetic.subtract(number, numberSecond);
         } else{
             number = numberSecond;
         }

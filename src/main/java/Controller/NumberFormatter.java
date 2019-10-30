@@ -35,7 +35,11 @@ class NumberFormatter {
                 pattern.append("E0");
 
             } else {
-                pattern.append("0".repeat(number.scale()));
+                if(number.scale() < 0){
+                    pattern.append("E0");
+                }else {
+                    pattern.append("0".repeat(number.scale()));
+                }
             }
         } else if (number.abs().compareTo(BigDecimal.ONE) < 0 && number.abs().compareTo(BigDecimal.ZERO) != 0) {
             pattern.append("0.");

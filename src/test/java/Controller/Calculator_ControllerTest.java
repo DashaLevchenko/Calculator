@@ -49,14 +49,14 @@ class Calculator_ControllerTest extends ApplicationTest {
 
     @BeforeAll
     static void config() throws Exception {
-        System.setProperty("testfx.robot", "awt");
+//        System.setProperty("testfx.robot", "awt");
 
 //
-//        System.setProperty("testfx.robot", "glass");
-//        System.setProperty("testfx.headless", "true");
-//        System.setProperty("prism.order", "d3d");
-//        System.setProperty("prism.text", "t2k");
-//        System.setProperty("java.awt.headless", "true");
+        System.setProperty("testfx.robot", "glass");
+        System.setProperty("testfx.headless", "true");
+        System.setProperty("prism.order", "d3d");
+        System.setProperty("prism.text", "t2k");
+        System.setProperty("java.awt.headless", "true");
     }
 
     @BeforeEach
@@ -112,31 +112,92 @@ class Calculator_ControllerTest extends ApplicationTest {
         assertNumber("0", "7838765,89 +/- bs bs bs bs bs bs bs bs bs bs", "");
         //comma bs
         assertNumber("234 567", "234567, bs", "");
+        assertNumber("234 567", "234567,8 bs bs", "");
         assertNumber("-678 395", "678395, +/- bs", "");
         //in operation
         assertNumber("0", "679 + 67 bs bs", "679 + ");
         assertNumber("9", "3 1/x + 987 bs bs", "1/(3) + ");
         assertNumber("0,00", "3 x² - ,0000 bs bs", "sqr(3) - ");
-        assertNumber("7", "2456 * 2 - 789 bs bs", "2456 x 2 - ");
+        assertNumber("7", "2456 x 2 - 789 bs bs", "2456 x 2 - ");
         //Don`t bs result
         assertNumber("7 396", "86 x² bs bs", "sqr(86)");
         assertNumber("334", "347 - 13 - bs bs", "347 - 13 - ");
         assertNumber("299,422778024652", "89654 √ = bs bs bs", "");
         assertNumber("435 611 087", "435576762 + 34325 = bs bs bs", "");
         assertNumber("9,999999999999996e+63", "9999999999999999 x² x² bs bs bs bs = bs bs bs", "");
-
-        assertNumber("0,0000000000000001", "2,555555 bs 1 x² * 0,0000000000000000 bs 1", "sqr(2,555551) x "); //hist
-        assertNumber("0,0000000000000001", ",0000000000000000 bs 1 * 2 / 0,0000000000000000 bs 1", "0,0000000000000001 x 2 ÷ ");
+        assertNumber("0,0000000000000001", "2,555555 bs 1 x² x 0,0000000000000000 bs 1", "sqr(2,555551) x ");
+        assertNumber("0,0000000000000001", ",0000000000000000 bs 1 x 2 / 0,0000000000000000 bs 1", "0,0000000000000001 x 2 ÷ ");
     }
 
     @Test
     void checkAdd() {
+        //Integer
         assertNumber("2", "0 + 2 +", "0 + 2 + ");
+        assertNumber("2", "2 + 0 +", "2 + 0 + ");
+        assertNumber("-2", "0 + 2 +/- +", "0 + -2 + ");
+        assertNumber("-2", "2 +/- + 0 +", "-2 + 0 + ");
+
         assertNumber("5", "2 + 3 +", "2 + 3 + ");
+        assertNumber("-1", "2 + 3 +/- +", "2 + -3 + ");
+        assertNumber("1", "2 +/- + 3 +", "-2 + 3 + ");
+        assertNumber("-5", "2 +/- + 3 +/- +", "-2 + -3 + ");
+
+        //with equal
+        assertNumber("2", "0 + 2 =", "");
+        assertNumber("2", "2 + 0 =", "");
+        assertNumber("-2", "0 + 2 +/- =", "");
+        assertNumber("-2", "2 +/- + 0 =", "");
+
+        assertNumber("5", "2 + 3 =", "");
+        assertNumber("-1", "2 + 3 +/- =", "");
+        assertNumber("1", "2 +/- + 3 =", "");
+        assertNumber("-5", "2 +/- + 3 +/- =", "");
+
+        //Decimal
+        assertNumber("0,2", "0 + ,2 +", "0 + 0,2 + ");
+        assertNumber("-0,2", "0 + ,2 +/- +", "0 + -0,2 + ");
+        assertNumber("-0,2", ",2 +/- + 0 +", "-0,2 + 0 + ");
+
+        assertNumber("2,3", "2 + 0,3 +", "2 + 0,3 + ");
+        assertNumber("3,2", "0,2 + 3 +", "0,2 + 3 + ");
+        assertNumber("0,5", "0,2 + 0,3 +", "0,2 + 0,3 + ");
+
+        assertNumber("1,7", "2 + 0,3 +/- +", "2 + -0,3 + ");
+        assertNumber("-2,8", "0,2 + 3 +/- +", "0,2 + -3 + ");
+        assertNumber("-0,1", "0,2 + 0,3 +/- +", "0,2 + -0,3 + ");
+
+        assertNumber("-1,7", "2 +/- + 0,3 +", "-2 + 0,3 + ");
+        assertNumber("2,8", "0,2 +/- + 3 +", "-0,2 + 3 + ");
+        assertNumber("0,1", "0,2 +/- + 0,3 +", "-0,2 + 0,3 + ");
+
+        assertNumber("-2,3", "2 +/- + 0,3 +/- +", "-2 + -0,3 + ");
+        assertNumber("-3,2", "0,2 +/- + 3 +/- +", "-0,2 + -3 + ");
+        assertNumber("-0,5", "0,2 +/- + 0,3 +/- +", "-0,2 + -0,3 + ");
+
+        //with equal
+        assertNumber("0,2", "0 + ,2 =", "");
+        assertNumber("-0,2", "0 + ,2 +/- =", "");
+        assertNumber("-0,2", ",2 +/- + 0 =", "");
+
+        assertNumber("2,3", "2 + 0,3 =", "");
+        assertNumber("3,2", "0,2 + 3 =", "");
+        assertNumber("0,5", "0,2 + 0,3 =", "");
+
+        assertNumber("1,7", "2 + 0,3 +/- =", "");
+        assertNumber("-2,8", "0,2 + 3 +/- =", "");
+        assertNumber("-0,1", "0,2 + 0,3 +/- =", "");
+
+        assertNumber("-1,7", "2 +/- + 0,3 =", "");
+        assertNumber("2,8", "0,2 +/- + 3 =", "");
+        assertNumber("0,1", "0,2 +/- + 0,3 =", "");
+
+        assertNumber("-2,3", "2 +/- + 0,3 +/- =", "");
+        assertNumber("-3,2", "0,2 +/- + 3 +/- =", "");
+        assertNumber("-0,5", "0,2 +/- + 0,3 +/- =", "");
+
         assertNumber("9", "2 + 3 + 4 +", "2 + 3 + 4 + ");
         assertNumber("15", "2 + 3 + 4 + 6 +", "2 + 3 + 4 + 6 + ");
-
-        assertNumber("5", "2 - * / + 3 -", "2 + 3 - ");
+        assertNumber("5", "2 - x / + 3 -", "2 + 3 - ");
         assertNumber("39,998", "19 + 0,999 + =", "");
         assertNumber("2", "1 + 0,9999999999999999 -", "1 + 0,9999999999999999 - ");
         assertNumber("200 024,2", "199999 + 0,999999999999999999999 + 24,2 + 0,00000000000001 =", "");
@@ -144,11 +205,73 @@ class Calculator_ControllerTest extends ApplicationTest {
 
     @Test
     void checkSubtract() {
-        assertNumber("-1", "0 - 1 -", "0 - 1 - ");
-        assertNumber("0", "1 - 1 -", "1 - 1 - ");
+        //Integer
+        assertNumber("-2", "0 - 2 -", "0 - 2 - ");
+        assertNumber("2", "2 - 0 -", "2 - 0 - ");
+        assertNumber("2", "0 - 2 +/- -", "0 - -2 - ");
+        assertNumber("-2", "2 +/- - 0 -", "-2 - 0 - ");
+
+        assertNumber("-1", "2 - 3 -", "2 - 3 - ");
+        assertNumber("5", "2 - 3 +/- -", "2 - -3 - ");
+        assertNumber("-5", "2 +/- - 3 -", "-2 - 3 - ");
+        assertNumber("1", "2 +/- - 3 +/- -", "-2 - -3 - ");
+
+        //with equal
+        assertNumber("-2", "0 - 2 =", "");
+        assertNumber("2", "2 - 0 =", "");
+        assertNumber("2", "0 - 2 +/- =", "");
+        assertNumber("-2", "2 +/- - 0 =", "");
+
+        assertNumber("-1", "2 - 3 =", "");
+        assertNumber("5", "2 - 3 +/- =", "");
+        assertNumber("-5", "2 +/- - 3 =", "");
+        assertNumber("1", "2 +/- - 3 +/- =", "");
+
+        //Decimal
+        assertNumber("-0,2", "0 - ,2 -", "0 - 0,2 - ");
+        assertNumber("0,2", "0 - ,2 +/- -", "0 - -0,2 - ");
+        assertNumber("-0,2", ",2 +/- - 0 -", "-0,2 - 0 - ");
+
+        assertNumber("1,7", "2 - 0,3 -", "2 - 0,3 - ");
+        assertNumber("-2,8", "0,2 - 3 -", "0,2 - 3 - ");
+        assertNumber("-0,1", "0,2 - 0,3 -", "0,2 - 0,3 - ");
+
+        assertNumber("2,3", "2 - 0,3 +/- -", "2 - -0,3 - ");
+        assertNumber("3,2", "0,2 - 3 +/- -", "0,2 - -3 - ");
+        assertNumber("0,5", "0,2 - 0,3 +/- -", "0,2 - -0,3 - ");
+
+        assertNumber("-2,3", "2 +/- - 0,3 -", "-2 - 0,3 - ");
+        assertNumber("-3,2", "0,2 +/- - 3 -", "-0,2 - 3 - ");
+        assertNumber("-0,5", "0,2 +/- - 0,3 -", "-0,2 - 0,3 - ");
+
+        assertNumber("-1,7", "2 +/- - 0,3 +/- -", "-2 - -0,3 - ");
+        assertNumber("2,8", "0,2 +/- - 3 +/- -", "-0,2 - -3 - ");
+        assertNumber("0,1", "0,2 +/- - 0,3 +/- -", "-0,2 - -0,3 - ");
+
+        //with equal
+        assertNumber("-0,2", "0 - ,2 =", "");
+        assertNumber("0,2", "0 - ,2 +/- =", "");
+        assertNumber("-0,2", ",2 +/- - 0 =", "");
+
+        assertNumber("1,7", "2 - 0,3 =", "");
+        assertNumber("-2,8", "0,2 - 3 =", "");
+        assertNumber("-0,1", "0,2 - 0,3 =", "");
+
+        assertNumber("2,3", "2 - 0,3 +/- =", "");
+        assertNumber("3,2", "0,2 - 3 +/- =", "");
+        assertNumber("0,5", "0,2 - 0,3 +/- =", "");
+
+        assertNumber("-2,3", "2 +/- - 0,3 =", "");
+        assertNumber("-3,2", "0,2 +/- - 3 =", "");
+        assertNumber("-0,5", "0,2 +/- - 0,3 =", "");
+
+        assertNumber("-1,7", "2 +/- - 0,3 +/- =", "");
+        assertNumber("2,8", "0,2 +/- - 3 +/- =", "");
+        assertNumber("0,1", "0,2 +/- - 0,3 +/- =", "");
+
         assertNumber("2", "5 - 1 - 2 -", "5 - 1 - 2 - ");
         assertNumber("-6", "5 - 1 - 2 - 8 -", "5 - 1 - 2 - 8 - ");
-        assertNumber("-3", "5 / * + - 8 -", "5 - 8 - ");
+        assertNumber("-3", "5 / x + - 8 -", "5 - 8 - ");
         assertNumber("230,01476", "687 - 456 - ,98524 -", "687 - 456 - 0,98524 - ");
         assertNumber("22,9", "24 - 0,9999999999999999 - 0,1 -", "24 - 0,9999999999999999 - 0,1 - ");
         assertNumber("45 565,7412036", "45623 - 67,23445 - 9,9756536 +/- -", "45623 - 67,23445 - -9,9756536 - ");
@@ -156,23 +279,143 @@ class Calculator_ControllerTest extends ApplicationTest {
 
     @Test
     void checkMultiply() {
-        assertNumber("0", "0 * 1 *", "0 x 1 x ");
-        assertNumber("1", "1 * 1 *", "1 x 1 x ");
-        assertNumber("10", "5 * 1 * 2 *", "5 x 1 x 2 x ");
-        assertNumber("80", "5 * 1 * 2 * 8 *", "5 x 1 x 2 x 8 x ");
-        assertNumber("56", "7 - + / * 8 *", "7 x 8 x ");
-        assertNumber("308 648,10528", "687 * 456 * ,98524 *", "687 x 456 x 0,98524 x ");
-        assertNumber("2,4", "24 * 0,9999999999999999 * 0,1 *", "24 x 0,9999999999999999 x 0,1 x ");
-        assertNumber("-30 599 692,0677186", "45623 * 67,23445 * 9,9756536 +/- *", "45623 x 67,23445 x -9,9756536 x ");
+        //Integer
+        assertNumber("0", "0 x 2 x", "0 x 2 x ");
+        assertNumber("0", "2 x 0 x", "2 x 0 x ");
+        assertNumber("0", "0 x 2 +/- x", "0 x -2 x ");
+        assertNumber("0", "2 +/- x 0 x", "-2 x 0 x ");
+
+        assertNumber("6", "2 x 3 x", "2 x 3 x ");
+        assertNumber("-6", "2 x 3 +/- x", "2 x -3 x ");
+        assertNumber("-6", "2 +/- x 3 x", "-2 x 3 x ");
+        assertNumber("6", "2 +/- x 3 +/- x", "-2 x -3 x ");
+
+        //with equal
+        assertNumber("0", "0 x 2 =", "");
+        assertNumber("0", "2 x 0 =", "");
+        assertNumber("0", "0 x 2 +/- =", "");
+        assertNumber("0", "2 +/- x 0 =", "");
+
+        assertNumber("6", "2 x 3 =", "");
+        assertNumber("-6", "2 x 3 +/- =", "");
+        assertNumber("-6", "2 +/- x 3 =", "");
+        assertNumber("6", "2 +/- x 3 +/- =", "");
+
+        //Decimal
+        assertNumber("0", "0 x ,2 x", "0 x 0,2 x ");
+        assertNumber("0", "0 x ,2 +/- x", "0 x -0,2 x ");
+        assertNumber("0", ",2 x 0 x", "0,2 x 0 x ");
+        assertNumber("0", ",2 +/- x 0 x", "-0,2 x 0 x ");
+
+        assertNumber("0,6", "2 x 0,3 x", "2 x 0,3 x ");
+        assertNumber("0,6", "0,2 x 3 x", "0,2 x 3 x ");
+        assertNumber("0,06", "0,2 x 0,3 x", "0,2 x 0,3 x ");
+
+        assertNumber("-0,6", "2 x 0,3 +/- x", "2 x -0,3 x ");
+        assertNumber("-0,6", "0,2 x 3 +/- x", "0,2 x -3 x ");
+        assertNumber("-0,06", "0,2 x 0,3 +/- x", "0,2 x -0,3 x ");
+
+        assertNumber("-0,6", "2 +/- x 0,3 x", "-2 x 0,3 x ");
+        assertNumber("-0,6", "0,2 +/- x 3 x", "-0,2 x 3 x ");
+        assertNumber("-0,06", "0,2 +/- x 0,3 x", "-0,2 x 0,3 x ");
+
+        assertNumber("0,6", "2 +/- x 0,3 +/- x", "-2 x -0,3 x ");
+        assertNumber("0,6", "0,2 +/- x 3 +/- x", "-0,2 x -3 x ");
+        assertNumber("0,06", "0,2 +/- x 0,3 +/- x", "-0,2 x -0,3 x ");
+
+        //with equal
+        assertNumber("0", "0 x ,2 =", "");
+        assertNumber("0", "0 x ,2 +/- =", "");
+        assertNumber("0", ",2 x 0 =", "");
+        assertNumber("0", ",2 +/- x 0 =", "");
+
+        assertNumber("0,6", "2 x 0,3 =", "");
+        assertNumber("0,6", "0,2 x 3 =", "");
+        assertNumber("0,06", "0,2 x 0,3 =", "");
+
+        assertNumber("-0,6", "2 x 0,3 +/- =", "");
+        assertNumber("-0,6", "0,2 x 3 +/- =", "");
+        assertNumber("-0,06", "0,2 x 0,3 +/- =", "");
+
+        assertNumber("-0,6", "2 +/- x 0,3 =", "");
+        assertNumber("-0,6", "0,2 +/- x 3 =", "");
+        assertNumber("-0,06", "0,2 +/- x 0,3 =", "");
+
+        assertNumber("0,6", "2 +/- x 0,3 +/- =", "");
+        assertNumber("0,6", "0,2 +/- x 3 +/- =", "");
+        assertNumber("0,06", "0,2 +/- x 0,3 +/- =", "");
+
+        assertNumber("10", "5 x 1 x 2 x", "5 x 1 x 2 x ");
+        assertNumber("80", "5 x 1 x 2 x 8 x", "5 x 1 x 2 x 8 x ");
+        assertNumber("56", "7 - + / x 8 x", "7 x 8 x ");
+        assertNumber("308 648,10528", "687 x 456 x ,98524 x", "687 x 456 x 0,98524 x ");
+        assertNumber("2,4", "24 x 0,9999999999999999 x 0,1 x", "24 x 0,9999999999999999 x 0,1 x ");
+        assertNumber("-30 599 692,0677186", "45623 x 67,23445 x 9,9756536 +/- x", "45623 x 67,23445 x -9,9756536 x ");
     }
 
     @Test
     void checkDivide() {
+        //Integer
         assertNumber("0", "0 / 2 /", "0 ÷ 2 ÷ ");
-        assertNumber("2,5", "5 / 2 / ", "5 ÷ 2 ÷ ");
+        assertNumber("0", "0 / 2 +/- /", "0 ÷ -2 ÷ ");
+
+        assertNumber("0,6666666666666667", "2 / 3 /", "2 ÷ 3 ÷ ");
+        assertNumber("-0,6666666666666667", "2 / 3 +/- /", "2 ÷ -3 ÷ ");
+        assertNumber("-0,6666666666666667", "2 +/- / 3 /", "-2 ÷ 3 ÷ ");
+        assertNumber("0,6666666666666667", "2 +/- / 3 +/- /", "-2 ÷ -3 ÷ ");
+
+        //with equal
+        assertNumber("0", "0 / 2 =", "");
+        assertNumber("0", "0 / 2 +/- =", "");
+
+        assertNumber("0,6666666666666667", "2 / 3 =", "");
+        assertNumber("-0,6666666666666667", "2 / 3 +/- =", "");
+        assertNumber("-0,6666666666666667", "2 +/- / 3 =", "");
+        assertNumber("0,6666666666666667", "2 +/- / 3 +/- =", "");
+
+        //Decimal
+        assertNumber("0", "0 / ,2 /", "0 ÷ 0,2 ÷ ");
+        assertNumber("0", "0 / ,2 +/- /", "0 ÷ -0,2 ÷ ");
+
+        assertNumber("6,666666666666667", "2 / 0,3 /", "2 ÷ 0,3 ÷ ");
+        assertNumber("0,0666666666666667", "0,2 / 3 /", "0,2 ÷ 3 ÷ ");
+        assertNumber("0,6666666666666667", "0,2 / 0,3 /", "0,2 ÷ 0,3 ÷ ");
+
+        assertNumber("-6,666666666666667", "2 / 0,3 +/- /", "2 ÷ -0,3 ÷ ");
+        assertNumber("-0,0666666666666667", "0,2 / 3 +/- /", "0,2 ÷ -3 ÷ ");
+        assertNumber("-0,6666666666666667", "0,2 / 0,3 +/- /", "0,2 ÷ -0,3 ÷ ");
+
+        assertNumber("-6,666666666666667", "2 +/- / 0,3 /", "-2 ÷ 0,3 ÷ ");
+        assertNumber("-0,0666666666666667", "0,2 +/- / 3 /", "-0,2 ÷ 3 ÷ ");
+        assertNumber("-0,6666666666666667", "0,2 +/- / 0,3 /", "-0,2 ÷ 0,3 ÷ ");
+
+        assertNumber("6,666666666666667", "2 +/- / 0,3 +/- /", "-2 ÷ -0,3 ÷ ");
+        assertNumber("0,0666666666666667", "0,2 +/- / 3 +/- /", "-0,2 ÷ -3 ÷ ");
+        assertNumber("0,6666666666666667", "0,2 +/- / 0,3 +/- /", "-0,2 ÷ -0,3 ÷ ");
+
+        //with equal
+        assertNumber("0", "0 / ,2 =", "");
+        assertNumber("0", "0 / ,2 +/- =", "");
+
+        assertNumber("6,666666666666667", "2 / 0,3 =", "");
+        assertNumber("0,0666666666666667", "0,2 / 3 =", "");
+        assertNumber("0,6666666666666667", "0,2 / 0,3 =", "");
+
+        assertNumber("-6,666666666666667", "2 / 0,3 +/- =", "");
+        assertNumber("-0,0666666666666667", "0,2 / 3 +/- =", "");
+        assertNumber("-0,6666666666666667", "0,2 / 0,3 +/- =", "");
+
+        assertNumber("-6,666666666666667", "2 +/- / 0,3 =", "");
+        assertNumber("-0,0666666666666667", "0,2 +/- / 3 =", "");
+        assertNumber("-0,6666666666666667", "0,2 +/- / 0,3 =", "");
+
+        assertNumber("6,666666666666667", "2 +/- / 0,3 +/- =", "");
+        assertNumber("0,0666666666666667", "0,2 +/- / 3 +/- =", "");
+        assertNumber("0,6666666666666667", "0,2 +/- / 0,3 +/- =", "");
+
         assertNumber("0,3947368421052632", "6 / 1,9 / 8 /", "6 ÷ 1,9 ÷ 8 ÷ ");
         assertNumber("0,5833333333333333", "7 / 2 / 3 / 2 /", "7 ÷ 2 ÷ 3 ÷ 2 ÷ ");
-        assertNumber("2,00000002", "2 + - * / 0,99999999 / ", "2 ÷ 0,99999999 ÷ ");
+        assertNumber("2,00000002", "2 + - x / 0,99999999 / ", "2 ÷ 0,99999999 ÷ ");
         assertNumber("3,333333333333333", "10 / 3 /", "10 ÷ 3 ÷ ");
         assertNumber("3,333333444444448", "10 / 2,9999999 /", "10 ÷ 2,9999999 ÷ ");
         assertNumber("-1,658062522813398", "0,9999999999999999 / 0,77644 / 0,776767767666 +/- /", "0,9999999999999999 ÷ 0,77644 ÷ -0,776767767666 ÷ ");
@@ -181,10 +424,18 @@ class Calculator_ControllerTest extends ApplicationTest {
     @Test
     void checkEqual() {
         //One equal
+        assertNumber("0", "=", "");
+        assertNumber("0", "+ =", "");
+        assertNumber("0", "- =", "");
+        assertNumber("0", "x =", "");
+        assertNumber("0", "x² =", "");
+        assertNumber("0", "√ =", "");
+        assertNumber("0", "% =", "");
+        
         assertNumber("2", "2 =", "");
         assertNumber("4", "2 + =", "");
         assertNumber("0", "2 - =", "");
-        assertNumber("4", "2 * =", "");
+        assertNumber("4", "2 x =", "");
         assertNumber("1", "2 / =", "");
         assertNumber("4", "2 x² =", "");
         assertNumber("1,414213562373095", "2 √ =", "");
@@ -193,7 +444,7 @@ class Calculator_ControllerTest extends ApplicationTest {
 
         assertNumber("4", "2 + = + +", "4 + ");
         assertNumber("0", "2 - = - -", "0 - ");
-        assertNumber("4", "2 * = * *", "4 x ");
+        assertNumber("4", "2 x = x x", "4 x ");
         assertNumber("1", "2 / = / /", "1 ÷ ");
         assertNumber("256", "2 x² = x² x²", "sqr(sqr(4))");
         assertNumber("1,090507732665258", "2 √ = √ √", "√(√(1,414213562373095))");
@@ -202,7 +453,7 @@ class Calculator_ControllerTest extends ApplicationTest {
 
         assertNumber("8", "2 + = + =", "");
         assertNumber("0", "2 - = - =", "");
-        assertNumber("16", "2 * = * =", "");
+        assertNumber("16", "2 x = x =", "");
         assertNumber("1", "2 / = / =", "");
         assertNumber("16", "2 x² = x² =", "");
         assertNumber("1,189207115002721", "2 √ = √ =", "");
@@ -211,7 +462,7 @@ class Calculator_ControllerTest extends ApplicationTest {
         //Several equals
         assertNumber("8", "2 + = = =", "");
         assertNumber("-4", "2 - = = =", "");
-        assertNumber("16", "2 * = = =", "");
+        assertNumber("16", "2 x = = =", "");
         assertNumber("0,25", "2 / = = =", "");
         assertNumber("4", "2 x² = = =", "");
         assertNumber("1,414213562373095", "2 √ = = =", "");
@@ -241,12 +492,15 @@ class Calculator_ControllerTest extends ApplicationTest {
     void checkOperationHistory() {
         assertNumber("0", "+", "0 + ");
         assertNumber("0", "-", "0 - ");
-        assertNumber("0", "*", "0 x ");
+        assertNumber("0", "x", "0 x ");
         assertNumber("0", "/", "0 ÷ ");
+        assertNumber("0", "x²", "sqr(0)");
+        assertNumber("0", "√", "√(0)");
+        assertNumber("0", "%", "0");
 
         assertNumber("3", "3 +", "3 + ");
         assertNumber("3", "3 -", "3 - ");
-        assertNumber("3", "3 *", "3 x ");
+        assertNumber("3", "3 x", "3 x ");
         assertNumber("3", "3 /", "3 ÷ ");
         //Decimal number
         assertNumber("5", "2 + 3, +", "2 + 3 + ");
@@ -261,40 +515,64 @@ class Calculator_ControllerTest extends ApplicationTest {
     void checkMIXBinaryOperations() {
         //Add with
         assertNumber("1", "1 + 0,9999999999999999 - 0,9999999999999999 =", "");
-        assertNumber("1 925 066 427,985", "34156,745 +/- +/- + 388656 * 45532 bs =", "");
+        assertNumber("1 925 066 427,985", "34156,745 +/- +/- + 388656 x 45532 bs =", "");
         assertNumber("-1 556,844780280956", ",77765544 + 7785 +/- / 4,999999 =", "");
-        assertNumber("9 999 998,0000001", "9999999 + 9999999 - 9999999 * 0,9999999 =", "");
-        assertNumber("0,0617809442729949", "867,8333 + 3 * 4 / 56382 = bs bs bs bs bs bs bs", "");
+        assertNumber("9 999 998,0000001", "9999999 + 9999999 - 9999999 x 0,9999999 =", "");
+        assertNumber("0,0617809442729949", "867,8333 + 3 x 4 / 56382 = bs bs bs bs bs bs bs", "");
         assertNumber("455 667 995,6", "2332, + 3 / 0,5 + 455663325,6 = +/- +/- +/- bs +/-", "negate(negate(negate(negate(455667995,6))))");
         //Subtract with
         assertNumber("19", "19 - 0,9999999999999999 + 0,9999999999999999 =", "");
-        assertNumber("48 688 021 125,732", "27786, , 999 - 768492,000000 * 65732 +/-  =", "");
+        assertNumber("48 688 021 125,732", "27786, , 999 - 768492,000000 x 65732 +/-  =", "");
         assertNumber("631 210,0063121001", "887754 - 256544 / 0,99999999 =", "");
-        assertNumber("-357 684,1186736475", "23 +/- 1 - 65 bs 43 * 2345 / 5,73 =", "");
+        assertNumber("-357 684,1186736475", "23 +/- 1 - 65 bs 43 x 2345 / 5,73 =", "");
         assertNumber("84,77860962566845", "43 - 87678 +/- bs ,4 / 748 + 73 =", "");
         assertNumber("-3 929", "2 - 3957 + 84 - 7 bs 58 =", "");
         //Multiply with
-        assertNumber("2,099999998", "0,999999999 * 2 + 0,1 =", "");
-        assertNumber("1,9", "0,9999999999999999 * 2 - 0,1 =", "");
-        assertNumber("20", "0,9999999999999999 * 2 / 0,1 =", "");
-        assertNumber("8 814", "233 * 38 + 4 - 44 =", "");
-        assertNumber("-50 623 218 535 195,59", "97548354766 +/- , bs 452 * 3874 - 4 / 7465 =", "");
-        assertNumber("88,54373407202216", "973 * 9 / 8664 + 87,533 =", "");
+        assertNumber("2,099999998", "0,999999999 x 2 + 0,1 =", "");
+        assertNumber("1,9", "0,9999999999999999 x 2 - 0,1 =", "");
+        assertNumber("20", "0,9999999999999999 x 2 / 0,1 =", "");
+        assertNumber("8 814", "233 x 38 + 4 - 44 =", "");
+        assertNumber("-50 623 218 535 195,59", "97548354766 +/- , bs 452 x 3874 - 4 / 7465 =", "");
+        assertNumber("88,54373407202216", "973 x 9 / 8664 + 87,533 =", "");
         //Divide with
         assertNumber("637 925,889675519", "288743 bs +/- , 00000001 / 88985455 + 637925,889999999 =", "");
         assertNumber("8,000000000000001", "9 / 0,9999999999999999 - 0,9999999999999999 =", "");
-        assertNumber("1 000", "1000 / 2,9999999999999999647 * 3 =", "");
+        assertNumber("1 000", "1000 / 2,9999999999999999647 x 3 =", "");
         assertNumber("-789,5563005780347", "972 / 865 + 85,32 - 876 =", "");
-        assertNumber("4 055,773333333333", "7784 / 84 - ,49 * 44 =", "");
-        assertNumber("35,8938327603227", "297 / 36 * 409 / 94,0064 =", "");
+        assertNumber("4 055,773333333333", "7784 / 84 - ,49 x 44 =", "");
+        assertNumber("35,8938327603227", "297 / 36 x 409 / 94,0064 =", "");
     }
 
     @Test
     void checkOneDivideX() {
         assertNumber("1", "1 1/x", "1/(1)");
-        assertNumber("0,5", "2 1/x", "1/(2)");
         assertNumber("2", "2 1/x 1/x", "1/(1/(2))");
-        assertNumber("-3", "3 1/x +/- 1/x", "1/(negate(1/(3)))");
+        assertNumber("-2", "2 +/- 1/x 1/x", "1/(1/(-2))");
+        assertNumber("-2", "2 1/x +/- 1/x", "1/(negate(1/(2)))");
+        assertNumber("-2", "2 1/x 1/x +/-", "negate(1/(1/(2)))");
+        assertNumber("-2", "2 +/- 1/x +/- 1/x +/-", "negate(1/(negate(1/(-2))))");
+
+        assertNumber("10", "0,1 1/x", "1/(0,1)");
+        assertNumber("0,2", "0,2 1/x 1/x", "1/(1/(0,2))");
+        assertNumber("-0,2", "0,2 +/- 1/x 1/x", "1/(1/(-0,2))");
+        assertNumber("-0,2", "0,2 1/x +/- 1/x", "1/(negate(1/(0,2)))");
+        assertNumber("-0,2", "0,2 1/x 1/x +/-", "negate(1/(1/(0,2)))");
+        assertNumber("-0,2", "0,2 +/- 1/x +/- 1/x +/-", "negate(1/(negate(1/(-0,2))))");
+        
+        assertNumber("1", "1 1/x =", "");
+        assertNumber("2", "2 1/x 1/x =", "");
+        assertNumber("-2", "2 +/- 1/x 1/x =", "");
+        assertNumber("-2", "2 1/x +/- 1/x =", "");
+        assertNumber("-2", "2 1/x 1/x +/- =", "");
+        assertNumber("-2", "2 +/- 1/x +/- 1/x +/- =", "");
+
+        assertNumber("10", "0,1 1/x =", "");
+        assertNumber("0,2", "0,2 1/x 1/x =", "");
+        assertNumber("-0,2", "0,2 +/- 1/x 1/x =", "");
+        assertNumber("-0,2", "0,2 1/x +/- 1/x =", "");
+        assertNumber("-0,2", "0,2 1/x 1/x +/- =", "");
+        assertNumber("-0,2", "0,2 +/- 1/x +/- 1/x +/- =", "");
+
         assertNumber("0,0017789321070561", "562,135 1/x", "1/(562,135)");
         assertNumber("9 009", "9009 1/x 1/x", "1/(1/(9009))");
         assertNumber("0,021799115915055", "45,87342 1/x 1/x 1/x", "1/(1/(1/(45,87342)))");
@@ -306,7 +584,24 @@ class Calculator_ControllerTest extends ApplicationTest {
     @Test
     void checkSquareRoot() {
         assertNumber("0", "0 √", "√(0)");
+
         assertNumber("1", "1 √", "√(1)");
+        assertNumber("1,189207115002721", "2 √ √", "√(√(2))");
+        assertNumber("-1,189207115002721", "2 √ √ +/-", "negate(√(√(2)))");
+
+        assertNumber("0,3162277660168379", "0,1 √", "√(0,1)");
+        assertNumber("0,668740304976422", "0,2 √ √", "√(√(0,2))");
+        assertNumber("-0,668740304976422", "0,2 √ √ +/-", "negate(√(√(0,2)))");
+
+        assertNumber("0", "0 √ =", "");
+        assertNumber("1", "1 √ =", "");
+        assertNumber("1,189207115002721", "2 √ √ =", "");
+        assertNumber("-1,189207115002721", "2 √ √ +/- =", "");
+
+        assertNumber("0,3162277660168379", "0,1 √ =", "");
+        assertNumber("0,668740304976422", "0,2 √ √ =", "");
+        assertNumber("-0,668740304976422", "0,2 √ √ +/- =", "");
+
         assertNumber("1,414213562373095", "2 √", "√(2)");
         assertNumber("1,189207115002721", "2 √ √", "√(√(2))");
         assertNumber("-7,071067811865475", "50 √ +/-", "negate(√(50))");
@@ -321,6 +616,35 @@ class Calculator_ControllerTest extends ApplicationTest {
         assertNumber("1", "1 x²", "sqr(1)");
         assertNumber("4", "2 x²", "sqr(2)");
         assertNumber("16", "2 x² x²", "sqr(sqr(2))");
+        assertNumber("16", "2 +/- x² x²", "sqr(sqr(-2))");
+        assertNumber("16", "2 x² +/- x²", "sqr(negate(sqr(2)))");
+        assertNumber("-16", "2 x² x² +/-", "negate(sqr(sqr(2)))");
+        assertNumber("-16", "2 +/- x² +/- x² +/-", "negate(sqr(negate(sqr(-2))))");
+
+        assertNumber("0,01", "0,1 x²", "sqr(0,1)");
+        assertNumber("0,04", "0,2 x²", "sqr(0,2)");
+        assertNumber("0,0016", "0,2 x² x²", "sqr(sqr(0,2))");
+        assertNumber("0,0016", "0,2 +/- x² x²", "sqr(sqr(-0,2))");
+        assertNumber("0,0016", "0,2 x² +/- x²", "sqr(negate(sqr(0,2)))");
+        assertNumber("-0,0016", "0,2 x² x² +/-", "negate(sqr(sqr(0,2)))");
+        assertNumber("-0,0016", "0,2 +/- x² +/- x² +/-", "negate(sqr(negate(sqr(-0,2))))");
+
+        assertNumber("1", "1 x² =", "");
+        assertNumber("4", "2 x² =", "");
+        assertNumber("16", "2 x² x² =", "");
+        assertNumber("16", "2 +/- x² x² =", "");
+        assertNumber("16", "2 x² +/- x² =", "");
+        assertNumber("-16", "2 x² x² +/- =", "");
+        assertNumber("-16", "2 +/- x² +/- x² +/- =", "");
+
+        assertNumber("0,01", "0,1 x² =", "");
+        assertNumber("0,04", "0,2 x² =", "");
+        assertNumber("0,0016", "0,2 x² x² =", "");
+        assertNumber("0,0016", "0,2 +/- x² x² =", "");
+        assertNumber("0,0016", "0,2 x² +/- x² =", "");
+        assertNumber("-0,0016", "0,2 x² x² +/- =", "");
+        assertNumber("-0,0016", "0,2 +/- x² +/- x² +/- =", "");
+
         assertNumber("547,56", "23,4 x²", "sqr(23,4)");
         assertNumber("952 217 706 900 625", "5555 x² x²", "sqr(sqr(5555))");
         assertNumber("19 610 512 980 404,22", "45,87342 x² x² x²", "sqr(sqr(sqr(45,87342)))");
@@ -387,7 +711,7 @@ class Calculator_ControllerTest extends ApplicationTest {
         assertNumber("1,e+16", "9999999999999999 + 2 +", "9999999999999999 + 2 + ");
         assertNumber("-1,e+16", "9999999999999999 +/- - 2 =", "");
         assertNumber("2,e+16", "9999999999999999 + =", "");
-        assertNumber("3,086419753086419e+31", "5555555555555555 * =", "");
+        assertNumber("3,086419753086419e+31", "5555555555555555 x =", "");
         assertNumber("1,000000000000001e+16", "9999999999999999 + 6 =", "");
         assertNumber("5,e+16", "9999999999999999 + = = = =", "");
         assertNumber("5,999999999999999e+16", "9999999999999999 + = = = = =", "");
@@ -414,9 +738,9 @@ class Calculator_ControllerTest extends ApplicationTest {
         assertNumber("0,0011111111111111", "0,1111111111111111 / 100 =", "");
         assertNumber("0,01", "0,9999999999999999 / 100 =", "");
         assertNumber("0,0000000000000001", "0,0000000000000001 / 1 =", "");
-        assertNumber("0,000000000000001", "0,0000000000000001 * 10 =", "");
+        assertNumber("0,000000000000001", "0,0000000000000001 x 10 =", "");
         assertNumber("-0,0000000000000001", "0,0000000000000001 +/- / 1 =", "");
-        assertNumber("-0,000000000000001", "0,0000000000000001 * 10 +/- =", "");
+        assertNumber("-0,000000000000001", "0,0000000000000001 x 10 +/- =", "");
         assertNumber("0,000000000000001", "1 / 1000000000000000 =", "");
         //e+
         assertNumber("9 999 999 999 999 998", "9999999999999999 - 1 =", "");
@@ -445,8 +769,8 @@ class Calculator_ControllerTest extends ApplicationTest {
         assertNumber("Overflow", "9999999999999999 x²  x²  x²  x²  x²  x²  x²  x²  x²  x²   x² ", "sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(9999999999999999))))))))))");
         assertNumber("Overflow", "0,0000000000000001 x²  x² x²  x²  x²  x²  x²  x²  x² x²", "sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(0,0000000000000001))))))))))");
         assertNumber("Overflow", "9999999999999999 / 1000000000000000 = = = x²  x²  x²  x²  x²  x²  x²  x² x²", "sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(9,999999999999999e-30)))))))))");
-        assertNumber("Overflow", "0,0000000000000001 x² * ,0000001 = x² x² x² x² x² x² x² x² * 0,0000000000000001 =", "sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(1,e-39)))))))) x ");
-        assertNumber("Overflow", "1000000000000000 x² * 1000000000 = x² x² x² x² x² x² x² x² MS 9999999999999999 * MR = * 10 = MC", "9,999999999999999e+9999 x ");
+        assertNumber("Overflow", "0,0000000000000001 x² x ,0000001 = x² x² x² x² x² x² x² x² x 0,0000000000000001 =", "sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(1,e-39)))))))) x ");
+        assertNumber("Overflow", "1000000000000000 x² x 1000000000 = x² x² x² x² x² x² x² x² MS 9999999999999999 x MR = x 10 = MC", "9,999999999999999e+9999 x ");
     }
 
     @Test
@@ -454,19 +778,19 @@ class Calculator_ControllerTest extends ApplicationTest {
         assertNumber("0", "8 %", "0");
         assertNumber("0", "0 + 1 %", "0 + 0");
         assertNumber("0", "0 - 1 %", "0 - 0");
-        assertNumber("0,01", "0 * 1 %", "0 x 0,01");
+        assertNumber("0,01", "0 x 1 %", "0 x 0,01");
         assertNumber("0,01", "0 / 1 %", "0 ÷ 0,01");
         assertNumber("0,81", "2 + 7 = %", "0,81");
         assertNumber("0,01", "3 - 4 = %", "0,01");
         assertNumber("0,0071428571428571", "5 / 7 = %", "0,0071428571428571");
-        assertNumber("0,54", "6 * 9 = %", "0,54");
+        assertNumber("0,54", "6 x 9 = %", "0,54");
         assertNumber("-14,68", "9 - 11 = 734 %", "-14,68");
         assertNumber("8 999,91", "2 + 7 = 99999 %", "8999,91");
         assertNumber("-2,56", "32 + 8 +/- % ", "32 + -2,56");
         assertNumber("0", "8 sqr %", "0");
         assertNumber("-63,36", "12 x² - % =", "");
         assertNumber("8,19", "9 - % +", "9 - 0,81 + ");
-        assertNumber("-4,75", "3 - 8 + % *", "3 - 8 + 0,25 x ");
+        assertNumber("-4,75", "3 - 8 + % x", "3 - 8 + 0,25 x ");
         assertNumber("-28 638,844416", "984 - 356 % + 876 - % - ", "984 - 3503,04 + 876 - 26995,804416 - ");
         assertNumber("-17,3578685327433", "284 √ + 3 % = +/-", "negate(17,3578685327433)");
         assertNumber("-234,21", "100 + 88 - 11 + 34 - % +", "100 + 88 - 11 + 34 - 445,21 + ");
@@ -510,18 +834,18 @@ class Calculator_ControllerTest extends ApplicationTest {
         //Unary with binary
         //Square with binary
         assertNumber("28", "5 x² + 3 -", "sqr(5) + 3 - ");
-        assertNumber("22", "5 x² - 3 *", "sqr(5) - 3 x ");
-        assertNumber("75", "5 x² * 3 /", "sqr(5) x 3 ÷ ");
+        assertNumber("22", "5 x² - 3 x", "sqr(5) - 3 x ");
+        assertNumber("75", "5 x² x 3 /", "sqr(5) x 3 ÷ ");
         assertNumber("8,333333333333333", "5 x² / 3 +", "sqr(5) ÷ 3 + ");
         //Square root with binary
         assertNumber("5,23606797749979", "5 √ + 3 -", "√(5) + 3 - ");
-        assertNumber("-0,7639320225002103", "5 √ - 3 *", "√(5) - 3 x ");
-        assertNumber("6,708203932499369", "5 √ * 3 /", "√(5) x 3 ÷ ");
+        assertNumber("-0,7639320225002103", "5 √ - 3 x", "√(5) - 3 x ");
+        assertNumber("6,708203932499369", "5 √ x 3 /", "√(5) x 3 ÷ ");
         assertNumber("0,7453559924999299", "5 √ / 3 +", "√(5) ÷ 3 + ");
         //One divide x with binary
         assertNumber("3,2", "5 1/x + 3 -", "1/(5) + 3 - ");
-        assertNumber("-2,8", "5 1/x - 3 *", "1/(5) - 3 x ");
-        assertNumber("0,6", "5 1/x * 3 /", "1/(5) x 3 ÷ ");
+        assertNumber("-2,8", "5 1/x - 3 x", "1/(5) - 3 x ");
+        assertNumber("0,6", "5 1/x x 3 /", "1/(5) x 3 ÷ ");
         assertNumber("0,0666666666666667", "5 1/x / 3 +", "1/(5) ÷ 3 + ");
         //Binary with unary
         //Add with unary
@@ -533,9 +857,9 @@ class Calculator_ControllerTest extends ApplicationTest {
         assertNumber("3,267949192431123", "5 - 3 √ -", "5 - √(3) - ");
         assertNumber("4,666666666666667", "5 - 3 1/x -", "5 - 1/(3) - ");
         //Multiply with unary
-        assertNumber("45", "5 * 3 x² -", "5 x sqr(3) - ");
-        assertNumber("8,660254037844386", "5 * 3 √ -", "5 x √(3) - ");
-        assertNumber("1,666666666666667", "5 * 3 1/x -", "5 x 1/(3) - ");
+        assertNumber("45", "5 x 3 x² -", "5 x sqr(3) - ");
+        assertNumber("8,660254037844386", "5 x 3 √ -", "5 x √(3) - ");
+        assertNumber("1,666666666666667", "5 x 3 1/x -", "5 x 1/(3) - ");
         //Divide with unary
         assertNumber("0,5555555555555556", "5 / 3 x² -", "5 ÷ sqr(3) - ");
         assertNumber("2,886751345948129", "5 / 3 √ -", "5 ÷ √(3) - ");
@@ -544,19 +868,19 @@ class Calculator_ControllerTest extends ApplicationTest {
         //Mix all operations
         assertNumber("5", "2 MS 3 + MR - MC", "3 + 2 - ");
         assertNumber("-2,23606797749979", "5 √ +/- -", "negate(√(5)) - ");
-        assertNumber("2 906 811,3127248", "878,756 + 45,63 % +/- * 78 x² =", "");
-        assertNumber("2,009861478780531", ",883655 * 0,74553 % + 0,99999 + √ =", "");
+        assertNumber("2 906 811,3127248", "878,756 + 45,63 % +/- x 78 x² =", "");
+        assertNumber("2,009861478780531", ",883655 x 0,74553 % + 0,99999 + √ =", "");
         assertNumber("7,666666666666667", "3 1/x +/- + 8 -", "negate(1/(3)) + 8 - ");
-        assertNumber("6 639 379 852 195,999", "985948894 - 7453628 1/x * 6734 = ", "");
+        assertNumber("6 639 379 852 195,999", "985948894 - 7453628 1/x x 6734 = ", "");
         assertNumber("-59", "5 + 8 x² +/- +/- +/- -", "5 + negate(negate(negate(sqr(8)))) - ");
         assertNumber("2 298 455 479 608,324", "4376 + 7987 - % + 8,9 = x²", "sqr(-1516065,79)");
-        assertNumber("59,02888304444444", "56 * % MS 789 % M+ / 0,55 bs bs 89 M- MR + 0,99999 % = ", "");
-        assertNumber("-36,799632", "2 x² + 6 x² - 8 % * 0,999999 bs +/- /", "sqr(2) + sqr(6) - 3,2 x -0,99999 ÷ ");
+        assertNumber("59,02888304444444", "56 x % MS 789 % M+ / 0,55 bs bs 89 M- MR + 0,99999 % = ", "");
+        assertNumber("-36,799632", "2 x² + 6 x² - 8 % x 0,999999 bs +/- /", "sqr(2) + sqr(6) - 3,2 x -0,99999 ÷ ");
         assertNumber("1 070 281,69789316", "675 x² + 784 x² + ,8354 x² - ", "sqr(675) + sqr(784) + sqr(0,8354) - ");
-        assertNumber("-1,628217149182808e-8", "4567 x² + 78956,00009 * 64785 √ +/- = 1/x M+ * 7536 M- MR +/- √ MC =", "");
-        assertNumber("1,e-9999", "0,0000000000000001 x² * ,0000001 = x² x² x² x² x² x² x² x² * 0,000000000000001 =", "");
+        assertNumber("-1,628217149182808e-8", "4567 x² + 78956,00009 x 64785 √ +/- = 1/x M+ x 7536 M- MR +/- √ MC =", "");
+        assertNumber("1,e-9999", "0,0000000000000001 x² x ,0000001 = x² x² x² x² x² x² x² x² x 0,000000000000001 =", "");
         assertNumber("0,0178571428571429", "87 + 324 - 443 / ,56 +/- x² √ 1/x %", "87 + 324 - 443 ÷ 0,0178571428571429");
-        assertNumber("9,999999999999999e+9999", "1000000000000000 x² * 1000000000 = x² x² x² x² x² x² x² x² MS 9999999999999999 * MR = MC", "");
+        assertNumber("9,999999999999999e+9999", "1000000000000000 x² x 1000000000 = x² x² x² x² x² x² x² x² MS 9999999999999999 x MR = MC", "");
 
 
     }
@@ -661,7 +985,7 @@ class Calculator_ControllerTest extends ApplicationTest {
             type(ADD);
         } else if (idButton.equals("-")) {
             type(SUBTRACT);
-        } else if (idButton.equals("*")) {
+        } else if (idButton.equals("x")) {
             type(MULTIPLY);
         } else if (idButton.equals("√")) {
             push(new KeyCodeCombination(DIGIT2, KeyCombination.SHIFT_DOWN));
@@ -723,7 +1047,7 @@ class Calculator_ControllerTest extends ApplicationTest {
             push(new KeyCodeCombination(EQUALS, KeyCombination.SHIFT_DOWN));
         } else if (idButton.equals("-")) {
             type(MINUS);
-        } else if (idButton.equals("*")) {
+        } else if (idButton.equals("x")) {
             push(new KeyCodeCombination(DIGIT8, KeyCombination.SHIFT_DOWN));
         } else if (idButton.equals("√")) {
             push(new KeyCodeCombination(DIGIT2, KeyCombination.SHIFT_DOWN));
@@ -786,7 +1110,7 @@ class Calculator_ControllerTest extends ApplicationTest {
             button = from(root).lookup("#add").query();
         } else if (idButtonClickedMouse.equals("-")) {
             button = from(root).lookup("#subtract").query();
-        } else if (idButtonClickedMouse.equals("*")) {
+        } else if (idButtonClickedMouse.equals("x")) {
             button = from(root).lookup("#multiply").query();
         } else if (idButtonClickedMouse.equals("√")) {
             button = from(root).lookup("#√").query();

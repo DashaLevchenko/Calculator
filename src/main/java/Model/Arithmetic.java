@@ -8,7 +8,6 @@ public class Arithmetic {
 
 
     /**
-     * 9
      * Method calculates sum of numbers
      *
      * @param x First parameter
@@ -16,7 +15,7 @@ public class Arithmetic {
      * @return Sum of x and y
      */
     public static BigDecimal sum(BigDecimal x, BigDecimal y) {
-        return scaleForBigDecimal(x.add(y).round(MathContext.DECIMAL128));
+        return x.add(y).round(MathContext.DECIMAL128);
     }
 
     /**
@@ -26,12 +25,12 @@ public class Arithmetic {
      * @param y Second parameter value to be subtracted from {@code x}.
      * @return Difference of {@code x} and {@code y}
      */
-    public static BigDecimal minus(BigDecimal x, BigDecimal y) {
-        return scaleForBigDecimal(x.subtract(y));
+    public static BigDecimal subtract(BigDecimal x, BigDecimal y) {
+        return x.subtract(y).round(MathContext.DECIMAL128);
     }
 
     public static BigDecimal multiply(BigDecimal x, BigDecimal y) {
-        return scaleForBigDecimal(x.multiply(y));
+        return x.multiply(y).round(MathContext.DECIMAL128);
     }
 
     static BigDecimal divide(BigDecimal x, BigDecimal y) throws ArithmeticException {
@@ -40,7 +39,7 @@ public class Arithmetic {
         } else if (y.equals(BigDecimal.ZERO)) {
             throw new ArithmeticException("Cannot divide by zero");
         } else {
-            return scaleForBigDecimal(x.divide(y, MathContext.DECIMAL128));
+            return x.divide(y, MathContext.DECIMAL128);
         }
     }
 
@@ -53,37 +52,37 @@ public class Arithmetic {
     }
 
     static BigDecimal xSquare(BigDecimal x) {
-        return scaleForBigDecimal(x.pow(2).round(MathContext.DECIMAL128));
+        return x.pow(2).round(MathContext.DECIMAL128);
     }
 
     static BigDecimal oneDivideX(BigDecimal y) throws ArithmeticException {
-        return scaleForBigDecimal(Arithmetic.divide(BigDecimal.ONE, y));
+        return Arithmetic.divide(BigDecimal.ONE, y);
     }
 
     static BigDecimal percent(BigDecimal x, BigDecimal percent) {
         if (percent.equals(BigDecimal.ZERO)) {
             return BigDecimal.ZERO;
         }
-        return scaleForBigDecimal(x.multiply(percent.movePointLeft(2), MathContext.DECIMAL128));
-    }
-
-    public static BigDecimal negate(BigDecimal x) {
-        return scaleForBigDecimal(x.negate());
+        return x.multiply(percent.divide(BigDecimal.valueOf(100)), MathContext.DECIMAL128);
     }
 
     public static BigDecimal calculate(BigDecimal number1, BigDecimal number2, OperationsEnum operation) {
-        BigDecimal result = BigDecimal.ZERO;
-
+        BigDecimal result;
+        if (operation == null) {
+            throw new NullPointerException("Enter operation: ADD, SUBTRACT, MULTIPLY, PERCENT, DIVIDE");
+        }
         if (operation.equals(OperationsEnum.ADD)) {
             result = sum(number1, number2);
         } else if (operation.equals(OperationsEnum.SUBTRACT)) {
-            result = minus(number1, number2);
+            result = subtract(number1, number2);
         } else if (operation.equals(OperationsEnum.MULTIPLY)) {
             result = multiply(number1, number2);
         } else if (operation.equals(OperationsEnum.PERCENT)) {
             result = percent(number1, number2);
         } else if (operation.equals(OperationsEnum.DIVIDE)) {
             result = divide(number1, number2);
+        }else{
+            throw new IllegalArgumentException("Enter binary operation");
         }
         result = result.round(MathContext.DECIMAL128);
 
@@ -92,31 +91,25 @@ public class Arithmetic {
 
 
     public static BigDecimal calculate(BigDecimal number, OperationsEnum operation) {
-        BigDecimal result = BigDecimal.ZERO;
-
-        if (operation.equals(OperationsEnum.SQRT)) {
-            result = squareRoot(number);
-        } else if (operation.equals(OperationsEnum.SQR)) {
-            result = xSquare(number);
-        } else if (operation.equals(OperationsEnum.ONE_DIVIDE_X)) {
-            result = oneDivideX(number);
-        } else if (operation.equals(OperationsEnum.PERCENT)) {
-            result = percent(number, BigDecimal.ZERO);
+        BigDecimal result;
+        if (operation == null) {
+            throw new NullPointerException("Enter operation: SQRT, SQR, ONE_DIVIDE_X, PERCENT");
         }
-        result = result.round(MathContext.DECIMAL128);
+            if (operation.equals(OperationsEnum.SQRT)) {
+                result = squareRoot(number);
+            } else if (operation.equals(OperationsEnum.SQR)) {
+                result = xSquare(number);
+            } else if (operation.equals(OperationsEnum.ONE_DIVIDE_X)) {
+                result = oneDivideX(number);
+            } else if (operation.equals(OperationsEnum.PERCENT)) {
+                result = percent(number, BigDecimal.ZERO);
+            } else {
+                throw new IllegalArgumentException("Enter unary operation");
+            }
+            result = result.round(MathContext.DECIMAL128);
 
         return result;
     }
-
-    public static BigDecimal scaleForBigDecimal(BigDecimal numberDouble) {
-        numberDouble = numberDouble.stripTrailingZeros();
-        if (numberDouble.scale() < 0) {
-            numberDouble = numberDouble.setScale(0);
-        }
-        return numberDouble;
-    }
-
-
 
 
 }

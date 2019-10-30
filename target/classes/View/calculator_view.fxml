@@ -429,7 +429,7 @@
          <content>
             <Label fx:id="outOperationMemory" alignment="TOP_LEFT" contentDisplay="TOP" ellipsisString="" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: e6e6e6;" textAlignment="RIGHT" textFill="#8d8b8b">
                <font>
-                  <Font name="Segoe UI" size="15.0" />
+                  <Font name="Segoe MDL2 Assets" size="15.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="DEFAULT" />
