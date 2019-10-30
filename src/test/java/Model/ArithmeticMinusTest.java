@@ -2020,7 +2020,7 @@ class ArithmeticMinusTest {
         BigDecimal result = new BigDecimal(resultString);
 
         assertEquals(result, Arithmetic.subtract(x, y));
-        assertEquals(result, x.subtract(y).round(MathContext.DECIMAL128));
+        assertEquals(x.subtract(y).round(MathContext.DECIMAL128), Arithmetic.subtract(x, y));
         assertEquals(result, Arithmetic.calculate(x, y, OperationsEnum.SUBTRACT));
 
         assertMinusInvalid(x, y);

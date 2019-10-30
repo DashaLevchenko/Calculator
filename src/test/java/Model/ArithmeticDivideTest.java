@@ -14,8 +14,6 @@ class ArithmeticDivideTest {
     void divideInteger() {
         assertionDivideValid("0", "1", "0");
         assertionDivideValid("0", "-1", "0");
-        assertionDivideValid("0", "1", "0");
-        assertionDivideValid("0", "-1", "0");
         assertionDivideValid("1", "1", "1");
         assertionDivideValid("1", "-1", "-1");
         assertionDivideValid("-1", "1", "-1");
@@ -2017,7 +2015,7 @@ class ArithmeticDivideTest {
         BigDecimal result = new BigDecimal(resultString);
 
         assertEquals(result, Arithmetic.divide(x, y));
-        assertEquals(result, x.divide(y, MathContext.DECIMAL128));
+        assertEquals(x.divide(y, MathContext.DECIMAL128), Arithmetic.divide(x, y));
         assertEquals(result, Arithmetic.calculate(x, y, OperationsEnum.DIVIDE));
 
 

@@ -12,6 +12,11 @@ class ArithmeticPercentTest {
 
     @Test
     void percentInteger() {
+        assertionsPercent("0", "0", "0");
+        assertionsPercent("0", "1", "0.00");
+        assertionsPercent("1", "0", "0");
+        assertionsPercent("0", "-1", "0.00");
+        assertionsPercent("-1", "0", "0");
         assertionsPercent("1", "1", "0.01");
         assertionsPercent("1", "-1", "-0.01");
         assertionsPercent("-1", "1", "-0.01");
@@ -2014,7 +2019,7 @@ class ArithmeticPercentTest {
         BigDecimal result = new BigDecimal(resultString);
 
         assertEquals(result,  Arithmetic.percent(x, percent));
-        assertEquals(result, x.multiply(percent.divide(BigDecimal.valueOf(100)), MathContext.DECIMAL128));
+        assertEquals(x.multiply(percent.divide(BigDecimal.valueOf(100)), MathContext.DECIMAL128), Arithmetic.percent(x, percent));
         assertEquals(result, Arithmetic.calculate(x, percent,  OperationsEnum.PERCENT));
         assertEquals(BigDecimal.ZERO, Arithmetic.calculate(x, OperationsEnum.PERCENT));
 

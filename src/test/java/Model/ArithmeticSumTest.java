@@ -2037,19 +2037,13 @@ class ArithmeticSumTest {
 
 
     void assertionSum(String xString, String yString, String sum) {
-
-
         BigDecimal x = new BigDecimal(xString);
         BigDecimal y = new BigDecimal(yString);
-
-
-//        System.out.println("assertCalculate(\""+xString+"\", \""+yString+"\", ADD, \""+sum+"\");");
-
 
         BigDecimal sumBig = new BigDecimal(sum);
 
         assertEquals(sumBig, Arithmetic.sum(x, y));
-        assertEquals(sumBig, x.add(y).round(MathContext.DECIMAL128));
+        assertEquals(x.add(y).round(MathContext.DECIMAL128), Arithmetic.sum(x, y));
         assertEquals(sumBig, Arithmetic.calculate(x, y, OperationsEnum.ADD));
 
         assertSumInvalid(x, y);

@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.loadui.testfx.utils.FXTestUtils;
 import org.testfx.framework.junit5.ApplicationTest;
 
 import java.awt.*;
@@ -20,8 +21,6 @@ import java.math.BigDecimal;
 
 import static javafx.scene.input.KeyCode.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
-//import org.loadui.testfx.utils.*;
 
 
 class Calculator_ControllerTest extends ApplicationTest {
@@ -49,14 +48,7 @@ class Calculator_ControllerTest extends ApplicationTest {
 
     @BeforeAll
     static void config() throws Exception {
-//        System.setProperty("testfx.robot", "awt");
-
-//
-        System.setProperty("testfx.robot", "glass");
-        System.setProperty("testfx.headless", "true");
-        System.setProperty("prism.order", "d3d");
-        System.setProperty("prism.text", "t2k");
-        System.setProperty("java.awt.headless", "true");
+        System.setProperty("testfx.robot", "awt");
     }
 
     @BeforeEach
@@ -431,7 +423,7 @@ class Calculator_ControllerTest extends ApplicationTest {
         assertNumber("0", "x² =", "");
         assertNumber("0", "√ =", "");
         assertNumber("0", "% =", "");
-        
+
         assertNumber("2", "2 =", "");
         assertNumber("4", "2 + =", "");
         assertNumber("0", "2 - =", "");
@@ -558,7 +550,7 @@ class Calculator_ControllerTest extends ApplicationTest {
         assertNumber("-0,2", "0,2 1/x +/- 1/x", "1/(negate(1/(0,2)))");
         assertNumber("-0,2", "0,2 1/x 1/x +/-", "negate(1/(1/(0,2)))");
         assertNumber("-0,2", "0,2 +/- 1/x +/- 1/x +/-", "negate(1/(negate(1/(-0,2))))");
-        
+
         assertNumber("1", "1 1/x =", "");
         assertNumber("2", "2 1/x 1/x =", "");
         assertNumber("-2", "2 +/- 1/x 1/x =", "");
@@ -698,18 +690,14 @@ class Calculator_ControllerTest extends ApplicationTest {
         assertNumber("1,111111111111111e-4", "0,1111111111111111 / 1000 -", "0,1111111111111111 ÷ 1000 - ");
         //number less 0,0000000000000001
         assertNumber("1,e-17", "0,0000000000000001 / 10 +", "0,0000000000000001 ÷ 10 + ");
-        assertNumber("-1,e-17", "0,0000000000000001 / 10 +/- +", "0,0000000000000001 ÷ -10 + ");
         assertNumber("1,1e-16", "0,0000000000000011 / 10 +", "0,0000000000000011 ÷ 10 + ");
         assertNumber("9,e-17", "0,0000000000000009 / 10 +", "0,0000000000000009 ÷ 10 + ");
-        assertNumber("1,e-18", "0,0000000000000001 / 100 +", "0,0000000000000001 ÷ 100 + ");
-        assertNumber("-1,e-18", "0,0000000000000001 / 100 +/- +", "0,0000000000000001 ÷ -100 + ");
         assertNumber("1,e-30", "0,000000000000001 / 10000000000000000000 +", "0,000000000000001 ÷ 1000000000000000 + ");
         assertNumber("1,e-31", "0,0000000000000001 / 10000000000000000000 +", "0,0000000000000001 ÷ 1000000000000000 + ");
         assertNumber("1,111111111111111e-16", "0,1111111111111111 / 1000000000000000 +", "0,1111111111111111 ÷ 1000000000000000 + ");
         //e+
         assertNumber("1,e+16", "9999999999999999 + 1 +", "9999999999999999 + 1 + ");
         assertNumber("1,e+16", "9999999999999999 + 2 +", "9999999999999999 + 2 + ");
-        assertNumber("-1,e+16", "9999999999999999 +/- - 2 =", "");
         assertNumber("2,e+16", "9999999999999999 + =", "");
         assertNumber("3,086419753086419e+31", "5555555555555555 x =", "");
         assertNumber("1,000000000000001e+16", "9999999999999999 + 6 =", "");
@@ -717,7 +705,6 @@ class Calculator_ControllerTest extends ApplicationTest {
         assertNumber("5,999999999999999e+16", "9999999999999999 + = = = = =", "");
 
         assertNumber("1,e-17", "0,0000000000000001 / 9,999999999999996 +", "0,0000000000000001 ÷ 9,999999999999996 + ");
-        assertNumber("1,1e-16", "0,0000000000000011 / 9,999999999999996 +", "0,0000000000000011 ÷ 9,999999999999996 + ");
         assertNumber("1,e-18", "0,0000000000000001 / 99,99999999999996 +", "0,0000000000000001 ÷ 99,99999999999996 + ");
         assertNumber("1,e-30", "0,000000000000001 / 999999999999999,9 +", "0,000000000000001 ÷ 999999999999999,9 + ");
         assertNumber("1,e-31", "0,0000000000000001 / 999999999999999,6 +", "0,0000000000000001 ÷ 999999999999999,6 + ");
@@ -938,12 +925,7 @@ class Calculator_ControllerTest extends ApplicationTest {
                 mouseInput(buttonPressed);
             }
         }
-        try {
-            Thread.sleep(100);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
+        FXTestUtils.awaitEvents();
         String actual = outLabel.getText();
         assertEquals(result, actual);
         type(ESCAPE);
@@ -1107,23 +1089,23 @@ class Calculator_ControllerTest extends ApplicationTest {
         } else if (idButtonClickedMouse.equals("d")) {
             button = from(root).lookup("#CE").query();
         } else if (idButtonClickedMouse.equals("+")) {
-            button = from(root).lookup("#add").query();
+            button = from(root).lookup("#ADD").query();
         } else if (idButtonClickedMouse.equals("-")) {
-            button = from(root).lookup("#subtract").query();
+            button = from(root).lookup("#SUBTRACT").query();
         } else if (idButtonClickedMouse.equals("x")) {
-            button = from(root).lookup("#multiply").query();
+            button = from(root).lookup("#MULTIPLY").query();
         } else if (idButtonClickedMouse.equals("√")) {
-            button = from(root).lookup("#√").query();
+            button = from(root).lookup("#SQRT").query();
         } else if (idButtonClickedMouse.equals("%")) {
-            button = from(root).lookup("#percent").query();
+            button = from(root).lookup("#PERCENT").query();
         } else if (idButtonClickedMouse.equals("1/x")) {
-            button = from(root).lookup("#oneDivideX").query();
+            button = from(root).lookup("#ONE_DIVIDE_X").query();
         } else if (idButtonClickedMouse.equals("x²")) {
-            button = from(root).lookup("#sqrX").query();
+            button = from(root).lookup("#SQR").query();
         } else if (idButtonClickedMouse.equals("/")) {
-            button = from(root).lookup("#divide").query();
+            button = from(root).lookup("#DIVIDE").query();
         } else if (idButtonClickedMouse.equals("=")) {
-            button = from(root).lookup("#equal").query();
+            button = from(root).lookup("#EQUAL").query();
         } else if (idButtonClickedMouse.equals("MS")) {
             button = from(root).lookup("#memoryStore").query();
         } else if (idButtonClickedMouse.equals("M+")) {
@@ -1136,7 +1118,6 @@ class Calculator_ControllerTest extends ApplicationTest {
             button = from(root).lookup("#memoryRecall").query();
         }
 
-
         if (button != null) {
             Scene scene = button.getScene();
             double sceneX = scene.getWindow().getX();
@@ -1145,15 +1126,14 @@ class Calculator_ControllerTest extends ApplicationTest {
             int buttonX = (int) (sceneX + button.getBoundsInParent().getCenterX());
             int buttonY = (int) (sceneY + button.getBoundsInParent().getCenterY() + button.getParent().getBoundsInParent().getMinY() + button.getParent().getParent().getLayoutY());
 
-            robot.mouseMove(buttonX, buttonY);
-            try {
-                Thread.sleep(100);
-                robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
-                robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            if (button.getId().equals("memoryStore") || button.getId().equals("memoryAdd") ||
+                    button.getId().equals("memorySubtract") || button.getId().equals("memoryClear") || button.getId().equals("memoryRecall")) {
+                buttonY += (int) button.getParent().getParent().getParent().getLayoutY();
             }
-
+            FXTestUtils.awaitEvents();
+            robot.mouseMove(buttonX, buttonY);
+            robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
+            robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
         }
     }
 }

@@ -1,7 +1,5 @@
 package Controller;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 
 class Calculator_ControllerMouseTest extends Calculator_ControllerTest {
     @Override

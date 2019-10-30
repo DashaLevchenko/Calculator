@@ -15,11 +15,7 @@ class ArithmeticMultiplyTest {
         assertionMultiply("0", "0", "0");
         assertionMultiply("0", "1", "0");
         assertionMultiply("0", "-1", "0");
-        assertionMultiply("0", "1", "0");
-        assertionMultiply("0", "-1", "0");
         assertionMultiply("1", "0", "0");
-        assertionMultiply("1", "0", "0");
-        assertionMultiply("-1", "0", "0");
         assertionMultiply("-1", "0", "0");
         assertionMultiply("1", "1", "1");
         assertionMultiply("1", "-1", "-1");
@@ -2026,7 +2022,7 @@ class ArithmeticMultiplyTest {
         BigDecimal result = new BigDecimal(resultString);
 
         assertEquals(result, Arithmetic.multiply(x, y));
-        assertEquals(result, x.multiply(y, MathContext.DECIMAL128));
+        assertEquals(x.multiply(y, MathContext.DECIMAL128), Arithmetic.multiply(x, y));
         assertEquals(result, Arithmetic.calculate(x, y, OperationsEnum.MULTIPLY));
 
         assertMultiplyInvalid(x, y);
