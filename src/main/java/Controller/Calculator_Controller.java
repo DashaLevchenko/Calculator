@@ -560,6 +560,7 @@ public class Calculator_Controller {
         setNum2();
         result = null;
         operationsIsDisable(false);
+        scrollOutOperationMemory();
     }
 
     private String cleanDisplay(String out) {

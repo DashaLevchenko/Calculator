@@ -57,6 +57,19 @@ class Calculator_ControllerTest extends ApplicationTest {
         outLabel = from(root).lookup("#outText").query();
     }
 
+    /* Symbols for writing tests:
+         - memory recall
+         - memory clear
+         - memory store
+         - memory add
+         - memory subtract 
+         - square x
+         - one divide x
+         - negate
+         - backspace
+        
+    */
+
     @Test
     void checkInput() {
         //Input number
@@ -69,8 +82,8 @@ class Calculator_ControllerTest extends ApplicationTest {
         assertNumber("222 222", "222222", "");
         assertNumber("222 222 222", "222222222", "");
         assertNumber("2 222 222 222 222 222", "2222222222222222222", "");
-        assertNumber("-2 222 222 222 222 222", "222222222222222222 +/-", "");
-        assertNumber("2 222 222 222 222 222", "222222222222222222 +/- +/-", "");
+        assertNumber("-2 222 222 222 222 222", "222222222222222222 ", "");
+        assertNumber("2 222 222 222 222 222", "222222222222222222  ", "");
         //Input Decimal
         assertNumber("0,00000000", "0,00000000", "");
         assertNumber("0,00000000000000", "0,00000000000000", "");
@@ -84,41 +97,41 @@ class Calculator_ControllerTest extends ApplicationTest {
         assertNumber("12 456 789,12345678", "12456789,123456789", "");
         assertNumber("1 234 567 891 234 567,", "1234567891234567,", "");
         assertNumber("1 234 567 891 234 567,", "1234567891234567,89", "");
-        assertNumber("-1 234 567 891 234 567,", "1234567891234567,89 +/-", "");
-        assertNumber("1 234 567 891 234 567,", "1234567891234567,89 +/- +/-", "");
-        assertNumber("1 234 567 891 234 567,", "1234567891234567,89 +/- +/-", "");
-        assertNumber("-222,3333333333333", "222,3333333333333 +/- 44", "");
-        assertNumber("222,3333333333333", "222,3333333333333 +/- +/- 33,", "");
+        assertNumber("-1 234 567 891 234 567,", "1234567891234567,89 ", "");
+        assertNumber("1 234 567 891 234 567,", "1234567891234567,89  ", "");
+        assertNumber("1 234 567 891 234 567,", "1234567891234567,89  ", "");
+        assertNumber("-222,3333333333333", "222,3333333333333  44", "");
+        assertNumber("222,3333333333333", "222,3333333333333   33,", "");
     }
 
     @Test
     void checkBackspace() {
         //zero
-        assertNumber("0", " bs", "");
-        assertNumber("0", "5 bs", "");
-        assertNumber("0", "01 bs", "");
-        assertNumber("0", "8 +/- bs", "");
-        assertNumber("1 111", "11111 bs", "");
-        assertNumber("-44", "444 +/- bs", "");
-        assertNumber("88 888 888", "8888888888 bs bs", "");
-        assertNumber("0", "7838765,89 +/- bs bs bs bs bs bs bs bs bs bs", "");
-        //comma bs
-        assertNumber("234 567", "234567, bs", "");
-        assertNumber("234 567", "234567,8 bs bs", "");
-        assertNumber("-678 395", "678395, +/- bs", "");
+        assertNumber("0", " ", "");
+        assertNumber("0", "5 ", "");
+        assertNumber("0", "01 ", "");
+        assertNumber("0", "8  ", "");
+        assertNumber("1 111", "11111 ", "");
+        assertNumber("-44", "444  ", "");
+        assertNumber("88 888 888", "8888888888  ", "");
+        assertNumber("0", "7838765,89           ", "");
+        //comma 
+        assertNumber("234 567", "234567, ", "");
+        assertNumber("234 567", "234567,8  ", "");
+        assertNumber("-678 395", "678395,  ", "");
         //in operation
-        assertNumber("0", "679 + 67 bs bs", "679 + ");
-        assertNumber("9", "3 1/x + 987 bs bs", "1/(3) + ");
-        assertNumber("0,00", "3 x² - ,0000 bs bs", "sqr(3) - ");
-        assertNumber("7", "2456 x 2 - 789 bs bs", "2456 x 2 - ");
-        //Don`t bs result
-        assertNumber("7 396", "86 x² bs bs", "sqr(86)");
-        assertNumber("334", "347 - 13 - bs bs", "347 - 13 - ");
-        assertNumber("299,422778024652", "89654 √ = bs bs bs", "");
-        assertNumber("435 611 087", "435576762 + 34325 = bs bs bs", "");
-        assertNumber("9,999999999999996e+63", "9999999999999999 x² x² bs bs bs bs = bs bs bs", "");
-        assertNumber("0,0000000000000001", "2,555555 bs 1 x² x 0,0000000000000000 bs 1", "sqr(2,555551) x ");
-        assertNumber("0,0000000000000001", ",0000000000000000 bs 1 x 2 / 0,0000000000000000 bs 1", "0,0000000000000001 x 2 ÷ ");
+        assertNumber("0", "679 + 67  ", "679 + ");
+        assertNumber("9", "3  + 987  ", "1/(3) + ");
+        assertNumber("0,00", "3  - ,0000  ", "sqr(3) - ");
+        assertNumber("7", "2456 x 2 - 789  ", "2456 x 2 - ");
+        //Don`t backspace result
+        assertNumber("7 396", "86   ", "sqr(86)");
+        assertNumber("334", "347 - 13 -  ", "347 - 13 - ");
+        assertNumber("299,422778024652", "89654 √ =   ", "");
+        assertNumber("435 611 087", "435576762 + 34325 =   ", "");
+        assertNumber("9,999999999999996e+63", "9999999999999999       =   ", "");
+        assertNumber("0,0000000000000001", "2,555555  1  x 0,0000000000000000  1", "sqr(2,555551) x ");
+        assertNumber("0,0000000000000001", ",0000000000000000  1 x 2 / 0,0000000000000000  1", "0,0000000000000001 x 2 ÷ ");
     }
 
     @Test
@@ -126,73 +139,89 @@ class Calculator_ControllerTest extends ApplicationTest {
         //Integer
         assertNumber("2", "0 + 2 +", "0 + 2 + ");
         assertNumber("2", "2 + 0 +", "2 + 0 + ");
-        assertNumber("-2", "0 + 2 +/- +", "0 + -2 + ");
-        assertNumber("-2", "2 +/- + 0 +", "-2 + 0 + ");
+        assertNumber("-2", "0 + 2  +", "0 + -2 + ");
+        assertNumber("-2", "2  + 0 +", "-2 + 0 + ");
 
         assertNumber("5", "2 + 3 +", "2 + 3 + ");
-        assertNumber("-1", "2 + 3 +/- +", "2 + -3 + ");
-        assertNumber("1", "2 +/- + 3 +", "-2 + 3 + ");
-        assertNumber("-5", "2 +/- + 3 +/- +", "-2 + -3 + ");
+        assertNumber("-1", "2 + 3  +", "2 + -3 + ");
+        assertNumber("1", "2  + 3 +", "-2 + 3 + ");
+        assertNumber("-5", "2  + 3  +", "-2 + -3 + ");
 
         //with equal
         assertNumber("2", "0 + 2 =", "");
         assertNumber("2", "2 + 0 =", "");
-        assertNumber("-2", "0 + 2 +/- =", "");
-        assertNumber("-2", "2 +/- + 0 =", "");
+        assertNumber("-2", "0 + 2  =", "");
+        assertNumber("-2", "2  + 0 =", "");
 
         assertNumber("5", "2 + 3 =", "");
-        assertNumber("-1", "2 + 3 +/- =", "");
-        assertNumber("1", "2 +/- + 3 =", "");
-        assertNumber("-5", "2 +/- + 3 +/- =", "");
+        assertNumber("-1", "2 + 3  =", "");
+        assertNumber("1", "2  + 3 =", "");
+        assertNumber("-5", "2  + 3  =", "");
 
         //Decimal
         assertNumber("0,2", "0 + ,2 +", "0 + 0,2 + ");
-        assertNumber("-0,2", "0 + ,2 +/- +", "0 + -0,2 + ");
-        assertNumber("-0,2", ",2 +/- + 0 +", "-0,2 + 0 + ");
+        assertNumber("-0,2", "0 + ,2  +", "0 + -0,2 + ");
+        assertNumber("-0,2", ",2  + 0 +", "-0,2 + 0 + ");
 
         assertNumber("2,3", "2 + 0,3 +", "2 + 0,3 + ");
         assertNumber("3,2", "0,2 + 3 +", "0,2 + 3 + ");
         assertNumber("0,5", "0,2 + 0,3 +", "0,2 + 0,3 + ");
 
-        assertNumber("1,7", "2 + 0,3 +/- +", "2 + -0,3 + ");
-        assertNumber("-2,8", "0,2 + 3 +/- +", "0,2 + -3 + ");
-        assertNumber("-0,1", "0,2 + 0,3 +/- +", "0,2 + -0,3 + ");
+        assertNumber("1,7", "2 + 0,3  +", "2 + -0,3 + ");
+        assertNumber("-2,8", "0,2 + 3  +", "0,2 + -3 + ");
+        assertNumber("-0,1", "0,2 + 0,3  +", "0,2 + -0,3 + ");
 
-        assertNumber("-1,7", "2 +/- + 0,3 +", "-2 + 0,3 + ");
-        assertNumber("2,8", "0,2 +/- + 3 +", "-0,2 + 3 + ");
-        assertNumber("0,1", "0,2 +/- + 0,3 +", "-0,2 + 0,3 + ");
+        assertNumber("-1,7", "2  + 0,3 +", "-2 + 0,3 + ");
+        assertNumber("2,8", "0,2  + 3 +", "-0,2 + 3 + ");
+        assertNumber("0,1", "0,2  + 0,3 +", "-0,2 + 0,3 + ");
 
-        assertNumber("-2,3", "2 +/- + 0,3 +/- +", "-2 + -0,3 + ");
-        assertNumber("-3,2", "0,2 +/- + 3 +/- +", "-0,2 + -3 + ");
-        assertNumber("-0,5", "0,2 +/- + 0,3 +/- +", "-0,2 + -0,3 + ");
+        assertNumber("-2,3", "2  + 0,3  +", "-2 + -0,3 + ");
+        assertNumber("-3,2", "0,2  + 3  +", "-0,2 + -3 + ");
+        assertNumber("-0,5", "0,2  + 0,3  +", "-0,2 + -0,3 + ");
 
         //with equal
         assertNumber("0,2", "0 + ,2 =", "");
-        assertNumber("-0,2", "0 + ,2 +/- =", "");
-        assertNumber("-0,2", ",2 +/- + 0 =", "");
+        assertNumber("-0,2", "0 + ,2  =", "");
+        assertNumber("-0,2", ",2  + 0 =", "");
 
         assertNumber("2,3", "2 + 0,3 =", "");
         assertNumber("3,2", "0,2 + 3 =", "");
         assertNumber("0,5", "0,2 + 0,3 =", "");
 
-        assertNumber("1,7", "2 + 0,3 +/- =", "");
-        assertNumber("-2,8", "0,2 + 3 +/- =", "");
-        assertNumber("-0,1", "0,2 + 0,3 +/- =", "");
+        assertNumber("1,7", "2 + 0,3  =", "");
+        assertNumber("-2,8", "0,2 + 3  =", "");
+        assertNumber("-0,1", "0,2 + 0,3  =", "");
 
-        assertNumber("-1,7", "2 +/- + 0,3 =", "");
-        assertNumber("2,8", "0,2 +/- + 3 =", "");
-        assertNumber("0,1", "0,2 +/- + 0,3 =", "");
+        assertNumber("-1,7", "2  + 0,3 =", "");
+        assertNumber("2,8", "0,2  + 3 =", "");
+        assertNumber("0,1", "0,2  + 0,3 =", "");
 
-        assertNumber("-2,3", "2 +/- + 0,3 +/- =", "");
-        assertNumber("-3,2", "0,2 +/- + 3 +/- =", "");
-        assertNumber("-0,5", "0,2 +/- + 0,3 +/- =", "");
+        assertNumber("-2,3", "2  + 0,3  =", "");
+        assertNumber("-3,2", "0,2  + 3  =", "");
+        assertNumber("-0,5", "0,2  + 0,3  =", "");
 
-        assertNumber("9", "2 + 3 + 4 +", "2 + 3 + 4 + ");
-        assertNumber("15", "2 + 3 + 4 + 6 +", "2 + 3 + 4 + 6 + ");
-        assertNumber("5", "2 - x / + 3 -", "2 + 3 - ");
+        //Complicate
         assertNumber("39,998", "19 + 0,999 + =", "");
+        assertNumber("7 575 656 638 990", "6557 + 66777 + 7575656565656 =", "");
+        assertNumber("966,986641643", ",734451643 + 999,99999 + 33,7478 =", "");
         assertNumber("2", "1 + 0,9999999999999999 -", "1 + 0,9999999999999999 - ");
+        assertNumber("134 799 465,46344", "00032456 + 71223234 + 63543775,46344 =", "");
+        assertNumber("-642 305", "645634 + 3241 + 8893  + ", "-645634 + 3241 + 88 + ");
+        assertNumber("9 999 999 999 999 974", "9999999999999999 + 25,7485 + ,63783 =", "");
+        assertNumber("8 485,56867", "45 + 975,43467 + 7465,134+", "45 + 975,43467 + 7465,134 + ");
+        assertNumber("1,11e+16", "9999999999999999 + 999999999999999,9 + 99999999999999,99 =", "");
+        assertNumber("2,22e+16", "9999999999999999 + 999999999999999,9 + 99999999999999,99 +=", "");
         assertNumber("200 024,2", "199999 + 0,999999999999999999999 + 24,2 + 0,00000000000001 =", "");
+        assertNumber("72 121 732 095 271,43", "2543648,9 + 71122444653354,43 + 999289985564,9966 =", "");
+        assertNumber("1 015 192,9679", "6453,7546 + 998993,2133 + 09746 +", "6453,7546 + 998993,2133 + 9746 + ");
+        assertNumber("536 565 498 151 530,8",",283555656456454 + 41536,47786 + 536565243543452,9 + 254566541,13232 =","");
+        assertNumber("142 222 627 140 725","91225536 + 77535 + 35555555366655 + 773888,2444456372 + 9341566,993676 +=+=","");
+        assertNumber("7 151 308 359,218243","123456789 + 42565476,25465465 + 32354556133,999 + 173734556 + 441224,355467 +=","");
+        assertNumber("890 255 526,989901", "889499999,9999 + 7,9999999 + 755534,99 +", "889499999,9999 + -7,999999 + 755534,99 + ");
+        assertNumber("764 450 653 694,5556","763645455243 + 87487868 + 878787878 + 231432 + 1332443 + 12334566 = + 0,555555555555555 =","");
+        assertNumber("638 129 814,8953974", "0,8993654377 + 345278,996132 + 637784534,9999 +", "0,8993654377 + 345278,996132 + 637784534,9999 + ");
+        assertNumber("2,001020348139744e+16","9999999999999999 + 99273555,53445 + 7687929,1213436 + 8888292995564725 + 3786661827488 + =","");
+
     }
 
     @Test
@@ -200,73 +229,89 @@ class Calculator_ControllerTest extends ApplicationTest {
         //Integer
         assertNumber("-2", "0 - 2 -", "0 - 2 - ");
         assertNumber("2", "2 - 0 -", "2 - 0 - ");
-        assertNumber("2", "0 - 2 +/- -", "0 - -2 - ");
-        assertNumber("-2", "2 +/- - 0 -", "-2 - 0 - ");
+        assertNumber("2", "0 - 2  -", "0 - -2 - ");
+        assertNumber("-2", "2  - 0 -", "-2 - 0 - ");
 
         assertNumber("-1", "2 - 3 -", "2 - 3 - ");
-        assertNumber("5", "2 - 3 +/- -", "2 - -3 - ");
-        assertNumber("-5", "2 +/- - 3 -", "-2 - 3 - ");
-        assertNumber("1", "2 +/- - 3 +/- -", "-2 - -3 - ");
+        assertNumber("5", "2 - 3  -", "2 - -3 - ");
+        assertNumber("-5", "2  - 3 -", "-2 - 3 - ");
+        assertNumber("1", "2  - 3  -", "-2 - -3 - ");
 
         //with equal
         assertNumber("-2", "0 - 2 =", "");
         assertNumber("2", "2 - 0 =", "");
-        assertNumber("2", "0 - 2 +/- =", "");
-        assertNumber("-2", "2 +/- - 0 =", "");
+        assertNumber("2", "0 - 2  =", "");
+        assertNumber("-2", "2  - 0 =", "");
 
         assertNumber("-1", "2 - 3 =", "");
-        assertNumber("5", "2 - 3 +/- =", "");
-        assertNumber("-5", "2 +/- - 3 =", "");
-        assertNumber("1", "2 +/- - 3 +/- =", "");
+        assertNumber("5", "2 - 3  =", "");
+        assertNumber("-5", "2  - 3 =", "");
+        assertNumber("1", "2  - 3  =", "");
 
         //Decimal
         assertNumber("-0,2", "0 - ,2 -", "0 - 0,2 - ");
-        assertNumber("0,2", "0 - ,2 +/- -", "0 - -0,2 - ");
-        assertNumber("-0,2", ",2 +/- - 0 -", "-0,2 - 0 - ");
+        assertNumber("0,2", "0 - ,2  -", "0 - -0,2 - ");
+        assertNumber("-0,2", ",2  - 0 -", "-0,2 - 0 - ");
 
         assertNumber("1,7", "2 - 0,3 -", "2 - 0,3 - ");
         assertNumber("-2,8", "0,2 - 3 -", "0,2 - 3 - ");
         assertNumber("-0,1", "0,2 - 0,3 -", "0,2 - 0,3 - ");
 
-        assertNumber("2,3", "2 - 0,3 +/- -", "2 - -0,3 - ");
-        assertNumber("3,2", "0,2 - 3 +/- -", "0,2 - -3 - ");
-        assertNumber("0,5", "0,2 - 0,3 +/- -", "0,2 - -0,3 - ");
+        assertNumber("2,3", "2 - 0,3  -", "2 - -0,3 - ");
+        assertNumber("3,2", "0,2 - 3  -", "0,2 - -3 - ");
+        assertNumber("0,5", "0,2 - 0,3  -", "0,2 - -0,3 - ");
 
-        assertNumber("-2,3", "2 +/- - 0,3 -", "-2 - 0,3 - ");
-        assertNumber("-3,2", "0,2 +/- - 3 -", "-0,2 - 3 - ");
-        assertNumber("-0,5", "0,2 +/- - 0,3 -", "-0,2 - 0,3 - ");
+        assertNumber("-2,3", "2  - 0,3 -", "-2 - 0,3 - ");
+        assertNumber("-3,2", "0,2  - 3 -", "-0,2 - 3 - ");
+        assertNumber("-0,5", "0,2  - 0,3 -", "-0,2 - 0,3 - ");
 
-        assertNumber("-1,7", "2 +/- - 0,3 +/- -", "-2 - -0,3 - ");
-        assertNumber("2,8", "0,2 +/- - 3 +/- -", "-0,2 - -3 - ");
-        assertNumber("0,1", "0,2 +/- - 0,3 +/- -", "-0,2 - -0,3 - ");
+        assertNumber("-1,7", "2  - 0,3  -", "-2 - -0,3 - ");
+        assertNumber("2,8", "0,2  - 3  -", "-0,2 - -3 - ");
+        assertNumber("0,1", "0,2  - 0,3  -", "-0,2 - -0,3 - ");
 
         //with equal
         assertNumber("-0,2", "0 - ,2 =", "");
-        assertNumber("0,2", "0 - ,2 +/- =", "");
-        assertNumber("-0,2", ",2 +/- - 0 =", "");
+        assertNumber("0,2", "0 - ,2  =", "");
+        assertNumber("-0,2", ",2  - 0 =", "");
 
         assertNumber("1,7", "2 - 0,3 =", "");
         assertNumber("-2,8", "0,2 - 3 =", "");
         assertNumber("-0,1", "0,2 - 0,3 =", "");
 
-        assertNumber("2,3", "2 - 0,3 +/- =", "");
-        assertNumber("3,2", "0,2 - 3 +/- =", "");
-        assertNumber("0,5", "0,2 - 0,3 +/- =", "");
+        assertNumber("2,3", "2 - 0,3  =", "");
+        assertNumber("3,2", "0,2 - 3  =", "");
+        assertNumber("0,5", "0,2 - 0,3  =", "");
 
-        assertNumber("-2,3", "2 +/- - 0,3 =", "");
-        assertNumber("-3,2", "0,2 +/- - 3 =", "");
-        assertNumber("-0,5", "0,2 +/- - 0,3 =", "");
+        assertNumber("-2,3", "2  - 0,3 =", "");
+        assertNumber("-3,2", "0,2  - 3 =", "");
+        assertNumber("-0,5", "0,2  - 0,3 =", "");
 
-        assertNumber("-1,7", "2 +/- - 0,3 +/- =", "");
-        assertNumber("2,8", "0,2 +/- - 3 +/- =", "");
-        assertNumber("0,1", "0,2 +/- - 0,3 +/- =", "");
+        assertNumber("-1,7", "2  - 0,3  =", "");
+        assertNumber("2,8", "0,2  - 3  =", "");
+        assertNumber("0,1", "0,2  - 0,3  =", "");
 
-        assertNumber("2", "5 - 1 - 2 -", "5 - 1 - 2 - ");
-        assertNumber("-6", "5 - 1 - 2 - 8 -", "5 - 1 - 2 - 8 - ");
-        assertNumber("-3", "5 / x + - 8 -", "5 - 8 - ");
+        assertNumber("18,001", "19 - 0,999 =", "");
+        assertNumber("-7 575 656 625 876", "6557 - 66777 - 7575656565656 =", "");
+        assertNumber("-965,517738357", ",734451643 - 999,99999 - 33,7478 =", "");
         assertNumber("230,01476", "687 - 456 - ,98524 -", "687 - 456 - 0,98524 - ");
+        assertNumber("-134 734 553,46344", "00032456 - 71223234 - 63543775,46344 =", "");
+        assertNumber("-648 963", "645634 - 3241 - 8893  - ", "-645634 - 3241 - 88 - ");
+        assertNumber("1,000000000000002e+16", "9999999999999999 - 25,7485 - ,63783 =", "");
+        assertNumber("-8 395,56867", "45 - 975,43467 - 7465,134-", "45 - 975,43467 - 7465,134 - ");
         assertNumber("22,9", "24 - 0,9999999999999999 - 0,1 -", "24 - 0,9999999999999999 - 0,1 - ");
-        assertNumber("45 565,7412036", "45623 - 67,23445 - 9,9756536 +/- -", "45623 - 67,23445 - -9,9756536 - ");
+        assertNumber("0,0000000000000001", "1 - 0,9999999999999999 -", "1 - 0,9999999999999999 - ");
+        assertNumber("199 973,8", "199999 - 0,999999999999999999999 - 24,2 - 0,00000000000001 =", "");
+        assertNumber("-72 121 737 182 567,43", "2543648,9 - 71122444653354,43 - 999289985564,9966 =", "");
+        assertNumber("45 565,7412036", "45623 - 67,23445 - 9,9756536  -", "45623 - 67,23445 - -9,9756536 - ");
+        assertNumber("8 899 999 999 999 999", "9999999999999999 - 999999999999999,9 - 99999999999999,99 =", "");
+        assertNumber("-1 002 285,4587", "6453,7546 - 998993,2133 - 09746 -", "6453,7546 - 998993,2133 - 9746 - ");
+        assertNumber("-536 565 498 151 530,2",",283555656456454 - 41536,47786 - 536565243543452,9 - 254566541,13232 =","");
+        assertNumber("35 555 474 334 109,24","91225536 - 77535 - 35555555366655 - 773888,2444456372 - 9341566,993676 -==","");
+        assertNumber("6 657 481 203,218243","123456789 - 42565476,25465465 - 32354556133,999 - 173734556 - 441224,355467 -===","");
+        assertNumber("888 744 473,009899", "889499999,9999 - 7,9999999 - 755534,99 -", "889499999,9999 - -7,999999 - 755534,99 - ");
+        assertNumber("762 840 256 791,4444","763645455243 - 87487868 - 878787878 - 231432 - 1332443 - 12334566 = - 0,555555555555555 =","");
+        assertNumber("-638 129 813,0966666", "0,8993654377 - 345278,996132 - 637784534,9999 -", "0,8993654377 - 345278,996132 - 637784534,9999 - ");
+        assertNumber("9 991 111 595 267 635","9999999999999999 - 99273555,53445 - 7687929,1213436 - 8888292995564725 - 378666 - 1827488 =","");
     }
 
     @Test
@@ -274,143 +319,174 @@ class Calculator_ControllerTest extends ApplicationTest {
         //Integer
         assertNumber("0", "0 x 2 x", "0 x 2 x ");
         assertNumber("0", "2 x 0 x", "2 x 0 x ");
-        assertNumber("0", "0 x 2 +/- x", "0 x -2 x ");
-        assertNumber("0", "2 +/- x 0 x", "-2 x 0 x ");
+        assertNumber("0", "0 x 2  x", "0 x -2 x ");
+        assertNumber("0", "2  x 0 x", "-2 x 0 x ");
 
         assertNumber("6", "2 x 3 x", "2 x 3 x ");
-        assertNumber("-6", "2 x 3 +/- x", "2 x -3 x ");
-        assertNumber("-6", "2 +/- x 3 x", "-2 x 3 x ");
-        assertNumber("6", "2 +/- x 3 +/- x", "-2 x -3 x ");
+        assertNumber("-6", "2 x 3  x", "2 x -3 x ");
+        assertNumber("-6", "2  x 3 x", "-2 x 3 x ");
+        assertNumber("6", "2  x 3  x", "-2 x -3 x ");
 
         //with equal
         assertNumber("0", "0 x 2 =", "");
         assertNumber("0", "2 x 0 =", "");
-        assertNumber("0", "0 x 2 +/- =", "");
-        assertNumber("0", "2 +/- x 0 =", "");
+        assertNumber("0", "0 x 2  =", "");
+        assertNumber("0", "2  x 0 =", "");
 
         assertNumber("6", "2 x 3 =", "");
-        assertNumber("-6", "2 x 3 +/- =", "");
-        assertNumber("-6", "2 +/- x 3 =", "");
-        assertNumber("6", "2 +/- x 3 +/- =", "");
+        assertNumber("-6", "2 x 3  =", "");
+        assertNumber("-6", "2  x 3 =", "");
+        assertNumber("6", "2  x 3  =", "");
 
         //Decimal
         assertNumber("0", "0 x ,2 x", "0 x 0,2 x ");
-        assertNumber("0", "0 x ,2 +/- x", "0 x -0,2 x ");
+        assertNumber("0", "0 x ,2  x", "0 x -0,2 x ");
         assertNumber("0", ",2 x 0 x", "0,2 x 0 x ");
-        assertNumber("0", ",2 +/- x 0 x", "-0,2 x 0 x ");
+        assertNumber("0", ",2  x 0 x", "-0,2 x 0 x ");
 
         assertNumber("0,6", "2 x 0,3 x", "2 x 0,3 x ");
         assertNumber("0,6", "0,2 x 3 x", "0,2 x 3 x ");
         assertNumber("0,06", "0,2 x 0,3 x", "0,2 x 0,3 x ");
 
-        assertNumber("-0,6", "2 x 0,3 +/- x", "2 x -0,3 x ");
-        assertNumber("-0,6", "0,2 x 3 +/- x", "0,2 x -3 x ");
-        assertNumber("-0,06", "0,2 x 0,3 +/- x", "0,2 x -0,3 x ");
+        assertNumber("-0,6", "2 x 0,3  x", "2 x -0,3 x ");
+        assertNumber("-0,6", "0,2 x 3  x", "0,2 x -3 x ");
+        assertNumber("-0,06", "0,2 x 0,3  x", "0,2 x -0,3 x ");
 
-        assertNumber("-0,6", "2 +/- x 0,3 x", "-2 x 0,3 x ");
-        assertNumber("-0,6", "0,2 +/- x 3 x", "-0,2 x 3 x ");
-        assertNumber("-0,06", "0,2 +/- x 0,3 x", "-0,2 x 0,3 x ");
+        assertNumber("-0,6", "2  x 0,3 x", "-2 x 0,3 x ");
+        assertNumber("-0,6", "0,2  x 3 x", "-0,2 x 3 x ");
+        assertNumber("-0,06", "0,2  x 0,3 x", "-0,2 x 0,3 x ");
 
-        assertNumber("0,6", "2 +/- x 0,3 +/- x", "-2 x -0,3 x ");
-        assertNumber("0,6", "0,2 +/- x 3 +/- x", "-0,2 x -3 x ");
-        assertNumber("0,06", "0,2 +/- x 0,3 +/- x", "-0,2 x -0,3 x ");
+        assertNumber("0,6", "2  x 0,3  x", "-2 x -0,3 x ");
+        assertNumber("0,6", "0,2  x 3  x", "-0,2 x -3 x ");
+        assertNumber("0,06", "0,2  x 0,3  x", "-0,2 x -0,3 x ");
 
         //with equal
         assertNumber("0", "0 x ,2 =", "");
-        assertNumber("0", "0 x ,2 +/- =", "");
+        assertNumber("0", "0 x ,2  =", "");
         assertNumber("0", ",2 x 0 =", "");
-        assertNumber("0", ",2 +/- x 0 =", "");
+        assertNumber("0", ",2  x 0 =", "");
 
         assertNumber("0,6", "2 x 0,3 =", "");
         assertNumber("0,6", "0,2 x 3 =", "");
         assertNumber("0,06", "0,2 x 0,3 =", "");
 
-        assertNumber("-0,6", "2 x 0,3 +/- =", "");
-        assertNumber("-0,6", "0,2 x 3 +/- =", "");
-        assertNumber("-0,06", "0,2 x 0,3 +/- =", "");
+        assertNumber("-0,6", "2 x 0,3  =", "");
+        assertNumber("-0,6", "0,2 x 3  =", "");
+        assertNumber("-0,06", "0,2 x 0,3  =", "");
 
-        assertNumber("-0,6", "2 +/- x 0,3 =", "");
-        assertNumber("-0,6", "0,2 +/- x 3 =", "");
-        assertNumber("-0,06", "0,2 +/- x 0,3 =", "");
+        assertNumber("-0,6", "2  x 0,3 =", "");
+        assertNumber("-0,6", "0,2  x 3 =", "");
+        assertNumber("-0,06", "0,2  x 0,3 =", "");
 
-        assertNumber("0,6", "2 +/- x 0,3 +/- =", "");
-        assertNumber("0,6", "0,2 +/- x 3 +/- =", "");
-        assertNumber("0,06", "0,2 +/- x 0,3 +/- =", "");
+        assertNumber("0,6", "2  x 0,3  =", "");
+        assertNumber("0,6", "0,2  x 3  =", "");
+        assertNumber("0,06", "0,2  x 0,3  =", "");
 
         assertNumber("10", "5 x 1 x 2 x", "5 x 1 x 2 x ");
         assertNumber("80", "5 x 1 x 2 x 8 x", "5 x 1 x 2 x 8 x ");
         assertNumber("56", "7 - + / x 8 x", "7 x 8 x ");
         assertNumber("308 648,10528", "687 x 456 x ,98524 x", "687 x 456 x 0,98524 x ");
         assertNumber("2,4", "24 x 0,9999999999999999 x 0,1 x", "24 x 0,9999999999999999 x 0,1 x ");
-        assertNumber("-30 599 692,0677186", "45623 x 67,23445 x 9,9756536 +/- x", "45623 x 67,23445 x -9,9756536 x ");
+        assertNumber("-30 599 692,0677186", "45623 x 67,23445 x 9,9756536  x", "45623 x 67,23445 x -9,9756536 x ");
+
+        assertNumber("18,981", "19 x 0,999 =", "");
+        assertNumber("3,317052658404904e+21", "6557 x 66777 x 7575656565656 =", "");
+        assertNumber("-24 786,12690977413", ",734451643 x 999,99999 x 33,7478 =", "");
+        assertNumber("308 648,10528", "687 x 456 x ,98524 x", "687 x 456 x 0,98524 x ");
+        assertNumber("1,468891437446521e+20", "00032456 x 71223234 x 63543775,46344 =", "");
+        assertNumber("-184 139 981 872", "645634 x 3241 x 8893  x ", "x645634 x 3241 x 88 x ");
+        assertNumber("-1,6423165755e+17", "9999999999999999 x 25,7485 x ,63783 =", "");
+        assertNumber("327 678 773,3908101", "45 x 975,43467 x 7465,134x", "45 x 975,43467 x 7465,134 x ");
+        assertNumber("2,4", "24 x 0,9999999999999999 x 0,1 x", "24 x 0,9999999999999999 x 0,1 x ");
+        assertNumber("0,9999999999999999", "1 x 0,9999999999999999 x", "1 x 0,9999999999999999 x ");
+        assertNumber("0,000000048399758", "199999 x 0,999999999999999999999 x 24,2 x 0,00000000000001 =", "");
+        assertNumber("1,807820150566632e+32", "2543648,9 x 71122444653354,43 x 999289985564,9966 =", "");
+        assertNumber("-1,807820150566632e+32", "45623 x 67,23445 x 9,9756536  x", "45623 x 67,23445 x x9,9756536 x ");
+        assertNumber("9,999999999999997e+44", "9999999999999999 x 999999999999999,9 x 99999999999999,99 =", "");
+        assertNumber("62 834 967 167 427,83", "6453,7546 x 998993,2133 x 09746 x", "6453,7546 x 998993,2133 x 9746 x ");
+        assertNumber("1,608762156067023e+27",",283555656456454 x 41536,47786 x 536565243543452,9 x 254566541,13232 =","");
+        assertNumber("6,00978578110902e+117","91225536 x 77535 x 35555555366655 x 773888,2444456372 x 9341566,993676 x==","");
+        assertNumber("2,885457654121366e+156","123456789 x 42565476,25465465 x 32354556133,999 x 173734556 x 441224,355467 x===","");
+        assertNumber("-5 376 386 316 791 022", "889499999,9999 x 7,9999999 x 755534,99 x", "889499999,9999 x x7,999999 x 755534,99 x ");
+        assertNumber("1,240643711305041e+47","763645455243 x 87487868 x 878787878 x 231432 x 1332443 x 12334566 = x 0,555555555555555 =","");
+        assertNumber("198 052 504 342 910,6", "0,8993654377 x 345278,996132 x 637784534,9999 x", "0,8993654377 x 345278,996132 x 637784534,9999 x ");
+        assertNumber("4,694315569797804e+55","9999999999999999 x 99273555,53445 x 7687929,1213436 x 8888292995564725 x 378666 x 1827488 =","");
+        //1,111111111111111e-4‬
     }
 
     @Test
     void checkDivide() {
         //Integer
         assertNumber("0", "0 / 2 /", "0 ÷ 2 ÷ ");
-        assertNumber("0", "0 / 2 +/- /", "0 ÷ -2 ÷ ");
+        assertNumber("0", "0 / 2  /", "0 ÷ -2 ÷ ");
 
         assertNumber("0,6666666666666667", "2 / 3 /", "2 ÷ 3 ÷ ");
-        assertNumber("-0,6666666666666667", "2 / 3 +/- /", "2 ÷ -3 ÷ ");
-        assertNumber("-0,6666666666666667", "2 +/- / 3 /", "-2 ÷ 3 ÷ ");
-        assertNumber("0,6666666666666667", "2 +/- / 3 +/- /", "-2 ÷ -3 ÷ ");
+        assertNumber("-0,6666666666666667", "2 / 3  /", "2 ÷ -3 ÷ ");
+        assertNumber("-0,6666666666666667", "2  / 3 /", "-2 ÷ 3 ÷ ");
+        assertNumber("0,6666666666666667", "2  / 3  /", "-2 ÷ -3 ÷ ");
 
         //with equal
         assertNumber("0", "0 / 2 =", "");
-        assertNumber("0", "0 / 2 +/- =", "");
+        assertNumber("0", "0 / 2  =", "");
 
         assertNumber("0,6666666666666667", "2 / 3 =", "");
-        assertNumber("-0,6666666666666667", "2 / 3 +/- =", "");
-        assertNumber("-0,6666666666666667", "2 +/- / 3 =", "");
-        assertNumber("0,6666666666666667", "2 +/- / 3 +/- =", "");
+        assertNumber("-0,6666666666666667", "2 / 3  =", "");
+        assertNumber("-0,6666666666666667", "2  / 3 =", "");
+        assertNumber("0,6666666666666667", "2  / 3  =", "");
 
         //Decimal
         assertNumber("0", "0 / ,2 /", "0 ÷ 0,2 ÷ ");
-        assertNumber("0", "0 / ,2 +/- /", "0 ÷ -0,2 ÷ ");
+        assertNumber("0", "0 / ,2  /", "0 ÷ -0,2 ÷ ");
 
         assertNumber("6,666666666666667", "2 / 0,3 /", "2 ÷ 0,3 ÷ ");
         assertNumber("0,0666666666666667", "0,2 / 3 /", "0,2 ÷ 3 ÷ ");
         assertNumber("0,6666666666666667", "0,2 / 0,3 /", "0,2 ÷ 0,3 ÷ ");
 
-        assertNumber("-6,666666666666667", "2 / 0,3 +/- /", "2 ÷ -0,3 ÷ ");
-        assertNumber("-0,0666666666666667", "0,2 / 3 +/- /", "0,2 ÷ -3 ÷ ");
-        assertNumber("-0,6666666666666667", "0,2 / 0,3 +/- /", "0,2 ÷ -0,3 ÷ ");
+        assertNumber("-6,666666666666667", "2 / 0,3  /", "2 ÷ -0,3 ÷ ");
+        assertNumber("-0,0666666666666667", "0,2 / 3  /", "0,2 ÷ -3 ÷ ");
+        assertNumber("-0,6666666666666667", "0,2 / 0,3  /", "0,2 ÷ -0,3 ÷ ");
 
-        assertNumber("-6,666666666666667", "2 +/- / 0,3 /", "-2 ÷ 0,3 ÷ ");
-        assertNumber("-0,0666666666666667", "0,2 +/- / 3 /", "-0,2 ÷ 3 ÷ ");
-        assertNumber("-0,6666666666666667", "0,2 +/- / 0,3 /", "-0,2 ÷ 0,3 ÷ ");
+        assertNumber("-6,666666666666667", "2  / 0,3 /", "-2 ÷ 0,3 ÷ ");
+        assertNumber("-0,0666666666666667", "0,2  / 3 /", "-0,2 ÷ 3 ÷ ");
+        assertNumber("-0,6666666666666667", "0,2  / 0,3 /", "-0,2 ÷ 0,3 ÷ ");
 
-        assertNumber("6,666666666666667", "2 +/- / 0,3 +/- /", "-2 ÷ -0,3 ÷ ");
-        assertNumber("0,0666666666666667", "0,2 +/- / 3 +/- /", "-0,2 ÷ -3 ÷ ");
-        assertNumber("0,6666666666666667", "0,2 +/- / 0,3 +/- /", "-0,2 ÷ -0,3 ÷ ");
+        assertNumber("6,666666666666667", "2  / 0,3  /", "-2 ÷ -0,3 ÷ ");
+        assertNumber("0,0666666666666667", "0,2  / 3  /", "-0,2 ÷ -3 ÷ ");
+        assertNumber("0,6666666666666667", "0,2  / 0,3  /", "-0,2 ÷ -0,3 ÷ ");
 
         //with equal
         assertNumber("0", "0 / ,2 =", "");
-        assertNumber("0", "0 / ,2 +/- =", "");
+        assertNumber("0", "0 / ,2  =", "");
 
         assertNumber("6,666666666666667", "2 / 0,3 =", "");
         assertNumber("0,0666666666666667", "0,2 / 3 =", "");
         assertNumber("0,6666666666666667", "0,2 / 0,3 =", "");
 
-        assertNumber("-6,666666666666667", "2 / 0,3 +/- =", "");
-        assertNumber("-0,0666666666666667", "0,2 / 3 +/- =", "");
-        assertNumber("-0,6666666666666667", "0,2 / 0,3 +/- =", "");
+        assertNumber("-6,666666666666667", "2 / 0,3  =", "");
+        assertNumber("-0,0666666666666667", "0,2 / 3  =", "");
+        assertNumber("-0,6666666666666667", "0,2 / 0,3  =", "");
 
-        assertNumber("-6,666666666666667", "2 +/- / 0,3 =", "");
-        assertNumber("-0,0666666666666667", "0,2 +/- / 3 =", "");
-        assertNumber("-0,6666666666666667", "0,2 +/- / 0,3 =", "");
+        assertNumber("-6,666666666666667", "2  / 0,3 =", "");
+        assertNumber("-0,0666666666666667", "0,2  / 3 =", "");
+        assertNumber("-0,6666666666666667", "0,2  / 0,3 =", "");
 
-        assertNumber("6,666666666666667", "2 +/- / 0,3 +/- =", "");
-        assertNumber("0,0666666666666667", "0,2 +/- / 3 +/- =", "");
-        assertNumber("0,6666666666666667", "0,2 +/- / 0,3 +/- =", "");
+        assertNumber("6,666666666666667", "2  / 0,3  =", "");
+        assertNumber("0,0666666666666667", "0,2  / 3  =", "");
+        assertNumber("0,6666666666666667", "0,2  / 0,3  =", "");
+
 
         assertNumber("0,3947368421052632", "6 / 1,9 / 8 /", "6 ÷ 1,9 ÷ 8 ÷ ");
         assertNumber("0,5833333333333333", "7 / 2 / 3 / 2 /", "7 ÷ 2 ÷ 3 ÷ 2 ÷ ");
         assertNumber("2,00000002", "2 + - x / 0,99999999 / ", "2 ÷ 0,99999999 ÷ ");
         assertNumber("3,333333333333333", "10 / 3 /", "10 ÷ 3 ÷ ");
         assertNumber("3,333333444444448", "10 / 2,9999999 /", "10 ÷ 2,9999999 ÷ ");
-        assertNumber("-1,658062522813398", "0,9999999999999999 / 0,77644 / 0,776767767666 +/- /", "0,9999999999999999 ÷ 0,77644 ÷ -0,776767767666 ÷ ");
+        assertNumber("-1,658062522813398", "0,9999999999999999 / 0,77644 / 0,776767767666  /", "0,9999999999999999 ÷ 0,77644 ÷ -0,776767767666 ÷ ");
+
+        //Exception
+        assertNumber("Result is undefined", "0 / 0 =", "0 ÷ ");
+        assertNumber("Cannot divide by zero", "1 / 0 =", "1 ÷ ");
+        assertNumber("Cannot divide by zero", "2 + 4 - 1 + 3 / 0 =", "2 + 4 - 1 + 3 ÷ ");
+
     }
 
     @Test
@@ -420,7 +496,7 @@ class Calculator_ControllerTest extends ApplicationTest {
         assertNumber("0", "+ =", "");
         assertNumber("0", "- =", "");
         assertNumber("0", "x =", "");
-        assertNumber("0", "x² =", "");
+        assertNumber("0", " =", "");
         assertNumber("0", "√ =", "");
         assertNumber("0", "% =", "");
 
@@ -429,36 +505,36 @@ class Calculator_ControllerTest extends ApplicationTest {
         assertNumber("0", "2 - =", "");
         assertNumber("4", "2 x =", "");
         assertNumber("1", "2 / =", "");
-        assertNumber("4", "2 x² =", "");
+        assertNumber("4", "2  =", "");
         assertNumber("1,414213562373095", "2 √ =", "");
-        assertNumber("0,5", "2 1/x =", "");
+        assertNumber("0,5", "2  =", "");
         assertNumber("2,06", "2 + 3 % =", "");
 
         assertNumber("4", "2 + = + +", "4 + ");
         assertNumber("0", "2 - = - -", "0 - ");
         assertNumber("4", "2 x = x x", "4 x ");
         assertNumber("1", "2 / = / /", "1 ÷ ");
-        assertNumber("256", "2 x² = x² x²", "sqr(sqr(4))");
+        assertNumber("256", "2  =  ", "sqr(sqr(4))");
         assertNumber("1,090507732665258", "2 √ = √ √", "√(√(1,414213562373095))");
-        assertNumber("0,5", "2 1/x = 1/x 1/x", "1/(1/(0,5))");
+        assertNumber("0,5", "2  =  ", "1/(1/(0,5))");
         assertNumber("0,0008741816", "2 + 3 % = % %", "0,0008741816");
 
         assertNumber("8", "2 + = + =", "");
         assertNumber("0", "2 - = - =", "");
         assertNumber("16", "2 x = x =", "");
         assertNumber("1", "2 / = / =", "");
-        assertNumber("16", "2 x² = x² =", "");
+        assertNumber("16", "2  =  =", "");
         assertNumber("1,189207115002721", "2 √ = √ =", "");
-        assertNumber("2", "2 1/x = 1/x =", "");
+        assertNumber("2", "2  =  =", "");
         assertNumber("0,102436", "2 + 3 % = % =", "");
         //Several equals
         assertNumber("8", "2 + = = =", "");
         assertNumber("-4", "2 - = = =", "");
         assertNumber("16", "2 x = = =", "");
         assertNumber("0,25", "2 / = = =", "");
-        assertNumber("4", "2 x² = = =", "");
+        assertNumber("4", "2  = = =", "");
         assertNumber("1,414213562373095", "2 √ = = =", "");
-        assertNumber("0,5", "2 1/x = = =", "");
+        assertNumber("0,5", "2  = = =", "");
         assertNumber("2,18", "2 + 3 % = = =", "");
         assertNumber("-12", "2 + = = = = 6 - = = =", "");
 
@@ -466,18 +542,18 @@ class Calculator_ControllerTest extends ApplicationTest {
 
     @Test
     void checkNegate() {
-        assertNumber("0", "0 +/-", "");
-        assertNumber("0", "0 = +/-", "negate(0)");
-        assertNumber("-1", "1 +/-", "");
-        assertNumber("1", "1 +/- +/-", "");
-        assertNumber("-1", "1 = +/-", "negate(1)");
-        assertNumber("1", "1 = +/- +/-", "negate(negate(1))");
-        assertNumber("9", "2 + 3 - 4 +/- +", "2 + 3 - -4 + ");
-        assertNumber("1", "2 + 3 - 4 +/- +/- +", "2 + 3 - 4 + ");
-        assertNumber("-5", "2 + 3 - +/-", "2 + 3 - negate(5)");
-        assertNumber("0", "2 + 3 - +/- 5 +", "2 + 3 - 5 + ");
-        assertNumber("5", "2 + 3 - +/- +/-", "2 + 3 - negate(negate(5))");
-        assertNumber("-3", "9 √ +/- +/- +/-", "negate(negate(negate(√(9))))");
+        assertNumber("0", "0 ", "");
+        assertNumber("0", "0 = ", "negate(0)");
+        assertNumber("-1", "1 ", "");
+        assertNumber("1", "1  ", "");
+        assertNumber("-1", "1 = ", "negate(1)");
+        assertNumber("1", "1 =  ", "negate(negate(1))");
+        assertNumber("9", "2 + 3 - 4  +", "2 + 3 - -4 + ");
+        assertNumber("1", "2 + 3 - 4   +", "2 + 3 - 4 + ");
+        assertNumber("-5", "2 + 3 - ", "2 + 3 - negate(5)");
+        assertNumber("0", "2 + 3 -  5 +", "2 + 3 - 5 + ");
+        assertNumber("5", "2 + 3 -  ", "2 + 3 - negate(negate(5))");
+        assertNumber("-3", "9 √   ", "negate(negate(negate(√(9))))");
     }
 
     @Test
@@ -486,7 +562,7 @@ class Calculator_ControllerTest extends ApplicationTest {
         assertNumber("0", "-", "0 - ");
         assertNumber("0", "x", "0 x ");
         assertNumber("0", "/", "0 ÷ ");
-        assertNumber("0", "x²", "sqr(0)");
+        assertNumber("0", "", "sqr(0)");
         assertNumber("0", "√", "√(0)");
         assertNumber("0", "%", "0");
 
@@ -499,7 +575,7 @@ class Calculator_ControllerTest extends ApplicationTest {
         assertNumber("5", "2 + 3,00000 +", "2 + 3 + ");
         assertNumber("5,000000001", "2,0000000 + 3,000000001 +", "2 + 3,000000001 + ");
         //Number with e-notation
-        assertNumber("9,999999999999998e+31", "99999999999999999 x² = +", "9,999999999999998e+31 + ");
+        assertNumber("9,999999999999998e+31", "99999999999999999  = +", "9,999999999999998e+31 + ");
 
     }
 
@@ -507,27 +583,27 @@ class Calculator_ControllerTest extends ApplicationTest {
     void checkMIXBinaryOperations() {
         //Add with
         assertNumber("1", "1 + 0,9999999999999999 - 0,9999999999999999 =", "");
-        assertNumber("1 925 066 427,985", "34156,745 +/- +/- + 388656 x 45532 bs =", "");
-        assertNumber("-1 556,844780280956", ",77765544 + 7785 +/- / 4,999999 =", "");
+        assertNumber("1 925 066 427,985", "34156,745   + 388656 x 45532  =", "");
+        assertNumber("-1 556,844780280956", ",77765544 + 7785  / 4,999999 =", "");
         assertNumber("9 999 998,0000001", "9999999 + 9999999 - 9999999 x 0,9999999 =", "");
-        assertNumber("0,0617809442729949", "867,8333 + 3 x 4 / 56382 = bs bs bs bs bs bs bs", "");
-        assertNumber("455 667 995,6", "2332, + 3 / 0,5 + 455663325,6 = +/- +/- +/- bs +/-", "negate(negate(negate(negate(455667995,6))))");
+        assertNumber("0,0617809442729949", "867,8333 + 3 x 4 / 56382 =       ", "");
+        assertNumber("455 667 995,6", "2332, + 3 / 0,5 + 455663325,6 =     ", "negate(negate(negate(negate(455667995,6))))");
         //Subtract with
         assertNumber("19", "19 - 0,9999999999999999 + 0,9999999999999999 =", "");
-        assertNumber("48 688 021 125,732", "27786, , 999 - 768492,000000 x 65732 +/-  =", "");
+        assertNumber("48 688 021 125,732", "27786, , 999 - 768492,000000 x 65732   =", "");
         assertNumber("631 210,0063121001", "887754 - 256544 / 0,99999999 =", "");
-        assertNumber("-357 684,1186736475", "23 +/- 1 - 65 bs 43 x 2345 / 5,73 =", "");
-        assertNumber("84,77860962566845", "43 - 87678 +/- bs ,4 / 748 + 73 =", "");
-        assertNumber("-3 929", "2 - 3957 + 84 - 7 bs 58 =", "");
+        assertNumber("-357 684,1186736475", "23  1 - 65  43 x 2345 / 5,73 =", "");
+        assertNumber("84,77860962566845", "43 - 87678   ,4 / 748 + 73 =", "");
+        assertNumber("-3 929", "2 - 3957 + 84 - 7  58 =", "");
         //Multiply with
         assertNumber("2,099999998", "0,999999999 x 2 + 0,1 =", "");
         assertNumber("1,9", "0,9999999999999999 x 2 - 0,1 =", "");
         assertNumber("20", "0,9999999999999999 x 2 / 0,1 =", "");
         assertNumber("8 814", "233 x 38 + 4 - 44 =", "");
-        assertNumber("-50 623 218 535 195,59", "97548354766 +/- , bs 452 x 3874 - 4 / 7465 =", "");
+        assertNumber("-50 623 218 535 195,59", "97548354766  ,  452 x 3874 - 4 / 7465 =", "");
         assertNumber("88,54373407202216", "973 x 9 / 8664 + 87,533 =", "");
         //Divide with
-        assertNumber("637 925,889675519", "288743 bs +/- , 00000001 / 88985455 + 637925,889999999 =", "");
+        assertNumber("637 925,889675519", "288743   , 00000001 / 88985455 + 637925,889999999 =", "");
         assertNumber("8,000000000000001", "9 / 0,9999999999999999 - 0,9999999999999999 =", "");
         assertNumber("1 000", "1000 / 2,9999999999999999647 x 3 =", "");
         assertNumber("-789,5563005780347", "972 / 865 + 85,32 - 876 =", "");
@@ -537,40 +613,45 @@ class Calculator_ControllerTest extends ApplicationTest {
 
     @Test
     void checkOneDivideX() {
-        assertNumber("1", "1 1/x", "1/(1)");
-        assertNumber("2", "2 1/x 1/x", "1/(1/(2))");
-        assertNumber("-2", "2 +/- 1/x 1/x", "1/(1/(-2))");
-        assertNumber("-2", "2 1/x +/- 1/x", "1/(negate(1/(2)))");
-        assertNumber("-2", "2 1/x 1/x +/-", "negate(1/(1/(2)))");
-        assertNumber("-2", "2 +/- 1/x +/- 1/x +/-", "negate(1/(negate(1/(-2))))");
+        assertNumber("1", "1 ", "1/(1)");
+        assertNumber("2", "2  ", "1/(1/(2))");
+        assertNumber("-2", "2   ", "1/(1/(-2))");
+        assertNumber("-2", "2   ", "1/(negate(1/(2)))");
+        assertNumber("-2", "2   ", "negate(1/(1/(2)))");
+        assertNumber("-2", "2     ", "negate(1/(negate(1/(-2))))");
 
-        assertNumber("10", "0,1 1/x", "1/(0,1)");
-        assertNumber("0,2", "0,2 1/x 1/x", "1/(1/(0,2))");
-        assertNumber("-0,2", "0,2 +/- 1/x 1/x", "1/(1/(-0,2))");
-        assertNumber("-0,2", "0,2 1/x +/- 1/x", "1/(negate(1/(0,2)))");
-        assertNumber("-0,2", "0,2 1/x 1/x +/-", "negate(1/(1/(0,2)))");
-        assertNumber("-0,2", "0,2 +/- 1/x +/- 1/x +/-", "negate(1/(negate(1/(-0,2))))");
+        assertNumber("10", "0,1 ", "1/(0,1)");
+        assertNumber("0,2", "0,2  ", "1/(1/(0,2))");
+        assertNumber("-0,2", "0,2   ", "1/(1/(-0,2))");
+        assertNumber("-0,2", "0,2   ", "1/(negate(1/(0,2)))");
+        assertNumber("-0,2", "0,2   ", "negate(1/(1/(0,2)))");
+        assertNumber("-0,2", "0,2     ", "negate(1/(negate(1/(-0,2))))");
 
-        assertNumber("1", "1 1/x =", "");
-        assertNumber("2", "2 1/x 1/x =", "");
-        assertNumber("-2", "2 +/- 1/x 1/x =", "");
-        assertNumber("-2", "2 1/x +/- 1/x =", "");
-        assertNumber("-2", "2 1/x 1/x +/- =", "");
-        assertNumber("-2", "2 +/- 1/x +/- 1/x +/- =", "");
+        assertNumber("1", "1  =", "");
+        assertNumber("2", "2   =", "");
+        assertNumber("-2", "2    =", "");
+        assertNumber("-2", "2    =", "");
+        assertNumber("-2", "2    =", "");
+        assertNumber("-2", "2      =", "");
 
-        assertNumber("10", "0,1 1/x =", "");
-        assertNumber("0,2", "0,2 1/x 1/x =", "");
-        assertNumber("-0,2", "0,2 +/- 1/x 1/x =", "");
-        assertNumber("-0,2", "0,2 1/x +/- 1/x =", "");
-        assertNumber("-0,2", "0,2 1/x 1/x +/- =", "");
-        assertNumber("-0,2", "0,2 +/- 1/x +/- 1/x +/- =", "");
+        assertNumber("10", "0,1  =", "");
+        assertNumber("0,2", "0,2   =", "");
+        assertNumber("-0,2", "0,2    =", "");
+        assertNumber("-0,2", "0,2    =", "");
+        assertNumber("-0,2", "0,2    =", "");
+        assertNumber("-0,2", "0,2      =", "");
 
-        assertNumber("0,0017789321070561", "562,135 1/x", "1/(562,135)");
-        assertNumber("9 009", "9009 1/x 1/x", "1/(1/(9009))");
-        assertNumber("0,021799115915055", "45,87342 1/x 1/x 1/x", "1/(1/(1/(45,87342)))");
-        assertNumber("1", "0,9999999999999999 1/x", "1/(0,9999999999999999)");
-        assertNumber("1,e+16", "0,0000000000000001 1/x", "1/(0,0000000000000001)");
-        assertNumber("-1", "0,9999999999999999 1/x 1/x 1/x +/-", "negate(1/(1/(1/(0,9999999999999999))))");
+        assertNumber("0,0017789321070561", "562,135 ", "1/(562,135)");
+        assertNumber("9 009", "9009  ", "1/(1/(9009))");
+        assertNumber("0,021799115915055", "45,87342   ", "1/(1/(1/(45,87342)))");
+        assertNumber("1", "0,9999999999999999 ", "1/(0,9999999999999999)");
+        assertNumber("1,e+16", "0,0000000000000001 ", "1/(0,0000000000000001)");
+        assertNumber("-1", "0,9999999999999999    ", "negate(1/(1/(1/(0,9999999999999999))))");
+
+        //Exception
+        assertNumber("Cannot divide by zero", "0 ", "1/(0)");
+        assertNumber("Cannot divide by zero", "0 √ ", "1/(√(0))");
+        assertNumber("Cannot divide by zero", "4 + 5 - 9 +  ", "4 + 5 - 9 + 1/(0)");
     }
 
     @Test
@@ -579,103 +660,108 @@ class Calculator_ControllerTest extends ApplicationTest {
 
         assertNumber("1", "1 √", "√(1)");
         assertNumber("1,189207115002721", "2 √ √", "√(√(2))");
-        assertNumber("-1,189207115002721", "2 √ √ +/-", "negate(√(√(2)))");
+        assertNumber("-1,189207115002721", "2 √ √ ", "negate(√(√(2)))");
 
         assertNumber("0,3162277660168379", "0,1 √", "√(0,1)");
         assertNumber("0,668740304976422", "0,2 √ √", "√(√(0,2))");
-        assertNumber("-0,668740304976422", "0,2 √ √ +/-", "negate(√(√(0,2)))");
+        assertNumber("-0,668740304976422", "0,2 √ √ ", "negate(√(√(0,2)))");
 
         assertNumber("0", "0 √ =", "");
         assertNumber("1", "1 √ =", "");
         assertNumber("1,189207115002721", "2 √ √ =", "");
-        assertNumber("-1,189207115002721", "2 √ √ +/- =", "");
+        assertNumber("-1,189207115002721", "2 √ √  =", "");
 
         assertNumber("0,3162277660168379", "0,1 √ =", "");
         assertNumber("0,668740304976422", "0,2 √ √ =", "");
-        assertNumber("-0,668740304976422", "0,2 √ √ +/- =", "");
+        assertNumber("-0,668740304976422", "0,2 √ √  =", "");
 
         assertNumber("1,414213562373095", "2 √", "√(2)");
         assertNumber("1,189207115002721", "2 √ √", "√(√(2))");
-        assertNumber("-7,071067811865475", "50 √ +/-", "negate(√(50))");
+        assertNumber("-7,071067811865475", "50 √ ", "negate(√(50))");
         assertNumber("1,613225729177976", "45,87342 √ √ √", "√(√(√(45,87342)))");
         assertNumber("0,00000001", "0,0000000000000001 √", "√(0,0000000000000001)");
-        assertNumber("5,259663116753397", "765,3 √ +/- +/- √ ", "√(negate(negate(√(765,3))))");
+        assertNumber("5,259663116753397", "765,3 √   √ ", "√(negate(negate(√(765,3))))");
+
+        //Exception, negative number
+        assertNumber("Invalid input", "1  √", "√(-1)");
+        assertNumber("Invalid input", "2 - 3 = √", "√(-1)");
+        assertNumber("Invalid input", "2 + 3 =  √", "√(negate(5))");
     }
 
     @Test
     void checkSquareX() {
-        assertNumber("0", "0 x²", "sqr(0)");
-        assertNumber("1", "1 x²", "sqr(1)");
-        assertNumber("4", "2 x²", "sqr(2)");
-        assertNumber("16", "2 x² x²", "sqr(sqr(2))");
-        assertNumber("16", "2 +/- x² x²", "sqr(sqr(-2))");
-        assertNumber("16", "2 x² +/- x²", "sqr(negate(sqr(2)))");
-        assertNumber("-16", "2 x² x² +/-", "negate(sqr(sqr(2)))");
-        assertNumber("-16", "2 +/- x² +/- x² +/-", "negate(sqr(negate(sqr(-2))))");
+        assertNumber("0", "0 ", "sqr(0)");
+        assertNumber("1", "1 ", "sqr(1)");
+        assertNumber("4", "2 ", "sqr(2)");
+        assertNumber("16", "2  ", "sqr(sqr(2))");
+        assertNumber("16", "2   ", "sqr(sqr(-2))");
+        assertNumber("16", "2   ", "sqr(negate(sqr(2)))");
+        assertNumber("-16", "2   ", "negate(sqr(sqr(2)))");
+        assertNumber("-16", "2     ", "negate(sqr(negate(sqr(-2))))");
 
-        assertNumber("0,01", "0,1 x²", "sqr(0,1)");
-        assertNumber("0,04", "0,2 x²", "sqr(0,2)");
-        assertNumber("0,0016", "0,2 x² x²", "sqr(sqr(0,2))");
-        assertNumber("0,0016", "0,2 +/- x² x²", "sqr(sqr(-0,2))");
-        assertNumber("0,0016", "0,2 x² +/- x²", "sqr(negate(sqr(0,2)))");
-        assertNumber("-0,0016", "0,2 x² x² +/-", "negate(sqr(sqr(0,2)))");
-        assertNumber("-0,0016", "0,2 +/- x² +/- x² +/-", "negate(sqr(negate(sqr(-0,2))))");
+        assertNumber("0,01", "0,1 ", "sqr(0,1)");
+        assertNumber("0,04", "0,2 ", "sqr(0,2)");
+        assertNumber("0,0016", "0,2  ", "sqr(sqr(0,2))");
+        assertNumber("0,0016", "0,2   ", "sqr(sqr(-0,2))");
+        assertNumber("0,0016", "0,2   ", "sqr(negate(sqr(0,2)))");
+        assertNumber("-0,0016", "0,2   ", "negate(sqr(sqr(0,2)))");
+        assertNumber("-0,0016", "0,2     ", "negate(sqr(negate(sqr(-0,2))))");
 
-        assertNumber("1", "1 x² =", "");
-        assertNumber("4", "2 x² =", "");
-        assertNumber("16", "2 x² x² =", "");
-        assertNumber("16", "2 +/- x² x² =", "");
-        assertNumber("16", "2 x² +/- x² =", "");
-        assertNumber("-16", "2 x² x² +/- =", "");
-        assertNumber("-16", "2 +/- x² +/- x² +/- =", "");
+        assertNumber("1", "1  =", "");
+        assertNumber("4", "2  =", "");
+        assertNumber("16", "2   =", "");
+        assertNumber("16", "2    =", "");
+        assertNumber("16", "2    =", "");
+        assertNumber("-16", "2    =", "");
+        assertNumber("-16", "2      =", "");
 
-        assertNumber("0,01", "0,1 x² =", "");
-        assertNumber("0,04", "0,2 x² =", "");
-        assertNumber("0,0016", "0,2 x² x² =", "");
-        assertNumber("0,0016", "0,2 +/- x² x² =", "");
-        assertNumber("0,0016", "0,2 x² +/- x² =", "");
-        assertNumber("-0,0016", "0,2 x² x² +/- =", "");
-        assertNumber("-0,0016", "0,2 +/- x² +/- x² +/- =", "");
+        assertNumber("0,01", "0,1  =", "");
+        assertNumber("0,04", "0,2  =", "");
+        assertNumber("0,0016", "0,2   =", "");
+        assertNumber("0,0016", "0,2    =", "");
+        assertNumber("0,0016", "0,2    =", "");
+        assertNumber("-0,0016", "0,2    =", "");
+        assertNumber("-0,0016", "0,2      =", "");
 
-        assertNumber("547,56", "23,4 x²", "sqr(23,4)");
-        assertNumber("952 217 706 900 625", "5555 x² x²", "sqr(sqr(5555))");
-        assertNumber("19 610 512 980 404,22", "45,87342 x² x² x²", "sqr(sqr(sqr(45,87342)))");
-        assertNumber("0,9999999999999998", "0,9999999999999999 +/- x²", "sqr(-0,9999999999999999)");
-        assertNumber("1,e-32", "0,0000000000000001 x²", "sqr(0,0000000000000001)");
-        assertNumber("-0,9999999999999992", "0,9999999999999999 x² x² x² +/-", "negate(sqr(sqr(sqr(0,9999999999999999))))");
+        assertNumber("547,56", "23,4 ", "sqr(23,4)");
+        assertNumber("952 217 706 900 625", "5555  ", "sqr(sqr(5555))");
+        assertNumber("19 610 512 980 404,22", "45,87342   ", "sqr(sqr(sqr(45,87342)))");
+        assertNumber("0,9999999999999998", "0,9999999999999999  ", "sqr(-0,9999999999999999)");
+        assertNumber("1,e-32", "0,0000000000000001 ", "sqr(0,0000000000000001)");
+        assertNumber("-0,9999999999999992", "0,9999999999999999    ", "negate(sqr(sqr(sqr(0,9999999999999999))))");
 
     }
 
     @Test
     void checkMIXUnaryOperations() {
-        assertNumber("15 678", "15678 √ x² ", "sqr(√(15678))");
-        assertNumber("1,000020000300004e-10", "99999 x² 1/x", "1/(sqr(99999))");
-        assertNumber("0,00108190582506", "854321 1/x √", "√(1/(854321))");
-        assertNumber("-0,0010000005000004", "999999 √ 1/x  +/-", "negate(1/(√(999999)))");
-        assertNumber("9 874 562", "9874562 x² √", "√(sqr(9874562))");
-        assertNumber("1,00000020000003e-14", "9999999 1/x x²", "sqr(1/(9999999))");
+        assertNumber("15 678", "15678 √  ", "sqr(√(15678))");
+        assertNumber("1,000020000300004e-10", "99999  ", "1/(sqr(99999))");
+        assertNumber("0,00108190582506", "854321  √", "√(1/(854321))");
+        assertNumber("-0,0010000005000004", "999999 √   ", "negate(1/(√(999999)))");
+        assertNumber("9 874 562", "9874562  √", "√(sqr(9874562))");
+        assertNumber("1,00000020000003e-14", "9999999  ", "sqr(1/(9999999))");
         //three operation
         assertNumber("9,956168238447662", "96546784,32415 √ √ √ ", "√(√(√(96546784,32415)))");
-        assertNumber("9 999,9999500005", "99999999,00001 √ √ x² ", "sqr(√(√(99999999,00001)))");
-        assertNumber("0,0056425927787405", "986472913,876543 √ √ 1/x ", "1/(√(√(986472913,876543)))");
-        assertNumber("31 622,77658587241", "999999999 √ x² √ ", "√(sqr(√(999999999)))");
-        assertNumber("0,0032577870844877", "8877878787,65 √ 1/x √ ", "√(1/(√(8877878787,65)))");
-        assertNumber("99 999,999995", "9999999999 x² √ √ ", "√(√(sqr(9999999999)))");
-        assertNumber("0,0017837042774312", "98788998999,874 1/x √ √ ", "√(√(1/(98788998999,874)))");
-        assertNumber("2,036161793239094e+84", "34562212456 x² x² x² ", "sqr(sqr(sqr(34562212456)))");
-        assertNumber("9,9999999998e+21", "99999999999 x² x² √ +/- +/-", "negate(negate(√(sqr(sqr(99999999999)))))");
-        assertNumber("2,596893369539549e-48", "787746478889,98787 x² x² 1/x ", "1/(sqr(sqr(787746478889,9878)))");
-        assertNumber("9,99999999999537e+23", "999999999999,768565 x² √ x² ", "sqr(√(sqr(999999999999,7685)))");
-        assertNumber("2,598079199785716e-52", "7876565765566 x² 1/x x² ", "sqr(1/(sqr(7876565765566)))");
-        assertNumber("9,999999999999998e+25", "9999999999999,999999 √ x² x² ", "sqr(sqr(√(9999999999999,999)))");
-        assertNumber("1,060361063588689e-56", "98545445454546 1/x x² x² ", "sqr(sqr(1/(98545445454546)))");
-        assertNumber("1,00000000000001e-14", "99999999999999 1/x 1/x 1/x ", "1/(1/(1/(99999999999999)))");
-        assertNumber("25 991 214,58828613", "675543235774338 1/x 1/x √ ", "√(1/(1/(675543235774338)))");
-        assertNumber("9,99999999999998e+29", "999999999999999 1/x 1/x x² ", "sqr(1/(1/(999999999999999)))");
-        assertNumber("8,100000065610006e-16", "1234567891234567 x² √ 1/x ", "1/(√(sqr(1234567891234567)))");
-        assertNumber("1,173436304521581e+31", "3425545656565653 1/x x² 1/x ", "1/(sqr(1/(3425545656565653)))");
-        assertNumber("6 654 638 824 545 454", "6654638824545454 x² = √", "√(4,42842178851477e+31)");
-        assertNumber("-999 998 000 001,0002", "999999,0000000001 +/- x² 1/x 1/x +/-", "negate(1/(1/(sqr(-999999,0000000001))))");
+        assertNumber("9 999,9999500005", "99999999,00001 √ √  ", "sqr(√(√(99999999,00001)))");
+        assertNumber("0,0056425927787405", "986472913,876543 √ √  ", "1/(√(√(986472913,876543)))");
+        assertNumber("31 622,77658587241", "999999999 √  √ ", "√(sqr(√(999999999)))");
+        assertNumber("0,0032577870844877", "8877878787,65 √  √ ", "√(1/(√(8877878787,65)))");
+        assertNumber("99 999,999995", "9999999999  √ √ ", "√(√(sqr(9999999999)))");
+        assertNumber("0,0017837042774312", "98788998999,874  √ √ ", "√(√(1/(98788998999,874)))");
+        assertNumber("2,036161793239094e+84", "34562212456    ", "sqr(sqr(sqr(34562212456)))");
+        assertNumber("9,9999999998e+21", "99999999999   √  ", "negate(negate(√(sqr(sqr(99999999999)))))");
+        assertNumber("2,596893369539549e-48", "787746478889,98787    ", "1/(sqr(sqr(787746478889,9878)))");
+        assertNumber("9,99999999999537e+23", "999999999999,768565  √  ", "sqr(√(sqr(999999999999,7685)))");
+        assertNumber("2,598079199785716e-52", "7876565765566    ", "sqr(1/(sqr(7876565765566)))");
+        assertNumber("9,999999999999998e+25", "9999999999999,999999 √   ", "sqr(sqr(√(9999999999999,999)))");
+        assertNumber("1,060361063588689e-56", "98545445454546    ", "sqr(sqr(1/(98545445454546)))");
+        assertNumber("1,00000000000001e-14", "99999999999999    ", "1/(1/(1/(99999999999999)))");
+        assertNumber("25 991 214,58828613", "675543235774338   √ ", "√(1/(1/(675543235774338)))");
+        assertNumber("9,99999999999998e+29", "999999999999999    ", "sqr(1/(1/(999999999999999)))");
+        assertNumber("8,100000065610006e-16", "1234567891234567  √  ", "1/(√(sqr(1234567891234567)))");
+        assertNumber("1,173436304521581e+31", "3425545656565653    ", "1/(sqr(1/(3425545656565653)))");
+        assertNumber("6 654 638 824 545 454", "6654638824545454  = √", "√(4,42842178851477e+31)");
+        assertNumber("-999 998 000 001,0002", "999999,0000000001     ", "negate(1/(1/(sqr(-999999,0000000001))))");
 
     }
 
@@ -722,38 +808,27 @@ class Calculator_ControllerTest extends ApplicationTest {
         assertNumber("0,01", "0,9999999999999999 / 100 =", "");
         assertNumber("0,0000000000000001", "0,0000000000000001 / 1 =", "");
         assertNumber("0,000000000000001", "0,0000000000000001 x 10 =", "");
-        assertNumber("-0,0000000000000001", "0,0000000000000001 +/- / 1 =", "");
-        assertNumber("-0,000000000000001", "0,0000000000000001 x 10 +/- =", "");
+        assertNumber("-0,0000000000000001", "0,0000000000000001  / 1 =", "");
+        assertNumber("-0,000000000000001", "0,0000000000000001 x 10  =", "");
         assertNumber("0,000000000000001", "1 / 1000000000000000 =", "");
         //e+
         assertNumber("9 999 999 999 999 998", "9999999999999999 - 1 =", "");
-        assertNumber("-9 999 999 999 999 998", "9999999999999999 +/- + 1 =", "");
-        assertNumber("9 999 999 999 999 998", "9999999999999999 + 1 +/- =", "");
+        assertNumber("-9 999 999 999 999 998", "9999999999999999  + 1 =", "");
+        assertNumber("9 999 999 999 999 998", "9999999999999999 + 1  =", "");
         assertNumber("9 999 999 999 999 999", "9999999999999998 + 1 =", "");
         assertNumber("9 999 999 999 999 997", "9999999999999998 - 1 =", "");
-        assertNumber("-9 999 999 999 999 997", "9999999999999998 +/- + 1 =", "");
-        assertNumber("-9 999 999 999 999 999", "9999999999999998 +/- - 1 =", "");
+        assertNumber("-9 999 999 999 999 997", "9999999999999998  + 1 =", "");
+        assertNumber("-9 999 999 999 999 999", "9999999999999998  - 1 =", "");
     }
 
     @Test
     void checkExceptions() {
-        //Divide zero
-        assertNumber("Result is undefined", "0 / 0 =", "0 ÷ ");
-        assertNumber("Cannot divide by zero", "1 / 0 =", "1 ÷ ");
-        assertNumber("Cannot divide by zero", "0 1/x", "1/(0)");
-        assertNumber("Cannot divide by zero", "0 √ 1/x", "1/(√(0))");
-        assertNumber("Cannot divide by zero", "2 + 4 - 1 + 3 / 0 =", "2 + 4 - 1 + 3 ÷ ");
-        assertNumber("Cannot divide by zero", "4 + 5 - 9 + 1/x ", "4 + 5 - 9 + 1/(0)");
-        //Square root negative number
-        assertNumber("Invalid input", "1 +/- √", "√(-1)");
-        assertNumber("Invalid input", "2 - 3 = √", "√(-1)");
-        assertNumber("Invalid input", "2 + 3 = +/- √", "√(negate(5))");
         //Overflow
-        assertNumber("Overflow", "9999999999999999 x²  x²  x²  x²  x²  x²  x²  x²  x²  x²   x² ", "sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(9999999999999999))))))))))");
-        assertNumber("Overflow", "0,0000000000000001 x²  x² x²  x²  x²  x²  x²  x²  x² x²", "sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(0,0000000000000001))))))))))");
-        assertNumber("Overflow", "9999999999999999 / 1000000000000000 = = = x²  x²  x²  x²  x²  x²  x²  x² x²", "sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(9,999999999999999e-30)))))))))");
-        assertNumber("Overflow", "0,0000000000000001 x² x ,0000001 = x² x² x² x² x² x² x² x² x 0,0000000000000001 =", "sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(1,e-39)))))))) x ");
-        assertNumber("Overflow", "1000000000000000 x² x 1000000000 = x² x² x² x² x² x² x² x² MS 9999999999999999 x MR = x 10 = MC", "9,999999999999999e+9999 x ");
+        assertNumber("Overflow", "9999999999999999                       ", "sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(9999999999999999))))))))))");
+        assertNumber("Overflow", "0,0000000000000001                 ", "sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(0,0000000000000001))))))))))");
+        assertNumber("Overflow", "9999999999999999 / 1000000000000000 = = =                ", "sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(9,999999999999999e-30)))))))))");
+        assertNumber("Overflow", "0,0000000000000001  x ,0000001 =         x 0,0000000000000001 =", "sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(1,e-39)))))))) x ");
+        assertNumber("Overflow", "1000000000000000  x 1000000000 =          9999999999999999 x  = x 10 = ", "9,999999999999999e+9999 x ");
     }
 
     @Test
@@ -769,13 +844,13 @@ class Calculator_ControllerTest extends ApplicationTest {
         assertNumber("0,54", "6 x 9 = %", "0,54");
         assertNumber("-14,68", "9 - 11 = 734 %", "-14,68");
         assertNumber("8 999,91", "2 + 7 = 99999 %", "8999,91");
-        assertNumber("-2,56", "32 + 8 +/- % ", "32 + -2,56");
+        assertNumber("-2,56", "32 + 8  % ", "32 + -2,56");
         assertNumber("0", "8 sqr %", "0");
-        assertNumber("-63,36", "12 x² - % =", "");
+        assertNumber("-63,36", "12  - % =", "");
         assertNumber("8,19", "9 - % +", "9 - 0,81 + ");
         assertNumber("-4,75", "3 - 8 + % x", "3 - 8 + 0,25 x ");
         assertNumber("-28 638,844416", "984 - 356 % + 876 - % - ", "984 - 3503,04 + 876 - 26995,804416 - ");
-        assertNumber("-17,3578685327433", "284 √ + 3 % = +/-", "negate(17,3578685327433)");
+        assertNumber("-17,3578685327433", "284 √ + 3 % = ", "negate(17,3578685327433)");
         assertNumber("-234,21", "100 + 88 - 11 + 34 - % +", "100 + 88 - 11 + 34 - 445,21 + ");
         assertNumber("1,03122e-13", "0,0000000000001011 + 2 % - ", "0,0000000000001011 + 2,022e-15 - ");
         assertNumber("-3,08641975312477e+29", "5555555555555555 + 34566 - % +", "5555555555555555 + 34566 - 3,086419753124826e+29 + ");
@@ -785,30 +860,30 @@ class Calculator_ControllerTest extends ApplicationTest {
 
     @Test
     void checkMemory() {
-        //M+
-        assertNumber("5", "5 M+ 88 MR MC", "");
-        assertNumber("100", "12 M+ 88 M+ MR MC", "");
-        assertNumber("188", "12 M+ 88 M+ M+ MR MC", "");
-        assertNumber("376", "12 M+ 88 M+ M+ MR M+ MR MC", "");
-        //M-
-        assertNumber("-5", "5 M- 88 MR MC", "");
-        assertNumber("-100", "12 M- 88 M- MR MC", "");
-        assertNumber("-188", "12 M- 88 M- M- MR MC", "");
-        assertNumber("0", "12 M- 88 M- M- MR M- MR MC", "");
+        //
+        assertNumber("5", "5  88  ", "");
+        assertNumber("100", "12  88   ", "");
+        assertNumber("188", "12  88    ", "");
+        assertNumber("376", "12  88      ", "");
+        //
+        assertNumber("-5", "5  88  ", "");
+        assertNumber("-100", "12  88   ", "");
+        assertNumber("-188", "12  88    ", "");
+        assertNumber("0", "12  88      ", "");
         //Mix
-        assertNumber("7", "7 M+ M- MC", "");
-        assertNumber("0", "24 M- M+ MR", "");
-        assertNumber("256", "M- 256 M+ 876 MR MC", "");
-        assertNumber("776", "M+ 776 M- MC", "");
-        assertNumber("95", "67 M+ 95 M- MS MR MC", "");
-        assertNumber("18 693", "6231 M+ M+ M+ 56 MR MC", "");
-        assertNumber("99 640", "98765 M- M- M- MC MS 875 M+ MR ", "");
-        assertNumber("99 640,75136", "0,88776 M+ 0,1364 M- = MR = MC", "");
-        assertNumber("2", "1 M+ 0,9999999999999999 M+ 0 MR MC", "");
-        assertNumber("29 999 996,99981057", "9999999 M+ M+ M+ 0,00018943 M- 898 MR MC", "");
-        assertNumber("99 999 999", "MS 9,9999999999999911 M- M+ 99999999 M+ 99999999 MR MC", "");
-        assertNumber("9 999 999 999 999 999", "9999999999999999 MS 9999999999999999 M- M+ 00000000000001 MR MC", "");
-        assertNumber("1,8e+18", "9999999999999999 M+ M+ M+ M+ M+ MR M+ M+ M+ M+ M+  MR M+ M+ M+ M+ M+ MR MC", "");
+        assertNumber("7", "7   ", "");
+        assertNumber("0", "24   ", "");
+        assertNumber("256", " 256  876  ", "");
+        assertNumber("776", " 776  ", "");
+        assertNumber("95", "67  95    ", "");
+        assertNumber("18 693", "6231    56  ", "");
+        assertNumber("99 640", "98765      875   ", "");
+        assertNumber("99 640,75136", "0,88776  0,1364  =  = ", "");
+        assertNumber("2", "1  0,9999999999999999  0  ", "");
+        assertNumber("29 999 996,99981057", "9999999    0,00018943  898  ", "");
+        assertNumber("99 999 999", " 9,9999999999999911   99999999  99999999  ", "");
+        assertNumber("9 999 999 999 999 999", "9999999999999999  9999999999999999   00000000000001  ", "");
+        assertNumber("1,8e+18", "9999999999999999                    ", "");
 
     }
 
@@ -816,72 +891,67 @@ class Calculator_ControllerTest extends ApplicationTest {
     void checkAllOperations() {
         //Unary with binary
         //Square with binary
-        assertNumber("28", "5 x² + 3 -", "sqr(5) + 3 - ");
-        assertNumber("22", "5 x² - 3 x", "sqr(5) - 3 x ");
-        assertNumber("75", "5 x² x 3 /", "sqr(5) x 3 ÷ ");
-        assertNumber("8,333333333333333", "5 x² / 3 +", "sqr(5) ÷ 3 + ");
+        assertNumber("28", "5  + 3 -", "sqr(5) + 3 - ");
+        assertNumber("22", "5  - 3 x", "sqr(5) - 3 x ");
+        assertNumber("75", "5  x 3 /", "sqr(5) x 3 ÷ ");
+        assertNumber("8,333333333333333", "5  / 3 +", "sqr(5) ÷ 3 + ");
         //Square root with binary
         assertNumber("5,23606797749979", "5 √ + 3 -", "√(5) + 3 - ");
         assertNumber("-0,7639320225002103", "5 √ - 3 x", "√(5) - 3 x ");
         assertNumber("6,708203932499369", "5 √ x 3 /", "√(5) x 3 ÷ ");
         assertNumber("0,7453559924999299", "5 √ / 3 +", "√(5) ÷ 3 + ");
         //One divide x with binary
-        assertNumber("3,2", "5 1/x + 3 -", "1/(5) + 3 - ");
-        assertNumber("-2,8", "5 1/x - 3 x", "1/(5) - 3 x ");
-        assertNumber("0,6", "5 1/x x 3 /", "1/(5) x 3 ÷ ");
-        assertNumber("0,0666666666666667", "5 1/x / 3 +", "1/(5) ÷ 3 + ");
+        assertNumber("3,2", "5  + 3 -", "1/(5) + 3 - ");
+        assertNumber("-2,8", "5  - 3 x", "1/(5) - 3 x ");
+        assertNumber("0,6", "5  x 3 /", "1/(5) x 3 ÷ ");
+        assertNumber("0,0666666666666667", "5  / 3 +", "1/(5) ÷ 3 + ");
         //Binary with unary
         //Add with unary
-        assertNumber("14", "5 + 3 x² -", "5 + sqr(3) - ");
+        assertNumber("14", "5 + 3  -", "5 + sqr(3) - ");
         assertNumber("6,732050807568877", "5 + 3 √ -", "5 + √(3) - ");
-        assertNumber("5,333333333333333", "5 + 3 1/x -", "5 + 1/(3) - ");
+        assertNumber("5,333333333333333", "5 + 3  -", "5 + 1/(3) - ");
         //Subtract with unary
-        assertNumber("-4", "5 - 3 x² -", "5 - sqr(3) - ");
+        assertNumber("-4", "5 - 3  -", "5 - sqr(3) - ");
         assertNumber("3,267949192431123", "5 - 3 √ -", "5 - √(3) - ");
-        assertNumber("4,666666666666667", "5 - 3 1/x -", "5 - 1/(3) - ");
+        assertNumber("4,666666666666667", "5 - 3  -", "5 - 1/(3) - ");
         //Multiply with unary
-        assertNumber("45", "5 x 3 x² -", "5 x sqr(3) - ");
+        assertNumber("45", "5 x 3  -", "5 x sqr(3) - ");
         assertNumber("8,660254037844386", "5 x 3 √ -", "5 x √(3) - ");
-        assertNumber("1,666666666666667", "5 x 3 1/x -", "5 x 1/(3) - ");
+        assertNumber("1,666666666666667", "5 x 3  -", "5 x 1/(3) - ");
         //Divide with unary
-        assertNumber("0,5555555555555556", "5 / 3 x² -", "5 ÷ sqr(3) - ");
+        assertNumber("0,5555555555555556", "5 / 3  -", "5 ÷ sqr(3) - ");
         assertNumber("2,886751345948129", "5 / 3 √ -", "5 ÷ √(3) - ");
-        assertNumber("15", "5 / 3 1/x -", "5 ÷ 1/(3) - ");
+        assertNumber("15", "5 / 3  -", "5 ÷ 1/(3) - ");
 
         //Mix all operations
-        assertNumber("5", "2 MS 3 + MR - MC", "3 + 2 - ");
-        assertNumber("-2,23606797749979", "5 √ +/- -", "negate(√(5)) - ");
-        assertNumber("2 906 811,3127248", "878,756 + 45,63 % +/- x 78 x² =", "");
+        assertNumber("5", "2  3 +  - ", "3 + 2 - ");
+        assertNumber("-2,23606797749979", "5 √  -", "negate(√(5)) - ");
+        assertNumber("2 906 811,3127248", "878,756 + 45,63 %  x 78  =", "");
         assertNumber("2,009861478780531", ",883655 x 0,74553 % + 0,99999 + √ =", "");
-        assertNumber("7,666666666666667", "3 1/x +/- + 8 -", "negate(1/(3)) + 8 - ");
-        assertNumber("6 639 379 852 195,999", "985948894 - 7453628 1/x x 6734 = ", "");
-        assertNumber("-59", "5 + 8 x² +/- +/- +/- -", "5 + negate(negate(negate(sqr(8)))) - ");
-        assertNumber("2 298 455 479 608,324", "4376 + 7987 - % + 8,9 = x²", "sqr(-1516065,79)");
-        assertNumber("59,02888304444444", "56 x % MS 789 % M+ / 0,55 bs bs 89 M- MR + 0,99999 % = ", "");
-        assertNumber("-36,799632", "2 x² + 6 x² - 8 % x 0,999999 bs +/- /", "sqr(2) + sqr(6) - 3,2 x -0,99999 ÷ ");
-        assertNumber("1 070 281,69789316", "675 x² + 784 x² + ,8354 x² - ", "sqr(675) + sqr(784) + sqr(0,8354) - ");
-        assertNumber("-1,628217149182808e-8", "4567 x² + 78956,00009 x 64785 √ +/- = 1/x M+ x 7536 M- MR +/- √ MC =", "");
-        assertNumber("1,e-9999", "0,0000000000000001 x² x ,0000001 = x² x² x² x² x² x² x² x² x 0,000000000000001 =", "");
-        assertNumber("0,0178571428571429", "87 + 324 - 443 / ,56 +/- x² √ 1/x %", "87 + 324 - 443 ÷ 0,0178571428571429");
-        assertNumber("9,999999999999999e+9999", "1000000000000000 x² x 1000000000 = x² x² x² x² x² x² x² x² MS 9999999999999999 x MR = MC", "");
+        assertNumber("7,666666666666667", "3   + 8 -", "negate(1/(3)) + 8 - ");
+        assertNumber("6 639 379 852 195,999", "985948894 - 7453628  x 6734 = ", "");
+        assertNumber("-59", "5 + 8     -", "5 + negate(negate(negate(sqr(8)))) - ");
+        assertNumber("2 298 455 479 608,324", "4376 + 7987 - % + 8,9 = ", "sqr(-1516065,79)");
+        assertNumber("59,02888304444444", "56 x %  789 %  / 0,55   89   + 0,99999 % = ", "");
+        assertNumber("-36,799632", "2  + 6  - 8 % x 0,999999   /", "sqr(2) + sqr(6) - 3,2 x -0,99999 ÷ ");
+        assertNumber("1 070 281,69789316", "675  + 784  + ,8354  - ", "sqr(675) + sqr(784) + sqr(0,8354) - ");
+        assertNumber("-1,628217149182808e-8", "4567  + 78956,00009 x 64785 √  =   x 7536    √  =", "");
+        assertNumber("1,e-9999", "0,0000000000000001  x ,0000001 =         x 0,000000000000001 =", "");
+        assertNumber("0,0178571428571429", "87 + 324 - 443 / ,56   √  %", "87 + 324 - 443 ÷ 0,0178571428571429");
+        assertNumber("9,999999999999999e+9999", "1000000000000000  x 1000000000 =          9999999999999999 x  = ", "");
 
 
     }
 
     void assertNumber(String result, String buttonsPressed, String outOperationMemoryResult) {
-        checkKeyInputNumber(result, buttonsPressed, outOperationMemoryResult);
+        checkMouseInputNumber(result, buttonsPressed, outOperationMemoryResult);
     }
 
     void checkKeyInputNumber(String result, String buttonsPressed, String outOperationMemoryResult) {
-        for (String buttonPressed : buttonsPressed.split(" ")) {
-            if (isNumber(buttonPressed)) {
-                for (char idButton : buttonPressed.toCharArray()) {
-                    keyboardInput(String.valueOf(idButton));
-                }
-            } else {
-                keyboardInput(buttonPressed);
-            }
+        for (char idButton : buttonsPressed.toCharArray()) {
+            keyboardInput(String.valueOf(idButton));
         }
+
         assertEquals(result, outLabel.getText());
         assertEquals(outOperationMemoryResult, outOperationMemory.getText());
         type(ESCAPE);
@@ -897,30 +967,20 @@ class Calculator_ControllerTest extends ApplicationTest {
     }
 
     void checkNumpadInputNumber(String result, String buttonsPressed, String clearButtonPressed) {
-        for (String buttonPressed : buttonsPressed.split(" ")) {
-            if (isNumber(buttonPressed)) {
-                for (char idButton : buttonPressed.toCharArray()) {
-                    keyboardNumpadInput(String.valueOf(idButton));
-                }
-            } else {
-                keyboardNumpadInput(buttonPressed);
-            }
+        for (char idButton : buttonsPressed.toCharArray()) {
+            keyboardNumpadInput(String.valueOf(idButton));
         }
+
         assertEquals(result, outLabel.getText());
         type(ESCAPE);
     }
 
 
     void checkMouseInputNumber(String result, String buttonsPressed, String clearButtonPressed) {
-        for (String buttonPressed : buttonsPressed.split(" ")) {
-            if (isNumber(buttonPressed)) {
-                for (char idButton : buttonPressed.toCharArray()) {
-                    mouseInput(String.valueOf(idButton));
-                }
-            } else {
-                mouseInput(buttonPressed);
-            }
+        for (char idButton : buttonsPressed.toCharArray()) {
+            mouseInput(String.valueOf(idButton));
         }
+
         FXTestUtils.awaitEvents();
         String actual = outLabel.getText();
         assertEquals(result, actual);
@@ -951,9 +1011,9 @@ class Calculator_ControllerTest extends ApplicationTest {
             type(NUMPAD0);
         } else if (idButton.equals(",")) {
             type(COMMA);
-        } else if (idButton.equals("+/-")) {
+        } else if (idButton.equals("")) {
             type(F9);
-        } else if (idButton.equals("bs")) {
+        } else if (idButton.equals("")) {
             type(BACK_SPACE);
         } else if (idButton.equals("c")) {
             type(ESCAPE);
@@ -969,23 +1029,23 @@ class Calculator_ControllerTest extends ApplicationTest {
             push(new KeyCodeCombination(DIGIT2, KeyCombination.SHIFT_DOWN));
         } else if (idButton.equals("%")) {
             push(new KeyCodeCombination(DIGIT5, KeyCombination.SHIFT_DOWN));
-        } else if (idButton.equals("1/x")) {
+        } else if (idButton.equals("")) {
             type(R);
-        } else if (idButton.equals("x²")) {
+        } else if (idButton.equals("")) {
             type(Q);
         } else if (idButton.equals("/")) {
             type(DIVIDE);
         } else if (idButton.equals("=")) {
             type(ENTER);
-        } else if (idButton.equals("MS")) {
+        } else if (idButton.equals("")) {
             push(new KeyCodeCombination(M, KeyCombination.CONTROL_DOWN));
-        } else if (idButton.equals("M+")) {
+        } else if (idButton.equals("")) {
             push(new KeyCodeCombination(P, KeyCombination.CONTROL_DOWN));
-        } else if (idButton.equals("M-")) {
+        } else if (idButton.equals("")) {
             push(new KeyCodeCombination(Q, KeyCombination.CONTROL_DOWN));
-        } else if (idButton.equals("MC")) {
+        } else if (idButton.equals("")) {
             push(new KeyCodeCombination(L, KeyCombination.CONTROL_DOWN));
-        } else if (idButton.equals("MR")) {
+        } else if (idButton.equals("")) {
             push(new KeyCodeCombination(R, KeyCombination.CONTROL_DOWN));
         }
     }
@@ -1013,9 +1073,9 @@ class Calculator_ControllerTest extends ApplicationTest {
             type(DIGIT0);
         } else if (idButton.equals(",")) {
             type(COMMA);
-        } else if (idButton.equals("+/-")) {
+        } else if (idButton.equals("")) {
             type(F9);
-        } else if (idButton.equals("bs")) {
+        } else if (idButton.equals("")) {
             type(BACK_SPACE);
         } else if (idButton.equals("c")) {
             type(ESCAPE);
@@ -1031,23 +1091,23 @@ class Calculator_ControllerTest extends ApplicationTest {
             push(new KeyCodeCombination(DIGIT2, KeyCombination.SHIFT_DOWN));
         } else if (idButton.equals("%")) {
             push(new KeyCodeCombination(DIGIT5, KeyCombination.SHIFT_DOWN));
-        } else if (idButton.equals("1/x")) {
+        } else if (idButton.equals("")) {
             type(R);
-        } else if (idButton.equals("x²")) {
+        } else if (idButton.equals("")) {
             type(Q);
         } else if (idButton.equals("/")) {
             type(SLASH);
         } else if (idButton.equals("=")) {
             type(ENTER);
-        } else if (idButton.equals("MS")) {
+        } else if (idButton.equals("")) {
             push(new KeyCodeCombination(M, KeyCombination.CONTROL_DOWN));
-        } else if (idButton.equals("M+")) {
+        } else if (idButton.equals("")) {
             push(new KeyCodeCombination(P, KeyCombination.CONTROL_DOWN));
-        } else if (idButton.equals("M-")) {
+        } else if (idButton.equals("")) {
             push(new KeyCodeCombination(Q, KeyCombination.CONTROL_DOWN));
-        } else if (idButton.equals("MC")) {
+        } else if (idButton.equals("")) {
             push(new KeyCodeCombination(L, KeyCombination.CONTROL_DOWN));
-        } else if (idButton.equals("MR")) {
+        } else if (idButton.equals("")) {
             push(new KeyCodeCombination(R, KeyCombination.CONTROL_DOWN));
         }
     }
@@ -1076,9 +1136,9 @@ class Calculator_ControllerTest extends ApplicationTest {
             button = from(root).lookup("#zero").query();
         } else if (idButtonClickedMouse.equals(",")) {
             button = from(root).lookup("#point").query();
-        } else if (idButtonClickedMouse.equals("+/-")) {
+        } else if (idButtonClickedMouse.equals("")) {
             button = from(root).lookup("#plusMinus").query();
-        } else if (idButtonClickedMouse.equals("bs")) {
+        } else if (idButtonClickedMouse.equals("")) {
             button = from(root).lookup("#Backspace").query();
         } else if (idButtonClickedMouse.equals("c")) {
             button = from(root).lookup("#C").query();
@@ -1094,23 +1154,23 @@ class Calculator_ControllerTest extends ApplicationTest {
             button = from(root).lookup("#SQRT").query();
         } else if (idButtonClickedMouse.equals("%")) {
             button = from(root).lookup("#PERCENT").query();
-        } else if (idButtonClickedMouse.equals("1/x")) {
+        } else if (idButtonClickedMouse.equals("")) {
             button = from(root).lookup("#ONE_DIVIDE_X").query();
-        } else if (idButtonClickedMouse.equals("x²")) {
+        } else if (idButtonClickedMouse.equals("")) {
             button = from(root).lookup("#SQR").query();
         } else if (idButtonClickedMouse.equals("/")) {
             button = from(root).lookup("#DIVIDE").query();
         } else if (idButtonClickedMouse.equals("=")) {
             button = from(root).lookup("#EQUAL").query();
-        } else if (idButtonClickedMouse.equals("MS")) {
+        } else if (idButtonClickedMouse.equals("")) {
             button = from(root).lookup("#memoryStore").query();
-        } else if (idButtonClickedMouse.equals("M+")) {
+        } else if (idButtonClickedMouse.equals("")) {
             button = from(root).lookup("#memoryAdd").query();
-        } else if (idButtonClickedMouse.equals("M-")) {
+        } else if (idButtonClickedMouse.equals("")) {
             button = from(root).lookup("#memorySubtract").query();
-        } else if (idButtonClickedMouse.equals("MC")) {
+        } else if (idButtonClickedMouse.equals("")) {
             button = from(root).lookup("#memoryClear").query();
-        } else if (idButtonClickedMouse.equals("MR")) {
+        } else if (idButtonClickedMouse.equals("")) {
             button = from(root).lookup("#memoryRecall").query();
         }
 
