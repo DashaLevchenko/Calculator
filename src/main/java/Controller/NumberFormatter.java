@@ -35,25 +35,24 @@ class NumberFormatter {
                 pattern.append("E0");
 
             } else {
-                if(number.scale() < 0){
+                if (number.scale() < 0) {
                     pattern.append("E0");
-                }else {
+                } else {
                     pattern.append("0".repeat(number.scale()));
                 }
             }
         } else if (number.abs().compareTo(BigDecimal.ONE) < 0 && number.abs().compareTo(BigDecimal.ZERO) != 0) {
             pattern.append("0.");
-            if (number.scale() > MAX_SCALE) {
                 number = number.round(new MathContext(MAX_SCALE, RoundingMode.HALF_UP));
                 number = number.stripTrailingZeros();
+
+            if (number.scale() > MAX_SCALE) {
                 if ((number.scale() - number.precision() > 2 ) || number.abs().compareTo(MIN_DECIMAL_NUMBER_WITHOUT_E) < 0) {
-                    if (number.precision() != 1 && number.precision() <= MAX_SCALE) {
-                        pattern.append("#".repeat(number.precision()));
-                    }
-                    pattern.append("E0");
+                if (number.precision() != 1 && number.precision() <= MAX_SCALE) {
+                    pattern.append("#".repeat(number.precision()));
+                }
+                pattern.append("E0");
                 } else {
-//                    number = number.setScale(16, RoundingMode.HALF_UP);
-//                    number = number.setScale(MAX_SCALE, RoundingMode.HALF_EVEN);
                     number = number.setScale(MAX_SCALE, RoundingMode.HALF_UP);
                     pattern.append("#".repeat(MAX_SCALE));
                 }
@@ -90,8 +89,8 @@ class NumberFormatter {
                 number = (BigDecimal) decimalFormat.parse(text);
 
                 number = number.stripTrailingZeros();
-                if(number.scale() < 0){
-                    number= number.setScale(0);
+                if (number.scale() < 0) {
+                    number = number.setScale(0);
                 }
 
             } catch (ParseException e) {
