@@ -7,9 +7,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="feaeb0c2-feb2-4a9c-98e3-48b1d1a339aa" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/View/src/CalcMDL2.ttf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Calculator_Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Calculator_Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/NumberFormatter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/NumberFormatter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/Controller/Calculator_ControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Controller/Calculator_ControllerTest.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -82,7 +82,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/target/classes" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/View/src" />
     <property name="project.structure.last.edited" value="Problems" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -99,20 +99,20 @@
       <recent name="Controller" />
       <recent name="Model" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Calculator\target\classes" />
-      <recent name="D:\Calculator\target" />
-      <recent name="D:\Calculator\target\classes\View" />
-      <recent name="C:\Users\Дарья\IdeaProjects\Calculator\target\classes\View" />
-      <recent name="D:\Calculator\src\main\java\View" />
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+      <recent name="org.testfx.framework.junit.ApplicationTest" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="View" />
       <recent name="Model" />
     </key>
-    <key name="CreateTestDialog.Recents.Supers">
-      <recent name="" />
-      <recent name="org.testfx.framework.junit.ApplicationTest" />
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Calculator\src\main\java\View\src" />
+      <recent name="D:\Calculator\target\classes" />
+      <recent name="D:\Calculator\target" />
+      <recent name="D:\Calculator\target\classes\View" />
+      <recent name="C:\Users\Дарья\IdeaProjects\Calculator\target\classes\View" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -283,13 +283,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1565432602101</updated>
-    </task>
-    <task id="LOCAL-00019" summary="all tests are working">
-      <created>1566918390009</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1566918390009</updated>
     </task>
     <task id="LOCAL-00020" summary="less tests for sum">
       <created>1566918940655</created>
@@ -627,7 +620,14 @@
       <option name="project" value="LOCAL" />
       <updated>1572626550709</updated>
     </task>
-    <option name="localTasksCounter" value="68" />
+    <task id="LOCAL-00068" summary="border work">
+      <created>1572883625751</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1572883625751</updated>
+    </task>
+    <option name="localTasksCounter" value="69" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -688,7 +688,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="before change result and add new variable" />
     <MESSAGE value="before change start" />
     <MESSAGE value="before delete textOut" />
     <MESSAGE value="create new separate method" />
@@ -713,29 +712,25 @@
     <MESSAGE value="all work" />
     <MESSAGE value="before 10 /3 = *3" />
     <MESSAGE value="before change formatter" />
-    <option name="LAST_COMMIT_MESSAGE" value="before change formatter" />
+    <MESSAGE value="border work" />
+    <option name="LAST_COMMIT_MESSAGE" value="border work" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/Controller/Calculator_ControllerTest.java</url>
-          <line>1254</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/Controller/Calculator_Controller.java</url>
-          <line>669</line>
+          <line>667</line>
           <option name="timeStamp" value="10" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/Controller/Calculator_Controller.java</url>
-          <line>261</line>
+          <line>259</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/Controller/Calculator_Controller.java</url>
-          <line>873</line>
+          <line>871</line>
           <option name="timeStamp" value="13" />
         </line-breakpoint>
       </breakpoints>

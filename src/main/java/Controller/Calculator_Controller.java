@@ -160,12 +160,10 @@ public class Calculator_Controller {
 
     private static final double MAX_FONT_SIZE = 71;
     private final int CHAR_MAX_INPUT = 16;
-    private static final BigDecimal MAX_NUMBER_DECIMAL = new BigDecimal("9.999999999999999E-9999");
+    private static final BigDecimal MAX_NUMBER_DECIMAL = new BigDecimal("1.E-9999");
     private static final BigDecimal MIN_NUMBER_INTEGER = new BigDecimal("9.999999999999999E9999");
-    private static final int MAX_SCALE_DECIMAL = 9998;
+    private static final int MAX_SCALE_DECIMAL = MAX_NUMBER_DECIMAL.scale() - MAX_NUMBER_DECIMAL.precision();
     private static final int MAX_SCALE_INTEGER = (MIN_NUMBER_INTEGER.scale() - MIN_NUMBER_INTEGER.precision());
-//    private static final int MAX_SCALE_INTEGER = MAX_NUMBER_INTEGER.scale() - MAX_NUMBER_INTEGER.precision();
-//    private static final int MAX_SCALE_INTEGER = MAX_NUMBER_INTEGER.scale() * -1;
 
     private OperationsEnum newBinaryOperation;
     private OperationsEnum percentOperation;
@@ -921,7 +919,7 @@ public class Calculator_Controller {
     private BigDecimal isOverflow(BigDecimal result) throws ArithmeticException {
         boolean needOverflow = false;
         BigDecimal number = result;
-        System.out.println(number.scale() - number.precision()+" "+MAX_SCALE_DECIMAL + " "+MAX_SCALE_INTEGER);
+
         if (number.scale() > 0) {
             needOverflow = number.scale() - number.precision() > MAX_SCALE_DECIMAL;
         } else if (number.scale() < 0) {

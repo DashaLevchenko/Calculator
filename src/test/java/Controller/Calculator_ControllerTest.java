@@ -9,7 +9,6 @@ import javafx.scene.control.Label;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 import javafx.stage.Stage;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.loadui.testfx.utils.FXTestUtils;
@@ -45,18 +44,14 @@ class Calculator_ControllerTest extends ApplicationTest {
         }
     }
 
-    @BeforeAll
-    static void config() throws Exception {
-        System.setProperty("testfx.robot", "awt");
-    }
-
     @BeforeEach
     void outMemory() {
         outOperationMemory = from(root).lookup("#outOperationMemory").query();
         outLabel = from(root).lookup("#outText").query();
     }
 
-    /* Symbols for writing tests:
+    /* Symbols by font: "/View/src/CalcMDL2.ttf
+    Symbols for writing tests:
          - memory recall
          - memory clear
          - memory store
@@ -67,7 +62,6 @@ class Calculator_ControllerTest extends ApplicationTest {
         √ - square root
          - negate
          - backspace
-        
     */
 
     @Test
@@ -761,7 +755,6 @@ class Calculator_ControllerTest extends ApplicationTest {
         assertNumber("0,668740304976422", "0,2 √ √ =", "");
         assertNumber("-0,668740304976422", "0,2 √ √  =", "");
 
-
         //Complicate tests
         assertNumber("1,414213562373095", "2 √", "√(2)");
         assertNumber("23,15167380558045", "536 √", "√(536)");
@@ -863,8 +856,6 @@ class Calculator_ControllerTest extends ApplicationTest {
         assertNumber("7,113815415810459e+90", "227254673899,124   ", "sqr(sqr(sqr(-227254673899,124)))");
         assertNumber("9,999999999999968e+511", "9999999999999999     ", "sqr(sqr(sqr(sqr(sqr(9999999999999999)))))");
         assertNumber("-0,9999999999999992", "0,9999999999999999    ", "negate(sqr(sqr(sqr(0,9999999999999999))))");
-
-
     }
 
     @Test
@@ -878,16 +869,23 @@ class Calculator_ControllerTest extends ApplicationTest {
         assertNumber("Overflow", " / 9999999999999999 / 10 = x 5 = +  =", "5,e+9983 + ");
         assertNumber("Overflow", " / 9999999999999999 / 10 = x 5,0 = +  =", "5,e+9983 + ");
         assertNumber("Overflow", " / 9999999999999999 / 10 = x 5,1 = +  = ", "5,1e+9983 + ");
-        // min number => ‭9,999999999999999e-9999‬
+
+        assertNumber("Overflow", "1000000000000000x=x=x=x=x=x=x=x=x=x=", "1,e+7680 x ");
+        assertNumber("Overflow", "1000000000000000x1000000000=9999999999999999 x  = x 10 = ", "9,999999999999999e+9999 x ");
+        assertNumber("Overflow", "9999999999999999", "sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(9999999999999999))))))))))");
+
+        // min number => ‭1,e-9999‬
+        assertNumber("1,e-9999", "0,0000000000000001  x 0,0000001 = x 0,000000000000001= ", "");
+        assertNumber("Overflow", "/10=", "1,e-9999 ÷ ");
+        assertNumber("Overflow", "x0,1=", "1,e-9999 x ");
+
         assertNumber("9,999999999999999e-9999", "0,0000000000000001  x 0,0000001 = x 0,000000000000001= x 9,999999999999999 = ", "");
         assertNumber("Overflow", " /10 =", "9,999999999999999e-9999 ÷ ");
-        assertNumber("Overflow", " x0,1 =", "9,999999999999999e-9999 x ");
+        assertNumber("Overflow", " x0,1 = ", "9,999999999999999e-9999 x ");
 
-        assertNumber("Overflow", "9999999999999999 / 1000000000000000 = = =                ", "sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(9,999999999999999e-30)))))))))");
-        assertNumber("Overflow", "0,0000000000000001  x ,0000001 =         x 0,0000000000000001 =", "sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(1,e-39)))))))) x ");
-        assertNumber("Overflow", "1000000000000000  x 1000000000 =          9999999999999999 x  = x 10 = ", "9,999999999999999e+9999 x ");
-        assertNumber("Overflow", "9999999999999999 ", "sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(9999999999999999))))))))))");
-        assertNumber("Overflow", "0,0000000000000001 ","sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(0,0000000000000001))))))))))");
+        assertNumber("Overflow", "9999999999999999/1000000000000000===","sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(9,999999999999999e-30)))))))))");
+        assertNumber("Overflow","0,0000000000000001x,0000001=x0,0000000000000001 =", "sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(1,e-39)))))))) x ");
+        assertNumber("Overflow", "0,0000000000000001","sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(sqr(0,0000000000000001))))))))))");
     }
 
     @Test
@@ -1427,7 +1425,7 @@ class Calculator_ControllerTest extends ApplicationTest {
     void mouseInput(String idButtonClickedMouse) {
         Button button = null;
         if (idButtonClickedMouse.equals("1")) {
-            button = (Button) from(root).lookup("#one").query();
+            button = from(root).lookup("#one").query();
         } else if (idButtonClickedMouse.equals("2")) {
             button = from(root).lookup("#two").query();
         } else if (idButtonClickedMouse.equals("3")) {
