@@ -24,9 +24,9 @@ class NumberFormatter {
     static String formatterNumber(BigDecimal number) {
         StringBuilder pattern = new StringBuilder();
         if (number.abs().compareTo(MAX_NUMBER_INPUT) > 0) {
-            pattern.append("0.");
-            if (number.precision() > MAX_SCALE) {
-                number = number.round(new MathContext(MAX_SCALE, RoundingMode.HALF_UP));
+            number = number.round(new MathContext(MAX_SCALE, RoundingMode.HALF_UP));
+            if (number.precision() - number.scale() > MAX_SCALE) {
+                pattern.append("0.");
                 number = number.stripTrailingZeros();
 
                 if (number.precision() != 1 && number.precision() > number.scale()) {
@@ -36,22 +36,22 @@ class NumberFormatter {
 
             } else {
                 if (number.scale() < 0) {
-                    pattern.append("E0");
+                    pattern.append("0.E0");
                 } else {
-                    pattern.append("0".repeat(number.scale()));
+                    pattern.append("#,##0");
                 }
             }
         } else if (number.abs().compareTo(BigDecimal.ONE) < 0 && number.abs().compareTo(BigDecimal.ZERO) != 0) {
             pattern.append("0.");
-                number = number.round(new MathContext(MAX_SCALE, RoundingMode.HALF_UP));
-                number = number.stripTrailingZeros();
+            number = number.round(new MathContext(MAX_SCALE, RoundingMode.HALF_UP));
+            number = number.stripTrailingZeros();
 
             if (number.scale() > MAX_SCALE) {
-                if ((number.scale() - number.precision() > 2 ) || number.abs().compareTo(MIN_DECIMAL_NUMBER_WITHOUT_E) < 0) {
-                if (number.precision() != 1 && number.precision() <= MAX_SCALE) {
-                    pattern.append("#".repeat(number.precision()));
-                }
-                pattern.append("E0");
+                if ((number.scale() - number.precision() > 2) || number.abs().compareTo(MIN_DECIMAL_NUMBER_WITHOUT_E) < 0) {
+                    if (number.precision() != 1 && number.precision() <= MAX_SCALE) {
+                        pattern.append("#".repeat(number.precision()));
+                    }
+                    pattern.append("E0");
                 } else {
                     number = number.setScale(MAX_SCALE, RoundingMode.HALF_UP);
                     pattern.append("#".repeat(MAX_SCALE));
