@@ -8,7 +8,7 @@
   <component name="ChangeListManager">
     <list default="true" id="feaeb0c2-feb2-4a9c-98e3-48b1d1a339aa" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/NumberFormatter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/NumberFormatter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Calculator_Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Calculator_Controller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/Controller/Calculator_ControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Controller/Calculator_ControllerTest.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -131,7 +131,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.Calculator_ControllerTest">
+  <component name="RunManager" selected="Application.Calculator_Main">
     <configuration name="Calculator_Main" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Controller.Calculator_Main" />
       <module name="Calculator" />
@@ -192,7 +192,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Calculator_ControllerTest.checkMIXUnaryOperations" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="Calculator_ControllerTest.checkInput" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Calculator" />
       <extension name="coverage">
         <pattern>
@@ -202,7 +202,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="Controller" />
       <option name="MAIN_CLASS_NAME" value="Controller.Calculator_ControllerTest" />
-      <option name="METHOD_NAME" value="checkMIXUnaryOperations" />
+      <option name="METHOD_NAME" value="checkInput" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -244,18 +244,18 @@
       <item itemvalue="Application.Calculator_Main" />
       <item itemvalue="JUnit.Calculator_ControllerTest" />
       <item itemvalue="JUnit.Calculator_ControllerTest.checkSquareX" />
-      <item itemvalue="JUnit.Calculator_ControllerTest.checkMIXUnaryOperations" />
       <item itemvalue="JUnit.Calculator_ControllerTest.checkOverflow" />
       <item itemvalue="JUnit.Calculator_ControllerTest.checkAllOperations" />
       <item itemvalue="JUnit.Calculator_ControllerTest.checkAdd" />
+      <item itemvalue="JUnit.Calculator_ControllerTest.checkInput" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.Calculator_ControllerTest.checkInput" />
         <item itemvalue="JUnit.Calculator_ControllerTest.checkAdd" />
         <item itemvalue="JUnit.Calculator_ControllerTest.checkAllOperations" />
         <item itemvalue="JUnit.Calculator_ControllerTest.checkOverflow" />
         <item itemvalue="JUnit.Calculator_ControllerTest.checkSquareX" />
-        <item itemvalue="JUnit.Calculator_ControllerTest.checkMIXUnaryOperations" />
       </list>
     </recent_temporary>
   </component>
@@ -282,13 +282,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1565432602101</updated>
-    </task>
-    <task id="LOCAL-00021" summary="need to sort all tests besides sumTest">
-      <created>1567001362926</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
-      <option name="project" value="LOCAL" />
-      <updated>1567001362926</updated>
     </task>
     <task id="LOCAL-00022" summary="need to sort all tests besides sumTest,&#10;new method squareRoot(), writing tests">
       <created>1567006020714</created>
@@ -626,7 +619,14 @@
       <option name="project" value="LOCAL" />
       <updated>1572954698965</updated>
     </task>
-    <option name="localTasksCounter" value="70" />
+    <task id="LOCAL-00070" summary="before change format tests">
+      <created>1572963431636</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1572963431636</updated>
+    </task>
+    <option name="localTasksCounter" value="71" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -715,30 +715,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="before change format tests" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/Controller/Calculator_Controller.java</url>
-          <line>259</line>
-          <option name="timeStamp" value="11" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/Controller/Calculator_Controller.java</url>
-          <line>871</line>
-          <option name="timeStamp" value="13" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/Controller/Calculator_Controller.java</url>
-          <line>369</line>
-          <option name="timeStamp" value="14" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/Controller/Calculator_Controller.java</url>
-          <line>378</line>
-          <option name="timeStamp" value="15" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="JUnit">
         <watch expression="calculator" language="JAVA" />
@@ -746,6 +722,10 @@
       <configuration name="Application">
         <watch expression="text.txBounds" language="JAVA" />
         <watch expression="number.stringCache" />
+        <watch expression="((Calculator_Controller)this).historyOperations" custom="Controller.Calculator_Controller" />
+        <watch expression="((Calculator_Controller)this).historyUnaryOperations" custom="Controller.Calculator_Controller" />
+        <watch expression="((Calculator_Controller)this).numberFirstBinaryOperations" custom="Controller.Calculator_Controller" />
+        <watch expression="((Calculator_Controller)this).numberSecondBinaryOperations" custom="Controller.Calculator_Controller" />
       </configuration>
     </watches-manager>
   </component>

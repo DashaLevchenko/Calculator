@@ -235,22 +235,9 @@ public class Calculator_Controller {
         }
 
         newBinaryOperation = OperationsEnum.valueOf(((Button) actionEvent.getSource()).getId());
+        changeOperator();
 
-        OperationsEnum oldBinaryOperation;
-        if (!canChangeOperator) {
-            oldBinaryOperation = newBinaryOperation;
-            canChangeOperator = true;
-            historyOperations += getSymbol(oldBinaryOperation);
-        } else {
-            if (!negatePressed) {
-                historyOperations = new StringBuilder(historyOperations).delete(historyOperations.length() - getSymbol(newBinaryOperation).length(), historyOperations.length()).toString();
-                historyOperations += getSymbol(newBinaryOperation);
-            }
-        }
 
-        historyUnaryOperations = "";
-        outOperationMemory.setText(historyOperations);
-        scrollOutOperationMemory();
         equalWasPress = false;
     }
 
@@ -875,6 +862,23 @@ public class Calculator_Controller {
                 historyOperations += NumberFormatter.formatterNumber(numberSecondBinaryOperations).replace(" ", "");
             }
         }
+    }
+
+    private void changeOperator(){
+        OperationsEnum oldBinaryOperation;
+        if (!canChangeOperator) {
+            oldBinaryOperation = newBinaryOperation;
+            canChangeOperator = true;
+            historyOperations += getSymbol(oldBinaryOperation);
+        } else {
+            if (!negatePressed) {
+                historyOperations = new StringBuilder(historyOperations).delete(historyOperations.length() - getSymbol(newBinaryOperation).length(), historyOperations.length()).toString();
+                historyOperations += getSymbol(newBinaryOperation);
+            }
+        }
+        historyUnaryOperations = "";
+        outOperationMemory.setText(historyOperations);
+        scrollOutOperationMemory();
     }
 
     private void printError(Exception e) {
