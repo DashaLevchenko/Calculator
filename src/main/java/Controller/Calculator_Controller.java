@@ -12,6 +12,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -56,6 +57,9 @@ public class Calculator_Controller {
     //endregion
 
     //region Memory
+    @FXML
+    private GridPane memoryPanel;
+
     @FXML
     private Button memoryClear;
 
@@ -235,8 +239,9 @@ public class Calculator_Controller {
         }
 
         newBinaryOperation = OperationsEnum.valueOf(((Button) actionEvent.getSource()).getId());
-        changeOperator();
 
+
+        changeOperator();
 
         equalWasPress = false;
     }
@@ -273,7 +278,7 @@ public class Calculator_Controller {
                 printError(e);
             }
         }
-
+        canChangeOperator = false;
         scrollOutOperationMemory();
         resizeOutputText();
     }
@@ -430,6 +435,7 @@ public class Calculator_Controller {
         numberUnaryOperations = null;
         equalWasPress = false;
         operationsIsDisable(false);
+        memoryPanel.setDisable(false);
         isError = false;
         negatePressed = false;
         percentPressed = false;
@@ -535,7 +541,6 @@ public class Calculator_Controller {
         }
         String out = outText.getText().replace(" ", "");
         out = cleanDisplay(out);
-
         if (out.isEmpty() || out.equals("0")) {
             outText.setText(buttonText);
         } else {
@@ -657,6 +662,30 @@ public class Calculator_Controller {
                 historyUnaryOperations += NumberFormatter.formatterNumber(NumberFormatter.parseNumber(outText.getText())).replace(" ", "");
             }
         }
+
+
+        StringBuilder out = new StringBuilder(outText.getText());
+        if (!out.toString().equals("0")) {
+            if (out.charAt(0) != '-') {
+                out = out.insert(0, '-');
+                charValidInText++;
+            } else {
+                out.deleteCharAt(0);
+                charValidInText = CHAR_MAX_INPUT;
+            }
+            outText.setText(out.toString());
+        }
+        if (numberUnaryOperations == null) {
+            if (!historyOperations.isEmpty()) {
+                setNum2();
+            }else{
+                equalWasPress = false;
+                setNum1();
+            }
+        } else {
+            numberUnaryOperations = numberUnaryOperations.negate();
+            setNumberResultUnary();
+        }
         if (!historyUnaryOperations.isEmpty()) {
             if (historyOperations.equals("0")) {
                 historyOperations = "";
@@ -676,27 +705,7 @@ public class Calculator_Controller {
             outOperationMemory.setText(historyOperations + historyUnaryOperations);
         }
 
-        StringBuilder out = new StringBuilder(outText.getText());
-        if (!out.toString().
-
-                equals("0")) {
-            if (out.charAt(0) != '-') {
-                outText.setText("-" + out);
-                charValidInText++;
-            } else {
-                outText.setText(out.deleteCharAt(0).toString());
-                charValidInText = CHAR_MAX_INPUT;
-            }
-        }
-        if (numberUnaryOperations == null) {
-            setNum2();
-        } else {
-            numberUnaryOperations = numberUnaryOperations.negate();
-            setNumberResultUnary();
-        }
-
         resizeOutputText();
-
         negatePressed = true;
     }
 
@@ -779,6 +788,7 @@ public class Calculator_Controller {
             charValidInText++;
         }
         printResult(out);
+        memoryPressed = false;
     }
 
     private void resizeOutputText() {
@@ -884,6 +894,7 @@ public class Calculator_Controller {
     private void printError(Exception e) {
         isError = true;
         operationsIsDisable(true);
+        memoryPanel.setDisable(true);
         outText.setStyle(firstStyleLabel);
 
         printResult(e.getMessage());

@@ -43,9 +43,9 @@ public class Arithmetic {
         }
     }
 
-    static BigDecimal squareRoot(BigDecimal x) throws ArithmeticException {
+    static BigDecimal squareRoot(BigDecimal x) throws IllegalArgumentException {
         if (x.compareTo(BigDecimal.ZERO) < 0) {
-            throw new ArithmeticException("Invalid input");
+            throw new IllegalArgumentException("Invalid input");
         } else {
             return x.sqrt(MathContext.DECIMAL128);
         }
@@ -84,6 +84,7 @@ public class Arithmetic {
         }else{
             throw new IllegalArgumentException("Enter binary operation");
         }
+
         result = result.round(MathContext.DECIMAL128);
 
         return result;

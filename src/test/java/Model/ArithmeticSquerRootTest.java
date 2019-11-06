@@ -468,7 +468,7 @@ class ArithmeticSquerRootTest {
         try {
             Arithmetic.squareRoot(x);
             fail();
-        } catch (ArithmeticException e) {
+        } catch (IllegalArgumentException e) {
             assertEquals("Invalid input", e.getMessage());
         }
 
