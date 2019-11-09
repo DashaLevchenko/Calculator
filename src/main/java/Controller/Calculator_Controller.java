@@ -680,7 +680,8 @@ public class Calculator_Controller {
                 setNum2();
             }else{
                 equalWasPress = false;
-                setNum1();
+//                setNum1();
+                numberFirstBinaryOperations = NumberFormatter.parseNumber(outText.getText());
             }
         } else {
             numberUnaryOperations = numberUnaryOperations.negate();

@@ -9,11 +9,6 @@
     <list default="true" id="feaeb0c2-feb2-4a9c-98e3-48b1d1a339aa" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Calculator_Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Calculator_Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Arithmetic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Arithmetic.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/View/calculator_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/calculator_view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Controller/Calculator_ControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Controller/Calculator_ControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Model/ArithmeticSquerRootTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/ArithmeticSquerRootTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/View/calculator_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/calculator_view.fxml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -85,7 +80,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/target/classes/View" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Problems" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -102,6 +97,13 @@
       <recent name="Controller" />
       <recent name="Model" />
     </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Calculator" />
+      <recent name="D:\Calculator\target\classes\View" />
+      <recent name="D:\Calculator\src\main\java\View\src" />
+      <recent name="D:\Calculator\target\classes" />
+      <recent name="D:\Calculator\target" />
+    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="View" />
       <recent name="Model" />
@@ -109,13 +111,6 @@
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
       <recent name="org.testfx.framework.junit.ApplicationTest" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Calculator\target\classes\View" />
-      <recent name="D:\Calculator\src\main\java\View\src" />
-      <recent name="D:\Calculator\target\classes" />
-      <recent name="D:\Calculator\target" />
-      <recent name="C:\Users\Дарья\IdeaProjects\Calculator\target\classes\View" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -723,6 +718,11 @@
           <url>file://$PROJECT_DIR$/src/main/java/Controller/Calculator_Controller.java</url>
           <line>659</line>
           <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Controller/Calculator_Controller.java</url>
+          <line>251</line>
+          <option name="timeStamp" value="31" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
