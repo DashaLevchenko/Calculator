@@ -23,8 +23,8 @@ class NumberFormatter {
 
     static String formatterNumber(BigDecimal number) {
         StringBuilder pattern = new StringBuilder();
+        number = roundUp(number);
         if (number.abs().compareTo(MAX_NUMBER_INPUT) > 0) {
-            number = number.round(new MathContext(MAX_SCALE, RoundingMode.HALF_UP));
             if (number.precision() - number.scale() > MAX_SCALE) {
                 pattern.append("0.");
                 number = number.stripTrailingZeros();
@@ -42,11 +42,10 @@ class NumberFormatter {
                 }
             }
         } else if (number.abs().compareTo(BigDecimal.ONE) < 0 && number.abs().compareTo(BigDecimal.ZERO) != 0) {
-            pattern.append("0.");
-            number = number.round(new MathContext(MAX_SCALE, RoundingMode.HALF_UP));
             number = number.stripTrailingZeros();
 
             if (number.scale() > MAX_SCALE) {
+                pattern.append("0.");
                 if ((number.scale() - number.precision() > 2) || number.abs().compareTo(MIN_DECIMAL_NUMBER_WITHOUT_E) < 0) {
                     if (number.precision() != 1 && number.precision() <= MAX_SCALE) {
                         pattern.append("#".repeat(number.precision()));
@@ -57,16 +56,14 @@ class NumberFormatter {
                     pattern.append("#".repeat(MAX_SCALE));
                 }
             } else {
-                pattern.append("#".repeat(number.scale()));
+                pattern.append("0.").append("#".repeat(number.scale()));
             }
         } else {
             pattern.append("#,##0");
             if (number.scale() > 0) {
-                number = number.setScale(MAX_SCALE, RoundingMode.HALF_UP);
                 if (number.scale() < MAX_SCALE) {
                     pattern.append(".").append("#".repeat(number.scale()));
                 } else {
-                    number = number.round(new MathContext(MAX_SCALE, RoundingMode.HALF_EVEN));
                     pattern.append(".").append("#".repeat(MAX_SCALE));
                 }
             }
@@ -78,6 +75,23 @@ class NumberFormatter {
         }
 
         return outNumber;
+    }
+
+    private static BigDecimal roundUp(BigDecimal number) {
+        String numberStr = number.round(new MathContext(MAX_SCALE + 1, RoundingMode.HALF_DOWN)).toPlainString();
+
+        if (numberStr.contains(".")) {
+            String decimalPart = numberStr.substring(numberStr.indexOf(".") + 1);
+            long countNine = decimalPart.chars().filter(ch -> ch == '9').count();
+            if (countNine == decimalPart.length()) {
+                number = number.round(new MathContext(MAX_SCALE, RoundingMode.UP));
+            } else {
+                number = number.round(new MathContext(MAX_SCALE, RoundingMode.HALF_DOWN));
+            }
+        } else {
+            number = number.round(new MathContext(MAX_SCALE, RoundingMode.HALF_UP));
+        }
+        return number;
     }
 
     static BigDecimal parseNumber(String text) {

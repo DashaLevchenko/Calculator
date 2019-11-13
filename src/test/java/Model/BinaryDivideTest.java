@@ -8,7 +8,9 @@ import java.math.MathContext;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
-class ArithmeticDivideTest {
+class BinaryDivideTest {
+
+    private Binary binary = new Binary();
 
     @Test
     void divideInteger() {
@@ -2016,50 +2018,57 @@ class ArithmeticDivideTest {
     void assertionDivideValid(String xString, String yString, String resultString) {
         BigDecimal x = new BigDecimal(xString);
         BigDecimal y = new BigDecimal(yString);
-        BigDecimal result = new BigDecimal(resultString);
 
-        assertEquals(result, Arithmetic.divide(x, y));
-        assertEquals(x.divide(y, MathContext.DECIMAL128), Arithmetic.divide(x, y));
-        assertEquals(result, Arithmetic.calculate(x, y, OperationsEnum.DIVIDE));
+        binary.setNumberFirst(x);
+        binary.setNumberSecond(y);
+        binary.divide();
 
+        BigDecimal resultExpected = new BigDecimal(resultString);
+        BigDecimal resultActual = binary.getResult();
 
-        assertDivideInvalid(x, y);
+        assertEquals(resultExpected, resultActual);
+        assertEquals(x.divide(y, MathContext.DECIMAL128), resultActual);
+
+        binary.calculateBinary(OperationsEnum.DIVIDE);
+        assertEquals(resultExpected, binary.getResult());
+
+        assertDivideInvalid();
     }
 
-    private void assertDivideInvalid(BigDecimal x, BigDecimal y) {
-        assertEnumNull(x, y);
-        assertionDivideNotValid(x);
-        assertionDivideNotValid(y);
+    private void assertDivideInvalid() {
+        assertEnumNull();
+        assertionDivideNotValid();
 
-        assertEnumInvalid(x, y, OperationsEnum.SQR);
-        assertEnumInvalid(x, y, OperationsEnum.SQRT);
-        assertEnumInvalid(x, y, OperationsEnum.ONE_DIVIDE_X);
+        assertEnumInvalid(OperationsEnum.SQR);
+        assertEnumInvalid(OperationsEnum.SQRT);
+        assertEnumInvalid(OperationsEnum.ONE_DIVIDE_X);
     }
 
-    private void assertEnumInvalid(BigDecimal x, BigDecimal y, OperationsEnum operationsEnum) {
+    private void assertEnumInvalid(OperationsEnum operationsEnum) {
         try {
-            Arithmetic.calculate(x, y, operationsEnum);
+            binary.calculateBinary(operationsEnum);
             fail();
         } catch (IllegalArgumentException e) {
             assertEquals(e.getMessage(), "Enter binary operation");
         }
     }
 
-    private void assertEnumNull(BigDecimal x, BigDecimal y) {
+    private void assertEnumNull() {
         try {
-            Arithmetic.calculate(x, y, null);
+            binary.calculateBinary(null);
             fail();
         } catch (NullPointerException e) {
-            assertEquals(e.getMessage(), "Enter operation: ADD, SUBTRACT, MULTIPLY, PERCENT, DIVIDE");
+            assertEquals("Enter operation", e.getMessage());
         }
     }
 
-    void assertionDivideNotValid(BigDecimal x) {
+    void assertionDivideNotValid() {
         try {
-            Arithmetic.divide(x, BigDecimal.ZERO);
+            binary.setNumberSecond(BigDecimal.ZERO);
+            binary.calculateBinary(OperationsEnum.DIVIDE);
             fail();
         } catch (ArithmeticException e) {
-            if (x.equals(BigDecimal.ZERO)) {
+            if (binary.getNumberFirst().equals(BigDecimal.ZERO)) {
                 assertEquals("Result is undefined", e.getMessage());
             } else {
                 assertEquals("Cannot divide by zero", e.getMessage());

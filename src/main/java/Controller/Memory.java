@@ -1,7 +1,5 @@
 package Controller;
 
-import Model.Arithmetic;
-
 import java.math.BigDecimal;
 
 class Memory {
@@ -9,7 +7,7 @@ class Memory {
 
     void memoryAdd(BigDecimal numberSecond) throws ArithmeticException {
         if (number != null) {
-            number = Arithmetic.sum(number, numberSecond);
+            number = number.add(numberSecond);
         } else{
             number = numberSecond;
         }
@@ -17,9 +15,9 @@ class Memory {
 
     void memorySubtract(BigDecimal numberSecond) {
         if (number != null) {
-            number = Arithmetic.subtract(number, numberSecond);
+            number = number.subtract(numberSecond);
         } else{
-            number = numberSecond;
+            number = BigDecimal.ZERO.subtract(numberSecond);
         }
     }
 

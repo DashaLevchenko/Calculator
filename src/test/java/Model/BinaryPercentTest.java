@@ -6,10 +6,10 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
-class ArithmeticPercentTest {
-
+class BinaryPercentTest {
+    private Binary binary = new Binary();
     @Test
     void percentInteger() {
         assertionsPercent("0", "0", "0");
@@ -2016,53 +2016,24 @@ class ArithmeticPercentTest {
     void assertionsPercent(String xString, String percentString, String resultString) {
         BigDecimal x = new BigDecimal(xString);
         BigDecimal percent = new BigDecimal(percentString);
-        BigDecimal result = new BigDecimal(resultString);
+        binary.percent(x, percent);
+        BigDecimal resultActual = binary.getResult();
+        BigDecimal resultExpected = new BigDecimal(resultString);
 
-        assertEquals(result,  Arithmetic.percent(x, percent));
-        assertEquals(x.multiply(percent.divide(BigDecimal.valueOf(100)), MathContext.DECIMAL128), Arithmetic.percent(x, percent));
-        assertEquals(result, Arithmetic.calculate(x, percent,  OperationsEnum.PERCENT));
-        assertEquals(BigDecimal.ZERO, Arithmetic.calculate(x, OperationsEnum.PERCENT));
-
-        assertPercentInvalid(x, percent);
-
+        assertEquals(resultExpected,  resultActual);
+        assertEquals(x.multiply(percent.divide(BigDecimal.valueOf(100)), MathContext.DECIMAL128), resultActual);
+        assertPercentInvalid();
     }
 
-    private void assertPercentInvalid(BigDecimal x, BigDecimal percent) {
-        assertEnumNullTwoOperand(x, percent);
-        assertEnumNullOneOperand(x);
-        assertEnumInvalid(x, OperationsEnum.ADD);
-        assertEnumInvalid(x, OperationsEnum.SUBTRACT);
-        assertEnumInvalid(x, OperationsEnum.DIVIDE);
-        assertEnumInvalid(x, OperationsEnum.MULTIPLY);
+    private void assertPercentInvalid() {
+        binary.setNumberFirst(null);
+        binary.setNumberSecond(null);
+        binary.setResult(null);
+        binary.calculateBinary(OperationsEnum.PERCENT);
+
+        assertNull(binary.getNumberFirst());
+        assertNull(binary.getNumberSecond());
+        assertNull(binary.getResult());
+
     }
-
-    private void assertEnumInvalid(BigDecimal x, OperationsEnum operationsEnum) {
-        try {
-            Arithmetic.calculate(x, operationsEnum);
-            fail();
-        }catch(IllegalArgumentException e){
-            assertEquals(e.getMessage(), "Enter unary operation");
-        }
-    }
-
-    private void assertEnumNullOneOperand(BigDecimal x) {
-        try {
-            Arithmetic.calculate(x, null);
-            fail();
-        }catch(NullPointerException e){
-            assertEquals(e.getMessage(), "Enter operation: SQRT, SQR, ONE_DIVIDE_X, PERCENT");
-        }
-    }
-
-    private void assertEnumNullTwoOperand(BigDecimal x, BigDecimal percent) {
-        try {
-            Arithmetic.calculate(x, percent, null);
-            fail();
-        }catch(NullPointerException e){
-            assertEquals(e.getMessage(), "Enter operation: ADD, SUBTRACT, MULTIPLY, PERCENT, DIVIDE");
-        }
-    }
-
-
-
 }

@@ -8,8 +8,8 @@ import java.math.MathContext;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
-class ArithmeticSumTest {
-
+class BinarySumTest {
+    private Binary binary = new Binary();
     @Test
     void sumInteger() {
         //1 digit
@@ -2036,44 +2036,52 @@ class ArithmeticSumTest {
     }
 
 
-    void assertionSum(String xString, String yString, String sum) {
+    void assertionSum(String xString, String yString, String resultString) {
         BigDecimal x = new BigDecimal(xString);
         BigDecimal y = new BigDecimal(yString);
 
-        BigDecimal sumBig = new BigDecimal(sum);
+        binary.setNumberFirst(x);
+        binary.setNumberSecond(y);
+        binary.add();
 
-        assertEquals(sumBig, Arithmetic.sum(x, y));
-        assertEquals(x.add(y).round(MathContext.DECIMAL128), Arithmetic.sum(x, y));
-        assertEquals(sumBig, Arithmetic.calculate(x, y, OperationsEnum.ADD));
+        BigDecimal resultExpected = new BigDecimal(resultString);
+        BigDecimal resultActual = binary.getResult();
 
-        assertSumInvalid(x, y);
+        assertEquals(resultExpected, resultActual);
+        assertEquals(x.add(y, MathContext.DECIMAL128), resultActual);
+
+        binary.calculateBinary(OperationsEnum.ADD);
+        assertEquals(resultExpected, binary.getResult());
+
+        assertAddInvalid();
     }
 
-    private void assertSumInvalid(BigDecimal x, BigDecimal y) {
-        assertEnumNull(x, y);
+    private void assertAddInvalid() {
+        assertEnumNull();
 
-        assertEnumInvalid(x, y, OperationsEnum.SQR);
-        assertEnumInvalid(x, y, OperationsEnum.SQRT);
-        assertEnumInvalid(x, y, OperationsEnum.ONE_DIVIDE_X);
+        assertEnumInvalid(OperationsEnum.SQR);
+        assertEnumInvalid(OperationsEnum.SQRT);
+        assertEnumInvalid(OperationsEnum.ONE_DIVIDE_X);
     }
 
-    private void assertEnumInvalid(BigDecimal x, BigDecimal y, OperationsEnum operationsEnum) {
+    private void assertEnumInvalid(OperationsEnum operationsEnum) {
         try {
-            Arithmetic.calculate(x, y, operationsEnum);
+            binary.calculateBinary(operationsEnum);
             fail();
         } catch (IllegalArgumentException e) {
             assertEquals(e.getMessage(), "Enter binary operation");
         }
     }
 
-    private void assertEnumNull(BigDecimal x, BigDecimal y) {
+    private void assertEnumNull() {
         try {
-            Arithmetic.calculate(x, y, null);
+            binary.calculateBinary(null);
             fail();
         } catch (NullPointerException e) {
-            assertEquals(e.getMessage(), "Enter operation: ADD, SUBTRACT, MULTIPLY, PERCENT, DIVIDE");
+            assertEquals("Enter operation", e.getMessage());
         }
     }
+
 
 }
 

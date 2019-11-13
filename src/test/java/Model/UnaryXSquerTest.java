@@ -8,11 +8,12 @@ import java.math.MathContext;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
-class ArithmeticXSquerTest {
+class UnaryXSquerTest {
+    private Unary unary = new Unary();
 
     @Test
     void xSquareInteger() {
-//        assertionXSqureValid("0", "0");
+        assertionXSqureValid("0", "0");
         assertionXSqureValid("1", "1");
         assertionXSqureValid("-1", "1");
         assertionXSqureValid("2", "4");
@@ -648,8 +649,6 @@ class ArithmeticXSquerTest {
         assertionXSqureValid("-0.003", "0.000009");
         assertionXSqureValid("0.004", "0.000016");
         assertionXSqureValid("-0.004", "0.000016");
-        assertionXSqureValid("0.004", "0.000016");
-        assertionXSqureValid("-0.004", "0.000016");
         assertionXSqureValid("0.005", "0.000025");
         assertionXSqureValid("-0.005", "0.000025");
         assertionXSqureValid("0.006", "0.000036");
@@ -825,40 +824,44 @@ class ArithmeticXSquerTest {
 
     void assertionXSqureValid(String xString, String resultString) {
         BigDecimal x = new BigDecimal(xString);
+        BigDecimal resultExpected = new BigDecimal(resultString);
+        unary.setNumber(x);
+        unary.xSquare();
+        BigDecimal resultActual = unary.getResult();
 
-        BigDecimal result = new BigDecimal(resultString);
+        assertEquals(resultExpected, resultActual);
+        assertEquals(x.pow(2, MathContext.DECIMAL128), resultActual);
 
-        assertEquals(result, Arithmetic.xSquare(x));
-        assertEquals(x.pow(2, MathContext.DECIMAL128), Arithmetic.xSquare(x));
-        assertEquals(result, Arithmetic.calculate(x, OperationsEnum.SQR));
+        unary.calculateUnary(OperationsEnum.SQR);
+        assertEquals(resultExpected, unary.getResult());
 
-        assertXSquareInvalid(x);
+        assertXSquareInvalid();
     }
 
-    private void assertXSquareInvalid(BigDecimal x) {
-        assertEnumNull(x);
+    private void assertXSquareInvalid() {
+        assertEnumNull();
 
-        assertEnumInvalid(x, OperationsEnum.ADD);
-        assertEnumInvalid(x, OperationsEnum.SUBTRACT);
-        assertEnumInvalid(x, OperationsEnum.DIVIDE);
-        assertEnumInvalid(x, OperationsEnum.MULTIPLY);
+        assertEnumInvalid(OperationsEnum.ADD);
+        assertEnumInvalid(OperationsEnum.SUBTRACT);
+        assertEnumInvalid(OperationsEnum.DIVIDE);
+        assertEnumInvalid(OperationsEnum.MULTIPLY);
     }
 
-    private void assertEnumInvalid(BigDecimal x, OperationsEnum operationsEnum) {
+    private void assertEnumInvalid(OperationsEnum operationsEnum) {
         try {
-            Arithmetic.calculate(x, operationsEnum);
+            unary.calculateUnary(operationsEnum);
             fail();
         } catch (IllegalArgumentException e) {
-            assertEquals(e.getMessage(), "Enter unary operation");
+            assertEquals( "Enter unary operation", e.getMessage());
         }
     }
 
-    private void assertEnumNull(BigDecimal x) {
+    private void assertEnumNull() {
         try {
-            Arithmetic.calculate(x, null);
+            unary.calculateUnary(null);
             fail();
         } catch (NullPointerException e) {
-            assertEquals(e.getMessage(), "Enter operation: SQRT, SQR, ONE_DIVIDE_X, PERCENT");
+            assertEquals("Enter operation", e.getMessage());
         }
 
     }
