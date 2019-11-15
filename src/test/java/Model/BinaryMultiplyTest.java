@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 class BinaryMultiplyTest {
     private Binary binary = new Binary();
     @Test
-    void multiplyInteger() {
+    void multiplyInteger(){
         assertionMultiply("0", "0", "0");
         assertionMultiply("0", "1", "0");
         assertionMultiply("0", "-1", "0");
@@ -1272,8 +1272,6 @@ class BinaryMultiplyTest {
         assertionMultiply("986859867454E10967", "-536556E643", "-5.29505583041648424E+11627");
         assertionMultiply("-986859867454E10967", "536556E643", "-5.29505583041648424E+11627");
         assertionMultiply("-986859867454E10967", "-536556E643", "5.29505583041648424E+11627");
-
-
     }
 
     @Test
@@ -2012,8 +2010,6 @@ class BinaryMultiplyTest {
         assertionMultiply("986859867454E-10967", "-536556E-643", "-5.29505583041648424E-11593");
         assertionMultiply("-986859867454E-10967", "536556E-643", "-5.29505583041648424E-11593");
         assertionMultiply("-986859867454E-10967", "-536556E-643", "5.29505583041648424E-11593");
-
-
     }
 
     void assertionMultiply(String xString, String yString, String resultString) {

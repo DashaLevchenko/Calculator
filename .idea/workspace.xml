@@ -7,25 +7,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="feaeb0c2-feb2-4a9c-98e3-48b1d1a339aa" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Model/Binary.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Model/Unary.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/Model/UnaryPercentTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dictionaries/User.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/User.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Calculator_Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Calculator_Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Memory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Memory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/NumberFormatter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/NumberFormatter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Arithmetic.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Binary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Binary.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/Controller/Calculator_ControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Controller/Calculator_ControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Model/ArithmeticDivideTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/BinaryDivideTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Model/ArithmeticMinusTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/BinaryMinusTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Model/ArithmeticMultiplyTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/BinaryMultiplyTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Model/ArithmeticOneDivideXTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/UnaryOneDivideXTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Model/ArithmeticPercentTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/BinaryPercentTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Model/ArithmeticSquerRootTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/UnarySquerRootTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Model/ArithmeticSumTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/BinarySumTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Model/ArithmeticXSquerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/UnaryXSquerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Model/BinaryDivideTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/BinaryDivideTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Model/BinaryMinusTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/BinaryMinusTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Model/BinaryMultiplyTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/BinaryMultiplyTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Model/BinarySumTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/BinarySumTest.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -43,6 +33,7 @@
     <option name="hideWarnings" value="true" />
     <option name="HIDE_WARNINGS" value="true" />
   </component>
+  <component name="ExportTestResults" exportFormat="Xml" outputFolder="D:/" userTempatePath="" />
   <component name="FavoritesManager">
     <favorites_list name="Calculator" />
   </component>
@@ -53,8 +44,8 @@
         <option value="module-info" />
         <option value="FxmlFile" />
         <option value="Enum" />
-        <option value="JUnit5 Test Class" />
         <option value="Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -107,13 +98,21 @@
   </component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.RecentsKey">
-      <recent name="Model" />
       <recent name="Controller" />
+      <recent name="Model" />
       <recent name="View" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="Controller" />
       <recent name="Model" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+      <recent name="org.testfx.framework.junit.ApplicationTest" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="Model" />
+      <recent name="View" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\User\IdeaProjects\Calculator2\src\test\java" />
@@ -121,14 +120,6 @@
       <recent name="D:\Calculator" />
       <recent name="D:\Calculator\target\classes\View" />
       <recent name="D:\Calculator\src\main\java\View\src" />
-    </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="Model" />
-      <recent name="View" />
-    </key>
-    <key name="CreateTestDialog.Recents.Supers">
-      <recent name="" />
-      <recent name="org.testfx.framework.junit.ApplicationTest" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -148,7 +139,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Calculator_Main">
+  <component name="RunManager" selected="JUnit.Calculator_ControllerTest">
     <configuration name="Calculator_Main" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Controller.Calculator_Main" />
       <module name="Calculator2" />
@@ -158,6 +149,53 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BinaryDivideTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Calculator2" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Model.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Model" />
+      <option name="MAIN_CLASS_NAME" value="Model.BinaryDivideTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BinaryDivideTest.divideInteger" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Calculator2" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Model.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Model" />
+      <option name="MAIN_CLASS_NAME" value="Model.BinaryDivideTest" />
+      <option name="METHOD_NAME" value="divideInteger" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BinaryDivideTest.f" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Calculator2" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Model.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Model" />
+      <option name="MAIN_CLASS_NAME" value="Model.BinaryDivideTest" />
+      <option name="METHOD_NAME" value="f" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -192,7 +230,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Calculator_ControllerTest.checkAdd" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="Calculator_ControllerTest.checkDivide" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Calculator2" />
       <extension name="coverage">
         <pattern>
@@ -202,54 +240,8 @@
       </extension>
       <option name="PACKAGE_NAME" value="Controller" />
       <option name="MAIN_CLASS_NAME" value="Controller.Calculator_ControllerTest" />
-      <option name="METHOD_NAME" value="checkAdd" />
+      <option name="METHOD_NAME" value="checkDivide" />
       <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Calculator_ControllerTest.checkOverflow" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Calculator2" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Controller.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="Controller" />
-      <option name="MAIN_CLASS_NAME" value="Controller.Calculator_ControllerTest" />
-      <option name="METHOD_NAME" value="checkOverflow" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Calculator_ControllerTest.checkPercent" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Calculator2" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Controller.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="Controller" />
-      <option name="MAIN_CLASS_NAME" value="Controller.Calculator_ControllerTest" />
-      <option name="METHOD_NAME" value="checkPercent" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Model in Calculator2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Calculator2" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Model.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="Model" />
-      <option name="TEST_OBJECT" value="package" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -257,19 +249,19 @@
     <list>
       <item itemvalue="Application.Calculator_Main" />
       <item itemvalue="JUnit.Calculator_ControllerTest" />
-      <item itemvalue="JUnit.Model in Calculator2" />
       <item itemvalue="JUnit.Calculator_ControllerTest (1)" />
-      <item itemvalue="JUnit.Calculator_ControllerTest.checkOverflow" />
-      <item itemvalue="JUnit.Calculator_ControllerTest.checkAdd" />
-      <item itemvalue="JUnit.Calculator_ControllerTest.checkPercent" />
+      <item itemvalue="JUnit.Calculator_ControllerTest.checkDivide" />
+      <item itemvalue="JUnit.BinaryDivideTest" />
+      <item itemvalue="JUnit.BinaryDivideTest.divideInteger" />
+      <item itemvalue="JUnit.BinaryDivideTest.f" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.Calculator_ControllerTest.checkOverflow" />
-        <item itemvalue="JUnit.Calculator_ControllerTest.checkPercent" />
+        <item itemvalue="JUnit.BinaryDivideTest.f" />
+        <item itemvalue="JUnit.BinaryDivideTest.divideInteger" />
+        <item itemvalue="JUnit.BinaryDivideTest" />
+        <item itemvalue="JUnit.Calculator_ControllerTest.checkDivide" />
         <item itemvalue="JUnit.Calculator_ControllerTest (1)" />
-        <item itemvalue="JUnit.Calculator_ControllerTest.checkAdd" />
-        <item itemvalue="JUnit.Model in Calculator2" />
       </list>
     </recent_temporary>
   </component>
@@ -296,13 +288,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1565432602101</updated>
-    </task>
-    <task id="LOCAL-00022" summary="need to sort all tests besides sumTest,&#10;new method squareRoot(), writing tests">
-      <created>1567006020714</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1567006020715</updated>
     </task>
     <task id="LOCAL-00023" summary="Model is ready, need to add MovePoint, Memory(method), sort all tests">
       <created>1567440211453</created>
@@ -640,7 +625,14 @@
       <option name="project" value="LOCAL" />
       <updated>1572963431636</updated>
     </task>
-    <option name="localTasksCounter" value="71" />
+    <task id="LOCAL-00071" summary="before change MathContex in model">
+      <created>1573642760679</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1573642760679</updated>
+    </task>
+    <option name="localTasksCounter" value="72" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -701,7 +693,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="before delete textOut" />
     <MESSAGE value="create new separate method" />
     <MESSAGE value="numberFormatter in main is work" />
     <MESSAGE value="before textWithoutSeparate" />
@@ -726,14 +717,15 @@
     <MESSAGE value="before change formatter" />
     <MESSAGE value="border work" />
     <MESSAGE value="before change format tests" />
-    <option name="LAST_COMMIT_MESSAGE" value="before change format tests" />
+    <MESSAGE value="before change MathContex in model" />
+    <option name="LAST_COMMIT_MESSAGE" value="before change MathContex in model" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/Controller/Calculator_Controller.java</url>
-          <line>1127</line>
+          <line>1129</line>
           <option name="timeStamp" value="50" />
         </line-breakpoint>
         <line-breakpoint type="java-line">
@@ -743,23 +735,18 @@
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/Controller/Calculator_Controller.java</url>
-          <line>1184</line>
-          <option name="timeStamp" value="82" />
-        </line-breakpoint>
-        <line-breakpoint type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/Controller/Calculator_Controller.java</url>
-          <line>547</line>
-          <option name="timeStamp" value="87" />
-        </line-breakpoint>
-        <line-breakpoint type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/Controller/Calculator_Controller.java</url>
           <line>842</line>
           <option name="timeStamp" value="90" />
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/Controller/Calculator_Controller.java</url>
-          <line>1023</line>
+          <line>1025</line>
           <option name="timeStamp" value="92" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Controller/Calculator_Controller.java</url>
+          <line>1187</line>
+          <option name="timeStamp" value="94" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

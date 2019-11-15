@@ -5,9 +5,10 @@ import java.math.MathContext;
 
 
 public class Binary {
-//    private final MathContext mathContext = new MathContext(20000);
-    private final MathContext mathContext = MathContext.DECIMAL128;
-//    private final MathContext mathContext = new MathContext(34, RoundingMode.DOWN);
+    private final MathContext mathContext = new MathContext(20000);
+    private BigDecimal numberFirst = null;
+    private BigDecimal numberSecond = null;
+    private BigDecimal result = null;
 
     public BigDecimal getNumberFirst() {
         return numberFirst;
@@ -25,9 +26,6 @@ public class Binary {
         this.numberSecond = numberSecond;
     }
 
-    private BigDecimal numberFirst = null;
-    private BigDecimal numberSecond = null;
-    private BigDecimal result = null;
 
     public void setResult(BigDecimal result) {
         this.result = result;
@@ -38,16 +36,15 @@ public class Binary {
     }
 
     public void add() {
-        int scale = numberFirst.add(numberSecond).precision();
-        result = numberFirst.add(numberSecond).round(new MathContext(scale));
+        result = numberFirst.add(numberSecond);
     }
 
     public void subtract() {
-        result = numberFirst.subtract(numberSecond).round(mathContext);
+        result = numberFirst.subtract(numberSecond);
     }
 
     public void multiply() {
-        result = numberFirst.multiply(numberSecond).round(mathContext);
+        result = numberFirst.multiply(numberSecond);
     }
 
     public void divide() throws ArithmeticException {
@@ -66,7 +63,7 @@ public class Binary {
     }
 
     public void percent(BigDecimal number, BigDecimal percent){
-        result = number.multiply(percent.divide(BigDecimal.valueOf(100), mathContext), mathContext);
+        result = number.multiply(percent.divide(BigDecimal.valueOf(100), mathContext));
     }
 
     public void calculateBinary(OperationsEnum operation) {
@@ -85,7 +82,6 @@ public class Binary {
             } else {
                 throw new IllegalArgumentException("Enter binary operation");
             }
-            System.out.println(result);
             numberFirst = result;
         }
     }

@@ -163,8 +163,8 @@ public class Calculator_Controller {
 
     private static final double MAX_FONT_SIZE = 71;
     private final int CHAR_MAX_INPUT = 16;
-    private  final BigDecimal MAX_NUMBER_INTEGER = new BigDecimal("1E10000");
-    private  final BigDecimal MIN_NUMBER_DECIMAL = new BigDecimal("1E-10000");
+    private final BigDecimal MAX_NUMBER_INTEGER = new BigDecimal("1E10000");
+    private final BigDecimal MIN_NUMBER_DECIMAL = new BigDecimal("1E-10000");
 
     private OperationsEnum binaryOperation;
     private OperationsEnum unaryOperation;
@@ -500,52 +500,52 @@ public class Calculator_Controller {
     public void pressedEqual() {
         if (isError) {
             C.fire();
-        }
-
-        if (binaryOperation != null) {
-            canChangeOperator = false;
-            if (binaryBinary.getNumberSecond() == null) {
-                if (!canBackspace) {
-                    if (binaryBinary.getResult() != null) {
-                        binaryBinary.setNumberSecond(binaryBinary.getNumberFirst());
-                    } else {
-                        if (binaryBinary.getNumberFirst() != null) {
+        } else {
+            if (binaryOperation != null) {
+                canChangeOperator = false;
+                if (binaryBinary.getNumberSecond() == null) {
+                    if (!canBackspace) {
+                        if (binaryBinary.getResult() != null) {
                             binaryBinary.setNumberSecond(binaryBinary.getNumberFirst());
                         } else {
-                            binaryBinary.setNumberSecond(NumberFormatter.parseNumber(outText.getText()));
+                            if (binaryBinary.getNumberFirst() != null) {
+                                binaryBinary.setNumberSecond(binaryBinary.getNumberFirst());
+                            } else {
+                                binaryBinary.setNumberSecond(NumberFormatter.parseNumber(outText.getText()));
+                            }
                         }
+                    } else {
+                        binaryBinary.setNumberSecond(NumberFormatter.parseNumber(outText.getText()));
                     }
-                } else {
-                    binaryBinary.setNumberSecond(NumberFormatter.parseNumber(outText.getText()));
                 }
+                calculateBinaryOperation();
             }
-            calculateBinaryOperation();
-        }
-        if (!isError) {
-            if (binaryBinary.getResult() != null) {
-                printResult(binaryBinary.getResult());
-                canBackspace = false;
-                if (!isError) {
+            if (!isError) {
+                if (binaryBinary.getResult() != null) {
+                    printResult(binaryBinary.getResult());
+                    canBackspace = false;
+                    if (!isError) {
+                        clearHistory();
+                    }
+                }
+                if (unaryOperation != null) {
                     clearHistory();
                 }
-            }
-            if (unaryOperation != null) {
-                clearHistory();
-            }
-            if (negatePressed) {
-                negateHistory = "";
-                negatePressed = false;
-            }
+                if (negatePressed) {
+                    negateHistory = "";
+                    negatePressed = false;
+                }
 
-            if (historyOperations.equals("0")) {
-                historyOperations = "";
+                if (historyOperations.equals("0")) {
+                    historyOperations = "";
+                    outOperationMemory.setText(historyOperations);
+                }
+
+                equalWasPress = true;
+                canBackspace = false;
+            } else {
                 outOperationMemory.setText(historyOperations);
             }
-
-            equalWasPress = true;
-            canBackspace = false;
-        } else {
-            outOperationMemory.setText(historyOperations);
         }
         scrollOutOperationMemory();
 
@@ -855,8 +855,10 @@ public class Calculator_Controller {
                     binaryBinary.setNumberSecond(NumberFormatter.parseNumber(outText.getText()).negate());
                 }
             } else {
-                binaryBinary.setNumberFirst(binaryBinary.getNumberFirst().negate());
-                binaryBinary.setResult(binaryBinary.getNumberFirst());
+                if (binaryBinary.getNumberFirst() != null) {
+                    binaryBinary.setNumberFirst(binaryBinary.getNumberFirst().negate());
+                    binaryBinary.setResult(binaryBinary.getNumberFirst());
+                }
             }
         } else {
             if (unaryOperation != null) {
@@ -1165,6 +1167,7 @@ public class Calculator_Controller {
     private void printResult(BigDecimal result) {
         try {
             isOverflow(result);
+            outText.setText(NumberFormatter.formatterNumber(result));
             resizeOutputText();
         } catch (ArithmeticException e) {
             printError(e);
@@ -1183,10 +1186,8 @@ public class Calculator_Controller {
 
         if (overflow) {
             throw new ArithmeticException("Overflow");
-        } else {
-            outText.setText(NumberFormatter.formatterNumber(result));
-
         }
+
 
     }
 
