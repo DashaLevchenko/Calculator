@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.Binary;
+import Model.Memory;
 import Model.OperationsEnum;
 import Model.Unary;
 import javafx.animation.TranslateTransition;

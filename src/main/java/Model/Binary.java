@@ -2,10 +2,13 @@ package Model;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
+import java.math.RoundingMode;
 
 
 public class Binary {
-    private final MathContext mathContext = new MathContext(20000);
+    private final MathContext mathContext = new MathContext(10000, RoundingMode.HALF_EVEN);
+    private final int defaultScale = 10000;
+    private final RoundingMode defaultRounding = RoundingMode.HALF_EVEN;
     private BigDecimal numberFirst = null;
     private BigDecimal numberSecond = null;
     private BigDecimal result = null;
@@ -53,17 +56,17 @@ public class Binary {
         } else if (numberSecond.equals(BigDecimal.ZERO)) {
             throw new ArithmeticException("Cannot divide by zero");
         } else {
-            result = numberFirst.divide(numberSecond, mathContext);
+            result = numberFirst.divide(numberSecond, defaultScale, defaultRounding);
         }
     }
 
     public void percent(BigDecimal number){
-        result = number.divide(BigDecimal.valueOf(100), mathContext);
+        result = number.divide(BigDecimal.valueOf(100), MathContext.DECIMAL128);
         numberSecond = result;
     }
 
     public void percent(BigDecimal number, BigDecimal percent){
-        result = number.multiply(percent.divide(BigDecimal.valueOf(100), mathContext));
+        result = number.multiply(percent.divide(BigDecimal.valueOf(100), MathContext.DECIMAL128));
     }
 
     public void calculateBinary(OperationsEnum operation) {

@@ -2021,7 +2021,7 @@ class BinaryPercentTest {
         BigDecimal resultExpected = new BigDecimal(resultString);
 
         assertEquals(resultExpected,  resultActual);
-        assertEquals(x.multiply(percent.divide(BigDecimal.valueOf(100)), MathContext.DECIMAL128), resultActual);
+        assertEquals(x.multiply(percent.divide(BigDecimal.valueOf(100), MathContext.DECIMAL128)), resultActual);
         assertPercentInvalid();
     }
 

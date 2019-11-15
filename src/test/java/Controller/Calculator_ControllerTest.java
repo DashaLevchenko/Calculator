@@ -251,7 +251,7 @@ class Calculator_ControllerTest extends ApplicationTest {
 
         /*
          * Max number visible => 9,999999999999999e+9999,
-         * max number form model for controller => 9999999999999999 49...99,99...99
+         * max number from model for controller => 9999999999999999 49...99,99...99
          * Max number is saved at memory for accelerate tests,
          * and called by  symbol
          */
@@ -440,7 +440,7 @@ class Calculator_ControllerTest extends ApplicationTest {
 
         /*
          * Max number visible => 9,999999999999999e+9999,
-         * max number form model for controller => 9999999999999999 49...99,99...99
+         * max number from model for controller => 9999999999999999 49...99,99...99
          * Max number is saved at memory for accelerate tests,
          * and called by  symbol
          */
@@ -629,7 +629,7 @@ class Calculator_ControllerTest extends ApplicationTest {
 
         /*
          * Max number visible => 9,999999999999999e+9999,
-         * max number form model for controller => 9999999999999999 49...99,99...99
+         * max number from model for controller => 9999999999999999 49...99,99...99
          * Max number is saved at memory for accelerate tests,
          * and called by  symbol
          */
@@ -818,7 +818,7 @@ class Calculator_ControllerTest extends ApplicationTest {
 
         /*
          * Max number visible => 9,999999999999999e+9999,
-         * max number form model for controller => 9999999999999999 49...99,99...99
+         * max number from model for controller => 9999999999999999 49...99,99...99
          * Max number is saved at memory for accelerate tests,
          * and called by  symbol
          */
@@ -1258,7 +1258,7 @@ class Calculator_ControllerTest extends ApplicationTest {
 
         assertNumber(MIN_POSITIVE_NUMBER_INPUT + "", "1,e-32", "sqr(0,0000000000000001)");
         assertNumber(MIN_POSITIVE_NUMBER_INPUT + " ", "1,e-32", "sqr(-0,0000000000000001)");
-        //max number visible - 9,999999999999999e+9999, max number form model for controller => 9,999999999999999499999999999999999e+9999
+        //max number visible - 9,999999999999999e+9999, max number from model for controller => 9,999999999999999499999999999999999e+9999
         assertNumber(MAX_POSITIVE_NUMBER + "", "Overflow", "sqr(9,999999999999999e+9999)");
         assertNumber(MAX_POSITIVE_NUMBER + " ", "Overflow", "sqr(negate(9,999999999999999e+9999))");
 
