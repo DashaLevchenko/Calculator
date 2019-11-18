@@ -35,7 +35,7 @@
                   <RowConstraints maxHeight="63.0" minHeight="10.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Label fx:id="outText" alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="73.0" prefWidth="312.0" style="-fx-background-color: e6e6e6;">
+                  <Label fx:id="generalDisplay" alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="73.0" prefWidth="312.0" stylesheets="@style.css">
                      <font>
                         <Font name="Segoe UI Semibold" size="46.0" />
                      </font>

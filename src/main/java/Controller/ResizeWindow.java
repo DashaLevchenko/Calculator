@@ -11,7 +11,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
-public class Resize {
+public class ResizeWindow {
     private Stage stage;
     private Scene scene;
     private double minWidth;
@@ -19,7 +19,7 @@ public class Resize {
     private Cursor cursorEvent = Cursor.DEFAULT;
 
 
-    Resize(Stage stage) {
+    ResizeWindow (Stage stage) {
         this.stage = stage;
         this.minWidth = stage.getMinWidth();
         this.minHeight = stage.getMinHeight();
@@ -153,6 +153,7 @@ public class Resize {
             stage.setY(mouseEvent.getScreenY());
         }
     }
+
 
 
 }
