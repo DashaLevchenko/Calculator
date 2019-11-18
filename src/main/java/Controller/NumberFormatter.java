@@ -21,7 +21,7 @@ class NumberFormatter {
         decimalFormat.setDecimalFormatSymbols(symbols);
     }
 
-    static String formatterNumber(BigDecimal number) {
+    static String numberFormatter(BigDecimal number) {
         StringBuilder pattern = new StringBuilder();
         number = roundUp(number);
         if (number.abs().compareTo(MAX_NUMBER_INPUT) > 0) {

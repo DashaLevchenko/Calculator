@@ -1189,28 +1189,28 @@ class BinarySumTest {
         BigDecimal x = new BigDecimal(xString);
         BigDecimal y = new BigDecimal(yString);
 
-        System.out.println("assertionSubtract(\""+xString+"\", \""+yString+"\", \""+x.subtract(y)+"\");");
-        if(count==3){
-            System.out.println();
-            count = 0;
-        }else{
-            count++;
-        }
+//        System.out.println("assertionSubtract(\""+xString+"\", \""+yString+"\", \""+x.subtract(y)+"\");");
+//        if(count==3){
+//            System.out.println();
+//            count = 0;
+//        }else{
+//            count++;
+//        }
 
-//        binary.setNumberFirst(x);
-//        binary.setNumberSecond(y);
-//        binary.add();
-//
-//        BigDecimal resultExpected = new BigDecimal(resultString);
-//        BigDecimal resultActual = binary.getResult();
-//
-//        assertEquals(resultExpected, resultActual);
-//        assertEquals(x.add(y), resultActual);
-//
-//        binary.calculateBinary(OperationsEnum.ADD);
-//        assertEquals(resultExpected, binary.getResult());
-//
-//        assertAddInvalid();
+        binary.setNumberFirst(x);
+        binary.setNumberSecond(y);
+        binary.add();
+
+        BigDecimal resultExpected = new BigDecimal(resultString);
+        BigDecimal resultActual = binary.getResult();
+
+        assertEquals(resultExpected, resultActual);
+        assertEquals(x.add(y), resultActual);
+
+        binary.calculateBinary(OperationsEnum.ADD);
+        assertEquals(resultExpected, binary.getResult());
+
+        assertAddInvalid();
     }
 
     private void assertAddInvalid() {
