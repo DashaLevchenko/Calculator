@@ -8,6 +8,5 @@ public enum OperationsEnum {
     PERCENT ,
     SQRT ,
     SQR,
-    ONE_DIVIDE_X ;
-
+    ONE_DIVIDE_X
 }

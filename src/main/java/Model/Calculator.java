@@ -22,19 +22,37 @@ public class Calculator {
     }
 
 
-    public BigDecimal calculator (OperationsEnum operationsEnum) {
-        if (numberFirst != null && numberSecond != null) {
+    public BigDecimal calculator (OperationsEnum operation) {
+        if (numberFirst != null && numberSecond != null && isBinary(operation)) {
             binary.setNumberFirst(numberFirst);
             binary.setNumberSecond(numberSecond);
-            binary.calculateBinary(operationsEnum);
+            binary.calculateBinary(operation);
             result = binary.getResult();
-        } else if (numberFirst != null) {
+        } else if (numberFirst != null && isUnary(operation)) {
             unary.setNumber(numberFirst);
-            unary.calculateUnary(operationsEnum);
+            unary.calculateUnary(operation);
             result = unary.getResult();
         }
         setNumberFirst(result);
         return result;
+    }
+
+    private boolean isBinary (OperationsEnum operation) {
+        if (operation.equals(OperationsEnum.ADD) || operation.equals(OperationsEnum.SUBTRACT) ||
+                operation.equals(OperationsEnum.MULTIPLY) || operation.equals(OperationsEnum.DIVIDE) || operation.equals(OperationsEnum.PERCENT)) {
+           return true;
+        } else {
+            return false;
+        }
+    }
+
+    private boolean isUnary (OperationsEnum operation) {
+        if (operation.equals(OperationsEnum.SQRT) || operation.equals(OperationsEnum.SQR) ||
+                operation.equals(OperationsEnum.ONE_DIVIDE_X) || operation.equals(OperationsEnum.PERCENT)) {
+           return true;
+        } else {
+            return false;
+        }
     }
 
     public void setNumberFirst (BigDecimal numberFirst) {

@@ -123,7 +123,7 @@
                   </GridPane>
                </children>
             </GridPane>
-            <GridPane hgap="1.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" vgap="3.0" GridPane.rowIndex="1">
+            <GridPane fx:id="calculatorButtons" hgap="1.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" vgap="3.0" GridPane.rowIndex="1">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
@@ -139,7 +139,7 @@
                   <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="46.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Button fx:id="PERCENT" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#percentOperation" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation" stylesheets="@style.css" text="">
+                  <Button fx:id="percent" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#percentOperation" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation" stylesheets="@style.css" text="">
                      <rotationAxis>
                         <Point3D />
                      </rotationAxis>
@@ -150,18 +150,18 @@
                         <Insets />
                      </GridPane.margin>
                   </Button>
-                  <Button fx:id="SQRT" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#unaryOperations" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation" stylesheets="@style.css" text="" GridPane.columnIndex="1">
+                  <Button fx:id="sqrt" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#unaryOperations" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation" stylesheets="@style.css" text="" GridPane.columnIndex="1">
                      <rotationAxis>
                         <Point3D />
                      </rotationAxis>
                      <font>
-                        <Font name="Segoe MDL2 Assets" size="15.0" />
+                        <Font name="Calculator MDL2 Assets" size="15.0" />
                      </font>
                      <GridPane.margin>
                         <Insets />
                      </GridPane.margin>
                   </Button>
-                  <Button fx:id="SQR" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#unaryOperations" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation" stylesheets="@style.css" text="" GridPane.columnIndex="2">
+                  <Button fx:id="sqr" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#unaryOperations" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation" stylesheets="@style.css" text="" GridPane.columnIndex="2">
                      <rotationAxis>
                         <Point3D />
                      </rotationAxis>
@@ -172,7 +172,7 @@
                         <Insets />
                      </GridPane.margin>
                   </Button>
-                  <Button fx:id="ONE_DIVIDE_X" contentDisplay="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#unaryOperations" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation" stylesheets="@style.css" text="" GridPane.columnIndex="3">
+                  <Button fx:id="oneDivideX" contentDisplay="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#unaryOperations" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation" stylesheets="@style.css" text="" GridPane.columnIndex="3">
                      <rotationAxis>
                         <Point3D />
                      </rotationAxis>
@@ -205,7 +205,7 @@
                         <Insets />
                      </GridPane.margin>
                   </Button>
-                  <Button fx:id="Backspace" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#inputBackspace" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation" stylesheets="@style.css" text="" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                  <Button fx:id="backspace" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#inputBackspace" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation" stylesheets="@style.css" text="" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <rotationAxis>
                         <Point3D />
                      </rotationAxis>
@@ -216,7 +216,7 @@
                         <Insets />
                      </GridPane.margin>
                   </Button>
-                  <Button fx:id="DIVIDE" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#binaryOperation" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation_arithmetic" stylesheets="@style.css" text="" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                  <Button fx:id="divide" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#binaryOperation" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation_arithmetic" stylesheets="@style.css" text="" GridPane.columnIndex="3" GridPane.rowIndex="1">
                      <rotationAxis>
                         <Point3D />
                      </rotationAxis>
@@ -232,7 +232,7 @@
                         <Point3D />
                      </rotationAxis>
                      <font>
-                        <Font name="Segoe UI Semibold" size="24.0" />
+                        <Font name="Segoe MDL2 Assets" size="24.0" />
                      </font>
                      <GridPane.margin>
                         <Insets />
@@ -243,7 +243,7 @@
                         <Point3D />
                      </rotationAxis>
                      <font>
-                        <Font name="Segoe UI Semibold" size="24.0" />
+                        <Font name="Segoe MDL2 Assets" size="24.0" />
                      </font>
                      <GridPane.margin>
                         <Insets />
@@ -254,13 +254,13 @@
                         <Point3D />
                      </rotationAxis>
                      <font>
-                        <Font name="Segoe UI Semibold" size="24.0" />
+                        <Font name="Segoe MDL2 Assets" size="24.0" />
                      </font>
                      <GridPane.margin>
                         <Insets />
                      </GridPane.margin>
                   </Button>
-                  <Button fx:id="MULTIPLY" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#binaryOperation" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation_arithmetic" stylesheets="@style.css" text="" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                  <Button fx:id="multiply" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#binaryOperation" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation_arithmetic" stylesheets="@style.css" text="" GridPane.columnIndex="3" GridPane.rowIndex="2">
                      <rotationAxis>
                         <Point3D />
                      </rotationAxis>
@@ -276,7 +276,7 @@
                         <Point3D />
                      </rotationAxis>
                      <font>
-                        <Font name="Segoe UI Semibold" size="24.0" />
+                        <Font name="Segoe MDL2 Assets" size="24.0" />
                      </font>
                      <GridPane.margin>
                         <Insets />
@@ -287,7 +287,7 @@
                         <Point3D />
                      </rotationAxis>
                      <font>
-                        <Font name="Segoe UI Semibold" size="24.0" />
+                        <Font name="Segoe MDL2 Assets" size="24.0" />
                      </font>
                      <GridPane.margin>
                         <Insets />
@@ -298,13 +298,13 @@
                         <Point3D />
                      </rotationAxis>
                      <font>
-                        <Font name="Segoe UI Semibold" size="24.0" />
+                        <Font name="Segoe MDL2 Assets" size="24.0" />
                      </font>
                      <GridPane.margin>
                         <Insets />
                      </GridPane.margin>
                   </Button>
-                  <Button fx:id="SUBTRACT" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#binaryOperation" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation_arithmetic" stylesheets="@style.css" text="" GridPane.columnIndex="3" GridPane.rowIndex="3">
+                  <Button fx:id="subtract" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#binaryOperation" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation_arithmetic" stylesheets="@style.css" text="" GridPane.columnIndex="3" GridPane.rowIndex="3">
                      <rotationAxis>
                         <Point3D />
                      </rotationAxis>
@@ -320,7 +320,7 @@
                         <Point3D />
                      </rotationAxis>
                      <font>
-                        <Font name="Segoe UI Semibold" size="25.0" />
+                        <Font name="Segoe MDL2 Assets" size="24.0" />
                      </font>
                      <GridPane.margin>
                         <Insets />
@@ -331,7 +331,7 @@
                         <Point3D />
                      </rotationAxis>
                      <font>
-                        <Font name="Segoe UI Semibold" size="24.0" />
+                        <Font name="Segoe MDL2 Assets" size="24.0" />
                      </font>
                      <GridPane.margin>
                         <Insets />
@@ -342,13 +342,13 @@
                         <Point3D />
                      </rotationAxis>
                      <font>
-                        <Font name="Segoe UI Semibold" size="24.0" />
+                        <Font name="Segoe MDL2 Assets" size="24.0" />
                      </font>
                      <GridPane.margin>
                         <Insets />
                      </GridPane.margin>
                   </Button>
-                  <Button fx:id="ADD" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#binaryOperation" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation_arithmetic" stylesheets="@style.css" text="" GridPane.columnIndex="3" GridPane.rowIndex="4">
+                  <Button fx:id="add" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#binaryOperation" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation_arithmetic" stylesheets="@style.css" text="" GridPane.columnIndex="3" GridPane.rowIndex="4">
                      <rotationAxis>
                         <Point3D />
                      </rotationAxis>
@@ -359,12 +359,12 @@
                         <Insets />
                      </GridPane.margin>
                   </Button>
-                  <Button fx:id="plusMinus" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#negate" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation" stylesheets="@style.css" text="" GridPane.rowIndex="5">
+                  <Button fx:id="plusMinus" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#negate" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation" stylesheets="@style.css" text="" GridPane.rowIndex="5">
                      <rotationAxis>
                         <Point3D />
                      </rotationAxis>
                      <font>
-                        <Font name="Segoe MDL2 Assets" size="15.0" />
+                        <Font name="Calculator MDL2 Assets" size="15.0" />
                      </font>
                      <GridPane.margin>
                         <Insets />
@@ -375,7 +375,7 @@
                         <Point3D />
                      </rotationAxis>
                      <font>
-                        <Font name="Segoe UI Semibold" size="24.0" />
+                        <Font name="Segoe MDL2 Assets" size="24.0" />
                      </font>
                      <GridPane.margin>
                         <Insets />
@@ -392,7 +392,7 @@
                         <Insets />
                      </GridPane.margin>
                   </Button>
-                  <Button fx:id="EQUAL" defaultButton="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#pressedEqual" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation_arithmetic" stylesheets="@style.css" text="" GridPane.columnIndex="3" GridPane.rowIndex="5">
+                  <Button fx:id="equal" defaultButton="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#pressedEqual" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation_arithmetic" stylesheets="@style.css" text="" GridPane.columnIndex="3" GridPane.rowIndex="5">
                      <rotationAxis>
                         <Point3D />
                      </rotationAxis>

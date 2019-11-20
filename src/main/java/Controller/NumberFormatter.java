@@ -7,13 +7,23 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.ParseException;
 
+/**
+ * Class formatters number for print
+ */
 class NumberFormatter {
     private static DecimalFormatSymbols symbols = new DecimalFormatSymbols();
     private static DecimalFormat decimalFormat = new DecimalFormat();
-    private static final BigDecimal MIN_DECIMAL_NUMBER_WITHOUT_E = BigDecimal.valueOf(0.0000000000000001);
+    /**
+     * Max number before make exponent number
+     */
     private static final BigDecimal MAX_NUMBER_INPUT = BigDecimal.valueOf(9999999999999999L);
+
+    /**
+     * Max scale for number print
+     */
     private static final int MAX_SCALE = 16;
 
+    //Set separator for formatter number
     static {
         symbols.setExponentSeparator("e");
         symbols.setGroupingSeparator(' ');
@@ -21,9 +31,15 @@ class NumberFormatter {
         decimalFormat.setDecimalFormatSymbols(symbols);
     }
 
+    /**
+     * Method formatters number for print on display
+     * @param number Number need to format
+     * @return String with number was formatted
+     */
     static String numberFormatter(BigDecimal number) {
         StringBuilder pattern = new StringBuilder();
-        number = roundUp(number);
+
+        number = roundNumber(number);
         if (number.abs().compareTo(MAX_NUMBER_INPUT) > 0) {
             if (number.precision() - number.scale() > MAX_SCALE) {
                 pattern.append("0.");
@@ -46,7 +62,7 @@ class NumberFormatter {
 
             if (number.scale() > MAX_SCALE) {
                 pattern.append("0.");
-                if ((number.scale() - number.precision() > 2) || number.abs().compareTo(MIN_DECIMAL_NUMBER_WITHOUT_E) < 0) {
+                if ((number.scale() - number.precision() > 2)) {
                     if (number.precision() != 1 && number.precision() <= MAX_SCALE) {
                         pattern.append("#".repeat(number.precision()));
                     }
@@ -77,7 +93,7 @@ class NumberFormatter {
         return outNumber;
     }
 
-    private static BigDecimal roundUp(BigDecimal number) {
+    private static BigDecimal roundNumber(BigDecimal number) {
         String numberStr = number.round(new MathContext(MAX_SCALE + 1, RoundingMode.HALF_DOWN)).toPlainString();
 
         if (numberStr.contains(".")) {
@@ -94,6 +110,11 @@ class NumberFormatter {
         return number;
     }
 
+    /**
+     * Method parses number from text
+     * @param text Text need to parse
+     * @return Number was parsed
+     */
     static BigDecimal parseNumber(String text) {
         BigDecimal number = null;
         text = text.replace("+", "").replace(" ", "");
@@ -114,6 +135,11 @@ class NumberFormatter {
         return number;
     }
 
+    /**
+     * Method returns text was formatted
+     * @param text Text need to formatter
+     * @return Text was formatted
+     */
     static String formatterInputNumber(String text) {
         BigDecimal number = new BigDecimal(text.replace(",", "."));
         StringBuilder pattern = new StringBuilder();

@@ -15,7 +15,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -23,6 +22,9 @@ import java.math.BigDecimal;
 
 public class Calculator_Controller {
     //region FXML object
+    @FXML
+    private GridPane calculatorButtons;
+
     @FXML
     private Button zero;
 
@@ -72,31 +74,31 @@ public class Calculator_Controller {
     private Button memorySubtract;
 
     @FXML
-    private Button DIVIDE;
+    private Button divide;
 
     @FXML
-    private Button MULTIPLY;
+    private Button multiply;
 
     @FXML
-    private Button SUBTRACT;
+    private Button subtract;
 
     @FXML
-    private Button ADD;
+    private Button add;
 
     @FXML
-    private Button EQUAL;
+    private Button equal;
 
     @FXML
-    private Button PERCENT;
+    private Button percent;
 
     @FXML
-    private Button SQRT;
+    private Button sqrt;
 
     @FXML
-    private Button SQR;
+    private Button sqr;
 
     @FXML
-    private Button ONE_DIVIDE_X;
+    private Button oneDivideX;
 
     @FXML
     private Label generalDisplay;
@@ -120,7 +122,7 @@ public class Calculator_Controller {
     private Button C;
 
     @FXML
-    private Button Backspace;
+    private Button backspace;
 
     @FXML
     private Button plusMinus;
@@ -140,6 +142,10 @@ public class Calculator_Controller {
     @FXML
     private Button maximizeButton;
 
+
+    @FXML
+    private Button hideButton;
+
     @FXML
     private AnchorPane leftMenu;
 
@@ -148,8 +154,8 @@ public class Calculator_Controller {
     //endregion
 
     private final int CHAR_MAX_INPUT = 16;
-    private final BigDecimal MAX_NUMBER_INTEGER = new BigDecimal("1E10000");
-    private final BigDecimal MIN_NUMBER_DECIMAL = new BigDecimal("1E-10000");
+    private final BigDecimal MAX_NUMBER = new BigDecimal("1E10000");
+    private final BigDecimal MIN_NUMBER = new BigDecimal("1E-10000");
 
     private OperationsEnum binaryOperation;
     private OperationsEnum unaryOperation;
@@ -160,6 +166,11 @@ public class Calculator_Controller {
     private String historyOperations = "";
     private String historyUnaryOperations = "";
     private String negateHistory = "";
+    private String defaultText = "0";
+    private String decimalSeparate = ",";
+    private String separatorNumber = " ";
+    private String minus = "-";
+    private String emptyString = "";
 
     private boolean pointInText = false;
     private boolean canChangeOperator = false;
@@ -169,29 +180,29 @@ public class Calculator_Controller {
     private boolean negatePressed = false;
     private boolean memoryPressed = false;
     private boolean canBackspace = true;
+
     private double moveScroll;
     private double xOffset = 0;
     private double yOffset = 0;
+    private double speedOfAnimation = 0.1;
 
     private Memory memory;
     private boolean percentPressed = false;
     private Binary calculateBinary = new Binary();
     private Unary calculateUnary = new Unary();
-    private String defaultText = "0";
-    private CharSequence decimalSeparate = ",";
-    private String separatorNumber = " ";
 
 
+    
     @FXML
     void initialize () {
         firstStyleLabel = generalDisplay.getStyle();
-        generalDisplay.setText("0");
-        EQUAL.setDefaultButton(true);
+        generalDisplay.setText(defaultText);
+        equal.setDefaultButton(true);
     }
 
     @FXML
     void showLeftMenu () {
-        TranslateTransition transition = new TranslateTransition(Duration.seconds(0.1), leftMenu);
+        TranslateTransition transition = new TranslateTransition(Duration.seconds(speedOfAnimation), leftMenu);
         if (!showLeftMenu) {
             transition.setToX(leftMenu.getWidth());
             showLeftMenu = true;
@@ -205,19 +216,19 @@ public class Calculator_Controller {
     }
 
     private void operationsIsDisable (boolean disable) {
-        PERCENT.setDisable(disable);
-        SQRT.setDisable(disable);
-        SQR.setDisable(disable);
-        ONE_DIVIDE_X.setDisable(disable);
-        DIVIDE.setDisable(disable);
-        MULTIPLY.setDisable(disable);
-        SUBTRACT.setDisable(disable);
-        ADD.setDisable(disable);
+        percent.setDisable(disable);
+        sqrt.setDisable(disable);
+        sqr.setDisable(disable);
+        oneDivideX.setDisable(disable);
+        divide.setDisable(disable);
+        multiply.setDisable(disable);
+        subtract.setDisable(disable);
+        add.setDisable(disable);
         plusMinus.setDisable(disable);
         point.setDisable(disable);
     }
 
-    //region Input
+    //region Text
 
     @FXML
     void inputComma (ActionEvent actionEvent) {
@@ -246,7 +257,7 @@ public class Calculator_Controller {
         clearError();
         String out = generalDisplay.getText();
         if (canBackspace) {
-            out = Input.backspace(out);
+            out = Text.backspace(out);
 
             if (pointInText) {
                 if (!out.contains(decimalSeparate)) {
@@ -255,7 +266,7 @@ public class Calculator_Controller {
                 }
                 printResult(out);
             } else {
-                printResult(formatterNumber(new BigDecimal(Input.deleteNumberSeparator(out, separatorNumber))));
+                printResult(formatterNumber(new BigDecimal(Text.deleteNumberSeparator(out, separatorNumber))));
             }
         }
     }
@@ -266,7 +277,7 @@ public class Calculator_Controller {
 
         clearError();
 
-        String out = Input.getTextLabel(generalDisplay, separatorNumber);
+        String out = Text.getTextLabel(generalDisplay, separatorNumber);
         out = clearDisplay(out);
 
         if (out.equals(defaultText)) {
@@ -292,10 +303,10 @@ public class Calculator_Controller {
         addNegateHistory();
 
         setNumberNegate();
-        String out = Input.getTextLabel(generalDisplay, "");
-        out = Input.addNegate(out);
+        String out = Text.getTextLabel(generalDisplay, emptyString);
+        out = Text.addNegate(out);
 
-        if (out.contains("-")) {
+        if (out.contains(minus)) {
             charValidInText++;
         } else {
             charValidInText--;
@@ -313,7 +324,7 @@ public class Calculator_Controller {
             one.fire();
         } else if (keyCode == KeyCode.DIGIT2 || keyCode == KeyCode.NUMPAD2) {
             if (event.isShiftDown()) {
-                SQRT.fire();
+                sqrt.fire();
             } else {
                 two.fire();
             }
@@ -323,7 +334,7 @@ public class Calculator_Controller {
             four.fire();
         } else if (keyCode == KeyCode.DIGIT5 || keyCode == KeyCode.NUMPAD5) {
             if (event.isShiftDown()) {
-                PERCENT.fire();
+                percent.fire();
             } else {
                 five.fire();
             }
@@ -333,7 +344,7 @@ public class Calculator_Controller {
             seven.fire();
         } else if (keyCode == KeyCode.DIGIT8 || keyCode == KeyCode.NUMPAD8) {
             if (event.isShiftDown()) {
-                MULTIPLY.fire();
+                multiply.fire();
             } else {
                 eight.fire();
             }
@@ -344,19 +355,19 @@ public class Calculator_Controller {
         } else if (keyCode == KeyCode.ESCAPE) {
             C.fire();
         } else if (keyCode == KeyCode.BACK_SPACE) {
-            Backspace.fire();
+            backspace.fire();
         } else if (keyCode == KeyCode.COMMA) {
             point.fire();
         } else if (keyCode == KeyCode.ADD || (keyCode == KeyCode.EQUALS && event.isShiftDown())) {
-            ADD.fire();
+            add.fire();
         } else if (keyCode == KeyCode.MINUS || keyCode == KeyCode.SUBTRACT) {
-            SUBTRACT.fire();
+            subtract.fire();
         } else if (keyCode == KeyCode.MULTIPLY) {
-            MULTIPLY.fire();
+            multiply.fire();
         } else if (keyCode == KeyCode.SLASH || keyCode == KeyCode.DIVIDE) {
-            DIVIDE.fire();
+            divide.fire();
         } else if (keyCode == KeyCode.ENTER) {
-            EQUAL.fire();
+            equal.fire();
         } else if (keyCode == KeyCode.F9) {
             plusMinus.fire();
         } else if (keyCode == KeyCode.DELETE) {
@@ -365,13 +376,13 @@ public class Calculator_Controller {
             if (event.isControlDown()) {
                 memoryRecall.fire();
             } else {
-                ONE_DIVIDE_X.fire();
+                oneDivideX.fire();
             }
         } else if (keyCode == KeyCode.Q) {
             if (event.isControlDown()) {
                 memorySubtract.fire();
             } else {
-                SQR.fire();
+                sqr.fire();
             }
         } else if ((keyCode == KeyCode.M && event.isControlDown())) {
             memoryStore.fire();
@@ -500,11 +511,12 @@ public class Calculator_Controller {
     //region Operations pressed
     @FXML
     public void binaryOperation (ActionEvent actionEvent) {
+        String buttonID = ((Button) actionEvent.getSource()).getId();
         if (!negatePressed) {
             historyOperations += historyUnaryOperations;
         } else {
             historyOperations += negateHistory;
-            negateHistory = "";
+            negateHistory = emptyString;
             negatePressed = false;
         }
 
@@ -516,12 +528,12 @@ public class Calculator_Controller {
         unaryOperation = null;
 
         if (binaryOperation == null) {
-            binaryOperation = OperationsEnum.valueOf(((Button) actionEvent.getSource()).getId());
+            binaryOperation = OperationsEnum.valueOf(buttonID.toUpperCase());
         }
 
         calculateBinaryOperation();
         if (!isError) {
-            binaryOperation = OperationsEnum.valueOf(((Button) actionEvent.getSource()).getId());
+            binaryOperation = OperationsEnum.valueOf(buttonID.toUpperCase());
             changeOperator();
             pointInText = false;
         }
@@ -574,13 +586,13 @@ public class Calculator_Controller {
                 deleteLastHistory();
             }
 
-            historyOperations += Input.deleteNumberSeparator(formatterNumber(calculateBinary.getResult()), separatorNumber);
+            historyOperations += Text.deleteNumberSeparator(formatterNumber(calculateBinary.getResult()), separatorNumber);
             printResult(formatterNumber(calculateBinary.getResult()));
         } else {
             calculateUnary.setNumber(numberFromDisplay());
             calculateUnary.calculateUnary(percentOperation);
             printResult(formatterNumber(calculateUnary.getResult()));
-            historyOperations = Input.deleteNumberSeparator(formatterNumber(calculateUnary.getResult()), separatorNumber);
+            historyOperations = Text.deleteNumberSeparator(formatterNumber(calculateUnary.getResult()), separatorNumber);
         }
 
         outOperationMemory.setText(historyOperations);
@@ -589,7 +601,7 @@ public class Calculator_Controller {
     }
 
     @FXML
-    public void pressedEqual () {
+    void pressedEqual () {
         clearError();
         equalWasPress = true;
 
@@ -694,9 +706,9 @@ public class Calculator_Controller {
         BigDecimal number = NumberFormatter.parseNumber(NumberFormatter.numberFormatter(result));
 
         if (number.abs().compareTo(BigDecimal.ONE) > 0) {
-            overflow = number.abs().compareTo(MAX_NUMBER_INTEGER) >= 0;
+            overflow = number.abs().compareTo(MAX_NUMBER) >= 0;
         } else if (number.abs().compareTo(BigDecimal.ONE) < 0 && number.compareTo(BigDecimal.ZERO) != 0) {
-            overflow = number.abs().compareTo(MIN_NUMBER_DECIMAL) <= 0;
+            overflow = number.abs().compareTo(MIN_NUMBER) <= 0;
         }
 
         if (overflow) {
@@ -712,20 +724,20 @@ public class Calculator_Controller {
             if (historyOperations.isEmpty()) {
                 if (!historyUnaryOperations.isEmpty()) {
                     negateHistory = historyUnaryOperations;
-                    historyUnaryOperations = "";
+                    historyUnaryOperations = emptyString;
                 }
             } else {
-                if (historyUnaryOperations.isEmpty()||percentPressed) {
+                if (historyUnaryOperations.isEmpty() || percentPressed) {
                     deleteLastHistory();
                 } else {
                     if (negateHistory.isEmpty()) {
                         negateHistory = historyUnaryOperations;
-                        historyUnaryOperations = "";
+                        historyUnaryOperations = emptyString;
                     }
                 }
             }
             if (negateHistory.isEmpty()) {
-                negateHistory = Input.getTextLabel(generalDisplay, separatorNumber);
+                negateHistory = Text.getTextLabel(generalDisplay, separatorNumber);
             }
             negateHistory = "negate(" + negateHistory + ")";
 
@@ -758,28 +770,28 @@ public class Calculator_Controller {
         }
         if (!negateHistory.isEmpty()) {
             historyUnaryOperations = negateHistory;
-            negateHistory = "";
+            negateHistory = emptyString;
         }
         historyUnaryOperations = History.getSymbol(unaryOperation) + historyUnaryOperations + ")";
     }
 
     private void deleteLastHistory () {
-        if (!negatePressed||percentPressed) {
+        if (!negatePressed || percentPressed) {
             historyOperations = History.deleteLastHistory(canChangeOperator, binaryOperation, historyOperations);
         }
     }
 
     private void clearHistory () {
-        historyOperations = "";
-        negateHistory = "";
-        historyUnaryOperations = "";
+        historyOperations = emptyString;
+        negateHistory = emptyString;
+        historyUnaryOperations = emptyString;
         outOperationMemory.setText(historyOperations);
     }
 
     private void changeOperator () {
         historyOperations = History.changeOperator(canChangeOperator, binaryOperation, historyOperations);
         canChangeOperator = true;
-        historyUnaryOperations = "";
+        historyUnaryOperations = emptyString;
         outOperationMemory.setText(historyOperations);
         scrollOutOperationMemory();
     }
@@ -815,7 +827,7 @@ public class Calculator_Controller {
     @FXML
     void clearAllC () {
         generalDisplay.setStyle(firstStyleLabel);
-        generalDisplay.setText("0");
+        generalDisplay.setText(defaultText);
         clearHistory();
         pointInText = false;
         canChangeOperator = false;
@@ -831,7 +843,7 @@ public class Calculator_Controller {
         memoryPanel.setDisable(false);
         isError = false;
         negatePressed = false;
-        negateHistory = "";
+        negateHistory = emptyString;
         percentPressed = false;
         charValidInText = CHAR_MAX_INPUT;
         resizeOutputText();
@@ -842,7 +854,7 @@ public class Calculator_Controller {
     @FXML
     void clearNumberCE () {
         generalDisplay.setStyle(firstStyleLabel);
-        generalDisplay.setText("0");
+        generalDisplay.setText(defaultText);
         pointInText = false;
         charValidInText = CHAR_MAX_INPUT;
         clearError();
@@ -855,11 +867,11 @@ public class Calculator_Controller {
             memoryPressed = false;
             canBackspace = true;
             charValidInText = CHAR_MAX_INPUT;
-            out = "";
+            out = emptyString;
             percentOperation = null;
             pointInText = false;
-            historyUnaryOperations = "";
-            negateHistory = "";
+            historyUnaryOperations = emptyString;
+            negateHistory = emptyString;
             outOperationMemory.setText(historyOperations);
         }
         return out;
@@ -874,7 +886,7 @@ public class Calculator_Controller {
     private void clearUnary () {
         calculateUnary.setResult(null);
         calculateUnary.setNumber(null);
-        historyUnaryOperations = "";
+        historyUnaryOperations = emptyString;
         unaryOperation = null;
     }
 
@@ -925,7 +937,6 @@ public class Calculator_Controller {
         if (memory != null) {
             numberFromMemory(memory.memoryRecall());
             printResult(NumberFormatter.numberFormatter(memory.memoryRecall()));
-
         }
         memoryPressed = true;
     }
@@ -979,22 +990,17 @@ public class Calculator_Controller {
     @FXML
     public void maximizeWindow () {
         Stage stage = (Stage) maximizeButton.getScene().getWindow();
-
-        if (!stage.isMaximized()) {
-            stage.setMaximized(true);
-            maximizeButton.setText("");
-        } else {
-            stage.setMaximized(false);
-            maximizeButton.setText("");
-        }
-        resizeFontButton();
+        ResizeWindow resizeWindow = new ResizeWindow(stage);
+        resizeWindow.maximizeWindow(maximizeButton);
+        resizeWindow.resizeButton(calculatorButtons);
+        
         resizeOutputText();
         scrollOutOperationMemory();
     }
 
     @FXML
     public void hideWindow () {
-        Stage stage = (Stage) maximizeButton.getScene().getWindow();
+        Stage stage = (Stage) hideButton.getScene().getWindow();
         stage.setIconified(true);
     }
 
@@ -1028,51 +1034,6 @@ public class Calculator_Controller {
         generalDisplay.setFont(ResizeDisplay.fontSize(generalDisplay));
     }
 
-    private void resizeFontButton () {
-        Stage stage = (Stage) maximizeButton.getScene().getWindow();
-        Font newFontNumber;
-        Font newFontOperations;
-        if (stage.isMaximized()) {
-            newFontNumber = Font.font("Segoe UI Semibold", 34);
-            newFontOperations = Font.font("Segoe MDL2 Assets", 20);
-
-            PERCENT.setFont(Font.font("Calculator MDL2 Assets", 20));
-            SQR.setFont(Font.font("Calculator MDL2 Assets", 25));
-            ONE_DIVIDE_X.setFont(Font.font("Calculator MDL2 Assets", 22));
-            DIVIDE.setFont(Font.font("Calculator MDL2 Assets", 20));
-            EQUAL.setFont(Font.font("Calculator MDL2 Assets", 20));
-        } else {
-            newFontNumber = Font.font("Segoe UI Semibold", 24);
-            newFontOperations = Font.font("Segoe MDL2 Assets", 15);
-
-            PERCENT.setFont(Font.font("Calculator MDL2 Assets", 15));
-            SQR.setFont(Font.font("Calculator MDL2 Assets", 19));
-            ONE_DIVIDE_X.setFont(Font.font("Calculator MDL2 Assets", 17));
-            DIVIDE.setFont(Font.font("Calculator MDL2 Assets", 15));
-            EQUAL.setFont(Font.font("Calculator MDL2 Assets", 15));
-        }
-
-        one.setFont(newFontNumber);
-        two.setFont(newFontNumber);
-        three.setFont(newFontNumber);
-        four.setFont(newFontNumber);
-        five.setFont(newFontNumber);
-        six.setFont(newFontNumber);
-        seven.setFont(newFontNumber);
-        eight.setFont(newFontNumber);
-        nine.setFont(newFontNumber);
-        zero.setFont(newFontNumber);
-        point.setFont(newFontNumber);
-
-        plusMinus.setFont(newFontOperations);
-        ADD.setFont(newFontOperations);
-        MULTIPLY.setFont(newFontOperations);
-        SUBTRACT.setFont(newFontOperations);
-        SQRT.setFont(newFontOperations);
-        CE.setFont(newFontOperations);
-        C.setFont(newFontOperations);
-        Backspace.setFont(newFontOperations);
-    }
 
     //endregion
 

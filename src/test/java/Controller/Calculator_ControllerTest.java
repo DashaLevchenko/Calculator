@@ -106,7 +106,7 @@ class Calculator_ControllerTest extends ApplicationTest {
 
     @Test
     void checkInput() {
-        //Input zero
+        //Text zero
         assertNumber("0000000", "0", "");
         assertNumber("001", "1", "");
         assertNumber("0000000000000012345", "12 345", "");

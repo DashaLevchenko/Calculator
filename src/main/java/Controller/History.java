@@ -4,9 +4,22 @@ import Model.OperationsEnum;
 
 import java.math.BigDecimal;
 
+/**
+ * This class change calculator history
+ */
+
 public class History {
 private static OperationsEnum oldOperation;
 
+    /**
+     * This method changes old operator if old and new operator are different
+     *
+     * @param canChangeOperator If parameter equal true old operation in history change,
+     *                          else old operation adds to history
+     * @param operation New operation
+     * @param history String witch keeps history
+     * @return String witch keeps history was changed
+     */
     public static String changeOperator(boolean canChangeOperator, OperationsEnum operation, String history) {
         if (!canChangeOperator) {
             oldOperation = operation;
@@ -22,28 +35,40 @@ private static OperationsEnum oldOperation;
         return history;
     }
 
-    public static String deleteLastHistory (boolean canChangeOperator, OperationsEnum binaryOperation, String historyOperations) {
-        int partToDelete = historyOperations.split(" ").length;
-        String numberDelete = historyOperations.split(" ")[partToDelete - 1];
-        int charStart = historyOperations.length() - numberDelete.length();
+    /**
+     * This method deletes last text entry
+     * @param canChangeOperator If tis operator is true deletes last operator was added to history
+     * @param binaryOperation Symbol of this operation will be deletes
+     * @param history String witch keeps history
+     * @return String witch keeps history was changed
+     */
+    public static String deleteLastHistory (boolean canChangeOperator, OperationsEnum binaryOperation, String history) {
+        int partToDelete = history.split(" ").length;
+        String numberDelete = history.split(" ")[partToDelete - 1];
+        int charStart = history.length() - numberDelete.length();
 
         if (numberDelete.length() > 0) {
             if (!canChangeOperator) {
-                int charEnd = historyOperations.length();
+                int charEnd = history.length();
                 if (numberDelete.length() == 1) {
-                        historyOperations = new StringBuilder(historyOperations).deleteCharAt(historyOperations.length() - 1).toString();
+                        history = new StringBuilder(history).deleteCharAt(history.length() - 1).toString();
                 } else {
-                    if (historyOperations.substring(charStart, charEnd).equals(numberDelete)) {
-                        historyOperations = new StringBuilder(historyOperations).delete(charStart, charEnd).toString();
+                    if (history.substring(charStart, charEnd).equals(numberDelete)) {
+                        history = new StringBuilder(history).delete(charStart, charEnd).toString();
                     }
                 }
             } else {
-                    historyOperations = new StringBuilder(historyOperations).delete(historyOperations.length() - getSymbol(binaryOperation).length(), historyOperations.length()).toString();
+                    history = new StringBuilder(history).delete(history.length() - getSymbol(binaryOperation).length(), history.length()).toString();
             }
         }
-        return historyOperations;
+        return history;
     }
 
+    /**
+     * Method returns string of operation for writing down in history
+     * @param operation Operation which need to find match
+     * @return String of operation for writing out in history
+     */
     public static String getSymbol (OperationsEnum operation) {
         String symbol;
         if (operation.equals(OperationsEnum.SUBTRACT)) {
@@ -69,8 +94,14 @@ private static OperationsEnum oldOperation;
         return symbol;
     }
 
+    /**
+     * Method return string number was formatted for writing down in history
+     * @param number Number witch need to format
+     * @param separatorNumber Grouping separator is used for separate number
+     * @return String number was formatted without grouping separator
+     */
     public static String formatterNumberHistory(BigDecimal number, String separatorNumber){
-        return Input.deleteNumberSeparator(NumberFormatter.numberFormatter(number), separatorNumber);
+        return Text.deleteNumberSeparator(NumberFormatter.numberFormatter(number), separatorNumber);
     }
 
 }

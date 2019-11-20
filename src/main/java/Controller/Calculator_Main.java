@@ -7,7 +7,9 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-
+/**
+ * Class launches calculator application
+ */
 public class Calculator_Main extends Application {
     public static void main(String[] args) {
         launch(args);

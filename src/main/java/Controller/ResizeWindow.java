@@ -7,11 +7,27 @@ import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Font;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
+/**
+ * This class resizes application`s window
+ */
+
 public class ResizeWindow {
+
+    /**
+     * Text for button which was pressed for maximized stage
+     */
+    private static final String BUTTON_TEXT_STAGE_MAXIMIZED = "";
+
+    /**
+     * Text for button which was pressed for return default size stage
+     */
+    private static final String BUTTON_TEXT_STAGE_NOT_MAXIMIZED = "";
     private Stage stage;
     private Scene scene;
     private double minWidth;
@@ -19,7 +35,21 @@ public class ResizeWindow {
     private Cursor cursorEvent = Cursor.DEFAULT;
     private int MIN_BORDER = 4;
 
+    /**
+     * Max width of device where application is used
+     */
+    private static final double MAX_WIDTH_WINDOWS = 1600;
 
+    /**
+     * Font is always used for buttons
+     */
+    private static final String DEFAULT_FONT_BUTTON = "Calculator MDL2 Assets";
+
+    /**
+     * This constructor gets stage, sets min width of stage, sets min height of stage, sets scene of stage
+     *
+     * @param stage Stage of application
+     */
     ResizeWindow (Stage stage) {
         this.stage = stage;
         this.minWidth = stage.getMinWidth();
@@ -27,28 +57,29 @@ public class ResizeWindow {
         this.scene = stage.getScene();
     }
 
-    public void resizeAllStage() {
-        EventHandler<MouseEvent> event = resizeWindow();
 
+    /**
+     * This method resizes application's stage
+     * and  adds handler mouse event to all stage's children
+     */
+    public void resizeAllStage () {
+        EventHandler<MouseEvent> event = resizeWindow();
+        setEventHandler(event);
+    }
+
+    private void setEventHandler (EventHandler<MouseEvent> event) {
         stage.getScene().addEventHandler(MouseEvent.MOUSE_MOVED, event);
-        stage.getScene().addEventHandler(MouseEvent.MOUSE_PRESSED, event);
         stage.getScene().addEventHandler(MouseEvent.MOUSE_DRAGGED, event);
-        stage.getScene().addEventHandler(MouseEvent.MOUSE_EXITED, event);
-        stage.getScene().addEventHandler(MouseEvent.MOUSE_EXITED_TARGET, event);
 
         ObservableList<Node> children = stage.getScene().getRoot().getChildrenUnmodifiable();
         for (Node child : children) {
             addListenerDeeply(child, event);
         }
-
     }
 
-    private void addListenerDeeply(Node node, EventHandler<MouseEvent> listener) {
+    private void addListenerDeeply (Node node, EventHandler<MouseEvent> listener) {
         node.addEventHandler(MouseEvent.MOUSE_MOVED, listener);
-        node.addEventHandler(MouseEvent.MOUSE_PRESSED, listener);
         node.addEventHandler(MouseEvent.MOUSE_DRAGGED, listener);
-        node.addEventHandler(MouseEvent.MOUSE_EXITED, listener);
-        node.addEventHandler(MouseEvent.MOUSE_EXITED_TARGET, listener);
         if (node instanceof Parent) {
             Parent parent = (Parent) node;
             ObservableList<Node> children = parent.getChildrenUnmodifiable();
@@ -58,11 +89,17 @@ public class ResizeWindow {
         }
     }
 
-    private EventHandler<MouseEvent> resizeWindow() {
+    /**
+     * This method changes image cursor when mouse was moved on border area.
+     * Also this method changes width and height window when mouse was dragged
+     * and moved in border area
+     *
+     * @return Mouse event
+     */
+    private EventHandler<MouseEvent> resizeWindow () {
         EventHandler<MouseEvent> event = mouseEvent -> {
             EventType<? extends MouseEvent> mouseEventType = mouseEvent.getEventType();
 
-            int border = MIN_BORDER;
             double mouseWinX = mouseEvent.getSceneX();
             double mouseWinY = mouseEvent.getSceneY();
             double sceneWidth = scene.getWidth();
@@ -70,25 +107,7 @@ public class ResizeWindow {
             Screen window = Screen.getPrimary();
 
             if (MouseEvent.MOUSE_MOVED.equals(mouseEventType)) {
-                if (mouseWinX < border && mouseWinY < border) {
-                    cursorEvent = Cursor.NW_RESIZE;
-                } else if (mouseWinX < border && mouseWinY > sceneHeight - border) {
-                    cursorEvent = Cursor.SW_RESIZE;
-                } else if (mouseWinX > sceneWidth - border && mouseWinY < border) {
-                    cursorEvent = Cursor.NE_RESIZE;
-                } else if (mouseWinX > sceneWidth - border && mouseWinY > sceneHeight - border) {
-                    cursorEvent = Cursor.SE_RESIZE;
-                } else if (mouseWinX < border) {
-                    cursorEvent = Cursor.W_RESIZE;
-                } else if (mouseWinX > sceneWidth - border) {
-                    cursorEvent = Cursor.E_RESIZE;
-                } else if (mouseWinY < border) {
-                    cursorEvent = Cursor.N_RESIZE;
-                } else if (mouseWinY > sceneHeight - border) {
-                    cursorEvent = Cursor.S_RESIZE;
-                } else {
-                    cursorEvent = Cursor.DEFAULT;
-                }
+                setCursorEvent(mouseWinX, mouseWinY, sceneWidth, sceneHeight);
                 scene.setCursor(cursorEvent);
             } else if (MouseEvent.MOUSE_DRAGGED.equals(mouseEventType)) {
                 if (cursorEvent.equals(Cursor.N_RESIZE) || cursorEvent.equals(Cursor.NE_RESIZE) || cursorEvent.equals(Cursor.NW_RESIZE)) {
@@ -97,7 +116,7 @@ public class ResizeWindow {
                         stage.setY(0);
                     } else {
                         if (mouseEvent.getScreenY() > 0 && stage.getHeight() == window.getBounds().getHeight()) {
-                            stage.setHeight(stage.getHeight()-mouseEvent.getScreenY());
+                            stage.setHeight(stage.getHeight() - mouseEvent.getScreenY());
                             stage.setY(mouseEvent.getScreenY());
                         }
                         changeYPosition(mouseEvent);
@@ -139,7 +158,29 @@ public class ResizeWindow {
         return event;
     }
 
-    private void changeXPosition(MouseEvent mouseEvent) {
+    private void setCursorEvent (double mouseWinX, double mouseWinY, double sceneWidth, double sceneHeight) {
+        if (mouseWinX < MIN_BORDER && mouseWinY < MIN_BORDER) {
+            cursorEvent = Cursor.NW_RESIZE;
+        } else if (mouseWinX < MIN_BORDER && mouseWinY > sceneHeight - MIN_BORDER) {
+            cursorEvent = Cursor.SW_RESIZE;
+        } else if (mouseWinX > sceneWidth - MIN_BORDER && mouseWinY < MIN_BORDER) {
+            cursorEvent = Cursor.NE_RESIZE;
+        } else if (mouseWinX > sceneWidth - MIN_BORDER && mouseWinY > sceneHeight - MIN_BORDER) {
+            cursorEvent = Cursor.SE_RESIZE;
+        } else if (mouseWinX < MIN_BORDER) {
+            cursorEvent = Cursor.W_RESIZE;
+        } else if (mouseWinX > sceneWidth - MIN_BORDER) {
+            cursorEvent = Cursor.E_RESIZE;
+        } else if (mouseWinY < MIN_BORDER) {
+            cursorEvent = Cursor.N_RESIZE;
+        } else if (mouseWinY > sceneHeight - MIN_BORDER) {
+            cursorEvent = Cursor.S_RESIZE;
+        } else {
+            cursorEvent = Cursor.DEFAULT;
+        }
+    }
+
+    private void changeXPosition (MouseEvent mouseEvent) {
         double newWidth = stage.getX() - mouseEvent.getScreenX() + stage.getWidth();
         if (newWidth > stage.getMinWidth()) {
             stage.setWidth(newWidth);
@@ -147,7 +188,7 @@ public class ResizeWindow {
         }
     }
 
-    private void changeYPosition(MouseEvent mouseEvent) {
+    private void changeYPosition (MouseEvent mouseEvent) {
         double newHeight = stage.getY() - mouseEvent.getScreenY() + stage.getHeight();
         if (newHeight > minHeight) {
             stage.setHeight(newHeight);
@@ -155,6 +196,47 @@ public class ResizeWindow {
         }
     }
 
+    /**
+     * Method resizes button's font size if width stage was changed
+     *
+     * @param node Node which keeps buttons
+     */
 
+    public void resizeButton (Node node) {
+        ObservableList<Node> buttons = ((Parent) node).getChildrenUnmodifiable();
+        for (Node child : buttons) {
+            Button button = (Button) child;
+            button.setFont(new Font(DEFAULT_FONT_BUTTON, newSize(button.getFont())));
+        }
+    }
 
+    private double newSize (Font font) {
+        double oldSize = font.getSize();
+        double numberForChange = MAX_WIDTH_WINDOWS / stage.getMinWidth();
+        double newSize;
+        if (stage.isMaximized()) {
+            newSize = oldSize + numberForChange;
+        } else {
+            newSize = oldSize - numberForChange;
+        }
+        return newSize;
+    }
+
+    /**
+     * This methods makes stage size on all device window,
+     * and change button text
+     *
+     * @param button  Button was pressed for maximized stage
+     */
+    public void maximizeWindow (Button button) {
+        String buttonText;
+        if (!stage.isMaximized()) {
+            stage.setMaximized(true);
+            buttonText = BUTTON_TEXT_STAGE_MAXIMIZED;
+        } else {
+            stage.setMaximized(false);
+            buttonText = BUTTON_TEXT_STAGE_NOT_MAXIMIZED;
+        }
+        button.setText(buttonText);
+    }
 }
