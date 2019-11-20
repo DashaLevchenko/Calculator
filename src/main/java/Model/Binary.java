@@ -6,7 +6,14 @@ import java.math.RoundingMode;
 
 
 public class Binary {
+    /**
+     * Max default scale
+     */
     private final int defaultScale = 10000;
+
+    /**
+     * Max default rounding
+     */
     private final RoundingMode defaultRounding = RoundingMode.UP;
     private BigDecimal numberFirst = null;
     private BigDecimal numberSecond = null;
@@ -37,19 +44,19 @@ public class Binary {
         return result;
     }
 
-    public void add() {
+    private void add() {
         result = numberFirst.add(numberSecond);
     }
 
-    public void subtract() {
+    private void subtract() {
         result = numberFirst.subtract(numberSecond);
     }
 
-    public void multiply() {
+    private void multiply() {
         result = numberFirst.multiply(numberSecond);
     }
 
-    public void divide() throws ArithmeticException {
+    private void divide() throws ArithmeticException {
         if (numberFirst.equals(BigDecimal.ZERO) && numberSecond.equals(BigDecimal.ZERO)) {
             throw new ArithmeticException("Result is undefined");
         } else if (numberSecond.equals(BigDecimal.ZERO)) {

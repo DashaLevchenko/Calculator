@@ -23,7 +23,7 @@ public class Unary {
         this.result = result;
     }
 
-    public void squareRoot() throws IllegalArgumentException {
+    private void squareRoot() throws IllegalArgumentException {
         if (number.compareTo(BigDecimal.ZERO) < 0) {
             throw new IllegalArgumentException("Invalid input");
         } else {
@@ -31,11 +31,11 @@ public class Unary {
         }
     }
 
-    public void xSquare() {
+    private void xSquare() {
         result = number.pow(2).round(MathContext.DECIMAL128);
     }
 
-    public void oneDivideX() throws ArithmeticException {
+    private void oneDivideX() throws ArithmeticException {
         try {
             result = BigDecimal.ONE.divide(number, MathContext.DECIMAL128);
         } catch (ArithmeticException e) {

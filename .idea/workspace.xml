@@ -8,8 +8,7 @@
   <component name="ChangeListManager">
     <list default="true" id="feaeb0c2-feb2-4a9c-98e3-48b1d1a339aa" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/src/main/java/Model/Binary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Binary.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Memory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Memory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Model/OperationsEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/OperationsEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Unary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Unary.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -280,13 +279,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1565432602101</updated>
-    </task>
-    <task id="LOCAL-00028" summary="start controller">
-      <created>1568039874579</created>
-      <option name="number" value="00028" />
-      <option name="presentableId" value="LOCAL-00028" />
-      <option name="project" value="LOCAL" />
-      <updated>1568039874579</updated>
     </task>
     <task id="LOCAL-00029" summary="resize is working,&#10;start controller, I want to change textField">
       <created>1568133473126</created>
@@ -624,7 +616,14 @@
       <option name="project" value="LOCAL" />
       <updated>1574264237678</updated>
     </task>
-    <option name="localTasksCounter" value="77" />
+    <task id="LOCAL-00077" summary="before change controller">
+      <created>1574266795019</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1574266795019</updated>
+    </task>
+    <option name="localTasksCounter" value="78" />
     <servers />
   </component>
   <component name="UnknownFeatures">
