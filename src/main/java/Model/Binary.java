@@ -8,7 +8,7 @@ import java.math.RoundingMode;
 public class Binary {
     private final MathContext mathContext = new MathContext(10000, RoundingMode.HALF_EVEN);
     private final int defaultScale = 10000;
-    private final RoundingMode defaultRounding = RoundingMode.HALF_EVEN;
+    private final RoundingMode defaultRounding = RoundingMode.UP;
     private BigDecimal numberFirst = null;
     private BigDecimal numberSecond = null;
     private BigDecimal result = null;

@@ -23,7 +23,6 @@ import java.math.BigDecimal;
 
 public class Calculator_Controller {
     //region FXML object
-    //region Number Button
     @FXML
     private Button zero;
 
@@ -53,9 +52,7 @@ public class Calculator_Controller {
 
     @FXML
     private Button three;
-    //endregion
 
-    //region Memory
     @FXML
     private GridPane memoryPanel;
 
@@ -74,9 +71,6 @@ public class Calculator_Controller {
     @FXML
     private Button memorySubtract;
 
-    //endregion
-
-    //region Operations
     @FXML
     private Button DIVIDE;
 
@@ -103,9 +97,7 @@ public class Calculator_Controller {
 
     @FXML
     private Button ONE_DIVIDE_X;
-    //endregion
 
-    //region Change text
     @FXML
     private Label generalDisplay;
 
@@ -141,27 +133,20 @@ public class Calculator_Controller {
 
     @FXML
     private Label textStandard;
-    //endregion
 
-    //region Window resize button
     @FXML
     private Button cancel;
 
     @FXML
     private Button maximizeButton;
 
-    //endregion
-
     @FXML
     private AnchorPane leftMenu;
 
     @FXML
     private AnchorPane generalAnchorPane;
-
-
     //endregion
 
-    private static final double MAX_FONT_SIZE = 71;
     private final int CHAR_MAX_INPUT = 16;
     private final BigDecimal MAX_NUMBER_INTEGER = new BigDecimal("1E10000");
     private final BigDecimal MIN_NUMBER_DECIMAL = new BigDecimal("1E-10000");
@@ -169,11 +154,13 @@ public class Calculator_Controller {
     private OperationsEnum binaryOperation;
     private OperationsEnum unaryOperation;
     private OperationsEnum percentOperation;
+
     private int charValidInText = 16;
     private String firstStyleLabel;
     private String historyOperations = "";
     private String historyUnaryOperations = "";
     private String negateHistory = "";
+
     private boolean pointInText = false;
     private boolean canChangeOperator = false;
     private boolean equalWasPress;
@@ -185,31 +172,25 @@ public class Calculator_Controller {
     private double moveScroll;
     private double xOffset = 0;
     private double yOffset = 0;
+
     private Memory memory;
     private boolean percentPressed = false;
     private Binary calculateBinary = new Binary();
     private Unary calculateUnary = new Unary();
-    private OperationsEnum oldBinaryOperation;
+    private String defaultText = "0";
+    private CharSequence decimalSeparate = ",";
+    private String separatorNumber = " ";
 
 
     @FXML
-    void initialize() {
+    void initialize () {
         firstStyleLabel = generalDisplay.getStyle();
         generalDisplay.setText("0");
         EQUAL.setDefaultButton(true);
     }
 
-
     @FXML
-    void resizeWindow() {
-        Stage stage = (Stage) generalAnchorPane.getScene().getWindow();
-        ResizeWindow resize = new ResizeWindow(stage);
-        resize.resizeAllStage();
-        scrollOutOperationMemory();
-    }
-
-    @FXML
-    void showLeftMenu() {
+    void showLeftMenu () {
         TranslateTransition transition = new TranslateTransition(Duration.seconds(0.1), leftMenu);
         if (!showLeftMenu) {
             transition.setToX(leftMenu.getWidth());
@@ -223,284 +204,110 @@ public class Calculator_Controller {
         transition.play();
     }
 
+    private void operationsIsDisable (boolean disable) {
+        PERCENT.setDisable(disable);
+        SQRT.setDisable(disable);
+        SQR.setDisable(disable);
+        ONE_DIVIDE_X.setDisable(disable);
+        DIVIDE.setDisable(disable);
+        MULTIPLY.setDisable(disable);
+        SUBTRACT.setDisable(disable);
+        ADD.setDisable(disable);
+        plusMinus.setDisable(disable);
+        point.setDisable(disable);
+    }
+
+    //region Input
+
     @FXML
-    public void binaryOperation(ActionEvent actionEvent) {
-        if (!negatePressed) {
-            historyOperations += historyUnaryOperations;
-        } else {
-            historyOperations += negateHistory;
-            negateHistory = "";
-            negatePressed = false;
-        }
+    void inputComma (ActionEvent actionEvent) {
+        String out = generalDisplay.getText();
 
-        if (equalWasPress) {
-            clearBinary();
-            equalWasPress = false;
-        }
-        setNumbersBinary();
-        unaryOperation = null;
-
-        if (binaryOperation == null) {
-            binaryOperation = OperationsEnum.valueOf(((Button) actionEvent.getSource()).getId());
-        }
-
-        calculateBinaryOperation();
-        if (!isError) {
-            binaryOperation = OperationsEnum.valueOf(((Button) actionEvent.getSource()).getId());
-            changeOperator();
-
-            if (calculateBinary.getResult() != null) {
-                printResult(NumberFormatter.numberFormatter(calculateBinary.getResult()));
-                calculateBinary.setResult(null);
-                calculateBinary.setNumberSecond(null);
-                canBackspace = false;
-
+        if (!pointInText) {
+            if (!canBackspace) {
+                out = defaultText;
+                canBackspace = true;
             }
+            if (out.equals(defaultText)) {
+                charValidInText++;
+            }
+            out += decimalSeparate;
+            pointInText = true;
+            charValidInText++;
+            canChangeOperator = false;
         }
-        canBackspace = false;
-        scrollOutOperationMemory();
+
+        printResult(out);
+        memoryPressed = false;
     }
 
     @FXML
-    public void unaryOperations(ActionEvent actionEvent) {
-        unaryOperation = OperationsEnum.valueOf(((Button) actionEvent.getSource()).getId());
-        setNumberUnary();
-
-        if (historyUnaryOperations.isEmpty()) {
-            historyUnaryOperations = NumberFormatter.numberFormatter(calculateUnary.getNumber()).replace(" ", "");
-        }
-        if (negateHistory.isEmpty()) {
-            historyUnaryOperations = getOperationUnary(unaryOperation) + historyUnaryOperations + ")";
-        } else {
-            historyUnaryOperations = getOperationUnary(unaryOperation) + negateHistory + ")";
-            negateHistory = "";
-        }
-
-        outOperationMemory.setText(historyOperations + historyUnaryOperations);
-
-        try {
-            calculateUnary.calculateUnary(unaryOperation);
-        } catch (Exception e) {
-            printError(e);
-        }
-
-        if (!isError) {
-            if (calculateUnary.getResult() != null) {
-                if (historyOperations.isEmpty()) {
-                    calculateBinary.setNumberFirst(calculateUnary.getResult());
-                    binaryOperation = null;
-                } else {
-                    if (binaryOperation != null) {
-                        calculateBinary.setNumberSecond(calculateUnary.getResult());
-                    } else {
-                        calculateBinary.setNumberFirst(calculateUnary.getResult());
-                    }
-                }
-                printResult(NumberFormatter.numberFormatter(calculateUnary.getResult()));
-                canBackspace = false;
-            }
-
-            scrollOutOperationMemory();
-        }
-    }
-
-
-
-    @FXML
-    public void percentOperation() {
-        percentOperation = OperationsEnum.PERCENT;
-
-        canChangeOperator = false;
-
-        if (binaryOperation != null) {
-            if (binaryOperation.equals(OperationsEnum.DIVIDE) || binaryOperation.equals(OperationsEnum.MULTIPLY)) {
-                calculateBinary.percent(numberFromDisplay());
-            } else {
-                if (!equalWasPress) {
-                    if (canBackspace) {
-                        calculateBinary.setNumberSecond(numberFromDisplay());
-                    } else {
-                        if (calculateBinary.getNumberSecond() == null) {
-                            calculateBinary.setNumberSecond(calculateBinary.getNumberFirst());
-                        }
-                    }
-                    calculateBinary.percent(calculateBinary.getNumberFirst(), calculateBinary.getNumberSecond());
-                    calculateBinary.setNumberSecond(calculateBinary.getResult());
-                } else {
-                    if (canBackspace) {
-                        calculateBinary.setNumberSecond(calculateBinary.getNumberFirst());
-                        calculateBinary.setNumberFirst(numberFromDisplay());
-                    } else {
-                        calculateBinary.setNumberFirst(calculateBinary.getResult());
-                    }
-                    calculateBinary.percent(calculateBinary.getNumberFirst(), calculateBinary.getNumberSecond());
-                }
-            }
-            if (percentPressed) {
-                deleteLastHistory();
-            }
-
-            historyOperations += NumberFormatter.numberFormatter(calculateBinary.getResult()).replace(" ", "");
-            printResult(NumberFormatter.numberFormatter(calculateBinary.getResult()));
-        } else {
-            calculateUnary.setNumber(numberFromDisplay());
-            calculateUnary.calculateUnary(percentOperation);
-            printResult(NumberFormatter.numberFormatter(calculateUnary.getResult()));
-            historyOperations = NumberFormatter.numberFormatter(calculateUnary.getResult()).replace(" ", "");
-        }
-
-        outOperationMemory.setText(historyOperations);
-        percentPressed = true;
-        canBackspace = false;
-    }
-    
-
-    @FXML
-    void scrollButtonLeftPressed() {
-        scrollPaneOperation.setHvalue(scrollPaneOperation.getHvalue() + moveScroll);
-        scrollButtonRight.setVisible(true);
-        if (scrollPaneOperation.getHvalue() == scrollPaneOperation.getHmax()) {
-            scrollButtonLeft.setVisible(false);
-            scrollButtonRight.setVisible(true);
-        }
-    }
-
-    @FXML
-    void scrollButtonRightPressed() {
-        scrollPaneOperation.setHvalue(scrollPaneOperation.getHvalue() - moveScroll);
-        scrollButtonLeft.setVisible(true);
-        if (scrollPaneOperation.getHvalue() == 0) {
-            scrollButtonRight.setVisible(false);
-            scrollButtonLeft.setVisible(true);
-        }
-    }
-
-    @FXML
-    public void pressedEqual() {
-        if (isError) {
-            C.fire();
-        } else {
-            if (binaryOperation != null) {
-                canChangeOperator = false;
-                if (calculateBinary.getNumberSecond() == null) {
-                    if (!canBackspace) {
-                        if (calculateBinary.getResult() != null) {
-                            calculateBinary.setNumberSecond(calculateBinary.getNumberFirst());
-                        } else {
-                            if (calculateBinary.getNumberFirst() != null) {
-                                calculateBinary.setNumberSecond(calculateBinary.getNumberFirst());
-                            } else {
-                                calculateBinary.setNumberSecond(numberFromDisplay());
-                            }
-                        }
-                    } else {
-                        calculateBinary.setNumberSecond(numberFromDisplay());
-                    }
-                }
-                calculateBinaryOperation();
-            }
-            if (!isError) {
-                if (calculateBinary.getResult() != null) {
-                    printResult(NumberFormatter.numberFormatter(calculateBinary.getResult()));
-                    canBackspace = false;
-                    if (!isError) {
-                        clearHistory();
-                    }
-                }
-                if (unaryOperation != null) {
-                    clearHistory();
-                }
-                if (negatePressed) {
-                    negateHistory = "";
-                    negatePressed = false;
-                }
-
-                if (historyOperations.equals("0")) {
-                    historyOperations = "";
-                    outOperationMemory.setText(historyOperations);
-                }
-
-                equalWasPress = true;
-                canBackspace = false;
-            } else {
-                outOperationMemory.setText(historyOperations);
-            }
-        }
-        scrollOutOperationMemory();
-
-
-    }
-
-    @FXML
-    void backspace() {
-        if (isError) {
-            C.fire();
-        }
+    void inputBackspace () {
+        clearError();
         String out = generalDisplay.getText();
         if (canBackspace) {
-            if (out.replace(",", "").length() > 0) {
-                if ((out.length() == 2 && out.contains("-")) ||
-                        out.length() == 1) {
-                    CE.fire();
-                } else {
-                    if (out.charAt(out.length() - 1) == ',') {
-                        pointInText = false;
-                        charValidInText--;
-                    }
+            out = Input.backspace(out);
 
-                    out = new StringBuilder(out).deleteCharAt(out.length() - 1).toString();
-                    if (out.charAt(out.length() - 1) == ',') {
-                        printResult(out);
-                    } else {
-                        printResult(NumberFormatter.formatterInputNumber(out.replace(" ", "")));
-                    }
+            if (pointInText) {
+                if (!out.contains(decimalSeparate)) {
+                    pointInText = false;
+                    charValidInText--;
                 }
+                printResult(out);
+            } else {
+                printResult(formatterNumber(new BigDecimal(Input.deleteNumberSeparator(out, separatorNumber))));
             }
         }
     }
 
     @FXML
-    void clearAllC() {
-        generalDisplay.setStyle(firstStyleLabel);
-        generalDisplay.setText("0");
-        clearHistory();
-        pointInText = false;
-        canChangeOperator = false;
-        binaryOperation = null;
-        oldBinaryOperation = null;
-        calculateBinary.setNumberSecond(null);
-        calculateBinary.setNumberFirst(null);
-        calculateBinary.setResult(null);
-        scrollButtonRight.setVisible(false);
-        scrollButtonLeft.setVisible(false);
-        clearUnary();
-        equalWasPress = false;
-        operationsIsDisable(false);
-        memoryPanel.setDisable(false);
-        isError = false;
-        negatePressed = false;
-        negateHistory = "";
-        percentPressed = false;
-        charValidInText = CHAR_MAX_INPUT;
-        resizeOutputText();
-        percentOperation = null;
-        canBackspace = true;
-    }
+    void inputNumber (ActionEvent actionEvent) {
+        String buttonText = ((Button) actionEvent.getSource()).getText();
 
-    @FXML
-    void clearNumberCE() {
-        generalDisplay.setStyle(firstStyleLabel);
-        generalDisplay.setText("0");
-        pointInText = false;
-        charValidInText = CHAR_MAX_INPUT;
-        if (isError) {
-            C.fire();
+        clearError();
+
+        String out = Input.getTextLabel(generalDisplay, separatorNumber);
+        out = clearDisplay(out);
+
+        if (out.equals(defaultText)) {
+            printResult(buttonText);
+        } else {
+            if (out.length() < charValidInText) {
+                out += buttonText;
+                printResult(NumberFormatter.formatterInputNumber(out));
+            }
         }
-        resizeOutputText();
+
+        scrollOutOperationMemory();
+
+        if (equalWasPress && historyUnaryOperations.isEmpty()) {
+            calculateBinary.setNumberFirst(null);
+        }
     }
 
     @FXML
-    void keyPressed(KeyEvent event) {
+    void negate () {
+        negatePressed = true;
+
+        addNegateHistory();
+
+        setNumberNegate();
+        String out = Input.getTextLabel(generalDisplay, "");
+        out = Input.addNegate(out);
+
+        if (out.contains("-")) {
+            charValidInText++;
+        } else {
+            charValidInText--;
+        }
+
+        printResult(out);
+        scrollOutOperationMemory();
+        canChangeOperator = false;
+    }
+
+    @FXML
+    void keyPressed (KeyEvent event) {
         KeyCode keyCode = event.getCode();
         if (keyCode == KeyCode.DIGIT1 || keyCode == KeyCode.NUMPAD1) {
             one.fire();
@@ -575,96 +382,25 @@ public class Calculator_Controller {
         }
     }
 
-    @FXML
-    public void number(ActionEvent actionEvent) {
-        String buttonText = ((Button) actionEvent.getSource()).getText();
-
-        if (isError) {
-            C.fire();
-        }
-
-        String out = generalDisplay.getText().replace(" ", "");
-        out = cleanDisplay(out);
-
-        if (out.isEmpty() || out.equals("0")) {
-            generalDisplay.setText(buttonText);
-        } else {
-            if (out.length() < charValidInText) {
-                generalDisplay.setText(NumberFormatter.formatterInputNumber(out + buttonText));
-            }
-        }
-        resizeOutputText();
-        operationsIsDisable(false);
-        scrollOutOperationMemory();
-        if (equalWasPress && historyUnaryOperations.isEmpty()) {
-            calculateBinary.setNumberFirst(null);
-        }
-    }
-
-    //region Window
-    @FXML
-    public void cancelButton() {
-        Stage stage = (Stage) cancel.getScene().getWindow();
-        stage.close();
-    }
-
-    @FXML
-    public void maximizeWindow() {
-        Stage stage = (Stage) maximizeButton.getScene().getWindow();
-
-        if (!stage.isMaximized()) {
-            stage.setMaximized(true);
-            maximizeButton.setText("");
-        } else {
-            stage.setMaximized(false);
-            maximizeButton.setText("");
-        }
-        maximizeFontButton();
-        resizeOutputText();
-        scrollOutOperationMemory();
-    }
-
-    @FXML
-    public void hideWindow() {
-        Stage stage = (Stage) maximizeButton.getScene().getWindow();
-        stage.setIconified(true);
-    }
-
-    @FXML
-    void draggedWindow(MouseEvent event) {
-        Stage stage = (Stage) title.getScene().getWindow();
-        stage.setX(event.getScreenX() - xOffset);
-        stage.setY(event.getScreenY() - yOffset);
-    }
-
-    @FXML
-    void clickWindow(MouseEvent event) {
-        xOffset = event.getSceneX();
-        yOffset = event.getSceneY();
-    }
     //endregion
 
-    @FXML
-    public void negate() {
-        negatePressed = true;
-        addNegateHistory();
-
-        StringBuilder out = new StringBuilder(generalDisplay.getText());
+    //region Set number
+    private void setNumberNegate () {
         if (binaryOperation != null) {
             if (!equalWasPress) {
                 if (!canBackspace) {
-                    if (calculateBinary.getNumberSecond() == null) {
-                        calculateBinary.setNumberSecond(calculateBinary.getNumberFirst().negate());
+                    if (numberFromBinarySecondNumber() == null) {
+                        calculateBinary.setNumberSecond(numberFromBinaryFirstNumber().negate());
                     } else {
-                        calculateBinary.setNumberSecond(calculateBinary.getNumberSecond().negate());
+                        calculateBinary.setNumberSecond(numberFromBinarySecondNumber().negate());
                     }
                 } else {
                     calculateBinary.setNumberSecond(numberFromDisplay().negate());
                 }
             } else {
-                if (calculateBinary.getNumberFirst() != null) {
-                    calculateBinary.setNumberFirst(calculateBinary.getNumberFirst().negate());
-                    calculateBinary.setResult(calculateBinary.getNumberFirst());
+                if (numberFromBinaryFirstNumber() != null) {
+                    calculateBinary.setNumberFirst(numberFromBinaryFirstNumber().negate());
+                    calculateBinary.setResult(numberFromBinaryFirstNumber());
                 }
             }
         } else {
@@ -673,147 +409,262 @@ public class Calculator_Controller {
                 calculateUnary.setNumber(calculateUnary.getNumber().negate());
             }
             if (historyOperations.isEmpty()) {
-                if (calculateBinary.getNumberFirst() != null) {
-                    calculateBinary.setNumberFirst(calculateBinary.getNumberFirst().negate());
+                if (numberFromBinaryFirstNumber() != null) {
+                    calculateBinary.setNumberFirst(numberFromBinaryFirstNumber().negate());
                 }
             }
         }
+    }
 
-        if (!out.toString().equals("0")) {
-            if (out.charAt(0) != '-') {
-                out = out.insert(0, '-');
-                charValidInText++;
+    private void setNumbersBinary () {
+        if (numberFromBinaryFirstNumber() == null) {
+            if (calculateBinary.getResult() != null) {
+                calculateBinary.setNumberFirst(numberFromBinaryResult());
             } else {
-                out.deleteCharAt(0);
-                charValidInText = CHAR_MAX_INPUT;
+                calculateBinary.setNumberFirst(numberFromDisplay());
+            }
+            addBinaryFirstNumberHistory();
+        } else {
+            if (canBackspace || memoryPressed) {
+                if (!memoryPressed) {
+                    calculateBinary.setNumberSecond(numberFromDisplay());
+                }
+
+                addBinarySecondNumberHistory();
+            } else if (equalWasPress) {
+                if (calculateBinary.getResult() != null) {
+                    calculateBinary.setNumberSecond(numberFromBinaryResult());
+                } else {
+                    if (numberFromBinaryFirstNumber() != null) {
+                        calculateBinary.setNumberSecond(numberFromBinaryFirstNumber());
+                    } else {
+                        calculateBinary.setNumberSecond(numberFromDisplay());
+                    }
+                }
+            }
+            addBinaryFirstNumberHistory();
+        }
+        percentPressed = false;
+        clearUnary();
+    }
+
+    private void setNumberUnary () {
+        if (calculateUnary.getNumber() == null) {
+            if (canBackspace) {
+                calculateUnary.setNumber(numberFromDisplay());
+            } else {
+                if (calculateBinary.getResult() != null) {
+                    calculateUnary.setNumber(calculateBinary.getResult());
+                    calculateBinary.setResult(null);
+                } else {
+                    calculateUnary.setNumber(numberFromDisplay());
+                }
             }
         }
-
-        printResult(out.toString());
-        scrollOutOperationMemory();
-        canChangeOperator = false;
-
-    }
-
-    //region Memory
-
-    @FXML
-    void memoryStore() {
-        if (memory == null) {
-            memory = new Memory();
-        }
-        memory.setNumber(setMemoryNumber());
-
-        memoryButtonDisable(false);
-        memoryPressed = true;
-    }
-
-    @FXML
-    void memoryAdd() {
-        if (memory != null) {
-            memory.memoryAdd(setMemoryNumber());
-        } else {
-            memory = new Memory();
-            memory.memoryAdd(setMemoryNumber());
-            memoryButtonDisable(false);
-        }
-        memoryPressed = true;
-    }
-
-    @FXML
-    void memoryClear() {
-        memoryPressed = true;
-        memory = null;
-        memoryButtonDisable(true);
-    }
-
-    @FXML
-    void memoryRecall() {
-        if (memory != null) {
-            getMemoryNumber(memory.memoryRecall());
-            printResult(NumberFormatter.numberFormatter(memory.memoryRecall()));
-
-        }
-        memoryPressed = true;
-    }
-
-    @FXML
-    void memorySubtract() {
-        if (memory != null) {
-            memory.memorySubtract(setMemoryNumber());
-        } else {
-            memory = new Memory();
-            memory.memorySubtract(setMemoryNumber());
-            memoryButtonDisable(false);
-        }
-        memoryPressed = true;
     }
     //endregion
 
-    @FXML
-    public void commaMouseClick(ActionEvent actionEvent) {
-        String buttonText = ((Button) actionEvent.getSource()).getText();
-        String out = generalDisplay.getText();
+    //region Get Number from ...
+    private BigDecimal numberFromBinaryResult () {
+        return calculateBinary.getResult();
+    }
 
-        if (canChangeOperator || !historyUnaryOperations.isEmpty()) {
-            out = "0";
-            canChangeOperator = false;
-            canBackspace = true;
-            pointInText = false;
-            historyUnaryOperations = "";
-            outOperationMemory.setText(historyOperations);
-        }
-        if (canBackspace) {
-            if (!pointInText) {
-                if (out.equals("0")) {
-                    charValidInText++;
-                }
-                out += buttonText;
-                pointInText = true;
-                charValidInText++;
+    private BigDecimal numberFromBinaryFirstNumber () {
+        return calculateBinary.getNumberFirst();
+    }
+
+    private BigDecimal numberFromBinarySecondNumber () {
+        return calculateBinary.getNumberSecond();
+    }
+
+    private BigDecimal numberFromDisplay () {
+        return NumberFormatter.parseNumber(generalDisplay.getText());
+    }
+
+    private void numberFromMemory (BigDecimal numberFromMemory) {
+        if (historyOperations.isEmpty()) {
+            clearUnary();
+            calculateBinary.setNumberFirst(numberFromMemory);
+            calculateUnary.setNumber(numberFromMemory);
+            canBackspace = false;
+        } else {
+            if (binaryOperation != null) {
+                calculateBinary.setNumberSecond(numberFromMemory);
             }
         }
-
-        printResult(out);
-        memoryPressed = false;
     }
 
-    private void resizeOutputText() {
-        generalDisplay.setFont(ResizeDisplay.fontSize(generalDisplay));
+
+    //endregion
+
+    //region Operations pressed
+    @FXML
+    public void binaryOperation (ActionEvent actionEvent) {
+        if (!negatePressed) {
+            historyOperations += historyUnaryOperations;
+        } else {
+            historyOperations += negateHistory;
+            negateHistory = "";
+            negatePressed = false;
+        }
+
+        if (equalWasPress) {
+            clearBinary();
+            equalWasPress = false;
+        }
+        setNumbersBinary();
+        unaryOperation = null;
+
+        if (binaryOperation == null) {
+            binaryOperation = OperationsEnum.valueOf(((Button) actionEvent.getSource()).getId());
+        }
+
+        calculateBinaryOperation();
+        if (!isError) {
+            binaryOperation = OperationsEnum.valueOf(((Button) actionEvent.getSource()).getId());
+            changeOperator();
+            pointInText = false;
+        }
+        canBackspace = false;
+        scrollOutOperationMemory();
     }
 
-    private void scrollOutOperationMemory() {
-        moveScroll = ResizeDisplay.scrollText(scrollPaneOperation, outOperationMemory.getText(), scrollButtonLeft, scrollButtonRight);
+    @FXML
+    public void unaryOperations (ActionEvent actionEvent) {
+        unaryOperation = OperationsEnum.valueOf(((Button) actionEvent.getSource()).getId());
+        setNumberUnary();
+        addUnaryNumberHistory();
+        calculateUnaryOperation();
+        outOperationMemory.setText(historyOperations + historyUnaryOperations);
+
+        scrollOutOperationMemory();
     }
 
-    private void calculateBinaryOperation() {
+    @FXML
+    public void percentOperation () {
+        percentOperation = OperationsEnum.PERCENT;
+
+        canChangeOperator = false;
+
+        if (binaryOperation != null) {
+            if (binaryOperation.equals(OperationsEnum.DIVIDE) || binaryOperation.equals(OperationsEnum.MULTIPLY)) {
+                calculateBinary.percent(numberFromDisplay());
+            } else {
+                if (!equalWasPress) {
+                    if (canBackspace) {
+                        calculateBinary.setNumberSecond(numberFromDisplay());
+                    } else {
+                        if (numberFromBinarySecondNumber() == null) {
+                            calculateBinary.setNumberSecond(numberFromBinaryFirstNumber());
+                        }
+                    }
+                    calculateBinary.percent(numberFromBinaryFirstNumber(), numberFromBinarySecondNumber());
+                    calculateBinary.setNumberSecond(calculateBinary.getResult());
+                } else {
+                    if (canBackspace) {
+                        calculateBinary.setNumberSecond(numberFromBinaryFirstNumber());
+                        calculateBinary.setNumberFirst(numberFromDisplay());
+                    } else {
+                        calculateBinary.setNumberFirst(calculateBinary.getResult());
+                    }
+                    calculateBinary.percent(numberFromBinaryFirstNumber(), numberFromBinarySecondNumber());
+                }
+            }
+            if (percentPressed) {
+                deleteLastHistory();
+            }
+
+            historyOperations += Input.deleteNumberSeparator(formatterNumber(calculateBinary.getResult()), separatorNumber);
+            printResult(formatterNumber(calculateBinary.getResult()));
+        } else {
+            calculateUnary.setNumber(numberFromDisplay());
+            calculateUnary.calculateUnary(percentOperation);
+            printResult(formatterNumber(calculateUnary.getResult()));
+            historyOperations = Input.deleteNumberSeparator(formatterNumber(calculateUnary.getResult()), separatorNumber);
+        }
+
+        outOperationMemory.setText(historyOperations);
+        percentPressed = true;
+        canBackspace = false;
+    }
+
+    @FXML
+    public void pressedEqual () {
+        clearError();
+        equalWasPress = true;
+
+        if (binaryOperation != null) {
+            canChangeOperator = false;
+            if (numberFromBinarySecondNumber() == null) {
+                if (!canBackspace) {
+                    setNumbersBinary();
+                } else {
+                    calculateBinary.setNumberSecond(numberFromDisplay());
+                }
+            }
+
+            calculateBinaryOperation();
+        }
+
+        if (!isError) {
+            clearHistory();
+        }
+        negatePressed = false;
+        canBackspace = false;
+
+        scrollOutOperationMemory();
+    }
+    //endregion
+
+    //region Calculate
+    private void calculateBinaryOperation () {
         try {
             calculateBinary.calculateBinary(binaryOperation);
+            if (calculateBinary.getResult() != null) {
+                printResult(NumberFormatter.numberFormatter(calculateBinary.getResult()));
+                canBackspace = false;
+            }
+            if (!equalWasPress) {
+                calculateBinary.setResult(null);
+                calculateBinary.setNumberSecond(null);
+            }
         } catch (Exception e) {
-            outOperationMemory.setText(historyOperations + getSymbol(binaryOperation));
+            if (equalWasPress) {
+                historyOperations += negateHistory;
+                outOperationMemory.setText(historyOperations);
+            } else {
+                outOperationMemory.setText(historyOperations + History.getSymbol(binaryOperation));
+            }
             printError(e);
         }
     }
 
-    private void changeOperator() {
-        if (!canChangeOperator) {
-            oldBinaryOperation = binaryOperation;
-            canChangeOperator = true;
-            historyOperations += getSymbol(oldBinaryOperation);
-        } else {
-            String lastSymbol = historyOperations.split(" ")[historyOperations.split(" ").length - 1];
-            if (getSymbol(oldBinaryOperation).replace(" ", "").equals(lastSymbol)) {
-                deleteLastHistory();
-                oldBinaryOperation = binaryOperation;
-            }
-            historyOperations += getSymbol(binaryOperation);
-        }
-        historyUnaryOperations = "";
-        outOperationMemory.setText(historyOperations);
-        scrollOutOperationMemory();
-    }
+    private void calculateUnaryOperation () {
+        try {
+            calculateUnary.calculateUnary(unaryOperation);
 
-    private void printError(Exception e) {
+            if (calculateUnary.getResult() != null) {
+                if (historyOperations.isEmpty()) {
+                    calculateBinary.setNumberFirst(calculateUnary.getResult());
+                    binaryOperation = null;
+                } else {
+                    if (binaryOperation != null) {
+                        calculateBinary.setNumberSecond(calculateUnary.getResult());
+                    } else {
+                        calculateBinary.setNumberFirst(calculateUnary.getResult());
+                    }
+                }
+                printResult(NumberFormatter.numberFormatter(calculateUnary.getResult()));
+                canBackspace = false;
+            }
+        } catch (Exception e) {
+            printError(e);
+        }
+    }
+    //endregion
+
+    //region Print
+    private void printError (Exception e) {
         isError = true;
         operationsIsDisable(true);
         memoryPanel.setDisable(true);
@@ -824,21 +675,7 @@ public class Calculator_Controller {
         scrollOutOperationMemory();
     }
 
-    private void operationsIsDisable(boolean disable) {
-        PERCENT.setDisable(disable);
-        SQRT.setDisable(disable);
-        SQR.setDisable(disable);
-        ONE_DIVIDE_X.setDisable(disable);
-        DIVIDE.setDisable(disable);
-        MULTIPLY.setDisable(disable);
-        SUBTRACT.setDisable(disable);
-        ADD.setDisable(disable);
-        plusMinus.setDisable(disable);
-        point.setDisable(disable);
-
-    }
-
-    private void printResult(String text) {
+    private void printResult (String text) {
         try {
             isOverflow(NumberFormatter.parseNumber(text));
             generalDisplay.setText(text);
@@ -848,7 +685,11 @@ public class Calculator_Controller {
         }
     }
 
-    private void isOverflow(BigDecimal result) throws ArithmeticException {
+    private String formatterNumber (BigDecimal number) {
+        return NumberFormatter.numberFormatter(number);
+    }
+
+    private void isOverflow (BigDecimal result) throws ArithmeticException {
         boolean overflow = false;
         BigDecimal number = NumberFormatter.parseNumber(NumberFormatter.numberFormatter(result));
 
@@ -863,111 +704,10 @@ public class Calculator_Controller {
         }
 
     }
+    //endregion
 
-    private String getSymbol(OperationsEnum binaryOperation) {
-        String symbol;
-        if (binaryOperation.equals(OperationsEnum.SUBTRACT)) {
-            symbol = " - ";
-        } else if (binaryOperation.equals(OperationsEnum.ADD)) {
-            symbol = " + ";
-        } else if (binaryOperation.equals(OperationsEnum.MULTIPLY)) {
-            symbol = " x ";
-        } else if (binaryOperation.equals(OperationsEnum.DIVIDE)) {
-            symbol = " ÷ ";
-        } else if (binaryOperation.equals(OperationsEnum.PERCENT)) {
-            symbol = " ";
-        } else {
-            symbol = "  ";
-        }
-
-        return symbol;
-    }
-
-    private String getOperationUnary(OperationsEnum unaryOperation) {
-        String operation;
-        if (unaryOperation.equals(OperationsEnum.SQRT)) {
-            operation = "√(";
-        } else if (unaryOperation.equals(OperationsEnum.SQR)) {
-            operation = "sqr(";
-        } else if (unaryOperation.equals(OperationsEnum.ONE_DIVIDE_X)) {
-            operation = "1/(";
-        } else {
-            operation = "";
-        }
-        return operation;
-    }
-
-    private void setNumbersBinary () {
-        if (calculateBinary.getNumberFirst() == null) {
-            if (calculateBinary.getResult() != null) {
-                calculateBinary.setNumberFirst(calculateBinary.getResult());
-            } else {
-                calculateBinary.setNumberFirst(numberFromDisplay());
-            }
-            if (historyOperations.isEmpty() && !negatePressed) {
-                historyOperations += NumberFormatter.numberFormatter(calculateBinary.getNumberFirst()).replace(" ", "");
-                outOperationMemory.setText(historyOperations);
-            }
-
-        } else {
-            if (canBackspace || memoryPressed) {
-                if (!memoryPressed) {
-                    calculateBinary.setNumberSecond(numberFromDisplay());
-                }
-
-                if (calculateBinary.getNumberSecond() != null && !percentPressed) {
-                    historyOperations += NumberFormatter.numberFormatter(calculateBinary.getNumberSecond()).replace(" ", "");
-                    outOperationMemory.setText(historyOperations);
-                    memoryPressed = false;
-                }
-            }
-
-            if (historyOperations.isEmpty() && !negatePressed) {
-                historyOperations += NumberFormatter.numberFormatter(calculateBinary.getNumberFirst()).replace(" ", "");
-                outOperationMemory.setText(historyOperations);
-            }
-
-        }
-        percentPressed = false;
-        clearUnary();
-    }
-
-    private void setNumberUnary() {
-        if (calculateUnary.getNumber() == null) {
-            if (canBackspace) {
-                calculateUnary.setNumber(numberFromDisplay());
-            } else {
-                if (calculateBinary.getResult() != null) {
-                    calculateUnary.setNumber(calculateBinary.getResult());
-                    calculateBinary.setResult(null);
-                } else {
-                    calculateUnary.setNumber(numberFromDisplay());
-                }
-            }
-        }
-    }
-
-    private void clearUnary() {
-        calculateUnary.setResult(null);
-        calculateUnary.setNumber(null);
-        historyUnaryOperations = "";
-        unaryOperation = null;
-    }
-
-    private void clearBinary() {
-        if (historyOperations.isEmpty()) {
-            calculateBinary.setNumberSecond(null);
-            calculateBinary.setResult(null);
-        } else {
-            calculateBinary.setNumberSecond(null);
-        }
-    }
-
-    private BigDecimal numberFromDisplay (){
-        return NumberFormatter.parseNumber(generalDisplay.getText());
-    }
-
-    private void addNegateHistory() {
+    //region History
+    private void addNegateHistory () {
         if (!canBackspace) {
             if (historyOperations.isEmpty()) {
                 if (!historyUnaryOperations.isEmpty()) {
@@ -975,7 +715,7 @@ public class Calculator_Controller {
                     historyUnaryOperations = "";
                 }
             } else {
-                if (historyUnaryOperations.isEmpty()) {
+                if (historyUnaryOperations.isEmpty()||percentPressed) {
                     deleteLastHistory();
                 } else {
                     if (negateHistory.isEmpty()) {
@@ -985,7 +725,7 @@ public class Calculator_Controller {
                 }
             }
             if (negateHistory.isEmpty()) {
-                negateHistory = generalDisplay.getText().replace(" ", "");
+                negateHistory = Input.getTextLabel(generalDisplay, separatorNumber);
             }
             negateHistory = "negate(" + negateHistory + ")";
 
@@ -993,38 +733,123 @@ public class Calculator_Controller {
         }
     }
 
-    private void deleteLastHistory() {
-        int partToDelete = historyOperations.split(" ").length;
-        String numberDelete = historyOperations.split(" ")[partToDelete - 1];
-        int charStart = historyOperations.length() - numberDelete.length();
-
-        if (numberDelete.length() > 0) {
-            if (!canChangeOperator) {
-                int charEnd = historyOperations.length();
-                if (numberDelete.length() == 1) {
-                    if (negateHistory.isEmpty()) {
-                        historyOperations = new StringBuilder(historyOperations).deleteCharAt(historyOperations.length() - 1).toString();
-                    }
-                } else {
-                    if (historyOperations.substring(charStart, charEnd).equals(numberDelete)) {
-                        historyOperations = new StringBuilder(historyOperations).delete(charStart, charEnd).toString();
-                    }
-                }
-            } else {
-                if (!negatePressed) {
-                    historyOperations = new StringBuilder(historyOperations).delete(historyOperations.length() - getSymbol(binaryOperation).length(), historyOperations.length()).toString();
-                }
-            }
+    private void addBinarySecondNumberHistory () {
+        if (numberFromBinarySecondNumber() != null && !percentPressed) {
+            historyOperations += formatterNumberHistory(numberFromBinarySecondNumber());
+            outOperationMemory.setText(historyOperations);
+            memoryPressed = false;
         }
     }
 
-    private void clearHistory() {
+    private String formatterNumberHistory (BigDecimal number) {
+        return History.formatterNumberHistory(number, separatorNumber);
+    }
+
+    private void addBinaryFirstNumberHistory () {
+        if (historyOperations.isEmpty() && !negatePressed) {
+            historyOperations += formatterNumberHistory(numberFromBinaryFirstNumber());
+            outOperationMemory.setText(historyOperations);
+        }
+    }
+
+    private void addUnaryNumberHistory () {
+        if (historyUnaryOperations.isEmpty()) {
+            historyUnaryOperations = formatterNumberHistory(calculateUnary.getNumber());
+        }
+        if (!negateHistory.isEmpty()) {
+            historyUnaryOperations = negateHistory;
+            negateHistory = "";
+        }
+        historyUnaryOperations = History.getSymbol(unaryOperation) + historyUnaryOperations + ")";
+    }
+
+    private void deleteLastHistory () {
+        if (!negatePressed||percentPressed) {
+            historyOperations = History.deleteLastHistory(canChangeOperator, binaryOperation, historyOperations);
+        }
+    }
+
+    private void clearHistory () {
         historyOperations = "";
+        negateHistory = "";
         historyUnaryOperations = "";
         outOperationMemory.setText(historyOperations);
     }
 
-    private String cleanDisplay(String out) {
+    private void changeOperator () {
+        historyOperations = History.changeOperator(canChangeOperator, binaryOperation, historyOperations);
+        canChangeOperator = true;
+        historyUnaryOperations = "";
+        outOperationMemory.setText(historyOperations);
+        scrollOutOperationMemory();
+    }
+    //endregion
+
+    //region Scroll History
+    @FXML
+    void scrollButtonLeftPressed () {
+        scrollPaneOperation.setHvalue(scrollPaneOperation.getHvalue() + moveScroll);
+        scrollButtonRight.setVisible(true);
+        if (scrollPaneOperation.getHvalue() == scrollPaneOperation.getHmax()) {
+            scrollButtonLeft.setVisible(false);
+            scrollButtonRight.setVisible(true);
+        }
+    }
+
+    @FXML
+    void scrollButtonRightPressed () {
+        scrollPaneOperation.setHvalue(scrollPaneOperation.getHvalue() - moveScroll);
+        scrollButtonLeft.setVisible(true);
+        if (scrollPaneOperation.getHvalue() == 0) {
+            scrollButtonRight.setVisible(false);
+            scrollButtonLeft.setVisible(true);
+        }
+    }
+
+    private void scrollOutOperationMemory () {
+        moveScroll = ResizeDisplay.scrollText(scrollPaneOperation, outOperationMemory.getText(), scrollButtonLeft, scrollButtonRight);
+    }
+    //endregion
+
+    //region Clear
+    @FXML
+    void clearAllC () {
+        generalDisplay.setStyle(firstStyleLabel);
+        generalDisplay.setText("0");
+        clearHistory();
+        pointInText = false;
+        canChangeOperator = false;
+        binaryOperation = null;
+        calculateBinary.setNumberSecond(null);
+        calculateBinary.setNumberFirst(null);
+        calculateBinary.setResult(null);
+        scrollButtonRight.setVisible(false);
+        scrollButtonLeft.setVisible(false);
+        clearUnary();
+        equalWasPress = false;
+        operationsIsDisable(false);
+        memoryPanel.setDisable(false);
+        isError = false;
+        negatePressed = false;
+        negateHistory = "";
+        percentPressed = false;
+        charValidInText = CHAR_MAX_INPUT;
+        resizeOutputText();
+        percentOperation = null;
+        canBackspace = true;
+    }
+
+    @FXML
+    void clearNumberCE () {
+        generalDisplay.setStyle(firstStyleLabel);
+        generalDisplay.setText("0");
+        pointInText = false;
+        charValidInText = CHAR_MAX_INPUT;
+        clearError();
+        resizeOutputText();
+    }
+
+    private String clearDisplay (String out) {
         if (canChangeOperator || !canBackspace || memoryPressed || !historyUnaryOperations.isEmpty() || !negateHistory.isEmpty()) {
             canChangeOperator = false;
             memoryPressed = false;
@@ -1040,13 +865,177 @@ public class Calculator_Controller {
         return out;
     }
 
-    private void maximizeFontButton() {
+    private void clearError () {
+        if (isError) {
+            C.fire();
+        }
+    }
+
+    private void clearUnary () {
+        calculateUnary.setResult(null);
+        calculateUnary.setNumber(null);
+        historyUnaryOperations = "";
+        unaryOperation = null;
+    }
+
+    private void clearBinary () {
+        if (historyOperations.isEmpty()) {
+            calculateBinary.setNumberSecond(null);
+            calculateBinary.setResult(null);
+        } else {
+            calculateBinary.setNumberSecond(null);
+        }
+    }
+    //endregion
+
+    //region Memory
+
+    @FXML
+    void memoryStore () {
+        if (memory == null) {
+            memory = new Memory();
+        }
+        memory.setNumber(setMemoryNumber());
+
+        memoryButtonDisable(false);
+        memoryPressed = true;
+    }
+
+    @FXML
+    void memoryAdd () {
+        if (memory != null) {
+            memory.memoryAdd(setMemoryNumber());
+        } else {
+            memory = new Memory();
+            memory.memoryAdd(setMemoryNumber());
+            memoryButtonDisable(false);
+        }
+        memoryPressed = true;
+    }
+
+    @FXML
+    void memoryClear () {
+        memoryPressed = true;
+        memory = null;
+        memoryButtonDisable(true);
+    }
+
+    @FXML
+    void memoryRecall () {
+        if (memory != null) {
+            numberFromMemory(memory.memoryRecall());
+            printResult(NumberFormatter.numberFormatter(memory.memoryRecall()));
+
+        }
+        memoryPressed = true;
+    }
+
+    @FXML
+    void memorySubtract () {
+        if (memory != null) {
+            memory.memorySubtract(setMemoryNumber());
+        } else {
+            memory = new Memory();
+            memory.memorySubtract(setMemoryNumber());
+            memoryButtonDisable(false);
+        }
+        memoryPressed = true;
+    }
+
+    private void memoryButtonDisable (boolean disable) {
+        memoryClear.setDisable(disable);
+        memoryRecall.setDisable(disable);
+    }
+
+    private BigDecimal setMemoryNumber () {
+        BigDecimal number;
+        if (binaryOperation != null) {
+            if (canBackspace) {
+                number = numberFromDisplay();
+            } else {
+                if (calculateBinary.getResult() != null) {
+                    number = calculateBinary.getResult();
+                } else {
+                    number = numberFromBinaryFirstNumber();
+                }
+            }
+        } else if (unaryOperation != null && calculateUnary.getResult() != null) {
+            number = calculateUnary.getResult();
+        } else {
+            number = numberFromDisplay();
+        }
+        return number;
+    }
+
+    //endregion
+
+    //region Window
+    @FXML
+    public void closeWindow () {
+        Stage stage = (Stage) cancel.getScene().getWindow();
+        stage.close();
+    }
+
+    @FXML
+    public void maximizeWindow () {
+        Stage stage = (Stage) maximizeButton.getScene().getWindow();
+
+        if (!stage.isMaximized()) {
+            stage.setMaximized(true);
+            maximizeButton.setText("");
+        } else {
+            stage.setMaximized(false);
+            maximizeButton.setText("");
+        }
+        resizeFontButton();
+        resizeOutputText();
+        scrollOutOperationMemory();
+    }
+
+    @FXML
+    public void hideWindow () {
+        Stage stage = (Stage) maximizeButton.getScene().getWindow();
+        stage.setIconified(true);
+    }
+
+    @FXML
+    void draggedWindow (MouseEvent event) {
+        Stage stage = (Stage) title.getScene().getWindow();
+        stage.setX(event.getScreenX() - xOffset);
+        stage.setY(event.getScreenY() - yOffset);
+    }
+
+    @FXML
+    void clickWindow (MouseEvent event) {
+        xOffset = event.getSceneX();
+        yOffset = event.getSceneY();
+    }
+
+
+    //endregion
+
+    //region Resize
+
+    @FXML
+    void resizeWindow () {
+        Stage stage = (Stage) generalAnchorPane.getScene().getWindow();
+        ResizeWindow resize = new ResizeWindow(stage);
+        resize.resizeAllStage();
+        scrollOutOperationMemory();
+    }
+
+    private void resizeOutputText () {
+        generalDisplay.setFont(ResizeDisplay.fontSize(generalDisplay));
+    }
+
+    private void resizeFontButton () {
         Stage stage = (Stage) maximizeButton.getScene().getWindow();
         Font newFontNumber;
         Font newFontOperations;
         if (stage.isMaximized()) {
             newFontNumber = Font.font("Segoe UI Semibold", 34);
             newFontOperations = Font.font("Segoe MDL2 Assets", 20);
+
             PERCENT.setFont(Font.font("Calculator MDL2 Assets", 20));
             SQR.setFont(Font.font("Calculator MDL2 Assets", 25));
             ONE_DIVIDE_X.setFont(Font.font("Calculator MDL2 Assets", 22));
@@ -1055,6 +1044,7 @@ public class Calculator_Controller {
         } else {
             newFontNumber = Font.font("Segoe UI Semibold", 24);
             newFontOperations = Font.font("Segoe MDL2 Assets", 15);
+
             PERCENT.setFont(Font.font("Calculator MDL2 Assets", 15));
             SQR.setFont(Font.font("Calculator MDL2 Assets", 19));
             ONE_DIVIDE_X.setFont(Font.font("Calculator MDL2 Assets", 17));
@@ -1084,41 +1074,6 @@ public class Calculator_Controller {
         Backspace.setFont(newFontOperations);
     }
 
-    private void memoryButtonDisable(boolean disable) {
-        memoryClear.setDisable(disable);
-        memoryRecall.setDisable(disable);
-    }
+    //endregion
 
-    private BigDecimal setMemoryNumber() {
-        BigDecimal number;
-        if (binaryOperation != null) {
-            if (canBackspace) {
-                number = numberFromDisplay();
-            } else {
-                if (calculateBinary.getResult() != null) {
-                    number = calculateBinary.getResult();
-                } else {
-                    number = calculateBinary.getNumberFirst();
-                }
-            }
-        } else if (unaryOperation != null && calculateUnary.getResult() != null) {
-            number = calculateUnary.getResult();
-        } else {
-            number = numberFromDisplay();
-        }
-        return number;
-    }
-
-    private void getMemoryNumber(BigDecimal number) {
-        if (historyOperations.isEmpty()) {
-            clearUnary();
-            calculateBinary.setNumberFirst(number);
-            calculateUnary.setNumber(number);
-            canBackspace = false;
-        } else {
-            if (binaryOperation != null) {
-                calculateBinary.setNumberSecond(number);
-            }
-        }
-    }
 }

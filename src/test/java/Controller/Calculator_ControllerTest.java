@@ -59,7 +59,7 @@ class Calculator_ControllerTest extends ApplicationTest {
     @BeforeEach
     void outMemory() {
         outOperationMemory = from(root).lookup("#outOperationMemory").query();
-        outLabel = from(root).lookup("#outText").query();
+        outLabel = from(root).lookup("#generalDisplay").query();
     }
 
     /* Symbols by font: "/View/src/CalcMDL2.ttf
@@ -75,6 +75,34 @@ class Calculator_ControllerTest extends ApplicationTest {
          - negate
          - backspace
     */
+
+    @Test
+    void checkComma() {
+        assertNumber(",", "0,", "");
+        assertNumber(",3", "0,3", "");
+        assertNumber(",3333333333333333", "0,3333333333333333", "");
+
+        assertNumber(",,,", "0,", "");
+        assertNumber(",,,3", "0,3", "");
+        assertNumber(",,,3333333333333333", "0,3333333333333333", "");
+
+        assertNumber("5,", "5,", "");
+        assertNumber("5,3", "5,3", "");
+        assertNumber("5,3333333333333333", "5,333333333333333", "");
+
+        assertNumber("5,,,", "5,", "");
+        assertNumber("5,,,3", "5,3", "");
+        assertNumber("5,,,3333333333333333", "5,333333333333333", "");
+
+        assertNumber("5+,", "0,", "5 + ");
+        assertNumber("5+,3", "0,3", "5 + ");
+        assertNumber("5+,3333333333333333", "0,3333333333333333", "5 + ");
+
+        assertNumber("5+,,,", "0,", "5 + ");
+        assertNumber("5+,,,3", "0,3", "5 + ");
+        assertNumber("5+,,,3333333333333333", "0,3333333333333333", "5 + ");
+
+    }
 
     @Test
     void checkInput() {
@@ -154,8 +182,8 @@ class Calculator_ControllerTest extends ApplicationTest {
         assertNumber("0 + 0 +", "0", "0 + 0 + ");
 
         assertNumber("2 + 0 +", "2", "2 + 0 + ");
-        assertNumber("2  + 0 +", "-2", "-2 + 0 + ");
         assertNumber("0 + 2  +", "-2", "0 + -2 + ");
+        assertNumber("2  + 0 +", "-2", "-2 + 0 + ");
 
         assertNumber("2 + 2 +", "4", "2 + 2 + ");
         assertNumber("2 + 2 +", "0", "2 + -2 + ");
@@ -822,7 +850,6 @@ class Calculator_ControllerTest extends ApplicationTest {
          * Max number is saved at memory for accelerate tests,
          * and called by  symbol
          */
-        assertNumber(MAX_POSITIVE_NUMBER_VISIBLE + "" + MAX_POSITIVE_NUMBER + " /  =", "1", "");
         assertNumber(MAX_POSITIVE_NUMBER + "" + MAX_POSITIVE_NUMBER_VISIBLE + " /  =", "0,9999999999999999", "");
         //  => 9999999999999999 49...99,99...99
         assertNumber(" / 0 =", "Cannot divide by zero", "9,999999999999999e+9999 ÷ ");
@@ -996,6 +1023,16 @@ class Calculator_ControllerTest extends ApplicationTest {
         assertNumber("2  =  =", "16", "");
         assertNumber("2 √ = √ =", "1,189207115002721", "");
         assertNumber("2  =  =", "2", "");
+
+        //One operand with operation and two equals
+        assertNumber("2 + ==", "6", "");
+        assertNumber("2 - ==", "-2", "");
+        assertNumber("2 x ==", "8", "");
+        assertNumber("2 / ==", "0,5", "");
+        assertNumber("2  ==", "4", "");
+        assertNumber("2 √ ==", "1,414213562373095", "");
+        assertNumber("2  ==", "0,5", "");
+        assertNumber("3 % ==", "0", "");
 
         //One operand with operation and several equals
         assertNumber("2 + ===", "8", "");

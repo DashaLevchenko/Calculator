@@ -17,6 +17,7 @@ public class ResizeWindow {
     private double minWidth;
     private double minHeight;
     private Cursor cursorEvent = Cursor.DEFAULT;
+    private int MIN_BORDER = 4;
 
 
     ResizeWindow (Stage stage) {
@@ -61,7 +62,7 @@ public class ResizeWindow {
         EventHandler<MouseEvent> event = mouseEvent -> {
             EventType<? extends MouseEvent> mouseEventType = mouseEvent.getEventType();
 
-            int border = 4;
+            int border = MIN_BORDER;
             double mouseWinX = mouseEvent.getSceneX();
             double mouseWinY = mouseEvent.getSceneY();
             double sceneWidth = scene.getWidth();
