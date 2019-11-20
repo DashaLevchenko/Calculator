@@ -7,20 +7,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="feaeb0c2-feb2-4a9c-98e3-48b1d1a339aa" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/User.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/User.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Calculator_Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Calculator_Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Calculator_Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Calculator_Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/History.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/History.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Input.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Text.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/NumberFormatter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/NumberFormatter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/ResizeDisplay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/ResizeDisplay.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/ResizeWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/ResizeWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Calculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Calculator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Binary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Binary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Memory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Memory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Model/OperationsEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/OperationsEnum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/View/calculator_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/calculator_view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Controller/Calculator_ControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Controller/Calculator_ControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/View/calculator_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/calculator_view.fxml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -291,13 +280,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1565432602101</updated>
-    </task>
-    <task id="LOCAL-00027" summary="resize is work">
-      <created>1568037759503</created>
-      <option name="number" value="00027" />
-      <option name="presentableId" value="LOCAL-00027" />
-      <option name="project" value="LOCAL" />
-      <updated>1568037759503</updated>
     </task>
     <task id="LOCAL-00028" summary="start controller">
       <created>1568039874579</created>
@@ -635,7 +617,14 @@
       <option name="project" value="LOCAL" />
       <updated>1574084260336</updated>
     </task>
-    <option name="localTasksCounter" value="76" />
+    <task id="LOCAL-00076" summary="before change controller">
+      <created>1574264237678</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1574264237678</updated>
+    </task>
+    <option name="localTasksCounter" value="77" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -696,7 +685,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="pattern for 0,111(13)" />
     <MESSAGE value="all work,&#10;before change tests" />
     <MESSAGE value="before change test format" />
     <MESSAGE value="before test exceptions" />
@@ -721,7 +709,8 @@
     <MESSAGE value="before change buffer console size" />
     <MESSAGE value="before create new classes" />
     <MESSAGE value="before create History" />
-    <option name="LAST_COMMIT_MESSAGE" value="before create History" />
+    <MESSAGE value="before change controller" />
+    <option name="LAST_COMMIT_MESSAGE" value="before change controller" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
