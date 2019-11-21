@@ -1286,7 +1286,7 @@ class BinaryMinusTest {
 //        System.out.println("assertionSubtract(\""+xString+"\", \""+yString+"\", \""+x.subtract(y)+"\");");
         binary.setNumberFirst(x);
         binary.setNumberSecond(y);
-        binary.subtract();
+//        binary.subtract();
 
         BigDecimal resultExpected = new BigDecimal(resultString);
         BigDecimal resultActual = binary.getResult();

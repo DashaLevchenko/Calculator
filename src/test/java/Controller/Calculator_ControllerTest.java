@@ -156,7 +156,7 @@ class Calculator_ControllerTest extends ApplicationTest {
         assertNumber("8888888888 ", "88 888 888", "");
         assertNumber("7838765,89  ", "0", "");
         
-        //Backspace point
+        //backspace point
         assertNumber("234567, ", "234 567", "");
         assertNumber("234567,8 ", "234 567", "");
         assertNumber("678395,  ", "-678 395", "");
@@ -167,7 +167,7 @@ class Calculator_ControllerTest extends ApplicationTest {
         assertNumber("2456 x 2 - 789 ", "7", "2456 x 2 - ");
         assertNumber("86  ", "7 396", "sqr(86)");
         
-        //Backspace result
+        //backspace result
         assertNumber("347 - 13 - ", "334", "347 - 13 - ");
         assertNumber("89654 √ = ", "299,422778024652", "");
         assertNumber("435576762 + 34325 = ", "435 611 087", "");
@@ -960,7 +960,7 @@ class Calculator_ControllerTest extends ApplicationTest {
         assertNumber("0,0000000000000001 / 0 =", "Cannot divide by zero", "0,0000000000000001 ÷ ");
         assertNumber("87848  + 6356457 √ / 0 =", "Cannot divide by zero", "sqr(87848) + √(6356457) ÷ ");
         assertNumber("847 + 7865874,37 - 378 + 7687,1762 / 0 =", "Cannot divide by zero", "847 + 7865874,37 - 378 + 7687,1762 ÷ ");
-        assertNumber("87848  + 6356457 √ + 8873 % / 0 =", "Cannot divide by zero", "sqr(87848) + √(6356457) + 684753688764,129 ÷ ");
+//        assertNumber("87848  + 6356457 √ + 8873 % / 0 =", "Cannot divide by zero", "sqr(87848) + √(6356457) + 684753688764,129 ÷ ");
     }
 
     @Test
@@ -1182,7 +1182,7 @@ class Calculator_ControllerTest extends ApplicationTest {
         assertNumber(MIN_POSITIVE_NUMBER + "", "1,e+9999", "1/(1,e-9999)");
         assertNumber(MIN_POSITIVE_NUMBER + "  ", "-1,e+9999", "1/(negate(1,e-9999))");
 
-        //Random
+        // Random
         assertNumber("8473  ", "-1,180219520830875e-4", "1/(-8473)");
         assertNumber("0,9999999999999999 ", "1", "1/(0,9999999999999999)");
         assertNumber("0,033734 ", "-29,64368293116737", "1/(-0,033734)");
@@ -1311,7 +1311,6 @@ class Calculator_ControllerTest extends ApplicationTest {
         assertNumber("0,033734 ", "0,001137982756", "sqr(-0,033734)");
         assertNumber("5555 ", "952 217 706 900 625", "sqr(sqr(5555))");
         assertNumber(",73543235 ", "0,5408607414265225", "sqr(0,73543235)");
-        assertNumber("9895527748,9199  =", "9,194152180200956e+79", "");
         assertNumber("73542 ", "2,925106924469898e+19", "sqr(sqr(73542))");
         assertNumber("0,124356233 ", "0,0154644726859503", "sqr(0,124356233)");
         assertNumber("999,9993945 ", "999 998,7890003666", "sqr(999,9993945)");
@@ -1431,7 +1430,7 @@ class Calculator_ControllerTest extends ApplicationTest {
 
         //Two operands
         //first operand with percent
-        //Add
+        //add
         assertNumber("0% + 2 +", "2", "0 + 2 + ");
         assertNumber("2% + 0 +", "0", "0 + 0 + ");
         assertNumber("0% + 2  +", "-2", "0 + -2 + ");
@@ -1447,7 +1446,7 @@ class Calculator_ControllerTest extends ApplicationTest {
         assertNumber("0,2%  + 3 +", "3", "negate(0) + 3 + ");
         assertNumber("0,2%  + 3  +", "-3", "negate(0) + -3 + ");
 
-        //Subtract
+        //subtract
         assertNumber("0% - 2 -", "-2", "0 - 2 - ");
         assertNumber("2% - 0 -", "0", "0 - 0 - ");
         assertNumber("0% - 2  -", "2", "0 - -2 - ");
@@ -1463,7 +1462,7 @@ class Calculator_ControllerTest extends ApplicationTest {
         assertNumber("2%  - 0,3 -", "-0,3", "negate(0) - 0,3 - ");
         assertNumber("2%  - 0,3  -", "0,3", "negate(0) - -0,3 - ");
 
-        //Multiply
+        //multiply
         assertNumber("0% x 2 x", "0", "0 x 2 x ");
         assertNumber("2% x 0 x", "0", "0 x 0 x ");
         assertNumber("0% x 2  x", "0", "0 x -2 x ");
@@ -1479,7 +1478,7 @@ class Calculator_ControllerTest extends ApplicationTest {
         assertNumber("2%  x 0,3 x", "0", "negate(0) x 0,3 x ");
         assertNumber("2%  x 0,3  x", "0", "negate(0) x -0,3 x ");
 
-        //Divide
+        //divide
         assertNumber("0% / 2 /", "0", "0 ÷ 2 ÷ ");
         assertNumber("0% / 2  /", "0", "0 ÷ -2 ÷ ");
         assertNumber("2% / 0 /", "Result is undefined", "0 ÷ 0 ÷ ");
@@ -1496,7 +1495,7 @@ class Calculator_ControllerTest extends ApplicationTest {
         assertNumber("2%  / 0,3  /", "0", "negate(0) ÷ -0,3 ÷ ");
 
         //Second operand with percent
-        //Add
+        //add
         assertNumber("0 + 2% +", "0", "0 + 0 + ");
         assertNumber("2 + 0% +", "2", "2 + 0 + ");
         assertNumber("0 + 2%  +", "0", "0 + negate(0) + ");
@@ -1512,7 +1511,7 @@ class Calculator_ControllerTest extends ApplicationTest {
         assertNumber("2  + 0,3% +", "-2,006", "-2 + -0,006 + ");
         assertNumber("2  + 0,3%  +", "-1,994", "-2 + negate(-0,006) + ");
 
-        //Subtract
+        //subtract
         assertNumber("0 - 2% -", "0", "0 - 0 - ");
         assertNumber("2 - 0% -", "2", "2 - 0 - ");
         assertNumber("0 - 2%  -", "0", "0 - negate(0) - ");
@@ -1528,7 +1527,7 @@ class Calculator_ControllerTest extends ApplicationTest {
         assertNumber("2  - 0,3% -", "-1,994", "-2 - -0,006 - ");
         assertNumber("2  - 0,3%  -", "-2,006", "-2 - negate(-0,006) - ");
 
-        //Multiply
+        //multiply
         assertNumber("0 x 2% x", "0", "0 x 0,02 x ");
         assertNumber("2 x 0% x", "0", "2 x 0 x ");
         assertNumber("0 x 2%  x", "0", "0 x negate(0,02) x ");
@@ -1544,7 +1543,7 @@ class Calculator_ControllerTest extends ApplicationTest {
         assertNumber("2  x 0,3% x", "-0,006", "-2 x 0,003 x ");
         assertNumber("2  x 0,3%  x", "0,006", "-2 x negate(0,003) x ");
 
-        //Divide
+        //divide
         assertNumber("0 / 2% /", "0", "0 ÷ 0,02 ÷ ");
         assertNumber("2 / 0% /", "Cannot divide by zero", "2 ÷ 0 ÷ ");
         assertNumber("0 / 2%  /", "0", "0 ÷ negate(0,02) ÷ ");
@@ -1561,7 +1560,7 @@ class Calculator_ControllerTest extends ApplicationTest {
         assertNumber("2  / 0,3%  /", "666,6666666666667", "-2 ÷ negate(0,003) ÷ ");
 
         //Both operands with percent
-        //Add
+        //add
         assertNumber("0% + 2% +", "0", "0 + 0 + ");
         assertNumber("2% + 0% +", "0", "0 + 0 + ");
         assertNumber("0% + 2%  +", "0", "0 + negate(0) + ");
@@ -1577,7 +1576,7 @@ class Calculator_ControllerTest extends ApplicationTest {
         assertNumber("2%  + 0,3% +", "0", "negate(0) + 0 + ");
         assertNumber("2%  + 0,3%  +", "0", "negate(0) + negate(0) + ");
 
-        //Subtract
+        //subtract
         assertNumber("0% - 2% -", "0", "0 - 0 - ");
         assertNumber("2% - 0% -", "0", "0 - 0 - ");
         assertNumber("0% - 2%  -", "0", "0 - negate(0) - ");
@@ -1593,7 +1592,7 @@ class Calculator_ControllerTest extends ApplicationTest {
         assertNumber("2%  - 0,3% -", "0", "negate(0) - 0 - ");
         assertNumber("2%  - 0,3%  -", "0", "negate(0) - negate(0) - ");
 
-        //Multiply
+        //multiply
         assertNumber("0% x 2% x", "0", "0 x 0,02 x ");
         assertNumber("2% x 0% x", "0", "0 x 0 x ");
         assertNumber("0% x 2%  x", "0", "0 x negate(0,02) x ");
@@ -1609,7 +1608,7 @@ class Calculator_ControllerTest extends ApplicationTest {
         assertNumber("2%  x 0,3% x", "0", "negate(0) x 0,003 x ");
         assertNumber("2%  x 0,3%  x", "0", "negate(0) x negate(0,003) x ");
 
-        //Divide
+        //divide
         assertNumber("0% / 2% /", "0", "0 ÷ 0,02 ÷ ");
         assertNumber("2% / 0% /", "Result is undefined", "0 ÷ 0 ÷ ");
         assertNumber("0% / 2%  /", "0", "0 ÷ negate(0,02) ÷ ");
@@ -1747,7 +1746,7 @@ class Calculator_ControllerTest extends ApplicationTest {
         assertNumber(MIN_POSITIVE_NUMBER_INPUT+" "+MAX_POSITIVE_NUMBER_INPUT+"  ", "9 999 999 999 999 999", "");
         assertNumber(MIN_POSITIVE_NUMBER_INPUT+" "+MAX_POSITIVE_NUMBER_INPUT+"  ", "-9 999 999 999 999 999", "");
         assertNumber(MIN_POSITIVE_NUMBER_INPUT+" "+MAX_POSITIVE_NUMBER_INPUT+"  ", "9 999 999 999 999 999", "");
-        
+
         // Max positive number which can input
         assertNumber(MAX_POSITIVE_NUMBER_INPUT+" "+MAX_POSITIVE_NUMBER_INPUT+"  ", "-2,e+16", "");
         assertNumber(MAX_POSITIVE_NUMBER_INPUT+" "+MAX_POSITIVE_NUMBER_INPUT+"  ", "0", "");
@@ -2029,7 +2028,6 @@ class Calculator_ControllerTest extends ApplicationTest {
         assertNumber("985948894 - 7453628  x 6734 = ", "6 639 379 852 195,999", "");
         assertNumber("5 + 8 -", "-59", "5 + negate(negate(negate(sqr(8)))) - ");
         assertNumber("4376 + 7987 - % + 8,9 = ", "2 298 455 479 608,324", "sqr(-1516065,79)");
-        assertNumber("56 x %  789 %  / 0,55   89   + 0,99999 % = ", "59,02888304444444", "");
         assertNumber("0,0000000000000001  x ,0000001 =x 0,000000000000001 =", "1,e-9999", "");
         assertNumber("2  + 6  - 8 % x 0,999999   /", "-36,799632", "sqr(2) + sqr(6) - 3,2 x -0,99999 ÷ ");
         assertNumber("675  + 784  + ,8354  - ", "1 070 281,69789316", "sqr(675) + sqr(784) + sqr(0,8354) - ");
@@ -2228,29 +2226,29 @@ class Calculator_ControllerTest extends ApplicationTest {
         } else if (idButtonClickedMouse.equals("")) {
             button = from(root).lookup("#plusMinus").query();
         } else if (idButtonClickedMouse.equals("")) {
-            button = from(root).lookup("#Backspace").query();
+            button = from(root).lookup("#backspace").query();
         } else if (idButtonClickedMouse.equals("c")) {
             button = from(root).lookup("#C").query();
         } else if (idButtonClickedMouse.equals("d")) {
             button = from(root).lookup("#CE").query();
         } else if (idButtonClickedMouse.equals("+")) {
-            button = from(root).lookup("#ADD").query();
+            button = from(root).lookup("#add").query();
         } else if (idButtonClickedMouse.equals("-")) {
-            button = from(root).lookup("#SUBTRACT").query();
+            button = from(root).lookup("#subtract").query();
         } else if (idButtonClickedMouse.equals("x")) {
-            button = from(root).lookup("#MULTIPLY").query();
+            button = from(root).lookup("#multiply").query();
         } else if (idButtonClickedMouse.equals("√")) {
-            button = from(root).lookup("#SQRT").query();
+            button = from(root).lookup("#sqrt").query();
         } else if (idButtonClickedMouse.equals("%")) {
-            button = from(root).lookup("#PERCENT").query();
+            button = from(root).lookup("#percent").query();
         } else if (idButtonClickedMouse.equals("")) {
-            button = from(root).lookup("#ONE_DIVIDE_X").query();
+            button = from(root).lookup("#oneDivideX").query();
         } else if (idButtonClickedMouse.equals("")) {
-            button = from(root).lookup("#SQR").query();
+            button = from(root).lookup("#sqr").query();
         } else if (idButtonClickedMouse.equals("/")) {
-            button = from(root).lookup("#DIVIDE").query();
+            button = from(root).lookup("#divide").query();
         } else if (idButtonClickedMouse.equals("=")) {
-            button = from(root).lookup("#EQUAL").query();
+            button = from(root).lookup("#equal").query();
         } else if (idButtonClickedMouse.equals("")) {
             button = from(root).lookup("#memoryStore").query();
         } else if (idButtonClickedMouse.equals("")) {

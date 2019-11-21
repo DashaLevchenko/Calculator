@@ -826,7 +826,7 @@ class UnaryXSquerTest {
         BigDecimal x = new BigDecimal(xString);
         BigDecimal resultExpected = new BigDecimal(resultString);
         unary.setNumber(x);
-        unary.xSquare();
+//        unary.xSquare();
         BigDecimal resultActual = unary.getResult();
 
         assertEquals(resultExpected, resultActual);

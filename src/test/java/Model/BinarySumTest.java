@@ -1199,7 +1199,7 @@ class BinarySumTest {
 
         binary.setNumberFirst(x);
         binary.setNumberSecond(y);
-        binary.add();
+//        binary.add();
 
         BigDecimal resultExpected = new BigDecimal(resultString);
         BigDecimal resultActual = binary.getResult();

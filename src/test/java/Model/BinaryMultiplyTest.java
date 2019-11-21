@@ -2018,7 +2018,7 @@ class BinaryMultiplyTest {
 
         binary.setNumberFirst(x);
         binary.setNumberSecond(y);
-        binary.multiply();
+//        binary.multiply();
 
         BigDecimal resultExpected = new BigDecimal(resultString);
         BigDecimal resultActual = binary.getResult();

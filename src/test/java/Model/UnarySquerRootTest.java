@@ -426,7 +426,7 @@ class UnarySquerRootTest {
         BigDecimal x = new BigDecimal(xString);
         BigDecimal resultExpected = new BigDecimal(resultString);
         unary.setNumber(x);
-        unary.squareRoot();
+//        unary.squareRoot();
         BigDecimal resultActual = unary.getResult();
 
         assertEquals(resultExpected, resultActual);
@@ -483,7 +483,7 @@ class UnarySquerRootTest {
     void assertionSQRTNotValid(BigDecimal x) {
         try {
             unary.setNumber(x);
-            unary.squareRoot();
+//            unary.squareRoot();
             fail();
         } catch (IllegalArgumentException e) {
             assertEquals("Invalid input", e.getMessage());

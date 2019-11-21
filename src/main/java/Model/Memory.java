@@ -33,7 +33,7 @@ public class Memory {
     }
 
     /**
-     * Return {@code number}
+     * Method returns {@code number}
      * @return Number
      */
     public BigDecimal memoryRecall() {

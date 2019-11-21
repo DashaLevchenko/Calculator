@@ -838,7 +838,7 @@ class UnaryOneDivideXTest {
         BigDecimal x = new BigDecimal(xString);
         BigDecimal resultExpected = new BigDecimal(resultString);
         unary.setNumber(x);
-        unary.oneDivideX();
+//        unary.oneDivideX();
         BigDecimal resultActual = unary.getResult();
 
         assertEquals(resultExpected, resultActual);

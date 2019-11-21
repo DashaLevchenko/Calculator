@@ -13,9 +13,6 @@ import java.text.ParseException;
 class NumberFormatter {
     private static DecimalFormatSymbols symbols = new DecimalFormatSymbols();
     private static DecimalFormat decimalFormat = new DecimalFormat();
-    /**
-     * Max number before make exponent number
-     */
     private static final BigDecimal MAX_NUMBER_INPUT = BigDecimal.valueOf(9999999999999999L);
 
     /**

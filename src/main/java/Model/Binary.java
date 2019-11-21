@@ -57,9 +57,9 @@ public class Binary {
     }
 
     private void divide() throws ArithmeticException {
-        if (numberFirst.equals(BigDecimal.ZERO) && numberSecond.equals(BigDecimal.ZERO)) {
+        if (numberFirst.setScale(0, RoundingMode.UP).equals(BigDecimal.ZERO) && numberSecond.setScale(0, RoundingMode.UP).equals(BigDecimal.ZERO)) {
             throw new ArithmeticException("Result is undefined");
-        } else if (numberSecond.equals(BigDecimal.ZERO)) {
+        } else if (numberSecond.setScale(0, RoundingMode.UP).equals(BigDecimal.ZERO)) {
             throw new ArithmeticException("Cannot divide by zero");
         } else {
             result = numberFirst.divide(numberSecond, defaultScale, defaultRounding);
