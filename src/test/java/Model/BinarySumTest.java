@@ -9,8 +9,10 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 class BinarySumTest {
     private Binary binary = new Binary();
+    private Calculator calculator = new Calculator();
+
     @Test
-    void sumInteger() {
+    void checkAdd () {
 //        assertionSum("0", "0", "0");
 
         assertionSum("0", "1", "1");
@@ -1188,29 +1190,30 @@ class BinarySumTest {
     void assertionSum(String xString, String yString, String resultString) {
         BigDecimal x = new BigDecimal(xString);
         BigDecimal y = new BigDecimal(yString);
-
-//        System.out.println("assertionSubtract(\""+xString+"\", \""+yString+"\", \""+x.subtract(y)+"\");");
-//        if(count==3){
-//            System.out.println();
-//            count = 0;
-//        }else{
-//            count++;
-//        }
-
-        binary.setNumberFirst(x);
-        binary.setNumberSecond(y);
-//        binary.add();
-
         BigDecimal resultExpected = new BigDecimal(resultString);
-        BigDecimal resultActual = binary.getResult();
+        System.out.println("assertionSubtract(\""+xString+"\", \""+yString+"\", \""+x.subtract(y)+"\");");
+        if(count==3){
+            System.out.println();
+            count = 0;
+        }else{
+            count++;
+        }
 
-        assertEquals(resultExpected, resultActual);
-        assertEquals(x.add(y), resultActual);
-
-        binary.calculateBinary(OperationsEnum.ADD);
-        assertEquals(resultExpected, binary.getResult());
-
-        assertAddInvalid();
+//        calculator.setNumberFirst(x);
+//        calculator.setNumberSecond(y);
+//        calculator.calculator(OperationsEnum.ADD);
+//        BigDecimal resultActual = calculator.getResult();
+//        assertEquals(resultExpected, resultActual);
+//
+//        binary.setNumberFirst(x);
+//        binary.setNumberSecond(y);
+//        binary.calculateBinary(OperationsEnum.ADD);
+//        resultActual = binary.getResult();
+//        assertEquals(resultExpected, resultActual);
+//
+//        assertEquals(x.add(y), resultActual);
+//
+//        assertAddInvalid();
     }
 
     private void assertAddInvalid() {
@@ -1232,7 +1235,7 @@ class BinarySumTest {
 
     private void assertEnumNull() {
         try {
-            binary.calculateBinary(null);
+            calculator.calculator(null);
             fail();
         } catch (NullPointerException e) {
             assertEquals("Enter operation", e.getMessage());
