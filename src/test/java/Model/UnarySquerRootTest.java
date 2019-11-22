@@ -13,9 +13,9 @@ class UnarySquerRootTest {
     private Calculator calculator = new Calculator();
 
     @Test
-    void squareRootInteger() {
-        assertionSQRTValid("0", "0");
+    void squareRootInteger(){
         assertionSQRTValid("1", "1");
+        assertionSQRTValid("0", "0");
         assertionSQRTValid("2", "1.414213562373095048801688724209698");
         assertionSQRTValid("3", "1.732050807568877293527446341505872");
         assertionSQRTValid("4", "2");
@@ -327,6 +327,9 @@ class UnarySquerRootTest {
         assertionSQRTValid("5.647753E+10549", "7.515153358381983145409957506060964E+5274");
         assertionSQRTValid("8.8788779E+10897", "9.422779791547715034610003242559177E+5448");
         assertionSQRTValid("9.86859867454E+10978", "3.141432583160109772276842278620604E+5489");
+        assertionSQRTValid("9999999999999999", "99999999.99999999499999999999999988");
+        assertionSQRTValid("9999999999999999E9999", "3.162277660168379173885010536013748E+5007");
+
 
     }
 
@@ -421,6 +424,8 @@ class UnarySquerRootTest {
         assertionSQRTValid("5.647753E-10537", "7.515153358381983145409957506060964E-5269");
         assertionSQRTValid("8.8788779E-10883", "9.422779791547715034610003242559177E-5442");
         assertionSQRTValid("9.86859867454E-10956", "3.141432583160109772276842278620604E-5478");
+        assertionSQRTValid("1E-9999", "3.162277660168379331998893544432719E-5000");
+        assertionSQRTValid("0.0000000000000001", "1E-8");
     }
 
     void assertionSQRTValid(String xString, String resultString) {

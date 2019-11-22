@@ -10,7 +10,7 @@ import java.text.ParseException;
 /**
  * Class formatters number for print
  */
-class NumberFormatter {
+class FormatterNumber {
     private static DecimalFormatSymbols symbols = new DecimalFormatSymbols();
     private static DecimalFormat decimalFormat = new DecimalFormat();
     private static final BigDecimal MAX_NUMBER_INPUT = BigDecimal.valueOf(9999999999999999L);

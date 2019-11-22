@@ -8,7 +8,7 @@ import java.math.BigDecimal;
  * This class change calculator history
  */
 
-public class History {
+public class ChangeHistory {
 private static OperationsEnum oldOperation;
 
     /**
@@ -101,7 +101,7 @@ private static OperationsEnum oldOperation;
      * @return String number was formatted without grouping separator
      */
     public static String formatterNumberHistory(BigDecimal number, String separatorNumber){
-        return Text.deleteNumberSeparator(NumberFormatter.numberFormatter(number), separatorNumber);
+        return Text.deleteNumberSeparator(FormatterNumber.numberFormatter(number), separatorNumber);
     }
 
 }

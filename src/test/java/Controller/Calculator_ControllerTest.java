@@ -28,7 +28,7 @@ class Calculator_ControllerTest extends ApplicationTest {
 
     @Override
     public void start(Stage stage) throws Exception {
-        root = FXMLLoader.load(Calculator_Main.class.getResource("/View/calculator_view.fxml"));
+        root = FXMLLoader.load(CalculatorMain.class.getResource("/View/calculator_view.fxml"));
         stage.setScene(new Scene(root));
         stage.show();
         stage.toFront();

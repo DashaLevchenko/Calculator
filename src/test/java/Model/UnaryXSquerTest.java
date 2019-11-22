@@ -13,815 +13,284 @@ class UnaryXSquerTest {
     private Calculator calculator = new Calculator();
 
     @Test
-    void xSquareInteger() {
-        assertionXSqureValid("0", "0");
-        assertionXSqureValid("1", "1");
-        assertionXSqureValid("-1", "1");
-        assertionXSqureValid("2", "4");
-        assertionXSqureValid("-2", "4");
-        assertionXSqureValid("3", "9");
-        assertionXSqureValid("-3", "9");
-        assertionXSqureValid("4", "16");
-        assertionXSqureValid("-4", "16");
-        assertionXSqureValid("5", "25");
-        assertionXSqureValid("-5", "25");
-        assertionXSqureValid("6", "36");
-        assertionXSqureValid("-6", "36");
-        assertionXSqureValid("7", "49");
-        assertionXSqureValid("-7", "49");
-        assertionXSqureValid("8", "64");
-        assertionXSqureValid("-8", "64");
-        assertionXSqureValid("9", "81");
-        assertionXSqureValid("-9", "81");
-        assertionXSqureValid("10", "100");
-        assertionXSqureValid("-10", "100");
-        assertionXSqureValid("11", "121");
-        assertionXSqureValid("-11", "121");
-        assertionXSqureValid("14", "196");
-        assertionXSqureValid("-14", "196");
-        assertionXSqureValid("21", "441");
-        assertionXSqureValid("-21", "441");
-        assertionXSqureValid("22", "484");
-        assertionXSqureValid("-22", "484");
-        assertionXSqureValid("26", "676");
-        assertionXSqureValid("-26", "676");
-        assertionXSqureValid("32", "1024");
-        assertionXSqureValid("-32", "1024");
-        assertionXSqureValid("33", "1089");
-        assertionXSqureValid("-33", "1089");
-        assertionXSqureValid("38", "1444");
-        assertionXSqureValid("-38", "1444");
-        assertionXSqureValid("43", "1849");
-        assertionXSqureValid("-43", "1849");
-        assertionXSqureValid("44", "1936");
-        assertionXSqureValid("-44", "1936");
-        assertionXSqureValid("50", "2500");
-        assertionXSqureValid("-50", "2500");
-        assertionXSqureValid("54", "2916");
-        assertionXSqureValid("-54", "2916");
-        assertionXSqureValid("55", "3025");
-        assertionXSqureValid("-55", "3025");
-        assertionXSqureValid("62", "3844");
-        assertionXSqureValid("-62", "3844");
-        assertionXSqureValid("65", "4225");
-        assertionXSqureValid("-65", "4225");
-        assertionXSqureValid("66", "4356");
-        assertionXSqureValid("-66", "4356");
-        assertionXSqureValid("74", "5476");
-        assertionXSqureValid("-74", "5476");
-        assertionXSqureValid("76", "5776");
-        assertionXSqureValid("-76", "5776");
-        assertionXSqureValid("77", "5929");
-        assertionXSqureValid("-77", "5929");
-        assertionXSqureValid("86", "7396");
-        assertionXSqureValid("-86", "7396");
-        assertionXSqureValid("87", "7569");
-        assertionXSqureValid("-87", "7569");
-        assertionXSqureValid("88", "7744");
-        assertionXSqureValid("-88", "7744");
-        assertionXSqureValid("98", "9604");
-        assertionXSqureValid("-98", "9604");
-        assertionXSqureValid("99", "9801");
-        assertionXSqureValid("-99", "9801");
-        assertionXSqureValid("100", "10000");
-        assertionXSqureValid("-100", "10000");
-        assertionXSqureValid("108", "11664");
-        assertionXSqureValid("-108", "11664");
-        assertionXSqureValid("111", "12321");
-        assertionXSqureValid("-111", "12321");
-        assertionXSqureValid("129", "16641");
-        assertionXSqureValid("-129", "16641");
-        assertionXSqureValid("138", "19044");
-        assertionXSqureValid("-138", "19044");
-        assertionXSqureValid("145", "21025");
-        assertionXSqureValid("-145", "21025");
-        assertionXSqureValid("152", "23104");
-        assertionXSqureValid("-152", "23104");
-        assertionXSqureValid("161", "25921");
-        assertionXSqureValid("-161", "25921");
-        assertionXSqureValid("171", "29241");
-        assertionXSqureValid("-171", "29241");
-        assertionXSqureValid("185", "34225");
-        assertionXSqureValid("-185", "34225");
-        assertionXSqureValid("197", "38809");
-        assertionXSqureValid("-197", "38809");
-        assertionXSqureValid("210", "44100");
-        assertionXSqureValid("-210", "44100");
-        assertionXSqureValid("211", "44521");
-        assertionXSqureValid("-211", "44521");
-        assertionXSqureValid("214", "45796");
-        assertionXSqureValid("-214", "45796");
-        assertionXSqureValid("222", "49284");
-        assertionXSqureValid("-222", "49284");
-        assertionXSqureValid("226", "51076");
-        assertionXSqureValid("-226", "51076");
-        assertionXSqureValid("237", "56169");
-        assertionXSqureValid("-237", "56169");
-        assertionXSqureValid("244", "59536");
-        assertionXSqureValid("-244", "59536");
-        assertionXSqureValid("253", "64009");
-        assertionXSqureValid("-253", "64009");
-        assertionXSqureValid("260", "67600");
-        assertionXSqureValid("-260", "67600");
-        assertionXSqureValid("278", "77284");
-        assertionXSqureValid("-278", "77284");
-        assertionXSqureValid("286", "81796");
-        assertionXSqureValid("-286", "81796");
-        assertionXSqureValid("301", "90601");
-        assertionXSqureValid("-301", "90601");
-        assertionXSqureValid("314", "98596");
-        assertionXSqureValid("-314", "98596");
-        assertionXSqureValid("322", "103684");
-        assertionXSqureValid("-322", "103684");
-        assertionXSqureValid("328", "107584");
-        assertionXSqureValid("-328", "107584");
-        assertionXSqureValid("331", "109561");
-        assertionXSqureValid("-331", "109561");
-        assertionXSqureValid("333", "110889");
-        assertionXSqureValid("-333", "110889");
-        assertionXSqureValid("348", "121104");
-        assertionXSqureValid("-348", "121104");
-        assertionXSqureValid("356", "126736");
-        assertionXSqureValid("-356", "126736");
-        assertionXSqureValid("367", "134689");
-        assertionXSqureValid("-367", "134689");
-        assertionXSqureValid("376", "141376");
-        assertionXSqureValid("-376", "141376");
-        assertionXSqureValid("389", "151321");
-        assertionXSqureValid("-389", "151321");
-        assertionXSqureValid("403", "162409");
-        assertionXSqureValid("-403", "162409");
-        assertionXSqureValid("418", "174724");
-        assertionXSqureValid("-418", "174724");
-        assertionXSqureValid("428", "183184");
-        assertionXSqureValid("-428", "183184");
-        assertionXSqureValid("431", "185761");
-        assertionXSqureValid("-431", "185761");
-        assertionXSqureValid("433", "187489");
-        assertionXSqureValid("-433", "187489");
-        assertionXSqureValid("444", "197136");
-        assertionXSqureValid("-444", "197136");
-        assertionXSqureValid("449", "201601");
-        assertionXSqureValid("-449", "201601");
-        assertionXSqureValid("453", "205209");
-        assertionXSqureValid("-453", "205209");
-        assertionXSqureValid("467", "218089");
-        assertionXSqureValid("-467", "218089");
-        assertionXSqureValid("479", "229441");
-        assertionXSqureValid("-479", "229441");
-        assertionXSqureValid("492", "242064");
-        assertionXSqureValid("-492", "242064");
-        assertionXSqureValid("512", "262144");
-        assertionXSqureValid("-512", "262144");
-        assertionXSqureValid("524", "274576");
-        assertionXSqureValid("-524", "274576");
-        assertionXSqureValid("539", "290521");
-        assertionXSqureValid("-539", "290521");
-        assertionXSqureValid("544", "295936");
-        assertionXSqureValid("-544", "295936");
-        assertionXSqureValid("547", "299209");
-        assertionXSqureValid("-547", "299209");
-        assertionXSqureValid("553", "305809");
-        assertionXSqureValid("-553", "305809");
-        assertionXSqureValid("555", "308025");
-        assertionXSqureValid("-555", "308025");
-        assertionXSqureValid("562", "315844");
-        assertionXSqureValid("-562", "315844");
-        assertionXSqureValid("570", "324900");
-        assertionXSqureValid("-570", "324900");
-        assertionXSqureValid("574", "329476");
-        assertionXSqureValid("-574", "329476");
-        assertionXSqureValid("582", "338724");
-        assertionXSqureValid("-582", "338724");
-        assertionXSqureValid("586", "343396");
-        assertionXSqureValid("-586", "343396");
-        assertionXSqureValid("599", "358801");
-        assertionXSqureValid("-599", "358801");
-        assertionXSqureValid("612", "374544");
-        assertionXSqureValid("-612", "374544");
-        assertionXSqureValid("614", "376996");
-        assertionXSqureValid("-614", "376996");
-        assertionXSqureValid("628", "394384");
-        assertionXSqureValid("-628", "394384");
-        assertionXSqureValid("638", "407044");
-        assertionXSqureValid("-638", "407044");
-        assertionXSqureValid("642", "412164");
-        assertionXSqureValid("-642", "412164");
-        assertionXSqureValid("655", "429025");
-        assertionXSqureValid("-655", "429025");
-        assertionXSqureValid("657", "431649");
-        assertionXSqureValid("-657", "431649");
-        assertionXSqureValid("661", "436921");
-        assertionXSqureValid("-661", "436921");
-        assertionXSqureValid("666", "443556");
-        assertionXSqureValid("-666", "443556");
-        assertionXSqureValid("679", "461041");
-        assertionXSqureValid("-679", "461041");
-        assertionXSqureValid("683", "466489");
-        assertionXSqureValid("-683", "466489");
-        assertionXSqureValid("690", "476100");
-        assertionXSqureValid("-690", "476100");
-        assertionXSqureValid("704", "495616");
-        assertionXSqureValid("-704", "495616");
-        assertionXSqureValid("718", "515524");
-        assertionXSqureValid("-718", "515524");
-        assertionXSqureValid("721", "519841");
-        assertionXSqureValid("-721", "519841");
-        assertionXSqureValid("739", "546121");
-        assertionXSqureValid("-739", "546121");
-        assertionXSqureValid("742", "550564");
-        assertionXSqureValid("-742", "550564");
-        assertionXSqureValid("756", "571536");
-        assertionXSqureValid("-756", "571536");
-        assertionXSqureValid("763", "582169");
-        assertionXSqureValid("-763", "582169");
-        assertionXSqureValid("763", "582169");
-        assertionXSqureValid("-763", "582169");
-        assertionXSqureValid("766", "586756");
-        assertionXSqureValid("-766", "586756");
-        assertionXSqureValid("777", "603729");
-        assertionXSqureValid("-777", "603729");
-        assertionXSqureValid("777", "603729");
-        assertionXSqureValid("-777", "603729");
-        assertionXSqureValid("785", "616225");
-        assertionXSqureValid("-785", "616225");
-        assertionXSqureValid("812", "659344");
-        assertionXSqureValid("-812", "659344");
-        assertionXSqureValid("824", "678976");
-        assertionXSqureValid("-824", "678976");
-        assertionXSqureValid("831", "690561");
-        assertionXSqureValid("-831", "690561");
-        assertionXSqureValid("847", "717409");
-        assertionXSqureValid("-847", "717409");
-        assertionXSqureValid("856", "732736");
-        assertionXSqureValid("-856", "732736");
-        assertionXSqureValid("862", "743044");
-        assertionXSqureValid("-862", "743044");
-        assertionXSqureValid("877", "769129");
-        assertionXSqureValid("-877", "769129");
-        assertionXSqureValid("879", "772641");
-        assertionXSqureValid("-879", "772641");
-        assertionXSqureValid("882", "777924");
-        assertionXSqureValid("-882", "777924");
-        assertionXSqureValid("888", "788544");
-        assertionXSqureValid("-888", "788544");
-        assertionXSqureValid("893", "797449");
-        assertionXSqureValid("-893", "797449");
-        assertionXSqureValid("905", "819025");
-        assertionXSqureValid("-905", "819025");
-        assertionXSqureValid("914", "835396");
-        assertionXSqureValid("-914", "835396");
-        assertionXSqureValid("927", "859329");
-        assertionXSqureValid("-927", "859329");
-        assertionXSqureValid("935", "874225");
-        assertionXSqureValid("-935", "874225");
-        assertionXSqureValid("946", "894916");
-        assertionXSqureValid("-946", "894916");
-        assertionXSqureValid("952", "906304");
-        assertionXSqureValid("-952", "906304");
-        assertionXSqureValid("963", "927369");
-        assertionXSqureValid("-963", "927369");
-        assertionXSqureValid("977", "954529");
-        assertionXSqureValid("-977", "954529");
-        assertionXSqureValid("986", "972196");
-        assertionXSqureValid("-986", "972196");
-        assertionXSqureValid("988", "976144");
-        assertionXSqureValid("-988", "976144");
-        assertionXSqureValid("999", "998001");
-        assertionXSqureValid("-999", "998001");
-        assertionXSqureValid("1000", "1000000");
-        assertionXSqureValid("-1000", "1000000");
-        assertionXSqureValid("1008", "1016064");
-        assertionXSqureValid("-1008", "1016064");
-        assertionXSqureValid("1111", "1234321");
-        assertionXSqureValid("-1111", "1234321");
-        assertionXSqureValid("1114", "1240996");
-        assertionXSqureValid("-1114", "1240996");
-        assertionXSqureValid("1226", "1503076");
-        assertionXSqureValid("-1226", "1503076");
-        assertionXSqureValid("1314", "1726596");
-        assertionXSqureValid("-1314", "1726596");
-        assertionXSqureValid("1403", "1968409");
-        assertionXSqureValid("-1403", "1968409");
-        assertionXSqureValid("1524", "2322576");
-        assertionXSqureValid("-1524", "2322576");
-        assertionXSqureValid("1628", "2650384");
-        assertionXSqureValid("-1628", "2650384");
-        assertionXSqureValid("1718", "2951524");
-        assertionXSqureValid("-1718", "2951524");
-        assertionXSqureValid("1812", "3283344");
-        assertionXSqureValid("-1812", "3283344");
-        assertionXSqureValid("1905", "3629025");
-        assertionXSqureValid("-1905", "3629025");
-        assertionXSqureValid("2013", "4052169");
-        assertionXSqureValid("-2013", "4052169");
-        assertionXSqureValid("2175", "4730625");
-        assertionXSqureValid("-2175", "4730625");
-        assertionXSqureValid("2112", "4460544");
-        assertionXSqureValid("-2112", "4460544");
-        assertionXSqureValid("2222", "4937284");
-        assertionXSqureValid("-2222", "4937284");
-        assertionXSqureValid("2256", "5089536");
-        assertionXSqureValid("-2256", "5089536");
-        assertionXSqureValid("2367", "5602689");
-        assertionXSqureValid("-2367", "5602689");
-        assertionXSqureValid("2498", "6240004");
-        assertionXSqureValid("-2498", "6240004");
-        assertionXSqureValid("2596", "6739216");
-        assertionXSqureValid("-2596", "6739216");
-        assertionXSqureValid("2696", "7268416");
-        assertionXSqureValid("-2696", "7268416");
-        assertionXSqureValid("2731", "7458361");
-        assertionXSqureValid("-2731", "7458361");
-        assertionXSqureValid("2891", "8357881");
-        assertionXSqureValid("-2891", "8357881");
-        assertionXSqureValid("2964", "8785296");
-        assertionXSqureValid("-2964", "8785296");
-        assertionXSqureValid("3015", "9090225");
-        assertionXSqureValid("-3015", "9090225");
-        assertionXSqureValid("3173", "10067929");
-        assertionXSqureValid("-3173", "10067929");
-        assertionXSqureValid("3224", "10394176");
-        assertionXSqureValid("-3224", "10394176");
-        assertionXSqureValid("3265", "10660225");
-        assertionXSqureValid("-3265", "10660225");
-        assertionXSqureValid("3324", "11048976");
-        assertionXSqureValid("-3324", "11048976");
-        assertionXSqureValid("3333", "11108889");
-        assertionXSqureValid("-3333", "11108889");
-        assertionXSqureValid("3477", "12089529");
-        assertionXSqureValid("-3477", "12089529");
-        assertionXSqureValid("3531", "12467961");
-        assertionXSqureValid("-3531", "12467961");
-        assertionXSqureValid("3647", "13300609");
-        assertionXSqureValid("-3647", "13300609");
-        assertionXSqureValid("3787", "14341369");
-        assertionXSqureValid("-3787", "14341369");
-        assertionXSqureValid("3889", "15124321");
-        assertionXSqureValid("-3889", "15124321");
-        assertionXSqureValid("3932", "15460624");
-        assertionXSqureValid("-3932", "15460624");
-        assertionXSqureValid("4077", "16621929");
-        assertionXSqureValid("-4077", "16621929");
-        assertionXSqureValid("4178", "17455684");
-        assertionXSqureValid("-4178", "17455684");
-        assertionXSqureValid("4222", "17825284");
-        assertionXSqureValid("-4222", "17825284");
-        assertionXSqureValid("4336", "18800896");
-        assertionXSqureValid("-4336", "18800896");
-        assertionXSqureValid("4378", "19166884");
-        assertionXSqureValid("-4378", "19166884");
-        assertionXSqureValid("4425", "19580625");
-        assertionXSqureValid("-4425", "19580625");
-        assertionXSqureValid("4444", "19749136");
-        assertionXSqureValid("-4444", "19749136");
-        assertionXSqureValid("4554", "20738916");
-        assertionXSqureValid("-4554", "20738916");
-        assertionXSqureValid("4647", "21594609");
-        assertionXSqureValid("-4647", "21594609");
-        assertionXSqureValid("4781", "22857961");
-        assertionXSqureValid("-4781", "22857961");
-        assertionXSqureValid("4856", "23580736");
-        assertionXSqureValid("-4856", "23580736");
-        assertionXSqureValid("4986", "24860196");
-        assertionXSqureValid("-4986", "24860196");
-        assertionXSqureValid("5086", "25867396");
-        assertionXSqureValid("-5086", "25867396");
-        assertionXSqureValid("5154", "26563716");
-        assertionXSqureValid("-5154", "26563716");
-        assertionXSqureValid("5243", "27489049");
-        assertionXSqureValid("-5243", "27489049");
-        assertionXSqureValid("5323", "28334329");
-        assertionXSqureValid("-5323", "28334329");
-        assertionXSqureValid("5416", "29333056");
-        assertionXSqureValid("-5416", "29333056");
-        assertionXSqureValid("5448", "29680704");
-        assertionXSqureValid("-5448", "29680704");
-        assertionXSqureValid("5555", "30858025");
-        assertionXSqureValid("-5555", "30858025");
-        assertionXSqureValid("5570", "31024900");
-        assertionXSqureValid("-5570", "31024900");
-        assertionXSqureValid("5631", "31708161");
-        assertionXSqureValid("-5631", "31708161");
-        assertionXSqureValid("5960", "35521600");
-        assertionXSqureValid("-5960", "35521600");
-        assertionXSqureValid("6036", "36433296");
-        assertionXSqureValid("-6036", "36433296");
-        assertionXSqureValid("6271", "39325441");
-        assertionXSqureValid("-6271", "39325441");
-        assertionXSqureValid("6354", "40373316");
-        assertionXSqureValid("-6354", "40373316");
-        assertionXSqureValid("6429", "41332041");
-        assertionXSqureValid("-6429", "41332041");
-        assertionXSqureValid("6519", "42497361");
-        assertionXSqureValid("-6519", "42497361");
-        assertionXSqureValid("6560", "43033600");
-        assertionXSqureValid("-6560", "43033600");
-        assertionXSqureValid("6666", "44435556");
-        assertionXSqureValid("-6666", "44435556");
-        assertionXSqureValid("6667", "44448889");
-        assertionXSqureValid("-6667", "44448889");
-        assertionXSqureValid("6753", "45603009");
-        assertionXSqureValid("-6753", "45603009");
-        assertionXSqureValid("6874", "47251876");
-        assertionXSqureValid("-6874", "47251876");
-        assertionXSqureValid("6950", "48302500");
-        assertionXSqureValid("-6950", "48302500");
-        assertionXSqureValid("7071", "49999041");
-        assertionXSqureValid("-7071", "49999041");
-        assertionXSqureValid("7118", "50665924");
-        assertionXSqureValid("-7118", "50665924");
-        assertionXSqureValid("7224", "52186176");
-        assertionXSqureValid("-7224", "52186176");
-        assertionXSqureValid("7335", "53802225");
-        assertionXSqureValid("-7335", "53802225");
-        assertionXSqureValid("7452", "55532304");
-        assertionXSqureValid("-7452", "55532304");
-        assertionXSqureValid("7589", "57592921");
-        assertionXSqureValid("-7589", "57592921");
-        assertionXSqureValid("7672", "58859584");
-        assertionXSqureValid("-7672", "58859584");
-        assertionXSqureValid("7765", "60295225");
-        assertionXSqureValid("-7765", "60295225");
-        assertionXSqureValid("7777", "60481729");
-        assertionXSqureValid("-7777", "60481729");
-        assertionXSqureValid("7850", "61622500");
-        assertionXSqureValid("-7850", "61622500");
-        assertionXSqureValid("7919", "62710561");
-        assertionXSqureValid("-7919", "62710561");
-        assertionXSqureValid("8072", "65157184");
-        assertionXSqureValid("-8072", "65157184");
-        assertionXSqureValid("8146", "66357316");
-        assertionXSqureValid("-8146", "66357316");
-        assertionXSqureValid("8230", "67732900");
-        assertionXSqureValid("-8230", "67732900");
-        assertionXSqureValid("8336", "69488896");
-        assertionXSqureValid("-8336", "69488896");
-        assertionXSqureValid("8419", "70879561");
-        assertionXSqureValid("-8419", "70879561");
-        assertionXSqureValid("8591", "73805281");
-        assertionXSqureValid("-8591", "73805281");
-        assertionXSqureValid("8636", "74580496");
-        assertionXSqureValid("-8636", "74580496");
-        assertionXSqureValid("8745", "76475025");
-        assertionXSqureValid("-8745", "76475025");
-        assertionXSqureValid("8784", "77158656");
-        assertionXSqureValid("-8784", "77158656");
-        assertionXSqureValid("8855", "78411025");
-        assertionXSqureValid("-8855", "78411025");
-        assertionXSqureValid("8888", "78996544");
-        assertionXSqureValid("-8888", "78996544");
-        assertionXSqureValid("8958", "80245764");
-        assertionXSqureValid("-8958", "80245764");
-        assertionXSqureValid("9083", "82500889");
-        assertionXSqureValid("-9083", "82500889");
-        assertionXSqureValid("9112", "83028544");
-        assertionXSqureValid("-9112", "83028544");
-        assertionXSqureValid("9214", "84897796");
-        assertionXSqureValid("-9214", "84897796");
-        assertionXSqureValid("9335", "87142225");
-        assertionXSqureValid("-9335", "87142225");
-        assertionXSqureValid("9487", "90003169");
-        assertionXSqureValid("-9487", "90003169");
-        assertionXSqureValid("9522", "90668484");
-        assertionXSqureValid("-9522", "90668484");
-        assertionXSqureValid("9672", "93547584");
-        assertionXSqureValid("-9672", "93547584");
-        assertionXSqureValid("9755", "95160025");
-        assertionXSqureValid("-9755", "95160025");
-        assertionXSqureValid("9826", "96550276");
-        assertionXSqureValid("-9826", "96550276");
-        assertionXSqureValid("9989", "99780121");
-        assertionXSqureValid("-9989", "99780121");
-        assertionXSqureValid("9896", "97930816");
-        assertionXSqureValid("-9896", "97930816");
-        assertionXSqureValid("9999", "99980001");
-        assertionXSqureValid("-9999", "99980001");
-        assertionXSqureValid("55555", "3086358025");
-        assertionXSqureValid("-55555", "3086358025");
-        assertionXSqureValid("82534", "6811861156");
-        assertionXSqureValid("-82534", "6811861156");
-        assertionXSqureValid("437903", "191759037409");
-        assertionXSqureValid("-437903", "191759037409");
-        assertionXSqureValid("840736", "706837021696");
-        assertionXSqureValid("-840736", "706837021696");
-        assertionXSqureValid("2234567", "4993289677489");
-        assertionXSqureValid("-2234567", "4993289677489");
-        assertionXSqureValid("4534074", "20557827037476");
-        assertionXSqureValid("-4534074", "20557827037476");
-        assertionXSqureValid("49771169", "2477169263626561");
-        assertionXSqureValid("-49771169", "2477169263626561");
-        assertionXSqureValid("72324911", "5230892751157921");
-        assertionXSqureValid("-72324911", "5230892751157921");
-        assertionXSqureValid("659254843", "434616948018954649");
-        assertionXSqureValid("-659254843", "434616948018954649");
-        assertionXSqureValid("888888888", "790123455209876544");
-        assertionXSqureValid("-888888888", "790123455209876544");
-        assertionXSqureValid("1874764566", "3514742177929168356");
-        assertionXSqureValid("-1874764566", "3514742177929168356");
-        assertionXSqureValid("6243776665", "38984747042398522225");
-        assertionXSqureValid("-6243776665", "38984747042398522225");
-        assertionXSqureValid("47037036736", "2212482824903813533696");
-        assertionXSqureValid("-47037036736", "2212482824903813533696");
-        assertionXSqureValid("444444444444", "197530864197135802469136");
-        assertionXSqureValid("-444444444444", "197530864197135802469136");
-        assertionXSqureValid("999999999999", "999999999998000000000001");
-        assertionXSqureValid("-999999999999", "999999999998000000000001");
-        assertionXSqureValid("6578868631288", "43281512467745242492538944");
-        assertionXSqureValid("-6578868631288", "43281512467745242492538944");
-        assertionXSqureValid("8407407347404", "70684498305182763545539216");
-        assertionXSqureValid("-8407407347404", "70684498305182763545539216");
-        assertionXSqureValid("34691357824690", "1203490307720680088773596100");
-        assertionXSqureValid("-34691357824690", "1203490307720680088773596100");
-        assertionXSqureValid("96419752386415", "9296768650257581087476552225");
-        assertionXSqureValid("-96419752386415", "9296768650257581087476552225");
-        assertionXSqureValid("109975967636925", "12094713457677974968623455625");
-        assertionXSqureValid("-109975967636925", "12094713457677974968623455625");
-        assertionXSqureValid("565933996761014", "320281288689895404643030308196");
-        assertionXSqureValid("-565933996761014", "320281288689895404643030308196");
-        assertionXSqureValid("1082424349226241", "1171642471797851335335402990081");
-        assertionXSqureValid("-1082424349226241", "1171642471797851335335402990081");
-        assertionXSqureValid("10289622287797479", "105876326825538625753264918755441");
-        assertionXSqureValid("-10289622287797479", "105876326825538625753264918755441");
-        assertionXSqureValid("1E+17", "1E+34");
-        assertionXSqureValid("-1E+17", "1E+34");
-        assertionXSqureValid("5.647753E+23", "3.1897113949009E+47");
-        assertionXSqureValid("-5.647753E+23", "3.1897113949009E+47");
-        assertionXSqureValid("8.8788779E+24", "7.883447276310841E+49");
-        assertionXSqureValid("-8.8788779E+24", "7.883447276310841E+49");
-        assertionXSqureValid("9.86859867454E+38", "9.73892397991326448442116E+77");
-        assertionXSqureValid("-9.86859867454E+38", "9.73892397991326448442116E+77");
-        assertionXSqureValid("1E+296", "1E+592");
-        assertionXSqureValid("-1E+296", "1E+592");
-        assertionXSqureValid("5.647753E+549", "3.1897113949009E+1099");
-        assertionXSqureValid("-5.647753E+549", "3.1897113949009E+1099");
-        assertionXSqureValid("8.8788779E+897", "7.883447276310841E+1795");
-        assertionXSqureValid("-8.8788779E+897", "7.883447276310841E+1795");
-        assertionXSqureValid("9.86859867454E+978", "9.73892397991326448442116E+1957");
-        assertionXSqureValid("-9.86859867454E+978", "9.73892397991326448442116E+1957");
-        assertionXSqureValid("1E+1296", "1E+2592");
-        assertionXSqureValid("-1E+1296", "1E+2592");
-        assertionXSqureValid("5.647753E+1549", "3.1897113949009E+3099");
-        assertionXSqureValid("-5.647753E+1549", "3.1897113949009E+3099");
-        assertionXSqureValid("8.8788779E+1897", "7.883447276310841E+3795");
-        assertionXSqureValid("-8.8788779E+1897", "7.883447276310841E+3795");
-        assertionXSqureValid("9.86859867454E+1978", "9.73892397991326448442116E+3957");
-        assertionXSqureValid("-9.86859867454E+1978", "9.73892397991326448442116E+3957");
-        assertionXSqureValid("1E+2296", "1E+4592");
-        assertionXSqureValid("-1E+2296", "1E+4592");
-        assertionXSqureValid("5.647753E+2549", "3.1897113949009E+5099");
-        assertionXSqureValid("-5.647753E+2549", "3.1897113949009E+5099");
-        assertionXSqureValid("8.8788779E+2897", "7.883447276310841E+5795");
-        assertionXSqureValid("-8.8788779E+2897", "7.883447276310841E+5795");
-        assertionXSqureValid("9.86859867454E+2978", "9.73892397991326448442116E+5957");
-        assertionXSqureValid("-9.86859867454E+2978", "9.73892397991326448442116E+5957");
-        assertionXSqureValid("1E+3296", "1E+6592");
-        assertionXSqureValid("-1E+3296", "1E+6592");
-        assertionXSqureValid("5.647753E+3549", "3.1897113949009E+7099");
-        assertionXSqureValid("-5.647753E+3549", "3.1897113949009E+7099");
-        assertionXSqureValid("8.8788779E+3897", "7.883447276310841E+7795");
-        assertionXSqureValid("-8.8788779E+3897", "7.883447276310841E+7795");
-        assertionXSqureValid("9.86859867454E+3978", "9.73892397991326448442116E+7957");
-        assertionXSqureValid("-9.86859867454E+3978", "9.73892397991326448442116E+7957");
-        assertionXSqureValid("1E+4296", "1E+8592");
-        assertionXSqureValid("-1E+4296", "1E+8592");
-        assertionXSqureValid("5.647753E+4549", "3.1897113949009E+9099");
-        assertionXSqureValid("-5.647753E+4549", "3.1897113949009E+9099");
-        assertionXSqureValid("8.8788779E+4897", "7.883447276310841E+9795");
-        assertionXSqureValid("-8.8788779E+4897", "7.883447276310841E+9795");
-        assertionXSqureValid("9.86859867454E+4978", "9.73892397991326448442116E+9957");
-        assertionXSqureValid("-9.86859867454E+4978", "9.73892397991326448442116E+9957");
-        assertionXSqureValid("1E+5296", "1E+10592");
-        assertionXSqureValid("-1E+5296", "1E+10592");
-        assertionXSqureValid("5.647753E+5549", "3.1897113949009E+11099");
-        assertionXSqureValid("-5.647753E+5549", "3.1897113949009E+11099");
-        assertionXSqureValid("8.8788779E+5897", "7.883447276310841E+11795");
-        assertionXSqureValid("-8.8788779E+5897", "7.883447276310841E+11795");
-        assertionXSqureValid("9.86859867454E+5978", "9.73892397991326448442116E+11957");
-        assertionXSqureValid("-9.86859867454E+5978", "9.73892397991326448442116E+11957");
-        assertionXSqureValid("1E+6296", "1E+12592");
-        assertionXSqureValid("-1E+6296", "1E+12592");
-        assertionXSqureValid("5.647753E+6549", "3.1897113949009E+13099");
-        assertionXSqureValid("-5.647753E+6549", "3.1897113949009E+13099");
-        assertionXSqureValid("8.8788779E+6897", "7.883447276310841E+13795");
-        assertionXSqureValid("-8.8788779E+6897", "7.883447276310841E+13795");
-        assertionXSqureValid("9.86859867454E+6978", "9.73892397991326448442116E+13957");
-        assertionXSqureValid("-9.86859867454E+6978", "9.73892397991326448442116E+13957");
-        assertionXSqureValid("1E+7296", "1E+14592");
-        assertionXSqureValid("-1E+7296", "1E+14592");
-        assertionXSqureValid("5.647753E+7549", "3.1897113949009E+15099");
-        assertionXSqureValid("-5.647753E+7549", "3.1897113949009E+15099");
-        assertionXSqureValid("8.8788779E+7897", "7.883447276310841E+15795");
-        assertionXSqureValid("-8.8788779E+7897", "7.883447276310841E+15795");
-        assertionXSqureValid("9.86859867454E+7978", "9.73892397991326448442116E+15957");
-        assertionXSqureValid("-9.86859867454E+7978", "9.73892397991326448442116E+15957");
-        assertionXSqureValid("1E+8296", "1E+16592");
-        assertionXSqureValid("-1E+8296", "1E+16592");
-        assertionXSqureValid("5.647753E+8549", "3.1897113949009E+17099");
-        assertionXSqureValid("-5.647753E+8549", "3.1897113949009E+17099");
-        assertionXSqureValid("8.8788779E+8897", "7.883447276310841E+17795");
-        assertionXSqureValid("-8.8788779E+8897", "7.883447276310841E+17795");
-        assertionXSqureValid("9.86859867454E+8978", "9.73892397991326448442116E+17957");
-        assertionXSqureValid("-9.86859867454E+8978", "9.73892397991326448442116E+17957");
-        assertionXSqureValid("1E+9296", "1E+18592");
-        assertionXSqureValid("-1E+9296", "1E+18592");
-        assertionXSqureValid("5.647753E+9549", "3.1897113949009E+19099");
-        assertionXSqureValid("-5.647753E+9549", "3.1897113949009E+19099");
-        assertionXSqureValid("8.8788779E+9897", "7.883447276310841E+19795");
-        assertionXSqureValid("-8.8788779E+9897", "7.883447276310841E+19795");
-        assertionXSqureValid("9.86859867454E+9978", "9.73892397991326448442116E+19957");
-        assertionXSqureValid("-9.86859867454E+9978", "9.73892397991326448442116E+19957");
-        assertionXSqureValid("1E+10296", "1E+20592");
-        assertionXSqureValid("-1E+10296", "1E+20592");
-        assertionXSqureValid("5.647753E+10549", "3.1897113949009E+21099");
-        assertionXSqureValid("-5.647753E+10549", "3.1897113949009E+21099");
-        assertionXSqureValid("8.8788779E+10897", "7.883447276310841E+21795");
-        assertionXSqureValid("-8.8788779E+10897", "7.883447276310841E+21795");
-        assertionXSqureValid("9.86859867454E+10978", "9.73892397991326448442116E+21957");
-        assertionXSqureValid("-9.86859867454E+10978", "9.73892397991326448442116E+21957");
-
-    }
+    void xSquareInteger() {}
 
     @Test
     void xSquareDecimal() {
         assertionXSqureValid("0.002", "0.000004");
         assertionXSqureValid("-0.002", "0.000004");
+
         assertionXSqureValid("0.003", "0.000009");
         assertionXSqureValid("-0.003", "0.000009");
+
         assertionXSqureValid("0.004", "0.000016");
         assertionXSqureValid("-0.004", "0.000016");
+
+        assertionXSqureValid("0.004", "0.000016");
+        assertionXSqureValid("-0.004", "0.000016");
+
         assertionXSqureValid("0.005", "0.000025");
         assertionXSqureValid("-0.005", "0.000025");
+
         assertionXSqureValid("0.006", "0.000036");
         assertionXSqureValid("-0.006", "0.000036");
+
         assertionXSqureValid("0.007", "0.000049");
         assertionXSqureValid("-0.007", "0.000049");
+
         assertionXSqureValid("0.008", "0.000064");
         assertionXSqureValid("-0.008", "0.000064");
+
         assertionXSqureValid("0.009", "0.000081");
         assertionXSqureValid("-0.009", "0.000081");
+
         assertionXSqureValid("0.010", "0.000100");
         assertionXSqureValid("-0.010", "0.000100");
+
         assertionXSqureValid("0.00011", "1.21E-8");
         assertionXSqureValid("-0.00011", "1.21E-8");
+
         assertionXSqureValid("0.00043", "1.849E-7");
         assertionXSqureValid("-0.00043", "1.849E-7");
+
         assertionXSqureValid("0.00098", "9.604E-7");
         assertionXSqureValid("-0.00098", "9.604E-7");
+
         assertionXSqureValid("0.00152", "0.0000023104");
         assertionXSqureValid("-0.00152", "0.0000023104");
+
         assertionXSqureValid("0.00278", "0.0000077284");
         assertionXSqureValid("-0.00278", "0.0000077284");
+
         assertionXSqureValid("0.00367", "0.0000134689");
         assertionXSqureValid("-0.00367", "0.0000134689");
+
         assertionXSqureValid("0.00547", "0.0000299209");
         assertionXSqureValid("-0.00547", "0.0000299209");
+
         assertionXSqureValid("0.00562", "0.0000315844");
         assertionXSqureValid("-0.00562", "0.0000315844");
+
         assertionXSqureValid("0.00679", "0.0000461041");
         assertionXSqureValid("-0.00679", "0.0000461041");
+
         assertionXSqureValid("0.00742", "0.0000550564");
         assertionXSqureValid("-0.00742", "0.0000550564");
+
         assertionXSqureValid("0.00893", "0.0000797449");
         assertionXSqureValid("-0.00893", "0.0000797449");
+
         assertionXSqureValid("0.00935", "0.0000874225");
         assertionXSqureValid("-0.00935", "0.0000874225");
+
         assertionXSqureValid("0.00952", "0.0000906304");
         assertionXSqureValid("-0.00952", "0.0000906304");
+
         assertionXSqureValid("0.00999", "0.0000998001");
         assertionXSqureValid("-0.00999", "0.0000998001");
+
         assertionXSqureValid("0.000001008", "1.016064E-12");
         assertionXSqureValid("-0.000001008", "1.016064E-12");
+
         assertionXSqureValid("0.000002256", "5.089536E-12");
         assertionXSqureValid("-0.000002256", "5.089536E-12");
+
         assertionXSqureValid("0.000003173", "1.0067929E-11");
         assertionXSqureValid("-0.000003173", "1.0067929E-11");
+
         assertionXSqureValid("0.000003477", "1.2089529E-11");
         assertionXSqureValid("-0.000003477", "1.2089529E-11");
+
         assertionXSqureValid("0.000003889", "1.5124321E-11");
         assertionXSqureValid("-0.000003889", "1.5124321E-11");
+
         assertionXSqureValid("0.000004378", "1.9166884E-11");
         assertionXSqureValid("-0.000004378", "1.9166884E-11");
+
         assertionXSqureValid("0.000004647", "2.1594609E-11");
         assertionXSqureValid("-0.000004647", "2.1594609E-11");
+
         assertionXSqureValid("0.000005448", "2.9680704E-11");
         assertionXSqureValid("-0.000005448", "2.9680704E-11");
+
         assertionXSqureValid("0.000006271", "3.9325441E-11");
         assertionXSqureValid("-0.000006271", "3.9325441E-11");
+
         assertionXSqureValid("0.000007118", "5.0665924E-11");
         assertionXSqureValid("-0.000007118", "5.0665924E-11");
+
         assertionXSqureValid("0.000008072", "6.5157184E-11");
         assertionXSqureValid("-0.000008072", "6.5157184E-11");
+
         assertionXSqureValid("0.000009112", "8.3028544E-11");
         assertionXSqureValid("-0.000009112", "8.3028544E-11");
+
         assertionXSqureValid("0.000009214", "8.4897796E-11");
         assertionXSqureValid("-0.000009214", "8.4897796E-11");
+
         assertionXSqureValid("0.000055555", "3.086358025E-9");
         assertionXSqureValid("-0.000055555", "3.086358025E-9");
+
         assertionXSqureValid("0.000082534", "6.811861156E-9");
         assertionXSqureValid("-0.000082534", "6.811861156E-9");
+
         assertionXSqureValid("0.072324911", "0.005230892751157921");
         assertionXSqureValid("-0.072324911", "0.005230892751157921");
+
         assertionXSqureValid("0.888888888", "0.790123455209876544");
         assertionXSqureValid("-0.888888888", "0.790123455209876544");
+
         assertionXSqureValid("1E-17", "1E-34");
         assertionXSqureValid("-1E-17", "1E-34");
+
         assertionXSqureValid("5.647753E-11", "3.1897113949009E-21");
         assertionXSqureValid("-5.647753E-11", "3.1897113949009E-21");
+
         assertionXSqureValid("8.8788779E-10", "7.883447276310841E-19");
         assertionXSqureValid("-8.8788779E-10", "7.883447276310841E-19");
+
         assertionXSqureValid("9.86859867454E-16", "9.73892397991326448442116E-31");
         assertionXSqureValid("-9.86859867454E-16", "9.73892397991326448442116E-31");
+
         assertionXSqureValid("1E-296", "1E-592");
         assertionXSqureValid("-1E-296", "1E-592");
+
         assertionXSqureValid("5.647753E-537", "3.1897113949009E-1073");
         assertionXSqureValid("-5.647753E-537", "3.1897113949009E-1073");
+
         assertionXSqureValid("8.8788779E-883", "7.883447276310841E-1765");
         assertionXSqureValid("-8.8788779E-883", "7.883447276310841E-1765");
+
         assertionXSqureValid("9.86859867454E-956", "9.73892397991326448442116E-1911");
         assertionXSqureValid("-9.86859867454E-956", "9.73892397991326448442116E-1911");
+
         assertionXSqureValid("1E-1296", "1E-2592");
         assertionXSqureValid("-1E-1296", "1E-2592");
+
         assertionXSqureValid("5.647753E-1537", "3.1897113949009E-3073");
         assertionXSqureValid("-5.647753E-1537", "3.1897113949009E-3073");
+
         assertionXSqureValid("8.8788779E-1883", "7.883447276310841E-3765");
         assertionXSqureValid("-8.8788779E-1883", "7.883447276310841E-3765");
+
         assertionXSqureValid("9.86859867454E-1956", "9.73892397991326448442116E-3911");
         assertionXSqureValid("-9.86859867454E-1956", "9.73892397991326448442116E-3911");
+
         assertionXSqureValid("1E-2296", "1E-4592");
         assertionXSqureValid("-1E-2296", "1E-4592");
+
         assertionXSqureValid("5.647753E-2537", "3.1897113949009E-5073");
         assertionXSqureValid("-5.647753E-2537", "3.1897113949009E-5073");
+
         assertionXSqureValid("8.8788779E-2883", "7.883447276310841E-5765");
         assertionXSqureValid("-8.8788779E-2883", "7.883447276310841E-5765");
+
         assertionXSqureValid("9.86859867454E-2956", "9.73892397991326448442116E-5911");
         assertionXSqureValid("-9.86859867454E-2956", "9.73892397991326448442116E-5911");
+
         assertionXSqureValid("1E-3296", "1E-6592");
         assertionXSqureValid("-1E-3296", "1E-6592");
+
         assertionXSqureValid("5.647753E-3537", "3.1897113949009E-7073");
         assertionXSqureValid("-5.647753E-3537", "3.1897113949009E-7073");
+
         assertionXSqureValid("8.8788779E-3883", "7.883447276310841E-7765");
         assertionXSqureValid("-8.8788779E-3883", "7.883447276310841E-7765");
+
         assertionXSqureValid("9.86859867454E-3956", "9.73892397991326448442116E-7911");
         assertionXSqureValid("-9.86859867454E-3956", "9.73892397991326448442116E-7911");
+
         assertionXSqureValid("1E-4296", "1E-8592");
         assertionXSqureValid("-1E-4296", "1E-8592");
+
         assertionXSqureValid("5.647753E-4537", "3.1897113949009E-9073");
         assertionXSqureValid("-5.647753E-4537", "3.1897113949009E-9073");
+
         assertionXSqureValid("8.8788779E-4883", "7.883447276310841E-9765");
         assertionXSqureValid("-8.8788779E-4883", "7.883447276310841E-9765");
+
         assertionXSqureValid("9.86859867454E-4956", "9.73892397991326448442116E-9911");
         assertionXSqureValid("-9.86859867454E-4956", "9.73892397991326448442116E-9911");
+
         assertionXSqureValid("1E-5296", "1E-10592");
         assertionXSqureValid("-1E-5296", "1E-10592");
+
         assertionXSqureValid("5.647753E-5537", "3.1897113949009E-11073");
         assertionXSqureValid("-5.647753E-5537", "3.1897113949009E-11073");
+
         assertionXSqureValid("8.8788779E-5883", "7.883447276310841E-11765");
         assertionXSqureValid("-8.8788779E-5883", "7.883447276310841E-11765");
+
         assertionXSqureValid("9.86859867454E-5956", "9.73892397991326448442116E-11911");
         assertionXSqureValid("-9.86859867454E-5956", "9.73892397991326448442116E-11911");
+
         assertionXSqureValid("1E-6296", "1E-12592");
         assertionXSqureValid("-1E-6296", "1E-12592");
+
         assertionXSqureValid("5.647753E-6537", "3.1897113949009E-13073");
         assertionXSqureValid("-5.647753E-6537", "3.1897113949009E-13073");
+
         assertionXSqureValid("8.8788779E-6883", "7.883447276310841E-13765");
         assertionXSqureValid("-8.8788779E-6883", "7.883447276310841E-13765");
+
         assertionXSqureValid("9.86859867454E-6956", "9.73892397991326448442116E-13911");
         assertionXSqureValid("-9.86859867454E-6956", "9.73892397991326448442116E-13911");
+
         assertionXSqureValid("1E-7296", "1E-14592");
         assertionXSqureValid("-1E-7296", "1E-14592");
+
         assertionXSqureValid("5.647753E-7537", "3.1897113949009E-15073");
         assertionXSqureValid("-5.647753E-7537", "3.1897113949009E-15073");
+
         assertionXSqureValid("8.8788779E-7883", "7.883447276310841E-15765");
         assertionXSqureValid("-8.8788779E-7883", "7.883447276310841E-15765");
+
         assertionXSqureValid("9.86859867454E-7956", "9.73892397991326448442116E-15911");
         assertionXSqureValid("-9.86859867454E-7956", "9.73892397991326448442116E-15911");
+
         assertionXSqureValid("1E-8296", "1E-16592");
         assertionXSqureValid("-1E-8296", "1E-16592");
+
         assertionXSqureValid("5.647753E-8537", "3.1897113949009E-17073");
         assertionXSqureValid("-5.647753E-8537", "3.1897113949009E-17073");
+
         assertionXSqureValid("8.8788779E-8883", "7.883447276310841E-17765");
         assertionXSqureValid("-8.8788779E-8883", "7.883447276310841E-17765");
+
         assertionXSqureValid("9.86859867454E-8956", "9.73892397991326448442116E-17911");
         assertionXSqureValid("-9.86859867454E-8956", "9.73892397991326448442116E-17911");
+
         assertionXSqureValid("1E-9296", "1E-18592");
         assertionXSqureValid("-1E-9296", "1E-18592");
+
         assertionXSqureValid("5.647753E-9537", "3.1897113949009E-19073");
         assertionXSqureValid("-5.647753E-9537", "3.1897113949009E-19073");
+
         assertionXSqureValid("8.8788779E-9883", "7.883447276310841E-19765");
         assertionXSqureValid("-8.8788779E-9883", "7.883447276310841E-19765");
+
         assertionXSqureValid("9.86859867454E-9956", "9.73892397991326448442116E-19911");
         assertionXSqureValid("-9.86859867454E-9956", "9.73892397991326448442116E-19911");
+
         assertionXSqureValid("1E-10296", "1E-20592");
         assertionXSqureValid("-1E-10296", "1E-20592");
+
         assertionXSqureValid("5.647753E-10537", "3.1897113949009E-21073");
         assertionXSqureValid("-5.647753E-10537", "3.1897113949009E-21073");
+
         assertionXSqureValid("8.8788779E-10883", "7.883447276310841E-21765");
         assertionXSqureValid("-8.8788779E-10883", "7.883447276310841E-21765");
+
         assertionXSqureValid("9.86859867454E-10956", "9.73892397991326448442116E-21911");
         assertionXSqureValid("-9.86859867454E-10956", "9.73892397991326448442116E-21911");
-    }
 
+        assertionXSqureValid("-1E-9999", "1E-19998");
+        assertionXSqureValid("1E-9999", "1E-19998");
+
+        assertionXSqureValid("-0.0000000000000001", "1E-32");
+        assertionXSqureValid("0.0000000000000001", "1E-32");
+
+    }
 
     void assertionXSqureValid(String xString, String resultString) {
         BigDecimal x = new BigDecimal(xString);

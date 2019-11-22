@@ -1,6 +1,6 @@
 package View;
 
-import Controller.Calculator_Main;
+import Controller.CalculatorMain;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
 import javafx.scene.Parent;
@@ -24,7 +24,7 @@ public class Calculator_ViewTest extends ApplicationTest {
 
     @Override
     public void start(Stage stage) throws Exception {
-        root = FXMLLoader.load(Calculator_Main.class.getResource("/View/calculator_view.fxml"));
+        root = FXMLLoader.load(CalculatorMain.class.getResource("/View/calculator_view.fxml"));
         stage.setScene(new Scene(root));
         this.stage = stage;
         stage.setHeight(500);

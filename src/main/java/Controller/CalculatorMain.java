@@ -10,7 +10,7 @@ import javafx.stage.StageStyle;
 /**
  * Class launches calculator application
  */
-public class Calculator_Main extends Application {
+public class CalculatorMain extends Application {
     public static void main(String[] args) {
         launch(args);
     }
