@@ -10,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 class UnarySquerRootTest {
     private Unary unary = new Unary();
+    private Calculator calculator = new Calculator();
 
     @Test
     void squareRootInteger() {
@@ -426,21 +427,23 @@ class UnarySquerRootTest {
         BigDecimal x = new BigDecimal(xString);
         BigDecimal resultExpected = new BigDecimal(resultString);
         unary.setNumber(x);
-//        unary.squareRoot();
+        unary.calculateUnary(OperationsEnum.SQRT);
         BigDecimal resultActual = unary.getResult();
 
         assertEquals(resultExpected, resultActual);
-        assertEquals(x.sqrt(MathContext.DECIMAL128), resultActual);
 
-        unary.calculateUnary(OperationsEnum.SQRT);
-        assertEquals(resultExpected, unary.getResult());
+        calculator.setNumberFirst(x);
+        calculator.calculator(OperationsEnum.SQRT);
+        resultActual = calculator.getResult();
+        assertEquals(resultExpected, resultActual);
+
+        assertEquals(x.sqrt(MathContext.DECIMAL128), resultActual);
 
         assertSquareRootInvalid(x);
     }
 
     private void assertSquareRootInvalid(BigDecimal x) {
         if (!x.equals(BigDecimal.ZERO)) {
-            assertionSQRTNotValid(x.negate());
             assertionCalculateNotValid(x.negate());
         }
 
@@ -473,22 +476,13 @@ class UnarySquerRootTest {
 
     private void assertEnumNull() {
         try {
-            unary.calculateUnary(null);
+            calculator.calculator(null);
             fail();
         } catch (NullPointerException e) {
             assertEquals("Enter operation", e.getMessage());
         }
     }
 
-    void assertionSQRTNotValid(BigDecimal x) {
-        try {
-            unary.setNumber(x);
-//            unary.squareRoot();
-            fail();
-        } catch (IllegalArgumentException e) {
-            assertEquals("Invalid input", e.getMessage());
-        }
 
-    }
 
 }

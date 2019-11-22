@@ -56,6 +56,10 @@ public class Binary {
         result = numberFirst.multiply(numberSecond);
     }
 
+    /**
+     * Method divides two numbers
+     * @throws ArithmeticException If divide by zero
+     */
     private void divide() throws ArithmeticException {
         if (numberFirst.setScale(0, RoundingMode.UP).equals(BigDecimal.ZERO) && numberSecond.setScale(0, RoundingMode.UP).equals(BigDecimal.ZERO)) {
             throw new ArithmeticException("Result is undefined");
@@ -66,16 +70,19 @@ public class Binary {
         }
     }
 
-    public void percent(BigDecimal number){
-        result = number.divide(BigDecimal.valueOf(100), MathContext.DECIMAL128);
-        numberSecond = result;
-    }
 
     public void percent(BigDecimal number, BigDecimal percent){
         result = number.multiply(percent.divide(BigDecimal.valueOf(100), MathContext.DECIMAL128));
     }
 
-    public void calculateBinary(OperationsEnum operation) {
+    /**
+     * Method calculates binary operations
+     * @param operation Operation need to calculate
+     * @throws NullPointerException If operation equals null
+     * @throws IllegalArgumentException If operation not equals binary operation
+     * @throws ArithmeticException If divide by zero
+     */
+    public void calculateBinary(OperationsEnum operation) throws NullPointerException, IllegalArgumentException, ArithmeticException {
         if (operation == null) {
             throw new NullPointerException("Enter operation");
         }

@@ -10,6 +10,8 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 class BinaryMultiplyTest {
     private Binary binary = new Binary();
+    private Calculator calculator = new Calculator();
+
     @Test
     void multiplyInteger(){
         assertionMultiply("0", "0", "0");
@@ -2015,20 +2017,21 @@ class BinaryMultiplyTest {
     void assertionMultiply(String xString, String yString, String resultString) {
         BigDecimal x = new BigDecimal(xString);
         BigDecimal y = new BigDecimal(yString);
+        BigDecimal resultExpected = new BigDecimal(resultString);
+
+        calculator.setNumberFirst(x);
+        calculator.setNumberSecond(y);
+        calculator.calculator(OperationsEnum.MULTIPLY);
+        BigDecimal resultActual = calculator.getResult();
+        assertEquals(resultExpected, resultActual);
 
         binary.setNumberFirst(x);
         binary.setNumberSecond(y);
-//        binary.multiply();
-
-        BigDecimal resultExpected = new BigDecimal(resultString);
-        BigDecimal resultActual = binary.getResult();
-
-        assertEquals(resultExpected, resultActual);
-        assertEquals(x.multiply(y, MathContext.DECIMAL128), resultActual);
-
         binary.calculateBinary(OperationsEnum.MULTIPLY);
-        assertEquals(resultExpected, binary.getResult());
+        resultActual = binary.getResult();
+        assertEquals(resultExpected, resultActual);
 
+        assertEquals(x.multiply(y, MathContext.DECIMAL128), resultActual);
         assertMultiplyInvalid();
     }
 
@@ -2051,7 +2054,7 @@ class BinaryMultiplyTest {
 
     private void assertEnumNull() {
         try {
-            binary.calculateBinary(null);
+            calculator.calculator(null);
             fail();
         } catch (NullPointerException e) {
             assertEquals("Enter operation", e.getMessage());

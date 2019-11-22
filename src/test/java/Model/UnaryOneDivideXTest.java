@@ -10,9 +10,10 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 class UnaryOneDivideXTest {
     private Unary unary = new Unary();
+    private Calculator calculator = new Calculator();
 
     @Test
-    void oneDivideXValidInteger() {
+    void oneDivideXValidInteger () {
         assertionOneDivideXValid("1", "1");
         assertionOneDivideXValid("-1", "-1");
         assertionOneDivideXValid("2", "0.5");
@@ -641,7 +642,7 @@ class UnaryOneDivideXTest {
     }
 
     @Test
-    void oneDivideXValidDecimal() {
+    void oneDivideXValidDecimal () {
         assertionOneDivideXValid("0.002", "5E+2");
         assertionOneDivideXValid("-0.002", "-5E+2");
         assertionOneDivideXValid("0.003", "333.3333333333333333333333333333333");
@@ -824,7 +825,7 @@ class UnaryOneDivideXTest {
     }
 
     @Test
-    void oneDivideXNotValid() {
+    void oneDivideXNotValid () {
         try {
             unary.setNumber(BigDecimal.ZERO);
             unary.calculateUnary(OperationsEnum.ONE_DIVIDE_X);
@@ -834,25 +835,26 @@ class UnaryOneDivideXTest {
         }
     }
 
-    void assertionOneDivideXValid(String xString, String resultString) {
+    void assertionOneDivideXValid (String xString, String resultString) {
         BigDecimal x = new BigDecimal(xString);
         BigDecimal resultExpected = new BigDecimal(resultString);
         unary.setNumber(x);
-//        unary.oneDivideX();
-        BigDecimal resultActual = unary.getResult();
-
-        assertEquals(resultExpected, resultActual);
-        assertEquals(BigDecimal.ONE.divide(x, MathContext.DECIMAL128), resultActual);
-
         unary.calculateUnary(OperationsEnum.ONE_DIVIDE_X);
-        assertEquals(resultExpected, unary.getResult());
+        BigDecimal resultActual = unary.getResult();
+        assertEquals(resultExpected, resultActual);
 
+        calculator.setNumberFirst(x);
+        calculator.calculator(OperationsEnum.ONE_DIVIDE_X);
+        resultActual = unary.getResult();
+        assertEquals(resultExpected,resultActual);
+
+        assertEquals(BigDecimal.ONE.divide(x, MathContext.DECIMAL128), resultActual);
 
         assertEnumNull();
         assertOneDivideXInvalid();
     }
 
-    private void assertOneDivideXInvalid() {
+    private void assertOneDivideXInvalid () {
         assertEnumNull();
 
         assertEnumInvalid(OperationsEnum.ADD);
@@ -861,7 +863,7 @@ class UnaryOneDivideXTest {
         assertEnumInvalid(OperationsEnum.MULTIPLY);
     }
 
-    private void assertEnumInvalid(OperationsEnum operationsEnum) {
+    private void assertEnumInvalid (OperationsEnum operationsEnum) {
         try {
             unary.calculateUnary(operationsEnum);
             fail();
@@ -870,9 +872,9 @@ class UnaryOneDivideXTest {
         }
     }
 
-    private void assertEnumNull() {
+    private void assertEnumNull () {
         try {
-            unary.calculateUnary(null);
+            calculator.calculator(null);
             fail();
         } catch (NullPointerException e) {
             assertEquals("Enter operation", e.getMessage());

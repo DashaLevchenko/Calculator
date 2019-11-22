@@ -10,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 class UnaryXSquerTest {
     private Unary unary = new Unary();
+    private Calculator calculator = new Calculator();
 
     @Test
     void xSquareInteger() {
@@ -825,16 +826,20 @@ class UnaryXSquerTest {
     void assertionXSqureValid(String xString, String resultString) {
         BigDecimal x = new BigDecimal(xString);
         BigDecimal resultExpected = new BigDecimal(resultString);
+
         unary.setNumber(x);
-//        unary.xSquare();
+        unary.calculateUnary(OperationsEnum.SQR);
         BigDecimal resultActual = unary.getResult();
 
         assertEquals(resultExpected, resultActual);
-        assertEquals(x.pow(2, MathContext.DECIMAL128), resultActual);
 
-        unary.calculateUnary(OperationsEnum.SQR);
+        calculator.setNumberFirst(x);
+        calculator.calculator(OperationsEnum.SQR);
+        resultActual = calculator.getResult();
+
         assertEquals(resultExpected, unary.getResult());
 
+        assertEquals(x.pow(2, MathContext.DECIMAL128), resultActual);
         assertXSquareInvalid();
     }
 
@@ -858,7 +863,7 @@ class UnaryXSquerTest {
 
     private void assertEnumNull() {
         try {
-            unary.calculateUnary(null);
+            calculator.calculator(null);
             fail();
         } catch (NullPointerException e) {
             assertEquals("Enter operation", e.getMessage());

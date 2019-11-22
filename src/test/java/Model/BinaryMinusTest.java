@@ -9,6 +9,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 class BinaryMinusTest {
     private Binary binary = new Binary();
+    private Calculator calculator = new Calculator();
 
 
     @Test
@@ -1283,19 +1284,22 @@ class BinaryMinusTest {
     void assertionSubtract(String xString, String yString, String resultString) {
         BigDecimal x = new BigDecimal(xString);
         BigDecimal y = new BigDecimal(yString);
+        BigDecimal resultExpected = new BigDecimal(resultString);
+
 //        System.out.println("assertionSubtract(\""+xString+"\", \""+yString+"\", \""+x.subtract(y)+"\");");
+        calculator.setNumberFirst(x);
+        calculator.setNumberSecond(y);
+        calculator.calculator(OperationsEnum.SUBTRACT);
+        BigDecimal resultActual = calculator.getResult();
+        assertEquals(resultExpected, resultActual);
+
         binary.setNumberFirst(x);
         binary.setNumberSecond(y);
-//        binary.subtract();
-
-        BigDecimal resultExpected = new BigDecimal(resultString);
-        BigDecimal resultActual = binary.getResult();
-
-        assertEquals(resultExpected, resultActual);
-        assertEquals(x.subtract(y), resultActual);
-
         binary.calculateBinary(OperationsEnum.SUBTRACT);
-        assertEquals(resultExpected, binary.getResult());
+        resultActual = binary.getResult();
+        assertEquals(resultExpected, resultActual);
+
+        assertEquals(x.subtract(y), resultActual);
 
         assertSubtractInvalid();
     }
@@ -1319,7 +1323,7 @@ class BinaryMinusTest {
 
     private void assertEnumNull() {
         try {
-            binary.calculateBinary(null);
+            calculator.calculator(null);
             fail();
         } catch (NullPointerException e) {
             assertEquals("Enter operation", e.getMessage());

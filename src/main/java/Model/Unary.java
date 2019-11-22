@@ -7,10 +7,6 @@ public class Unary {
     private BigDecimal number;
     private BigDecimal result;
 
-    public BigDecimal getNumber() {
-        return number;
-    }
-
     public void setNumber(BigDecimal number) {
         this.number = number;
     }
@@ -23,6 +19,10 @@ public class Unary {
         this.result = result;
     }
 
+    /**
+     * Method calculates square root
+     * @throws IllegalArgumentException If number need to calculate square root is negative
+     */
     private void squareRoot() throws IllegalArgumentException {
         if (number.compareTo(BigDecimal.ZERO) < 0) {
             throw new IllegalArgumentException("Invalid input");
@@ -35,6 +35,10 @@ public class Unary {
         result = number.pow(2).round(MathContext.DECIMAL128);
     }
 
+    /**
+     * Method divides one to x
+     * @throws ArithmeticException If divide by zero
+     */
     private void oneDivideX() throws ArithmeticException {
         try {
             result = BigDecimal.ONE.divide(number, MathContext.DECIMAL128);
@@ -43,11 +47,18 @@ public class Unary {
         }
     }
 
-    public void percent() {
+    private void percent() {
         result = BigDecimal.ZERO;
     }
 
-    public void calculateUnary(OperationsEnum operation) throws NullPointerException {
+    /**
+     * Method calculates unary operations
+     * @param operation Operation need to calculate
+     * @throws NullPointerException If operation equals null
+     * @throws ArithmeticException If divide by zero
+     * @throws IllegalArgumentException If operation not equals unary operation
+     */
+    public void calculateUnary(OperationsEnum operation) throws NullPointerException, ArithmeticException, IllegalArgumentException {
         if (operation == null) {
             throw new NullPointerException("Enter operation");
         }

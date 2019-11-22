@@ -10,8 +10,10 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 class BinaryPercentTest {
     private Binary binary = new Binary();
+    private Calculator calculator = new Calculator();
+
     @Test
-    void percentInteger() {
+    void percentInteger () {
         assertionsPercent("0", "0", "0");
         assertionsPercent("0", "1", "0.00");
         assertionsPercent("1", "0", "0");
@@ -1274,11 +1276,10 @@ class BinaryPercentTest {
         assertionsPercent("-986859867454E10967", "-536556E643", "5.29505583041648424E+11625");
 
 
-
     }
 
     @Test
-    void percentDecimal(){
+    void percentDecimal () {
         assertionsPercent("1", "-0.001", "-0.00001");
         assertionsPercent("0.001", "-1", "-0.00001");
         assertionsPercent("0.001", "-0.001", "-1E-8");
@@ -2013,19 +2014,28 @@ class BinaryPercentTest {
         assertionsPercent("-986859867454E-10967", "-536556E-643", "5.29505583041648424E-11595");
     }
 
-    void assertionsPercent(String xString, String percentString, String resultString) {
+    void assertionsPercent (String xString, String percentString, String resultString) {
         BigDecimal x = new BigDecimal(xString);
         BigDecimal percent = new BigDecimal(percentString);
-        binary.percent(x, percent);
-        BigDecimal resultActual = binary.getResult();
         BigDecimal resultExpected = new BigDecimal(resultString);
 
-        assertEquals(resultExpected,  resultActual);
+        binary.percent(x, percent);
+        BigDecimal resultActual = binary.getResult();
+        assertEquals(resultExpected, resultActual);
+
+        calculator.setNumberSecond(x);
+        calculator.setPercent(percent);
+        calculator.calculator(OperationsEnum.PERCENT);
+
+        resultActual = calculator.getResult();
+        assertEquals(resultExpected, resultActual);
+
         assertEquals(x.multiply(percent.divide(BigDecimal.valueOf(100), MathContext.DECIMAL128)), resultActual);
+
         assertPercentInvalid();
     }
 
-    private void assertPercentInvalid() {
+    private void assertPercentInvalid () {
         binary.setNumberFirst(null);
         binary.setNumberSecond(null);
         binary.setResult(null);
@@ -2034,6 +2044,5 @@ class BinaryPercentTest {
         assertNull(binary.getNumberFirst());
         assertNull(binary.getNumberSecond());
         assertNull(binary.getResult());
-
     }
 }

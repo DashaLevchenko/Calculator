@@ -9,6 +9,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 public class UnaryPercentTest {
     private Unary unary = new Unary();
+    private Calculator calculator = new Calculator();
 
     @Test
     void percentInteger(){
@@ -822,14 +823,17 @@ public class UnaryPercentTest {
     private void assertionPercentValid(String xString) {
         BigDecimal x = new BigDecimal(xString);
         BigDecimal resultExpected = BigDecimal.ZERO;
+
         unary.setNumber(x);
-        unary.percent();
+        unary.calculateUnary(OperationsEnum.PERCENT);
         BigDecimal resultActual = unary.getResult();
 
         assertEquals(resultExpected, resultActual);
 
-        unary.calculateUnary(OperationsEnum.PERCENT);
-        assertEquals(resultExpected, unary.getResult());
+        calculator.setNumberFirst(x);
+        calculator.calculator(OperationsEnum.PERCENT);
+        resultActual = calculator.getResult();
+        assertEquals(resultExpected, resultActual);
         
         assertPercentInvalid();
     }
@@ -854,7 +858,7 @@ public class UnaryPercentTest {
 
     private void assertEnumNull() {
         try {
-            unary.calculateUnary(null);
+            calculator.calculator(null);
             fail();
         } catch (NullPointerException e) {
             assertEquals("Enter operation", e.getMessage());
