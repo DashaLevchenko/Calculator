@@ -11,9 +11,12 @@ import java.math.BigDecimal;
  * Class realizes calculator
  */
 public class Calculator {
-    private BigDecimal numberFirst = null;
-    private BigDecimal numberSecond = null;
-    private BigDecimal percent = null;
+    private BigDecimal numberFirst;
+    private BigDecimal numberSecond;
+    private BigDecimal percent;
+    private OperationsEnum operation;
+
+
     private Binary binary = new Binary();
     private Unary unary = new Unary();
     private History history = new History();
@@ -61,44 +64,43 @@ public class Calculator {
 
     /**
      * Method calculates math operation and return result of calculation
-     *
-     * @param operation Operation need to calculate
      */
-    public void calculate (OperationsEnum operation) throws DivideZeroException, ResultUndefinedException, OperationException, InvalidInputException {
+    public void calculate () throws DivideZeroException, ResultUndefinedException, OperationException, InvalidInputException {
         if (operation == null) {
             throw new OperationException("Enter operation");
         }
 
         if (isBinary(operation)) {
-            calculateBinaryOperation(operation);
+            calculateBinaryOperation();
         } else if (isUnary(operation)) {
-            calculateUnaryOperation(operation);
+            calculateUnaryOperation();
         } else if (isPercent(operation)) {
-            calculatePercent(operation);
+            calculatePercent();
         }
 
     }
 
-    private void calculatePercent (OperationsEnum operation) throws OperationException, InvalidInputException, DivideZeroException {
+    //    private void calculatePercent (OperationsEnum operation) throws OperationException, InvalidInputException, DivideZeroException {
+    private void calculatePercent () throws OperationException, InvalidInputException, DivideZeroException {
         if (numberFirst != null && numberSecond == null) {
             unary.setNumber(numberFirst);
             unary.calculateUnary(operation);
-            history.addOperation(operation);
+
             result = unary.getResult();
             numberFirst = result;
         } else {
-            history.addOperation(operation);
+
             binary.percent(numberSecond, percent);
             result = binary.getResult();
             numberSecond = result;
         }
     }
 
-    private void calculateUnaryOperation (OperationsEnum operation) throws OperationException, InvalidInputException, DivideZeroException {
+    private void calculateUnaryOperation () throws OperationException, InvalidInputException, DivideZeroException {
         if (numberSecond == null) {
             unary.setNumber(numberFirst);
             unary.calculateUnary(operation);
-            history.addOperation(operation);
+
             numberFirst = unary.getResult();
             numberSecond = null;
         } else {
@@ -109,16 +111,12 @@ public class Calculator {
         result = unary.getResult();
     }
 
-    private void calculateBinaryOperation (OperationsEnum operation) throws OperationException, DivideZeroException, ResultUndefinedException {
+    private void calculateBinaryOperation () throws OperationException, DivideZeroException, ResultUndefinedException {
         if (numberFirst != null && numberSecond != null) {
             binary.setNumberFirst(numberFirst);
 
-
             binary.setNumberSecond(numberSecond);
             binary.calculateBinary(operation);
-
-            history.addOperation(operation);
-
 
             result = binary.getResult();
             numberFirst = result;
@@ -142,21 +140,47 @@ public class Calculator {
 
     public void setNumberFirst (BigDecimal numberFirst) {
         this.numberFirst = numberFirst;
-        if (history.getHistory().isEmpty()) {
+        if (history.getStringHistory().isEmpty() && numberFirst != null) {
             history.addNumber(numberFirst);
         }
     }
 
     public void setNumberSecond (BigDecimal numberSecond) {
         this.numberSecond = numberSecond;
-        history.addNumber(numberSecond);
+        if (numberSecond != null) {
+            history.addNumber(numberSecond);
+        }
     }
 
     public BigDecimal getResult () {
         return result;
     }
 
-    public History getHistory(){
+    public History getHistory () {
         return history;
+    }
+
+    public OperationsEnum getOperation () {
+        return operation;
+    }
+
+    public void setOperation (OperationsEnum operation) {
+        this.operation = operation;
+        if (operation != null) {
+            history.addOperation(operation);
+        }
+    }
+
+    public void clearCalculator () {
+        numberFirst = null;
+        numberSecond = null;
+        result = null;
+        clearHistory();
+        operation = null;
+        percent = null;
+    }
+
+    public void clearHistory () {
+        history.getListHistory().clear();
     }
 }

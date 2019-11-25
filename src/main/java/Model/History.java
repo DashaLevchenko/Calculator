@@ -18,20 +18,21 @@ public class History {
     }
 
     private void needChangeLastOperation (OperationsEnum operation) {
-        Boolean isBinaryLast = false;
-        boolean isBinaryNew = false;
+
 
         if (history.size() > 0) {
-            if (history.get(history.size() - 1) instanceof OperationsEnum) {
-                OperationsEnum lastOperation = (OperationsEnum) history.get(history.size() - 1);
-                isBinaryLast = isBinary(lastOperation);
+            if (getLast() instanceof OperationsEnum) {
+                OperationsEnum lastOperation = (OperationsEnum) getLast();
+
+                Boolean isBinaryLast = isBinary(lastOperation);
+                boolean isBinaryNew = isBinary(operation);
+
+                if (isBinaryLast.equals(isBinaryNew)) {
+                    deleteLast();
+                }
             }
-            isBinaryNew = isBinary(operation);
         }
 
-        if (isBinaryLast.equals(isBinaryNew)) {
-            history.remove(history.size() - 1);
-        }
     }
 
     private boolean isBinary (OperationsEnum operation) {
@@ -54,13 +55,18 @@ public class History {
     }
 
 
-    public String getHistory () {
+    public String getStringHistory () {
         String stringHistory = "";
         for (Object o : history) {
             stringHistory = stringHistory.concat(o.toString()).concat(" ");
         }
         return stringHistory;
     }
+
+    public ArrayList getListHistory (){
+        return history;
+    }
+
 
 
 }
