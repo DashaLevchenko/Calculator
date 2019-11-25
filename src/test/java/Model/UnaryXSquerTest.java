@@ -1,5 +1,9 @@
 package Model;
 
+import Model.Exceptions.DivideZeroException;
+import Model.Exceptions.InvalidInputException;
+import Model.Exceptions.OperationException;
+import Model.Exceptions.ResultUndefinedException;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -297,13 +301,21 @@ class UnaryXSquerTest {
         BigDecimal resultExpected = new BigDecimal(resultString);
 
         unary.setNumber(x);
-        unary.calculateUnary(OperationsEnum.SQR);
+        try {
+            unary.calculateUnary(OperationsEnum.SQR);
+        } catch (InvalidInputException | DivideZeroException | OperationException e) {
+            e.printStackTrace();
+        }
         BigDecimal resultActual = unary.getResult();
 
         assertEquals(resultExpected, resultActual);
 
         calculator.setNumberFirst(x);
-        calculator.calculator(OperationsEnum.SQR);
+        try {
+            calculator.calculate(OperationsEnum.SQR);
+        } catch (DivideZeroException | ResultUndefinedException | OperationException | InvalidInputException e) {
+            e.printStackTrace();
+        }
         resultActual = calculator.getResult();
 
         assertEquals(resultExpected, unary.getResult());
@@ -325,17 +337,18 @@ class UnaryXSquerTest {
         try {
             unary.calculateUnary(operationsEnum);
             fail();
-        } catch (IllegalArgumentException e) {
+        } catch (Exception e) {
             assertEquals( "Enter unary operation", e.getMessage());
         }
     }
 
     private void assertEnumNull() {
         try {
-            calculator.calculator(null);
+            calculator.calculate(null);
             fail();
-        } catch (NullPointerException e) {
-            assertEquals("Enter operation", e.getMessage());
+        } catch (Exception e) {
+//            assertEquals("Enter operation", e.getMessage());
+            assertEquals(e.getClass(), OperationException.class);
         }
 
     }

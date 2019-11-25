@@ -1,5 +1,9 @@
 package Model;
 
+import Model.Exceptions.DivideZeroException;
+import Model.Exceptions.InvalidInputException;
+import Model.Exceptions.OperationException;
+import Model.Exceptions.ResultUndefinedException;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -1240,13 +1244,21 @@ public class UnaryPercentTest {
         BigDecimal resultExpected = BigDecimal.ZERO;
 
         unary.setNumber(x);
-        unary.calculateUnary(OperationsEnum.PERCENT);
+        try {
+            unary.calculateUnary(OperationsEnum.PERCENT);
+        } catch (InvalidInputException | DivideZeroException | OperationException e) {
+            e.printStackTrace();
+        }
         BigDecimal resultActual = unary.getResult();
 
         assertEquals(resultExpected, resultActual);
 
         calculator.setNumberFirst(x);
-        calculator.calculator(OperationsEnum.PERCENT);
+        try {
+            calculator.calculate(OperationsEnum.PERCENT);
+        } catch (DivideZeroException | ResultUndefinedException | OperationException | InvalidInputException e) {
+            e.printStackTrace();
+        }
         resultActual = calculator.getResult();
         assertEquals(resultExpected, resultActual);
         
@@ -1266,16 +1278,16 @@ public class UnaryPercentTest {
         try {
             unary.calculateUnary(operationsEnum);
             fail();
-        } catch (IllegalArgumentException e) {
+        } catch (Exception e) {
             assertEquals( "Enter unary operation", e.getMessage());
         }
     }
 
     private void assertEnumNull() {
         try {
-            calculator.calculator(null);
+            calculator.calculate(null);
             fail();
-        } catch (NullPointerException e) {
+        } catch (Exception e) {
             assertEquals("Enter operation", e.getMessage());
         }
 

@@ -1,5 +1,9 @@
 package Model;
 
+import Model.Exceptions.DivideZeroException;
+import Model.Exceptions.InvalidInputException;
+import Model.Exceptions.OperationException;
+
 import java.math.BigDecimal;
 import java.math.MathContext;
 
@@ -23,9 +27,9 @@ public class Unary {
      * Method calculates square root
      * @throws IllegalArgumentException If number need to calculate square root is negative
      */
-    private void squareRoot() throws IllegalArgumentException {
+    private void squareRoot() throws InvalidInputException {
         if (number.compareTo(BigDecimal.ZERO) < 0) {
-            throw new IllegalArgumentException("Invalid input");
+            throw new InvalidInputException("Invalid input");
         } else {
             result = number.sqrt(MathContext.DECIMAL128);
         }
@@ -39,11 +43,11 @@ public class Unary {
      * Method divides one to x
      * @throws ArithmeticException If divide by zero
      */
-    private void oneDivideX() throws ArithmeticException {
+    private void oneDivideX() throws DivideZeroException {
         try {
             result = BigDecimal.ONE.divide(number, MathContext.DECIMAL128);
         } catch (ArithmeticException e) {
-            throw new ArithmeticException("Cannot divide by zero");
+            throw new DivideZeroException("Cannot divide by zero");
         }
     }
 
@@ -58,7 +62,7 @@ public class Unary {
      * @throws ArithmeticException If divide by zero
      * @throws IllegalArgumentException If operation not equals unary operation
      */
-    public void calculateUnary(OperationsEnum operation) throws NullPointerException, ArithmeticException, IllegalArgumentException {
+    public void calculateUnary(OperationsEnum operation) throws InvalidInputException, DivideZeroException, OperationException {
         if (operation == null) {
             throw new NullPointerException("Enter operation");
         }
@@ -71,7 +75,7 @@ public class Unary {
         } else if (operation.equals(OperationsEnum.PERCENT)) {
             percent();
         } else {
-            throw new IllegalArgumentException("Enter unary operation");
+            throw new OperationException("Enter unary operation");
         }
         number = result;
 

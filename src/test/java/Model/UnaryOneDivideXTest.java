@@ -1,5 +1,9 @@
 package Model;
 
+import Model.Exceptions.DivideZeroException;
+import Model.Exceptions.InvalidInputException;
+import Model.Exceptions.OperationException;
+import Model.Exceptions.ResultUndefinedException;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -1240,7 +1244,7 @@ class UnaryOneDivideXTest {
             unary.setNumber(BigDecimal.ZERO);
             unary.calculateUnary(OperationsEnum.ONE_DIVIDE_X);
             fail();
-        } catch (ArithmeticException e) {
+        } catch (Exception e) {
             assertEquals("Cannot divide by zero", e.getMessage());
         }
     }
@@ -1250,12 +1254,20 @@ class UnaryOneDivideXTest {
         BigDecimal resultExpected = new BigDecimal(resultString);
 
         unary.setNumber(x);
-        unary.calculateUnary(OperationsEnum.ONE_DIVIDE_X);
+        try {
+            unary.calculateUnary(OperationsEnum.ONE_DIVIDE_X);
+        } catch (InvalidInputException | DivideZeroException | OperationException e) {
+            e.printStackTrace();
+        }
         BigDecimal resultActual = unary.getResult();
         assertEquals(resultExpected, resultActual);
 
         calculator.setNumberFirst(x);
-        calculator.calculator(OperationsEnum.ONE_DIVIDE_X);
+        try {
+            calculator.calculate(OperationsEnum.ONE_DIVIDE_X);
+        } catch (DivideZeroException | ResultUndefinedException | OperationException | InvalidInputException e) {
+            e.printStackTrace();
+        }
         resultActual = unary.getResult();
         assertEquals(resultExpected,resultActual);
 
@@ -1278,16 +1290,16 @@ class UnaryOneDivideXTest {
         try {
             unary.calculateUnary(operationsEnum);
             fail();
-        } catch (IllegalArgumentException e) {
+        } catch (Exception e) {
             assertEquals(e.getMessage(), "Enter unary operation");
         }
     }
 
     private void assertEnumNull () {
         try {
-            calculator.calculator(null);
+            calculator.calculate(null);
             fail();
-        } catch (NullPointerException e) {
+        } catch (Exception e) {
             assertEquals("Enter operation", e.getMessage());
         }
     }

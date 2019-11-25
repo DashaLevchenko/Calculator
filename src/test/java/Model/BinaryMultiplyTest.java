@@ -1,5 +1,9 @@
 package Model;
 
+import Model.Exceptions.DivideZeroException;
+import Model.Exceptions.InvalidInputException;
+import Model.Exceptions.OperationException;
+import Model.Exceptions.ResultUndefinedException;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -19,6 +23,7 @@ class BinaryMultiplyTest {
         assertionMultiply("1", "0", "0");
         assertionMultiply("-1", "0", "0");
 
+        //both operands are integer
         assertionMultiply("1", "1", "1");
         assertionMultiply("1", "-1", "-1");
         assertionMultiply("-1", "1", "-1");
@@ -124,6 +129,7 @@ class BinaryMultiplyTest {
         assertionMultiply("-839875982893745783", "42456265346", "-35657997587469427886916535918");
         assertionMultiply("-839875982893745783", "-42456265346", "35657997587469427886916535918");
 
+        //first operand is decimal
         assertionMultiply("0.1", "2", "0.2");
         assertionMultiply("0.1", "-2", "-0.2");
         assertionMultiply("-0.1", "2", "-0.2");
@@ -479,6 +485,7 @@ class BinaryMultiplyTest {
         assertionMultiply("-5647753E-10543", "6567687746", "-3.7092678170534738E-10527");
         assertionMultiply("-5647753E-10543", "-6567687746", "3.7092678170534738E-10527");
 
+        //second operand is decimal
         assertionMultiply("1", "0.2", "0.2");
         assertionMultiply("1", "-0.2", "-0.2");
         assertionMultiply("-1", "0.2", "-0.2");
@@ -709,6 +716,7 @@ class BinaryMultiplyTest {
         assertionMultiply("-10289622287797479", "0.00349675", "-35980236734855.83469325");
         assertionMultiply("-10289622287797479", "-0.00349675", "35980236734855.83469325");
 
+        //both operands are decimal
         assertionMultiply("0.1", "0.2", "0.02");
         assertionMultiply("0.1", "-0.2", "-0.02");
         assertionMultiply("-0.1", "0.2", "-0.02");
@@ -1059,6 +1067,8 @@ class BinaryMultiplyTest {
         assertionMultiply("-986859867454E-10967", "536556E-643", "-5.29505583041648424E-11593");
         assertionMultiply("-986859867454E-10967", "-536556E-643", "5.29505583041648424E-11593");
 
+        //Special numbers for realization
+        //=> 9999999999999999
         assertionMultiply("9999999999999999", "0", "0");
         assertionMultiply("-9999999999999999", "0", "0");
         assertionMultiply("0", "9999999999999999", "0");
@@ -1089,6 +1099,7 @@ class BinaryMultiplyTest {
         assertionMultiply("-9999999999999999", "1E-9999", "-9.999999999999999E-9984");
         assertionMultiply("-9999999999999999", "-1E-9999", "9.999999999999999E-9984");
 
+        //=>0.0000000000000001
         assertionMultiply("0.0000000000000001", "1", "1E-16");
         assertionMultiply("0.0000000000000001", "-1", "-1E-16");
         assertionMultiply("-0.0000000000000001", "1", "-1E-16");
@@ -1114,6 +1125,7 @@ class BinaryMultiplyTest {
         assertionMultiply("-0.0000000000000001", "1E-9999", "-1E-10015");
         assertionMultiply("-0.0000000000000001", "-1E-9999", "1E-10015");
 
+        //=> 9999999999999999E9999
         assertionMultiply("9999999999999999E9999", "1", "9.999999999999999E+10014");
         assertionMultiply("9999999999999999E9999", "-1", "-9.999999999999999E+10014");
         assertionMultiply("-9999999999999999E9999", "1", "-9.999999999999999E+10014");
@@ -1139,6 +1151,7 @@ class BinaryMultiplyTest {
         assertionMultiply("-9999999999999999E9999", "1E-9999", "-9999999999999999");
         assertionMultiply("-9999999999999999E9999", "-1E-9999", "9999999999999999");
 
+        //=> 1E-9999
         assertionMultiply("1E-9999", "1", "1E-9999");
         assertionMultiply("1E-9999", "-1", "-1E-9999");
         assertionMultiply("-1E-9999", "1", "-1E-9999");
@@ -1163,7 +1176,6 @@ class BinaryMultiplyTest {
         assertionMultiply("1E-9999", "-9999999999999999E9999", "-9999999999999999");
         assertionMultiply("-1E-9999", "9999999999999999E9999", "-9999999999999999");
         assertionMultiply("-1E-9999", "-9999999999999999E9999", "9999999999999999");
-
     }
 
 
@@ -1175,13 +1187,21 @@ class BinaryMultiplyTest {
 
         calculator.setNumberFirst(x);
         calculator.setNumberSecond(y);
-        calculator.calculator(OperationsEnum.MULTIPLY);
+        try {
+            calculator.calculate(OperationsEnum.MULTIPLY);
+        } catch (DivideZeroException | ResultUndefinedException | OperationException | InvalidInputException e) {
+            e.printStackTrace();
+        }
         BigDecimal resultActual = calculator.getResult();
         assertEquals(resultExpected, resultActual);
 
         binary.setNumberFirst(x);
         binary.setNumberSecond(y);
-        binary.calculateBinary(OperationsEnum.MULTIPLY);
+        try {
+            binary.calculateBinary(OperationsEnum.MULTIPLY);
+        } catch (ResultUndefinedException | DivideZeroException | OperationException e) {
+            e.printStackTrace();
+        }
         resultActual = binary.getResult();
         assertEquals(resultExpected, resultActual);
 
@@ -1201,16 +1221,16 @@ class BinaryMultiplyTest {
         try {
             binary.calculateBinary(operationsEnum);
             fail();
-        } catch (IllegalArgumentException e) {
+        } catch (Exception e) {
             assertEquals(e.getMessage(), "Enter binary operation");
         }
     }
 
     private void assertEnumNull() {
         try {
-            calculator.calculator(null);
+            calculator.calculate(null);
             fail();
-        } catch (NullPointerException e) {
+        } catch (Exception e) {
             assertEquals("Enter operation", e.getMessage());
         }
     }

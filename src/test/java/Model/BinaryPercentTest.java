@@ -1,5 +1,9 @@
 package Model;
 
+import Model.Exceptions.DivideZeroException;
+import Model.Exceptions.InvalidInputException;
+import Model.Exceptions.OperationException;
+import Model.Exceptions.ResultUndefinedException;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -19,6 +23,7 @@ class BinaryPercentTest {
         assertionsPercent("1", "0", "0");
         assertionsPercent("-1", "0", "0");
 
+        //both operands are integer
         assertionsPercent("1", "1", "0.01");
         assertionsPercent("1", "-1", "-0.01");
         assertionsPercent("-1", "1", "-0.01");
@@ -124,6 +129,7 @@ class BinaryPercentTest {
         assertionsPercent("-839875982893745783", "42456265346", "-356579975874694278869165359.18");
         assertionsPercent("-839875982893745783", "-42456265346", "356579975874694278869165359.18");
 
+        //first operand is decimal
         assertionsPercent("0.1", "2", "0.002");
         assertionsPercent("0.1", "-2", "-0.002");
         assertionsPercent("-0.1", "2", "-0.002");
@@ -479,6 +485,7 @@ class BinaryPercentTest {
         assertionsPercent("-5647753E-10543", "6567687746", "-3.7092678170534738E-10529");
         assertionsPercent("-5647753E-10543", "-6567687746", "3.7092678170534738E-10529");
 
+        //second operand is decimal
         assertionsPercent("1", "0.2", "0.002");
         assertionsPercent("1", "-0.2", "-0.002");
         assertionsPercent("-1", "0.2", "-0.002");
@@ -714,6 +721,7 @@ class BinaryPercentTest {
         assertionsPercent("-0.1", "0.2", "-0.0002");
         assertionsPercent("-0.1", "-0.2", "0.0002");
 
+        //both operands are decimal
         assertionsPercent("0.002", "0.010", "2E-7");
         assertionsPercent("0.002", "-0.010", "-2E-7");
         assertionsPercent("-0.002", "0.010", "-2E-7");
@@ -1059,6 +1067,8 @@ class BinaryPercentTest {
         assertionsPercent("-986859867454E-10967", "536556E-643", "-5.29505583041648424E-11595");
         assertionsPercent("-986859867454E-10967", "-536556E-643", "5.29505583041648424E-11595");
 
+    //Special numbers for realization
+        //=> 9999999999999999
         assertionsPercent("9999999999999999", "0", "0");
         assertionsPercent("-9999999999999999", "0", "0");
         assertionsPercent("0", "9999999999999999", "0.00");
@@ -1089,6 +1099,7 @@ class BinaryPercentTest {
         assertionsPercent("-9999999999999999", "1E-9999", "-9.999999999999999E-9986");
         assertionsPercent("-9999999999999999", "-1E-9999", "9.999999999999999E-9986");
 
+        //=>0.0000000000000001
         assertionsPercent("0.0000000000000001", "1", "1E-18");
         assertionsPercent("0.0000000000000001", "-1", "-1E-18");
         assertionsPercent("-0.0000000000000001", "1", "-1E-18");
@@ -1114,6 +1125,7 @@ class BinaryPercentTest {
         assertionsPercent("-0.0000000000000001", "1E-9999", "-1E-10017");
         assertionsPercent("-0.0000000000000001", "-1E-9999", "1E-10017");
 
+        //=> 9999999999999999E9999
         assertionsPercent("9999999999999999E9999", "1", "9.999999999999999E+10012");
         assertionsPercent("9999999999999999E9999", "-1", "-9.999999999999999E+10012");
         assertionsPercent("-9999999999999999E9999", "1", "-9.999999999999999E+10012");
@@ -1139,6 +1151,7 @@ class BinaryPercentTest {
         assertionsPercent("-9999999999999999E9999", "1E-9999", "-99999999999999.99");
         assertionsPercent("-9999999999999999E9999", "-1E-9999", "99999999999999.99");
 
+        //=> 1E-9999
         assertionsPercent("1E-9999", "1", "1E-10001");
         assertionsPercent("1E-9999", "-1", "-1E-10001");
         assertionsPercent("-1E-9999", "1", "-1E-10001");
@@ -1177,7 +1190,11 @@ class BinaryPercentTest {
 
         calculator.setNumberSecond(x);
         calculator.setPercent(percent);
-        calculator.calculator(OperationsEnum.PERCENT);
+        try {
+            calculator.calculate(OperationsEnum.PERCENT);
+        } catch (DivideZeroException | ResultUndefinedException | OperationException | InvalidInputException e) {
+            e.printStackTrace();
+        }
 
         resultActual = calculator.getResult();
         assertEquals(resultExpected, resultActual);
@@ -1191,7 +1208,11 @@ class BinaryPercentTest {
         binary.setNumberFirst(null);
         binary.setNumberSecond(null);
         binary.setResult(null);
-        binary.calculateBinary(OperationsEnum.PERCENT);
+        try {
+            binary.calculateBinary(OperationsEnum.PERCENT);
+        } catch (ResultUndefinedException | DivideZeroException | OperationException e) {
+            e.printStackTrace();
+        }
 
         assertNull(binary.getNumberFirst());
         assertNull(binary.getNumberSecond());

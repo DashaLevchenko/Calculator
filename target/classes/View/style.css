@@ -17,6 +17,12 @@
 -fx-text-base-color: #000;
 }
 
+.generalDisplay{
+-fx-font-size: 46px;
+-fx-background-color: e6e6e6;
+-fx-font-family:"Segoe UI Semibold";
+}
+
 .menu:hover, .init_other:hover {
 -fx-background-color: #cfcfcf;
 }

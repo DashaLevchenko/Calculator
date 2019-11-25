@@ -42,5 +42,10 @@ public enum OperationsEnum {
     /**
      * The singleton is one division number
      */
-    ONE_DIVIDE_X
+    ONE_DIVIDE_X,
+
+    /**
+     * The singleton is negate
+     */
+    NEGATE
 }

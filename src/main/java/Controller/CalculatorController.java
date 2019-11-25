@@ -1,6 +1,10 @@
 package Controller;
 
 import Model.*;
+import Model.Exceptions.DivideZeroException;
+import Model.Exceptions.InvalidInputException;
+import Model.Exceptions.OperationException;
+import Model.Exceptions.ResultUndefinedException;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -703,7 +707,7 @@ public class CalculatorController {
      */
     private void calculateBinaryOperation () {
         try {
-            calculator.calculator(binaryOperation);
+            calculator.calculate(binaryOperation);
 
             if (calculator.getResult() != null) {
                 printResult(FormatterNumber.numberFormatter(getResult()));
@@ -732,7 +736,7 @@ public class CalculatorController {
      */
     private void calculateUnaryOperation () {
         try {
-            calculator.calculator(unaryOperation);
+            calculator.calculate(unaryOperation);
             printResult(FormatterNumber.numberFormatter(calculator.getResult()));
             canBackspace = false;
         } catch (Exception e) {
@@ -743,10 +747,15 @@ public class CalculatorController {
     /*
      * Method sets number for calculate percent operation, calculate percent and catches exception
      */
-    private void calculatePercent () {
+    private void calculatePercent (){
         setPercentNumber();
 
-        calculator.calculator(percentOperation);
+        try {
+            calculator.calculate(percentOperation);
+        } catch (DivideZeroException | ResultUndefinedException | OperationException | InvalidInputException e) {
+            e.printStackTrace();
+            printError(e);
+        }
     }
 
 
