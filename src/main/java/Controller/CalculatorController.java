@@ -182,9 +182,9 @@ public class CalculatorController {
 
     private int charValidInText = 16;
     private String firstStyleLabel;
-    private String historyOperations = "";
-    private String historyUnaryOperations = "";
-    private String negateHistory = "";
+//    private String historyOperations = "";
+//    private String historyUnaryOperations = "";
+//    private String negateHistory = "";
     private String defaultText = "0";
     private String decimalSeparate = ",";
     private String separatorNumber = " ";
@@ -613,15 +613,15 @@ public class CalculatorController {
      * This method gets number from memory after memory recall button was pressed
      */
     private void getMemoryNumber (BigDecimal numberFromMemory) {
-        if (historyOperations.isEmpty()) {
+//        if (historyOperations.isEmpty()) {
 //            clearUnary();
             setCalculatorFirstNumber(numberFromMemory);
             canBackspace = false;
-        } else {
+//        } else {
             if (binaryOperation != null) {
                 setCalculatorSecondNumber(numberFromMemory);
             }
-        }
+//        }
     }
 
 
@@ -651,7 +651,7 @@ public class CalculatorController {
 //        }
 
         if (binaryOperation != null) {
-            calculateBinaryOperation();
+            calculate();
         }
 
         binaryOperation = OperationsEnum.valueOf(buttonID.toUpperCase());
@@ -693,11 +693,13 @@ public class CalculatorController {
         } else {
             unaryOperation = OperationsEnum.valueOf(buttonID.toUpperCase());
         }
+        setNumberUnary();
+        calculator.setOperation(unaryOperation);
 
 //        addUnaryNumberHistory(setNumberUnary());
-        calculateUnaryOperation();
-        setTextOperationHistory(historyOperations + historyUnaryOperations);
-
+//        calculateUnaryOperation();
+        calculate();
+        printHistory();
         scrollOutOperationMemory();
     }
 
@@ -708,9 +710,9 @@ public class CalculatorController {
         canChangeOperator = false;
 
         calculatePercent();
-        historyOperations += Text.deleteNumberSeparator(formatterNumber(calculator.getResult()), separatorNumber);
+//        historyOperations += Text.deleteNumberSeparator(formatterNumber(calculator.getResult()), separatorNumber);
         printResult(formatterNumber(calculator.getResult()));
-        setTextOperationHistory(historyOperations);
+//        setTextOperationHistory(historyOperations);
 
         percentPressed = true;
         canBackspace = false;
@@ -729,7 +731,7 @@ public class CalculatorController {
                 setBinarySecondNumber();
             }
 
-            calculateBinaryOperation();
+            calculate();
         }
 
         if (!isError) {
@@ -756,11 +758,11 @@ public class CalculatorController {
      * catches exception and
      * prohibits to backspace text in general display
      */
-    private void calculateBinaryOperation () {
+    private void calculate () {
         try {
             calculator.calculate();
 
-            if (calculator.getResult() != null) {
+            if (getResult() != null) {
                 printResult(FormatterNumber.numberFormatter(getResult()));
                 canBackspace = false;
             }
@@ -769,30 +771,26 @@ public class CalculatorController {
                 setCalculatorSecondNumber(null);
             }
         } catch (Exception e) {
-//            if (equalWasPress) {
-//                historyOperations += negateHistory;
-//                setTextOperationHistory(historyOperations);
-//            } else {
-//                setTextOperationHistory(historyOperations + ChangeHistory.getSymbol(binaryOperation));
+            printError(e);
+        }
+    }
+
+
+//    /*
+//     * Method calculates unary operation, call print result method and catches exception
+//     * and prohibits to backspace text in general display
+//     */
+//    private void calculateUnaryOperation () {
+//        try {
+//            calculator.calculate();
+//            if (getResult() != null) {
+//                printResult(FormatterNumber.numberFormatter(calculator.getResult()));
 //            }
-            printError(e);
-        }
-    }
-
-
-    /*
-     * Method calculates unary operation, call print result method and catches exception
-     * and prohibits to backspace text in general display
-     */
-    private void calculateUnaryOperation () {
-        try {
-            calculator.calculate();
-            printResult(FormatterNumber.numberFormatter(calculator.getResult()));
-            canBackspace = false;
-        } catch (Exception e) {
-            printError(e);
-        }
-    }
+//            canBackspace = false;
+//        } catch (Exception e) {
+//            printError(e);
+//        }
+//    }
 
     /*
      * Method sets number for calculate percent operation, calculate percent and catches exception
@@ -1048,7 +1046,7 @@ public class CalculatorController {
         memoryPanel.setDisable(false);
         isError = false;
         negatePressed = false;
-        negateHistory = emptyString;
+//        negateHistory = emptyString;
         percentPressed = false;
         charValidInText = CHAR_MAX_INPUT;
         resizeOutputText();
@@ -1139,7 +1137,7 @@ public class CalculatorController {
             getMemoryNumber(memory.memoryRecall());
             printResult(formatterNumber(memory.memoryRecall()));
         }
-        negateHistory = emptyString;
+//        negateHistory = emptyString;
         memoryPressed = true;
     }
 

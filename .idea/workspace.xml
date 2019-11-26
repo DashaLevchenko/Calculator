@@ -9,10 +9,6 @@
     <list default="true" id="feaeb0c2-feb2-4a9c-98e3-48b1d1a339aa" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controller/CalculatorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/CalculatorController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Demo/Demo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Demo/Demo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Calculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Calculator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Model/E.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/E.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Model/History.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/History.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -295,13 +291,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1565432602101</updated>
-    </task>
-    <task id="LOCAL-00034" summary="write Tests, &#10;how use robotFX?">
-      <created>1569861493096</created>
-      <option name="number" value="00034" />
-      <option name="presentableId" value="LOCAL-00034" />
-      <option name="project" value="LOCAL" />
-      <updated>1569861493096</updated>
     </task>
     <task id="LOCAL-00035" summary="write Tests,">
       <created>1569942587427</created>
@@ -639,7 +628,14 @@
       <option name="project" value="LOCAL" />
       <updated>1574690774752</updated>
     </task>
-    <option name="localTasksCounter" value="83" />
+    <task id="LOCAL-00083" summary="before change model,&#10;setOperation">
+      <created>1574698646399</created>
+      <option name="number" value="00083" />
+      <option name="presentableId" value="LOCAL-00083" />
+      <option name="project" value="LOCAL" />
+      <updated>1574698646400</updated>
+    </task>
+    <option name="localTasksCounter" value="84" />
     <servers />
   </component>
   <component name="UnknownFeatures">
