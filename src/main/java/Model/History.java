@@ -17,6 +17,10 @@ public class History {
         }
     }
 
+    public void addOperationString (String historyString) {
+            history.add(historyString);
+    }
+
     private void needChangeLastOperation (OperationsEnum operation) {
 
 
@@ -24,10 +28,10 @@ public class History {
             if (getLast() instanceof OperationsEnum) {
                 OperationsEnum lastOperation = (OperationsEnum) getLast();
 
-                Boolean isBinaryLast = isBinary(lastOperation);
+                boolean isBinaryLast = isBinary(lastOperation);
                 boolean isBinaryNew = isBinary(operation);
 
-                if (isBinaryLast.equals(isBinaryNew)) {
+                if (isBinaryLast && isBinaryNew) {
                     deleteLast();
                 }
             }

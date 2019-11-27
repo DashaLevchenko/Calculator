@@ -1,7 +1,6 @@
 package Model;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class E {
@@ -26,16 +25,17 @@ public class E {
             calculator.setNumberFirst(BigDecimal.valueOf(5));
             calculator.setOperation(OperationsEnum.ADD);
             calculator.setNumberSecond(BigDecimal.valueOf(3));
+            calculator.calculate();
 
-            calculator.setOperation(OperationsEnum.DIVIDE);
-            calculator.setNumberSecond(BigDecimal.valueOf(2));
-
-            calculator.setOperation(OperationsEnum.SUBTRACT);
-            calculator.setNumberSecond(BigDecimal.valueOf(1));
+            calculator.setOperation(OperationsEnum.SQR);
+            calculator.calculate();
 
             calculator.setOperation(OperationsEnum.SQRT);
-            calculator.setOperation(OperationsEnum.ADD);
-            calculator.setNumberSecond(BigDecimal.valueOf(4));
+            calculator.calculate();
+
+
+
+
 
 //            calculator.calculate(OperationsEnum.ADD);
 
@@ -48,26 +48,33 @@ public class E {
 
 
 //            calculator.calculate(OperationsEnum.ADD);
-
-//            System.out.println("Ответ: " + calculator.getResult());
-            System.out.println(stringHistory());
+//            calculator.calculate();
+            System.out.println("Ответ: " + calculator.getResult());
+//            System.out.println(stringHistory());
         } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
 
-    public static String stringHistory (){
-        ArrayList historyArray = calculator.getHistory().getListHistory();
-        String history = "";
-        for (Object o : historyArray) {
-            if(o instanceof OperationsEnum){
-                history = history.concat(operationSymbols.get(o)).concat(" ");
-            }else{
-                history = history.concat(o.toString()).concat(" ");
-            }
-        }
-
-    return history;
-    }
+//    public static String stringHistory (){
+//        ArrayList historyArray = calculator.getHistory().getListHistory();
+//       for(Object object : historyArray){
+//           if(object instanceof Number){
+//               int index = historyArray.indexOf(object);
+//               historyArray.remove(index);
+////               historyArray.add(index, );
+//           }
+//       }
+////        String history = "";
+////        for (Object o : historyArray) {
+//////            if(o instanceof OperationsEnum){
+//////                history = history.concat(operationSymbols.get(o)).concat(" ");
+//////            }else{
+////                history = history.concat(o.toString()).concat(" ");
+//////            }
+////        }
+//
+//    return history;
+//    }
 }
