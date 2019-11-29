@@ -7,7 +7,7 @@ import java.math.BigDecimal;
  * Class calculates number without print
  */
 public class Memory {
-    private BigDecimal number = null;
+    private BigDecimal number;
 
     /**
      * Method adds numbers

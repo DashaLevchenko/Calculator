@@ -193,7 +193,6 @@ public class CalculatorController {
 
     private int charValidInText = 16;
     private String firstStyleLabel;
-    //    private String historyOperations = "";
     private String historyUnaryOperations = "";
     private String negateHistory = "";
     private String defaultText = "0";
@@ -316,7 +315,6 @@ public class CalculatorController {
                 printResult(FormatterNumber.formatterInputNumber(out));
             }
         }
-
 
         scrollOutOperationMemory();
         canChangeOperator = false;

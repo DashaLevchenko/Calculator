@@ -21,7 +21,7 @@ class FormatterNumber {
     private static final int MAX_SCALE = 16;
 
     //Set separator for formatter number
-    static {
+     {
         symbols.setExponentSeparator("e");
         symbols.setGroupingSeparator(' ');
         symbols.setDecimalSeparator(',');
@@ -113,9 +113,8 @@ class FormatterNumber {
      * @return Number was parsed
      */
     static BigDecimal parseNumber(String text) throws ParseException {
-        BigDecimal number = null;
+        BigDecimal number;
         text = text.replace("+", "").replace(" ", "");
-//        if (decimalFormat != null && !text.isEmpty()) {
             try {
                 decimalFormat.setParseBigDecimal(true);
                 number = (BigDecimal) decimalFormat.parse(text);

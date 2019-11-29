@@ -23,25 +23,12 @@ public class Binary {
     private BigDecimal numberSecond = null;
     private BigDecimal result = null;
 
-    public BigDecimal getNumberFirst () {
-        return numberFirst;
-    }
-
     public void setNumberFirst (BigDecimal numberFirst) {
         this.numberFirst = numberFirst;
     }
 
-    public BigDecimal getNumberSecond () {
-        return numberSecond;
-    }
-
     public void setNumberSecond (BigDecimal numberSecond) {
         this.numberSecond = numberSecond;
-    }
-
-
-    public void setResult (BigDecimal result) {
-        this.result = result;
     }
 
     public BigDecimal getResult () {
