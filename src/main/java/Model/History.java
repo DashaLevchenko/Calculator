@@ -13,12 +13,12 @@ public class History {
     public void addOperation (OperationsEnum operation) {
         if (history.size() > 0) {
             needChangeLastOperation(operation);
-            history.add(operation);
         }
+        history.add(operation);
     }
 
     public void addOperationString (String historyString) {
-            history.add(historyString);
+        history.add(historyString);
     }
 
     private void needChangeLastOperation (OperationsEnum operation) {
@@ -67,10 +67,9 @@ public class History {
         return stringHistory;
     }
 
-    public ArrayList getListHistory (){
+    public ArrayList getListHistory () {
         return history;
     }
-
 
 
 }

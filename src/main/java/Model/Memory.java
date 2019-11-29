@@ -25,6 +25,9 @@ public class Memory {
      * @param numberSecond Number which subtract to {@code number}
      */
     public void memorySubtract(BigDecimal numberSecond) {
+        if(numberSecond.equals(BigDecimal.valueOf(-0.1))){
+            System.out.println("l");
+        }
         if (number != null) {
             number = number.subtract(numberSecond);
         } else{

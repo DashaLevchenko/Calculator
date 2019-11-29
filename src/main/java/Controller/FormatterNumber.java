@@ -112,10 +112,10 @@ class FormatterNumber {
      * @param text Text need to parse
      * @return Number was parsed
      */
-    static BigDecimal parseNumber(String text) {
+    static BigDecimal parseNumber(String text) throws ParseException {
         BigDecimal number = null;
         text = text.replace("+", "").replace(" ", "");
-        if (decimalFormat != null && !text.isEmpty()) {
+//        if (decimalFormat != null && !text.isEmpty()) {
             try {
                 decimalFormat.setParseBigDecimal(true);
                 number = (BigDecimal) decimalFormat.parse(text);
@@ -124,12 +124,12 @@ class FormatterNumber {
                 if (number.scale() < 0) {
                     number = number.setScale(0);
                 }
-
+            return  number;
             } catch (ParseException e) {
-                e.printStackTrace();
+                throw e;
             }
-        }
-        return number;
+//        }
+
     }
 
     /**
