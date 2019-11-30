@@ -21,7 +21,7 @@ class FormatterNumber {
     private static final int MAX_SCALE = 16;
 
     //Set separator for formatter number
-     {
+     static {
         symbols.setExponentSeparator("e");
         symbols.setGroupingSeparator(' ');
         symbols.setDecimalSeparator(',');

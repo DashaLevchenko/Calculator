@@ -1668,148 +1668,147 @@ class Calculator_ControllerTest extends ApplicationTest {
 
     @Test
     void checkMemorySubtract() {
-//        //  was pressed one time
-//        assertNumber("0  8  ", "0", "");
+        //  was pressed one time
+        assertNumber("0  8  ", "0", "");
+
+        assertNumber("5  8  ", "-5", "");
+        assertNumber("5  8  ", "5", "");
+
+        assertNumber("0,5  8  ", "-0,5", "");
+        assertNumber("0,5  8  ", "0,5", "");
+
+        assertNumber(MIN_POSITIVE_NUMBER_INPUT + " 9  ", "-0,0000000000000001", "");
+        assertNumber(MIN_POSITIVE_NUMBER_INPUT + " 9  ", "0,0000000000000001", "");
+
+        assertNumber(MAX_POSITIVE_NUMBER_INPUT + " 9  ", "-9 999 999 999 999 999", "");
+        assertNumber(MAX_POSITIVE_NUMBER_INPUT + " 9  ", "9 999 999 999 999 999", "");
+
+        assertNumber(MAX_POSITIVE_NUMBER_VISIBLE + " 9  ", "-9,999999999999999e+9999", "");
+        assertNumber(MAX_POSITIVE_NUMBER_VISIBLE + " 9  ", "9,999999999999999e+9999", "");
+
+        assertNumber(MAX_POSITIVE_NUMBER + " 9  ", "-9,999999999999999e+9999", "");
+        assertNumber(MAX_POSITIVE_NUMBER + " 9  ", "9,999999999999999e+9999", "");
+
+        assertNumber(MIN_POSITIVE_NUMBER + " 9  ", "-1,e-9999", "");
+        assertNumber(MIN_POSITIVE_NUMBER + " 9  ", "1,e-9999", "");
+
+        //  was pressed two time
+        //both operands are integer
+        assertNumber("0  0  ", "0", "");
+
+        assertNumber("2  0  ", "-2", "");
+        assertNumber("2   0  ", "2", "");
+        assertNumber("0  2   ", "2", "");
+
+        assertNumber("2  2  ", "-4", "");
+        assertNumber("2  2  ", "0", "");
+        assertNumber("2  2  ", "0", "");
+        assertNumber("2  2  ", "4", "");
+
+        assertNumber("2  3  ", "-5", "");
+        assertNumber("2  3   ", "1", "");
+        assertNumber("2   3  ", "-1", "");
+        assertNumber("2   3   ", "5", "");
+        //first operand is decimal
+        assertNumber("0,2   0  ", "-0,2", "");
+        assertNumber("0,2   0  ", "0,2", "");
+
+        assertNumber("0,2  3  ", "-3,2", "");
+        assertNumber("0,2  3   ", "2,8", "");
+        assertNumber("0,2   3  ", "-2,8", "");
+        assertNumber("0,2   3   ", "3,2", "");
+        //second operand is decimal
+        assertNumber("0  ,2  ", "-0,2", "");
+        assertNumber("0  ,2   ", "0,2", "");
+
+        assertNumber("2  0,3  ", "-2,3", "");
+        assertNumber("2  0,3   ", "-1,7", "");
+        assertNumber("2   0,3  ", "1,7", "");
+        assertNumber("2   0,3   ", "2,3", "");
+        //both operands are decimal
+        assertNumber("0,2  0,2  ", "-0,4", "");
+        assertNumber("0,2  0,2  ", "0", "");
+        assertNumber("0,2  0,2  ", "0", "");
+        assertNumber("0,2  0,2  ", "0,4", "");
+
+        assertNumber("0,2  0,3  ", "-0,5", "");
+        assertNumber("0,2   0,3  ", "-0,1", "");
+        assertNumber("0,2  0,3   ", "0,1", "");
+        assertNumber("0,2   0,3   ", "0,5", "");
 //
-//        assertNumber("5  8  ", "-5", "");
-//        assertNumber("5  8  ", "5", "");
-//
-//        assertNumber("0,5  8  ", "-0,5", "");
-//        assertNumber("0,5  8  ", "0,5", "");
-//
-//        assertNumber(MIN_POSITIVE_NUMBER_INPUT + " 9  ", "-0,0000000000000001", "");
-//        assertNumber(MIN_POSITIVE_NUMBER_INPUT + " 9  ", "0,0000000000000001", "");
-//
-//        assertNumber(MAX_POSITIVE_NUMBER_INPUT + " 9  ", "-9 999 999 999 999 999", "");
-//        assertNumber(MAX_POSITIVE_NUMBER_INPUT + " 9  ", "9 999 999 999 999 999", "");
-//
-//        assertNumber(MAX_POSITIVE_NUMBER_VISIBLE + " 9  ", "-9,999999999999999e+9999", "");
-//        assertNumber(MAX_POSITIVE_NUMBER_VISIBLE + " 9  ", "9,999999999999999e+9999", "");
-//
-//        assertNumber(MAX_POSITIVE_NUMBER + " 9  ", "-9,999999999999999e+9999", "");
-//        assertNumber(MAX_POSITIVE_NUMBER + " 9  ", "9,999999999999999e+9999", "");
-//
-//        assertNumber(MIN_POSITIVE_NUMBER + " 9  ", "-1,e-9999", "");
-//        assertNumber(MIN_POSITIVE_NUMBER + " 9  ", "1,e-9999", "");
-//
-//        //  was pressed two time
-//        //both operands are integer
-//        assertNumber("0  0  ", "0", "");
-//
-//        assertNumber("2  0  ", "-2", "");
-//        assertNumber("2   0  ", "2", "");
-//        assertNumber("0  2   ", "2", "");
-//
-//        assertNumber("2  2  ", "-4", "");
-//        assertNumber("2  2  ", "0", "");
-//        assertNumber("2  2  ", "0", "");
-//        assertNumber("2  2  ", "4", "");
-//
-//        assertNumber("2  3  ", "-5", "");
-//        assertNumber("2  3   ", "1", "");
-//        assertNumber("2   3  ", "-1", "");
-//        assertNumber("2   3   ", "5", "");
-//        //first operand is decimal
-//        assertNumber("0,2   0  ", "-0,2", "");
-//        assertNumber("0,2   0  ", "0,2", "");
-//
-//        assertNumber("0,2  3  ", "-3,2", "");
-//        assertNumber("0,2  3   ", "2,8", "");
-//        assertNumber("0,2   3  ", "-2,8", "");
-//        assertNumber("0,2   3   ", "3,2", "");
-//        //second operand is decimal
-//        assertNumber("0  ,2  ", "-0,2", "");
-//        assertNumber("0  ,2   ", "0,2", "");
-//
-//        assertNumber("2  0,3  ", "-2,3", "");
-//        assertNumber("2  0,3   ", "-1,7", "");
-//        assertNumber("2   0,3  ", "1,7", "");
-//        assertNumber("2   0,3   ", "2,3", "");
-//        //both operands are decimal
-//        assertNumber("0,2  0,2  ", "-0,4", "");
-//        assertNumber("0,2  0,2  ", "0", "");
-//        assertNumber("0,2  0,2  ", "0", "");
-//        assertNumber("0,2  0,2  ", "0,4", "");
-//
-//        assertNumber("0,2  0,3  ", "-0,5", "");
-//        assertNumber("0,2   0,3  ", "-0,1", "");
-//        assertNumber("0,2  0,3   ", "0,1", "");
-//        assertNumber("0,2   0,3   ", "0,5", "");
-////
-////        //Min positive number which can input
-//        assertNumber(MIN_POSITIVE_NUMBER_INPUT+" "+MIN_POSITIVE_NUMBER_INPUT+"  ", "-0,0000000000000002", "");
-//        assertNumber(MIN_POSITIVE_NUMBER_INPUT+" "+MIN_POSITIVE_NUMBER_INPUT+"  ", "0", "");
-//        assertNumber(MIN_POSITIVE_NUMBER_INPUT+" "+MIN_POSITIVE_NUMBER_INPUT+"  ", "0", "");
-//        assertNumber(MIN_POSITIVE_NUMBER_INPUT+" "+MIN_POSITIVE_NUMBER_INPUT+"  ", "0,0000000000000002", "");
-//
-//        assertNumber(MIN_POSITIVE_NUMBER_INPUT+" 1   ", "-1", "");
-//        assertNumber(MIN_POSITIVE_NUMBER_INPUT+" 1   ", "0,9999999999999999", "");
-//        assertNumber(MIN_POSITIVE_NUMBER_INPUT+" 1   ", "-0,9999999999999999", "");
-//        assertNumber(MIN_POSITIVE_NUMBER_INPUT+" 1   ", "1", "");
-//
-//        assertNumber(MIN_POSITIVE_NUMBER_INPUT+" 0,1   ", "-0,1000000000000001", "");
-//        assertNumber(MIN_POSITIVE_NUMBER_INPUT+" 0,1   ", "0,0999999999999999", "");
-//        assertNumber(MIN_POSITIVE_NUMBER_INPUT+" 0,1   ", "-0,0999999999999999", "");
-//        assertNumber(MIN_POSITIVE_NUMBER_INPUT+" 0,1   ", "0,1000000000000001", "");
-//
-//        assertNumber(MIN_POSITIVE_NUMBER_INPUT+" "+MAX_POSITIVE_NUMBER_INPUT+"  ", "-9 999 999 999 999 999", "");
-//        assertNumber(MIN_POSITIVE_NUMBER_INPUT+" "+MAX_POSITIVE_NUMBER_INPUT+"  ", "9 999 999 999 999 999", "");
-//        assertNumber(MIN_POSITIVE_NUMBER_INPUT+" "+MAX_POSITIVE_NUMBER_INPUT+"  ", "-9 999 999 999 999 999", "");
-//        assertNumber(MIN_POSITIVE_NUMBER_INPUT+" "+MAX_POSITIVE_NUMBER_INPUT+"  ", "9 999 999 999 999 999", "");
-//
-//        // Max positive number which can input
-//        assertNumber(MAX_POSITIVE_NUMBER_INPUT+" "+MAX_POSITIVE_NUMBER_INPUT+"  ", "-2,e+16", "");
-//        assertNumber(MAX_POSITIVE_NUMBER_INPUT+" "+MAX_POSITIVE_NUMBER_INPUT+"  ", "0", "");
-//        assertNumber(MAX_POSITIVE_NUMBER_INPUT+" "+MAX_POSITIVE_NUMBER_INPUT+"  ", "0", "");
-//        assertNumber(MAX_POSITIVE_NUMBER_INPUT+" "+MAX_POSITIVE_NUMBER_INPUT+"  ", "2,e+16", "");
-//
-//        assertNumber(MAX_POSITIVE_NUMBER_INPUT+" 1   ", "-1,e+16", "");
-//        assertNumber(MAX_POSITIVE_NUMBER_INPUT+" 1   ", "-9 999 999 999 999 998", "");
-//        assertNumber(MAX_POSITIVE_NUMBER_INPUT+" 1   ", "9 999 999 999 999 998", "");
-//        assertNumber(MAX_POSITIVE_NUMBER_INPUT+" 1   ", "1,e+16", "");
-//
-//        assertNumber(MAX_POSITIVE_NUMBER_INPUT+" 0,1   ", "-9 999 999 999 999 999", "");
-//        assertNumber(MAX_POSITIVE_NUMBER_INPUT+" 0,1   ", "-9 999 999 999 999 999", "");
-//        assertNumber(MAX_POSITIVE_NUMBER_INPUT+" 0,1   ", "9 999 999 999 999 999", "");
-//        assertNumber(MAX_POSITIVE_NUMBER_INPUT+" 0,1   ", "9 999 999 999 999 999", "");
-//        // Min number
-//        assertNumber(MIN_POSITIVE_NUMBER + " " + MIN_POSITIVE_NUMBER + "  ", "-2,e-9999", "");
-//        assertNumber(MIN_POSITIVE_NUMBER + " " + MIN_POSITIVE_NUMBER + "  ", "0", "negate(1,e-9999) ");
-//        assertNumber(MIN_POSITIVE_NUMBER + " " + MIN_POSITIVE_NUMBER + "  ", "0", "");
-//        assertNumber(MIN_POSITIVE_NUMBER + " " + MIN_POSITIVE_NUMBER + "  ", "2,e-9999", "negate(1,e-9999) ");
-//
-//        assertNumber(MIN_POSITIVE_NUMBER + " 1   ", "-1", "");
-//        assertNumber(MIN_POSITIVE_NUMBER + " 1   ", "1", "");
-//        assertNumber(MIN_POSITIVE_NUMBER + " 1   ", "-1", "");
-//        assertNumber(MIN_POSITIVE_NUMBER + " 1   ", "1", "");
-//
-//        assertNumber(MIN_POSITIVE_NUMBER + " 0,1   ", "-0,1", "");
-//        assertNumber(MIN_POSITIVE_NUMBER + " 0,1   ", "0,1", "");
-//        assertNumber(MIN_POSITIVE_NUMBER + " 0,1   ", "-0,1", "");
-//        assertNumber(MIN_POSITIVE_NUMBER + " 0,1   ", "0,1", "");
-//
-//        assertNumber(MIN_POSITIVE_NUMBER + " " + MIN_POSITIVE_NUMBER_INPUT + "  ", "-0,0000000000000001", "");
-//        assertNumber(MIN_POSITIVE_NUMBER + " " + MIN_POSITIVE_NUMBER_INPUT + "  ", "0,0000000000000001", "");
-//        assertNumber(MIN_POSITIVE_NUMBER + " " + MIN_POSITIVE_NUMBER_INPUT + "  ", "-0,0000000000000001", "");
-//        assertNumber(MIN_POSITIVE_NUMBER + " " + MIN_POSITIVE_NUMBER_INPUT + "  ", "0,0000000000000001", "");
-//
-//        assertNumber(MIN_POSITIVE_NUMBER + " " + MAX_POSITIVE_NUMBER_INPUT + "  ", "-9 999 999 999 999 999", "");
-//        assertNumber(MIN_POSITIVE_NUMBER + " " + MAX_POSITIVE_NUMBER_INPUT + "  ", "9 999 999 999 999 999", "");
-//        assertNumber(MIN_POSITIVE_NUMBER + " " + MAX_POSITIVE_NUMBER_INPUT + "  ", "-9 999 999 999 999 999", "");
-//        assertNumber(MIN_POSITIVE_NUMBER + " " + MAX_POSITIVE_NUMBER_INPUT + "  ", "9 999 999 999 999 999", "");
-//
-//        // Max number
-//        assertNumber(MAX_POSITIVE_NUMBER + " 1   ", "Overflow", "");
-//        assertNumber(MAX_POSITIVE_NUMBER + " 1   ", "-9,999999999999999e+9999", "");
-//        assertNumber(MAX_POSITIVE_NUMBER + " 1   ", "9,999999999999999e+9999", "");
-//        assertNumber(MAX_POSITIVE_NUMBER + " 1   ", "Overflow", "");
-//
-//        assertNumber(MAX_POSITIVE_NUMBER + " 0,1   ", "Overflow", "");
-//        assertNumber(MAX_POSITIVE_NUMBER + " 0,1   ", "-9,999999999999999e+9999", "");
-//        assertNumber(MAX_POSITIVE_NUMBER + " 0,1   ", "9,999999999999999e+9999", "");
-//        assertNumber(MAX_POSITIVE_NUMBER + " 0,1   ", "Overflow", "");
+//        //Min positive number which can input
+        assertNumber(MIN_POSITIVE_NUMBER_INPUT+" "+MIN_POSITIVE_NUMBER_INPUT+"  ", "-0,0000000000000002", "");
+        assertNumber(MIN_POSITIVE_NUMBER_INPUT+" "+MIN_POSITIVE_NUMBER_INPUT+"  ", "0", "");
+        assertNumber(MIN_POSITIVE_NUMBER_INPUT+" "+MIN_POSITIVE_NUMBER_INPUT+"  ", "0", "");
+        assertNumber(MIN_POSITIVE_NUMBER_INPUT+" "+MIN_POSITIVE_NUMBER_INPUT+"  ", "0,0000000000000002", "");
+
+        assertNumber(MIN_POSITIVE_NUMBER_INPUT+" 1   ", "-1", "");
+        assertNumber(MIN_POSITIVE_NUMBER_INPUT+" 1   ", "0,9999999999999999", "");
+        assertNumber(MIN_POSITIVE_NUMBER_INPUT+" 1   ", "-0,9999999999999999", "");
+        assertNumber(MIN_POSITIVE_NUMBER_INPUT+" 1   ", "1", "");
+
+        assertNumber(MIN_POSITIVE_NUMBER_INPUT+" 0,1   ", "-0,1000000000000001", "");
+        assertNumber(MIN_POSITIVE_NUMBER_INPUT+" 0,1   ", "0,0999999999999999", "");
+        assertNumber(MIN_POSITIVE_NUMBER_INPUT+" 0,1   ", "-0,0999999999999999", "");
+        assertNumber(MIN_POSITIVE_NUMBER_INPUT+" 0,1   ", "0,1000000000000001", "");
+
+        assertNumber(MIN_POSITIVE_NUMBER_INPUT+" "+MAX_POSITIVE_NUMBER_INPUT+"  ", "-9 999 999 999 999 999", "");
+        assertNumber(MIN_POSITIVE_NUMBER_INPUT+" "+MAX_POSITIVE_NUMBER_INPUT+"  ", "9 999 999 999 999 999", "");
+        assertNumber(MIN_POSITIVE_NUMBER_INPUT+" "+MAX_POSITIVE_NUMBER_INPUT+"  ", "-9 999 999 999 999 999", "");
+        assertNumber(MIN_POSITIVE_NUMBER_INPUT+" "+MAX_POSITIVE_NUMBER_INPUT+"  ", "9 999 999 999 999 999", "");
+
+        // Max positive number which can input
+        assertNumber(MAX_POSITIVE_NUMBER_INPUT+" "+MAX_POSITIVE_NUMBER_INPUT+"  ", "-2,e+16", "");
+        assertNumber(MAX_POSITIVE_NUMBER_INPUT+" "+MAX_POSITIVE_NUMBER_INPUT+"  ", "0", "");
+        assertNumber(MAX_POSITIVE_NUMBER_INPUT+" "+MAX_POSITIVE_NUMBER_INPUT+"  ", "0", "");
+        assertNumber(MAX_POSITIVE_NUMBER_INPUT+" "+MAX_POSITIVE_NUMBER_INPUT+"  ", "2,e+16", "");
+
+        assertNumber(MAX_POSITIVE_NUMBER_INPUT+" 1   ", "-1,e+16", "");
+        assertNumber(MAX_POSITIVE_NUMBER_INPUT+" 1   ", "-9 999 999 999 999 998", "");
+        assertNumber(MAX_POSITIVE_NUMBER_INPUT+" 1   ", "9 999 999 999 999 998", "");
+        assertNumber(MAX_POSITIVE_NUMBER_INPUT+" 1   ", "1,e+16", "");
+
+        assertNumber(MAX_POSITIVE_NUMBER_INPUT+" 0,1   ", "-9 999 999 999 999 999", "");
+        assertNumber(MAX_POSITIVE_NUMBER_INPUT+" 0,1   ", "-9 999 999 999 999 999", "");
+        assertNumber(MAX_POSITIVE_NUMBER_INPUT+" 0,1   ", "9 999 999 999 999 999", "");
+        assertNumber(MAX_POSITIVE_NUMBER_INPUT+" 0,1   ", "9 999 999 999 999 999", "");
+        // Min number
+        assertNumber(MIN_POSITIVE_NUMBER + " " + MIN_POSITIVE_NUMBER + "  ", "-2,e-9999", "");
+        assertNumber(MIN_POSITIVE_NUMBER + " " + MIN_POSITIVE_NUMBER + "  ", "0", "negate(1,e-9999) ");
+        assertNumber(MIN_POSITIVE_NUMBER + " " + MIN_POSITIVE_NUMBER + "  ", "0", "");
+        assertNumber(MIN_POSITIVE_NUMBER + " " + MIN_POSITIVE_NUMBER + "  ", "2,e-9999", "negate(1,e-9999) ");
+
+        assertNumber(MIN_POSITIVE_NUMBER + " 1   ", "-1", "");
+        assertNumber(MIN_POSITIVE_NUMBER + " 1   ", "1", "");
+        assertNumber(MIN_POSITIVE_NUMBER + " 1   ", "-1", "");
+        assertNumber(MIN_POSITIVE_NUMBER + " 1   ", "1", "");
+
+        assertNumber(MIN_POSITIVE_NUMBER + " 0,1   ", "-0,1", "");
+        assertNumber(MIN_POSITIVE_NUMBER + " 0,1   ", "0,1", "");
+        assertNumber(MIN_POSITIVE_NUMBER + " 0,1   ", "-0,1", "");
+        assertNumber(MIN_POSITIVE_NUMBER + " 0,1   ", "0,1", "");
+
+        assertNumber(MIN_POSITIVE_NUMBER + " " + MIN_POSITIVE_NUMBER_INPUT + "  ", "-0,0000000000000001", "");
+        assertNumber(MIN_POSITIVE_NUMBER + " " + MIN_POSITIVE_NUMBER_INPUT + "  ", "0,0000000000000001", "");
+        assertNumber(MIN_POSITIVE_NUMBER + " " + MIN_POSITIVE_NUMBER_INPUT + "  ", "-0,0000000000000001", "");
+        assertNumber(MIN_POSITIVE_NUMBER + " " + MIN_POSITIVE_NUMBER_INPUT + "  ", "0,0000000000000001", "");
+
+        assertNumber(MIN_POSITIVE_NUMBER + " " + MAX_POSITIVE_NUMBER_INPUT + "  ", "-9 999 999 999 999 999", "");
+        assertNumber(MIN_POSITIVE_NUMBER + " " + MAX_POSITIVE_NUMBER_INPUT + "  ", "9 999 999 999 999 999", "");
+        assertNumber(MIN_POSITIVE_NUMBER + " " + MAX_POSITIVE_NUMBER_INPUT + "  ", "-9 999 999 999 999 999", "");
+        assertNumber(MIN_POSITIVE_NUMBER + " " + MAX_POSITIVE_NUMBER_INPUT + "  ", "9 999 999 999 999 999", "");
+
+        // Max number
+        assertNumber(MAX_POSITIVE_NUMBER + " 1   ", "Overflow", "");
+        assertNumber(MAX_POSITIVE_NUMBER + " 1   ", "-9,999999999999999e+9999", "");
+        assertNumber(MAX_POSITIVE_NUMBER + " 1   ", "9,999999999999999e+9999", "");
+        assertNumber(MAX_POSITIVE_NUMBER + " 1   ", "Overflow", "");
+
+        assertNumber(MAX_POSITIVE_NUMBER + " 0,1   ", "Overflow", "");
+        assertNumber(MAX_POSITIVE_NUMBER + " 0,1   ", "-9,999999999999999e+9999", "");
+        assertNumber(MAX_POSITIVE_NUMBER + " 0,1   ", "9,999999999999999e+9999", "");
         assertNumber(MAX_POSITIVE_NUMBER + " 0,1   ", "Overflow", "");
-//        assertNumber("1000000000000000x1000000000= x9999999999999999= /9999999999999999/10x5-1= += 0,0000000000000001x0,0000001=x0,000000000000001= +1 =  ", "Overflow", "");
+        assertNumber(MAX_POSITIVE_NUMBER + " 0,1   ", "Overflow", "");
 
         assertNumber(MAX_POSITIVE_NUMBER + " " + MIN_POSITIVE_NUMBER_INPUT + "  ", "Overflow", "");
         assertNumber(MAX_POSITIVE_NUMBER + " " + MIN_POSITIVE_NUMBER_INPUT + "  ", "-9,999999999999999e+9999", "");

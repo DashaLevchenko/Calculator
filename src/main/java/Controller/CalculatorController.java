@@ -19,7 +19,6 @@ import javafx.util.Duration;
 
 import java.math.BigDecimal;
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class CalculatorController {
@@ -155,21 +154,20 @@ public class CalculatorController {
     private AnchorPane generalAnchorPane;
     //endregion
 
-    static HashMap<OperationsEnum, String> operationSymbols = new HashMap<>();
     static HashMap<String, OperationsEnum> operation = new HashMap<>();
 
-    static {
-        operationSymbols.put(OperationsEnum.ADD, "+");
-        operationSymbols.put(OperationsEnum.SUBTRACT, "-");
-        operationSymbols.put(OperationsEnum.DIVIDE, "÷");
-        operationSymbols.put(OperationsEnum.MULTIPLY, "x");
-
-        operationSymbols.put(OperationsEnum.SQRT, "√");
-        operationSymbols.put(OperationsEnum.SQR, "sqr");
-        operationSymbols.put(OperationsEnum.ONE_DIVIDE_X, "1/");
-        operationSymbols.put(OperationsEnum.PERCENT, "");
-
-        operationSymbols.put(OperationsEnum.NEGATE, "negate");
+    {
+//        operationSymbols.put(OperationsEnum.ADD, "+");
+//        operationSymbols.put(OperationsEnum.SUBTRACT, "-");
+//        operationSymbols.put(OperationsEnum.DIVIDE, "÷");
+//        operationSymbols.put(OperationsEnum.MULTIPLY, "x");
+//
+//        operationSymbols.put(OperationsEnum.SQRT, "√");
+//        operationSymbols.put(OperationsEnum.SQR, "sqr");
+//        operationSymbols.put(OperationsEnum.ONE_DIVIDE_X, "1/");
+//        operationSymbols.put(OperationsEnum.PERCENT, "");
+//
+//        operationSymbols.put(OperationsEnum.NEGATE, "negate");
 
         operation.put("add", OperationsEnum.ADD);
         operation.put("subtract", OperationsEnum.SUBTRACT);
@@ -193,8 +191,8 @@ public class CalculatorController {
 
     private int charValidInText = 16;
     private String firstStyleLabel;
-    private String historyUnaryOperations = "";
-    private String negateHistory = "";
+    //    private String historyUnaryOperations = "";
+//    private String negateHistory = "";
     private String defaultText = "0";
     private String decimalSeparate = ",";
     private String separatorNumber = " ";
@@ -206,7 +204,17 @@ public class CalculatorController {
     private boolean equalWasPress;
     private boolean showLeftMenu = false;
     private boolean isError = false;
+
+    public void setNegatePressed (boolean negatePressed) {
+        this.negatePressed = negatePressed;
+    }
+
     private boolean negatePressed = false;
+
+    public boolean isNegatePressed () {
+        return negatePressed;
+    }
+
     private boolean memoryPressed = false;
     private boolean canBackspace = true;
 
@@ -218,13 +226,18 @@ public class CalculatorController {
     private Memory memory;
     private boolean percentPressed = false;
     private Calculator calculator = new Calculator();
+    private CalculatorHistory history;
 
+    public Calculator getCalculator () {
+        return calculator;
+    }
 
     @FXML
     void initialize () {
         firstStyleLabel = generalDisplay.getStyle();
         generalDisplay.setText(defaultText);
         equal.setDefaultButton(true);
+        history = new CalculatorHistory(calculator);
     }
 
     @FXML
@@ -312,6 +325,7 @@ public class CalculatorController {
         } else {
             if (out.length() < charValidInText) {
                 out += buttonText;
+
                 printResult(FormatterNumber.formatterInputNumber(out));
             }
         }
@@ -433,13 +447,11 @@ public class CalculatorController {
                     setCalculatorFirstNumber(getDisplayNumber().negate());
                 }
 
-            }else{
+            } else {
                 setCalculatorFirstNumber(getSecondNumber().negate());
                 setCalculatorSecondNumber(null);
                 memoryPressed = false;
             }
-            calculator.getHistory().deleteLast();
-            calculator.getHistory().addNumber(getFirstNumber().negate());
         } else {
             if (binaryOperation == null) {
                 setBinaryFirstNumber();
@@ -456,8 +468,6 @@ public class CalculatorController {
                     } else {
                         setCalculatorSecondNumber(getSecondNumber().negate());
                     }
-                    calculator.getHistory().deleteLast();
-                    calculator.getHistory().addNumber(getSecondNumber().negate());
                 }
             }
         }
@@ -470,7 +480,7 @@ public class CalculatorController {
             if (!equalWasPress) {
                 calculator.getHistory().addNumber(memory.memoryRecall());
             }
-                calculator.getHistory().addOperation(OperationsEnum.NEGATE);
+            calculator.getHistory().addOperation(OperationsEnum.NEGATE);
         } else {
             if (equalWasPress) {
                 calculator.getHistory().addOperation(OperationsEnum.NEGATE);
@@ -496,8 +506,8 @@ public class CalculatorController {
         if (calculator.getNumberFirst() == null) {
             setCalculatorFirstNumber(getDisplayNumber());
         } else {
-            if (historySize() == 0) {
-                calculator.getHistory().addNumber(calculator.getNumberFirst());
+            if (history.historySize() == 0) {
+                history.addHistoryNumber(getFirstNumber());
             }
         }
     }
@@ -528,14 +538,14 @@ public class CalculatorController {
      * after binary or unary operation buttons was pressed
      */
     private void setNumbersBinary () {
-            if (!percentPressed) {
-                if (binaryOperation == null) {
-                    setBinaryFirstNumber();
-                    setCalculatorSecondNumber(null);
-                } else {
-                    setBinarySecondNumber();
-                }
+        if (!percentPressed) {
+            if (binaryOperation == null) {
+                setBinaryFirstNumber();
+                setCalculatorSecondNumber(null);
+            } else {
+                setBinarySecondNumber();
             }
+        }
 
         percentPressed = false;
         calculator.setPercentOperation(null);
@@ -680,8 +690,9 @@ public class CalculatorController {
     @FXML
     public void binaryOperation (ActionEvent actionEvent) {
         String buttonID = ((Button) actionEvent.getSource()).getId();
-        historyUnaryOperations = emptyString;
-        negateHistory = emptyString;
+        history.clearHistoryUnaryOperations();
+        history.clearNegateHistory();
+
 
         if (equalWasPress) {
             binaryOperation = null;
@@ -710,248 +721,13 @@ public class CalculatorController {
     }
 
 
-    ArrayList historyArrayG = new ArrayList();
-
-    private void printHistory () {
-        historyArrayG = calculator.getHistory().getListHistory();
-
-        if (!calculator.getHistory().getListHistory().isEmpty()) {
-            Object o = calculator.getHistory().getLast();
-            int index = calculator.getHistory().getListHistory().size() - 1;
-
-            if (o instanceof OperationsEnum) {
-                OperationsEnum operation = (OperationsEnum) o;
-                if (isBinary(operation)) {
-                    try {
-                        changeBinaryOperationHistory(operation, index);
-                    } catch (ParseException e) {
-                        printError(e);
-                    }
-                }
-                if (isUnary(operation)) {
-                    changeUnaryOperationHistory(operation, index);
-
-                }
-                if (operation.equals(OperationsEnum.PERCENT)) {
-                    changePercentOperationHistory();
-                }
-
-                if (operation.equals(OperationsEnum.NEGATE)) {
-                    changeNegateOperationHistory(operation, index);
-                    negatePressed = false;
-                }
-            }
-            if (isNumber(o.toString())) {
-                if (!negatePressed) {
-                    try {
-                        changeNumberHistory(o, index);
-                    } catch (ParseException e) {
-                        printError(e);
-                    }
-                } else {
-                    changeNegateNumberHistory(index);
-
-                }
-            }
-
-            outOperationMemory.setText(calculator.getHistory().getStringHistory());
-        }
-    }
-
-    private void changeNegateNumberHistory (int index) {
-        boolean nextNegate = false;
-        if (historySize() >= 1) {
-            for (int i = historySize() - 1; i >= 0; i--) {
-                Object prePreviousObject = getHistory(i);
-                if (!operationSymbols.containsValue(prePreviousObject.toString())) {
-                    deleteLastHistory();
-                } else {
-                    break;
-                }
-            }
-        }
-    }
-
-    private void changeNegateOperationHistory (OperationsEnum operation, int index) {
-        if (historySize() > 1) {
-            int previousIndex = index - 1;
-            Object previousObject = getHistory(previousIndex);
-            deleteLastHistory();
-            deleteLastHistory();
-
-            if (negateHistory.isEmpty()) {
-                if (historyUnaryOperations.isEmpty()) {
-                    if (isNumber(previousObject.toString())) {
-                        negateHistory = formatterNumberHistory(previousObject.toString());
-                    } else {
-                        negateHistory = previousObject.toString();
-                    }
-                } else {
-                    negateHistory = historyUnaryOperations;
-                }
-            }
-
-            negateHistory = operationSymbols.get(operation) + "(" + negateHistory + ")";
-            addLastHistory(negateHistory);
-        }
-        if (historySize() > 1) {
-            for (int i = historySize() - 2; i >= 0; i--) {
-                Object prePreviousObject = getHistory(i);
-                if (!operationSymbols.containsValue(prePreviousObject.toString())) {
-                    deleteHistory(i);
-                } else {
-                    break;
-                }
-            }
-        }
-    }
-
-    private void changePercentOperationHistory () {
-        deleteLastHistory();
-        if (historySize() >= 1) {
-            for (int i = historySize() - 1; i >= 0; i--) {
-                Object prePreviousObject = getHistory(i);
-                if (!operationSymbols.containsValue(prePreviousObject.toString())) {
-                    deleteLastHistory();
-                } else {
-                    break;
-                }
-            }
-        }
-
-        addLastHistory(formatterNumberHistory(getResult().toString()));
-    }
-
-    private boolean isNumber (String text) {
-        try {
-            BigDecimal number;
-            if (text.contains("e")) {
-                number = FormatterNumber.parseNumber(text);
-            } else {
-                number = new BigDecimal(text);
-            }
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
-    private void changeUnaryOperationHistory (OperationsEnum operation, int index) {
-        int previousIndex = index - 1;
-        Object previousObject = getHistory(previousIndex);
-
-        deleteLastHistory();
-        deleteLastHistory();
-
-        if (historySize() >= 1) {
-            for (int i = historySize() - 1; i >= 0; i--) {
-                Object prePreviousObject = getHistory(i);
-                if (!operationSymbols.containsValue(prePreviousObject.toString())) {
-                    deleteLastHistory();
-                } else {
-                    break;
-                }
-            }
-        }
-        if (negateHistory.isEmpty()) {
-            if (historyUnaryOperations.isEmpty()) {
-                if (isNumber(previousObject.toString())) {
-                    historyUnaryOperations = formatterNumberHistory(previousObject.toString());
-                }
-            }
-        } else {
-            historyUnaryOperations = negateHistory;
-            negateHistory = emptyString;
-        }
-
-
-        historyUnaryOperations = operationSymbols.get(operation) + "(" + historyUnaryOperations + ")";
-        addLastHistory(historyUnaryOperations);
-    }
-
-    private Object getHistory (int index) {
-        return calculator.getHistory().getListHistory().get(index);
-    }
-
-    private boolean isUnary (OperationsEnum operationsEnum) {
-        return operationsEnum.equals(OperationsEnum.SQRT) || operationsEnum.equals(OperationsEnum.SQR) ||
-                operationsEnum.equals(OperationsEnum.ONE_DIVIDE_X);
-    }
-
-    private void changeBinaryOperationHistory (OperationsEnum operationsEnum, int index) throws ParseException {
-        deleteLastHistory();
-        if (historySize() >= 1) {
-            int previousIndex = index - 1;
-            Object previousObject = calculator.getHistory().getListHistory().get(previousIndex);
-            for (int i = historySize() - 1; i >= 0; i--) {
-                Object prePreviousObject = getHistory(i);
-                if (operationSymbols.containsValue(prePreviousObject.toString())) {
-                    deleteLastHistory();
-                } else {
-                    break;
-                }
-            }
-            if (historyUnaryOperations.isEmpty()) {
-                if (isNumber(previousObject.toString())) {
-                    deleteLastHistory();
-                    addLastHistory(formatterNumberHistory(previousObject.toString()));
-                }
-            } else {
-                historyUnaryOperations = emptyString;
-            }
-        }
-
-        addLastHistory(operationSymbols.get(operationsEnum));
-    }
-
-    private int historySize () {
-        return calculator.getHistory().getListHistory().size();
-    }
-
-    private void addLastHistory (String s) {
-        calculator.getHistory().addOperationString(s);
-    }
-
-    private void deleteLastHistory () {
-        calculator.getHistory().deleteLast();
-    }
-
-    private void deleteHistory (int index) {
-        calculator.getHistory().getListHistory().remove(index);
-    }
-
-    private void addHistory (int index, Object object) {
-        calculator.getHistory().getListHistory().add(index, object);
-    }
-
-    private void changeNumberHistory (Object object, int index) throws ParseException {
-        int previousIndex = index - 1;
-        Object previousObject = calculator.getHistory().getListHistory().get(previousIndex);
-
-        if (calculator.getHistory().getListHistory().size() > index) {
-            if (previousObject.equals(OperationsEnum.PERCENT)) {
-                changePercentOperationHistory();
-            }
-        } else {
-            deleteHistory(index);
-            addHistory(index, object.toString());
-        }
-    }
-
-
-    private boolean isBinary (OperationsEnum operationsEnum) {
-        return operationsEnum.equals(OperationsEnum.ADD) || operationsEnum.equals(OperationsEnum.SUBTRACT) ||
-                operationsEnum.equals(OperationsEnum.MULTIPLY) || operationsEnum.equals(OperationsEnum.DIVIDE);
-    }
-
-
     @FXML
     public void unaryOperations (ActionEvent actionEvent) {
         String buttonID = ((Button) actionEvent.getSource()).getId();
 
         if (equalWasPress) {
             binaryOperation = null;
-            historyUnaryOperations = emptyString;
+            history.clearHistoryUnaryOperations();
         }
 
 
@@ -962,6 +738,11 @@ public class CalculatorController {
         calculate();
         printHistory();
         scrollOutOperationMemory();
+    }
+
+    private void printHistory () {
+        outOperationMemory.setText(history.printHistory());
+        negatePressed = false;
     }
 
     @FXML
@@ -994,7 +775,8 @@ public class CalculatorController {
             calculator.setPercent(null);
         }
         equalWasPress = true;
-        historyUnaryOperations = emptyString;
+
+        history.clearHistoryUnaryOperations();
 
         if (binaryOperation != null) {
             calculator.setOperation(binaryOperation);
@@ -1015,13 +797,6 @@ public class CalculatorController {
         memoryPressed = false;
 
         scrollOutOperationMemory();
-    }
-
-    private void clearHistory () {
-        calculator.clearHistory();
-        outOperationMemory.setText(emptyString);
-        negateHistory = emptyString;
-        historyUnaryOperations = emptyString;
     }
 
 
@@ -1058,15 +833,16 @@ public class CalculatorController {
     /*
      * Method outputs exception's message on general display
      */
-    private void printError (Exception e) {
+    public void printError (Exception e) {
         isError = true;
         operationsIsDisable(true);
         memoryPanel.setDisable(true);
+
+
         generalDisplay.setStyle(firstStyleLabel);
-
         generalDisplay.setText(e.getMessage());
-
         resizeOutputText();
+
         scrollOutOperationMemory();
     }
 
@@ -1115,31 +891,12 @@ public class CalculatorController {
     }
     //endregion
 
-    //region ChangeHistory
-
-    /*
-     * Method formatters number for print to history operation
-     */
-    private String formatterNumberHistory (String text) {
-        BigDecimal number = null;
-
-        if (text.contains("e")) {
-            try {
-                number = FormatterNumber.parseNumber(text);
-            } catch (ParseException e) {
-                printError(e);
-            }
-        } else {
-            number = new BigDecimal(text.replace(",", "."));
-        }
-
-        return Text.deleteNumberSeparator(formatterNumber(number), separatorNumber);
-    }
+    //region CalculatorHistory
 
 
     //endregion
 
-    //region Scroll ChangeHistory
+    //region Scroll CalculatorHistory
     @FXML
     void scrollButtonLeftPressed () {
         scrollPaneOperation.setHvalue(scrollPaneOperation.getHvalue() + moveScroll);
@@ -1178,22 +935,21 @@ public class CalculatorController {
         binaryOperation = null;
         calculator.clearCalculator();
         calculator.setPercentOperation(null);
-        historyArrayG.clear();
-        historyUnaryOperations = emptyString;
+
+
         pointInText = false;
         canChangeOperator = false;
         scrollButtonRight.setVisible(false);
         scrollButtonLeft.setVisible(false);
-        negateHistory = emptyString;
         clearHistory();
-        historyUnaryOperations = emptyString;
+
         unaryOperation = null;
         equalWasPress = false;
         operationsIsDisable(false);
         memoryPanel.setDisable(false);
         isError = false;
         negatePressed = false;
-        negateHistory = emptyString;
+
         percentPressed = false;
         charValidInText = CHAR_MAX_INPUT;
         resizeOutputText();
@@ -1386,5 +1142,7 @@ public class CalculatorController {
     }
 
     //endregion
-
+    private void clearHistory () {
+        outOperationMemory.setText(history.clearHistory());
+    }
 }

@@ -137,12 +137,12 @@ public class Calculator {
         }
     }
 
-    private boolean isBinary (OperationsEnum operation) {
+    public boolean isBinary (OperationsEnum operation) {
         return operation.equals(OperationsEnum.ADD) || operation.equals(OperationsEnum.SUBTRACT) ||
                 operation.equals(OperationsEnum.MULTIPLY) || operation.equals(OperationsEnum.DIVIDE);
     }
 
-    private boolean isUnary (OperationsEnum operation) {
+    public boolean isUnary (OperationsEnum operation) {
         return operation.equals(OperationsEnum.SQRT) || operation.equals(OperationsEnum.SQR) ||
                 operation.equals(OperationsEnum.ONE_DIVIDE_X);
     }
