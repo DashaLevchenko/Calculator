@@ -453,33 +453,37 @@ public class CalculatorController {
                 memoryPressed = false;
             }
         } else {
-            if (binaryOperation == null) {
-                setBinaryFirstNumber();
-                setCalculatorFirstNumber(getFirstNumber().negate());
-                if (getResult() != null) {
-                    setCalculatorResult(getResult().negate());
-                }
-            } else {
-                if (canBackspace) {
-                    setCalculatorSecondNumber(getDisplayNumber().negate());
+                if (binaryOperation == null) {
+                    setBinaryFirstNumber();
+                    setCalculatorFirstNumber(getFirstNumber().negate());
+                    if (getResult() != null) {
+                        setCalculatorResult(getResult().negate());
+                    }
                 } else {
-                    if (getSecondNumber() == null) {
-                        setCalculatorSecondNumber(getFirstNumber().negate());
+                    if (canBackspace) {
+                        setCalculatorSecondNumber(getDisplayNumber().negate());
+                        history.deleteLastHistory();
                     } else {
-                        setCalculatorSecondNumber(getSecondNumber().negate());
+                        if (getSecondNumber() == null) {
+                            setCalculatorSecondNumber(getFirstNumber().negate());
+                        } else {
+                            setCalculatorSecondNumber(getSecondNumber().negate());
+                        }
                     }
                 }
             }
-        }
+//        }
 
         addNegateOperationHistory();
     }
 
     private void addNegateOperationHistory () {
         if (memoryPressed) {
-            if (!equalWasPress) {
-                calculator.getHistory().addNumber(memory.memoryRecall());
-            }
+//            if (!equalWasPress) {
+//                calculator.getHistory().addNumber(memory.memoryRecall());
+//            }
+            history.deleteLastHistory();
+            history.addHistoryNumber(memory.memoryRecall().negate());
             calculator.getHistory().addOperation(OperationsEnum.NEGATE);
         } else {
             if (equalWasPress) {
@@ -550,6 +554,7 @@ public class CalculatorController {
         percentPressed = false;
         calculator.setPercentOperation(null);
         memoryPressed = false;
+        printHistory();
     }
 
     /*
@@ -725,6 +730,10 @@ public class CalculatorController {
     public void unaryOperations (ActionEvent actionEvent) {
         String buttonID = ((Button) actionEvent.getSource()).getId();
 
+        if(buttonID.equals("sqrt")){
+            System.out.println("l");
+        }
+
         if (equalWasPress) {
             binaryOperation = null;
             history.clearHistoryUnaryOperations();
@@ -736,13 +745,13 @@ public class CalculatorController {
         calculator.setOperation(unaryOperation);
 
         calculate();
+        negatePressed = false;
         printHistory();
         scrollOutOperationMemory();
     }
 
     private void printHistory () {
-        outOperationMemory.setText(history.printHistory());
-        negatePressed = false;
+        outOperationMemory.setText(history.getChangedHistory());
     }
 
     @FXML
@@ -823,6 +832,7 @@ public class CalculatorController {
 
         } catch (Exception e) {
             printError(e);
+
         }
     }
 

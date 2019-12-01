@@ -6,33 +6,30 @@ import java.util.HashMap;
 public class E {
     private static Calculator calculator = new Calculator();
     static HashMap<OperationsEnum, String> operationSymbols = new HashMap<>();
-    static {
-        operationSymbols.put(OperationsEnum.ADD, "+");
-        operationSymbols.put(OperationsEnum.SUBTRACT, "-");
-        operationSymbols.put(OperationsEnum.DIVIDE, "÷");
-        operationSymbols.put(OperationsEnum.MULTIPLY, "x");
-
-        operationSymbols.put(OperationsEnum.SQRT, "√");
-        operationSymbols.put(OperationsEnum.SQR, "sqr");
-        operationSymbols.put(OperationsEnum.ONE_DIVIDE_X, "1/");
-        operationSymbols.put(OperationsEnum.PERCENT, "");
-
-        operationSymbols.put(OperationsEnum.NEGATE, "negate");
-    }
+//    static {
+//        operationSymbols.put(OperationsEnum.ADD, "+");
+//        operationSymbols.put(OperationsEnum.SUBTRACT, "-");
+//        operationSymbols.put(OperationsEnum.DIVIDE, "÷");
+//        operationSymbols.put(OperationsEnum.MULTIPLY, "x");
+//
+//        operationSymbols.put(OperationsEnum.SQRT, "√");
+//        operationSymbols.put(OperationsEnum.SQR, "sqr");
+//        operationSymbols.put(OperationsEnum.ONE_DIVIDE_X, "1/");
+//        operationSymbols.put(OperationsEnum.PERCENT, "");
+//
+//        operationSymbols.put(OperationsEnum.NEGATE, "negate");
+//    }
     public static void main (String[] args) {
         //"√((5+3)/2-1)+4"
         try {
-            calculator.setNumberFirst(BigDecimal.valueOf(5));
+            calculator.setNumberFirst(BigDecimal.valueOf(2));
             calculator.setOperation(OperationsEnum.ADD);
             calculator.setNumberSecond(BigDecimal.valueOf(3));
-            calculator.calculate();
-
-            calculator.setOperation(OperationsEnum.SQR);
-            calculator.calculate();
-
             calculator.setOperation(OperationsEnum.SQRT);
             calculator.calculate();
+            calculator.setOperation(OperationsEnum.SQRT);
 
+            calculator.calculate();
 
 
 
@@ -49,8 +46,8 @@ public class E {
 
 //            calculator.calculate(OperationsEnum.ADD);
 //            calculator.calculate();
+            System.out.println(calculator.getHistory().getStringHistory());
             System.out.println("Ответ: " + calculator.getResult());
-//            System.out.println(stringHistory());
         } catch (Exception e) {
             e.printStackTrace();
         }

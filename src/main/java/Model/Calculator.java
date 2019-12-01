@@ -186,6 +186,6 @@ public class Calculator {
     }
 
     public void clearHistory () {
-        history.getListHistory().clear();
+        history.clear();
     }
 }

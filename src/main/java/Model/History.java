@@ -22,8 +22,6 @@ public class History {
     }
 
     private void needChangeLastOperation (OperationsEnum operation) {
-
-
         if (history.size() > 0) {
             if (getLast() instanceof OperationsEnum) {
                 OperationsEnum lastOperation = (OperationsEnum) getLast();
@@ -49,6 +47,19 @@ public class History {
             history.remove(history.size() - 1);
         }
     }
+    public void delete (int index) {
+        if (history.size() > index) {
+            history.remove(index);
+        }
+    }
+
+    public void clear () {
+        history.clear();
+    }
+    public int size () {
+        return history.size();
+    }
+
 
     public Object getLast () {
         if (history.size() > 0) {
@@ -72,4 +83,7 @@ public class History {
     }
 
 
+    public Object get (int index) {
+        return history.get(index);
+    }
 }
