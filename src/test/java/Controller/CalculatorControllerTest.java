@@ -2036,14 +2036,6 @@ public class CalculatorControllerTest extends ApplicationTest {
     }
 
     void assertNumber(String buttonsPressed, String result, String outOperationMemoryResult) {
-//        BigDecimal v = null;
-//        try {
-//            v = CalculateFormula.calculateFormula(buttonsPressed.replace(",", "."));
-//            System.out.println("assertNumber(\""+buttonsPressed.replace(",", ".")+"\", \""+v.toString()+"\");");
-//        } catch (Exception e) {
-//
-//        }
-
         checkMouseInputNumber(buttonsPressed, result, outOperationMemoryResult);
     }
 

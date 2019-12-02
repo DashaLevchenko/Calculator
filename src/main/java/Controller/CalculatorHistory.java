@@ -21,6 +21,10 @@ public class CalculatorHistory {
     private CharSequence exponentSeparator = "e";
     private String groupingSeparator = " ";
 
+    public String getHistoryUnaryOperations () {
+        return historyUnaryOperations;
+    }
+
     private String historyUnaryOperations = "";
     private String negateHistory = "";
     private String emptyString = "";
@@ -269,12 +273,13 @@ public class CalculatorHistory {
     private void changeNegateOperationHistory (OperationsEnum operation, int index) {
         if (historySize() > 1) {
             Object previousObject = getPreviousObject(index);
-            deleteOldHistory();
+
+            deleteLastHistory();
 
             if (negateHistory.isEmpty()) {
                 if (historyUnaryOperations.isEmpty()) {
                     if (isNumber(previousObject)) {
-                        BigDecimal number = parseNumber(previousObject).negate();
+                        BigDecimal number = parseNumber(previousObject);
                         negateHistory = formatterNumberHistory(number);
                     } else {
                         negateHistory = previousObject.toString();
@@ -292,7 +297,13 @@ public class CalculatorHistory {
         }
     }
 
-    private void deleteOldHistory () {
+    /**
+     * This method deletes two previous notes from history.
+     * Example:
+     *          was: 5 + 7 NEGATE
+     *          became: 5 +
+     */
+    public void deleteOldHistory () {
         deleteLastHistory();
         deleteLastHistory();
     }
