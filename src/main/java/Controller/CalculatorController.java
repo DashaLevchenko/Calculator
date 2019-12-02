@@ -317,21 +317,45 @@ public class CalculatorController {
 
         clearError();
 
-        String out = Text.getTextLabel(generalDisplay, separatorNumber);
+        String out = generalDisplay.getText();
         out = clearDisplay(out);
 
         if (out.equals(defaultText)) {
-            printResult(buttonText);
+            out = buttonText;
         } else {
-            if (out.length() < charValidInText) {
-                out += buttonText;
-
-                printResult(FormatterNumber.formatterInputNumber(out));
+            if (lengthTextWithoutSeparator(out) < charValidInText) {
+                out = out.concat(buttonText);
             }
         }
+        printResult(formatterInputNumber(out));
 
         scrollOutOperationMemory();
         canChangeOperator = false;
+    }
+
+    private int lengthTextWithoutSeparator (String out) {
+        return Text.deleteNumberSeparator(out, separatorNumber).length();
+    }
+
+    private String formatterInputNumber (String text) {
+        BigDecimal number = parseNumber(text);
+
+        if (!text.contains(decimalSeparate)) {
+            text = formatterNumber(number);
+        }
+
+
+        return text;
+    }
+
+    private BigDecimal parseNumber (String out) {
+        BigDecimal number = null;
+        try {
+            number = FormatterNumber.parseNumber(out);
+        } catch (ParseException e) {
+            printError(e);
+        }
+        return number;
     }
 
     @FXML
@@ -340,7 +364,7 @@ public class CalculatorController {
 
         setNumberNegate();
 
-        String out = Text.getTextLabel(generalDisplay, emptyString);
+        String out = generalDisplay.getText();
         out = Text.addNegate(out);
 
         if (out.contains(minus)) {
@@ -453,25 +477,25 @@ public class CalculatorController {
                 memoryPressed = false;
             }
         } else {
-                if (binaryOperation == null) {
-                    setBinaryFirstNumber();
-                    setCalculatorFirstNumber(getFirstNumber().negate());
-                    if (getResult() != null) {
-                        setCalculatorResult(getResult().negate());
-                    }
+            if (binaryOperation == null) {
+                setBinaryFirstNumber();
+                setCalculatorFirstNumber(getFirstNumber().negate());
+                if (getResult() != null) {
+                    setCalculatorResult(getResult().negate());
+                }
+            } else {
+                if (canBackspace) {
+                    setCalculatorSecondNumber(getDisplayNumber().negate());
+                    history.deleteLastHistory();
                 } else {
-                    if (canBackspace) {
-                        setCalculatorSecondNumber(getDisplayNumber().negate());
-                        history.deleteLastHistory();
+                    if (getSecondNumber() == null) {
+                        setCalculatorSecondNumber(getFirstNumber().negate());
                     } else {
-                        if (getSecondNumber() == null) {
-                            setCalculatorSecondNumber(getFirstNumber().negate());
-                        } else {
-                            setCalculatorSecondNumber(getSecondNumber().negate());
-                        }
+                        setCalculatorSecondNumber(getSecondNumber().negate());
                     }
                 }
             }
+        }
 //        }
 
         addNegateOperationHistory();
@@ -730,10 +754,6 @@ public class CalculatorController {
     public void unaryOperations (ActionEvent actionEvent) {
         String buttonID = ((Button) actionEvent.getSource()).getId();
 
-        if(buttonID.equals("sqrt")){
-            System.out.println("l");
-        }
-
         if (equalWasPress) {
             binaryOperation = null;
             history.clearHistoryUnaryOperations();
@@ -793,9 +813,7 @@ public class CalculatorController {
             if (getSecondNumber() == null) {
                 setBinarySecondNumber();
             }
-
             calculate();
-
         }
 
         if (!isError) {

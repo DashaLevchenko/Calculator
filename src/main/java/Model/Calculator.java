@@ -16,7 +16,6 @@ public class Calculator {
     private BigDecimal percent;
     private OperationsEnum operation;
 
-
     private Binary binary = new Binary();
     private Unary unary = new Unary();
     private History history = new History();
@@ -144,7 +143,7 @@ public class Calculator {
 
     public boolean isUnary (OperationsEnum operation) {
         return operation.equals(OperationsEnum.SQRT) || operation.equals(OperationsEnum.SQR) ||
-                operation.equals(OperationsEnum.ONE_DIVIDE_X);
+                operation.equals(OperationsEnum.ONE_DIVIDE_X) || operation.equals(OperationsEnum.NEGATE);
     }
 
     public void setNumberFirst (BigDecimal numberFirst) {
@@ -187,5 +186,9 @@ public class Calculator {
 
     public void clearHistory () {
         history.clear();
+    }
+
+    public OperationsEnum getOperation () {
+        return operation;
     }
 }

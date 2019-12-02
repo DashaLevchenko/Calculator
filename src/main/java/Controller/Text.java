@@ -1,7 +1,5 @@
 package Controller;
 
-import javafx.scene.control.Label;
-
 /**
  * This class changes text
  */
@@ -27,16 +25,6 @@ public class Text {
         }
 
         return text;
-    }
-
-    /**
-     * This method return text without some text from Label object
-     * @param label Label with some text
-     * @param replace Some text need to replace in text was gotten from Label object
-     * @return Text without some text from Label object
-     */
-    public static String getTextLabel (Label label, String replace){
-        return deleteNumberSeparator(label.getText(), replace);
     }
 
     /**

@@ -311,8 +311,9 @@ class UnaryXSquerTest {
         assertEquals(resultExpected, resultActual);
 
         calculator.setNumberFirst(x);
+        calculator.setOperation(OperationsEnum.SQR);
         try {
-            calculator.calculate(OperationsEnum.SQR);
+            calculator.calculate();
         } catch (DivideZeroException | ResultUndefinedException | OperationException | InvalidInputException e) {
             e.printStackTrace();
         }
@@ -343,8 +344,9 @@ class UnaryXSquerTest {
     }
 
     private void assertEnumNull() {
+        calculator.setOperation(null);
         try {
-            calculator.calculate(null);
+            calculator.calculate();
             fail();
         } catch (Exception e) {
 //            assertEquals("Enter operation", e.getMessage());

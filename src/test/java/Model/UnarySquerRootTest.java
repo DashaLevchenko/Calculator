@@ -446,8 +446,9 @@ class UnarySquerRootTest {
         assertEquals(resultExpected, resultActual);
 
         calculator.setNumberFirst(x);
+        calculator.setOperation(OperationsEnum.SQRT);
         try {
-            calculator.calculate(OperationsEnum.SQRT);
+            calculator.calculate();
         } catch (DivideZeroException | ResultUndefinedException | OperationException | InvalidInputException e) {
             e.printStackTrace();
         }
@@ -492,8 +493,9 @@ class UnarySquerRootTest {
     }
 
     private void assertEnumNull() {
+        calculator.setOperation(null);
         try {
-            calculator.calculate(null);
+            calculator.calculate();
             fail();
         } catch (Exception e) {
             assertEquals("Enter operation", e.getMessage());

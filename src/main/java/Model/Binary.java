@@ -19,9 +19,9 @@ public class Binary {
      * Max default rounding
      */
     private final RoundingMode defaultRounding = RoundingMode.UP;
-    private BigDecimal numberFirst = null;
-    private BigDecimal numberSecond = null;
-    private BigDecimal result = null;
+    private BigDecimal numberFirst;
+    private BigDecimal numberSecond;
+    private BigDecimal result;
 
     public void setNumberFirst (BigDecimal numberFirst) {
         this.numberFirst = numberFirst;
@@ -97,4 +97,5 @@ public class Binary {
             numberFirst = result;
         }
     }
+
 }

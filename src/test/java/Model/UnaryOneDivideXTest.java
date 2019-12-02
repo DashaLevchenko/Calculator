@@ -1263,8 +1263,9 @@ class UnaryOneDivideXTest {
         assertEquals(resultExpected, resultActual);
 
         calculator.setNumberFirst(x);
+        calculator.setOperation(OperationsEnum.ONE_DIVIDE_X);
         try {
-            calculator.calculate(OperationsEnum.ONE_DIVIDE_X);
+            calculator.calculate();
         } catch (DivideZeroException | ResultUndefinedException | OperationException | InvalidInputException e) {
             e.printStackTrace();
         }
@@ -1296,8 +1297,9 @@ class UnaryOneDivideXTest {
     }
 
     private void assertEnumNull () {
+        calculator.setOperation(null);
         try {
-            calculator.calculate(null);
+            calculator.calculate();
             fail();
         } catch (Exception e) {
             assertEquals("Enter operation", e.getMessage());

@@ -23,8 +23,8 @@ public class CalculatorHistory {
 
     private String historyUnaryOperations = "";
     private String negateHistory = "";
-    private HashMap<OperationsEnum, String> operationSymbols = new HashMap<>();
     private String emptyString = "";
+    private HashMap<OperationsEnum, String> operationSymbols = new HashMap<>();
 
     {
         operationSymbols.put(OperationsEnum.ADD, "+");
@@ -380,7 +380,11 @@ public class CalculatorHistory {
     }
 
     private boolean isUnary (OperationsEnum operationsEnum) {
-        return calculator.isUnary(operationsEnum);
+        boolean isUnary = false;
+        if(!operationsEnum.equals(negateOperation)){
+            isUnary = calculator.isUnary(operationsEnum);
+        }
+        return isUnary;
     }
 
     /**

@@ -74,12 +74,18 @@ public class Unary {
             oneDivideX();
         } else if (operation.equals(OperationsEnum.PERCENT)) {
             percent();
+        }else if (operation.equals(OperationsEnum.NEGATE)) {
+            negate();
         } else {
             throw new OperationException("Enter unary operation");
         }
         number = result;
 
 
+    }
+
+    private void negate () {
+        result = number.negate();
     }
 
 }

@@ -1254,8 +1254,9 @@ public class UnaryPercentTest {
         assertEquals(resultExpected, resultActual);
 
         calculator.setNumberFirst(x);
+        calculator.setPercentOperation(OperationsEnum.PERCENT);
         try {
-            calculator.calculate(OperationsEnum.PERCENT);
+            calculator.calculate();
         } catch (DivideZeroException | ResultUndefinedException | OperationException | InvalidInputException e) {
             e.printStackTrace();
         }
@@ -1284,8 +1285,9 @@ public class UnaryPercentTest {
     }
 
     private void assertEnumNull() {
+        calculator.setPercentOperation(null);
         try {
-            calculator.calculate(null);
+            calculator.calculate();
             fail();
         } catch (Exception e) {
             assertEquals("Enter operation", e.getMessage());

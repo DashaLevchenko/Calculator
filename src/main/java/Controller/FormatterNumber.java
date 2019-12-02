@@ -127,31 +127,7 @@ class FormatterNumber {
             } catch (ParseException e) {
                 throw e;
             }
-//        }
 
     }
 
-    /**
-     * Method returns text was formatted
-     * @param text Text need to formatter
-     * @return Text was formatted
-     */
-    static String formatterInputNumber(String text) {
-        BigDecimal number = new BigDecimal(text.replace(",", "."));
-        StringBuilder pattern = new StringBuilder();
-        pattern.append("#,##0");
-        if (number.scale() > 0) {
-            if (number.scale() <= MAX_SCALE) {
-                pattern.append(".").append("0".repeat(number.scale()));
-            } else {
-                if (number.precision() > number.scale()) {
-                    pattern.append(".").append("0".repeat(MAX_SCALE - (number.precision() - number.scale())));
-                } else {
-                    pattern.append(".").append("0".repeat(MAX_SCALE));
-                }
-            }
-        }
-
-        return new DecimalFormat(pattern.toString(), symbols).format(number);
-    }
 }

@@ -1185,8 +1185,9 @@ class BinaryMinusTest {
 
         calculator.setNumberFirst(x);
         calculator.setNumberSecond(y);
+        calculator.setOperation(OperationsEnum.SUBTRACT);
         try {
-            calculator.calculate(OperationsEnum.SUBTRACT);
+            calculator.calculate();
         } catch (DivideZeroException | ResultUndefinedException | OperationException | InvalidInputException e) {
             e.printStackTrace();
         }
@@ -1227,7 +1228,8 @@ class BinaryMinusTest {
 
     private void assertEnumNull() {
         try {
-            calculator.calculate(null);
+            calculator.setOperation(null);
+            calculator.calculate();
             fail();
         } catch (Exception e) {
             assertEquals("Enter operation", e.getMessage());

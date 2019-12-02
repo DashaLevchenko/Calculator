@@ -78,10 +78,6 @@ public class History {
         return stringHistory;
     }
 
-    public ArrayList getListHistory () {
-        return history;
-    }
-
 
     public Object get (int index) {
         return history.get(index);

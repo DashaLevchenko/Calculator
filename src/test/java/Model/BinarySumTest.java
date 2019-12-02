@@ -1197,14 +1197,21 @@ class BinarySumTest {
 
         calculator.setNumberFirst(x);
         calculator.setNumberSecond(y);
+        calculator.setOperation(OperationsEnum.ADD);
         try {
-            calculator.calculate(OperationsEnum.ADD);
+            calculator.calculate();
         } catch (DivideZeroException | ResultUndefinedException | OperationException | InvalidInputException e) {
             e.printStackTrace();
         }
         BigDecimal resultActual = calculator.getResult();
         assertEquals(resultExpected, resultActual);
 
+        assertBinary(x, y, resultExpected);
+
+        assertAddInvalid();
+    }
+
+    private void assertBinary (BigDecimal x, BigDecimal y, BigDecimal resultExpected) {
         binary.setNumberFirst(x);
         binary.setNumberSecond(y);
         try {
@@ -1212,12 +1219,10 @@ class BinarySumTest {
         } catch (ResultUndefinedException | DivideZeroException | OperationException e) {
             e.printStackTrace();
         }
-        resultActual = binary.getResult();
+        BigDecimal resultActual = binary.getResult();
         assertEquals(resultExpected, resultActual);
 
         assertEquals(x.add(y), resultActual);
-
-        assertAddInvalid();
     }
 
     private void assertAddInvalid() {
@@ -1238,8 +1243,9 @@ class BinarySumTest {
     }
 
     private void assertEnumNull() {
+        calculator.setOperation(null);
         try {
-            calculator.calculate(null);
+            calculator.calculate();
             fail();
         } catch (Exception e) {
             assertEquals("Enter operation", e.getMessage());
