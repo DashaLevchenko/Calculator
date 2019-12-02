@@ -21,7 +21,7 @@ class FormatterNumber {
     private static final int MAX_SCALE = 16;
 
     //Set separator for formatter number
-     static {
+    static {
         symbols.setExponentSeparator("e");
         symbols.setGroupingSeparator(' ');
         symbols.setDecimalSeparator(',');
@@ -30,67 +30,124 @@ class FormatterNumber {
 
     /**
      * Method formatters number for print on display
+     *
      * @param number Number need to format
      * @return String with number was formatted
      */
-    static String numberFormatter(BigDecimal number) {
-        StringBuilder pattern = new StringBuilder();
+    static String formatterNumber (BigDecimal number) {
+        StringBuilder pattern;
 
         number = roundNumber(number);
-        if (number.abs().compareTo(MAX_NUMBER_INPUT) > 0) {
-            if (number.precision() - number.scale() > MAX_SCALE) {
-                pattern.append("0.");
-                number = number.stripTrailingZeros();
 
-                if (number.precision() != 1 && number.precision() > number.scale()) {
-                    pattern.append("#".repeat(number.precision() - number.scale()));
-                }
-                pattern.append("E0");
-
-            } else {
-                if (number.scale() < 0) {
-                    pattern.append("0.E0");
-                } else {
-                    pattern.append("#,##0");
-                }
-            }
-        } else if (number.abs().compareTo(BigDecimal.ONE) < 0 && number.abs().compareTo(BigDecimal.ZERO) != 0) {
-            number = number.stripTrailingZeros();
-
-            if (number.scale() > MAX_SCALE) {
-                pattern.append("0.");
-                if ((number.scale() - number.precision() > 2)) {
-                    if (number.precision() != 1 && number.precision() <= MAX_SCALE) {
-                        pattern.append("#".repeat(number.precision()));
-                    }
-                    pattern.append("E0");
-                } else {
-                    number = number.setScale(MAX_SCALE, RoundingMode.HALF_UP);
-                    pattern.append("#".repeat(MAX_SCALE));
-                }
-            } else {
-                pattern.append("0.").append("#".repeat(number.scale()));
-            }
+        if (moreMaxNumber(number) > 0) {
+            pattern = patterMaxNumber(number);
+        } else if (compareZero(number) < 0 && compareZero(number) != 0) {
+            pattern = patterDecimal(number);
         } else {
-            pattern.append("#,##0");
-            if (number.scale() > 0) {
-                if (number.scale() < MAX_SCALE) {
-                    pattern.append(".").append("#".repeat(number.scale()));
-                } else {
-                    pattern.append(".").append("#".repeat(MAX_SCALE));
-                }
-            }
+            pattern = patternNumber(number);
         }
+
         decimalFormat = new DecimalFormat(pattern.toString(), symbols);
         String outNumber = decimalFormat.format(number);
-        if (!outNumber.contains("e-")) {
-            outNumber = outNumber.replace("e", "e+");
-        }
+        outNumber = changeExponent(outNumber);
 
         return outNumber;
     }
 
-    private static BigDecimal roundNumber(BigDecimal number) {
+    private static String changeExponent (String outNumber) {
+        if (!outNumber.contains("e-")) {
+            outNumber = outNumber.replace("e", "e+");
+        }
+        return outNumber;
+    }
+
+    private static StringBuilder patternNumber (BigDecimal number) {
+        StringBuilder pattern = new StringBuilder();
+
+        pattern.append("#,##0");
+
+        int scale = number.scale();
+        if (scale > 0) {
+            pattern.append(".");
+            if (isMoreMaxScale(scale)) {
+                pattern.append("#".repeat(MAX_SCALE));
+            } else {
+                pattern.append("#".repeat(scale));
+            }
+        }
+        return pattern;
+    }
+
+    private static StringBuilder patterDecimal (BigDecimal number) {
+        StringBuilder pattern = new StringBuilder();
+        number = number.stripTrailingZeros();
+        int scale = number.scale();
+        pattern.append("0.");
+
+        if (isMoreMaxScale(scale)) {
+            int precision = number.precision();
+            int numericInNumber = number.precision() - number.scale();
+
+            if (numericInNumber > 2) {
+                if (precision != 1 && precision <= MAX_SCALE) {
+                    pattern.append("#".repeat(precision));
+                }
+                pattern.append("E0");
+            } else {
+//                number = number.setScale(MAX_SCALE, RoundingMode.HALF_UP);
+                pattern.append("#".repeat(MAX_SCALE));
+            }
+        } else {
+            pattern.append("#".repeat(scale));
+        }
+        return pattern;
+    }
+
+    private static int compareZero (BigDecimal number) {
+        return number.abs().compareTo(BigDecimal.ONE);
+    }
+
+    private static StringBuilder patterMaxNumber (BigDecimal number) {
+        StringBuilder pattern = new StringBuilder();
+        int scale = number.scale();
+        int precision = number.precision();
+        int numericInNumber = precision - scale;
+
+        if (isMoreMaxScale(numericInNumber)) {
+            pattern.append("0.");
+            number = number.stripTrailingZeros();
+
+            precision = number.precision();
+            scale = number.scale();
+
+            if (precision != 1 && precision > scale) {
+                pattern.append("#".repeat(numericInNumber));
+            }
+            pattern.append("E0");
+
+        } else {
+            if (scale < 0) {
+                pattern.append("0.E0");
+            } else {
+                pattern.append("#,##0");
+            }
+        }
+        return pattern;
+    }
+
+    private static boolean isMoreMaxScale (int number) {
+        boolean isMore = false;
+        if (number > MAX_SCALE) {
+            isMore = true;
+        }
+        return isMore;
+    }
+
+    private static int moreMaxNumber (BigDecimal number) {
+        return number.abs().compareTo(MAX_NUMBER_INPUT);
+    }
+
+    private static BigDecimal roundNumber (BigDecimal number) {
         String numberStr = number.round(new MathContext(MAX_SCALE + 1, RoundingMode.HALF_DOWN)).toPlainString();
 
         if (numberStr.contains(".")) {
@@ -109,24 +166,25 @@ class FormatterNumber {
 
     /**
      * Method parses number from text
+     *
      * @param text Text need to parse
      * @return Number was parsed
      */
-    static BigDecimal parseNumber(String text) throws ParseException {
+    static BigDecimal parseNumber (String text) throws ParseException {
         BigDecimal number;
-        text = text.replace("+", "").replace(" ", "");
-            try {
-                decimalFormat.setParseBigDecimal(true);
-                number = (BigDecimal) decimalFormat.parse(text);
 
-                number = number.stripTrailingZeros();
-                if (number.scale() < 0) {
-                    number = number.setScale(0);
-                }
-            return  number;
-            } catch (ParseException e) {
-                throw e;
-            }
+        text = text.replace("+", "").replace(" ", "");
+
+        decimalFormat.setParseBigDecimal(true);
+
+        number = (BigDecimal) decimalFormat.parse(text);
+        number = number.stripTrailingZeros();
+
+        if (number.scale() < 0) {
+            number = number.setScale(0);
+        }
+
+        return number;
 
     }
 

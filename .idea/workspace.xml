@@ -7,12 +7,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="feaeb0c2-feb2-4a9c-98e3-48b1d1a339aa" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/User.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/User.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controller/CalculatorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/CalculatorController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controller/CalculatorHistory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/CalculatorHistory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/View/calculator_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/calculator_view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Controller/CalculatorControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Controller/CalculatorControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/FormatterNumber.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/FormatterNumber.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/ResizeWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/ResizeWindow.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -306,13 +305,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1565432602101</updated>
-    </task>
-    <task id="LOCAL-00042" summary="before change result and add new variable">
-      <created>1570701553141</created>
-      <option name="number" value="00042" />
-      <option name="presentableId" value="LOCAL-00042" />
-      <option name="project" value="LOCAL" />
-      <updated>1570701553141</updated>
     </task>
     <task id="LOCAL-00043" summary="before change start">
       <created>1570716522571</created>
@@ -650,7 +642,14 @@
       <option name="project" value="LOCAL" />
       <updated>1575291564470</updated>
     </task>
-    <option name="localTasksCounter" value="91" />
+    <task id="LOCAL-00091" summary="all works, before add javadoc and refactoring">
+      <created>1575319632831</created>
+      <option name="number" value="00091" />
+      <option name="presentableId" value="LOCAL-00091" />
+      <option name="project" value="LOCAL" />
+      <updated>1575319632831</updated>
+    </task>
+    <option name="localTasksCounter" value="92" />
     <servers />
   </component>
   <component name="UnknownFeatures">

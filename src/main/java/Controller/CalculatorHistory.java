@@ -9,7 +9,7 @@ import java.text.ParseException;
 import java.util.HashMap;
 
 /**
- * This class change calculator history
+ * This class change calculator history for calculator application
  */
 
 public class CalculatorHistory {
@@ -167,7 +167,7 @@ public class CalculatorHistory {
      * @return String number was formatted
      */
     private String formatterNumberHistory (BigDecimal number) {
-        String formattedNumber = FormatterNumber.numberFormatter(number);
+        String formattedNumber = FormatterNumber.formatterNumber(number);
         return deleteGroupingSeparator(formattedNumber);
     }
 

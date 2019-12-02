@@ -23,6 +23,9 @@ import java.util.HashMap;
 
 import static Controller.Text.*;
 
+/**
+ * This class realizes controller for calculator application
+ */
 public class CalculatorController {
 
     //region FXML elements
@@ -903,7 +906,7 @@ public class CalculatorController {
      * Method formatters number for print to general display
      */
     private String formatterNumber (BigDecimal number) {
-        return FormatterNumber.numberFormatter(number);
+        return FormatterNumber.formatterNumber(number);
     }
 
     /*

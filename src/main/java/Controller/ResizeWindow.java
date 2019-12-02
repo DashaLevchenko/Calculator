@@ -28,12 +28,13 @@ public class ResizeWindow {
      * Text for button which was pressed for return default size stage
      */
     private static final String BUTTON_TEXT_STAGE_NOT_MAXIMIZED = "";
+
     private Stage stage;
     private Scene scene;
     private double minWidth;
     private double minHeight;
     private Cursor cursorEvent = Cursor.DEFAULT;
-    private int MIN_BORDER = 4;
+    private int minBorder = 4;
 
     /**
      * Max width of device where application is used
@@ -159,21 +160,21 @@ public class ResizeWindow {
     }
 
     private void setCursorEvent (double mouseWinX, double mouseWinY, double sceneWidth, double sceneHeight) {
-        if (mouseWinX < MIN_BORDER && mouseWinY < MIN_BORDER) {
+        if (mouseWinX < minBorder && mouseWinY < minBorder) {
             cursorEvent = Cursor.NW_RESIZE;
-        } else if (mouseWinX < MIN_BORDER && mouseWinY > sceneHeight - MIN_BORDER) {
+        } else if (mouseWinX < minBorder && mouseWinY > sceneHeight - minBorder) {
             cursorEvent = Cursor.SW_RESIZE;
-        } else if (mouseWinX > sceneWidth - MIN_BORDER && mouseWinY < MIN_BORDER) {
+        } else if (mouseWinX > sceneWidth - minBorder && mouseWinY < minBorder) {
             cursorEvent = Cursor.NE_RESIZE;
-        } else if (mouseWinX > sceneWidth - MIN_BORDER && mouseWinY > sceneHeight - MIN_BORDER) {
+        } else if (mouseWinX > sceneWidth - minBorder && mouseWinY > sceneHeight - minBorder) {
             cursorEvent = Cursor.SE_RESIZE;
-        } else if (mouseWinX < MIN_BORDER) {
+        } else if (mouseWinX < minBorder) {
             cursorEvent = Cursor.W_RESIZE;
-        } else if (mouseWinX > sceneWidth - MIN_BORDER) {
+        } else if (mouseWinX > sceneWidth - minBorder) {
             cursorEvent = Cursor.E_RESIZE;
-        } else if (mouseWinY < MIN_BORDER) {
+        } else if (mouseWinY < minBorder) {
             cursorEvent = Cursor.N_RESIZE;
-        } else if (mouseWinY > sceneHeight - MIN_BORDER) {
+        } else if (mouseWinY > sceneHeight - minBorder) {
             cursorEvent = Cursor.S_RESIZE;
         } else {
             cursorEvent = Cursor.DEFAULT;
