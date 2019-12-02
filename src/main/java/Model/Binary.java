@@ -50,19 +50,23 @@ public class Binary {
     /**
      * Method divides two numbers
      *
-     * @throws ArithmeticException If divide by zero
+     * @throws ResultUndefinedException If two numbers equal zero
+     * @throws DivideZeroException If divide by zero
      */
     private void divide () throws ResultUndefinedException, DivideZeroException {
-        BigDecimal numberFirstWithoutScale = numberFirst.setScale(0, RoundingMode.UP);
-        BigDecimal numberSecondWithoutScale = numberSecond.setScale(0, RoundingMode.UP);
-
-        if (numberSecondWithoutScale.equals(BigDecimal.ZERO)) {
-            if (numberFirstWithoutScale.equals(BigDecimal.ZERO)) {
+        if (compareZero(numberSecond) == 0) {
+            if (compareZero(numberFirst) == 0) {
                 throw new ResultUndefinedException("Result is undefined");
             }
             throw new DivideZeroException("Cannot divide by zero");
         }
+
         result = numberFirst.divide(numberSecond, defaultScale, defaultRounding);
+    }
+
+    private int compareZero (BigDecimal number) {
+        number = number.setScale(0, RoundingMode.UP);
+        return number.compareTo(BigDecimal.ZERO);
     }
 
 
@@ -75,8 +79,9 @@ public class Binary {
      *
      * @param operation Operation need to calculate
      * @throws NullPointerException     If operation equals null
-     * @throws IllegalArgumentException If operation not equals binary operation
-     * @throws ArithmeticException      If divide by zero
+     * @throws OperationException       If operation not equals binary operation
+     * @throws DivideZeroException      If divide by zero
+     * @throws ResultUndefinedException If zero divide by zero
      */
     public void calculateBinary (OperationsEnum operation) throws ResultUndefinedException, DivideZeroException, OperationException {
         if (operation == null) {

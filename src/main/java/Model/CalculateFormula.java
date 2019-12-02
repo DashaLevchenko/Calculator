@@ -8,12 +8,15 @@ import Model.Exceptions.ResultUndefinedException;
 import java.math.BigDecimal;
 import java.util.HashMap;
 
+/**
+ * This class calculate formula and return result.
+ */
 public class CalculateFormula {
-    static Calculator calculator;
-    static HashMap<String, OperationsEnum> operationSymbols = new HashMap<>();
-    static OperationsEnum binaryOperation;
-    static OperationsEnum unaryOperation;
-    static String numberString = "";
+    private static Calculator calculator;
+    private static HashMap<String, OperationsEnum> operationSymbols = new HashMap<>();
+    private static OperationsEnum binaryOperation;
+    private static OperationsEnum unaryOperation;
+    private static String numberString = "";
     private static String decimalSeparator = ".";
     private static String equal = "=";
 
@@ -31,7 +34,25 @@ public class CalculateFormula {
         operationSymbols.put("", OperationsEnum.NEGATE);
     }
 
-
+    /**
+     * This method calculate formula and return result.
+     * Example:
+     * formula: 5 + 3 =
+     * result:  8
+     * <p>
+     * formula: 5 + 3 = 
+     * result:  -8
+     * <p>
+     * formula: 5 + 3 x 8 = 
+     * result:  -512
+     *
+     * @param formula Formula which need to calculate
+     * @return Number was calculated by formula
+     * @throws DivideZeroException      If divide by zero
+     * @throws ResultUndefinedException If zero divide by zero
+     * @throws OperationException       If operation not equals calculator operation
+     * @throws InvalidInputException    If square root negative number
+     */
     public static BigDecimal calculateFormula (String formula) throws DivideZeroException, InvalidInputException, ResultUndefinedException, OperationException {
         calculator = new Calculator();
         for (int i = 0; i < formula.length(); i++) {
@@ -47,13 +68,13 @@ public class CalculateFormula {
     private static void parseEqual (String symbol) throws ResultUndefinedException, DivideZeroException, InvalidInputException, OperationException {
         if (symbol.equals(equal)) {
             if (binaryOperation != null) {
-                if (calculator.isUnary(calculator.getOperation())) {
+                if (isUnary(getOperation())) {
                     setOperationSymbols(binaryOperation);
                 } else {
-                    if(calculator.getNumberSecond() == null){
-                        setNumber(calculator.getNumberFirst());
+                    if (getNumberSecond() == null) {
+                        setNumber(getNumberFirst());
                     }
-                    calculator.calculate();
+                    calculate();
                 }
                 setNumber(null);
                 setOperationSymbols(null);
@@ -61,18 +82,21 @@ public class CalculateFormula {
         }
     }
 
+    private static BigDecimal getNumberSecond () {
+        return calculator.getNumberSecond();
+    }
+
     private static void parseOperation (String symbol) throws ResultUndefinedException, DivideZeroException, InvalidInputException, OperationException {
         if (operationSymbols.containsKey(symbol)) {
-            if (calculator.isBinary(operationSymbols.get(symbol))) {
+            if (isBinary(operationSymbols.get(symbol))) {
                 binaryOperation = operationSymbols.get(symbol);
             }
-            if (calculator.isUnary(operationSymbols.get(symbol))) {
+            if (isUnary(operationSymbols.get(symbol))) {
                 unaryOperation = operationSymbols.get(symbol);
             }
 
             setOperationSymbols(operationSymbols.get(symbol));
         }
-
     }
 
     private static String nextSymbol (String formula, int index) {
@@ -99,10 +123,10 @@ public class CalculateFormula {
         }
     }
 
-    private static boolean isNumber (String i) {
+    private static boolean isNumber (String text) {
         boolean isNumber;
         try {
-            new BigDecimal(i);
+            new BigDecimal(text);
             isNumber = true;
         } catch (Exception e) {
             isNumber = false;
@@ -112,36 +136,76 @@ public class CalculateFormula {
 
 
     private static void setNumber (BigDecimal number) {
-        if (calculator.getNumberFirst() == null) {
-            calculator.setNumberFirst(number);
+        if (getNumberFirst() == null) {
+            setNumberFirst(number);
         } else {
-            calculator.setNumberSecond(number);
+            setNumberSecond(number);
         }
+    }
+
+    private static void setNumberFirst (BigDecimal number) {
+        calculator.setNumberFirst(number);
+    }
+
+    private static BigDecimal getNumberFirst () {
+        return getNumberFirst();
     }
 
     private static void setOperationSymbols (OperationsEnum operation) throws DivideZeroException, InvalidInputException, ResultUndefinedException, OperationException {
         if (operation != null) {
-            if (calculator.isUnary(operation)) {
-                calculator.setOperation(operation);
-                calculator.calculate();
-                unaryOperation = operation;
+            if (isUnary(operation)) {
+                setCalculateUnaryOperation(operation);
             }
-            if (calculator.isBinary(operation)) {
-                if (calculator.getOperation() != null) {
-                    if (calculator.isUnary(calculator.getOperation())) {
-                        calculator.setOperation(operation);
-                    }
-                    calculator.calculate();
-                    calculator.setNumberSecond(null);
-                }
-                binaryOperation = operation;
-                calculator.setOperation(operation);
+            if (isBinary(operation)) {
+                setCalculateBinaryOperation(operation);
             }
         } else {
             binaryOperation = operation;
             unaryOperation = operation;
-            calculator.setOperation(operation);
+            setOperation(operation);
         }
+    }
+
+    private static void setCalculateUnaryOperation (OperationsEnum operation) throws ResultUndefinedException, DivideZeroException, InvalidInputException, OperationException {
+        setOperation(operation);
+        calculate();
+        unaryOperation = operation;
+    }
+
+    private static void setCalculateBinaryOperation (OperationsEnum operation) throws ResultUndefinedException, DivideZeroException, InvalidInputException, OperationException {
+        if (getOperation() != null) {
+            if (isUnary(getOperation())) {
+                setOperation(operation);
+            }
+            calculate();
+            setNumberSecond(null);
+        }
+        binaryOperation = operation;
+        setOperation(operation);
+    }
+
+    private static void setNumberSecond (BigDecimal number) {
+        calculator.setNumberSecond(number);
+    }
+
+    private static OperationsEnum getOperation () {
+        return calculator.getOperation();
+    }
+
+    private static boolean isBinary (OperationsEnum operation) {
+        return calculator.isBinary(operation);
+    }
+
+    private static boolean isUnary (OperationsEnum operation) {
+        return calculator.isUnary(operation);
+    }
+
+    private static void calculate () throws DivideZeroException, InvalidInputException, ResultUndefinedException, OperationException {
+        calculator.calculate();
+    }
+
+    private static void setOperation (OperationsEnum operation) {
+        calculator.setOperation(operation);
     }
 
 
