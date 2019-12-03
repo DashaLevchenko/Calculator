@@ -578,6 +578,30 @@ public class CalculatorController {
         printHistory();
     }
 
+    /*
+      This method sets first or second number in calculator object for calculate unary operation
+       */
+    private void setNumberUnary () {
+        if (binaryOperation == null) {
+            if (getFirstNumber() == null) {
+                setCalculatorFirstNumber(getDisplayNumber());
+            }
+            setCalculatorSecondNumber(null);
+            if (negatePressed || equalWasPress) {
+                equalWasPress = false;
+                addHistoryNumber(getFirstNumber());
+            }
+        } else {
+            if (canBackspace) {
+                setCalculatorSecondNumber(getDisplayNumber());
+            } else {
+                if (calculator.getResult() != null && !negatePressed) {
+                    setCalculatorSecondNumber(getResult());
+                }
+            }
+        }
+    }
+
     private void setPercentOperation (OperationsEnum operationsEnum) {
         calculator.setPercentOperation(operationsEnum);
     }
@@ -650,6 +674,7 @@ public class CalculatorController {
 
     /**
      * Method returns calculator
+     *
      * @return Calculator
      */
     public Calculator getCalculator () {
@@ -705,6 +730,7 @@ public class CalculatorController {
      * Method calculate binary operations, if {@code divide, subtract, add, multiply} was pressed.
      * Also method sets first or second number in calculator.
      * Prints result or exception.
+     *
      * @param actionEvent Binary operation buttons was pressed
      */
     @FXML
@@ -748,6 +774,7 @@ public class CalculatorController {
      * Method calculate unary operations, if {@code sqr, sqrt, oneDivideX} was pressed.
      * Also method sets first or second number in calculator.
      * Prints result or exception.
+     *
      * @param actionEvent Unary operation was pressed
      */
     @FXML
@@ -760,7 +787,8 @@ public class CalculatorController {
         }
 
         unaryOperation = operation.get(buttonID);
-        calculator.setOperation(unaryOperation);
+        setNumberUnary();
+        setOperation(unaryOperation);
 
         calculate();
         negatePressed = false;
@@ -920,10 +948,10 @@ public class CalculatorController {
         BigDecimal number = parseNumber(formatterNumber(result));
 
         if (number != null) {
-            if (compareZero(number) > 0) {
+            if (compareOne(number) > 0) {
                 overflow = number.abs().compareTo(MAX_INVALID_NUMBER) >= 0;
 
-            } else if (compareZero(number) < 0 && compareZero(number) != 0) {
+            } else if (compareOne(number) < 0 && compareZero(number) != 0) {
                 overflow = number.abs().compareTo(MIN_INVALID_NUMBER) <= 0;
             }
         }
@@ -934,6 +962,10 @@ public class CalculatorController {
     }
 
     private int compareZero (BigDecimal number) {
+        return number.abs().compareTo(BigDecimal.ZERO);
+    }
+
+    private int compareOne (BigDecimal number) {
         return number.abs().compareTo(BigDecimal.ONE);
     }
     //endregion
@@ -973,14 +1005,13 @@ public class CalculatorController {
 
                 if (getResult() != null) {
                     deleteLastHistory();
-                    if (memoryPressed || percentPressed) {
-                        deleteLastHistory();
-                    }
-
                     numberAddHistory = getResult().negate();
                 } else {
                     deleteLastHistory();
                     numberAddHistory = getFirstNumber().negate();
+                }
+                if (memoryPressed || percentPressed) {
+                    deleteLastHistory();
                 }
                 addHistoryNumber(numberAddHistory);
                 setOperation(negateOperation);
@@ -1069,6 +1100,7 @@ public class CalculatorController {
         canChangeOperator = false;
         negatePressed = false;
         canBackspace = true;
+        memoryPressed = false;
 
         scrollButtonRight.setVisible(false);
         scrollButtonLeft.setVisible(false);
@@ -1078,6 +1110,7 @@ public class CalculatorController {
 
         charValidInText = CHAR_MAX_INPUT;
         resizeOutputText();
+        isError = false;
     }
 
     /**

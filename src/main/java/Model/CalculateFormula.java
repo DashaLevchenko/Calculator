@@ -148,7 +148,7 @@ public class CalculateFormula {
     }
 
     private static BigDecimal getNumberFirst () {
-        return getNumberFirst();
+        return calculator.getNumberFirst();
     }
 
     private static void setOperationSymbols (OperationsEnum operation) throws DivideZeroException, InvalidInputException, ResultUndefinedException, OperationException {

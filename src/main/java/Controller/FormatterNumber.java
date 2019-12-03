@@ -14,7 +14,7 @@ class FormatterNumber {
     public static DecimalFormatSymbols symbols = new DecimalFormatSymbols();
     private static DecimalFormat decimalFormat = new DecimalFormat();
     private static final BigDecimal MAX_NUMBER_INPUT = BigDecimal.valueOf(9999999999999999L);
-
+    private BigDecimal number;
     /**
      * Max scale for number print
      */
@@ -35,14 +35,32 @@ class FormatterNumber {
      * @return String with number was formatted
      */
     static String formatterNumber (BigDecimal number) {
-        StringBuilder pattern;
+        StringBuilder pattern = new StringBuilder();
 
         number = roundNumber(number);
 
         if (moreMaxNumber(number) > 0) {
             pattern = patterMaxNumber(number);
-        } else if (compareZero(number) < 0 && compareZero(number) != 0) {
-            pattern = patterDecimal(number);
+        } else if (compareOne(number) < 0 && compareZero(number) != 0) {
+            number = number.stripTrailingZeros();
+
+            pattern.append("0.");
+            int scale = number.scale();
+            if (scale > MAX_SCALE) {
+                int precision = number.precision();
+                int numericInNumber = scale - precision;
+                if (numericInNumber > 2) {
+                    if (precision != 1 && precision <= MAX_SCALE) {
+                        pattern.append("#".repeat(precision));
+                    }
+                    pattern.append("E0");
+                } else {
+                    number = number.setScale(MAX_SCALE, RoundingMode.HALF_UP);
+                    pattern.append("#".repeat(MAX_SCALE));
+                }
+            } else {
+                pattern.append("#".repeat(scale));
+            }
         } else {
             pattern = patternNumber(number);
         }
@@ -78,32 +96,11 @@ class FormatterNumber {
         return pattern;
     }
 
-    private static StringBuilder patterDecimal (BigDecimal number) {
-        StringBuilder pattern = new StringBuilder();
-        number = number.stripTrailingZeros();
-        int scale = number.scale();
-        pattern.append("0.");
-
-        if (isMoreMaxScale(scale)) {
-            int precision = number.precision();
-            int numericInNumber = number.precision() - number.scale();
-
-            if (numericInNumber > 2) {
-                if (precision != 1 && precision <= MAX_SCALE) {
-                    pattern.append("#".repeat(precision));
-                }
-                pattern.append("E0");
-            } else {
-//                number = number.setScale(MAX_SCALE, RoundingMode.HALF_UP);
-                pattern.append("#".repeat(MAX_SCALE));
-            }
-        } else {
-            pattern.append("#".repeat(scale));
-        }
-        return pattern;
+    private static int compareZero (BigDecimal number) {
+        return number.abs().compareTo(BigDecimal.ZERO);
     }
 
-    private static int compareZero (BigDecimal number) {
+    private static int compareOne (BigDecimal number) {
         return number.abs().compareTo(BigDecimal.ONE);
     }
 

@@ -141,7 +141,7 @@ public class CalculatorHistory {
      * @param text Text need to add to calculator history
      */
     private void addLastHistory (String text) {
-        history.addOperationString(text);
+        history.addString(text);
     }
 
     private boolean isBinary (OperationsEnum operationsEnum) {
