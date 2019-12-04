@@ -28,6 +28,152 @@ import static Controller.Text.*;
  */
 public class CalculatorController {
 
+    //region FXML elements
+    //region Number buttons
+    @FXML
+    private GridPane calculatorButtons;
+
+    @FXML
+    private Button zero;
+
+    @FXML
+    private Button seven;
+
+    @FXML
+    private Button eight;
+
+    @FXML
+    private Button nine;
+
+    @FXML
+    private Button four;
+
+    @FXML
+    private Button five;
+
+    @FXML
+    private Button six;
+
+    @FXML
+    private Button one;
+
+    @FXML
+    private Button two;
+
+    @FXML
+    private Button three;
+    //endregion
+
+    //region Memory buttons
+    @FXML
+    private GridPane memoryPanel;
+
+    @FXML
+    private Button memoryClear;
+
+    @FXML
+    private Button memoryRecall;
+
+    @FXML
+    private Button memoryStore;
+
+    @FXML
+    private Button memoryAdd;
+
+    @FXML
+    private Button memorySubtract;
+    //endregion
+
+    //region Binary operation buttons
+    @FXML
+    private Button divide;
+
+    @FXML
+    private Button multiply;
+
+    @FXML
+    private Button subtract;
+
+    @FXML
+    private Button add;
+    //endregion
+
+    @FXML
+    private Button equal;
+
+    @FXML
+    private Button percent;
+
+    //region Unary operation buttons
+    @FXML
+    private Button sqrt;
+
+    @FXML
+    private Button sqr;
+
+    @FXML
+    private Button oneDivideX;
+    //endregion
+
+    //region Displays
+    @FXML
+    private Label generalDisplay;
+
+    @FXML
+    private Label outOperationMemory;
+
+    @FXML
+    private ScrollPane scrollPaneOperation;
+
+    @FXML
+    private Button scrollButtonLeft;
+
+    @FXML
+    private Button scrollButtonRight;
+    //endregion
+
+    //region Clear buttons
+    @FXML
+    private Button CE;
+
+    @FXML
+    private Button C;
+    //endregion
+
+    //region Change number buttons
+    @FXML
+    private Button backspace;
+
+    @FXML
+    private Button plusMinus;
+
+    @FXML
+    private Button point;
+    //endregion
+
+    //region Other Window elements
+    @FXML
+    private Label title;
+
+    @FXML
+    private Label textStandard;
+
+    @FXML
+    private Button cancel;
+
+    @FXML
+    private Button maximizeButton;
+
+    @FXML
+    private Button hideButton;
+
+    @FXML
+    private AnchorPane leftMenu;
+
+    @FXML
+    private AnchorPane generalAnchorPane;
+    //endregion
+    //endregion
     /**
      * Variable which keeps key and value of operation.
      * Key is id of button was pressed.
@@ -62,13 +208,37 @@ public class CalculatorController {
      */
     public final BigDecimal MIN_INVALID_NUMBER = new BigDecimal("1E-10000");
 
-    /**
-     * Default text for general display
-     */
-    public final String DEFAULT_TEXT = "0";
+    private OperationsEnum binaryOperation;
+    private OperationsEnum unaryOperation;
+    private OperationsEnum negateOperation = OperationsEnum.NEGATE;
 
-    @FXML
-    private Label generalDisplay;
+    private int charValidInText = 16;
+    private String firstStyleLabel;
+    private String DEFAULT_TEXT = "0";
+    private String decimalSeparate = ",";
+    private String separatorNumber = " ";
+    private String minus = "-";
+    private String emptyString = "";
+
+    private boolean commaInText = false;
+    private boolean canChangeOperator = false;
+    private boolean equalWasPress;
+    private boolean showLeftMenu = false;
+    private boolean isError = false;
+    private boolean negatePressed = false;
+    private boolean memoryPressed = false;
+    private boolean canBackspace = true;
+
+    private double moveScroll;
+    private double xOffset = 0;
+    private double yOffset = 0;
+    private double speedOfAnimation = 0.1;
+    private double transitionXDefault = 0;
+
+    private Memory memory;
+    private boolean percentPressed = false;
+    private Calculator calculator = new Calculator();
+    private CalculatorHistory history;
 
     @FXML
     void initialize () {
@@ -77,16 +247,6 @@ public class CalculatorController {
         equal.setDefaultButton(true);
         history = new CalculatorHistory(calculator);
     }
-
-    private boolean showLeftMenu = false;
-    private double speedOfAnimation = 0.1;
-    private double transitionXDefault = 0;
-
-    @FXML
-    private AnchorPane leftMenu;
-
-    @FXML
-    private Label textStandard;
 
     /**
      * This method show calculator's left menu, if button show menu was pressed
@@ -112,11 +272,6 @@ public class CalculatorController {
         transition.play();
     }
 
-    @FXML
-    private Button divide, multiply, subtract, add,
-            percent, sqrt, sqr, oneDivideX, plusMinus, point;
-
-
     // Method does some button disable or not disable
     private void operationsIsDisable (boolean disable) {
         percent.setDisable(disable);
@@ -132,13 +287,6 @@ public class CalculatorController {
     }
 
     //region Text
-    private int charValidInText = 16;
-    private String decimalSeparate = ",";
-    private boolean commaInText = false;
-    private boolean canChangeOperator = false;
-    private boolean memoryPressed = false;
-    private boolean canBackspace = true;
-
     /**
      * Method adds comma to text from general display,
      * outs result on general display.
@@ -168,8 +316,6 @@ public class CalculatorController {
 
         memoryPressed = false;
     }
-
-    private String separatorNumber = " ";
 
     private int lengthTextWithoutSeparator (String out) {
         return deleteNumberSeparator(out, separatorNumber).length();
@@ -256,10 +402,6 @@ public class CalculatorController {
         return number;
     }
 
-    private String minus = "-";
-    private boolean equalWasPress;
-    private boolean negatePressed = false;
-
     /**
      * This method inserts {@code minus} to {@code out},
      * if {@code out} doesn't contains {@code minus}.
@@ -292,11 +434,6 @@ public class CalculatorController {
         printHistory();
     }
 
-    @FXML
-    private Button zero, one, two, three,
-            four, five, six, seven, eight, nine,
-            memoryClear, memoryRecall, memoryStore, memoryAdd, memorySubtract,
-            equal, CE, C, backspace;
 
     /**
      * This method sets which key combination equals buttons pressed
@@ -382,8 +519,6 @@ public class CalculatorController {
     //endregion
 
     //region Set number
-    private CalculatorHistory history;
-
     /*
      * This method sets first number in calculator object and adds it to history
      * after binary or unary operation buttons was pressed
@@ -421,9 +556,6 @@ public class CalculatorController {
         }
     }
 
-    private OperationsEnum binaryOperation;
-    private boolean percentPressed = false;
-
     /*
      * This method sets first and second numbers in calculator object and adds it to history
      * after binary or unary operation buttons was pressed
@@ -445,8 +577,6 @@ public class CalculatorController {
         }
         printHistory();
     }
-
-    private Calculator calculator = new Calculator();
 
     /*
       This method sets first or second number in calculator object for calculate unary operation
@@ -603,7 +733,6 @@ public class CalculatorController {
     //endregion
 
     //region Operations
-    private OperationsEnum unaryOperation;
 
     /**
      * Method calculate binary operations, if {@code divide, subtract, add, multiply} was pressed.
@@ -704,8 +833,6 @@ public class CalculatorController {
         calculator.setOperation(operationsEnum);
     }
 
-    private boolean isError = false;
-
     /**
      * Methods calculates operation, if {@code equal} was pressed.
      * Sets second number in calculator if {@code binaryOperation} not null.
@@ -781,11 +908,6 @@ public class CalculatorController {
     //endregion
 
     //region Print
-    private String firstStyleLabel;
-
-    @FXML
-    private GridPane memoryPanel;
-
     /*
      * Method outputs exception's message on general display,
      * makes some buttons disable, resizes text on general display.
@@ -856,9 +978,6 @@ public class CalculatorController {
     //endregion
 
     //region History
-    @FXML
-    private Label outOperationMemory;
-
     private void printHistory () {
         outOperationMemory.setText(history.getChangedHistory());
         scrollOutOperationMemory();
@@ -867,8 +986,6 @@ public class CalculatorController {
     private void clearHistory () {
         outOperationMemory.setText(history.clearHistory());
     }
-
-    private OperationsEnum negateOperation = OperationsEnum.NEGATE;
 
     /*
      * This method sets negative number in calculator object after negative button was pressed,
@@ -919,14 +1036,6 @@ public class CalculatorController {
     //endregion
 
     //region Scroll CalculatorHistory
-    private double moveScroll;
-    @FXML
-    private ScrollPane scrollPaneOperation;
-
-    @FXML
-    private Button scrollButtonLeft, scrollButtonRight;
-
-
     /**
      * This method moves scroll of calculator history in left if scroll button was pressed.
      * Makes left button invisible, if can't scroll left
@@ -973,8 +1082,6 @@ public class CalculatorController {
     //endregion
 
     //region Clear
-    private String emptyString = "";
-
     /**
      * This method sets default value all variable which used in calculator.
      */
@@ -1066,8 +1173,6 @@ public class CalculatorController {
     //endregion
 
     //region Memory
-    private Memory memory;
-
     /**
      * Method saves number in memory, if {@code memoryStore} button was pressed
      */
@@ -1165,9 +1270,6 @@ public class CalculatorController {
 
     //region Window
 
-    @FXML
-    private Button cancel;
-
     /**
      * Close calculator, if {@code cancel} was pressed
      */
@@ -1176,12 +1278,6 @@ public class CalculatorController {
         Stage stage = (Stage) cancel.getScene().getWindow();
         stage.close();
     }
-
-    @FXML
-    private GridPane calculatorButtons;
-
-    @FXML
-    private Button maximizeButton;
 
     /**
      * Maximize window of calculator and resize all button, if {@code maximize} was pressed
@@ -1197,9 +1293,6 @@ public class CalculatorController {
         scrollOutOperationMemory();
     }
 
-    @FXML
-    private Button hideButton;
-
     /**
      * Hide window of calculator, doesn't close, if {@code hide} was pressed.
      */
@@ -1209,11 +1302,7 @@ public class CalculatorController {
         stage.setIconified(true);
     }
 
-    private double xOffset = 0;
-    private double yOffset = 0;
 
-    @FXML
-    private Label title;
 
     /**
      * If mouse was dragged method changes location of calculator
@@ -1241,9 +1330,6 @@ public class CalculatorController {
     //endregion
 
     //region Resize
-    @FXML
-    private AnchorPane generalAnchorPane;
-
     /**
      * This method resizes widow of calculator, if mouse was moved and dragged on border window.
      * Also method changes history display.

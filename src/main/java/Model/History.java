@@ -27,13 +27,13 @@ public class History {
         history.add(operation);
     }
 
-    /**
-     * This method adds string to {@code history}.
-     * @param historyString String need to add to history.
-     */
-    public void addString (String historyString) {
-        history.add(historyString);
-    }
+//    /**
+//     * This method adds string to {@code history}.
+//     * @param historyString String need to add to history.
+//     */
+//    public void addString (String historyString) {
+//        history.add(historyString);
+//    }
 
     /*
      * Method checks last history object.
