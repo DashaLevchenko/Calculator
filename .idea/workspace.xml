@@ -8,10 +8,9 @@
   <component name="ChangeListManager">
     <list default="true" id="feaeb0c2-feb2-4a9c-98e3-48b1d1a339aa" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/CalculatorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/CalculatorController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/CalculatorHistory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/CalculatorHistory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/FormatterNumber.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/FormatterNumber.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Demo/Demo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Demo/Demo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Model/History.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/History.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/CalculateFormula.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/CalculateFormula.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -303,13 +302,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1565432602101</updated>
-    </task>
-    <task id="LOCAL-00047" summary="before textWithoutSeparate">
-      <created>1570794359286</created>
-      <option name="number" value="00047" />
-      <option name="presentableId" value="LOCAL-00047" />
-      <option name="project" value="LOCAL" />
-      <updated>1570794359286</updated>
     </task>
     <task id="LOCAL-00048" summary="change resizeOutput">
       <created>1570796535347</created>
@@ -647,7 +639,14 @@
       <option name="project" value="LOCAL" />
       <updated>1575454861422</updated>
     </task>
-    <option name="localTasksCounter" value="96" />
+    <task id="LOCAL-00096" summary="before change history">
+      <created>1575467109737</created>
+      <option name="number" value="00096" />
+      <option name="presentableId" value="LOCAL-00096" />
+      <option name="project" value="LOCAL" />
+      <updated>1575467109737</updated>
+    </task>
+    <option name="localTasksCounter" value="97" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -708,7 +707,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="all work, change negate" />
     <MESSAGE value="before delete methods" />
     <MESSAGE value="before change model" />
     <MESSAGE value="before overflow in controller" />
@@ -733,7 +731,8 @@
     <MESSAGE value="controller ok" />
     <MESSAGE value="javadoc history" />
     <MESSAGE value="all work" />
-    <option name="LAST_COMMIT_MESSAGE" value="all work" />
+    <MESSAGE value="before change history" />
+    <option name="LAST_COMMIT_MESSAGE" value="before change history" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

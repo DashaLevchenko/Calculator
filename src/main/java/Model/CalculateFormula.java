@@ -13,10 +13,10 @@ import java.util.HashMap;
  */
 public class CalculateFormula {
     private static Calculator calculator;
+    private static String equal = "=";
     private static HashMap<String, OperationsEnum> operationSymbols = new HashMap<>();
 
 
-    private static String equal = "=";
 
     static {
         operationSymbols.put("+", OperationsEnum.ADD);

@@ -11,14 +11,17 @@ import java.text.ParseException;
  * Class formatters number for print
  */
 class FormatterNumber {
-    public static DecimalFormatSymbols symbols = new DecimalFormatSymbols();
-    private static DecimalFormat decimalFormat = new DecimalFormat();
-    private static final BigDecimal MAX_NUMBER_INPUT = BigDecimal.valueOf(9999999999999999L);
-    private BigDecimal number;
     /**
      * Max scale for number print
      */
     private static final int MAX_SCALE = 16;
+
+    public static DecimalFormatSymbols symbols = new DecimalFormatSymbols();
+    private static DecimalFormat decimalFormat = new DecimalFormat();
+    private static final BigDecimal MAX_NUMBER_INPUT = BigDecimal.valueOf(9999999999999999L);
+    private static MathContext maxContext = new MathContext(MAX_SCALE + 1, RoundingMode.HALF_DOWN);
+    private static int precisionMin = 1;
+
 
     //Set separator for formatter number
     static {
@@ -49,8 +52,11 @@ class FormatterNumber {
             if (scale > MAX_SCALE) {
                 int precision = number.precision();
                 int numericInNumber = scale - precision;
-                if (numericInNumber > 2) {
-                    if (precision != 1 && precision <= MAX_SCALE) {
+                int minNumericInNumber = 2;
+
+                if (numericInNumber > minNumericInNumber) {
+
+                    if (precision != precisionMin && precision <= MAX_SCALE) {
                         pattern.append("#".repeat(precision));
                     }
                     pattern.append("E0");
@@ -117,7 +123,7 @@ class FormatterNumber {
             precision = number.precision();
             scale = number.scale();
 
-            if (precision != 1 && precision > scale) {
+            if (precision != precisionMin && precision > scale) {
                 pattern.append("#".repeat(numericInNumber));
             }
             pattern.append("E0");
@@ -145,11 +151,15 @@ class FormatterNumber {
     }
 
     private static BigDecimal roundNumber (BigDecimal number) {
-        String numberStr = number.round(new MathContext(MAX_SCALE + 1, RoundingMode.HALF_DOWN)).toPlainString();
+        String numberStr = number.round(maxContext).toPlainString();
 
-        if (numberStr.contains(".")) {
-            String decimalPart = numberStr.substring(numberStr.indexOf(".") + 1);
+        String point = ".";
+        if (numberStr.contains(point)) {
+            int indexAfterPoint = numberStr.indexOf(point) + 1;
+            String decimalPart = numberStr.substring(indexAfterPoint);
+
             long countNine = decimalPart.chars().filter(ch -> ch == '9').count();
+
             if (countNine == decimalPart.length()) {
                 number = number.round(new MathContext(MAX_SCALE, RoundingMode.UP));
             } else {
@@ -168,13 +178,11 @@ class FormatterNumber {
      * @return Number was parsed
      */
     static BigDecimal parseNumber (String text) throws ParseException {
-        BigDecimal number;
-
         text = text.replace("+", "").replace(" ", "");
 
         decimalFormat.setParseBigDecimal(true);
 
-        number = (BigDecimal) decimalFormat.parse(text);
+        BigDecimal number = (BigDecimal) decimalFormat.parse(text);
         number = number.stripTrailingZeros();
 
         if (number.scale() < 0) {
