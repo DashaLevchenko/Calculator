@@ -437,7 +437,8 @@ class UnarySquerRootTest {
         BigDecimal resultExpected = new BigDecimal(resultString);
         unary.setNumber(x);
         try {
-            unary.calculateUnary(OperationsEnum.SQRT);
+            unary.setOperation(OperationsEnum.SQRT);
+            unary.calculateUnary();
         } catch (InvalidInputException | DivideZeroException | OperationException e) {
             e.printStackTrace();
         }
@@ -476,7 +477,8 @@ class UnarySquerRootTest {
     private void assertionCalculateNotValid(BigDecimal x) {
         try {
             unary.setNumber(x);
-            unary.calculateUnary(OperationsEnum.SQRT);
+            unary.setOperation(OperationsEnum.SQRT);
+            unary.calculateUnary();
             fail();
         } catch (Exception e) {
             assertEquals("Invalid input", e.getMessage());
@@ -485,7 +487,8 @@ class UnarySquerRootTest {
 
     private void assertEnumInvalid(OperationsEnum operationsEnum) {
         try {
-            unary.calculateUnary(operationsEnum);
+            unary.setOperation(operationsEnum);
+            unary.calculateUnary();
             fail();
         } catch (Exception e) {
             assertEquals(e.getMessage(), "Enter unary operation");

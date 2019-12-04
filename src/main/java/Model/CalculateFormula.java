@@ -14,10 +14,8 @@ import java.util.HashMap;
 public class CalculateFormula {
     private static Calculator calculator;
     private static HashMap<String, OperationsEnum> operationSymbols = new HashMap<>();
-    private static OperationsEnum binaryOperation;
-    private static OperationsEnum unaryOperation;
-    private static String numberString = "";
-    private static String decimalSeparator = ".";
+
+
     private static String equal = "=";
 
     static {
@@ -65,6 +63,7 @@ public class CalculateFormula {
         return calculator.getResult();
     }
 
+    private static OperationsEnum binaryOperation;
     private static void parseEqual (String symbol) throws ResultUndefinedException, DivideZeroException, InvalidInputException, OperationException {
         if (symbol.equals(equal)) {
             if (binaryOperation != null) {
@@ -91,9 +90,6 @@ public class CalculateFormula {
             if (isBinary(operationSymbols.get(symbol))) {
                 binaryOperation = operationSymbols.get(symbol);
             }
-            if (isUnary(operationSymbols.get(symbol))) {
-                unaryOperation = operationSymbols.get(symbol);
-            }
 
             setOperationSymbols(operationSymbols.get(symbol));
         }
@@ -106,6 +102,9 @@ public class CalculateFormula {
         }
         return symbolNext;
     }
+
+    private static String numberString = "";
+    private static String decimalSeparator = ".";
 
     private static void parseNumber (String symbol, int i, String formula) {
         String nextSymbol = nextSymbol(formula, i);
@@ -161,7 +160,6 @@ public class CalculateFormula {
             }
         } else {
             binaryOperation = operation;
-            unaryOperation = operation;
             setOperation(operation);
         }
     }
@@ -169,7 +167,6 @@ public class CalculateFormula {
     private static void setCalculateUnaryOperation (OperationsEnum operation) throws ResultUndefinedException, DivideZeroException, InvalidInputException, OperationException {
         setOperation(operation);
         calculate();
-        unaryOperation = operation;
     }
 
     private static void setCalculateBinaryOperation (OperationsEnum operation) throws ResultUndefinedException, DivideZeroException, InvalidInputException, OperationException {

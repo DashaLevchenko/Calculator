@@ -1198,8 +1198,9 @@ class BinaryMultiplyTest {
 
         binary.setNumberFirst(x);
         binary.setNumberSecond(y);
+        binary.setOperation(OperationsEnum.MULTIPLY);
         try {
-            binary.calculateBinary(OperationsEnum.MULTIPLY);
+            binary.calculateBinary();
         } catch (ResultUndefinedException | DivideZeroException | OperationException e) {
             e.printStackTrace();
         }
@@ -1220,7 +1221,8 @@ class BinaryMultiplyTest {
 
     private void assertEnumInvalid(OperationsEnum operationsEnum) {
         try {
-            binary.calculateBinary(operationsEnum);
+            binary.setOperation(operationsEnum);
+            binary.calculateBinary();
             fail();
         } catch (Exception e) {
             assertEquals(e.getMessage(), "Enter binary operation");

@@ -16,7 +16,7 @@ public class UnaryPercentTest {
     private Calculator calculator = new Calculator();
 
     @Test
-    void percentInteger(){
+    void percentInteger () {
         assertionPercentValid("0");
 
         assertionPercentValid("1");
@@ -964,7 +964,7 @@ public class UnaryPercentTest {
     }
 
     @Test
-    void percentDecimal(){
+    void percentDecimal () {
         assertionPercentValid("0.002");
         assertionPercentValid("-0.002");
 
@@ -1238,14 +1238,15 @@ public class UnaryPercentTest {
         assertionPercentValid("-0.0000000000000001");
         assertionPercentValid("0.0000000000000001");
     }
-    
-    private void assertionPercentValid(String xString) {
+
+    private void assertionPercentValid (String xString) {
         BigDecimal x = new BigDecimal(xString);
         BigDecimal resultExpected = BigDecimal.ZERO;
 
         unary.setNumber(x);
+        unary.setOperation(OperationsEnum.PERCENT);
         try {
-            unary.calculateUnary(OperationsEnum.PERCENT);
+            unary.calculateUnary();
         } catch (InvalidInputException | DivideZeroException | OperationException e) {
             e.printStackTrace();
         }
@@ -1262,11 +1263,11 @@ public class UnaryPercentTest {
         }
         resultActual = calculator.getResult();
         assertEquals(resultExpected, resultActual);
-        
+
         assertPercentInvalid();
     }
 
-    private void assertPercentInvalid() {
+    private void assertPercentInvalid () {
         assertEnumNull();
 
         assertEnumInvalid(OperationsEnum.ADD);
@@ -1275,16 +1276,17 @@ public class UnaryPercentTest {
         assertEnumInvalid(OperationsEnum.MULTIPLY);
     }
 
-    private void assertEnumInvalid(OperationsEnum operationsEnum) {
+    private void assertEnumInvalid (OperationsEnum operationsEnum) {
         try {
-            unary.calculateUnary(operationsEnum);
+            unary.setOperation(operationsEnum);
+            unary.calculateUnary();
             fail();
         } catch (Exception e) {
-            assertEquals( "Enter unary operation", e.getMessage());
+            assertEquals("Enter unary operation", e.getMessage());
         }
     }
 
-    private void assertEnumNull() {
+    private void assertEnumNull () {
         calculator.setPercentOperation(null);
         try {
             calculator.calculate();

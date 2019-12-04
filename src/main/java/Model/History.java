@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class History {
 
     private ArrayList<Object> history = new ArrayList<>();
-    private String separatorHistory = " ";
+
 
     /**
      * This method adds number to {@code history}
@@ -106,6 +106,7 @@ public class History {
         return lastObject;
     }
 
+    private String separatorHistory = " ";
     /**
      * Method returns string of history with separator.
      * @return History was separated.

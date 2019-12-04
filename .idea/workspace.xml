@@ -9,12 +9,20 @@
     <list default="true" id="feaeb0c2-feb2-4a9c-98e3-48b1d1a339aa" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controller/CalculatorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/CalculatorController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/CalculatorHistory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/CalculatorHistory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/FormatterNumber.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/FormatterNumber.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Binary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Binary.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Model/CalculateFormula.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/CalculateFormula.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Calculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Calculator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Model/History.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/History.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Memory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Memory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/View/calculator_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/calculator_view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Unary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Unary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Model/BinaryDivideTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/BinaryDivideTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Model/BinaryMinusTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/BinaryMinusTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Model/BinaryMultiplyTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/BinaryMultiplyTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Model/BinaryPercentTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/BinaryPercentTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Model/BinarySumTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/BinarySumTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Model/UnaryOneDivideXTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/UnaryOneDivideXTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Model/UnaryPercentTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/UnaryPercentTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Model/UnarySquerRootTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/UnarySquerRootTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Model/UnaryXSquerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/UnaryXSquerTest.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -142,7 +150,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.CalculatorControllerTest">
+  <component name="RunManager" selected="JUnit.CalculatorControllerTest.checkPercent">
     <configuration name="CalculatorMain" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Controller.CalculatorMain" />
       <module name="Calculator2" />
@@ -156,7 +164,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CalculatorControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CalculatorControllerTest.checkAdd" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Calculator2" />
       <extension name="coverage">
         <pattern>
@@ -166,12 +174,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="Controller" />
       <option name="MAIN_CLASS_NAME" value="Controller.CalculatorControllerTest" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="METHOD_NAME" value="checkAdd" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CalculatorControllerTest.checkMultiply" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CalculatorControllerTest.checkAllOperations" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Calculator2" />
       <extension name="coverage">
         <pattern>
@@ -181,7 +190,39 @@
       </extension>
       <option name="PACKAGE_NAME" value="Controller" />
       <option name="MAIN_CLASS_NAME" value="Controller.CalculatorControllerTest" />
-      <option name="METHOD_NAME" value="checkMultiply" />
+      <option name="METHOD_NAME" value="checkAllOperations" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CalculatorControllerTest.checkMIXBinaryOperations" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Calculator2" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Controller" />
+      <option name="MAIN_CLASS_NAME" value="Controller.CalculatorControllerTest" />
+      <option name="METHOD_NAME" value="checkMIXBinaryOperations" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CalculatorControllerTest.checkMemorySubtract" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Calculator2" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Controller" />
+      <option name="MAIN_CLASS_NAME" value="Controller.CalculatorControllerTest" />
+      <option name="METHOD_NAME" value="checkMemorySubtract" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -198,22 +239,6 @@
       <option name="PACKAGE_NAME" value="Controller" />
       <option name="MAIN_CLASS_NAME" value="Controller.CalculatorControllerTest" />
       <option name="METHOD_NAME" value="checkPercent" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="CalculatorControllerTest.checkSquareX" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Calculator2" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Controller.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="Controller" />
-      <option name="MAIN_CLASS_NAME" value="Controller.CalculatorControllerTest" />
-      <option name="METHOD_NAME" value="checkSquareX" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -249,36 +274,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Model in Calculator2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Calculator2" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Model.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="Model" />
-      <option name="TEST_OBJECT" value="package" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <list>
       <item itemvalue="Application.CalculatorMain" />
       <item itemvalue="JUnit.Calculator_ControllerTest" />
-      <item itemvalue="JUnit.CalculatorControllerTest" />
-      <item itemvalue="JUnit.CalculatorControllerTest.checkMultiply" />
+      <item itemvalue="JUnit.CalculatorControllerTest.checkAdd" />
+      <item itemvalue="JUnit.CalculatorControllerTest.checkAllOperations" />
       <item itemvalue="JUnit.CalculatorControllerTest.checkPercent" />
-      <item itemvalue="JUnit.Model in Calculator2" />
-      <item itemvalue="JUnit.CalculatorControllerTest.checkSquareX" />
+      <item itemvalue="JUnit.CalculatorControllerTest.checkMIXBinaryOperations" />
+      <item itemvalue="JUnit.CalculatorControllerTest.checkMemorySubtract" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.CalculatorControllerTest" />
         <item itemvalue="JUnit.CalculatorControllerTest.checkPercent" />
-        <item itemvalue="JUnit.CalculatorControllerTest.checkSquareX" />
-        <item itemvalue="JUnit.Model in Calculator2" />
-        <item itemvalue="JUnit.CalculatorControllerTest.checkMultiply" />
+        <item itemvalue="JUnit.CalculatorControllerTest.checkMemorySubtract" />
+        <item itemvalue="JUnit.CalculatorControllerTest.checkMIXBinaryOperations" />
+        <item itemvalue="JUnit.CalculatorControllerTest.checkAdd" />
+        <item itemvalue="JUnit.CalculatorControllerTest.checkAllOperations" />
       </list>
     </recent_temporary>
   </component>
@@ -306,13 +317,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1565432602101</updated>
-    </task>
-    <task id="LOCAL-00045" summary="create new separate method">
-      <created>1570719736675</created>
-      <option name="number" value="00045" />
-      <option name="presentableId" value="LOCAL-00045" />
-      <option name="project" value="LOCAL" />
-      <updated>1570719736675</updated>
     </task>
     <task id="LOCAL-00046" summary="numberFormatter in main is work">
       <created>1570786751882</created>
@@ -650,7 +654,14 @@
       <option name="project" value="LOCAL" />
       <updated>1575323614846</updated>
     </task>
-    <option name="localTasksCounter" value="94" />
+    <task id="LOCAL-00094" summary="all work">
+      <created>1575365833565</created>
+      <option name="number" value="00094" />
+      <option name="presentableId" value="LOCAL-00094" />
+      <option name="project" value="LOCAL" />
+      <updated>1575365833565</updated>
+    </task>
+    <option name="localTasksCounter" value="95" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -726,7 +737,6 @@
     <MESSAGE value="before create new classes" />
     <MESSAGE value="before create History" />
     <MESSAGE value="before change controller" />
-    <MESSAGE value="all work" />
     <MESSAGE value="before change model,&#10;setOperation" />
     <MESSAGE value="before change calculateUnary" />
     <MESSAGE value="before change history %" />
@@ -736,30 +746,16 @@
     <MESSAGE value="all works, before add javadoc and refactoring" />
     <MESSAGE value="controller ok" />
     <MESSAGE value="javadoc history" />
-    <option name="LAST_COMMIT_MESSAGE" value="javadoc history" />
+    <MESSAGE value="all work" />
+    <option name="LAST_COMMIT_MESSAGE" value="all work" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/Controller/CalculatorController.java</url>
-          <line>781</line>
-          <option name="timeStamp" value="264" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/Controller/CalculatorController.java</url>
-          <line>1164</line>
-          <option name="timeStamp" value="267" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/Controller/CalculatorController.java</url>
-          <line>406</line>
-          <option name="timeStamp" value="268" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/Controller/CalculatorController.java</url>
-          <line>419</line>
-          <option name="timeStamp" value="269" />
+          <line>269</line>
+          <option name="timeStamp" value="275" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

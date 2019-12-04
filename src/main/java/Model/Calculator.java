@@ -18,7 +18,7 @@ public class Calculator {
 
     private Binary binary = new Binary();
     private Unary unary = new Unary();
-    private History history = new History();
+
 
     private OperationsEnum percentOperation;
     private BigDecimal result;
@@ -48,7 +48,8 @@ public class Calculator {
     private void calculatePercent () throws OperationException, InvalidInputException, DivideZeroException {
         if (numberFirst != null && numberSecond == null) {
             unary.setNumber(numberFirst);
-            unary.calculateUnary(percentOperation);
+            unary.setOperation(percentOperation);
+            unary.calculateUnary();
 
             result = unary.getResult();
             numberFirst = result;
@@ -68,25 +69,28 @@ public class Calculator {
 
     private void calculateUnaryOperation () throws OperationException, InvalidInputException, DivideZeroException {
         if (numberSecond == null) {
-            unary.setNumber(numberFirst);
-            unary.calculateUnary(operation);
-
+            calculateUnary(numberFirst);
             numberFirst = unary.getResult();
             numberSecond = null;
         } else {
-            unary.setNumber(numberSecond);
-            unary.calculateUnary(operation);
+            calculateUnary(numberSecond);
             numberSecond = unary.getResult();
         }
+    }
+
+    private void calculateUnary (BigDecimal number) throws OperationException, InvalidInputException, DivideZeroException {
+        unary.setNumber(number);
+        unary.setOperation(operation);
+        unary.calculateUnary();
         result = unary.getResult();
     }
 
     private void calculateBinaryOperation () throws OperationException, DivideZeroException, ResultUndefinedException {
         if (numberFirst != null && numberSecond != null) {
             binary.setNumberFirst(numberFirst);
-
             binary.setNumberSecond(numberSecond);
-            binary.calculateBinary(operation);
+            binary.setOperation(operation);
+            binary.calculateBinary();
 
             result = binary.getResult();
             numberFirst = result;
@@ -102,6 +106,8 @@ public class Calculator {
         return operation.equals(OperationsEnum.SQRT) || operation.equals(OperationsEnum.SQR) ||
                 operation.equals(OperationsEnum.ONE_DIVIDE_X) || operation.equals(OperationsEnum.NEGATE);
     }
+
+    private History history = new History();
 
     public void setNumberFirst (BigDecimal numberFirst) {
         this.numberFirst = numberFirst;

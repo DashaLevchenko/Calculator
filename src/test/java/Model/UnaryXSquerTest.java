@@ -302,7 +302,8 @@ class UnaryXSquerTest {
 
         unary.setNumber(x);
         try {
-            unary.calculateUnary(OperationsEnum.SQR);
+            unary.setOperation(OperationsEnum.SQR);
+            unary.calculateUnary();
         } catch (InvalidInputException | DivideZeroException | OperationException e) {
             e.printStackTrace();
         }
@@ -336,7 +337,8 @@ class UnaryXSquerTest {
 
     private void assertEnumInvalid(OperationsEnum operationsEnum) {
         try {
-            unary.calculateUnary(operationsEnum);
+            unary.setOperation(operationsEnum);
+            unary.calculateUnary();
             fail();
         } catch (Exception e) {
             assertEquals( "Enter unary operation", e.getMessage());

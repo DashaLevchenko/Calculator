@@ -17,10 +17,10 @@ class BinaryPercentTest {
 
     @Test
     void percentInteger () {
-//        assertionsPercent("0", "1", "0.00");
-//        assertionsPercent("0", "-1", "0.00");
-//        assertionsPercent("1", "0", "0");
-//        assertionsPercent("-1", "0", "0");
+        assertionsPercent("0", "1", "0.00");
+        assertionsPercent("0", "-1", "0.00");
+        assertionsPercent("1", "0", "0");
+        assertionsPercent("-1", "0", "0");
 
         //both operands are integer
         assertionsPercent("1", "1", "0.01");
@@ -1211,13 +1211,11 @@ class BinaryPercentTest {
         binary.setNumberSecond(null);
 
         try {
-            binary.calculateBinary(OperationsEnum.PERCENT);
+            binary.setOperation(OperationsEnum.PERCENT);
+            binary.calculateBinary();
         } catch (ResultUndefinedException | DivideZeroException | OperationException e) {
             e.printStackTrace();
         }
 
-//        assertNull(binary.getNumberFirst());
-//        assertNull(binary.getNumberSecond());
-//        assertNull(binary.getResult());
     }
 }

@@ -1242,7 +1242,8 @@ class UnaryOneDivideXTest {
     void oneDivideXNotValid () {
         try {
             unary.setNumber(BigDecimal.ZERO);
-            unary.calculateUnary(OperationsEnum.ONE_DIVIDE_X);
+            unary.setOperation(OperationsEnum.ONE_DIVIDE_X);
+            unary.calculateUnary();
             fail();
         } catch (Exception e) {
             assertEquals("Cannot divide by zero", e.getMessage());
@@ -1255,7 +1256,8 @@ class UnaryOneDivideXTest {
 
         unary.setNumber(x);
         try {
-            unary.calculateUnary(OperationsEnum.ONE_DIVIDE_X);
+            unary.setOperation(OperationsEnum.ONE_DIVIDE_X);
+            unary.calculateUnary();
         } catch (InvalidInputException | DivideZeroException | OperationException e) {
             e.printStackTrace();
         }
@@ -1289,7 +1291,8 @@ class UnaryOneDivideXTest {
 
     private void assertEnumInvalid (OperationsEnum operationsEnum) {
         try {
-            unary.calculateUnary(operationsEnum);
+            unary.setOperation(operationsEnum);
+            unary.calculateUnary();
             fail();
         } catch (Exception e) {
             assertEquals(e.getMessage(), "Enter unary operation");

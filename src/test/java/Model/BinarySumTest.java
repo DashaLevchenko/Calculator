@@ -1214,8 +1214,9 @@ class BinarySumTest {
     private void assertBinary (BigDecimal x, BigDecimal y, BigDecimal resultExpected) {
         binary.setNumberFirst(x);
         binary.setNumberSecond(y);
+        binary.setOperation(OperationsEnum.ADD);
         try {
-            binary.calculateBinary(OperationsEnum.ADD);
+            binary.calculateBinary();
         } catch (ResultUndefinedException | DivideZeroException | OperationException e) {
             e.printStackTrace();
         }
@@ -1235,7 +1236,8 @@ class BinarySumTest {
 
     private void assertEnumInvalid(OperationsEnum operationsEnum) {
         try {
-            binary.calculateBinary(operationsEnum);
+            binary.setOperation(operationsEnum);
+            binary.calculateBinary();
             fail();
         } catch (Exception e) {
             assertEquals(e.getMessage(), "Enter binary operation");

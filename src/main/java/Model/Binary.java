@@ -10,17 +10,15 @@ import java.math.RoundingMode;
 
 
 public class Binary {
-    /**
-     * Max default scale
-     */
-    private int defaultScale = 10000;
 
-    /**
-     * Max default rounding
-     */
-    private final RoundingMode defaultRounding = RoundingMode.UP;
     private BigDecimal numberFirst;
     private BigDecimal numberSecond;
+
+    public void setOperation (OperationsEnum operation) {
+        this.operation = operation;
+    }
+
+    private OperationsEnum operation;
     private BigDecimal result;
 
     public void setNumberFirst (BigDecimal numberFirst) {
@@ -46,6 +44,16 @@ public class Binary {
     private void multiply () {
         result = numberFirst.multiply(numberSecond);
     }
+
+    /**
+     * Max default scale
+     */
+    private int defaultScale = 10000;
+
+    /**
+     * Max default rounding
+     */
+    private RoundingMode defaultRounding = RoundingMode.UP;
 
     /**
      * Method divides two numbers
@@ -77,13 +85,12 @@ public class Binary {
     /**
      * Method calculates binary operations
      *
-     * @param operation Operation need to calculate
      * @throws NullPointerException     If operation equals null
      * @throws OperationException       If operation not equals binary operation
      * @throws DivideZeroException      If divide by zero
      * @throws ResultUndefinedException If zero divide by zero
      */
-    public void calculateBinary (OperationsEnum operation) throws ResultUndefinedException, DivideZeroException, OperationException {
+    public void calculateBinary () throws ResultUndefinedException, DivideZeroException, OperationException {
         if (operation == null) {
             throw new NullPointerException("Enter operation");
         }

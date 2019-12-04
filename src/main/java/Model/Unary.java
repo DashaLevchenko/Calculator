@@ -14,6 +14,12 @@ import java.math.RoundingMode;
  */
 public class Unary {
     private BigDecimal number;
+
+    public void setOperation (OperationsEnum operation) {
+        this.operation = operation;
+    }
+
+    private OperationsEnum operation;
     private BigDecimal result;
 
     public void setNumber (BigDecimal number) {
@@ -69,13 +75,12 @@ public class Unary {
     /**
      * Method calculates unary operations
      *
-     * @param operation Operation need to calculate
      * @throws NullPointerException  If operation equals null
      * @throws InvalidInputException If square root negative number
      * @throws DivideZeroException   If divide by zero
      * @throws OperationException    If operation not equals unary operation
      */
-    public void calculateUnary (OperationsEnum operation) throws InvalidInputException, DivideZeroException, OperationException {
+    public void calculateUnary () throws InvalidInputException, DivideZeroException, OperationException {
         if (operation == null) {
             throw new NullPointerException("Enter operation");
         }
