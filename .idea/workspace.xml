@@ -7,17 +7,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="feaeb0c2-feb2-4a9c-98e3-48b1d1a339aa" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/User.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/User.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controller/CalculatorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/CalculatorController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/CalculatorHistory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/CalculatorHistory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/FormatterNumber.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/FormatterNumber.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/ResizeDisplay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/ResizeDisplay.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/ResizeWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/ResizeWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Text.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Text.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Binary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Binary.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Model/History.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/History.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Unary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Unary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Text.java" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -311,13 +302,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1565432602101</updated>
-    </task>
-    <task id="LOCAL-00050" summary="all work,&#10;before change tests">
-      <created>1571236945932</created>
-      <option name="number" value="00050" />
-      <option name="presentableId" value="LOCAL-00050" />
-      <option name="project" value="LOCAL" />
-      <updated>1571236945932</updated>
     </task>
     <task id="LOCAL-00051" summary="before change test format">
       <created>1571239002131</created>
@@ -655,7 +639,14 @@
       <option name="project" value="LOCAL" />
       <updated>1575554198225</updated>
     </task>
-    <option name="localTasksCounter" value="99" />
+    <task id="LOCAL-00099" summary="before delete Text">
+      <created>1575565875553</created>
+      <option name="number" value="00099" />
+      <option name="presentableId" value="LOCAL-00099" />
+      <option name="project" value="LOCAL" />
+      <updated>1575565875553</updated>
+    </task>
+    <option name="localTasksCounter" value="100" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -729,7 +720,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="before change model" />
     <MESSAGE value="before overflow in controller" />
     <MESSAGE value="before change Enum" />
     <MESSAGE value="before 10 /3 = *3" />
@@ -754,18 +744,10 @@
     <MESSAGE value="all work" />
     <MESSAGE value="before change history" />
     <MESSAGE value="before change variable" />
-    <option name="LAST_COMMIT_MESSAGE" value="before change variable" />
+    <MESSAGE value="before delete Text" />
+    <option name="LAST_COMMIT_MESSAGE" value="before delete Text" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/Controller/CalculatorController.java</url>
-          <line>940</line>
-          <option name="timeStamp" value="331" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="JUnit">
         <watch expression="calculator" language="JAVA" />

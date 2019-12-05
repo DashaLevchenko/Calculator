@@ -298,8 +298,8 @@ public class CalculatorController {
      */
     public String backspace (String text) {
         int symbolsInTextWithoutComma = text.replace(decimalSeparate, "").length();
-        if (symbolsInTextWithoutComma > 0) {
 
+        if (symbolsInTextWithoutComma > 0) {
             int textLength = text.length();
             int minLengthWithMinus = 2;
             int minLength = 1;
@@ -309,8 +309,8 @@ public class CalculatorController {
                     textLength == minLength) {
                 text = DEFAULT_TEXT;
             } else {
-
-                text = new StringBuilder(text).deleteCharAt(textLength - 1).toString();
+                int lastSymbol = textLength - 1;
+                text = new StringBuilder(text).deleteCharAt(lastSymbol).toString();
             }
         }
 
