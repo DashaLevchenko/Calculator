@@ -16,15 +16,42 @@ class FormatterNumber {
      */
     private static final int MAX_SCALE = 16;
 
-    public static DecimalFormatSymbols getSymbols () {
-        return symbols;
-    }
+    /**
+     * Max number before exponential formatting.
+     */
+    private static final BigDecimal MAX_NUMBER_INPUT = BigDecimal.valueOf(9999999999999999L);
+
+    /**
+     * A {@code MathContext} object with a precision setting  16 digits, and a
+     * rounding mode of {@link RoundingMode#UP UP}.
+     */
+    private static final MathContext MATH_CONTEXT_UP = new MathContext(MAX_SCALE, RoundingMode.UP);
+
+    /**
+     * A {@code MathContext} object with a precision setting  16 digits, and a
+     * rounding mode of {@link RoundingMode#HALF_DOWN HALF_DOWN}.
+     */
+    private static final MathContext MATH_CONTEXT_HALF_DOWN = new MathContext(MAX_SCALE, RoundingMode.HALF_DOWN);
+
+    /**
+     * A {@code MathContext} object with a precision setting  16 digits, and a
+     * rounding mode of {@link RoundingMode#HALF_UP HALF_UP}.
+     */
+    private static final MathContext MATH_CONTEXT_UP_HALF_UP = new MathContext(MAX_SCALE, RoundingMode.HALF_UP);
+
+    /**
+     * A {@code MathContext} object with a precision setting  17 digits, and a
+     * rounding mode of {@link RoundingMode#HALF_DOWN HALF_DOWN}.
+     */
+    private static final MathContext MATH_CONTEXT_HALF_DOWN_MAX_SCALE_PLUS_ONE = new MathContext(MAX_SCALE + 1, RoundingMode.HALF_DOWN);
+
+    /**
+     * Minimal precision for formatter decimal number
+     */
+    private static final int PRECISION_MIN = 1;
 
     private static DecimalFormatSymbols symbols = new DecimalFormatSymbols();
     private static DecimalFormat decimalFormat = new DecimalFormat();
-    private static final BigDecimal MAX_NUMBER_INPUT = BigDecimal.valueOf(9999999999999999L);
-    private static MathContext maxContext = new MathContext(MAX_SCALE + 1, RoundingMode.HALF_DOWN);
-    private static int precisionMin = 1;
 
 
     //Set separator for formatter number
@@ -33,6 +60,10 @@ class FormatterNumber {
         symbols.setGroupingSeparator(' ');
         symbols.setDecimalSeparator(',');
         decimalFormat.setDecimalFormatSymbols(symbols);
+    }
+
+    public static DecimalFormatSymbols getSymbols () {
+        return symbols;
     }
 
     /**
@@ -60,7 +91,7 @@ class FormatterNumber {
 
                 if (numericInNumber > minNumericInNumber) {
 
-                    if (precision != precisionMin && precision <= MAX_SCALE) {
+                    if (precision != PRECISION_MIN && precision <= MAX_SCALE) {
                         pattern.append("#".repeat(precision));
                     }
                     pattern.append("E0");
@@ -83,8 +114,11 @@ class FormatterNumber {
     }
 
     private static String changeExponent (String outNumber) {
-        if (!outNumber.contains("e-")) {
-            outNumber = outNumber.replace("e", "e+");
+        String negateExponent = "e-";
+        String positiveExponent = "e+";
+        if (!outNumber.contains(negateExponent)) {
+            String exponent = "e";
+            outNumber = outNumber.replace(exponent, positiveExponent);
         }
         return outNumber;
     }
@@ -127,7 +161,7 @@ class FormatterNumber {
             precision = number.precision();
             scale = number.scale();
 
-            if (precision != precisionMin && precision > scale) {
+            if (precision != PRECISION_MIN && precision > scale) {
                 pattern.append("#".repeat(numericInNumber));
             }
             pattern.append("E0");
@@ -155,22 +189,23 @@ class FormatterNumber {
     }
 
     private static BigDecimal roundNumber (BigDecimal number) {
-        String numberStr = number.round(maxContext).toPlainString();
+        String numberStr = number.round(MATH_CONTEXT_HALF_DOWN_MAX_SCALE_PLUS_ONE).toPlainString();
 
         String point = ".";
         if (numberStr.contains(point)) {
             int indexAfterPoint = numberStr.indexOf(point) + 1;
             String decimalPart = numberStr.substring(indexAfterPoint);
 
-            long countNine = decimalPart.chars().filter(ch -> ch == '9').count();
+            char nine = '9';
+            long countNine = decimalPart.chars().filter(ch -> ch == nine).count();
 
             if (countNine == decimalPart.length()) {
-                number = number.round(new MathContext(MAX_SCALE, RoundingMode.UP));
+                number = number.round(MATH_CONTEXT_UP);
             } else {
-                number = number.round(new MathContext(MAX_SCALE, RoundingMode.HALF_DOWN));
+                number = number.round(MATH_CONTEXT_HALF_DOWN);
             }
         } else {
-            number = number.round(new MathContext(MAX_SCALE, RoundingMode.HALF_UP));
+            number = number.round(MATH_CONTEXT_UP_HALF_UP);
         }
         return number;
     }
@@ -182,8 +217,8 @@ class FormatterNumber {
      * @return Number was parsed
      */
     static BigDecimal parseNumber (String text) throws ParseException {
-        text = text.replace("+", "").replace(" ", "");
-
+        String plus = "+";
+        text = text.replace(plus, "").replace(" ", "");
         decimalFormat.setParseBigDecimal(true);
 
         BigDecimal number = (BigDecimal) decimalFormat.parse(text);
@@ -194,7 +229,6 @@ class FormatterNumber {
         }
 
         return number;
-
     }
 
 }

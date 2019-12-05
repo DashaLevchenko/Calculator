@@ -9,18 +9,29 @@ public class Text {
      */
     private static String defaultText = "0";
 
+
     /**
      * This method deletes last symbol in text
+     *
      * @param text Text which need to change
      * @return Text was changed
      */
-    public static String backspace(String text){
-        if (text.replace(",", "").length() > 0) {
-            if ((text.length() == 2 && text.contains("-")) ||
-                    text.length() == 1) {
+    public static String backspace (String text) {
+        String comma = ",";
+
+        int symbolsInTextWithoutComma = text.replace(comma, "").length();
+        if (symbolsInTextWithoutComma > 0) {
+            String minus = "-";
+
+            int textLength = text.length();
+            int minLengthWithMinus = 2;
+            int minLength = 1;
+
+            if ((textLength == minLengthWithMinus && text.contains(minus)) ||
+                    textLength == minLength) {
                 text = defaultText;
             } else {
-                text = new StringBuilder(text).deleteCharAt(text.length() - 1).toString();
+                text = new StringBuilder(text).deleteCharAt(textLength - 1).toString();
             }
         }
 
@@ -40,15 +51,18 @@ public class Text {
     /**
      * Method inserts "-" before text.
      * Example: before: "9", after: "-9"
+     *
      * @param text Text need to change
      * @return Text with "-"
      */
-    public static String addNegate(String text){
+    public String addNegate (String text) {
         if (!text.equals(defaultText)) {
-            if (text.charAt(0) != '-') {
-                text = "-"+text;
+            char minus = '-';
+            char firstChar = text.charAt(0);
+            if (firstChar != minus) {
+                text = minus + text;
             } else {
-                text = new StringBuilder(text).deleteCharAt(0).toString();
+                text = new StringBuilder(text).deleteCharAt(firstChar).toString();
             }
         }
         return text;

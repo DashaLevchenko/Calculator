@@ -21,47 +21,20 @@ import java.math.BigDecimal;
 import java.text.ParseException;
 import java.util.HashMap;
 
-import static Controller.Text.*;
-
 /**
  * This class realizes controller for calculator application
  */
 public class CalculatorController {
 
     //region FXML elements
+
     //region Number buttons
     @FXML
     private GridPane calculatorButtons;
 
     @FXML
-    private Button zero;
-
-    @FXML
-    private Button seven;
-
-    @FXML
-    private Button eight;
-
-    @FXML
-    private Button nine;
-
-    @FXML
-    private Button four;
-
-    @FXML
-    private Button five;
-
-    @FXML
-    private Button six;
-
-    @FXML
-    private Button one;
-
-    @FXML
-    private Button two;
-
-    @FXML
-    private Button three;
+    private Button zero, one, two, three,
+            four, five, six, seven, eight, nine;
     //endregion
 
     //region Memory buttons
@@ -69,34 +42,13 @@ public class CalculatorController {
     private GridPane memoryPanel;
 
     @FXML
-    private Button memoryClear;
-
-    @FXML
-    private Button memoryRecall;
-
-    @FXML
-    private Button memoryStore;
-
-    @FXML
-    private Button memoryAdd;
-
-    @FXML
-    private Button memorySubtract;
+    private Button memoryClear, memoryRecall, memoryStore,
+            memoryAdd, memorySubtract;
     //endregion
 
-    //region Binary operation buttons
+    //Binary operation buttons
     @FXML
-    private Button divide;
-
-    @FXML
-    private Button multiply;
-
-    @FXML
-    private Button subtract;
-
-    @FXML
-    private Button add;
-    //endregion
+    private Button divide, multiply, subtract, add;
 
     @FXML
     private Button equal;
@@ -104,68 +56,40 @@ public class CalculatorController {
     @FXML
     private Button percent;
 
-    //region Unary operation buttons
+    //Unary operation buttons
     @FXML
-    private Button sqrt;
+    private Button sqrt, sqr, oneDivideX;
 
-    @FXML
-    private Button sqr;
-
-    @FXML
-    private Button oneDivideX;
-    //endregion
 
     //region Displays
     @FXML
-    private Label generalDisplay;
-
-    @FXML
-    private Label outOperationMemory;
+    private Label generalDisplay, outOperationMemory;
 
     @FXML
     private ScrollPane scrollPaneOperation;
 
     @FXML
-    private Button scrollButtonLeft;
+    private Button scrollButtonLeft, scrollButtonRight;
 
-    @FXML
-    private Button scrollButtonRight;
+
     //endregion
 
-    //region Clear buttons
+    //Clear buttons
     @FXML
-    private Button CE;
+    private Button CE, C;
 
-    @FXML
-    private Button C;
-    //endregion
 
-    //region Change number buttons
+    //Change number buttons
     @FXML
-    private Button backspace;
+    private Button backspace, plusMinus, point;
 
-    @FXML
-    private Button plusMinus;
-
-    @FXML
-    private Button point;
-    //endregion
 
     //region Other Window elements
     @FXML
-    private Label title;
+    private Label title, textStandard;
 
     @FXML
-    private Label textStandard;
-
-    @FXML
-    private Button cancel;
-
-    @FXML
-    private Button maximizeButton;
-
-    @FXML
-    private Button hideButton;
+    private Button cancel, maximizeButton, hideButton;
 
     @FXML
     private AnchorPane leftMenu;
@@ -173,13 +97,14 @@ public class CalculatorController {
     @FXML
     private AnchorPane generalAnchorPane;
     //endregion
+
     //endregion
     /**
      * Variable which keeps key and value of operation.
      * Key is id of button was pressed.
      * Value is enum variable which match some operation.
      */
-    static HashMap<String, OperationsEnum> operation = new HashMap<>();
+    static final HashMap<String, OperationsEnum> operation = new HashMap<>();
 
     static {
         operation.put("add", OperationsEnum.ADD);
@@ -208,15 +133,17 @@ public class CalculatorController {
      */
     public final BigDecimal MIN_INVALID_NUMBER = new BigDecimal("1E-10000");
 
+    /**
+     * Default text for {@code generalDisplay}
+     */
+    private final String DEFAULT_TEXT = "0";
+
     private OperationsEnum binaryOperation;
     private OperationsEnum unaryOperation;
     private OperationsEnum negateOperation = OperationsEnum.NEGATE;
 
-    private int charValidInText = 16;
     private String firstStyleLabel;
-    private String DEFAULT_TEXT = "0";
     private String decimalSeparate = ",";
-    private String separatorNumber = " ";
     private String emptyString = "";
 
     private boolean commaInText = false;
@@ -227,13 +154,14 @@ public class CalculatorController {
     private boolean negatePressed = false;
     private boolean memoryPressed = false;
     private boolean canBackspace = true;
+    private boolean percentPressed = false;
 
+    private int charValidInText = 16;
     private double moveScroll;
     private double xOffset = 0;
     private double yOffset = 0;
 
     private Memory memory;
-    private boolean percentPressed = false;
     private Calculator calculator = new Calculator();
     private CalculatorHistory historyOut;
 
@@ -250,8 +178,6 @@ public class CalculatorController {
      */
     @FXML
     void showLeftMenu () {
-        double speedOfAnimation = 0.1;
-        TranslateTransition transition = new TranslateTransition(Duration.seconds(speedOfAnimation), leftMenu);
         double transitionX;
         boolean visible;
 
@@ -264,6 +190,11 @@ public class CalculatorController {
             showLeftMenu = false;
             visible = true;
         }
+
+        double speedOfAnimation = 0.1;
+
+        Duration duration = Duration.seconds(speedOfAnimation);
+        TranslateTransition transition = new TranslateTransition(duration, leftMenu);
 
         transition.setToX(transitionX);
         textStandard.setVisible(visible);
@@ -317,7 +248,8 @@ public class CalculatorController {
     }
 
     private int lengthTextWithoutSeparator (String out) {
-        return deleteNumberSeparator(out, separatorNumber).length();
+        String outWithoutSeparator = out.replace(" ", "");
+        return outWithoutSeparator.length();
     }
 
     private String formatterInputNumber (String text) {
@@ -350,12 +282,39 @@ public class CalculatorController {
                     charValidInText--;
                 }
             } else {
-                String outWithoutSeparator = deleteNumberSeparator(out, separatorNumber);
+                String outWithoutSeparator = out.replace(" ", "");
                 BigDecimal number = new BigDecimal(outWithoutSeparator);
                 out = formatterNumber(number);
             }
             printResult(out);
         }
+    }
+
+    /**
+     * This method deletes last symbol in text
+     *
+     * @param text Text which need to change
+     * @return Text was changed
+     */
+    public String backspace (String text) {
+        int symbolsInTextWithoutComma = text.replace(decimalSeparate, "").length();
+        if (symbolsInTextWithoutComma > 0) {
+
+            int textLength = text.length();
+            int minLengthWithMinus = 2;
+            int minLength = 1;
+            String minus = "-";
+
+            if ((textLength == minLengthWithMinus && text.contains(minus)) ||
+                    textLength == minLength) {
+                text = DEFAULT_TEXT;
+            } else {
+
+                text = new StringBuilder(text).deleteCharAt(textLength - 1).toString();
+            }
+        }
+
+        return text;
     }
 
     /**
@@ -435,6 +394,26 @@ public class CalculatorController {
             charValidInText--;
         }
         memoryPressed = false;
+    }
+
+    /**
+     * Method inserts "-" before text.
+     * Example: before: "9", after: "-9"
+     *
+     * @param text Text need to change
+     * @return Text with "-"
+     */
+    public String addNegate (String text) {
+        if (!text.equals(DEFAULT_TEXT)) {
+            char minus = '-';
+            char firstChar = text.charAt(0);
+            if (firstChar != minus) {
+                text = minus + text;
+            } else {
+                text = new StringBuilder(text).deleteCharAt(0).toString();
+            }
+        }
+        return text;
     }
 
 
@@ -877,12 +856,13 @@ public class CalculatorController {
 
         if (!isError) {
             clearHistory();
-        } else {
+        }
+        else {
             calculator.getHistory().clear();
-            if (historyContainsNegateUnary()) {
+            if (!memoryPressed && historyContainsNegateUnary()) {
                 deleteLastHistory();
+                printHistory();
             }
-            printHistory();
         }
         negatePressed = false;
         canBackspace = false;

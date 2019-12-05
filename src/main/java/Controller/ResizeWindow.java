@@ -34,7 +34,6 @@ public class ResizeWindow {
     private double minWidth;
     private double minHeight;
     private Cursor cursorEvent = Cursor.DEFAULT;
-    private int minBorder = 4;
 
     /**
      * Max width of device where application is used
@@ -160,6 +159,7 @@ public class ResizeWindow {
     }
 
     private void setCursorEvent (double mouseWinX, double mouseWinY, double sceneWidth, double sceneHeight) {
+        int minBorder = 4;
         if (mouseWinX < minBorder && mouseWinY < minBorder) {
             cursorEvent = Cursor.NW_RESIZE;
         } else if (mouseWinX < minBorder && mouseWinY > sceneHeight - minBorder) {

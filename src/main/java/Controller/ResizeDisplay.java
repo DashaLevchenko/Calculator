@@ -1,5 +1,6 @@
 package Controller;
 
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -37,16 +38,24 @@ public class ResizeDisplay {
      */
     public static Font fontSize(Label label){
         setStage(label);
-        Text textNew = new Text(label.getText());
-        double widthMaxTextOutput = label.getWidth() - label.getPadding().getRight() - label.getPadding().getLeft();
-        textNew.setFont(label.getFont());
-        double textWidthNew = textNew.getBoundsInLocal().getWidth();
-        double presentSize = label.getFont().getSize();
-        double percentOfChange;
-        double newSize;
 
-        percentOfChange = widthMaxTextOutput / textWidthNew;
-        newSize = presentSize * percentOfChange;
+        String labelText = label.getText();
+        Text textNew = new Text(labelText);
+
+        Font labelFont = label.getFont();
+        textNew.setFont(labelFont);
+
+        double textWidthNew = textNew.getBoundsInLocal().getWidth();
+
+        Insets padding = label.getPadding();
+        double paddingRight = padding.getRight();
+        double paddingLeft = padding.getLeft();
+        double labelWidth = label.getWidth();
+        double widthMaxTextOutput = labelWidth - paddingRight - paddingLeft;
+
+        double percentOfChange = widthMaxTextOutput / textWidthNew;
+        double presentSize = labelFont.getSize();
+        double newSize = presentSize * percentOfChange;
 
         if (newSize > MAX_FONT_SIZE_MIN_WINDOW && !stage.isMaximized()) {
             newSize = MAX_FONT_SIZE_MIN_WINDOW;
@@ -73,15 +82,26 @@ public class ResizeDisplay {
      */
     public static double scrollText(ScrollPane scrollPane, String text, Button scrollButtonLeft, Button scrollButtonRight){
         setStage(scrollPane);
-        Text history = new Text(text);
 
         double moveScroll = 0;
-        double maxWidthForLabelOperation = scrollPane.getWidth() - scrollPane.getPadding().getLeft() - scrollPane.getPadding().getRight();
-        if (history.getBoundsInLocal().getWidth() > maxWidthForLabelOperation) {
+        double scrollPaneWidth = scrollPane.getWidth();
+
+        Insets padding = scrollPane.getPadding();
+        double paddingRight = padding.getRight();
+        double paddingLeft = padding.getLeft();
+
+        double maxWidthLabelOperation = scrollPaneWidth - paddingLeft - paddingRight;
+        Text history = new Text(text);
+        double historyWidth = history.getBoundsInLocal().getWidth();
+
+        if (historyWidth > maxWidthLabelOperation) {
             scrollButtonLeft.setVisible(true);
-            double fullWidth = history.getBoundsInLocal().getWidth() / maxWidthForLabelOperation;
-            int temp = (int) fullWidth;
-            moveScroll = scrollPane.getHmax() / temp;
+
+            double fullWidth = historyWidth / maxWidthLabelOperation;
+            int fullWidthInt = (int) fullWidth;
+
+            double maxH = scrollPane.getHmax();
+            moveScroll = maxH / fullWidthInt;
         } else {
             scrollButtonLeft.setVisible(false);
             scrollButtonRight.setVisible(false);

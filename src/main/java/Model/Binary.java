@@ -46,11 +46,6 @@ public class Binary {
     }
 
     /**
-     * Max default scale
-     */
-    private int defaultScale = 10000;
-
-    /**
      * Max default rounding
      */
     private RoundingMode defaultRounding = RoundingMode.UP;
@@ -69,6 +64,7 @@ public class Binary {
             throw new DivideZeroException("Cannot divide by zero");
         }
 
+        int defaultScale = 10000;
         result = numberFirst.divide(numberSecond, defaultScale, defaultRounding);
     }
 

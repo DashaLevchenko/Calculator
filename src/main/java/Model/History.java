@@ -27,14 +27,6 @@ public class History{
         history.add(operation);
     }
 
-//    /**
-//     * This method adds string to {@code history}.
-//     * @param historyString String need to add to history.
-//     */
-//    public void addString (String historyString) {
-//        history.add(historyString);
-//    }
-
     /*
      * Method checks last history object.
      * If last history object is operation, methods deletes last history.
@@ -65,19 +57,11 @@ public class History{
      */
     public void deleteLast () {
         if (history.size() > 0) {
-            history.remove(history.size() - 1);
+            int indexLastObject = history.size() - 1;
+            history.remove(indexLastObject);
         }
     }
 
-    /**
-     * Method deletes history object by {@code index}.
-     * @param index Index of history object need to delete.
-     */
-    public void delete (int index) {
-        if (history.size() > index) {
-            history.remove(index);
-        }
-    }
 
     /**
      * Method clears history.
@@ -101,7 +85,8 @@ public class History{
     public Object getLast () {
         Object lastObject = null;
         if (history.size() > 0) {
-            lastObject = history.get(history.size() - 1);
+            int indexLastObject = history.size() - 1;
+            lastObject = history.get(indexLastObject);
         }
         return lastObject;
     }

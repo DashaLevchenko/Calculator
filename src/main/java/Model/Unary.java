@@ -14,6 +14,7 @@ import java.math.RoundingMode;
  */
 public class Unary {
     private BigDecimal number;
+    private MathContext mathContext = MathContext.DECIMAL128;
 
     public void setOperation (OperationsEnum operation) {
         this.operation = operation;
@@ -43,12 +44,13 @@ public class Unary {
         if (compareZero(number) < 0) {
             throw new InvalidInputException("Invalid input");
         }
-        result = number.sqrt(MathContext.DECIMAL128);
+        result = number.sqrt(mathContext);
 
     }
 
     private void xSquare () {
-        result = number.pow(2).round(MathContext.DECIMAL128);
+        int power = 2;
+        result = number.pow(power).round(mathContext);
     }
 
     /**
@@ -60,7 +62,7 @@ public class Unary {
         if (compareZero(number) == 0) {
             throw new DivideZeroException("Cannot divide by zero");
         }
-        result = BigDecimal.ONE.divide(number, MathContext.DECIMAL128);
+        result = BigDecimal.ONE.divide(number, mathContext);
     }
 
     private int compareZero (BigDecimal number) {
