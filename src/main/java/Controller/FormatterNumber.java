@@ -16,7 +16,11 @@ class FormatterNumber {
      */
     private static final int MAX_SCALE = 16;
 
-    public static DecimalFormatSymbols symbols = new DecimalFormatSymbols();
+    public static DecimalFormatSymbols getSymbols () {
+        return symbols;
+    }
+
+    private static DecimalFormatSymbols symbols = new DecimalFormatSymbols();
     private static DecimalFormat decimalFormat = new DecimalFormat();
     private static final BigDecimal MAX_NUMBER_INPUT = BigDecimal.valueOf(9999999999999999L);
     private static MathContext maxContext = new MathContext(MAX_SCALE + 1, RoundingMode.HALF_DOWN);

@@ -217,7 +217,6 @@ public class CalculatorController {
     private String DEFAULT_TEXT = "0";
     private String decimalSeparate = ",";
     private String separatorNumber = " ";
-    private String minus = "-";
     private String emptyString = "";
 
     private boolean commaInText = false;
@@ -232,20 +231,18 @@ public class CalculatorController {
     private double moveScroll;
     private double xOffset = 0;
     private double yOffset = 0;
-    private double speedOfAnimation = 0.1;
-    private double transitionXDefault = 0;
 
     private Memory memory;
     private boolean percentPressed = false;
     private Calculator calculator = new Calculator();
-    private CalculatorHistory history;
+    private CalculatorHistory historyOut;
 
     @FXML
     void initialize () {
         firstStyleLabel = generalDisplay.getStyle();
         generalDisplay.setText(DEFAULT_TEXT);
         equal.setDefaultButton(true);
-        history = new CalculatorHistory(calculator);
+        historyOut = new CalculatorHistory(calculator);
     }
 
     /**
@@ -253,6 +250,7 @@ public class CalculatorController {
      */
     @FXML
     void showLeftMenu () {
+        double speedOfAnimation = 0.1;
         TranslateTransition transition = new TranslateTransition(Duration.seconds(speedOfAnimation), leftMenu);
         double transitionX;
         boolean visible;
@@ -262,7 +260,7 @@ public class CalculatorController {
             showLeftMenu = true;
             visible = false;
         } else {
-            transitionX = transitionXDefault;
+            transitionX = 0;
             showLeftMenu = false;
             visible = true;
         }
@@ -287,6 +285,7 @@ public class CalculatorController {
     }
 
     //region Text
+
     /**
      * Method adds comma to text from general display,
      * outs result on general display.
@@ -372,13 +371,12 @@ public class CalculatorController {
      */
     @FXML
     void numberPressed (ActionEvent actionEvent) {
-        String buttonText = ((Button) actionEvent.getSource()).getText();
-
         clearError();
 
         String out = generalDisplay.getText();
         out = setDefaultText(out);
 
+        String buttonText = ((Button) actionEvent.getSource()).getText();
         if (out.equals(DEFAULT_TEXT)) {
             out = buttonText;
         } else {
@@ -412,8 +410,11 @@ public class CalculatorController {
         negatePressed = true;
 
         String out = generalDisplay.getText();
-        char lastSymbol = out.toCharArray()[out.length() - 1];
-        if (lastSymbol == ',') {
+        int indexLastSymbol = out.length() - 1;
+        String lastSymbol = String.valueOf(out.toCharArray()[indexLastSymbol]);
+
+
+        if (lastSymbol.equals(decimalSeparate) || canBackspace) {
             out = addNegate(out);
             printResult(out);
         } else {
@@ -423,15 +424,17 @@ public class CalculatorController {
                 setCalculatorSecondNumber(null);
             }
             calculateNegate();
+
+            printHistory();
         }
 
+        String minus = "-";
         if (out.contains(minus)) {
             charValidInText++;
         } else {
             charValidInText--;
         }
-
-        printHistory();
+        memoryPressed = false;
     }
 
 
@@ -526,11 +529,26 @@ public class CalculatorController {
     private void setFirstNumber () {
         if (getFirstNumber() == null) {
             setCalculatorFirstNumber(getDisplayNumber());
-        } else {
-            if (history.historySize() == 0) {
+        }
+
+        if (historyContainsNegateUnary()) {
+            if (getFirstNumber() != null) {
                 addHistoryNumber(getFirstNumber());
             }
+            printHistory();
         }
+    }
+
+    private boolean historyContainsNegateUnary () {
+        String unaryHistory = historyOut.getHistoryUnaryOperations();
+        String negateHistory = historyOut.getNegateHistory();
+
+        boolean unaryNegateEmpty = false;
+
+        if (unaryHistory.isEmpty() && negateHistory.isEmpty()) {
+            unaryNegateEmpty = true;
+        }
+        return unaryNegateEmpty;
     }
 
 
@@ -539,20 +557,21 @@ public class CalculatorController {
      * after binary or unary operation buttons was pressed
      */
     private void setSecondNumber () {
-        BigDecimal secondNumber = getDisplayNumber();
-        if (!canChangeOperator) {
+        if (getSecondNumber() == null && !canChangeOperator) {
+            BigDecimal secondNumber = getDisplayNumber();
+
             if (!canBackspace && !memoryPressed) {
                 if (equalWasPress) {
                     secondNumber = getFirstNumber();
                 } else {
-                    if (getSecondNumber() != null) {
-                        printHistory();
-                        addHistoryNumber(getSecondNumber());
-                        secondNumber = getSecondNumber();
-                    }
+                    addHistoryNumber(getSecondNumber());
+                    secondNumber = getSecondNumber();
                 }
             }
             setCalculatorSecondNumber(secondNumber);
+        }
+        if (historyContainsNegateUnary()) {
+            printHistory();
         }
     }
 
@@ -571,11 +590,8 @@ public class CalculatorController {
         }
 
         setPercentOperation(null);
-        if (!negatePressed) {
-            percentPressed = false;
-            memoryPressed = false;
-        }
-        printHistory();
+        percentPressed = false;
+        memoryPressed = false;
     }
 
     /*
@@ -639,9 +655,11 @@ public class CalculatorController {
      * and deletes last number if percent was pressed several time
      */
     private void setPercentNumber () {
-        BigDecimal secondNumber;
-        BigDecimal percent;
+
         if (binaryOperation != null) {
+            BigDecimal percent;
+            BigDecimal secondNumber;
+
             if (!equalWasPress) {
                 if (getSecondNumber() == null) {
                     if (getFirstNumber() != null && !canBackspace) {
@@ -743,11 +761,7 @@ public class CalculatorController {
      */
     @FXML
     public void binaryOperation (ActionEvent actionEvent) {
-        String buttonID = ((Button) actionEvent.getSource()).getId();
 
-        negatePressed = false;
-        history.clearHistoryUnaryOperations();
-        history.clearNegateHistory();
         if (canBackspace) {
             setCalculatorSecondNumber(null);
         }
@@ -759,15 +773,19 @@ public class CalculatorController {
 
         setNumbersBinary();
 
+        clearUnaryHistory();
+        clearNegateHistory();
+
+        negatePressed = false;
         if (unaryOperation != null) {
-            calculator.setOperation(binaryOperation);
+            setOperation(binaryOperation);
             unaryOperation = null;
         }
         if (binaryOperation != null) {
             calculate();
-            calculator.setOperation(binaryOperation);
         }
 
+        String buttonID = ((Button) actionEvent.getSource()).getId();
         binaryOperation = operation.get(buttonID);
         setOperation(binaryOperation);
 
@@ -779,6 +797,7 @@ public class CalculatorController {
         printHistory();
     }
 
+
     /**
      * Method calculate unary operations, if {@code sqr, sqrt, oneDivideX} was pressed.
      * Also method sets first or second number in calculator.
@@ -788,13 +807,12 @@ public class CalculatorController {
      */
     @FXML
     public void unaryOperations (ActionEvent actionEvent) {
-        String buttonID = ((Button) actionEvent.getSource()).getId();
-
         if (equalWasPress) {
             binaryOperation = null;
-            history.clearHistoryUnaryOperations();
+            clearUnaryHistory();
         }
 
+        String buttonID = ((Button) actionEvent.getSource()).getId();
         unaryOperation = operation.get(buttonID);
         setNumberUnary();
         setOperation(unaryOperation);
@@ -812,16 +830,16 @@ public class CalculatorController {
      */
     @FXML
     public void percentOperation (ActionEvent actionEvent) {
-        String buttonID = ((Button) actionEvent.getSource()).getId();
+        percentPressed = true;
         if (negatePressed) {
             if (binaryOperation != null) {
                 setOperation(binaryOperation);
-                deleteLastHistory();
+                calculator.getHistory().deleteLast();
             }
         }
-        percentPressed = true;
 
         setPercentNumber();
+        String buttonID = ((Button) actionEvent.getSource()).getId();
         setPercentOperation(operation.get(buttonID));
         calculate();
 
@@ -844,7 +862,7 @@ public class CalculatorController {
         clearPercent();
         equalWasPress = true;
 
-        history.clearHistoryUnaryOperations();
+        clearUnaryHistory();
 
         if (binaryOperation != null) {
             setOperation(binaryOperation);
@@ -859,6 +877,12 @@ public class CalculatorController {
 
         if (!isError) {
             clearHistory();
+        } else {
+            calculator.getHistory().clear();
+            if (historyContainsNegateUnary()) {
+                deleteLastHistory();
+            }
+            printHistory();
         }
         negatePressed = false;
         canBackspace = false;
@@ -891,10 +915,9 @@ public class CalculatorController {
             calculator.calculate();
 
             if (getResult() != null) {
-                printResult(formatterNumber(getResult()));
-                if (!negatePressed) {
-                    canBackspace = false;
-                }
+                String out = formatterNumber(getResult());
+                printResult(out);
+                canBackspace = false;
             }
             if (!equalWasPress && !percentPressed && unaryOperation == null) {
                 setCalculatorSecondNumber(null);
@@ -918,9 +941,10 @@ public class CalculatorController {
         memoryPanel.setDisable(true);
 
         generalDisplay.setStyle(firstStyleLabel);
-        generalDisplay.setText(e.getMessage());
-        resizeOutputText();
+        String errorMessage = e.getMessage();
+        generalDisplay.setText(errorMessage);
 
+        resizeOutputText();
         scrollOutOperationMemory();
     }
 
@@ -929,7 +953,8 @@ public class CalculatorController {
      */
     private void printResult (String text) {
         try {
-            isOverflow(parseNumber(text));
+            BigDecimal numberCheckedOverflow = parseNumber(text);
+            isOverflow(numberCheckedOverflow);
             generalDisplay.setText(text);
             resizeOutputText();
         } catch (OverflowException e) {
@@ -979,12 +1004,15 @@ public class CalculatorController {
 
     //region History
     private void printHistory () {
-        outOperationMemory.setText(history.getChangedHistory());
+        String historyChanged = historyOut.getChangedHistory();
+        outOperationMemory.setText(historyChanged);
         scrollOutOperationMemory();
     }
 
     private void clearHistory () {
-        outOperationMemory.setText(history.clearHistory());
+        calculator.getHistory().clear();
+        String historyClean = historyOut.clearHistory();
+        outOperationMemory.setText(historyClean);
     }
 
     /*
@@ -998,6 +1026,7 @@ public class CalculatorController {
         if (binaryOperation == null) {
             clearCalculatorResult();
         }
+
         addNegateOperationHistory();
     }
 
@@ -1005,37 +1034,40 @@ public class CalculatorController {
      * Method adds negate operation in calculator history.
      */
     private void addNegateOperationHistory () {
-        if (history.getHistoryUnaryOperations().isEmpty()) {
-            if (canBackspace) {
-                history.deleteOldHistory();
-            } else {
-                BigDecimal numberAddHistory;
+        if (historyOut.getHistoryUnaryOperations().isEmpty()) {
+            BigDecimal numberAddHistory;
 
-                if (getResult() != null) {
-                    numberAddHistory = getResult().negate();
-                } else {
-                    numberAddHistory = getFirstNumber().negate();
-                }
-                deleteLastHistory();
-                if (memoryPressed || percentPressed) {
-                    deleteLastHistory();
-                }
-                addHistoryNumber(numberAddHistory);
-                setOperation(negateOperation);
+            if (getResult() != null) {
+                numberAddHistory = getResult().negate();
+            } else {
+                numberAddHistory = getFirstNumber().negate();
             }
+
+            deleteLastHistoryIn();
+            if (memoryPressed || percentPressed) {
+                deleteLastHistoryIn();
+            }
+
+            addHistoryNumber(numberAddHistory);
+            setOperation(negateOperation);
         }
     }
 
+    private void deleteLastHistoryIn () {
+        calculator.getHistory().deleteLast();
+    }
+
     private void addHistoryNumber (BigDecimal number) {
-        history.addHistoryNumber(number);
+        calculator.getHistory().addNumber(number);
     }
 
     private void deleteLastHistory () {
-        history.deleteLastHistory();
+        historyOut.deleteLastObject();
     }
     //endregion
 
     //region Scroll CalculatorHistory
+
     /**
      * This method moves scroll of calculator history in left if scroll button was pressed.
      * Makes left button invisible, if can't scroll left
@@ -1082,6 +1114,7 @@ public class CalculatorController {
     //endregion
 
     //region Clear
+
     /**
      * This method sets default value all variable which used in calculator.
      */
@@ -1116,6 +1149,14 @@ public class CalculatorController {
         charValidInText = CHAR_MAX_INPUT;
         resizeOutputText();
         isError = false;
+    }
+
+    private void clearUnaryHistory () {
+        historyOut.clearHistoryUnaryOperations();
+    }
+
+    private void clearNegateHistory () {
+        historyOut.clearNegateHistory();
     }
 
     /**
@@ -1173,6 +1214,7 @@ public class CalculatorController {
     //endregion
 
     //region Memory
+
     /**
      * Method saves number in memory, if {@code memoryStore} button was pressed
      */
@@ -1223,7 +1265,8 @@ public class CalculatorController {
         if (memory != null) {
             getMemoryNumber(memory.memoryRecall());
             BigDecimal numberMemory = memory.memoryRecall();
-            printResult(formatterNumber(numberMemory));
+            String out = formatterNumber(numberMemory);
+            printResult(out);
         }
         memoryPressed = true;
     }
@@ -1303,7 +1346,6 @@ public class CalculatorController {
     }
 
 
-
     /**
      * If mouse was dragged method changes location of calculator
      *
@@ -1330,6 +1372,7 @@ public class CalculatorController {
     //endregion
 
     //region Resize
+
     /**
      * This method resizes widow of calculator, if mouse was moved and dragged on border window.
      * Also method changes history display.

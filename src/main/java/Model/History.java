@@ -3,7 +3,7 @@ package Model;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
-public class History {
+public class History{
 
     private ArrayList<Object> history = new ArrayList<>();
 
@@ -106,19 +106,7 @@ public class History {
         return lastObject;
     }
 
-    private String separatorHistory = " ";
-    /**
-     * Method returns string of history with separator.
-     * @return History was separated.
-     */
-    public String getStringHistory () {
-        String stringHistory = "";
-        for (Object o : history) {
-            stringHistory = stringHistory.concat(o.toString());
-            stringHistory = stringHistory.concat(separatorHistory);
-        }
-        return stringHistory;
-    }
+
 
     /**
      * Method returns history object by index.

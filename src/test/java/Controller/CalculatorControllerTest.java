@@ -745,141 +745,141 @@ public class CalculatorControllerTest extends ApplicationTest {
 
     @Test
     void checkDivide() {
-//        //both operands are integer
-//        assertNumber("0 / 0 /", "Result is undefined", "0 ÷ 0 ÷ ");
-//
-//        assertNumber("0 / 2 /", "0", "0 ÷ 2 ÷ ");
-//        assertNumber("2 / 0 /", "Cannot divide by zero", "2 ÷ 0 ÷ ");
-//        assertNumber("0 / 2  /", "0", "0 ÷ -2 ÷ ");
-//        assertNumber("2  / 0 /", "Cannot divide by zero", "-2 ÷ 0 ÷ ");
-//
-//        assertNumber("2 / 3 /", "0,6666666666666667", "2 ÷ 3 ÷ ");
-//        assertNumber("2 / 3  /", "-0,6666666666666667", "2 ÷ -3 ÷ ");
-//        assertNumber("2  / 3 /", "-0,6666666666666667", "-2 ÷ 3 ÷ ");
-//        assertNumber("2  / 3  /", "0,6666666666666667", "-2 ÷ -3 ÷ ");
-//
-//        //first operand is decimal
-//        assertNumber("0,2 / 0 /", "Cannot divide by zero", "0,2 ÷ 0 ÷ ");
-//        assertNumber("0,2 / 0  /", "Cannot divide by zero", "0,2 ÷ 0 ÷ ");
-//        assertNumber("0,2  / 0 /", "Cannot divide by zero", "-0,2 ÷ 0 ÷ ");
-//        assertNumber("0,2  / 0  /", "Cannot divide by zero", "-0,2 ÷ 0 ÷ ");
-//
-//        assertNumber("0,2 / 3 /", "0,0666666666666667", "0,2 ÷ 3 ÷ ");
-//        assertNumber("0,2 / 3  /", "-0,0666666666666667", "0,2 ÷ -3 ÷ ");
-//        assertNumber("0,2  / 3 /", "-0,0666666666666667", "-0,2 ÷ 3 ÷ ");
-//        assertNumber("0,2  / 3  /", "0,0666666666666667", "-0,2 ÷ -3 ÷ ");
-//
-//        //second operand is decimal
-//        assertNumber("0 / ,2 /", "0", "0 ÷ 0,2 ÷ ");
-//        assertNumber("0 / ,2  /", "0", "0 ÷ -0,2 ÷ ");
-//
-//        assertNumber("2 / 0,3 /", "6,666666666666667", "2 ÷ 0,3 ÷ ");
-//        assertNumber("2 / 0,3  /", "-6,666666666666667", "2 ÷ -0,3 ÷ ");
-//        assertNumber("2  / 0,3 /", "-6,666666666666667", "-2 ÷ 0,3 ÷ ");
-//        assertNumber("2  / 0,3  /", "6,666666666666667", "-2 ÷ -0,3 ÷ ");
-//
-//        //both operands are decimal
-//        assertNumber("0,2 / 0,2 /", "1", "0,2 ÷ 0,2 ÷ ");
-//        assertNumber("0,2 / 0,2  /", "-1", "0,2 ÷ -0,2 ÷ ");
-//        assertNumber("0,2  / 0,2 /", "-1", "-0,2 ÷ 0,2 ÷ ");
-//        assertNumber("0,2  / 0,2  /", "1", "-0,2 ÷ -0,2 ÷ ");
-//
-//        assertNumber("0,2 / 0,3 /", "0,6666666666666667", "0,2 ÷ 0,3 ÷ ");
-//        assertNumber("0,2 / 0,3  /", "-0,6666666666666667", "0,2 ÷ -0,3 ÷ ");
-//        assertNumber("0,2  / 0,3 /", "-0,6666666666666667", "-0,2 ÷ 0,3 ÷ ");
-//        assertNumber("0,2  / 0,3  /", "0,6666666666666667", "-0,2 ÷ -0,3 ÷ ");
-//
-//        /*
-//         * Max positive number which can input is saved in memory for accelerate tests,
-//         * and called by  symbol
-//         */
-//        assertNumber(MAX_POSITIVE_NUMBER_INPUT + " / 0 =", "Cannot divide by zero", "9999999999999999 ÷ ");
-//        assertNumber(" / 0 =", "Cannot divide by zero", "negate(9999999999999999) ÷ ");
-//        //  => 9999999999999999
-//        assertNumber(" / =", "1", "");
-//        assertNumber(" /  =", "-1", "");
-//        assertNumber(" / =", "-1", "");
-//        assertNumber(" /  =", "1", "");
-//        //  => 9999999999999999
-//        assertNumber(" / 1 =", "9 999 999 999 999 999", "");
-//        assertNumber(" / 1  =", "-9 999 999 999 999 999", "");
-//        assertNumber(" / 1 =", "-9 999 999 999 999 999", "");
-//        assertNumber(" / 1 =", "9 999 999 999 999 999", "");
-//        //  => 9999999999999999
-//        assertNumber(" / 0,1 =", "9,999999999999999e+16", "");
-//        assertNumber(" / 0,1  =", "-9,999999999999999e+16", "");
-//        assertNumber(" / 0,1 =", "-9,999999999999999e+16", "");
-//        assertNumber(" / 0,1 = ", "9,999999999999999e+16", "");
-//        //  => 9999999999999999
-//        assertNumber(" / " + MIN_POSITIVE_NUMBER_INPUT + " =", "9,999999999999999e+31", "");
-//        assertNumber(" / " + MIN_POSITIVE_NUMBER_INPUT + " =", "-9,999999999999999e+31", "");
-//        assertNumber(" / " + MIN_POSITIVE_NUMBER_INPUT + " =", "-9,999999999999999e+31", "");
-//        assertNumber(" / " + MIN_POSITIVE_NUMBER_INPUT + " =", "9,999999999999999e+31", "");
-//
-//
-//        /*
-//         * Min positive number  which can input is saved in memory for accelerate tests,
-//         * and called by  symbol
-//         */
-//        assertNumber(MIN_POSITIVE_NUMBER_INPUT + " / 0 =", "Cannot divide by zero", "0,0000000000000001 ÷ ");
-//        assertNumber(" / 0 =", "Cannot divide by zero", "negate(0,0000000000000001) ÷ ");
-//        //  => 0,0000000000000001
-//        assertNumber(" / =", "1", "");
-//        assertNumber(" /  =", "-1", "");
-//        assertNumber(" / =", "-1", "");
-//        assertNumber(" /  =", "1", "");
-//        //  => 0,0000000000000001
-//        assertNumber(" / 1 =", "0,0000000000000001", "");
-//        assertNumber(" / 1  =", "-0,0000000000000001", "");
-//        assertNumber(" / 1 =", "-0,0000000000000001", "");
-//        assertNumber(" / 1 =", "0,0000000000000001", "");
-//        //  => 0,0000000000000001
-//        assertNumber(" / 0,1 =", "0,000000000000001", "");
-//        assertNumber(" / 0,1  =", "-0,000000000000001", "");
-//        assertNumber(" / 0,1 =", "-0,000000000000001", "");
-//        assertNumber(" / 0,1 =", "0,000000000000001", "");
-//        //  => 0,0000000000000001
-//        assertNumber(" / 9999999999999999 =", "1,e-32", "");
-//        assertNumber(" / 9999999999999999  =", "-1,e-32", "");
-//        assertNumber(" / 9999999999999999 =", "-1,e-32", "");
-//        assertNumber(" / 9999999999999999 =", "1,e-32", "");
-//
-//        /*
-//         * Max number visible => 9,999999999999999e+9999,
-//         * max number from model for controller => 9999999999999999 49...99,99...99
-//         * Max number is saved at memory for accelerate tests,
-//         * and called by  symbol
-//         */
+        //both operands are integer
+        assertNumber("0 / 0 /", "Result is undefined", "0 ÷ 0 ÷ ");
+
+        assertNumber("0 / 2 /", "0", "0 ÷ 2 ÷ ");
+        assertNumber("2 / 0 /", "Cannot divide by zero", "2 ÷ 0 ÷ ");
+        assertNumber("0 / 2  /", "0", "0 ÷ -2 ÷ ");
+        assertNumber("2  / 0 /", "Cannot divide by zero", "-2 ÷ 0 ÷ ");
+
+        assertNumber("2 / 3 /", "0,6666666666666667", "2 ÷ 3 ÷ ");
+        assertNumber("2 / 3  /", "-0,6666666666666667", "2 ÷ -3 ÷ ");
+        assertNumber("2  / 3 /", "-0,6666666666666667", "-2 ÷ 3 ÷ ");
+        assertNumber("2  / 3  /", "0,6666666666666667", "-2 ÷ -3 ÷ ");
+
+        //first operand is decimal
+        assertNumber("0,2 / 0 /", "Cannot divide by zero", "0,2 ÷ 0 ÷ ");
+        assertNumber("0,2 / 0  /", "Cannot divide by zero", "0,2 ÷ 0 ÷ ");
+        assertNumber("0,2  / 0 /", "Cannot divide by zero", "-0,2 ÷ 0 ÷ ");
+        assertNumber("0,2  / 0  /", "Cannot divide by zero", "-0,2 ÷ 0 ÷ ");
+
+        assertNumber("0,2 / 3 /", "0,0666666666666667", "0,2 ÷ 3 ÷ ");
+        assertNumber("0,2 / 3  /", "-0,0666666666666667", "0,2 ÷ -3 ÷ ");
+        assertNumber("0,2  / 3 /", "-0,0666666666666667", "-0,2 ÷ 3 ÷ ");
+        assertNumber("0,2  / 3  /", "0,0666666666666667", "-0,2 ÷ -3 ÷ ");
+
+        //second operand is decimal
+        assertNumber("0 / ,2 /", "0", "0 ÷ 0,2 ÷ ");
+        assertNumber("0 / ,2  /", "0", "0 ÷ -0,2 ÷ ");
+
+        assertNumber("2 / 0,3 /", "6,666666666666667", "2 ÷ 0,3 ÷ ");
+        assertNumber("2 / 0,3  /", "-6,666666666666667", "2 ÷ -0,3 ÷ ");
+        assertNumber("2  / 0,3 /", "-6,666666666666667", "-2 ÷ 0,3 ÷ ");
+        assertNumber("2  / 0,3  /", "6,666666666666667", "-2 ÷ -0,3 ÷ ");
+
+        //both operands are decimal
+        assertNumber("0,2 / 0,2 /", "1", "0,2 ÷ 0,2 ÷ ");
+        assertNumber("0,2 / 0,2  /", "-1", "0,2 ÷ -0,2 ÷ ");
+        assertNumber("0,2  / 0,2 /", "-1", "-0,2 ÷ 0,2 ÷ ");
+        assertNumber("0,2  / 0,2  /", "1", "-0,2 ÷ -0,2 ÷ ");
+
+        assertNumber("0,2 / 0,3 /", "0,6666666666666667", "0,2 ÷ 0,3 ÷ ");
+        assertNumber("0,2 / 0,3  /", "-0,6666666666666667", "0,2 ÷ -0,3 ÷ ");
+        assertNumber("0,2  / 0,3 /", "-0,6666666666666667", "-0,2 ÷ 0,3 ÷ ");
+        assertNumber("0,2  / 0,3  /", "0,6666666666666667", "-0,2 ÷ -0,3 ÷ ");
+
+        /*
+         * Max positive number which can input is saved in memory for accelerate tests,
+         * and called by  symbol
+         */
+        assertNumber(MAX_POSITIVE_NUMBER_INPUT + " / 0 =", "Cannot divide by zero", "9999999999999999 ÷ ");
+        assertNumber(" / 0 =", "Cannot divide by zero", "negate(9999999999999999) ÷ ");
+        //  => 9999999999999999
+        assertNumber(" / =", "1", "");
+        assertNumber(" /  =", "-1", "");
+        assertNumber(" / =", "-1", "");
+        assertNumber(" /  =", "1", "");
+        //  => 9999999999999999
+        assertNumber(" / 1 =", "9 999 999 999 999 999", "");
+        assertNumber(" / 1  =", "-9 999 999 999 999 999", "");
+        assertNumber(" / 1 =", "-9 999 999 999 999 999", "");
+        assertNumber(" / 1 =", "9 999 999 999 999 999", "");
+        //  => 9999999999999999
+        assertNumber(" / 0,1 =", "9,999999999999999e+16", "");
+        assertNumber(" / 0,1  =", "-9,999999999999999e+16", "");
+        assertNumber(" / 0,1 =", "-9,999999999999999e+16", "");
+        assertNumber(" / 0,1 = ", "9,999999999999999e+16", "");
+        //  => 9999999999999999
+        assertNumber(" / " + MIN_POSITIVE_NUMBER_INPUT + " =", "9,999999999999999e+31", "");
+        assertNumber(" / " + MIN_POSITIVE_NUMBER_INPUT + " =", "-9,999999999999999e+31", "");
+        assertNumber(" / " + MIN_POSITIVE_NUMBER_INPUT + " =", "-9,999999999999999e+31", "");
+        assertNumber(" / " + MIN_POSITIVE_NUMBER_INPUT + " =", "9,999999999999999e+31", "");
+
+
+        /*
+         * Min positive number  which can input is saved in memory for accelerate tests,
+         * and called by  symbol
+         */
+        assertNumber(MIN_POSITIVE_NUMBER_INPUT + " / 0 =", "Cannot divide by zero", "0,0000000000000001 ÷ ");
+        assertNumber(" / 0 =", "Cannot divide by zero", "negate(0,0000000000000001) ÷ ");
+        //  => 0,0000000000000001
+        assertNumber(" / =", "1", "");
+        assertNumber(" /  =", "-1", "");
+        assertNumber(" / =", "-1", "");
+        assertNumber(" /  =", "1", "");
+        //  => 0,0000000000000001
+        assertNumber(" / 1 =", "0,0000000000000001", "");
+        assertNumber(" / 1  =", "-0,0000000000000001", "");
+        assertNumber(" / 1 =", "-0,0000000000000001", "");
+        assertNumber(" / 1 =", "0,0000000000000001", "");
+        //  => 0,0000000000000001
+        assertNumber(" / 0,1 =", "0,000000000000001", "");
+        assertNumber(" / 0,1  =", "-0,000000000000001", "");
+        assertNumber(" / 0,1 =", "-0,000000000000001", "");
+        assertNumber(" / 0,1 =", "0,000000000000001", "");
+        //  => 0,0000000000000001
+        assertNumber(" / 9999999999999999 =", "1,e-32", "");
+        assertNumber(" / 9999999999999999  =", "-1,e-32", "");
+        assertNumber(" / 9999999999999999 =", "-1,e-32", "");
+        assertNumber(" / 9999999999999999 =", "1,e-32", "");
+
+        /*
+         * Max number visible => 9,999999999999999e+9999,
+         * max number from model for controller => 9999999999999999 49...99,99...99
+         * Max number is saved at memory for accelerate tests,
+         * and called by  symbol
+         */
         assertNumber(MAX_POSITIVE_NUMBER + "" + MAX_POSITIVE_NUMBER_VISIBLE + " /  =", "0,9999999999999999", "");
-//        //  => 9999999999999999 49...99,99...99
-//        assertNumber(" / 0 =", "Cannot divide by zero", "9,999999999999999e+9999 ÷ ");
-//        assertNumber(" / 0 =", "Cannot divide by zero", "negate(9,999999999999999e+9999) ÷ ");
-//        //  => 9999999999999999 49...99,99...99
-//        assertNumber(" / =", "1", "");
-//        assertNumber(" /  =", "-1", "");
-//        assertNumber(" / =", "-1", "");
-//        assertNumber(" /  =", "1", "");
-//        //  => 9999999999999999 49...99,99...99
-//        assertNumber(" / 1 =", "9,999999999999999e+9999", "");
-//        assertNumber(" / 1  =", "-9,999999999999999e+9999", "");
-//        assertNumber(" / 1 =", "-9,999999999999999e+9999", "");
-//        assertNumber(" / 1 =", "9,999999999999999e+9999", "");
-//        //  => 9999999999999999 49...99,99...99
-//        assertNumber(" / 0,1 =", "Overflow", "9,999999999999999e+9999 ÷ ");
-//        assertNumber(" / 0,1  =", "Overflow", "9,999999999999999e+9999 ÷ ");
-//        assertNumber(" / 0,1 =", "Overflow", "negate(9,999999999999999e+9999) ÷ ");
-//        assertNumber(" / 0,1 = ", "Overflow", "negate(9,999999999999999e+9999) ÷ ");
-//        //  => 9999999999999999 49...99,99...99
-//        assertNumber(" / " + MIN_POSITIVE_NUMBER_INPUT + " =", "Overflow", "9,999999999999999e+9999 ÷ ");
-//        assertNumber(" / " + MIN_POSITIVE_NUMBER_INPUT + "  =", "Overflow", "9,999999999999999e+9999 ÷ ");
-//        assertNumber(" / " + MIN_POSITIVE_NUMBER_INPUT + " =", "Overflow", "negate(9,999999999999999e+9999) ÷ ");
-//        assertNumber(" / " + MIN_POSITIVE_NUMBER_INPUT + " = ", "Overflow", "negate(9,999999999999999e+9999) ÷ ");
-//        //  => 9999999999999999 49...99,99...99
-//        assertNumber(" / " + MAX_POSITIVE_NUMBER_INPUT + " =", "1,e+9984", "");
-//        assertNumber(" / " + MAX_POSITIVE_NUMBER_INPUT + "  =", "-1,e+9984", "");
-//        assertNumber(" / " + MAX_POSITIVE_NUMBER_INPUT + " =", "-1,e+9984", "");
-//        assertNumber(" / " + MAX_POSITIVE_NUMBER_INPUT + "  = ", "1,e+9984", "");
-//        //  => 9999999999999999 49...99,99...99
+        //  => 9999999999999999 49...99,99...99
+        assertNumber(" / 0 =", "Cannot divide by zero", "9,999999999999999e+9999 ÷ ");
+        assertNumber(" / 0 =", "Cannot divide by zero", "negate(9,999999999999999e+9999) ÷ ");
+        //  => 9999999999999999 49...99,99...99
+        assertNumber(" / =", "1", "");
+        assertNumber(" /  =", "-1", "");
+        assertNumber(" / =", "-1", "");
+        assertNumber(" /  =", "1", "");
+        //  => 9999999999999999 49...99,99...99
+        assertNumber(" / 1 =", "9,999999999999999e+9999", "");
+        assertNumber(" / 1  =", "-9,999999999999999e+9999", "");
+        assertNumber(" / 1 =", "-9,999999999999999e+9999", "");
+        assertNumber(" / 1 =", "9,999999999999999e+9999", "");
+        //  => 9999999999999999 49...99,99...99
+        assertNumber(" / 0,1 =", "Overflow", "9,999999999999999e+9999 ÷ ");
+        assertNumber(" / 0,1  =", "Overflow", "9,999999999999999e+9999 ÷ ");
+        assertNumber(" / 0,1 =", "Overflow", "negate(9,999999999999999e+9999) ÷ ");
+        assertNumber(" / 0,1 = ", "Overflow", "negate(9,999999999999999e+9999) ÷ ");
+        //  => 9999999999999999 49...99,99...99
+        assertNumber(" / " + MIN_POSITIVE_NUMBER_INPUT + " =", "Overflow", "9,999999999999999e+9999 ÷ ");
+        assertNumber(" / " + MIN_POSITIVE_NUMBER_INPUT + "  =", "Overflow", "9,999999999999999e+9999 ÷ ");
+        assertNumber(" / " + MIN_POSITIVE_NUMBER_INPUT + " =", "Overflow", "negate(9,999999999999999e+9999) ÷ ");
+        assertNumber(" / " + MIN_POSITIVE_NUMBER_INPUT + " = ", "Overflow", "negate(9,999999999999999e+9999) ÷ ");
+        //  => 9999999999999999 49...99,99...99
+        assertNumber(" / " + MAX_POSITIVE_NUMBER_INPUT + " =", "1,e+9984", "");
+        assertNumber(" / " + MAX_POSITIVE_NUMBER_INPUT + "  =", "-1,e+9984", "");
+        assertNumber(" / " + MAX_POSITIVE_NUMBER_INPUT + " =", "-1,e+9984", "");
+        assertNumber(" / " + MAX_POSITIVE_NUMBER_INPUT + "  = ", "1,e+9984", "");
+        //  => 9999999999999999 49...99,99...99
         assertNumber(MIN_POSITIVE_NUMBER + "/  =", "Overflow", "1,e-9999 ÷ ");
         assertNumber(MIN_POSITIVE_NUMBER + " /  =", "Overflow", "1,e-9999 ÷ negate(9,999999999999999e+9999) ");
         assertNumber(MIN_POSITIVE_NUMBER + " /  =", "Overflow", "negate(1,e-9999) ÷ ");

@@ -8,9 +8,12 @@
   <component name="ChangeListManager">
     <list default="true" id="feaeb0c2-feb2-4a9c-98e3-48b1d1a339aa" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/CalculatorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/CalculatorController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/CalculatorHistory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/CalculatorHistory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controller/FormatterNumber.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/FormatterNumber.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Demo/Demo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Demo/Demo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Model/CalculateFormula.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/CalculateFormula.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/History.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/History.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Controller/CalculatorControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Controller/CalculatorControllerTest.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -138,7 +141,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Demo">
+  <component name="RunManager" selected="JUnit.CalculatorControllerTest.checkPercent">
     <configuration name="CalculatorMain" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Controller.CalculatorMain" />
       <module name="Calculator2" />
@@ -152,20 +155,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Demo" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Demo.Demo" />
-      <module name="Calculator2" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Demo.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="CalculatorControllerTest.checkAdd" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CalculatorControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Calculator2" />
       <extension name="coverage">
         <pattern>
@@ -175,7 +165,38 @@
       </extension>
       <option name="PACKAGE_NAME" value="Controller" />
       <option name="MAIN_CLASS_NAME" value="Controller.CalculatorControllerTest" />
-      <option name="METHOD_NAME" value="checkAdd" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CalculatorControllerTest.checkDivide" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Calculator2" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Controller" />
+      <option name="MAIN_CLASS_NAME" value="Controller.CalculatorControllerTest" />
+      <option name="METHOD_NAME" value="checkDivide" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CalculatorControllerTest.checkEqual" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Calculator2" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Controller" />
+      <option name="MAIN_CLASS_NAME" value="Controller.CalculatorControllerTest" />
+      <option name="METHOD_NAME" value="checkEqual" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -192,22 +213,6 @@
       <option name="PACKAGE_NAME" value="Controller" />
       <option name="MAIN_CLASS_NAME" value="Controller.CalculatorControllerTest" />
       <option name="METHOD_NAME" value="checkMIXBinaryOperations" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="CalculatorControllerTest.checkMemorySubtract" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Calculator2" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Controller.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="Controller" />
-      <option name="MAIN_CLASS_NAME" value="Controller.CalculatorControllerTest" />
-      <option name="METHOD_NAME" value="checkMemorySubtract" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -262,19 +267,19 @@
     <list>
       <item itemvalue="Application.CalculatorMain" />
       <item itemvalue="JUnit.Calculator_ControllerTest" />
-      <item itemvalue="JUnit.CalculatorControllerTest.checkAdd" />
+      <item itemvalue="JUnit.CalculatorControllerTest" />
       <item itemvalue="JUnit.CalculatorControllerTest.checkPercent" />
+      <item itemvalue="JUnit.CalculatorControllerTest.checkDivide" />
+      <item itemvalue="JUnit.CalculatorControllerTest.checkEqual" />
       <item itemvalue="JUnit.CalculatorControllerTest.checkMIXBinaryOperations" />
-      <item itemvalue="JUnit.CalculatorControllerTest.checkMemorySubtract" />
-      <item itemvalue="Application.Demo" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Demo" />
         <item itemvalue="JUnit.CalculatorControllerTest.checkPercent" />
-        <item itemvalue="JUnit.CalculatorControllerTest.checkMemorySubtract" />
         <item itemvalue="JUnit.CalculatorControllerTest.checkMIXBinaryOperations" />
-        <item itemvalue="JUnit.CalculatorControllerTest.checkAdd" />
+        <item itemvalue="JUnit.CalculatorControllerTest.checkEqual" />
+        <item itemvalue="JUnit.CalculatorControllerTest" />
+        <item itemvalue="JUnit.CalculatorControllerTest.checkDivide" />
       </list>
     </recent_temporary>
   </component>
@@ -290,7 +295,7 @@
   </component>
   <component name="StructureViewFactory">
     <option name="AUTOSCROLL_MODE" value="false" />
-    <option name="ACTIVE_ACTIONS" value=",ALPHA_COMPARATOR,SHOW_NON_PUBLIC,SHOW_FIELDS" />
+    <option name="ACTIVE_ACTIONS" value=",ALPHA_COMPARATOR,SHOW_FIELDS" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -302,13 +307,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1565432602101</updated>
-    </task>
-    <task id="LOCAL-00048" summary="change resizeOutput">
-      <created>1570796535347</created>
-      <option name="number" value="00048" />
-      <option name="presentableId" value="LOCAL-00048" />
-      <option name="project" value="LOCAL" />
-      <updated>1570796535347</updated>
     </task>
     <task id="LOCAL-00049" summary="pattern for 0,111(13)">
       <created>1571155722455</created>
@@ -646,7 +644,14 @@
       <option name="project" value="LOCAL" />
       <updated>1575467109737</updated>
     </task>
-    <option name="localTasksCounter" value="97" />
+    <task id="LOCAL-00097" summary="before change history">
+      <created>1575468602941</created>
+      <option name="number" value="00097" />
+      <option name="presentableId" value="LOCAL-00097" />
+      <option name="project" value="LOCAL" />
+      <updated>1575468602941</updated>
+    </task>
+    <option name="localTasksCounter" value="98" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -741,8 +746,9 @@
         <watch expression="calculator" language="JAVA" />
       </configuration>
       <configuration name="Application">
-        <watch expression="((History)((CalculatorHistory)this).history).history" custom="Controller.CalculatorHistory,Model.History" />
-        <watch expression="((Calculator)((CalculatorController)this).calculator).history" custom="Model.Calculator,Controller.CalculatorController" />
+        <watch expression="((CalculatorHistory)this).calculator" custom="Controller.CalculatorHistory" />
+        <watch expression="((History)((Calculator)((CalculatorController)this).calculator).history).history" custom="Model.Calculator,Controller.CalculatorController,Model.History" />
+        <watch expression="((CalculatorController)this).history" custom="Controller.CalculatorController" />
       </configuration>
     </watches-manager>
   </component>
