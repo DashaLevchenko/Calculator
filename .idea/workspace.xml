@@ -6,9 +6,9 @@
     <option name="CUSTOM_SCOPE_NAME" value="All Places" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="feaeb0c2-feb2-4a9c-98e3-48b1d1a339aa" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/CalculatorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/CalculatorController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Text.java" beforeDir="false" />
+    <list default="true" id="feaeb0c2-feb2-4a9c-98e3-48b1d1a339aa" name="Default Changelist" comment="all work">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Demo/Demo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Demo/Demo.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -136,13 +136,26 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.CalculatorControllerTest">
+  <component name="RunManager" selected="Application.Demo">
     <configuration name="CalculatorMain" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Controller.CalculatorMain" />
       <module name="Calculator2" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value=".*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Demo" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Demo.Demo" />
+      <module name="Calculator2" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Demo.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -197,22 +210,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CalculatorControllerTest.checkInput" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Calculator2" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Controller.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="Controller" />
-      <option name="MAIN_CLASS_NAME" value="Controller.CalculatorControllerTest" />
-      <option name="METHOD_NAME" value="checkInput" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="CalculatorControllerTest.checkMultiply" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Calculator2" />
       <extension name="coverage">
@@ -262,19 +259,19 @@
     <list>
       <item itemvalue="Application.CalculatorMain" />
       <item itemvalue="JUnit.Calculator_ControllerTest" />
-      <item itemvalue="JUnit.CalculatorControllerTest.checkInput" />
       <item itemvalue="JUnit.CalculatorControllerTest.checkBackspace" />
       <item itemvalue="JUnit.CalculatorControllerTest.checkMultiply" />
       <item itemvalue="JUnit.CalculatorControllerTest.checkDivide" />
       <item itemvalue="JUnit.CalculatorControllerTest" />
+      <item itemvalue="Application.Demo" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Demo" />
         <item itemvalue="JUnit.CalculatorControllerTest" />
         <item itemvalue="JUnit.CalculatorControllerTest.checkDivide" />
         <item itemvalue="JUnit.CalculatorControllerTest.checkMultiply" />
         <item itemvalue="JUnit.CalculatorControllerTest.checkBackspace" />
-        <item itemvalue="JUnit.CalculatorControllerTest.checkInput" />
       </list>
     </recent_temporary>
   </component>
@@ -302,13 +299,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1565432602101</updated>
-    </task>
-    <task id="LOCAL-00051" summary="before change test format">
-      <created>1571239002131</created>
-      <option name="number" value="00051" />
-      <option name="presentableId" value="LOCAL-00051" />
-      <option name="project" value="LOCAL" />
-      <updated>1571239002131</updated>
     </task>
     <task id="LOCAL-00052" summary="before test exceptions">
       <created>1571598530632</created>
@@ -646,7 +636,14 @@
       <option name="project" value="LOCAL" />
       <updated>1575565875553</updated>
     </task>
-    <option name="localTasksCounter" value="100" />
+    <task id="LOCAL-00100" summary="all work">
+      <created>1575566306286</created>
+      <option name="number" value="00100" />
+      <option name="presentableId" value="LOCAL-00100" />
+      <option name="project" value="LOCAL" />
+      <updated>1575566306286</updated>
+    </task>
+    <option name="localTasksCounter" value="101" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -741,11 +738,11 @@
     <MESSAGE value="all works, before add javadoc and refactoring" />
     <MESSAGE value="controller ok" />
     <MESSAGE value="javadoc history" />
-    <MESSAGE value="all work" />
     <MESSAGE value="before change history" />
     <MESSAGE value="before change variable" />
     <MESSAGE value="before delete Text" />
-    <option name="LAST_COMMIT_MESSAGE" value="before delete Text" />
+    <MESSAGE value="all work" />
+    <option name="LAST_COMMIT_MESSAGE" value="all work" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
