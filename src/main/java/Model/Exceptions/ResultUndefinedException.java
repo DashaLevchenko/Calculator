@@ -8,5 +8,11 @@ public class ResultUndefinedException extends Exception {
     public ResultUndefinedException(String message){
         super(message);
     }
+    /**
+     * Constructs an {@code ResultUndefinedException} without the specified  detail message.
+     */
+    public ResultUndefinedException(){
+        super();
+    }
 
 }

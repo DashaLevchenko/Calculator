@@ -6,9 +6,11 @@
     <option name="CUSTOM_SCOPE_NAME" value="All Places" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="feaeb0c2-feb2-4a9c-98e3-48b1d1a339aa" name="Default Changelist" comment="all work">
+    <list default="true" id="feaeb0c2-feb2-4a9c-98e3-48b1d1a339aa" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Demo/Demo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Demo/Demo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Exceptions/ResultUndefinedException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Exceptions/ResultUndefinedException.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -89,7 +91,7 @@
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="Errors" />
+    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
   </component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.RecentsKey">
@@ -153,6 +155,7 @@
     <configuration name="Demo" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Demo.Demo" />
       <module name="Calculator2" />
+      <option name="PROGRAM_PARAMETERS" value="√" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="Demo.*" />
@@ -258,12 +261,12 @@
     </configuration>
     <list>
       <item itemvalue="Application.CalculatorMain" />
+      <item itemvalue="Application.Demo" />
       <item itemvalue="JUnit.Calculator_ControllerTest" />
       <item itemvalue="JUnit.CalculatorControllerTest.checkBackspace" />
       <item itemvalue="JUnit.CalculatorControllerTest.checkMultiply" />
       <item itemvalue="JUnit.CalculatorControllerTest.checkDivide" />
       <item itemvalue="JUnit.CalculatorControllerTest" />
-      <item itemvalue="Application.Demo" />
     </list>
     <recent_temporary>
       <list>
@@ -299,13 +302,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1565432602101</updated>
-    </task>
-    <task id="LOCAL-00052" summary="before test exceptions">
-      <created>1571598530632</created>
-      <option name="number" value="00052" />
-      <option name="presentableId" value="LOCAL-00052" />
-      <option name="project" value="LOCAL" />
-      <updated>1571598530633</updated>
     </task>
     <task id="LOCAL-00053" summary="before change unary operations in controller">
       <created>1571600228370</created>
@@ -643,7 +639,14 @@
       <option name="project" value="LOCAL" />
       <updated>1575566306286</updated>
     </task>
-    <option name="localTasksCounter" value="101" />
+    <task id="LOCAL-00101" summary="demo change">
+      <created>1575569951051</created>
+      <option name="number" value="00101" />
+      <option name="presentableId" value="LOCAL-00101" />
+      <option name="project" value="LOCAL" />
+      <updated>1575569951051</updated>
+    </task>
+    <option name="localTasksCounter" value="102" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -717,7 +720,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="before overflow in controller" />
     <MESSAGE value="before change Enum" />
     <MESSAGE value="before 10 /3 = *3" />
     <MESSAGE value="before change formatter" />
@@ -742,9 +744,19 @@
     <MESSAGE value="before change variable" />
     <MESSAGE value="before delete Text" />
     <MESSAGE value="all work" />
-    <option name="LAST_COMMIT_MESSAGE" value="all work" />
+    <MESSAGE value="demo change" />
+    <option name="LAST_COMMIT_MESSAGE" value="demo change" />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Demo/Demo.java</url>
+          <line>39</line>
+          <option name="timeStamp" value="343" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <watches-manager>
       <configuration name="JUnit">
         <watch expression="calculator" language="JAVA" />
