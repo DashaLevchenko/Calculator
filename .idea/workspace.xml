@@ -7,10 +7,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="feaeb0c2-feb2-4a9c-98e3-48b1d1a339aa" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Demo/Demo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Demo/Demo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Exceptions/ResultUndefinedException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Exceptions/ResultUndefinedException.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -302,13 +300,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1565432602101</updated>
-    </task>
-    <task id="LOCAL-00053" summary="before change unary operations in controller">
-      <created>1571600228370</created>
-      <option name="number" value="00053" />
-      <option name="presentableId" value="LOCAL-00053" />
-      <option name="project" value="LOCAL" />
-      <updated>1571600228370</updated>
     </task>
     <task id="LOCAL-00054" summary="tests work">
       <created>1571659466541</created>
@@ -646,7 +637,14 @@
       <option name="project" value="LOCAL" />
       <updated>1575569951051</updated>
     </task>
-    <option name="localTasksCounter" value="102" />
+    <task id="LOCAL-00102" summary="before change operation un demo">
+      <created>1575634871043</created>
+      <option name="number" value="00102" />
+      <option name="presentableId" value="LOCAL-00102" />
+      <option name="project" value="LOCAL" />
+      <updated>1575634871043</updated>
+    </task>
+    <option name="localTasksCounter" value="103" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -720,7 +718,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="before change Enum" />
     <MESSAGE value="before 10 /3 = *3" />
     <MESSAGE value="before change formatter" />
     <MESSAGE value="border work" />
@@ -745,18 +742,10 @@
     <MESSAGE value="before delete Text" />
     <MESSAGE value="all work" />
     <MESSAGE value="demo change" />
-    <option name="LAST_COMMIT_MESSAGE" value="demo change" />
+    <MESSAGE value="before change operation un demo" />
+    <option name="LAST_COMMIT_MESSAGE" value="before change operation un demo" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/Demo/Demo.java</url>
-          <line>39</line>
-          <option name="timeStamp" value="343" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="JUnit">
         <watch expression="calculator" language="JAVA" />

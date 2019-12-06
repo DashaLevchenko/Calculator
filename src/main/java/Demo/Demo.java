@@ -30,31 +30,37 @@ public class Demo {
 
     public static void main (String[] args) {
         //"√((5+3)/2-1)+4"
+            String formula = "((5+3)/2-1)√+4";
         try {
-            String formula = "";
-            for(String str : args){
-                formula = formula.concat(str);
-            }
-
-
-//             formula = "((5+3)/2-1)√+4";
             System.out.println("Ответ: " + calculate(formula));
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+
     private static String numberString;
 
-    private static BigDecimal calculate (String text) throws ResultUndefinedException, DivideZeroException, InvalidInputException, OperationException {
+    /**
+     * This method calculate formula and return result.
+     *
+     * @param formula Formula which need to calculate
+     * @return Number was calculated by formula
+     * @throws DivideZeroException      If divide by zero
+     * @throws ResultUndefinedException If zero divide by zero
+     * @throws OperationException       If operation not equals calculator operation
+     * @throws InvalidInputException    If square root negative number
+     */
+    public static BigDecimal calculate (String formula) throws ResultUndefinedException, DivideZeroException, InvalidInputException, OperationException {
         calculator = new Calculator();
         numberString = "";
-        for (int i = 0; i < text.length(); i++) {
-            char character = text.toCharArray()[i];
+
+        for (int i = 0; i < formula.length(); i++) {
+            char character = formula.toCharArray()[i];
             String symbol = String.valueOf(character);
 
-            parseNumber(symbol, i, text);
-            parseOperation(symbol);
+            parseNumber(symbol, i, formula);
+            parseOperation(symbol, i, formula);
         }
 
         return getResult();
@@ -68,9 +74,10 @@ public class Demo {
         return result;
     }
 
-    private static void parseOperation (String symbol) throws ResultUndefinedException, DivideZeroException, InvalidInputException, OperationException {
+    private static void parseOperation (String symbol, int index, String formula) throws ResultUndefinedException, DivideZeroException, InvalidInputException, OperationException {
+
         if (isOperation(symbol)) {
-            setOperation(symbol);
+            setOperation(symbol, index, formula);
         }
     }
 
@@ -83,6 +90,8 @@ public class Demo {
         if (isNumber(symbol)) {
             numberString = numberString.concat(symbol);
             boolean isNextSymbolPartNumber = isPartNumber(index, formula);
+
+
             if (!isNextSymbolPartNumber) {
                 BigDecimal number = new BigDecimal(numberString);
                 setNumber(number);
@@ -118,19 +127,38 @@ public class Demo {
         return isNumber;
     }
 
-    private static void setOperation (String operationString) throws DivideZeroException, InvalidInputException, ResultUndefinedException, OperationException {
+    private static void setOperation (String operationString, int index, String formula) throws DivideZeroException, InvalidInputException, ResultUndefinedException, OperationException {
         OperationsEnum operation = operations.get(operationString);
         calculator.setOperation(operation);
         boolean isUnary = calculator.isUnary(operation);
 
         if (isUnary) {
-            calculator.setNumberSecond(null);
+            boolean previousSymbolBracket = isBracket(index, formula);
+
+            if (previousSymbolBracket) {
+                calculator.setNumberSecond(null);
+            }
+
             calculator.calculate();
         }
     }
 
-    private static void setNumber (BigDecimal number) throws DivideZeroException, InvalidInputException, ResultUndefinedException, OperationException {
+    private static boolean isBracket (int index, String formula) {
+        boolean isBracket = false;
+        int previousIndex = index - 1;
 
+        if (previousIndex > 0) {
+            String previousSymbol = String.valueOf(formula.charAt(previousIndex));
+            String rightBracket = ")";
+
+            if (previousSymbol.equals(rightBracket)) {
+                isBracket = true;
+            }
+        }
+        return isBracket;
+    }
+
+    private static void setNumber (BigDecimal number) throws DivideZeroException, InvalidInputException, ResultUndefinedException, OperationException {
         if (calculator.getNumberFirst() == null) {
             calculator.setNumberFirst(number);
         } else {
@@ -139,6 +167,7 @@ public class Demo {
             if (calculator.getOperation() != null) {
                 OperationsEnum operation = calculator.getOperation();
                 boolean isBinary = calculator.isBinary(operation);
+
                 if (isBinary) {
                     calculator.calculate();
                 }
