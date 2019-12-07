@@ -1,6 +1,6 @@
 package Controller;
 
-import Model.Calculator;
+import Model.Model;
 import Model.OperationsEnum;
 
 import java.math.BigDecimal;
@@ -14,7 +14,7 @@ import java.util.HashMap;
  */
 
 public class CalculatorHistory {
-    private Calculator calculator;
+    private Model calculator;
     private OperationsEnum percentOperation = OperationsEnum.PERCENT;
     private OperationsEnum negateOperation = OperationsEnum.NEGATE;
     private CharSequence exponentSeparator = "e";
@@ -53,7 +53,7 @@ public class CalculatorHistory {
      *
      * @param calculator Calculator history you need to change
      */
-    CalculatorHistory (Calculator calculator) {
+    CalculatorHistory (Model calculator) {
         this.calculator = calculator;
     }
 
@@ -195,7 +195,7 @@ public class CalculatorHistory {
 
     private void changeOperation (OperationsEnum operation, int indexObject) {
         if (isBinary(operation)) {
-            changeBinaryOperationHistory(operation);
+            changeBinaryOperationHistory(operation, indexObject);
         }
         if (isUnary(operation)) {
             changeUnaryOperationHistory(operation, indexObject);
@@ -206,6 +206,8 @@ public class CalculatorHistory {
         if (operation.equals(negateOperation)) {
             changeNegateOperationHistory(operation, indexObject);
         }
+
+
     }
 
     /**
@@ -307,9 +309,9 @@ public class CalculatorHistory {
      * It deletes last number and adds result of percent calculate
      */
     private void changePercentOperationHistory () {
-        BigDecimal calculateResult = calculator.getResult();
-        String addHistory = formatterNumberHistory(calculateResult);
-        historyList.add(addHistory);
+//        BigDecimal calculateResult = calculator.getResult();
+//        String addHistory = formatterNumberHistory(calculateResult);
+//        historyList.add(addHistory);
         deletePreviousHistory(percentOperation);
     }
 
@@ -374,7 +376,12 @@ public class CalculatorHistory {
     }
 
     private Object getPreviousObject (int index) {
-        return getHistoryObject(index - 1);
+        int previousIndex = index - 1;
+        Object previousObject = null;
+        if (previousIndex >= 0) {
+            previousObject = getHistoryObject(index - 1);
+        }
+        return previousObject;
     }
 
     private Object getHistoryObject (int index) {
@@ -403,9 +410,15 @@ public class CalculatorHistory {
      *
      * @param operationsEnum Binary operation
      */
-    private void changeBinaryOperationHistory (OperationsEnum operationsEnum) {
+    private void changeBinaryOperationHistory (OperationsEnum operationsEnum, int indexObject) {
         if (!historyUnaryOperations.isEmpty()) {
             clearHistoryUnaryOperations();
+        }
+
+        Object previousObject = getPreviousObject(indexObject);
+        if (previousObject instanceof BigDecimal) {
+            String numberFormatted = formatterNumberHistory((BigDecimal) previousObject);
+            historyList.add(numberFormatted);
         }
 
         String addHistory = operationSymbols.get(operationsEnum);

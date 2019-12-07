@@ -7,6 +7,16 @@ public class History{
 
     private ArrayList<Object> history = new ArrayList<>();
 
+    public String getHistory (String historySeparator) {
+        String historyString = "";
+        for(Object historyObject : history){
+            String historyObjectString = historyObject.toString();
+            historyString = historyString.concat(historyObjectString);
+            historyString = historyString.concat(historySeparator);
+        }
+
+        return historyString;
+    }
 
     /**
      * This method adds number to {@code history}

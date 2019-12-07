@@ -7,15 +7,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="feaeb0c2-feb2-4a9c-98e3-48b1d1a339aa" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Model/Model.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Controller/Controller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/CalculatorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/CalculatorController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/CalculatorHistory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/CalculatorHistory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Demo/Demo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Demo/Demo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Binary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Binary.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Model/CalculateFormula.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Calculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Calculator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Model/OperationsEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/OperationsEnum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Model/BinaryPercentTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/BinaryPercentTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Model/CalculateFormulaTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/History.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/History.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Model.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/View/calculator_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/calculator_view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/View/calculator_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/calculator_view.fxml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -143,7 +143,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Demo">
+  <component name="RunManager" selected="Application.CalculatorMain">
     <configuration name="CalculatorMain" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Controller.CalculatorMain" />
       <module name="Calculator2" />
@@ -307,13 +307,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1565432602101</updated>
-    </task>
-    <task id="LOCAL-00055" summary="refactor %">
-      <created>1571675554146</created>
-      <option name="number" value="00055" />
-      <option name="presentableId" value="LOCAL-00055" />
-      <option name="project" value="LOCAL" />
-      <updated>1571675554146</updated>
     </task>
     <task id="LOCAL-00056" summary="before delete">
       <created>1571748917294</created>
@@ -651,7 +644,14 @@
       <option name="project" value="LOCAL" />
       <updated>1575646173749</updated>
     </task>
-    <option name="localTasksCounter" value="104" />
+    <task id="LOCAL-00104" summary="before change controller">
+      <created>1575722808607</created>
+      <option name="number" value="00104" />
+      <option name="presentableId" value="LOCAL-00104" />
+      <option name="project" value="LOCAL" />
+      <updated>1575722808607</updated>
+    </task>
+    <option name="localTasksCounter" value="105" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -733,7 +733,6 @@
     <MESSAGE value="before change buffer console size" />
     <MESSAGE value="before create new classes" />
     <MESSAGE value="before create History" />
-    <MESSAGE value="before change controller" />
     <MESSAGE value="before change model,&#10;setOperation" />
     <MESSAGE value="before change calculateUnary" />
     <MESSAGE value="before change history %" />
@@ -750,20 +749,26 @@
     <MESSAGE value="demo change" />
     <MESSAGE value="before change operation un demo" />
     <MESSAGE value="before delete calculate formula" />
-    <option name="LAST_COMMIT_MESSAGE" value="before delete calculate formula" />
+    <MESSAGE value="before change controller" />
+    <option name="LAST_COMMIT_MESSAGE" value="before change controller" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/Demo/Demo.java</url>
-          <line>54</line>
+          <line>55</line>
           <option name="timeStamp" value="356" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/Model/Model.java</url>
-          <line>180</line>
+          <line>193</line>
           <option name="timeStamp" value="360" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Controller/Controller.java</url>
+          <line>809</line>
+          <option name="timeStamp" value="369" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -773,9 +778,8 @@
         <watch expression="calculator" language="JAVA" />
       </configuration>
       <configuration name="Application">
-        <watch expression="((CalculatorHistory)this).calculator" custom="Controller.CalculatorHistory" />
-        <watch expression="((History)((Calculator)((CalculatorController)this).calculator).history).history" custom="Model.Calculator,Controller.CalculatorController,Model.History" />
-        <watch expression="((CalculatorController)this).history" custom="Controller.CalculatorController" />
+        <watch expression="((Controller.Controller)this).calculator" custom="Controller.Controller" />
+        <watch expression="((Controller.Controller)this).outOperationMemory" custom="Controller.Controller" />
       </configuration>
     </watches-manager>
   </component>

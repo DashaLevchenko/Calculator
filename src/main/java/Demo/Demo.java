@@ -38,21 +38,24 @@ public class Demo {
 
         formula.add(BigDecimal.valueOf(5));
         formula.add(OperationsEnum.ADD);
-        formula.add(BigDecimal.valueOf(3));
-        formula.add(OperationsEnum.DIVIDE);
-        formula.add(BigDecimal.valueOf(2));
         formula.add(OperationsEnum.SUBTRACT);
-        formula.add(BigDecimal.valueOf(1));
-        formula.add(OperationsEnum.EQUAL);
-        formula.add(OperationsEnum.SQRT);
-        formula.add(OperationsEnum.ADD);
-        formula.add(BigDecimal.valueOf(4));
-        formula.add(OperationsEnum.EQUAL);
+//        formula.add(OperationsEnum.EQUAL);
 
-
+//        formula.add(BigDecimal.valueOf(3));
+//        formula.add(OperationsEnum.DIVIDE);
+//        formula.add(BigDecimal.valueOf(2));
+//        formula.add(OperationsEnum.SUBTRACT);
+//        formula.add(BigDecimal.valueOf(1));
+//        formula.add(OperationsEnum.EQUAL);
+//        formula.add(OperationsEnum.SQRT);
+//        formula.add(OperationsEnum.ADD);
+//        formula.add(BigDecimal.valueOf(4));
+//        formula.add(OperationsEnum.EQUAL);
 
         try {
             BigDecimal result = calculator.calculator(formula);
+            String p = calculator.getHistory().getHistory(" ");
+            System.out.println(p);
             System.out.println("Result: " + result);
         } catch (OperationException e) {
             e.printStackTrace();

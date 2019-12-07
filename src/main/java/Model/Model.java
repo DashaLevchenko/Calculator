@@ -18,9 +18,14 @@ public class Model {
     private Unary unary = new Unary();
     private History history = new History();
 
-    //(5, ADD, 6)
+    public History getHistory () {
+        return history;
+    }
+//(5, ADD, 6)
 
     public BigDecimal calculator (ArrayList formula) throws OperationException, DivideZeroException, ResultUndefinedException, InvalidInputException {
+        history.clear();
+        clearCalculator();
         for (int i = 0; i < formula.size(); i++) {
             Object object = formula.get(i);
             clearCalculator(i, object, formula);
@@ -72,6 +77,14 @@ public class Model {
         }
     }
 
+    public void clearCalculator () {
+        numberFirst = null;
+        numberSecond = null;
+        result = null;
+        binaryOperation = null;
+        operation = null;
+    }
+
 
     public void setNumber (BigDecimal number) {
         if (numberFirst == null) {
@@ -85,9 +98,9 @@ public class Model {
     public void setOperation (OperationsEnum operation) {
         if (isBinary(operation)) {
             binaryOperation = operation;
-            history.addOperation(operation);
         }
         this.operation = operation;
+        history.addOperation(operation);
     }
 
 
@@ -110,11 +123,11 @@ public class Model {
         } else {
             number = numberSecond;
         }
-            calculateUnary(number);
+        calculateUnary(number);
 
         if (binaryOperation != null) {
             numberSecond = result;
-        }else{
+        } else {
             numberFirst = result;
             numberSecond = null;
 
