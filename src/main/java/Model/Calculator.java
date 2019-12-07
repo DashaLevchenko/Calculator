@@ -44,7 +44,6 @@ public class Calculator {
 
     }
 
-    //    private void calculatePercent (OperationsEnum operation) throws OperationException, InvalidInputException, DivideZeroException {
     private void calculatePercent () throws OperationException, InvalidInputException, DivideZeroException {
         if (numberFirst != null && numberSecond == null) {
             unary.setNumber(numberFirst);
@@ -54,13 +53,13 @@ public class Calculator {
             result = unary.getResult();
             numberFirst = result;
         } else {
-            if (operation.equals(OperationsEnum.DIVIDE) || operation.equals(OperationsEnum.MULTIPLY)) {
-                binary.percent(numberSecond, BigDecimal.valueOf(1));
-            } else {
-                if (numberFirst != null) {
-                    binary.percent(numberFirst, percent);
-                }
-            }
+//            if (operation.equals(OperationsEnum.DIVIDE) || operation.equals(OperationsEnum.MULTIPLY)) {
+//                binary.percent(numberSecond, BigDecimal.valueOf(1));
+//            } else {
+//                if (numberFirst != null) {
+//                    binary.percent(numberFirst, percent);
+//                }
+//            }
             result = binary.getResult();
             numberSecond = result;
             percent = result;

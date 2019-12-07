@@ -74,8 +74,8 @@ public class Binary {
     }
 
 
-    public void percent (BigDecimal number, BigDecimal percent) {
-        result = number.multiply(percent.divide(BigDecimal.valueOf(100), MathContext.DECIMAL128));
+    public void percent () {
+        result = numberFirst.multiply(numberSecond.divide(BigDecimal.valueOf(100), MathContext.DECIMAL128));
     }
 
     /**
@@ -99,6 +99,8 @@ public class Binary {
                 multiply();
             } else if (operation.equals(OperationsEnum.DIVIDE)) {
                 divide();
+            } else if (operation.equals(OperationsEnum.PERCENT)) {
+                percent();
             } else {
                 throw new OperationException("Enter binary operation");
             }

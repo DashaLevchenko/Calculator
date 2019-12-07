@@ -1183,7 +1183,7 @@ class BinaryPercentTest {
         BigDecimal percent = new BigDecimal(percentString);
         BigDecimal resultExpected = new BigDecimal(resultString);
 
-        binary.percent(x, percent);
+//        binary.percent(x, percent);
         BigDecimal resultActual = binary.getResult();
         assertEquals(resultExpected, resultActual);
 

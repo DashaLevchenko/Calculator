@@ -47,5 +47,9 @@ public enum OperationsEnum {
     /**
      * The singleton is negate
      */
-    NEGATE
+    NEGATE,
+    /**
+     * The singleton is equal
+     */
+    EQUAL
 }
