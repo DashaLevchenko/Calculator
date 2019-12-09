@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Demo {
-    private static Calculator calculator = new Calculator();
     private static HashMap<String, OperationsEnum> operations = new HashMap<>();
 
     static {
@@ -32,8 +31,9 @@ public class Demo {
 
     public static void main (String[] args) {
         String input = "5+3/2-1=√+4=";
+
         try {
-            BigDecimal result = calculator.calculator(toArray(input));
+            BigDecimal result = Calculator.calculator(toArray(input));
             System.out.println("Result: " + result);
         } catch (OperationException | DivideZeroException | ResultUndefinedException | InvalidInputException e) {
             e.printStackTrace();
@@ -76,7 +76,7 @@ public class Demo {
     private static boolean isNumberNext (String args, int i) {
         boolean isNumberNext = false;
         int indexNext = i + 1;
-        if (args.length() >= indexNext) {
+        if (args.length() > indexNext) {
             String symbolNext = String.valueOf(args.toCharArray()[indexNext]);
             isNumberNext = isNumber(symbolNext);
         }

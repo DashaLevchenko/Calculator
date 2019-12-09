@@ -8,28 +8,27 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
 
-
-public class Binary {
+class Binary {
 
     private BigDecimal numberFirst;
     private BigDecimal numberSecond;
 
-    public void setOperation (OperationsEnum operation) {
+    protected void setOperation (OperationsEnum operation) {
         this.operation = operation;
     }
 
     private OperationsEnum operation;
     private BigDecimal result;
 
-    public void setNumberFirst (BigDecimal numberFirst) {
+    protected void setNumberFirst (BigDecimal numberFirst) {
         this.numberFirst = numberFirst;
     }
 
-    public void setNumberSecond (BigDecimal numberSecond) {
+    protected void setNumberSecond (BigDecimal numberSecond) {
         this.numberSecond = numberSecond;
     }
 
-    public BigDecimal getResult () {
+    protected BigDecimal getResult () {
         return result;
     }
 
@@ -54,7 +53,7 @@ public class Binary {
      * Method divides two numbers
      *
      * @throws ResultUndefinedException If two numbers equal zero
-     * @throws DivideZeroException If divide by zero
+     * @throws DivideZeroException      If divide by zero
      */
     private void divide () throws ResultUndefinedException, DivideZeroException {
         if (compareZero(numberSecond) == 0) {
@@ -74,7 +73,7 @@ public class Binary {
     }
 
 
-    public void percent () {
+    protected void percent () {
         result = numberFirst.multiply(numberSecond.divide(BigDecimal.valueOf(100), MathContext.DECIMAL128));
     }
 
@@ -86,11 +85,11 @@ public class Binary {
      * @throws DivideZeroException      If divide by zero
      * @throws ResultUndefinedException If zero divide by zero
      */
-    public void calculateBinary () throws ResultUndefinedException, DivideZeroException, OperationException {
-        if (operation == null) {
-            throw new NullPointerException("Enter operation");
-        }
+    protected void calculateBinary () throws ResultUndefinedException, DivideZeroException, OperationException {
         if (numberFirst != null && numberSecond != null) {
+            if (operation == null) {
+                throw new NullPointerException("Enter operation");
+            }
             if (operation.equals(OperationsEnum.ADD)) {
                 add();
             } else if (operation.equals(OperationsEnum.SUBTRACT)) {

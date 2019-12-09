@@ -12,26 +12,26 @@ import java.math.RoundingMode;
 /**
  * This class calculates unary operations
  */
-public class Unary {
+ class Unary {
     private BigDecimal number;
     private MathContext mathContext = MathContext.DECIMAL128;
 
-    public void setOperation (OperationsEnum operation) {
+    protected void setOperation (OperationsEnum operation) {
         this.operation = operation;
     }
 
     private OperationsEnum operation;
     private BigDecimal result;
 
-    public void setNumber (BigDecimal number) {
+    protected void setNumber (BigDecimal number) {
         this.number = number;
     }
 
-    public BigDecimal getResult () {
+    protected BigDecimal getResult () {
         return result;
     }
 
-    public void setResult (BigDecimal result) {
+    protected void setResult (BigDecimal result) {
         this.result = result;
     }
 
@@ -82,7 +82,7 @@ public class Unary {
      * @throws DivideZeroException   If divide by zero
      * @throws OperationException    If operation not equals unary operation
      */
-    public void calculateUnary () throws InvalidInputException, DivideZeroException, OperationException {
+    protected void calculateUnary () throws InvalidInputException, DivideZeroException, OperationException {
         if (operation == null) {
             throw new NullPointerException("Enter operation");
         }

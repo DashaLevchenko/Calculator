@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.History;
 import Model.Memory;
 import Model.Calculator;
 import Model.OperationsEnum;
@@ -159,8 +160,8 @@ public class CalculatorController {
     private double yOffset = 0;
 
     private Memory memory;
-    private Calculator calculator;
-
+//    private Calculator calculator;
+    History history;
     private ArrayList<Object> formula = new ArrayList<>();
     BigDecimal result;
 
@@ -601,12 +602,14 @@ public class CalculatorController {
      * catches exception.
      */
     private void calculate () {
-        calculator = new Calculator();
+
         try {
-            result = calculator.calculator(formula);
+            result = Calculator.calculator(formula);
             if (result != null) {
                 String resultFormatted = FormatterNumber.formatterNumber(result);
                 printResult(resultFormatted);
+                history = Calculator.getHistory();
+
             }
             canBackspace = false;
             if (!isError) {
@@ -696,7 +699,7 @@ public class CalculatorController {
     //region History
     private void printHistory () {
         CalculatorHistory calculatorHistory = new CalculatorHistory();
-        if (calculator != null) {
+        if (history != null) {
             String historyChanged = calculatorHistory.getChangedHistory(calculator);
             outOperationMemory.setText(historyChanged);
         }
