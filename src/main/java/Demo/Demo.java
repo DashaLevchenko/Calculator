@@ -1,10 +1,10 @@
 package Demo;
 
+import Model.Calculator;
 import Model.Exceptions.DivideZeroException;
 import Model.Exceptions.InvalidInputException;
 import Model.Exceptions.OperationException;
 import Model.Exceptions.ResultUndefinedException;
-import Model.Calculator;
 import Model.OperationsEnum;
 
 import java.math.BigDecimal;
@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Demo {
-    //    private static Calculator calculator;
     private static Calculator calculator = new Calculator();
     private static HashMap<String, OperationsEnum> operations = new HashMap<>();
 
@@ -28,56 +27,80 @@ public class Demo {
         operations.put("%", OperationsEnum.PERCENT);
 
         operations.put("", OperationsEnum.NEGATE);
+        operations.put("=", OperationsEnum.EQUAL);
     }
 
     public static void main (String[] args) {
-//        List<Object> = List<OoperationsEnum, BigDecimal>
-
-
-        ArrayList<Object> formula = new ArrayList<>();
-
-        formula.add(BigDecimal.valueOf(0));
-        formula.add(OperationsEnum.ADD);
-        formula.add(BigDecimal.valueOf(2));
-        formula.add(OperationsEnum.PERCENT);
-        formula.add(OperationsEnum.NEGATE);
-        formula.add(OperationsEnum.ADD);
-//        formula.add(BigDecimal.valueOf(6));
-//
-//        formula.add(OperationsEnum.EQUAL);
-
-//        formula.add(BigDecimal.valueOf(3));
-//        formula.add(OperationsEnum.DIVIDE);
-//        formula.add(BigDecimal.valueOf(2));
-//        formula.add(OperationsEnum.SUBTRACT);
-//        formula.add(BigDecimal.valueOf(1));
-//        formula.add(OperationsEnum.EQUAL);
-//        formula.add(OperationsEnum.SQRT);
-//        formula.add(OperationsEnum.ADD);
-//        formula.add(BigDecimal.valueOf(4));
-//        formula.add(OperationsEnum.EQUAL);
-
+        String input = "5+3/2-1=√+4=";
         try {
-            BigDecimal result = calculator.calculator(formula);
-            String p = calculator.getHistory().getHistory(" ");
-            System.out.println(p);
+            BigDecimal result = calculator.calculator(toArray(input));
             System.out.println("Result: " + result);
-        } catch (OperationException e) {
-            e.printStackTrace();
-        } catch (DivideZeroException e) {
-            e.printStackTrace();
-        } catch (ResultUndefinedException e) {
-            e.printStackTrace();
-        } catch (InvalidInputException e) {
+        } catch (OperationException | DivideZeroException | ResultUndefinedException | InvalidInputException e) {
             e.printStackTrace();
         }
+    }
 
 
-//        try {
-////            System.out.println("Ответ: " + calculate(formula));
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+    private static ArrayList<Object> toArray (String args) {
+        ArrayList<Object> array = new ArrayList<>();
+        for (int i = 0; i < args.length(); i++) {
+            String symbol = String.valueOf(args.toCharArray()[i]);
+
+            if (isNumber(symbol)) {
+                 addNumber(symbol, args, i, array);
+            }
+            if (isOperation(symbol)) {
+               addOperation(symbol, array);
+            }
+        }
+        return array;
+
+    }
+
+    private static String numberString = "";
+
+    private static void addNumber (String symbol, String formulaInput, int i, ArrayList<Object> array) {
+        numberString = numberString.concat(symbol);
+        if (!isNumberNext(formulaInput, i)) {
+            BigDecimal number = new BigDecimal(numberString);
+            numberString = "";
+            array.add(number);
+        }
+    }
+
+    private static void addOperation (String symbol, ArrayList<Object> array) {
+        OperationsEnum operation = operations.get(symbol);
+        array.add(operation);
+    }
+
+    private static boolean isNumberNext (String args, int i) {
+        boolean isNumberNext = false;
+        int indexNext = i + 1;
+        if (args.length() >= indexNext) {
+            String symbolNext = String.valueOf(args.toCharArray()[indexNext]);
+            isNumberNext = isNumber(symbolNext);
+        }
+
+        return isNumberNext;
+    }
+
+    private static boolean isOperation (Object object) {
+
+        return operations.containsKey(object.toString());
+    }
+
+    private static boolean isNumber (Object object) {
+        boolean isNumber = false;
+        if (object != null) {
+            try {
+                new BigDecimal(object.toString());
+                isNumber = true;
+            } catch (Exception e) {
+                isNumber = false;
+            }
+        }
+
+        return isNumber;
     }
 
 

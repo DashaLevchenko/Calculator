@@ -144,7 +144,6 @@ public class CalculatorController {
     private String decimalSeparate = ",";
     private String emptyString = "";
 
-    //    private boolean commaInText = false;
     private boolean canChangeOperator = false;
 
     private boolean showLeftMenu = false;
@@ -162,7 +161,6 @@ public class CalculatorController {
     private Memory memory;
     private Calculator calculator;
 
-    //    private CalculatorHistory historyOut = new CalculatorHistory();
     private ArrayList<Object> formula = new ArrayList<>();
     BigDecimal result;
 
@@ -521,9 +519,7 @@ public class CalculatorController {
             setNumber();
         }
         String buttonID = ((Button) actionEvent.getSource()).getId();
-//        if(buttonID.equals("subtract")){
-//            System.out.println("l");
-//        }
+
         setOperation(operation.get(buttonID));
         canChangeOperator = true;
         calculate();
@@ -549,9 +545,7 @@ public class CalculatorController {
     @FXML
     public void unaryOperations (ActionEvent actionEvent) {
         String buttonID = ((Button) actionEvent.getSource()).getId();
-//        if (buttonID.equals("oneDivideX")) {
-//            System.out.println("l");
-//        }
+
         setNumber();
         OperationsEnum unaryOperation = operation.get(buttonID);
         setOperation(unaryOperation);
@@ -590,19 +584,13 @@ public class CalculatorController {
         setOperation(OperationsEnum.EQUAL);
         calculate();
 
-//        if (!isError) {
-//            clearHistory();
-//        }
-
         canBackspace = false;
         memoryPressed = false;
         charValidInText = CHAR_MAX_INPUT;
 
         scrollOutOperationMemory();
     }
-//    private void clearUnaryHistory () {
-//        historyOut.clearHistoryUnaryOperations();
-//    }
+
 
     //endregion
 
@@ -610,8 +598,7 @@ public class CalculatorController {
     /*
      * Method calculates operation,
      * calls print result method,
-     * catches exception and
-     * prohibits to backspace text in general display
+     * catches exception.
      */
     private void calculate () {
         calculator = new Calculator();
@@ -717,7 +704,6 @@ public class CalculatorController {
         scrollOutOperationMemory();
     }
 
-
     //endregion
 
     //region Scroll CalculatorHistory
@@ -778,9 +764,6 @@ public class CalculatorController {
         generalDisplay.setStyle(firstStyleLabel);
         generalDisplay.setText(DEFAULT_TEXT);
         outOperationMemory.setText(emptyString);
-
-//        clearHistory();
-
 
         formula.clear();
 
