@@ -1,7 +1,7 @@
 package Controller;
 
 import Model.Memory;
-import Model.Model;
+import Model.Calculator;
 import Model.OperationsEnum;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
@@ -160,7 +160,7 @@ public class CalculatorController {
     private double yOffset = 0;
 
     private Memory memory;
-    private Model calculator;
+    private Calculator calculator;
 
     //    private CalculatorHistory historyOut = new CalculatorHistory();
     private ArrayList<Object> formula = new ArrayList<>();
@@ -614,7 +614,7 @@ public class CalculatorController {
      * prohibits to backspace text in general display
      */
     private void calculate () {
-        calculator = new Model();
+        calculator = new Calculator();
         try {
             result = calculator.calculator(formula);
             if (result != null) {

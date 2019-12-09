@@ -1,7 +1,7 @@
 package Controller;
 
 import Model.Memory;
-import Model.Model;
+import Model.Calculator;
 import Model.OperationsEnum;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
@@ -604,7 +604,7 @@ if(buttonID.equals("sqrt")){
      * prohibits to backspace text in general display
      */
     private void calculate () {
-        Model calculator = new Model();
+        Calculator calculator = new Calculator();
         try {
             result = calculator.calculator(formula);
 
@@ -698,7 +698,7 @@ if(buttonID.equals("sqrt")){
     //endregion
 
     //region History
-    private void printHistory (Model calculator) {
+    private void printHistory (Calculator calculator) {
         historyOut.clearHistory();
         String historyChanged = historyOut.getChangedHistory(calculator);
         outOperationMemory.setText(historyChanged);

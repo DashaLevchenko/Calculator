@@ -1,6 +1,6 @@
 package Controller;
 
-import Model.Model;
+import Model.Calculator;
 import Model.History;
 import Model.OperationsEnum;
 
@@ -15,7 +15,7 @@ import java.util.HashMap;
  */
 
 public class CalculatorHistory {
-    private Model calculator;
+    private Calculator calculator;
     private OperationsEnum percentOperation = OperationsEnum.PERCENT;
     private OperationsEnum negateOperation = OperationsEnum.NEGATE;
     private CharSequence exponentSeparator = "e";
@@ -53,7 +53,7 @@ public class CalculatorHistory {
      *
      * @return History was changed
      */
-    public String getChangedHistory (Model calculator) {
+    public String getChangedHistory (Calculator calculator) {
         this.calculator = calculator;
         History historyIn = calculator.getHistory();
         int historyInSize = historyIn.size();

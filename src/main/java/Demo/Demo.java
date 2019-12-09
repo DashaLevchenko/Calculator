@@ -4,7 +4,7 @@ import Model.Exceptions.DivideZeroException;
 import Model.Exceptions.InvalidInputException;
 import Model.Exceptions.OperationException;
 import Model.Exceptions.ResultUndefinedException;
-import Model.Model;
+import Model.Calculator;
 import Model.OperationsEnum;
 
 import java.math.BigDecimal;
@@ -13,7 +13,7 @@ import java.util.HashMap;
 
 public class Demo {
     //    private static Calculator calculator;
-    private static Model calculator = new Model();
+    private static Calculator calculator = new Calculator();
     private static HashMap<String, OperationsEnum> operations = new HashMap<>();
 
     static {
