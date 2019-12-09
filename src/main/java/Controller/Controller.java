@@ -139,9 +139,6 @@ public class Controller {
      */
     private final String DEFAULT_TEXT = "0";
 
-    private OperationsEnum binaryOperation;
-    private OperationsEnum unaryOperation;
-    private OperationsEnum negateOperation = OperationsEnum.NEGATE;
 
     private String firstStyleLabel;
     private String decimalSeparate = ",";
@@ -149,13 +146,13 @@ public class Controller {
 
     private boolean commaInText = false;
     private boolean canChangeOperator = false;
-    private boolean equalWasPress;
+
     private boolean showLeftMenu = false;
     private boolean isError = false;
-    private boolean negatePressed = false;
+
     private boolean memoryPressed = false;
     private boolean canBackspace = true;
-    private boolean percentPressed = false;
+
 
     private int charValidInText = 16;
     private double moveScroll;
@@ -163,9 +160,10 @@ public class Controller {
     private double yOffset = 0;
 
     private Memory memory;
-    private Model calculator = new Model();
-    private CalculatorHistory historyOut;
+
+    private CalculatorHistory historyOut = new CalculatorHistory();
     private ArrayList<Object> formula = new ArrayList<>();
+    BigDecimal result;
 
 
     @FXML
@@ -173,7 +171,6 @@ public class Controller {
         firstStyleLabel = generalDisplay.getStyle();
         generalDisplay.setText(DEFAULT_TEXT);
         equal.setDefaultButton(true);
-        historyOut = new CalculatorHistory(calculator);
     }
 
     /**
@@ -366,40 +363,8 @@ public class Controller {
      * if {@code out} doesn't contains {@code minus}.
      * Also method sets
      */
-//    @FXML
-//    void negatePressed () {
-//        negatePressed = true;
-//
-//        String out = generalDisplay.getText();
-//        int indexLastSymbol = out.length() - 1;
-//        String lastSymbol = String.valueOf(out.toCharArray()[indexLastSymbol]);
-//
-//
-//        if (lastSymbol.equals(decimalSeparate) || canBackspace) {
-//            out = addNegate(out);
-//            printResult(out);
-//        } else {
-//            if (!equalWasPress) {
-//                setNumbersBinary();
-//            } else {
-//                setCalculatorSecondNumber(null);
-//            }
-//            calculateNegate();
-//
-//            printHistory();
-//        }
-//
-//        String minus = "-";
-//        if (out.contains(minus)) {
-//            charValidInText++;
-//        } else {
-//            charValidInText--;
-//        }
-//        memoryPressed = false;
-//    }
     @FXML
     void negatePressed () {
-        negatePressed = true;
 
         String out = generalDisplay.getText();
         int indexLastSymbol = out.length() - 1;
@@ -410,8 +375,8 @@ public class Controller {
             out = addNegate(out);
             printResult(out);
         } else {
-            formula.add(out);
-            formula.add(OperationsEnum.NEGATE);
+            setNumber();
+            setOperation(OperationsEnum.NEGATE);
             calculate();
         }
 
@@ -528,234 +493,17 @@ public class Controller {
 
     //endregion
 
-    //region Set number
-    /*
-     * This method sets first number in calculator object and adds it to history
-     * after binary or unary operation buttons was pressed
-     */
-    private void setFirstNumber () {
-//        if (getFirstNumber() == null) {
-//            setCalculatorFirstNumber(getDisplayNumber());
-//        }
-//
-//        if (historyContainsNegateUnary()) {
-//            if (getFirstNumber() != null) {
-//                addHistoryNumber(getFirstNumber());
-//            }
-//            printHistory();
-//        }
-    }
-
-    private boolean historyContainsNegateUnary () {
-        String unaryHistory = historyOut.getHistoryUnaryOperations();
-        String negateHistory = historyOut.getNegateHistory();
-
-        boolean unaryNegateEmpty = false;
-
-        if (unaryHistory.isEmpty() && negateHistory.isEmpty()) {
-            unaryNegateEmpty = true;
-        }
-        return unaryNegateEmpty;
-    }
-
-
-    /*
-     * This method sets second number in calculator object, adds it to history and adds first number to history
-     * after binary or unary operation buttons was pressed
-     */
-//    private void setSecondNumber () {
-//        if (getSecondNumber() == null && !canChangeOperator) {
-//            BigDecimal secondNumber = getDisplayNumber();
-//
-//            if (!canBackspace && !memoryPressed) {
-//                if (equalWasPress) {
-//                    secondNumber = getFirstNumber();
-//                } else {
-//                    addHistoryNumber(getSecondNumber());
-//                    secondNumber = getSecondNumber();
-//                }
-//            }
-//            setCalculatorSecondNumber(secondNumber);
-//        }
-//        if (historyContainsNegateUnary()) {
-//            printHistory();
-//        }
-//    }
-
-    /*
-     * This method sets first and second numbers in calculator object and adds it to history
-     * after binary or unary operation buttons was pressed
-     */
-//    private void setNumbersBinary () {
-//        if (!percentPressed) {
-//            if (binaryOperation == null) {
-//                setFirstNumber();
-//                setCalculatorSecondNumber(null);
-//            } else {
-//                setSecondNumber();
-//            }
-//        }
-//
-//        setPercentOperation(null);
-//        percentPressed = false;
-//        memoryPressed = false;
-//    }
-
-    /*
-      This method sets first or second number in calculator object for calculate unary operation
-       */
-//    private void setNumberUnary () {
-//        BigDecimal secondNumber;
-//        if (binaryOperation == null) {
-//            if (getFirstNumber() == null) {
-//                setCalculatorFirstNumber(getDisplayNumber());
-//            }
-//            secondNumber = null;
-//
-//            if (negatePressed || equalWasPress) {
-//                equalWasPress = false;
-//                addHistoryNumber(getFirstNumber());
-//            }
-//        } else {
-//            if (canBackspace) {
-//                secondNumber = getDisplayNumber();
-//            } else {
-//                if (getResult() != null && !negatePressed) {
-//                    secondNumber = getResult();
-//                } else {
-//                    secondNumber = getSecondNumber();
-//                }
-//            }
-//        }
-//        setCalculatorSecondNumber(secondNumber);
-//    }
-
-
-//    private void setPercentOperation (OperationsEnum operationsEnum) {
-//        calculator.setPercentOperation(operationsEnum);
-//    }
-
-
-    /*
-     * This method sets result number in calculator object
-     */
-//    private void clearCalculatorResult () {
-//        calculator.setResult(null);
-//    }
-
-    /*
-     * This method sets first number in calculator object
-     */
-//    private void setCalculatorFirstNumber (BigDecimal number) {
-//        calculator.setNumberFirst(number);
-//    }
-
-    /*
-     * This method sets second number in calculator object
-     */
-//    private void setCalculatorSecondNumber (BigDecimal number) {
-//        calculator.setNumberSecond(number);
-//    }
-
-    /*
-     * Method sets number in calculator object for calculate percent,
-     * and deletes last number if percent was pressed several time
-     */
-//    private void setPercentNumber () {
-//
-//        if (binaryOperation != null) {
-//            BigDecimal percent;
-//            BigDecimal secondNumber;
-//
-//            if (!equalWasPress) {
-//                if (getSecondNumber() == null) {
-//                    if (getFirstNumber() != null && !canBackspace) {
-//                        secondNumber = getFirstNumber();
-//                    } else {
-//                        secondNumber = getDisplayNumber();
-//                    }
-//                } else {
-//                    secondNumber = getSecondNumber();
-//                }
-//                percent = secondNumber;
-//            } else {
-//                percent = getResult();
-//                if (negatePressed) {
-//                    percent = percent.negate();
-//                }
-//                secondNumber = getFirstNumber();
-//            }
-//
-//            setPercent(percent);
-//            setCalculatorSecondNumber(secondNumber);
-//        } else {
-//            if (getFirstNumber() == null && getResult() == null) {
-//                setCalculatorFirstNumber(getDisplayNumber());
-//            }
-//        }
-//
-//        negatePressed = false;
-//    }
-
-//    private void setPercent (BigDecimal percent) {
-//        calculator.setPercent(percent);
-//    }
-
-    //endregion
-
-    //region Get
 
     /**
      * Method returns calculator
      *
      * @return Calculator
      */
-//    public Calculator getCalculator () {
-//        return calculator;
-//    }
-//
-//    /*
-//     * This method gets result number from calculator object
-//     */
-//    private BigDecimal getResult () {
-//        return calculator.getResult();
-//    }
-//
-//    /*
-//     * This method gets first number from calculator object
-//     */
-//    private BigDecimal getFirstNumber () {
-//        return calculator.getNumberFirst();
-//    }
-//
-//    /*
-//     * This method gets second number from calculator object
-//     */
-//    private BigDecimal getSecondNumber () {
-//        return calculator.getNumberSecond();
-//    }
 
-    /*
-     * This method gets parse number from general display
-     */
     private BigDecimal getDisplayNumber () {
         return parseNumber(generalDisplay.getText());
     }
 
-    /*
-     * This method gets number from memory after memory recall button was pressed
-     */
-//    private void getMemoryNumber (BigDecimal numberFromMemory) {
-//        if (binaryOperation != null) {
-//            setCalculatorSecondNumber(numberFromMemory);
-//        } else {
-//            setCalculatorFirstNumber(numberFromMemory);
-//            canBackspace = false;
-//        }
-//    }
-
-
-    //endregion
 
     //region Operations
 
@@ -766,69 +514,22 @@ public class Controller {
      *
      * @param actionEvent Binary operation buttons was pressed
      */
-//    @FXML
-//    public void binaryOperation (ActionEvent actionEvent) {
-//
-//        if (canBackspace) {
-//            setCalculatorSecondNumber(null);
-//        }
-//
-//        if (equalWasPress) {
-//            binaryOperation = null;
-//            equalWasPress = false;
-//        }
-//
-//        setNumbersBinary();
-//
-//        clearUnaryHistory();
-//        clearNegateHistory();
-//
-//        negatePressed = false;
-//        if (unaryOperation != null) {
-//            setOperation(binaryOperation);
-//            unaryOperation = null;
-//        }
-//        if (binaryOperation != null) {
-//            calculate();
-//        }
-//
-//        String buttonID = ((Button) actionEvent.getSource()).getId();
-//        binaryOperation = operation.get(buttonID);
-//        setOperation(binaryOperation);
-//
-//        canChangeOperator = true;
-//        canBackspace = false;
-//        commaInText = false;
-//
-//
-//        printHistory();
-//    }
     @FXML
     public void binaryOperation (ActionEvent actionEvent) {
-        String buttonID = ((Button) actionEvent.getSource()).getId();
-        if (buttonID.equals("subtract")) {
-            System.out.println("l");
-        }
-        clearUnaryHistory();
-        clearNegateHistory();
-
         if (!canChangeOperator) {
             setNumber();
         }
-
-
+        String buttonID = ((Button) actionEvent.getSource()).getId();
         setOperation(operation.get(buttonID));
         canChangeOperator = true;
         calculate();
-        printHistory();
-
-
-
     }
 
     private void setNumber () {
-        formula.add(getDisplayNumber());
-        canChangeOperator = false;
+        if (canBackspace) {
+            formula.add(getDisplayNumber());
+            canChangeOperator = false;
+        }
     }
 
 
@@ -839,67 +540,30 @@ public class Controller {
      *
      * @param actionEvent Unary operation was pressed
      */
-//    @FXML
-//    public void unaryOperations (ActionEvent actionEvent) {
-//        if (equalWasPress) {
-//            binaryOperation = null;
-//            clearUnaryHistory();
-//        }
-//
-//        String buttonID = ((Button) actionEvent.getSource()).getId();
-//        unaryOperation = operation.get(buttonID);
-//        setNumberUnary();
-//        setOperation(unaryOperation);
-//
-//        calculate();
-//        negatePressed = false;
-//        printHistory();
-//    }
+
     @FXML
     public void unaryOperations (ActionEvent actionEvent) {
         String buttonID = ((Button) actionEvent.getSource()).getId();
-        unaryOperation = operation.get(buttonID);
+if(buttonID.equals("sqrt")){
+    System.out.println(";");
+}
+        setNumber();
+        OperationsEnum unaryOperation = operation.get(buttonID);
         setOperation(unaryOperation);
 
         calculate();
-//        negatePressed = false;
-        printHistory();
     }
 
 
     /**
      * Method calculates percent operation, if {@code percent} was pressed
-     *
-     * @param actionEvent Percent button was pressed
      */
-//    @FXML
-//    public void percentOperation (ActionEvent actionEvent) {
-//        percentPressed = true;
-//        if (negatePressed) {
-//            if (binaryOperation != null) {
-//                setOperation(binaryOperation);
-//                calculator.getHistory().deleteLast();
-//            }
-//        }
-//
-//        setPercentNumber();
-//        String buttonID = ((Button) actionEvent.getSource()).getId();
-//        setPercentOperation(operation.get(buttonID));
-//        calculate();
-//
-//        setPercent(null);
-//        printHistory();
-//    }
     @FXML
-    public void percentOperation (ActionEvent actionEvent) {
-        percentPressed = true;
-
-        String buttonID = ((Button) actionEvent.getSource()).getId();
-
+    public void percentOperation () {
+        setNumber();
+        setOperation(OperationsEnum.PERCENT);
         calculate();
 
-
-        printHistory();
     }
 
     private void setOperation (OperationsEnum operationsEnum) {
@@ -914,34 +578,19 @@ public class Controller {
     @FXML
     void pressedEqual () {
         clearError();
-        clearPercent();
-        equalWasPress = true;
-
-        clearUnaryHistory();
+        setNumber();
+        setOperation(OperationsEnum.EQUAL);
+        calculate();
 
         if (!isError) {
             clearHistory();
-        } else {
-            calculator.getHistory().clear();
-            if (!memoryPressed && historyContainsNegateUnary()) {
-                deleteLastHistory();
-                printHistory();
-            }
         }
-        negatePressed = false;
+
         canBackspace = false;
         memoryPressed = false;
         charValidInText = CHAR_MAX_INPUT;
 
         scrollOutOperationMemory();
-    }
-
-    private void clearPercent () {
-//        if (percentPressed) {
-//            percentPressed = false;
-//            setPercentOperation(null);
-//            setPercent(null);
-//        }
     }
 
 
@@ -955,21 +604,23 @@ public class Controller {
      * prohibits to backspace text in general display
      */
     private void calculate () {
+        Model calculator = new Model();
         try {
+            result = calculator.calculator(formula);
 
-            BigDecimal result = calculator.calculator(formula);
-            historyOut.clearHistory();
             if (result != null) {
                 String resultFormatted = FormatterNumber.formatterNumber(result);
                 printResult(resultFormatted);
             }
-            else {
-            }
 
-
+            canBackspace = false;
         } catch (Exception e) {
             printError(e);
+        } finally {
+            printHistory(calculator);
+
         }
+
     }
 
     //endregion
@@ -1047,68 +698,20 @@ public class Controller {
     //endregion
 
     //region History
-    private void printHistory () {
-//        historyOut.clearHistory();
-        String historyChanged = historyOut.getChangedHistory();
+    private void printHistory (Model calculator) {
+        historyOut.clearHistory();
+        String historyChanged = historyOut.getChangedHistory(calculator);
         outOperationMemory.setText(historyChanged);
+
         scrollOutOperationMemory();
     }
 
     private void clearHistory () {
-        calculator.getHistory().clear();
         String historyClean = historyOut.clearHistory();
         outOperationMemory.setText(historyClean);
     }
 
-    /*
-     * This method sets negative number in calculator object after negative button was pressed,
-     * and calls method which adds operation in calculator history.
-     */
-    private void calculateNegate () {
-        setOperation(negateOperation);
-        unaryOperation = negateOperation;
-        calculate();
-//        if (binaryOperation == null) {
-//            clearCalculatorResult();
-//        }
 
-        addNegateOperationHistory();
-    }
-
-    /*
-     * Method adds negate operation in calculator history.
-     */
-    private void addNegateOperationHistory () {
-        if (historyOut.getHistoryUnaryOperations().isEmpty()) {
-            BigDecimal numberAddHistory;
-
-//            if (getResult() != null) {
-//                numberAddHistory = getResult().negate();
-//            } else {
-//                numberAddHistory = getFirstNumber().negate();
-//            }
-
-            deleteLastHistoryIn();
-            if (memoryPressed || percentPressed) {
-                deleteLastHistoryIn();
-            }
-
-//            addHistoryNumber(numberAddHistory);
-            setOperation(negateOperation);
-        }
-    }
-
-    private void deleteLastHistoryIn () {
-        calculator.getHistory().deleteLast();
-    }
-
-    private void addHistoryNumber (BigDecimal number) {
-        calculator.getHistory().addNumber(number);
-    }
-
-    private void deleteLastHistory () {
-        historyOut.deleteLastObject();
-    }
     //endregion
 
     //region Scroll CalculatorHistory
@@ -1170,18 +773,13 @@ public class Controller {
         generalDisplay.setText(DEFAULT_TEXT);
         outOperationMemory.setText(emptyString);
 
-        unaryOperation = null;
-        binaryOperation = null;
-        clearPercent();
-//        calculator.clearCalculator();
         clearHistory();
-        clearBinary();
-        equalWasPress = false;
 
+
+        formula.clear();
 
         commaInText = false;
         canChangeOperator = false;
-        negatePressed = false;
         canBackspace = true;
         memoryPressed = false;
 
@@ -1198,10 +796,6 @@ public class Controller {
 
     private void clearUnaryHistory () {
         historyOut.clearHistoryUnaryOperations();
-    }
-
-    private void clearNegateHistory () {
-        historyOut.clearNegateHistory();
     }
 
     /**
@@ -1230,22 +824,11 @@ public class Controller {
 
             out = emptyString;
         }
-        if (equalWasPress) {
-            clearHistory();
-            clearBinary();
 
-            equalWasPress = false;
-        }
         memoryPressed = false;
         return out;
     }
 
-    private void clearBinary () {
-//        binaryOperation = null;
-//        calculator.setOperation(null);
-//        calculator.setNumberFirst(null);
-//        calculator.setResult(null);
-    }
 
     /*
      * Method imitates press C button,
@@ -1308,11 +891,12 @@ public class Controller {
     @FXML
     void memoryRecall () {
         if (memory != null) {
-//            getMemoryNumber(memory.memoryRecall());
             BigDecimal numberMemory = memory.memoryRecall();
             String out = formatterNumber(numberMemory);
+            formula.add(numberMemory);
             printResult(out);
         }
+        canBackspace = false;
         memoryPressed = true;
     }
 
@@ -1344,13 +928,17 @@ public class Controller {
      * Method sets number in memory object
      */
     private BigDecimal setMemoryNumber () {
-        BigDecimal number;
+        BigDecimal number = null;
 
-//        if (getFirstNumber() != null) {
-//            number = getFirstNumber();
-//        } else {
-        number = getDisplayNumber();
-//        }
+
+        if (canBackspace) {
+            number = getDisplayNumber();
+        } else {
+            if (result != null) {
+                number = result;
+            }
+        }
+
         return number;
     }
 

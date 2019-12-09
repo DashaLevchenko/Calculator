@@ -36,9 +36,14 @@ public class Demo {
 
         ArrayList<Object> formula = new ArrayList<>();
 
-        formula.add(BigDecimal.valueOf(5));
+        formula.add(BigDecimal.valueOf(0));
         formula.add(OperationsEnum.ADD);
-        formula.add(OperationsEnum.SUBTRACT);
+        formula.add(BigDecimal.valueOf(2));
+        formula.add(OperationsEnum.PERCENT);
+        formula.add(OperationsEnum.NEGATE);
+        formula.add(OperationsEnum.ADD);
+//        formula.add(BigDecimal.valueOf(6));
+//
 //        formula.add(OperationsEnum.EQUAL);
 
 //        formula.add(BigDecimal.valueOf(3));

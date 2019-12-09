@@ -10,10 +10,14 @@ import java.util.ArrayList;
 
 public class Model {
     private BigDecimal numberFirst;
+
+
     private BigDecimal numberSecond;
     private OperationsEnum operation;
     private OperationsEnum binaryOperation;
     private BigDecimal result;
+    private boolean percentNegate;
+    private boolean previousEqual;
     private Binary binary = new Binary();
     private Unary unary = new Unary();
     private History history = new History();
@@ -21,29 +25,31 @@ public class Model {
     public History getHistory () {
         return history;
     }
-//(5, ADD, 6)
 
     public BigDecimal calculator (ArrayList formula) throws OperationException, DivideZeroException, ResultUndefinedException, InvalidInputException {
-        history.clear();
-        clearCalculator();
         for (int i = 0; i < formula.size(); i++) {
             Object object = formula.get(i);
             clearCalculator(i, object, formula);
 
             if (object instanceof OperationsEnum) {
                 OperationsEnum operationsEnum = (OperationsEnum) object;
-                if (isBinary(operationsEnum) && !isEqual(object)) {
-                    calculateBinaryOperation();
-                    numberSecond = null;
+
+                try {
+                    calculateLastBinaryOperation(operationsEnum);
+                } catch (OperationException | DivideZeroException | ResultUndefinedException e) {
+                    throw e;
+                } finally {
+                    addEqualHistory(i, formula);
+                    addPercentResultHistory(operationsEnum);
+
+                    setOperation(operationsEnum);
                 }
-                setOperation(operationsEnum);
             }
 
             if (object instanceof BigDecimal) {
                 BigDecimal number = (BigDecimal) object;
                 setNumber(number);
             }
-
 
             boolean canCalculate = canCalculate(i, formula);
             if (canCalculate) {
@@ -53,38 +59,71 @@ public class Model {
         return result;
     }
 
-    private void clearCalculator (int index, Object objectPresent, ArrayList formula) {
-        int nextIndex = index - 1;
-        Object previousObject = null;
-        if (nextIndex >= 0) {
-            previousObject = formula.get(nextIndex);
+    private void addPercentResultHistory (OperationsEnum operationsEnum) {
+        if (isNegate(operationsEnum) && isPercent(operation)) {
+            if (result != null) {
+                history.addNumber(result);
+            }
         }
+    }
+
+    private void addEqualHistory (int index, ArrayList formula) {
+        Object previousObject = getPreviousFormulaObject(index, formula);
 
         if (previousObject != null) {
-            if (isEqual(previousObject)) {
-                if (objectPresent instanceof Number) {
-                    numberFirst = null;
-                }
-                if (!isEqual(objectPresent)) {
-                    numberSecond = null;
-                    result = null;
-                    if (!isPercent(objectPresent)) {
-                        binaryOperation = null;
-                        operation = null;
+            if (previousObject instanceof OperationsEnum) {
+                if (isEqual(previousObject)) {
+                    if (numberFirst != null) {
+                        history.addNumber(numberFirst);
                     }
                 }
             }
         }
     }
 
-    public void clearCalculator () {
-        numberFirst = null;
-        numberSecond = null;
-        result = null;
-        binaryOperation = null;
-        operation = null;
+    private void calculateLastBinaryOperation (OperationsEnum operationsEnum) throws OperationException, DivideZeroException, ResultUndefinedException {
+        if (isBinary(operationsEnum) && !isEqual(operationsEnum)) {
+            if (binaryOperation != null) {
+                setOperation(binaryOperation);
+                history.deleteLast();
+                calculateBinaryOperation();
+                numberSecond = null;
+            }
+            previousEqual = false;
+        }
     }
 
+    private void clearCalculator (int index, Object objectPresent, ArrayList formula) {
+        Object previousObject = getPreviousFormulaObject(index, formula);
+
+        if (previousObject != null) {
+            if (previousEqual) {
+                if (objectPresent instanceof Number) {
+                    numberFirst = null;
+                }
+                if (!isEqual(objectPresent)) {
+                    result = null;
+                    if (!isNegate(objectPresent)) {
+                        numberSecond = null;
+                        previousEqual = false;
+                        if (!isPercent(objectPresent)) {
+                            binaryOperation = null;
+                        }
+                    }
+                    operation = null;
+                }
+            }
+        }
+    }
+
+    private Object getPreviousFormulaObject (int index, ArrayList formula) {
+        int nextIndex = index - 1;
+        Object previousObject = null;
+        if (nextIndex >= 0) {
+            previousObject = formula.get(nextIndex);
+        }
+        return previousObject;
+    }
 
     public void setNumber (BigDecimal number) {
         if (numberFirst == null) {
@@ -118,19 +157,21 @@ public class Model {
 
     private void calculateUnaryOperation () throws OperationException, InvalidInputException, DivideZeroException {
         BigDecimal number;
-        if (numberSecond == null) {
+        if (numberSecond == null || previousEqual) {
             number = numberFirst;
         } else {
             number = numberSecond;
         }
+
         calculateUnary(number);
 
-        if (binaryOperation != null) {
-            numberSecond = result;
-        } else {
+        if (numberSecond == null && binaryOperation == null ||previousEqual) {
             numberFirst = result;
-            numberSecond = null;
-
+        } else {
+            numberSecond = result;
+        }
+        if (operation.equals(OperationsEnum.NEGATE)) {
+            percentNegate = true;
         }
     }
 
@@ -188,30 +229,47 @@ public class Model {
     private void calculate () throws OperationException, DivideZeroException, ResultUndefinedException, InvalidInputException {
         if (operation != null) {
             if (isUnary(operation)) {
+                addResultHistory();
                 calculateUnaryOperation();
-            }
-            if (isEqual(operation)) {
-                calculateEqual();
             }
             if (isPercent(operation)) {
                 calculatePercent();
             }
+            if (isEqual(operation)) {
+                calculateEqual();
+            }
         }
+    }
 
+    private void addResultHistory () {
+        if (result != null && numberSecond == null) {
+            history.deleteLast();
+            history.addNumber(result);
+            setOperation(operation);
+
+        }
+    }
+
+    private boolean isNegate (Object operation) {
+        return operation.equals(OperationsEnum.NEGATE);
     }
 
     private void calculatePercent () throws OperationException, InvalidInputException, DivideZeroException, ResultUndefinedException {
         if (binaryOperation == null) {
             calculateUnaryOperation();
+            history.deleteLast();
         } else {
             boolean binaryOperationDivide = binaryOperation.equals(OperationsEnum.DIVIDE);
             boolean binaryOperationMultiply = binaryOperation.equals(OperationsEnum.MULTIPLY);
 
             BigDecimal percent;
             if (binaryOperationDivide || binaryOperationMultiply) {
-                binary.setNumberFirst(numberSecond);
+                if (numberSecond != null) {
+                    binary.setNumberFirst(numberSecond);
+                } else {
+                    binary.setNumberFirst(numberFirst);
+                }
                 percent = BigDecimal.ONE;
-                binary.setNumberSecond(percent);
             } else {
                 binary.setNumberFirst(numberFirst);
                 if (numberSecond != null) {
@@ -219,29 +277,61 @@ public class Model {
                 } else {
                     percent = numberFirst;
                 }
+                percent = percentNegate(percent);
             }
+
             binary.setNumberSecond(percent);
             binary.setOperation(operation);
             binary.calculateBinary();
             result = binary.getResult();
             numberSecond = result;
-        }
 
+
+            history.deleteLast();
+        }
+        history.addNumber(result);
+        history.addOperation(OperationsEnum.PERCENT);
 
     }
 
+    private BigDecimal percentNegate (BigDecimal percent) {
+        if (percentNegate) {
+            percent = percent.negate();
+            percentNegate = false;
+        }
+        return percent;
+    }
+
     private boolean isPercent (Object operation) {
-        return operation.equals(OperationsEnum.PERCENT);
+        boolean isPercent = false;
+        if (operation != null) {
+            isPercent = operation.equals(OperationsEnum.PERCENT);
+        }
+        return isPercent;
     }
 
     private void calculateEqual () throws OperationException, DivideZeroException, ResultUndefinedException {
         if (binaryOperation != null) {
             if (numberSecond == null) {
-                numberSecond = numberFirst;
+                if (result == null) {
+                    numberSecond = numberFirst;
+                } else {
+                    numberSecond = result;
+                }
             }
             operation = binaryOperation;
-            calculateBinaryOperation();
+            try {
+                calculateBinaryOperation();
+                history.clear();
+            } catch (OperationException | DivideZeroException | ResultUndefinedException e) {
+                history.deleteLast();
+                history.deleteLast();
+                throw e;
+            }
+
         }
+        percentNegate = false;
+        previousEqual = true;
     }
 
     private boolean isEqual (Object operation) {

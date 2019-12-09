@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.Model;
+import Model.History;
 import Model.OperationsEnum;
 
 import java.math.BigDecimal;
@@ -18,20 +19,10 @@ public class CalculatorHistory {
     private OperationsEnum percentOperation = OperationsEnum.PERCENT;
     private OperationsEnum negateOperation = OperationsEnum.NEGATE;
     private CharSequence exponentSeparator = "e";
-
-    public String getHistoryUnaryOperations () {
-        return historyUnaryOperations;
-    }
-
     private String historyUnaryOperations = "";
     private String negateHistory = "";
-
-    public String getNegateHistory () {
-        return negateHistory;
-    }
-
     private String emptyString = "";
-    private ArrayList<String> historyList = new ArrayList<>();
+    private ArrayList<String> historyListOut = new ArrayList<>();
     private HashMap<OperationsEnum, String> operationSymbols = new HashMap<>();
 
     {
@@ -49,15 +40,6 @@ public class CalculatorHistory {
     }
 
     /**
-     * Constructor set calculator and history calculator which need to change
-     *
-     * @param calculator Calculator history you need to change
-     */
-    CalculatorHistory (Model calculator) {
-        this.calculator = calculator;
-    }
-
-    /**
      * This method changes standard history of calculator and returns history was changed .
      * Example:
      * history was: " 2 ADD 3 SUBTRACT"
@@ -71,27 +53,53 @@ public class CalculatorHistory {
      *
      * @return History was changed
      */
-    public String getChangedHistory () {
-        if (calculator.getHistory().size() != 0) {
-            Object lastObject = calculator.getHistory().getLast();
-            int indexObject = calculator.getHistory().size() - 1;
+    public String getChangedHistory (Model calculator) {
+        this.calculator = calculator;
+        History historyIn = calculator.getHistory();
+        int historyInSize = historyIn.size();
+        if (historyInSize != 0) {
+            for (int index = 0; index < historyInSize; index++) {
+                Object object = historyIn.get(index);
 
-            if (lastObject instanceof OperationsEnum) {
-                OperationsEnum operation = (OperationsEnum) lastObject;
-                changeOperation(operation, indexObject);
-            }
-            if (isNumber(lastObject)) {
-                changeNumber(lastObject);
+                if (object instanceof OperationsEnum) {
+                    OperationsEnum operation = (OperationsEnum) object;
+                    changeOperation(operation, index);
+                }
+                if (isNumber(object)) {
+                    changeNumber(object);
+                }
             }
         }
         return getStringHistory();
     }
 
+//    public String getChangedHistory () {
+//        int historyInSize =calculator.getHistory().size();
+//        if (historyInSize != 0) {
+//            for (int index = 0; index > historyInSize; index++) {
+//                Object lastObject = calculator.getHistory().getLast();
+//                int indexObject = calculator.getHistory().size() - 1;
+//
+//                if (lastObject instanceof OperationsEnum) {
+//                    OperationsEnum operation = (OperationsEnum) lastObject;
+//                    changeOperation(operation, indexObject);
+//                }
+//                if (isNumber(lastObject)) {
+//                    changeNumber(lastObject);
+//                }
+//            }
+//        }
+//        return getStringHistory();
+//    }
+
     /**
      * Method deletes last history object from history
      */
     public void deleteLastObject () {
-        historyList.remove(historyList.size() - 1);
+        int indexLast = historyListOut.size() - 1;
+        if (indexLast >= 0) {
+            historyListOut.remove(indexLast);
+        }
     }
 
     /**
@@ -100,7 +108,7 @@ public class CalculatorHistory {
      * @return Size calculator history
      */
     public int historySize () {
-        return historyList.size();
+        return historyListOut.size();
     }
 
 
@@ -128,7 +136,7 @@ public class CalculatorHistory {
      * @return Empty string for printing
      */
     public String clearHistory () {
-        historyList.clear();
+        historyListOut.clear();
         negateHistory = emptyString;
         historyUnaryOperations = emptyString;
         return emptyString;
@@ -166,7 +174,7 @@ public class CalculatorHistory {
     private void changeNumber (Object lastObject) {
         BigDecimal number = parseNumber(lastObject);
         String addNumber = formatterNumberHistory(number);
-        historyList.add(addNumber);
+        historyListOut.add(addNumber);
     }
 
     private BigDecimal parseNumber (Object lastObject) {
@@ -206,6 +214,9 @@ public class CalculatorHistory {
         if (operation.equals(negateOperation)) {
             changeNegateOperationHistory(operation, indexObject);
         }
+        if (operation.equals(OperationsEnum.EQUAL)) {
+            clearHistory();
+        }
 
 
     }
@@ -230,20 +241,20 @@ public class CalculatorHistory {
             int indexStart = historySize() - minSizeHistoryForDeletePrev;
 
             for (int i = indexStart; i >= 0; i--) {
-                String previousHistory = historyList.get(i);
+                String previousHistory = historyListOut.get(i);
 
                 if (historyObject instanceof OperationsEnum) {
                     OperationsEnum operation = (OperationsEnum) historyObject;
 
                     if (isBinary(operation)) {
                         if (isOperationSymbol(previousHistory)) {
-                            historyList.remove(i);
+                            historyListOut.remove(i);
                         } else {
                             break;
                         }
                     } else {
                         if (!isOperationSymbol(previousHistory)) {
-                            historyList.remove(i);
+                            historyListOut.remove(i);
                         } else {
                             break;
                         }
@@ -283,6 +294,7 @@ public class CalculatorHistory {
                         negateHistory = formatterNumberHistory(number);
 
                     } else {
+
                         negateHistory = previousObject.toString();
                     }
                 } else {
@@ -291,7 +303,7 @@ public class CalculatorHistory {
             }
 
             negateHistory = wrapOperationInBrackets(operation, negateHistory);
-            historyList.add(negateHistory);
+            historyListOut.add(negateHistory);
             deletePreviousHistory(operation);
         }
     }
@@ -370,7 +382,7 @@ public class CalculatorHistory {
         }
 
         historyUnaryOperations = wrapOperationInBrackets(operation, historyUnaryOperations);
-        historyList.add(historyUnaryOperations);
+        historyListOut.add(historyUnaryOperations);
 
         deletePreviousHistory(operation);
     }
@@ -414,15 +426,18 @@ public class CalculatorHistory {
         if (!historyUnaryOperations.isEmpty()) {
             clearHistoryUnaryOperations();
         }
-
-        Object previousObject = getPreviousObject(indexObject);
-        if (previousObject instanceof BigDecimal) {
-            String numberFormatted = formatterNumberHistory((BigDecimal) previousObject);
-            historyList.add(numberFormatted);
+        if (!negateHistory.isEmpty()) {
+            clearNegateHistory();
         }
+//
+//        Object previousObject = getPreviousObject(indexObject);
+//        if (previousObject instanceof BigDecimal) {
+//            String numberFormatted = formatterNumberHistory((BigDecimal) previousObject);
+//            historyListOut.add(numberFormatted);
+//        }
 
         String addHistory = operationSymbols.get(operationsEnum);
-        historyList.add(addHistory);
+        historyListOut.add(addHistory);
 
         deletePreviousHistory(operationsEnum);
     }
@@ -434,7 +449,7 @@ public class CalculatorHistory {
      */
     public String getStringHistory () {
         String stringHistory = "";
-        for (String history : historyList) {
+        for (String history : historyListOut) {
             stringHistory = stringHistory.concat(history);
             String separatorHistory = " ";
             stringHistory = stringHistory.concat(separatorHistory);
