@@ -34,16 +34,14 @@ public class Demo {
     }
 
     public static void main (String[] args) {
-        String input = "5+3/2-1=√+4=";
 
         try {
-            BigDecimal result = Calculator.calculator(toArray(input));
+            BigDecimal result = Calculator.calculator(0);
             System.out.println("Result: " + result);
         } catch (OperationException | DivideZeroException | ResultUndefinedException | InvalidInputException e) {
             e.printStackTrace();
         }
     }
-
 
     // This method checks each symbol from string, adds number or operation to list and returns this list.
     private static ArrayList<Object> toArray (String input) {

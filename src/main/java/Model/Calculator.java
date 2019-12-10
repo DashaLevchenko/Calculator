@@ -126,9 +126,7 @@ public class Calculator {
             if (binaryOperation != null) {
                 setOperation(binaryOperation);
                 history.deleteLast();
-
                 calculateBinaryOperation();
-
                 numberSecond = null;
             }
             previousEqual = false;
