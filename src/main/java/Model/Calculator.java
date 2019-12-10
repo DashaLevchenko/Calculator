@@ -40,20 +40,17 @@ public class Calculator {
         setDefaultValue();
         for (int i = 0; i < formula.size(); i++) {
             Object object = formula.get(i);
+            if (object == null) {
+                throw new OperationException("Can not calculate null operation, enter operation or number.");
+            }
             clearCalculator(i, object, formula);
 
             if (object instanceof OperationsEnum) {
                 OperationsEnum operationsEnum = (OperationsEnum) object;
-
-                try {
-                    calculateLastBinaryOperation(operationsEnum);
-                } catch (OperationException | DivideZeroException | ResultUndefinedException e) {
-                    throw e;
-                } finally {
-                    addEqualHistory(i, formula);
-                    addPercentResultHistory(operationsEnum);
-                    setOperation(operationsEnum);
-                }
+                calculateLastBinaryOperation(operationsEnum);
+                addEqualHistory(i, formula);
+                addPercentResultHistory(operationsEnum);
+                setOperation(operationsEnum);
             }
 
             if (object instanceof BigDecimal) {
@@ -111,18 +108,17 @@ public class Calculator {
             if (binaryOperation != null) {
                 setOperation(binaryOperation);
                 history.deleteLast();
+
                 calculateBinaryOperation();
+
                 numberSecond = null;
             }
             previousEqual = false;
         }
     }
 
-    private static void clearCalculator (int index, Object objectPresent, ArrayList formula) throws OperationException {
+    private static void clearCalculator (int index, Object objectPresent, ArrayList formula) {
         Object previousObject = getPreviousFormulaObject(index, formula);
-        if (objectPresent == null) {
-            throw new OperationException("Can not calculate null operation, enter operation or number.");
-        }
 
         if (previousObject != null) {
             if (previousEqual) {

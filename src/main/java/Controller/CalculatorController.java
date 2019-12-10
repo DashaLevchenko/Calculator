@@ -160,7 +160,7 @@ public class CalculatorController {
     private double yOffset = 0;
 
     private Memory memory;
-//    private Calculator calculator;
+    //    private Calculator calculator;
     History history;
     private ArrayList<Object> formula = new ArrayList<>();
     BigDecimal result;
@@ -276,9 +276,9 @@ public class CalculatorController {
             out = backspace(out);
 
             if (out.length() > 0) {
-                int indexLastSymbol = out.length()-1;
+                int indexLastSymbol = out.length() - 1;
                 String lastSymbol = String.valueOf(out.toCharArray()[indexLastSymbol]);
-                if(!lastSymbol.equals(decimalSeparate) && !lastSymbol.equals(DEFAULT_TEXT)){
+                if (!lastSymbol.equals(decimalSeparate) && !lastSymbol.equals(DEFAULT_TEXT)) {
                     String outWithoutSeparator = out.replace(" ", "").replace(decimalSeparate, ".");
                     BigDecimal number = new BigDecimal(outWithoutSeparator);
                     out = formatterNumber(number);
@@ -605,10 +605,11 @@ public class CalculatorController {
 
         try {
             result = Calculator.calculator(formula);
+//            history = Calculator.getHistory();
             if (result != null) {
                 String resultFormatted = FormatterNumber.formatterNumber(result);
                 printResult(resultFormatted);
-                history = Calculator.getHistory();
+
 
             }
             canBackspace = false;
@@ -616,6 +617,7 @@ public class CalculatorController {
                 printHistory();
             }
         } catch (Exception e) {
+
             printHistory();
             printError(e);
         }
@@ -698,9 +700,10 @@ public class CalculatorController {
 
     //region History
     private void printHistory () {
-        CalculatorHistory calculatorHistory = new CalculatorHistory();
+        history = Calculator.getHistory();
         if (history != null) {
-            String historyChanged = calculatorHistory.getChangedHistory(calculator);
+            CalculatorHistory calculatorHistory = new CalculatorHistory(history);
+            String historyChanged = calculatorHistory.getChangedHistory();
             outOperationMemory.setText(historyChanged);
         }
 
@@ -921,7 +924,7 @@ public class CalculatorController {
         BigDecimal number = null;
 
 
-        if (canBackspace ) {
+        if (canBackspace) {
             number = getDisplayNumber();
         } else {
             if (result != null) {

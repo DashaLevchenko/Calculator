@@ -49,12 +49,12 @@ public class Demo {
             if (isNumber(symbol)) {
                  addNumber(symbol, args, i, array);
             }
+
             if (isOperation(symbol)) {
                addOperation(symbol, array);
             }
         }
         return array;
-
     }
 
     private static String numberString = "";
@@ -85,7 +85,6 @@ public class Demo {
     }
 
     private static boolean isOperation (Object object) {
-
         return operations.containsKey(object.toString());
     }
 

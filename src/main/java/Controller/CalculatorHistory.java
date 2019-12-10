@@ -15,7 +15,9 @@ import java.util.HashMap;
  */
 
 public class CalculatorHistory {
-    private Calculator calculator;
+//    private Calculator calculator;
+    private History history;
+
     private OperationsEnum percentOperation = OperationsEnum.PERCENT;
     private OperationsEnum negateOperation = OperationsEnum.NEGATE;
     private CharSequence exponentSeparator = "e";
@@ -39,6 +41,10 @@ public class CalculatorHistory {
         operationSymbols.put(OperationsEnum.NEGATE, "negate");
     }
 
+    CalculatorHistory(History history){
+        this.history = history;
+    }
+
     /**
      * This method changes standard history of calculator and returns history was changed .
      * Example:
@@ -53,13 +59,13 @@ public class CalculatorHistory {
      *
      * @return History was changed
      */
-    public String getChangedHistory (Calculator calculator) {
-        this.calculator = calculator;
-        History historyIn = calculator.getHistory();
-        int historyInSize = historyIn.size();
+    public String getChangedHistory () {
+//        this.calculator = calculator;
+//        History historyIn = history;
+        int historyInSize = history.size();
         if (historyInSize != 0) {
             for (int index = 0; index < historyInSize; index++) {
-                Object object = historyIn.get(index);
+                Object object = history.get(index);
 
                 if (object instanceof OperationsEnum) {
                     OperationsEnum operation = (OperationsEnum) object;
@@ -92,15 +98,15 @@ public class CalculatorHistory {
 //        return getStringHistory();
 //    }
 
-    /**
-     * Method deletes last history object from history
-     */
-    public void deleteLastObject () {
-        int indexLast = historyListOut.size() - 1;
-        if (indexLast >= 0) {
-            historyListOut.remove(indexLast);
-        }
-    }
+//    /**
+//     * Method deletes last history object from history
+//     */
+//    public void deleteLastObject () {
+//        int indexLast = historyListOut.size() - 1;
+//        if (indexLast >= 0) {
+//            historyListOut.remove(indexLast);
+//        }
+//    }
 
     /**
      * Method returns size of calculator history
@@ -132,19 +138,16 @@ public class CalculatorHistory {
 
     /**
      * Method cleans calculator history
-     *
-     * @return Empty string for printing
      */
-    public String clearHistory () {
+    public void clearHistory () {
         historyListOut.clear();
         negateHistory = emptyString;
         historyUnaryOperations = emptyString;
-        return emptyString;
     }
 
 
     private boolean isBinary (OperationsEnum operationsEnum) {
-        return calculator.isBinary(operationsEnum);
+        return Calculator.isBinary(operationsEnum);
     }
 
     /**
@@ -203,7 +206,7 @@ public class CalculatorHistory {
 
     private void changeOperation (OperationsEnum operation, int indexObject) {
         if (isBinary(operation)) {
-            changeBinaryOperationHistory(operation, indexObject);
+            changeBinaryOperationHistory(operation);
         }
         if (isUnary(operation)) {
             changeUnaryOperationHistory(operation, indexObject);
@@ -283,7 +286,7 @@ public class CalculatorHistory {
      */
     private void changeNegateOperationHistory (OperationsEnum operation, int index) {
         int minSizeHistory = 1;
-        int sizeHistoryIn = calculator.getHistory().size();
+        int sizeHistoryIn = history.size();
 
         if (sizeHistoryIn > minSizeHistory) {
             if (negateHistory.isEmpty()) {
@@ -397,13 +400,13 @@ public class CalculatorHistory {
     }
 
     private Object getHistoryObject (int index) {
-        return calculator.getHistory().get(index);
+        return history.get(index);
     }
 
     private boolean isUnary (OperationsEnum operationsEnum) {
         boolean isUnary = false;
         if (!operationsEnum.equals(negateOperation)) {
-            isUnary = calculator.isUnary(operationsEnum);
+            isUnary = Calculator.isUnary(operationsEnum);
         }
         return isUnary;
     }
@@ -422,7 +425,7 @@ public class CalculatorHistory {
      *
      * @param operationsEnum Binary operation
      */
-    private void changeBinaryOperationHistory (OperationsEnum operationsEnum, int indexObject) {
+    private void changeBinaryOperationHistory (OperationsEnum operationsEnum) {
         if (!historyUnaryOperations.isEmpty()) {
             clearHistoryUnaryOperations();
         }
