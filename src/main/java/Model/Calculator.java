@@ -22,6 +22,11 @@ public class Calculator {
     private static Unary unary = new Unary();
     private static History history = new History();
 
+    /**
+     * Method returns history operation from calculator
+     *
+     * @return History operation
+     */
     public static History getHistory () {
         return history;
     }
@@ -40,9 +45,11 @@ public class Calculator {
         setDefaultValue();
         for (int i = 0; i < formula.size(); i++) {
             Object object = formula.get(i);
+
             if (object == null) {
                 throw new OperationException("Can not calculate null operation, enter operation or number.");
             }
+
             clearCalculator(i, object, formula);
 
             if (object instanceof OperationsEnum) {
@@ -66,6 +73,7 @@ public class Calculator {
         return result;
     }
 
+    //Method sets default value to all variables
     private static void setDefaultValue () {
         numberFirst = null;
         numberSecond = null;
@@ -81,14 +89,21 @@ public class Calculator {
         history = new History();
     }
 
-    private static void addPercentResultHistory (OperationsEnum operationsEnum) {
-        if (isNegate(operationsEnum) && isPercent(operation)) {
+    /* Method adds result of percent calculation to history.
+     * If after percent was negate operation
+     */
+    private static void addPercentResultHistory (OperationsEnum operationsPresent) {
+        OperationsEnum operationPrevious = operation;
+        if (isNegate(operationsPresent) && isPercent(operationPrevious)) {
             if (result != null) {
                 history.addNumber(result);
             }
         }
     }
 
+    /* Method adds result of operations to history.
+     * If previous operation was equal, result of calculation adds to history
+     */
     private static void addEqualHistory (int index, ArrayList formula) {
         Object previousObject = getPreviousFormulaObject(index, formula);
 
@@ -103,8 +118,11 @@ public class Calculator {
         }
     }
 
-    private static void calculateLastBinaryOperation (OperationsEnum operationsEnum) throws OperationException, DivideZeroException, ResultUndefinedException {
-        if (isBinary(operationsEnum) && !isEqual(operationsEnum)) {
+    /* Method calculate previous binary operation,
+     * if present operation is binary too.
+     */
+    private static void calculateLastBinaryOperation (OperationsEnum operationPresent) throws OperationException, DivideZeroException, ResultUndefinedException {
+        if (isBinary(operationPresent) && !isEqual(operationPresent)) {
             if (binaryOperation != null) {
                 setOperation(binaryOperation);
                 history.deleteLast();
@@ -117,6 +135,7 @@ public class Calculator {
         }
     }
 
+    // Method sets default value to some variable, if previous operation was equal.
     private static void clearCalculator (int index, Object objectPresent, ArrayList formula) {
         Object previousObject = getPreviousFormulaObject(index, formula);
 
@@ -140,33 +159,43 @@ public class Calculator {
         }
     }
 
+    // Method returns previous object from formula.
     private static Object getPreviousFormulaObject (int index, ArrayList formula) {
         int nextIndex = index - 1;
         Object previousObject = null;
+
         if (nextIndex >= 0) {
             previousObject = formula.get(nextIndex);
         }
+
         return previousObject;
     }
 
+    // Method sets value for calculator number and adds it to history
     private static void setNumber (BigDecimal number) {
         if (numberFirst == null) {
             numberFirst = number;
         } else {
             numberSecond = number;
         }
+
         history.addNumber(number);
     }
 
+    /* Method sets value for calculator operation,
+     * sets value binary operation if operation is binary,
+     * and adds it to history.
+     */
     private static void setOperation (OperationsEnum operationsEnum) {
         if (isBinary(operationsEnum)) {
             binaryOperation = operationsEnum;
         }
+
         operation = operationsEnum;
         history.addOperation(operation);
     }
 
-
+    // Method calculate binary operation, if first and second calculator numbers isn't null.
     private static void calculateBinaryOperation () throws OperationException, DivideZeroException, ResultUndefinedException {
         if (numberFirst != null && numberSecond != null) {
             binary.setNumberFirst(numberFirst);
@@ -179,7 +208,25 @@ public class Calculator {
         }
     }
 
+    // Method calculates unary operation,
+    // sets true value to percent negate if unary operation is negate
     private static void calculateUnaryOperation () throws OperationException, InvalidInputException, DivideZeroException {
+        setUnaryNumber();
+
+        unary.setOperation(operation);
+        unary.calculateUnary();
+        result = unary.getResult();
+
+        getUnaryResult();
+
+        if (operation.equals(OperationsEnum.NEGATE)) {
+            percentNegate = true;
+        }
+    }
+
+    // Method chooses which number must be calculate with unary operation,
+    // sets it to unary object.
+    private static void setUnaryNumber () {
         BigDecimal number;
         if (numberSecond == null || previousEqual) {
             number = numberFirst;
@@ -187,27 +234,32 @@ public class Calculator {
             number = numberSecond;
         }
 
-        calculateUnary(number);
+        unary.setNumber(number);
+    }
+
+    /* Chooses which calculator variable must keep result of unary operation,
+     * and sets result.
+     */
+    private static void getUnaryResult () {
 
         if (numberSecond == null && binaryOperation == null || previousEqual) {
             numberFirst = result;
         } else {
             numberSecond = result;
         }
-        if (operation.equals(OperationsEnum.NEGATE)) {
-            percentNegate = true;
-        }
     }
 
-    private static void calculateUnary (BigDecimal number) throws OperationException, InvalidInputException, DivideZeroException {
-        unary.setNumber(number);
-        unary.setOperation(operation);
-        unary.calculateUnary();
-        result = unary.getResult();
-    }
 
+    /**
+     * This method returns true if operation was binary,
+     * and returns false if operation was not binary
+     *
+     * @param operation Operation which need to check
+     * @return Returns true if operation was binary, and returns false if operation was not binary
+     */
     public static boolean isBinary (OperationsEnum operation) {
         boolean isBinary = false;
+
         if (operation != null) {
             if (operation.equals(OperationsEnum.ADD) || operation.equals(OperationsEnum.SUBTRACT) ||
                     operation.equals(OperationsEnum.MULTIPLY) || operation.equals(OperationsEnum.DIVIDE)) {
@@ -218,13 +270,17 @@ public class Calculator {
         return isBinary;
     }
 
-
+    /* Method decides can calculator calculate operation or not.
+     * If present operation is binary operation or next operation not unary method returns true.
+     */
     private static boolean canCalculate (int index, ArrayList formula) {
         boolean canCalculate = false;
 
         int nextIndex = index + 1;
         Object nextObject = null;
-        if (formula.size() - 1 >= nextIndex) {
+
+        int numberObjectsFormula = formula.size() - 1;
+        if (numberObjectsFormula >= nextIndex) {
             nextObject = formula.get(nextIndex);
         }
 
@@ -235,6 +291,9 @@ public class Calculator {
         return canCalculate;
     }
 
+    /* Method returns true if next object is unary operation,
+     * and false if next object is null or isn't unary operation.
+     */
     private static boolean nextOperationUnary (Object nextObject) {
         boolean isUnary = false;
 
@@ -250,21 +309,25 @@ public class Calculator {
         return isUnary;
     }
 
+    // Method chooses which operation need to calculate
     private static void calculate () throws OperationException, DivideZeroException, ResultUndefinedException, InvalidInputException {
         if (operation != null) {
             if (isUnary(operation)) {
                 addResultHistory();
                 calculateUnaryOperation();
             }
+
             if (isPercent(operation)) {
                 calculatePercent();
             }
+
             if (isEqual(operation)) {
                 calculateEqual();
             }
         }
     }
 
+    // Method adds result of calculation to history
     private static void addResultHistory () {
         if (result != null && numberSecond == null) {
             history.deleteLast();
@@ -278,31 +341,14 @@ public class Calculator {
         return operation.equals(OperationsEnum.NEGATE);
     }
 
+    // Method calculates percent operation
     private static void calculatePercent () throws OperationException, InvalidInputException, DivideZeroException, ResultUndefinedException {
         if (binaryOperation == null) {
             calculateUnaryOperation();
             history.deleteLast();
-        } else {
-            boolean binaryOperationDivide = binaryOperation.equals(OperationsEnum.DIVIDE);
-            boolean binaryOperationMultiply = binaryOperation.equals(OperationsEnum.MULTIPLY);
 
-            BigDecimal percent;
-            if (binaryOperationDivide || binaryOperationMultiply) {
-                if (numberSecond != null) {
-                    binary.setNumberFirst(numberSecond);
-                } else {
-                    binary.setNumberFirst(numberFirst);
-                }
-                percent = BigDecimal.ONE;
-            } else {
-                binary.setNumberFirst(numberFirst);
-                if (numberSecond != null) {
-                    percent = numberSecond;
-                } else {
-                    percent = numberFirst;
-                }
-                percent = percentNegate(percent);
-            }
+        } else {
+            BigDecimal percent = setPercentBinaryNumber();
 
             binary.setNumberSecond(percent);
             binary.setOperation(operation);
@@ -310,12 +356,45 @@ public class Calculator {
             result = binary.getResult();
             numberSecond = result;
 
-
             history.deleteLast();
         }
+
         history.addNumber(result);
         history.addOperation(OperationsEnum.PERCENT);
+    }
 
+    /* Method returns percent which need to calculate
+    * and sets number in binary object for calculate percent.
+    * If binary operation is divide or multiply, need to calculate one percent from number.
+     */
+    private static BigDecimal setPercentBinaryNumber () {
+        BigDecimal percent;
+        boolean binaryOperationDivide = binaryOperation.equals(OperationsEnum.DIVIDE);
+        boolean binaryOperationMultiply = binaryOperation.equals(OperationsEnum.MULTIPLY);
+
+        if (binaryOperationDivide || binaryOperationMultiply) {
+            BigDecimal number;
+            if (numberSecond != null) {
+                number = numberSecond;
+            } else {
+                number = numberFirst;
+            }
+
+            binary.setNumberFirst(number);
+            percent = BigDecimal.ONE;
+
+        } else {
+            binary.setNumberFirst(numberFirst);
+
+            if (numberSecond != null) {
+                percent = numberSecond;
+            } else {
+                percent = numberFirst;
+            }
+
+            percent = percentNegate(percent);
+        }
+        return percent;
     }
 
     private static BigDecimal percentNegate (BigDecimal percent) {
@@ -334,16 +413,13 @@ public class Calculator {
         return isPercent;
     }
 
+    // Method calculates binary operation if present object from formula is equal
+    // and binary operation was in formula. Also method cleans history after calculating binary operation.
     private static void calculateEqual () throws OperationException, DivideZeroException, ResultUndefinedException {
         if (binaryOperation != null) {
-            if (numberSecond == null) {
-                if (result == null) {
-                    numberSecond = numberFirst;
-                } else {
-                    numberSecond = result;
-                }
-            }
+            setNumberEqual();
             operation = binaryOperation;
+
             try {
                 calculateBinaryOperation();
                 history.clear();
@@ -358,6 +434,17 @@ public class Calculator {
         previousEqual = true;
     }
 
+    // Sets second number if it is null
+    private static void setNumberEqual () {
+        if (numberSecond == null) {
+            if (result == null) {
+                numberSecond = numberFirst;
+            } else {
+                numberSecond = result;
+            }
+        }
+    }
+
     private static boolean isEqual (Object operation) {
         boolean isEqual = false;
 
@@ -369,6 +456,13 @@ public class Calculator {
         return isEqual;
     }
 
+    /**
+     * This method returns true if operation was unary,
+     * and returns false if operation was not unary.
+     *
+     * @param operation Operation which need to check
+     * @return Returns true if operation was unary, and returns false if operation was not unary.
+     */
     public static boolean isUnary (Object operation) {
         boolean isUnary = false;
         if (operation != null) {

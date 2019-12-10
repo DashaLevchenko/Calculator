@@ -1,8 +1,8 @@
 package Controller;
 
+import Model.Calculator;
 import Model.History;
 import Model.Memory;
-import Model.Calculator;
 import Model.OperationsEnum;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
@@ -15,6 +15,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -123,7 +124,7 @@ public class CalculatorController {
     /**
      * Maximal number of symbols which can be input in calculator
      */
-    public final int CHAR_MAX_INPUT = 16;
+    public final int DEFAULT_MAX_NUMBERS_CHAR_INPUT = 16;
 
     /**
      * Maximal invalid number which throws exception
@@ -140,30 +141,53 @@ public class CalculatorController {
      */
     private final String DEFAULT_TEXT = "0";
 
+    /**
+     * Decimal separator which is being used for number in application
+     */
+    private final String DECIMAL_SEPARATOR = ",";
 
-    private String firstStyleLabel;
-    private String decimalSeparate = ",";
-    private String emptyString = "";
+    /**
+     * Grouping separator which is being used for number in application
+     */
+    private final String GROUPING_SEPARATOR = " ";
 
+    /**
+     * Variable keeps empty string value
+     */
+    private final String EMPTY_STRING = "";
+
+    // Variable is true when can change binary operation
     private boolean canChangeOperator = false;
 
+    // Variable is true when left menu is visible
     private boolean showLeftMenu = false;
+
+    // Variable is true when was printed exception
     private boolean isError = false;
 
+    // Variable is true when memory buttons was pressed
     private boolean memoryPressed = false;
+
+    // Variable is true when can change text from general display
     private boolean canBackspace = true;
 
+    // Variable keeps result of calculation
+    private BigDecimal result;
 
-    private int charValidInText = 16;
+
     private double moveScroll;
     private double xOffset = 0;
     private double yOffset = 0;
-
     private Memory memory;
-    //    private Calculator calculator;
-    History history;
+
+    // Variable keeps general display's css options from, value sets when application is started.
+    private String firstStyleLabel;
+
+    // Variable keeps maximal length of symbol which can input
+    private int maxCharInText = 16;
+
+    // Formula which need to calculate
     private ArrayList<Object> formula = new ArrayList<>();
-    BigDecimal result;
 
 
     @FXML
@@ -192,7 +216,6 @@ public class CalculatorController {
         }
 
         double speedOfAnimation = 0.1;
-
         Duration duration = Duration.seconds(speedOfAnimation);
         TranslateTransition transition = new TranslateTransition(duration, leftMenu);
 
@@ -227,34 +250,39 @@ public class CalculatorController {
      */
     @FXML
     void commaPressed () {
-        String out = generalDisplay.getText();
+        String outText = getTextDisplay();
+        boolean isTextWithComma = outText.contains(DECIMAL_SEPARATOR);
 
-        if (!out.contains(decimalSeparate) || canChangeOperator) {
+        if (!isTextWithComma || canChangeOperator) {
             if (!canBackspace) {
-                out = DEFAULT_TEXT;
+                outText = DEFAULT_TEXT;
                 canBackspace = true;
             }
-            if (out.equals(DEFAULT_TEXT)) {
-                charValidInText++;
+
+            // Will increased min numbers symbol in text, if text from general display is "0".
+            if (outText.equals(DEFAULT_TEXT)) {
+                maxCharInText++;
             }
-            out = out.concat(decimalSeparate);
-            charValidInText++;
+
+            outText = outText.concat(DECIMAL_SEPARATOR);
+            maxCharInText++;
             canChangeOperator = false;
-            printResult(out);
+            printResult(outText);
         }
 
         memoryPressed = false;
     }
 
-    private int lengthTextWithoutSeparator (String out) {
-        String outWithoutSeparator = out.replace(" ", "");
+    private int lengthTextWithoutGroupingSeparator (String out) {
+        String outWithoutSeparator = out.replace(GROUPING_SEPARATOR, EMPTY_STRING);
         return outWithoutSeparator.length();
     }
 
     private String formatterInputNumber (String text) {
         BigDecimal number = parseNumber(text);
+        boolean isTextWithComma = text.contains(DECIMAL_SEPARATOR);
 
-        if (!text.contains(decimalSeparate)) {
+        if (!isTextWithComma) {
             text = formatterNumber(number);
         }
 
@@ -271,21 +299,39 @@ public class CalculatorController {
     @FXML
     void backspacePressed () {
         clearError();
-        String out = generalDisplay.getText();
-        if (canBackspace) {
-            out = backspace(out);
+        String outText = getTextDisplay();
 
-            if (out.length() > 0) {
-                int indexLastSymbol = out.length() - 1;
-                String lastSymbol = String.valueOf(out.toCharArray()[indexLastSymbol]);
-                if (!lastSymbol.equals(decimalSeparate) && !lastSymbol.equals(DEFAULT_TEXT)) {
-                    String outWithoutSeparator = out.replace(" ", "").replace(decimalSeparate, ".");
-                    BigDecimal number = new BigDecimal(outWithoutSeparator);
-                    out = formatterNumber(number);
-                }
-            }
-            printResult(out);
+        if (canBackspace) {
+            outText = backspace(outText);
+            outText = formatterBackspaceResult(outText);
+
+            printResult(outText);
         }
+    }
+
+    private String getTextDisplay () {
+        return generalDisplay.getText();
+    }
+
+    private String formatterBackspaceResult (String outText) {
+        int lengthOutText = outText.length();
+
+        if (lengthOutText > 0) {
+            int indexLastSymbol = lengthOutText - 1;
+            String lastSymbol = String.valueOf(outText.toCharArray()[indexLastSymbol]);
+            boolean isCommaLastSymbol = lastSymbol.equals(DECIMAL_SEPARATOR);
+            boolean isZeroLastSymbol = lastSymbol.equals(DEFAULT_TEXT);
+
+            if (!isCommaLastSymbol && !isZeroLastSymbol) {
+                String outWithoutSeparator = outText.replace(GROUPING_SEPARATOR, EMPTY_STRING);
+                String point = ".";
+                outWithoutSeparator = outWithoutSeparator.replace(DECIMAL_SEPARATOR, point);
+
+                BigDecimal number = new BigDecimal(outWithoutSeparator);
+                outText = formatterNumber(number);
+            }
+        }
+        return outText;
     }
 
     /**
@@ -295,28 +341,34 @@ public class CalculatorController {
      * @return Text was changed
      */
     public String backspace (String text) {
-        int symbolsInTextWithoutComma = text.replace(decimalSeparate, "").length();
+        int symbolsInTextWithoutComma = text.replace(DECIMAL_SEPARATOR, EMPTY_STRING).length();
 
         if (symbolsInTextWithoutComma > 0) {
             int textLength = text.length();
             int minLengthWithMinus = 2;
-            int minLength = 1;
-            String minus = "-";
+            int minLengthText = 1;
 
-            if ((textLength == minLengthWithMinus && text.contains(minus)) ||
-                    textLength == minLength) {
-                text = DEFAULT_TEXT;
-                charValidInText = CHAR_MAX_INPUT;
+            boolean isTextContainsMinus = isTextContainsMinus(text);
+            boolean isMinLengthTextWithMinus = textLength == minLengthWithMinus && isTextContainsMinus;
+            boolean isMinLengthText = textLength == minLengthText;
+
+            if (isMinLengthTextWithMinus || isMinLengthText) {
+                text = setDefaultText();
             } else {
                 int lastSymbol = textLength - 1;
                 text = new StringBuilder(text).deleteCharAt(lastSymbol).toString();
-                if (!text.contains(decimalSeparate)) {
-                    charValidInText--;
+                if (!text.contains(DECIMAL_SEPARATOR)) {
+                    maxCharInText--;
                 }
             }
         }
 
         return text;
+    }
+
+    private boolean isTextContainsMinus (String text) {
+        String minus = "-";
+        return text.contains(minus);
     }
 
     /**
@@ -333,20 +385,27 @@ public class CalculatorController {
     @FXML
     void numberPressed (ActionEvent actionEvent) {
         clearError();
-        String out = generalDisplay.getText();
-        out = setDefaultText(out);
+        String outText = getTextDisplay();
+        outText = setDefaultTextAfterResult(outText);
 
-        String buttonText = ((Button) actionEvent.getSource()).getText();
+        String buttonText = getButton(actionEvent).getText();
+        boolean isTextDefault = outText.equals(DEFAULT_TEXT);
 
-        if (out.equals(DEFAULT_TEXT)) {
-            out = buttonText;
+        if (isTextDefault) {
+            outText = buttonText;
         } else {
-            if (lengthTextWithoutSeparator(out) < charValidInText) {
-                out = out.concat(buttonText);
+            int lengthTextWithoutGroupingSeparator = lengthTextWithoutGroupingSeparator(outText);
+
+            if (lengthTextWithoutGroupingSeparator < maxCharInText) {
+                outText = outText.concat(buttonText);
             }
         }
-        printResult(formatterInputNumber(out));
+        printResult(formatterInputNumber(outText));
         canChangeOperator = false;
+    }
+
+    private Button getButton (ActionEvent actionEvent) {
+        return ((Button) actionEvent.getSource());
     }
 
 
@@ -367,25 +426,26 @@ public class CalculatorController {
      */
     @FXML
     void negatePressed () {
-        String out = generalDisplay.getText();
-        int indexLastSymbol = out.length() - 1;
-        String lastSymbol = String.valueOf(out.toCharArray()[indexLastSymbol]);
+        String outText = getTextDisplay();
+        int indexLastSymbol = outText.length() - 1;
+        String lastSymbol = String.valueOf(outText.toCharArray()[indexLastSymbol]);
 
-
-        if (lastSymbol.equals(decimalSeparate) || canBackspace) {
-            out = addNegate(out);
-            printResult(out);
+        boolean isCommaLastSymbol = lastSymbol.equals(DECIMAL_SEPARATOR);
+        if (isCommaLastSymbol || canBackspace) {
+            outText = addNegate(outText);
+            printResult(outText);
         } else {
-            setNumber();
-            setOperation(OperationsEnum.NEGATE);
+            addNumberFormula();
+            OperationsEnum negateOperation = OperationsEnum.NEGATE;
+            addOperationFormula(negateOperation);
             calculate();
         }
 
-        String minus = "-";
-        if (out.contains(minus)) {
-            charValidInText++;
+        boolean isTextContainsMinus = isTextContainsMinus(outText);
+        if (isTextContainsMinus) {
+            maxCharInText++;
         } else {
-            charValidInText--;
+            maxCharInText--;
         }
     }
 
@@ -397,7 +457,9 @@ public class CalculatorController {
      * @return Text with "-"
      */
     public String addNegate (String text) {
-        if (!text.equals(DEFAULT_TEXT)) {
+        boolean isDefaultText = text.equals(DEFAULT_TEXT);
+
+        if (!isDefaultText) {
             char minus = '-';
             char firstChar = text.charAt(0);
             if (firstChar != minus) {
@@ -501,7 +563,8 @@ public class CalculatorController {
      */
 
     private BigDecimal getDisplayNumber () {
-        return parseNumber(generalDisplay.getText());
+        String textFromGeneralDisplay = getTextDisplay();
+        return parseNumber(textFromGeneralDisplay);
     }
 
 
@@ -517,17 +580,18 @@ public class CalculatorController {
     @FXML
     public void binaryOperation (ActionEvent actionEvent) {
         if (!canChangeOperator) {
-            setNumber();
+            addNumberFormula();
         }
-        String buttonID = ((Button) actionEvent.getSource()).getId();
+        String buttonID = getButton(actionEvent).getId();
 
-        setOperation(operation.get(buttonID));
+        OperationsEnum operationsEnum = operation.get(buttonID);
+        addOperationFormula(operationsEnum);
         canChangeOperator = true;
         calculate();
         memoryPressed = false;
     }
 
-    private void setNumber () {
+    private void addNumberFormula () {
         if (canBackspace) {
             formula.add(getDisplayNumber());
             canChangeOperator = false;
@@ -545,11 +609,11 @@ public class CalculatorController {
 
     @FXML
     public void unaryOperations (ActionEvent actionEvent) {
-        String buttonID = ((Button) actionEvent.getSource()).getId();
+        String buttonID = getButton(actionEvent).getId();
 
-        setNumber();
+        addNumberFormula();
         OperationsEnum unaryOperation = operation.get(buttonID);
-        setOperation(unaryOperation);
+        addOperationFormula(unaryOperation);
 
         calculate();
         printHistory();
@@ -562,14 +626,14 @@ public class CalculatorController {
      */
     @FXML
     public void percentOperation () {
-        setNumber();
-        setOperation(OperationsEnum.PERCENT);
+        addNumberFormula();
+        addOperationFormula(OperationsEnum.PERCENT);
         calculate();
         printHistory();
 
     }
 
-    private void setOperation (OperationsEnum operationsEnum) {
+    private void addOperationFormula (OperationsEnum operationsEnum) {
         formula.add(operationsEnum);
     }
 
@@ -581,18 +645,16 @@ public class CalculatorController {
     @FXML
     void pressedEqual () {
         clearError();
-        setNumber();
-        setOperation(OperationsEnum.EQUAL);
+        addNumberFormula();
+        addOperationFormula(OperationsEnum.EQUAL);
         calculate();
 
         canBackspace = false;
         memoryPressed = false;
-        charValidInText = CHAR_MAX_INPUT;
+        maxCharInText = DEFAULT_MAX_NUMBERS_CHAR_INPUT;
 
         scrollOutOperationMemory();
     }
-
-
     //endregion
 
     //region Calculate
@@ -602,25 +664,24 @@ public class CalculatorController {
      * catches exception.
      */
     private void calculate () {
-
         try {
             result = Calculator.calculator(formula);
-//            history = Calculator.getHistory();
+
             if (result != null) {
                 String resultFormatted = FormatterNumber.formatterNumber(result);
                 printResult(resultFormatted);
-
-
             }
+
             canBackspace = false;
+
             if (!isError) {
                 printHistory();
             }
         } catch (Exception e) {
-
             printHistory();
             printError(e);
         }
+
         scrollOutOperationMemory();
     }
 
@@ -676,11 +737,15 @@ public class CalculatorController {
         BigDecimal number = parseNumber(formatterNumber(result));
 
         if (number != null) {
-            if (compareOne(number) > 0) {
-                overflow = number.abs().compareTo(MAX_INVALID_NUMBER) >= 0;
+            BigDecimal absoluteNumber = number.abs();
+            int compareOne = compareOne(absoluteNumber);
 
-            } else if (compareOne(number) < 0 && compareZero(number) != 0) {
-                overflow = number.abs().compareTo(MIN_INVALID_NUMBER) <= 0;
+            if (compareOne > 0) {
+                overflow = absoluteNumber.compareTo(MAX_INVALID_NUMBER) >= 0;
+            }
+
+            if (compareOne < 0 && compareZero(absoluteNumber) != 0) {
+                overflow = absoluteNumber.compareTo(MIN_INVALID_NUMBER) <= 0;
             }
         }
 
@@ -689,18 +754,18 @@ public class CalculatorController {
         }
     }
 
-    private int compareZero (BigDecimal number) {
-        return number.abs().compareTo(BigDecimal.ZERO);
+    private int compareZero (BigDecimal absoluteNumber) {
+        return absoluteNumber.compareTo(BigDecimal.ZERO);
     }
 
-    private int compareOne (BigDecimal number) {
-        return number.abs().compareTo(BigDecimal.ONE);
+    private int compareOne (BigDecimal absoluteNumber) {
+        return absoluteNumber.compareTo(BigDecimal.ONE);
     }
     //endregion
 
     //region History
     private void printHistory () {
-        history = Calculator.getHistory();
+        History history = Calculator.getHistory();
         if (history != null) {
             CalculatorHistory calculatorHistory = new CalculatorHistory(history);
             String historyChanged = calculatorHistory.getChangedHistory();
@@ -751,8 +816,8 @@ public class CalculatorController {
         }
     }
 
-    /*
-     * Method scrolls history, if text width more then width history area
+    /* Method calculates number flipping,
+     * if text width more then width history area.
      */
     private void scrollOutOperationMemory () {
         moveScroll = ResizeDisplay.scrollText(scrollPaneOperation, outOperationMemory.getText(), scrollButtonLeft, scrollButtonRight);
@@ -769,7 +834,7 @@ public class CalculatorController {
         //Displays
         generalDisplay.setStyle(firstStyleLabel);
         generalDisplay.setText(DEFAULT_TEXT);
-        outOperationMemory.setText(emptyString);
+        outOperationMemory.setText(EMPTY_STRING);
 
         formula.clear();
 
@@ -783,7 +848,7 @@ public class CalculatorController {
         operationsIsDisable(false);
         memoryPanel.setDisable(false);
 
-        charValidInText = CHAR_MAX_INPUT;
+        maxCharInText = DEFAULT_MAX_NUMBERS_CHAR_INPUT;
         resizeOutputText();
         isError = false;
     }
@@ -796,7 +861,7 @@ public class CalculatorController {
     void clearNumberCE () {
         generalDisplay.setStyle(firstStyleLabel);
         generalDisplay.setText(DEFAULT_TEXT);
-        charValidInText = CHAR_MAX_INPUT;
+        maxCharInText = DEFAULT_MAX_NUMBERS_CHAR_INPUT;
         clearError();
         resizeOutputText();
     }
@@ -806,22 +871,26 @@ public class CalculatorController {
      * This method calls if calculator's number button was pressed,
      * result of calculation was printed,
      */
-    private String setDefaultText (String out) {
+    private String setDefaultTextAfterResult (String out) {
         if (!canBackspace || memoryPressed || canChangeOperator) {
             canBackspace = true;
-            charValidInText = CHAR_MAX_INPUT;
+            maxCharInText = DEFAULT_MAX_NUMBERS_CHAR_INPUT;
+            out = setDefaultText();
 
-            out = emptyString;
         }
 
         if (memoryPressed) {
-            outOperationMemory.setText(emptyString);
+            outOperationMemory.setText(EMPTY_STRING);
             formula.clear();
             memoryPressed = false;
         }
         return out;
     }
 
+    private String setDefaultText () {
+        maxCharInText = DEFAULT_MAX_NUMBERS_CHAR_INPUT;
+        return DEFAULT_TEXT;
+    }
 
     /*
      * Method imitates press C button,
@@ -923,7 +992,6 @@ public class CalculatorController {
     private BigDecimal setMemoryNumber () {
         BigDecimal number = null;
 
-
         if (canBackspace) {
             number = getDisplayNumber();
         } else {
@@ -973,15 +1041,19 @@ public class CalculatorController {
 
 
     /**
-     * If mouse was dragged method changes location of calculator
+     * If mouse was dragged method changes location of calculator.
      *
      * @param event Mouse event
      */
     @FXML
     void draggedWindow (MouseEvent event) {
         Stage stage = (Stage) title.getScene().getWindow();
-        stage.setX(event.getScreenX() - xOffset);
-        stage.setY(event.getScreenY() - yOffset);
+
+        double x= event.getScreenX() - xOffset;
+        stage.setX(x);
+
+        double y= event.getScreenY() - yOffset;
+        stage.setY(y);
     }
 
     /**
@@ -1015,7 +1087,8 @@ public class CalculatorController {
      * Method resize text for general display and sets one
      */
     private void resizeOutputText () {
-        generalDisplay.setFont(ResizeDisplay.fontSize(generalDisplay));
+        Font newFont = ResizeDisplay.fontSize(generalDisplay);
+        generalDisplay.setFont(newFont);
     }
 
     //endregion

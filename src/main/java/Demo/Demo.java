@@ -11,6 +11,10 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+
+/**
+ * This class demonstrations calculator model.
+ */
 public class Demo {
     private static HashMap<String, OperationsEnum> operations = new HashMap<>();
 
@@ -41,17 +45,18 @@ public class Demo {
     }
 
 
-    private static ArrayList<Object> toArray (String args) {
+    // This method checks each symbol from string, adds number or operation to list and returns this list.
+    private static ArrayList<Object> toArray (String input) {
         ArrayList<Object> array = new ArrayList<>();
-        for (int i = 0; i < args.length(); i++) {
-            String symbol = String.valueOf(args.toCharArray()[i]);
+        for (int i = 0; i < input.length(); i++) {
+            String symbol = String.valueOf(input.toCharArray()[i]);
 
             if (isNumber(symbol)) {
-                 addNumber(symbol, args, i, array);
+                addNumber(symbol, input, i, array);
             }
 
             if (isOperation(symbol)) {
-               addOperation(symbol, array);
+                addOperation(symbol, array);
             }
         }
         return array;
@@ -59,20 +64,29 @@ public class Demo {
 
     private static String numberString = "";
 
+    /*Method adds number to list.
+     * if it is a number and next symbol is not number,
+     * symbol is written down to variable "numberString" and  this variable casting to BigDecimal and is added to list.
+     *If symbol is number and next symbol too, symbol is written down to variable "numberString".
+     */
     private static void addNumber (String symbol, String formulaInput, int i, ArrayList<Object> array) {
         numberString = numberString.concat(symbol);
-        if (!isNumberNext(formulaInput, i)) {
+        boolean isNumberNext = isNumberNext(formulaInput, i);
+
+        if (!isNumberNext) {
             BigDecimal number = new BigDecimal(numberString);
-            numberString = "";
             array.add(number);
+            numberString = "";
         }
     }
 
+    //Method adds operation to list.
     private static void addOperation (String symbol, ArrayList<Object> array) {
         OperationsEnum operation = operations.get(symbol);
         array.add(operation);
     }
 
+    // Method returns true if next symbol is number or false if isn't.
     private static boolean isNumberNext (String args, int i) {
         boolean isNumberNext = false;
         int indexNext = i + 1;

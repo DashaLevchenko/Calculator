@@ -13,23 +13,16 @@ class Binary {
     private BigDecimal numberFirst;
     private BigDecimal numberSecond;
 
-    protected void setOperation (OperationsEnum operation) {
-        this.operation = operation;
-    }
+    /**
+     * Max default rounding
+     */
+    private final RoundingMode DEFAULT_ROUNDING = RoundingMode.UP;
 
     private OperationsEnum operation;
     private BigDecimal result;
 
-    protected void setNumberFirst (BigDecimal numberFirst) {
-        this.numberFirst = numberFirst;
-    }
-
-    protected void setNumberSecond (BigDecimal numberSecond) {
-        this.numberSecond = numberSecond;
-    }
-
-    protected BigDecimal getResult () {
-        return result;
+    protected void setOperation (OperationsEnum operation) {
+        this.operation = operation;
     }
 
     private void add () {
@@ -43,11 +36,6 @@ class Binary {
     private void multiply () {
         result = numberFirst.multiply(numberSecond);
     }
-
-    /**
-     * Max default rounding
-     */
-    private RoundingMode defaultRounding = RoundingMode.UP;
 
     /**
      * Method divides two numbers
@@ -64,7 +52,7 @@ class Binary {
         }
 
         int defaultScale = 10000;
-        result = numberFirst.divide(numberSecond, defaultScale, defaultRounding);
+        result = numberFirst.divide(numberSecond, defaultScale, DEFAULT_ROUNDING);
     }
 
     private int compareZero (BigDecimal number) {
@@ -74,7 +62,9 @@ class Binary {
 
 
     protected void percent () {
-        result = numberFirst.multiply(numberSecond.divide(BigDecimal.valueOf(100), MathContext.DECIMAL128));
+        BigDecimal oneHundred = BigDecimal.valueOf(100);
+        BigDecimal numberSecondDivideHundred = numberSecond.divide(oneHundred, MathContext.DECIMAL128);
+        result = numberFirst.multiply(numberSecondDivideHundred);
     }
 
     /**
@@ -107,4 +97,15 @@ class Binary {
         }
     }
 
+    protected void setNumberFirst (BigDecimal numberFirst) {
+        this.numberFirst = numberFirst;
+    }
+
+    protected void setNumberSecond (BigDecimal numberSecond) {
+        this.numberSecond = numberSecond;
+    }
+
+    protected BigDecimal getResult () {
+        return result;
+    }
 }

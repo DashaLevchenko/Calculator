@@ -15,24 +15,11 @@ import java.math.RoundingMode;
  class Unary {
     private BigDecimal number;
     private MathContext mathContext = MathContext.DECIMAL128;
-
-    protected void setOperation (OperationsEnum operation) {
-        this.operation = operation;
-    }
-
     private OperationsEnum operation;
     private BigDecimal result;
 
-    protected void setNumber (BigDecimal number) {
-        this.number = number;
-    }
-
-    protected BigDecimal getResult () {
-        return result;
-    }
-
-    protected void setResult (BigDecimal result) {
-        this.result = result;
+    protected void setOperation (OperationsEnum operation) {
+        this.operation = operation;
     }
 
     /**
@@ -53,16 +40,14 @@ import java.math.RoundingMode;
         result = number.pow(power).round(mathContext);
     }
 
-    /**
-     * Method divides one to x
-     *
-     * @throws DivideZeroException If divide by zero
-     */
+
     private void oneDivideX () throws DivideZeroException {
         if (compareZero(number) == 0) {
             throw new DivideZeroException("Cannot divide by zero");
         }
-        result = BigDecimal.ONE.divide(number, mathContext);
+
+        BigDecimal one = BigDecimal.ONE;
+        result = one.divide(number, mathContext);
     }
 
     private int compareZero (BigDecimal number) {
@@ -107,5 +92,14 @@ import java.math.RoundingMode;
     private void negate () {
         result = number.negate();
     }
+    protected void setNumber (BigDecimal number) {
+        this.number = number;
+    }
+
+    protected BigDecimal getResult () {
+        return result;
+    }
+
+
 
 }

@@ -15,15 +15,23 @@ import java.util.HashMap;
  */
 
 public class CalculatorHistory {
-//    private Calculator calculator;
     private History history;
+
+    /**
+     * Variable keeps empty string value
+     */
+    private final String EMPTY_STRING = "";
+
+    /**
+     * Exponent separator which is being used for number in application
+     */
+    private final String EXPONENT_SEPARATOR = "e";
 
     private OperationsEnum percentOperation = OperationsEnum.PERCENT;
     private OperationsEnum negateOperation = OperationsEnum.NEGATE;
-    private CharSequence exponentSeparator = "e";
     private String historyUnaryOperations = "";
     private String negateHistory = "";
-    private String emptyString = "";
+
     private ArrayList<String> historyListOut = new ArrayList<>();
     private HashMap<OperationsEnum, String> operationSymbols = new HashMap<>();
 
@@ -41,7 +49,7 @@ public class CalculatorHistory {
         operationSymbols.put(OperationsEnum.NEGATE, "negate");
     }
 
-    CalculatorHistory(History history){
+    CalculatorHistory (History history) {
         this.history = history;
     }
 
@@ -60,9 +68,8 @@ public class CalculatorHistory {
      * @return History was changed
      */
     public String getChangedHistory () {
-//        this.calculator = calculator;
-//        History historyIn = history;
         int historyInSize = history.size();
+
         if (historyInSize != 0) {
             for (int index = 0; index < historyInSize; index++) {
                 Object object = history.get(index);
@@ -79,35 +86,6 @@ public class CalculatorHistory {
         return getStringHistory();
     }
 
-//    public String getChangedHistory () {
-//        int historyInSize =calculator.getHistory().size();
-//        if (historyInSize != 0) {
-//            for (int index = 0; index > historyInSize; index++) {
-//                Object lastObject = calculator.getHistory().getLast();
-//                int indexObject = calculator.getHistory().size() - 1;
-//
-//                if (lastObject instanceof OperationsEnum) {
-//                    OperationsEnum operation = (OperationsEnum) lastObject;
-//                    changeOperation(operation, indexObject);
-//                }
-//                if (isNumber(lastObject)) {
-//                    changeNumber(lastObject);
-//                }
-//            }
-//        }
-//        return getStringHistory();
-//    }
-
-//    /**
-//     * Method deletes last history object from history
-//     */
-//    public void deleteLastObject () {
-//        int indexLast = historyListOut.size() - 1;
-//        if (indexLast >= 0) {
-//            historyListOut.remove(indexLast);
-//        }
-//    }
-
     /**
      * Method returns size of calculator history
      *
@@ -123,7 +101,7 @@ public class CalculatorHistory {
      * like "sqr(sqrt(8))"
      */
     public void clearHistoryUnaryOperations () {
-        historyUnaryOperations = emptyString;
+        historyUnaryOperations = EMPTY_STRING;
     }
 
     /**
@@ -131,9 +109,7 @@ public class CalculatorHistory {
      * like "negate(negate(8))"
      */
     public void clearNegateHistory () {
-        if (!negateHistory.isEmpty()) {
-            negateHistory = emptyString;
-        }
+        negateHistory = EMPTY_STRING;
     }
 
     /**
@@ -141,8 +117,8 @@ public class CalculatorHistory {
      */
     public void clearHistory () {
         historyListOut.clear();
-        negateHistory = emptyString;
-        historyUnaryOperations = emptyString;
+        clearNegateHistory();
+        historyUnaryOperations = EMPTY_STRING;
     }
 
 
@@ -182,9 +158,9 @@ public class CalculatorHistory {
 
     private BigDecimal parseNumber (Object lastObject) {
         BigDecimal number = null;
-        String exponent = "e";
         String lastHistory = lastObject.toString();
-        if (lastHistory.contains(exponent)) {
+
+        if (lastHistory.contains(EXPONENT_SEPARATOR)) {
             try {
                 number = FormatterNumber.parseNumber(lastHistory);
             } catch (ParseException e) {
@@ -291,13 +267,13 @@ public class CalculatorHistory {
         if (sizeHistoryIn > minSizeHistory) {
             if (negateHistory.isEmpty()) {
                 Object previousObject = getPreviousObject(index);
+
                 if (historyUnaryOperations.isEmpty()) {
                     if (isNumber(previousObject)) {
                         BigDecimal number = parseNumber(previousObject);
                         negateHistory = formatterNumberHistory(number);
 
                     } else {
-
                         negateHistory = previousObject.toString();
                     }
                 } else {
@@ -316,6 +292,7 @@ public class CalculatorHistory {
         String operationSymbol = operationSymbols.get(operation);
         String leftBracket = "(";
         String rightBracket = ")";
+
         return operationSymbol.concat(leftBracket).concat(text).concat(rightBracket);
     }
 
@@ -324,16 +301,13 @@ public class CalculatorHistory {
      * It deletes last number and adds result of percent calculate
      */
     private void changePercentOperationHistory () {
-//        BigDecimal calculateResult = calculator.getResult();
-//        String addHistory = formatterNumberHistory(calculateResult);
-//        historyList.add(addHistory);
         deletePreviousHistory(percentOperation);
     }
 
     private boolean isNumber (Object object) {
         String text = object.toString();
         try {
-            if (text.contains(exponentSeparator)) {
+            if (text.contains(EXPONENT_SEPARATOR)) {
                 FormatterNumber.parseNumber(text);
             } else {
                 new BigDecimal(text);

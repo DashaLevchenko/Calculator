@@ -79,26 +79,30 @@ class FormatterNumber {
 
         if (moreMaxNumber(number) > 0) {
             pattern = patterMaxNumber(number);
+
         } else if (compareOne(number) < 0 && compareZero(number) != 0) {
             number = number.stripTrailingZeros();
 
             pattern.append("0.");
             int scale = number.scale();
+
             if (scale > MAX_SCALE) {
                 int precision = number.precision();
                 int numericInNumber = scale - precision;
                 int minNumericInNumber = 2;
 
                 if (numericInNumber > minNumericInNumber) {
-
                     if (precision != PRECISION_MIN && precision <= MAX_SCALE) {
                         pattern.append("#".repeat(precision));
                     }
+
                     pattern.append("E0");
+
                 } else {
                     number = number.setScale(MAX_SCALE, RoundingMode.HALF_UP);
                     pattern.append("#".repeat(MAX_SCALE));
                 }
+
             } else {
                 pattern.append("#".repeat(scale));
             }
@@ -116,6 +120,7 @@ class FormatterNumber {
     private static String changeExponent (String outNumber) {
         String negateExponent = "e-";
         String positiveExponent = "e+";
+
         if (!outNumber.contains(negateExponent)) {
             String exponent = "e";
             outNumber = outNumber.replace(exponent, positiveExponent);
@@ -131,6 +136,7 @@ class FormatterNumber {
         int scale = number.scale();
         if (scale > 0) {
             pattern.append(".");
+
             if (isMoreMaxScale(scale)) {
                 pattern.append("#".repeat(MAX_SCALE));
             } else {
@@ -218,7 +224,9 @@ class FormatterNumber {
      */
     static BigDecimal parseNumber (String text) throws ParseException {
         String plus = "+";
-        text = text.replace(plus, "").replace(" ", "");
+        String emptyString = "";
+        String groupingSeparator = " ";
+        text = text.replace(plus, emptyString).replace(groupingSeparator, emptyString);
         decimalFormat.setParseBigDecimal(true);
 
         BigDecimal number = (BigDecimal) decimalFormat.parse(text);

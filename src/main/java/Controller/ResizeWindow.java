@@ -46,7 +46,7 @@ public class ResizeWindow {
     private static final String DEFAULT_FONT_BUTTON = "Calculator MDL2 Assets";
 
     /**
-     * This constructor gets stage, sets min width of stage, sets min height of stage, sets scene of stage
+     * This constructor gets stage, sets min width of stage, sets min height of stage, sets scene of stage.
      *
      * @param stage Stage of application
      */
