@@ -7,31 +7,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="feaeb0c2-feb2-4a9c-98e3-48b1d1a339aa" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/CalculatorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/CalculatorController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Demo/Demo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Demo/Demo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Calculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Calculator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Model/BinaryDivideTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/BinaryDivideTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Model/BinaryMinusTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/BinaryMinusTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Model/BinaryMultiplyTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/BinaryMultiplyTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Model/BinaryPercentTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/BinaryPercentTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Model/BinarySumTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/BinarySumTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Model/UnaryOneDivideXTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/UnaryOneDivideXTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Model/UnaryPercentTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/UnaryPercentTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Model/UnarySquerRootTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/UnarySquerRootTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Model/UnaryXSquerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/UnaryXSquerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Controller/CalculatorController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Controller/CalculatorController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Demo/Demo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Demo/Demo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Model/Calculator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Model/Calculator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/Model/BinaryDivideTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/Model/BinaryDivideTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/Model/BinaryMinusTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/Model/BinaryMinusTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/Model/BinaryMultiplyTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/Model/BinaryMultiplyTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/Model/BinaryPercentTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/Model/BinaryPercentTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/Model/BinarySumTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/Model/BinarySumTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/Model/UnaryOneDivideXTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/Model/UnaryOneDivideXTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/Model/UnaryPercentTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/Model/UnaryPercentTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/Model/UnarySquerRootTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/Model/UnarySquerRootTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/Model/UnaryXSquerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/Model/UnaryXSquerTest.class" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -325,13 +302,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1565432602101</updated>
-    </task>
-    <task id="LOCAL-00065" summary="all work">
-      <created>1572398344737</created>
-      <option name="number" value="00065" />
-      <option name="presentableId" value="LOCAL-00065" />
-      <option name="project" value="LOCAL" />
-      <updated>1572398344738</updated>
     </task>
     <task id="LOCAL-00066" summary="before 10 /3 = *3">
       <created>1572449518440</created>
@@ -669,7 +639,14 @@
       <option name="project" value="LOCAL" />
       <updated>1575995820517</updated>
     </task>
-    <option name="localTasksCounter" value="114" />
+    <task id="LOCAL-00114" summary="before delete operation in demo">
+      <created>1576053962023</created>
+      <option name="number" value="00114" />
+      <option name="presentableId" value="LOCAL-00114" />
+      <option name="project" value="LOCAL" />
+      <updated>1576053962023</updated>
+    </task>
+    <option name="localTasksCounter" value="115" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -743,7 +720,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="before create History" />
     <MESSAGE value="before change model,&#10;setOperation" />
     <MESSAGE value="before change calculateUnary" />
     <MESSAGE value="before change history %" />
@@ -768,7 +744,8 @@
     <MESSAGE value="all works" />
     <MESSAGE value="all works after refactoring" />
     <MESSAGE value="before changing demo" />
-    <option name="LAST_COMMIT_MESSAGE" value="before changing demo" />
+    <MESSAGE value="before delete operation in demo" />
+    <option name="LAST_COMMIT_MESSAGE" value="before delete operation in demo" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
