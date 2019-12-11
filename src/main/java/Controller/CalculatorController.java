@@ -665,7 +665,7 @@ public class CalculatorController {
      */
     private void calculate () {
         try {
-            result = Calculator.calculator(formula);
+            result = Calculator.calculator();
 
             if (result != null) {
                 String resultFormatted = FormatterNumber.formatterNumber(result);

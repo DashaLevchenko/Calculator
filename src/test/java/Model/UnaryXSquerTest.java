@@ -304,7 +304,7 @@ class UnaryXSquerTest {
         formula = new ArrayList<>(Arrays.asList(x, OperationsEnum.SQR));
 
         try {
-            BigDecimal resultActual = Calculator.calculator(formula);
+            BigDecimal resultActual = Calculator.calculator();
             assertEquals(resultExpected, resultActual);
         } catch (DivideZeroException | ResultUndefinedException | OperationException | InvalidInputException e) {
             e.printStackTrace();
@@ -350,7 +350,7 @@ class UnaryXSquerTest {
     private void assertEnumNull (BigDecimal x) {
         formula = new ArrayList<>(Arrays.asList(x, null));
         try {
-            Calculator.calculator(formula);
+            Calculator.calculator();
             fail();
         } catch (Exception e) {
             assertEquals("Can not calculate null operation, enter operation or number.", e.getMessage());

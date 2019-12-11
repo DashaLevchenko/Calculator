@@ -1190,7 +1190,7 @@ class BinaryPercentTest {
         formula = new ArrayList<>(Arrays.asList(x, OperationsEnum.ADD, percent, OperationsEnum.PERCENT));
 
         try {
-            BigDecimal resultActual = Calculator.calculator(formula);
+            BigDecimal resultActual = Calculator.calculator();
             assertEquals(resultExpected, resultActual);
         } catch (DivideZeroException | ResultUndefinedException | OperationException | InvalidInputException e) {
             e.printStackTrace();

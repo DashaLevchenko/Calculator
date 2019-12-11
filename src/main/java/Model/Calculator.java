@@ -7,8 +7,10 @@ import Model.Exceptions.ResultUndefinedException;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Calculator {
+    private static final BigDecimal DEFAULT_RESULT = BigDecimal.ZERO;
     private static BigDecimal numberFirst;
     private static BigDecimal numberSecond;
     private static OperationsEnum operation;
@@ -31,18 +33,63 @@ public class Calculator {
         return history;
     }
 
-    /**
-     * This method calculates math operations from formula
-     *
-     * @param formula Formula which need to calculate
-     * @return Result of calculate formula
-     * @throws DivideZeroException      If divide by zero
-     * @throws ResultUndefinedException If zero divide by zero
-     * @throws OperationException       If operation not equals calculator operation
-     * @throws InvalidInputException    If square root negative number
-     */
-    public static BigDecimal calculator (ArrayList formula) throws OperationException, DivideZeroException, ResultUndefinedException, InvalidInputException {
+//    /**
+//     * This method calculates math operations from formula
+//     *
+//     * @param formula Formula which need to calculate
+//     * @return Result of calculate formula
+//     * @throws DivideZeroException      If divide by zero
+//     * @throws ResultUndefinedException If zero divide by zero
+//     * @throws OperationException       If operation not equals calculator operation
+//     * @throws InvalidInputException    If square root negative number
+//     */
+//    public static BigDecimal calculator (ArrayList formula) throws OperationException, DivideZeroException, ResultUndefinedException, InvalidInputException {
+//        setDefaultValue();
+//        for (int i = 0; i < formula.size(); i++) {
+//            Object object = formula.get(i);
+//
+//            if (object == null) {
+//                throw new OperationException("Can not calculate null operation, enter operation or number.");
+//            }
+//
+//            clearCalculator(i, object, formula);
+//
+//            if (object instanceof OperationsEnum) {
+//                OperationsEnum operationsEnum = (OperationsEnum) object;
+//                calculateLastBinaryOperation(operationsEnum);
+//                addEqualHistory(i, formula);
+//                addPercentResultHistory(operationsEnum);
+//                setOperation(operationsEnum);
+//            }
+//
+//            if (object instanceof BigDecimal) {
+//                BigDecimal number = (BigDecimal) object;
+//                setNumber(number);
+//            }
+//
+//            boolean canCalculate = canCalculate(i, formula);
+//            if (canCalculate) {
+//                calculate();
+//            }
+//        }
+//        return result;
+//    }
+
+    @SafeVarargs
+    public static <T> BigDecimal calculator (T... o) throws OperationException, DivideZeroException, ResultUndefinedException, InvalidInputException {
         setDefaultValue();
+        ArrayList formula = new ArrayList<Object>(Arrays.asList(o));
+
+        calculateFormula(formula);
+
+        if (result == null) {
+            result = DEFAULT_RESULT;
+        }
+
+        return result;
+    }
+
+    private static void calculateFormula (ArrayList formula) throws OperationException, DivideZeroException, ResultUndefinedException, InvalidInputException {
         for (int i = 0; i < formula.size(); i++) {
             Object object = formula.get(i);
 
@@ -60,8 +107,9 @@ public class Calculator {
                 setOperation(operationsEnum);
             }
 
-            if (object instanceof BigDecimal) {
-                BigDecimal number = (BigDecimal) object;
+            if (object instanceof Number) {
+                Number p = (Number) object;
+                BigDecimal number = new BigDecimal(String.valueOf(p));
                 setNumber(number);
             }
 
@@ -70,8 +118,8 @@ public class Calculator {
                 calculate();
             }
         }
-        return result;
     }
+
 
     //Method sets default value to all variables
     private static void setDefaultValue () {
@@ -362,8 +410,8 @@ public class Calculator {
     }
 
     /* Method returns percent which need to calculate
-    * and sets number in binary object for calculate percent.
-    * If binary operation is divide or multiply, need to calculate one percent from number.
+     * and sets number in binary object for calculate percent.
+     * If binary operation is divide or multiply, need to calculate one percent from number.
      */
     private static BigDecimal setPercentBinaryNumber () {
         BigDecimal percent;
