@@ -1184,13 +1184,11 @@ class BinaryPercentTest {
         BigDecimal percent = new BigDecimal(percentString);
         BigDecimal resultExpected = new BigDecimal(resultString);
 
-//        BigDecimal resultActual = binary.getResult();
-//        assertEquals(resultExpected, resultActual);
 
         formula = new ArrayList<>(Arrays.asList(x, OperationsEnum.ADD, percent, OperationsEnum.PERCENT));
 
         try {
-            BigDecimal resultActual = Calculator.calculator();
+            BigDecimal resultActual = Calculator.calculator(formula);
             assertEquals(resultExpected, resultActual);
         } catch (DivideZeroException | ResultUndefinedException | OperationException | InvalidInputException e) {
             e.printStackTrace();

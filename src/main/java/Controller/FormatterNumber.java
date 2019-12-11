@@ -195,7 +195,14 @@ class FormatterNumber {
     }
 
     private static BigDecimal roundNumber (BigDecimal number) {
-        String numberStr = number.round(MATH_CONTEXT_HALF_DOWN_MAX_SCALE_PLUS_ONE).toPlainString();
+        MathContext mathContext = chooseMathContext(number);
+        return number.round(mathContext);
+    }
+
+    private static MathContext chooseMathContext (BigDecimal number) {
+        MathContext mathContext;
+        number = number.round(MATH_CONTEXT_HALF_DOWN_MAX_SCALE_PLUS_ONE);
+        String numberStr = number.toPlainString();
 
         String point = ".";
         if (numberStr.contains(point)) {
@@ -206,14 +213,15 @@ class FormatterNumber {
             long countNine = decimalPart.chars().filter(ch -> ch == nine).count();
 
             if (countNine == decimalPart.length()) {
-                number = number.round(MATH_CONTEXT_UP);
+                mathContext = MATH_CONTEXT_UP;
             } else {
-                number = number.round(MATH_CONTEXT_HALF_DOWN);
+                mathContext = MATH_CONTEXT_HALF_DOWN;
             }
         } else {
-            number = number.round(MATH_CONTEXT_UP_HALF_UP);
+            mathContext = MATH_CONTEXT_UP_HALF_UP;
         }
-        return number;
+
+        return mathContext;
     }
 
     /**

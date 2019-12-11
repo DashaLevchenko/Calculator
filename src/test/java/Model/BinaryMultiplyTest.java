@@ -1189,7 +1189,7 @@ class BinaryMultiplyTest {
         formula = new ArrayList<>(Arrays.asList(x, OperationsEnum.MULTIPLY, y, OperationsEnum.EQUAL));
 
         try {
-            BigDecimal resultActual = Calculator.calculator();
+            BigDecimal resultActual = Calculator.calculator(formula);
             assertEquals(resultExpected, resultActual);
         } catch (DivideZeroException | ResultUndefinedException | OperationException | InvalidInputException e) {
             e.printStackTrace();
@@ -1237,7 +1237,7 @@ class BinaryMultiplyTest {
     private void assertEnumNull (BigDecimal x, BigDecimal y) {
         formula = new ArrayList<>(Arrays.asList(x, null, y, OperationsEnum.EQUAL));
         try {
-            Calculator.calculator();
+            Calculator.calculator(formula);
             fail();
         } catch (Exception e) {
             assertEquals("Can not calculate null operation, enter operation or number.", e.getMessage());

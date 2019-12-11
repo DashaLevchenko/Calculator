@@ -84,7 +84,7 @@ public class CalculatorController {
 
     //Change number buttons
     @FXML
-    private Button backspace, plusMinus, point;
+    private Button backspace, negate, point;
 
 
     //region Other Window elements
@@ -119,6 +119,8 @@ public class CalculatorController {
         operation.put("sqr", OperationsEnum.SQR);
         operation.put("oneDivideX", OperationsEnum.ONE_DIVIDE_X);
         operation.put("percent", OperationsEnum.PERCENT);
+        operation.put("negate", OperationsEnum.NEGATE);
+        operation.put("equal", OperationsEnum.EQUAL);
     }
 
     /**
@@ -234,7 +236,7 @@ public class CalculatorController {
         multiply.setDisable(disable);
         subtract.setDisable(disable);
         add.setDisable(disable);
-        plusMinus.setDisable(disable);
+        negate.setDisable(disable);
         point.setDisable(disable);
     }
 
@@ -355,8 +357,11 @@ public class CalculatorController {
             if (isMinLengthTextWithMinus || isMinLengthText) {
                 text = setDefaultText();
             } else {
-                int lastSymbol = textLength - 1;
-                text = new StringBuilder(text).deleteCharAt(lastSymbol).toString();
+                int endSubstring = textLength-1;
+                int startSubstring = 0;
+
+                text = text.substring(startSubstring, endSubstring);
+
                 if (!text.contains(DECIMAL_SEPARATOR)) {
                     maxCharInText--;
                 }
@@ -424,8 +429,7 @@ public class CalculatorController {
      * if {@code out} doesn't contains {@code minus}.
      * Also method sets
      */
-    @FXML
-    void negatePressed () {
+    void negatePressed (OperationsEnum operationsEnum) {
         String outText = getTextDisplay();
         int indexLastSymbol = outText.length() - 1;
         String lastSymbol = String.valueOf(outText.toCharArray()[indexLastSymbol]);
@@ -436,8 +440,7 @@ public class CalculatorController {
             printResult(outText);
         } else {
             addNumberFormula();
-            OperationsEnum negateOperation = OperationsEnum.NEGATE;
-            addOperationFormula(negateOperation);
+            addOperationFormula(operationsEnum);
             calculate();
         }
 
@@ -529,7 +532,7 @@ public class CalculatorController {
         } else if (keyCode == KeyCode.ENTER) {
             equal.fire();
         } else if (keyCode == KeyCode.F9) {
-            plusMinus.fire();
+            negate.fire();
         } else if (keyCode == KeyCode.DELETE) {
             CE.fire();
         } else if (keyCode == KeyCode.R) {
@@ -578,13 +581,42 @@ public class CalculatorController {
      * @param actionEvent Binary operation buttons was pressed
      */
     @FXML
-    public void binaryOperation (ActionEvent actionEvent) {
-        if (!canChangeOperator) {
-            addNumberFormula();
-        }
+    public void operationPressed (ActionEvent actionEvent) {
         String buttonID = getButton(actionEvent).getId();
 
         OperationsEnum operationsEnum = operation.get(buttonID);
+
+        if (operationsEnum != null) {
+            boolean isBinary = Calculator.isBinary(operationsEnum);
+            if (isBinary) {
+                binaryOperation(operationsEnum);
+            }
+
+            boolean isUnary = Calculator.isUnary(operationsEnum);
+            if (isUnary) {
+                unaryOperations(operationsEnum);
+            }
+
+            boolean isPercent = Calculator.isPercent(operationsEnum);
+            if (isPercent) {
+                percentOperation(operationsEnum);
+            }
+
+            boolean isEqual = Calculator.isEqual(operationsEnum);
+            if (isEqual) {
+                pressedEqual(operationsEnum);
+            }
+        }
+
+
+    }
+
+
+    public void binaryOperation (OperationsEnum operationsEnum) {
+        if (!canChangeOperator) {
+            addNumberFormula();
+        }
+
         addOperationFormula(operationsEnum);
         canChangeOperator = true;
         calculate();
@@ -604,30 +636,34 @@ public class CalculatorController {
      * Also method sets first or second number in calculator.
      * Prints result or exception.
      *
-     * @param actionEvent Unary operation was pressed
+     * @param operationsEnum Unary operation was pressed
      */
 
-    @FXML
-    public void unaryOperations (ActionEvent actionEvent) {
-        String buttonID = getButton(actionEvent).getId();
+    public void unaryOperations (OperationsEnum operationsEnum) {
 
-        addNumberFormula();
-        OperationsEnum unaryOperation = operation.get(buttonID);
-        addOperationFormula(unaryOperation);
+        boolean isNegate = Calculator.isNegate(operationsEnum);
 
-        calculate();
-        printHistory();
-        memoryPressed = false;
+
+        if (isNegate) {
+            negatePressed(operationsEnum);
+        } else {
+            addNumberFormula();
+            addOperationFormula(operationsEnum);
+            calculate();
+            printHistory();
+            memoryPressed = false;
+        }
+
+
     }
 
 
     /**
      * Method calculates percent operation, if {@code percent} was pressed
      */
-    @FXML
-    public void percentOperation () {
+    public void percentOperation (OperationsEnum operationsEnum) {
         addNumberFormula();
-        addOperationFormula(OperationsEnum.PERCENT);
+        addOperationFormula(operationsEnum);
         calculate();
         printHistory();
 
@@ -642,11 +678,10 @@ public class CalculatorController {
      * Sets second number in calculator if {@code binaryOperation} not null.
      * Clears percent operation, sets default value {@code charValidInText}.
      */
-    @FXML
-    void pressedEqual () {
+    void pressedEqual (OperationsEnum operationsEnum) {
         clearError();
         addNumberFormula();
-        addOperationFormula(OperationsEnum.EQUAL);
+        addOperationFormula(operationsEnum);
         calculate();
 
         canBackspace = false;
@@ -658,6 +693,7 @@ public class CalculatorController {
     //endregion
 
     //region Calculate
+
     /*
      * Method calculates operation,
      * calls print result method,
@@ -665,7 +701,7 @@ public class CalculatorController {
      */
     private void calculate () {
         try {
-            result = Calculator.calculator();
+            result = Calculator.calculator(formula);
 
             if (result != null) {
                 String resultFormatted = FormatterNumber.formatterNumber(result);
@@ -1049,10 +1085,10 @@ public class CalculatorController {
     void draggedWindow (MouseEvent event) {
         Stage stage = (Stage) title.getScene().getWindow();
 
-        double x= event.getScreenX() - xOffset;
+        double x = event.getScreenX() - xOffset;
         stage.setX(x);
 
-        double y= event.getScreenY() - yOffset;
+        double y = event.getScreenY() - yOffset;
         stage.setY(y);
     }
 

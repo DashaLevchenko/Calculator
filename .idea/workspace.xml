@@ -7,8 +7,38 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="feaeb0c2-feb2-4a9c-98e3-48b1d1a339aa" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/CalculatorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/CalculatorController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/FormatterNumber.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/FormatterNumber.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Demo/Demo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Demo/Demo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Calculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Calculator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/View/calculator_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/calculator_view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Controller/CalculatorControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Controller/CalculatorControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Model/BinaryDivideTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/BinaryDivideTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Model/BinaryMinusTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/BinaryMinusTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Model/BinaryMultiplyTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/BinaryMultiplyTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Model/BinaryPercentTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/BinaryPercentTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Model/BinarySumTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/BinarySumTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Model/UnaryOneDivideXTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/UnaryOneDivideXTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Model/UnaryPercentTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/UnaryPercentTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Model/UnarySquerRootTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/UnarySquerRootTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Model/UnaryXSquerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/UnaryXSquerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Controller/CalculatorController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Controller/CalculatorController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Controller/CalculatorHistory.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Controller/CalculatorHistory.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Controller/FormatterNumber.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Controller/FormatterNumber.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Demo/Demo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Demo/Demo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Model/Calculator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Model/Calculator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/View/calculator_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/calculator_view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/Controller/CalculatorControllerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/Controller/CalculatorControllerTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/Model/BinaryDivideTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/Model/BinaryDivideTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/Model/BinaryMinusTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/Model/BinaryMinusTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/Model/BinaryMultiplyTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/Model/BinaryMultiplyTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/Model/BinaryPercentTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/Model/BinaryPercentTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/Model/BinarySumTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/Model/BinarySumTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/Model/UnaryOneDivideXTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/Model/UnaryOneDivideXTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/Model/UnaryPercentTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/Model/UnaryPercentTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/Model/UnarySquerRootTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/Model/UnarySquerRootTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/Model/UnaryXSquerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/Model/UnaryXSquerTest.class" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -81,9 +111,10 @@
   <component name="PropertiesComponent">
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="TODO_SCOPE" value="Open Files" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/target/classes" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/target/classes/View" />
     <property name="project.structure.last.edited" value="Problems" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -115,8 +146,8 @@
       <recent name="View" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\User\IdeaProjects\Calculator2\target\classes" />
       <recent name="C:\Users\User\IdeaProjects\Calculator2\target\classes\View" />
+      <recent name="C:\Users\User\IdeaProjects\Calculator2\target\classes" />
       <recent name="C:\Users\User\IdeaProjects\Calculator2\src\test\java" />
       <recent name="D:\Calculator" />
       <recent name="D:\Calculator\target\classes\View" />
@@ -167,7 +198,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CalculatorControllerTest.checkAdd" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CalculatorControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Calculator2" />
       <extension name="coverage">
         <pattern>
@@ -177,8 +208,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="Controller" />
       <option name="MAIN_CLASS_NAME" value="Controller.CalculatorControllerTest" />
-      <option name="METHOD_NAME" value="checkAdd" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -199,7 +229,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CalculatorControllerTest.checkOverflow" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CalculatorControllerTest.checkSquareX" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Calculator2" />
       <extension name="coverage">
         <pattern>
@@ -209,7 +239,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="Controller" />
       <option name="MAIN_CLASS_NAME" value="Controller.CalculatorControllerTest" />
-      <option name="METHOD_NAME" value="checkOverflow" />
+      <option name="METHOD_NAME" value="checkSquareX" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -262,19 +292,19 @@
     <list>
       <item itemvalue="Application.CalculatorMain" />
       <item itemvalue="JUnit.Calculator_ControllerTest" />
-      <item itemvalue="JUnit.Model in Calculator2" />
-      <item itemvalue="JUnit.CalculatorControllerTest.checkOneDivideX" />
-      <item itemvalue="JUnit.CalculatorControllerTest.checkAdd" />
-      <item itemvalue="JUnit.CalculatorControllerTest.checkOverflow" />
       <item itemvalue="Application.Demo" />
+      <item itemvalue="JUnit.CalculatorControllerTest" />
+      <item itemvalue="JUnit.CalculatorControllerTest.checkSquareX" />
+      <item itemvalue="JUnit.CalculatorControllerTest.checkOneDivideX" />
+      <item itemvalue="JUnit.Model in Calculator2" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Demo" />
-        <item itemvalue="JUnit.CalculatorControllerTest.checkOverflow" />
         <item itemvalue="JUnit.Model in Calculator2" />
-        <item itemvalue="JUnit.CalculatorControllerTest.checkAdd" />
         <item itemvalue="JUnit.CalculatorControllerTest.checkOneDivideX" />
+        <item itemvalue="JUnit.CalculatorControllerTest.checkSquareX" />
+        <item itemvalue="JUnit.CalculatorControllerTest" />
       </list>
     </recent_temporary>
   </component>
@@ -290,7 +320,7 @@
   </component>
   <component name="StructureViewFactory">
     <option name="AUTOSCROLL_MODE" value="false" />
-    <option name="ACTIVE_ACTIONS" value=",SHOW_FIELDS,ALPHA_COMPARATOR" />
+    <option name="ACTIVE_ACTIONS" value=",SHOW_FIELDS,ALPHA_COMPARATOR,VISIBILITY_SORTER" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -302,13 +332,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1565432602101</updated>
-    </task>
-    <task id="LOCAL-00066" summary="before 10 /3 = *3">
-      <created>1572449518440</created>
-      <option name="number" value="00066" />
-      <option name="presentableId" value="LOCAL-00066" />
-      <option name="project" value="LOCAL" />
-      <updated>1572449518441</updated>
     </task>
     <task id="LOCAL-00067" summary="before change formatter">
       <created>1572626550708</created>
@@ -646,7 +669,14 @@
       <option name="project" value="LOCAL" />
       <updated>1576053962023</updated>
     </task>
-    <option name="localTasksCounter" value="115" />
+    <task id="LOCAL-00115" summary="before change controller operations">
+      <created>1576054316968</created>
+      <option name="number" value="00115" />
+      <option name="presentableId" value="LOCAL-00115" />
+      <option name="project" value="LOCAL" />
+      <updated>1576054316968</updated>
+    </task>
+    <option name="localTasksCounter" value="116" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -720,7 +750,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="before change model,&#10;setOperation" />
     <MESSAGE value="before change calculateUnary" />
     <MESSAGE value="before change history %" />
     <MESSAGE value="all teats are ok" />
@@ -745,9 +774,24 @@
     <MESSAGE value="all works after refactoring" />
     <MESSAGE value="before changing demo" />
     <MESSAGE value="before delete operation in demo" />
-    <option name="LAST_COMMIT_MESSAGE" value="before delete operation in demo" />
+    <MESSAGE value="before change controller operations" />
+    <option name="LAST_COMMIT_MESSAGE" value="before change controller operations" />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Controller/CalculatorController.java</url>
+          <line>642</line>
+          <option name="timeStamp" value="486" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Controller/CalculatorController.java</url>
+          <line>716</line>
+          <option name="timeStamp" value="487" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <watches-manager>
       <configuration name="JUnit">
         <watch expression="calculator" language="JAVA" />

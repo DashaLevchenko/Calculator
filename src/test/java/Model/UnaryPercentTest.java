@@ -1250,7 +1250,7 @@ public class UnaryPercentTest {
         formula = new ArrayList<>(Arrays.asList(x, OperationsEnum.PERCENT));
 
         try {
-            BigDecimal resultActual = Calculator.calculator();
+            BigDecimal resultActual = Calculator.calculator(formula);
             assertEquals(resultExpected, resultActual);
         } catch (DivideZeroException | ResultUndefinedException | OperationException | InvalidInputException e) {
             e.printStackTrace();
@@ -1295,7 +1295,7 @@ public class UnaryPercentTest {
     private void assertEnumNull (BigDecimal x) {
         formula = new ArrayList<>(Arrays.asList(x, null));
         try {
-            Calculator.calculator();
+            Calculator.calculator(formula);
             fail();
         } catch (Exception e) {
             assertEquals("Can not calculate null operation, enter operation or number.", e.getMessage());
