@@ -2,14 +2,14 @@ package Model;
 
 import Model.Exceptions.DivideZeroException;
 import Model.Exceptions.InvalidInputException;
-import Model.Exceptions.OperationException;
 import Model.Exceptions.ResultUndefinedException;
 
 import java.math.BigDecimal;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 
 public class Calculator {
-    //    private static final BigDecimal DEFAULT_RESULT = BigDecimal.ZERO;
     private static BigDecimal numberFirst;
     private static BigDecimal numberSecond;
     private static OperationsEnum operation;
@@ -33,12 +33,12 @@ public class Calculator {
     }
 
     @SafeVarargs
-    public static <T> BigDecimal calculator (T... objects) throws OperationException, DivideZeroException, ResultUndefinedException, InvalidInputException {
+    public static <T> BigDecimal calculator (T... objects) throws DivideZeroException, ResultUndefinedException, InvalidInputException {
         setDefaultValue();
         ArrayList formula;
 
         if (objects == null) {
-            throw new OperationException("Cannot calculate null formula, enter number or operation.");
+            throw new NullPointerException("Cannot calculate null formula, enter number or operation.");
         }
 
         if (objects.length > 0) {
@@ -50,12 +50,21 @@ public class Calculator {
             calculateFormula(formula);
         }
 
+        if (result == null) {
+            if (numberSecond != null) {
+                result = numberSecond;
+            } else {
+                if (numberFirst != null) {
+                    result = numberFirst;
+                }
+            }
+        }
 
         return result;
     }
 
 
-    private static void calculateFormula (ArrayList formula) throws OperationException, DivideZeroException, ResultUndefinedException, InvalidInputException {
+    private static void calculateFormula (ArrayList formula) throws DivideZeroException, ResultUndefinedException, InvalidInputException {
         for (int i = 0; i < formula.size(); i++) {
             Object object = formula.get(i);
             checkObject(object);
@@ -137,7 +146,7 @@ public class Calculator {
         }
     }
 
-    private static void parseOperation (Object object, int i, ArrayList formula) throws OperationException, DivideZeroException, ResultUndefinedException {
+    private static void parseOperation (Object object, int i, ArrayList formula) throws  DivideZeroException, ResultUndefinedException {
         boolean instanceOperation = object instanceof OperationsEnum;
         boolean instanceString = object instanceof String;
         OperationsEnum operationsEnum = null;
@@ -213,7 +222,7 @@ public class Calculator {
     /* Method calculate previous binary operation,
      * if present operation is binary too.
      */
-    private static void calculateLastBinaryOperation (OperationsEnum operationPresent) throws OperationException, DivideZeroException, ResultUndefinedException {
+    private static void calculateLastBinaryOperation (OperationsEnum operationPresent) throws DivideZeroException, ResultUndefinedException {
         if (isBinary(operationPresent) && !isEqual(operationPresent)) {
             if (binaryOperation != null) {
                 setOperation(binaryOperation);
@@ -286,7 +295,7 @@ public class Calculator {
     }
 
     // Method calculate binary operation, if first and second calculator numbers isn't null.
-    private static void calculateBinaryOperation () throws OperationException, DivideZeroException, ResultUndefinedException {
+    private static void calculateBinaryOperation () throws DivideZeroException, ResultUndefinedException {
         if (numberFirst != null && numberSecond != null) {
             binary.setNumberFirst(numberFirst);
             binary.setNumberSecond(numberSecond);
@@ -300,7 +309,7 @@ public class Calculator {
 
     // Method calculates unary operation,
     // sets true value to percent negate if unary operation is negate
-    private static void calculateUnaryOperation () throws OperationException, InvalidInputException, DivideZeroException {
+    private static void calculateUnaryOperation () throws  InvalidInputException, DivideZeroException {
         setUnaryNumber();
 
         unary.setOperation(operation);
@@ -351,8 +360,8 @@ public class Calculator {
         boolean isBinary = false;
 
         if (operation != null) {
-            if (operation.equals(OperationsEnum.ADD) || operation.equals(OperationsEnum.SUBTRACT) ||
-                    operation.equals(OperationsEnum.MULTIPLY) || operation.equals(OperationsEnum.DIVIDE)) {
+            if (operation == OperationsEnum.ADD || operation == OperationsEnum.SUBTRACT ||
+                    operation == OperationsEnum.MULTIPLY || operation == OperationsEnum.DIVIDE) {
                 isBinary = true;
             }
         }
@@ -400,7 +409,7 @@ public class Calculator {
     }
 
     // Method chooses which operation need to calculate
-    private static void calculate () throws OperationException, DivideZeroException, ResultUndefinedException, InvalidInputException {
+    private static void calculate () throws DivideZeroException, ResultUndefinedException, InvalidInputException {
         if (operation != null) {
             if (isUnary(operation)) {
                 addResultHistory();
@@ -428,11 +437,11 @@ public class Calculator {
     }
 
     public static boolean isNegate (Object operation) {
-        return operation.equals(OperationsEnum.NEGATE);
+        return operation == OperationsEnum.NEGATE;
     }
 
     // Method calculates percent operation
-    private static void calculatePercent () throws OperationException, InvalidInputException, DivideZeroException, ResultUndefinedException {
+    private static void calculatePercent () throws  InvalidInputException, DivideZeroException, ResultUndefinedException {
         if (binaryOperation == null) {
             calculateUnaryOperation();
             history.deleteLast();
@@ -498,14 +507,14 @@ public class Calculator {
     public static boolean isPercent (Object operation) {
         boolean isPercent = false;
         if (operation != null) {
-            isPercent = operation.equals(OperationsEnum.PERCENT);
+            isPercent = operation == OperationsEnum.PERCENT;
         }
         return isPercent;
     }
 
     // Method calculates binary operation if present object from formula is equal
     // and binary operation was in formula. Also method cleans history after calculating binary operation.
-    private static void calculateEqual () throws OperationException, DivideZeroException, ResultUndefinedException {
+    private static void calculateEqual () throws DivideZeroException, ResultUndefinedException {
         if (binaryOperation != null) {
             setNumberEqual();
             operation = binaryOperation;
@@ -513,7 +522,7 @@ public class Calculator {
             try {
                 calculateBinaryOperation();
                 history.clear();
-            } catch (OperationException | DivideZeroException | ResultUndefinedException e) {
+            } catch (DivideZeroException | ResultUndefinedException e) {
                 history.deleteLast();
                 history.deleteLast();
                 throw e;
@@ -540,7 +549,7 @@ public class Calculator {
 
         if (operation instanceof OperationsEnum) {
             OperationsEnum operationsEnum = (OperationsEnum) operation;
-            isEqual = operationsEnum.equals(OperationsEnum.EQUAL);
+            isEqual = operationsEnum == OperationsEnum.EQUAL;
         }
 
         return isEqual;
@@ -556,8 +565,8 @@ public class Calculator {
     public static boolean isUnary (OperationsEnum operation) {
         boolean isUnary = false;
         if (operation != null) {
-            if (operation.equals(OperationsEnum.SQRT) || operation.equals(OperationsEnum.SQR) ||
-                    operation.equals(OperationsEnum.ONE_DIVIDE_X) || operation.equals(OperationsEnum.NEGATE)) {
+            if (operation == OperationsEnum.SQRT || operation == OperationsEnum.SQR ||
+                    operation == OperationsEnum.ONE_DIVIDE_X || operation == OperationsEnum.NEGATE) {
                 isUnary = true;
             }
         }

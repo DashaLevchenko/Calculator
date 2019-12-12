@@ -357,10 +357,7 @@ public class CalculatorController {
             if (isMinLengthTextWithMinus || isMinLengthText) {
                 text = setDefaultText();
             } else {
-                int endSubstring = textLength-1;
-                int startSubstring = 0;
-
-                text = text.substring(startSubstring, endSubstring);
+                text = text.substring(0, textLength-1);
 
                 if (!text.contains(DECIMAL_SEPARATOR)) {
                     maxCharInText--;
@@ -607,8 +604,6 @@ public class CalculatorController {
                 pressedEqual(operationsEnum);
             }
         }
-
-
     }
 
 

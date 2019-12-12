@@ -2,7 +2,6 @@ package Model;
 
 import Model.Exceptions.DivideZeroException;
 import Model.Exceptions.InvalidInputException;
-import Model.Exceptions.OperationException;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
@@ -65,9 +64,8 @@ import java.math.RoundingMode;
      * @throws NullPointerException  If operation equals null
      * @throws InvalidInputException If square root negative number
      * @throws DivideZeroException   If divide by zero
-     * @throws OperationException    If operation not equals unary operation
      */
-    protected void calculateUnary () throws InvalidInputException, DivideZeroException, OperationException {
+    protected void calculateUnary () throws InvalidInputException, DivideZeroException {
         if (operation == null) {
             throw new NullPointerException("Enter operation");
         }
@@ -82,11 +80,9 @@ import java.math.RoundingMode;
         } else if (operation.equals(OperationsEnum.NEGATE)) {
             negate();
         } else {
-            throw new OperationException("Enter unary operation");
+            throw new IllegalArgumentException("Enter unary operation");
         }
         number = result;
-
-
     }
 
     private void negate () {
@@ -99,7 +95,5 @@ import java.math.RoundingMode;
     protected BigDecimal getResult () {
         return result;
     }
-
-
 
 }

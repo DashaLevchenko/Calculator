@@ -37,7 +37,7 @@ class FormatterNumber {
      * A {@code MathContext} object with a precision setting  16 digits, and a
      * rounding mode of {@link RoundingMode#HALF_UP HALF_UP}.
      */
-    private static final MathContext MATH_CONTEXT_UP_HALF_UP = new MathContext(MAX_SCALE, RoundingMode.HALF_UP);
+    private static final MathContext MATH_CONTEXT_HALF_UP = new MathContext(MAX_SCALE, RoundingMode.HALF_UP);
 
     /**
      * A {@code MathContext} object with a precision setting  17 digits, and a
@@ -218,7 +218,7 @@ class FormatterNumber {
                 mathContext = MATH_CONTEXT_HALF_DOWN;
             }
         } else {
-            mathContext = MATH_CONTEXT_UP_HALF_UP;
+            mathContext = MATH_CONTEXT_HALF_UP;
         }
 
         return mathContext;

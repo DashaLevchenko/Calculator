@@ -1,7 +1,6 @@
 package Model;
 
 import Model.Exceptions.DivideZeroException;
-import Model.Exceptions.OperationException;
 import Model.Exceptions.ResultUndefinedException;
 
 import java.math.BigDecimal;
@@ -71,11 +70,10 @@ class Binary {
      * Method calculates binary operations
      *
      * @throws NullPointerException     If operation equals null
-     * @throws OperationException       If operation not equals binary operation
      * @throws DivideZeroException      If divide by zero
      * @throws ResultUndefinedException If zero divide by zero
      */
-    protected void calculateBinary () throws ResultUndefinedException, DivideZeroException, OperationException {
+    protected void calculateBinary () throws ResultUndefinedException, DivideZeroException {
         if (numberFirst != null && numberSecond != null) {
             if (operation == null) {
                 throw new NullPointerException("Enter operation");
@@ -91,7 +89,7 @@ class Binary {
             } else if (operation.equals(OperationsEnum.PERCENT)) {
                 percent();
             } else {
-                throw new OperationException("Enter binary operation");
+                throw new IllegalArgumentException("Enter binary operation");
             }
             numberFirst = result;
         }
