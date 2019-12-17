@@ -20,7 +20,7 @@ class Binary {
     private OperationsEnum operation;
     private BigDecimal result;
 
-    protected void setOperation (OperationsEnum operation) {
+    public void setOperation (OperationsEnum operation) {
         this.operation = operation;
     }
 
@@ -45,9 +45,9 @@ class Binary {
     private void divide () throws ResultUndefinedException, DivideZeroException {
         if (compareZero(numberSecond) == 0) {
             if (compareZero(numberFirst) == 0) {
-                throw new ResultUndefinedException("Result is undefined");
+                throw new ResultUndefinedException();
             }
-            throw new DivideZeroException("Cannot divide by zero");
+            throw new DivideZeroException();
         }
 
         int defaultScale = 10000;
@@ -60,7 +60,7 @@ class Binary {
     }
 
 
-    protected void percent () {
+    private void percent () {
         BigDecimal oneHundred = BigDecimal.valueOf(100);
         BigDecimal numberSecondDivideHundred = numberSecond.divide(oneHundred, MathContext.DECIMAL128);
         result = numberFirst.multiply(numberSecondDivideHundred);
@@ -73,7 +73,7 @@ class Binary {
      * @throws DivideZeroException      If divide by zero
      * @throws ResultUndefinedException If zero divide by zero
      */
-    protected void calculateBinary () throws ResultUndefinedException, DivideZeroException {
+    public void calculateBinary () throws ResultUndefinedException, DivideZeroException {
         if (numberFirst != null && numberSecond != null) {
             if (operation == null) {
                 throw new NullPointerException("Enter operation");
@@ -95,15 +95,15 @@ class Binary {
         }
     }
 
-    protected void setNumberFirst (BigDecimal numberFirst) {
+    public void setNumberFirst (BigDecimal numberFirst) {
         this.numberFirst = numberFirst;
     }
 
-    protected void setNumberSecond (BigDecimal numberSecond) {
+    public void setNumberSecond (BigDecimal numberSecond) {
         this.numberSecond = numberSecond;
     }
 
-    protected BigDecimal getResult () {
+    public BigDecimal getResult () {
         return result;
     }
 }

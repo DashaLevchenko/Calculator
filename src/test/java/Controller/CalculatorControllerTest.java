@@ -27,7 +27,7 @@ public class CalculatorControllerTest extends ApplicationTest {
     private Label outOperationMemory;
 
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start (Stage stage) throws Exception {
         root = FXMLLoader.load(CalculatorMain.class.getResource("/View/calculator_view.fxml"));
         stage.setScene(new Scene(root));
         stage.show();
@@ -57,7 +57,7 @@ public class CalculatorControllerTest extends ApplicationTest {
     }
 
     @BeforeEach
-    void outMemory() {
+    void outMemory () {
         outOperationMemory = from(root).lookup("#outOperationMemory").query();
         outLabel = from(root).lookup("#generalDisplay").query();
     }
@@ -77,7 +77,7 @@ public class CalculatorControllerTest extends ApplicationTest {
     */
 
     @Test
-    void checkComma() {
+    void checkComma () {
         assertNumber(",", "0,", "");
         assertNumber(",3", "0,3", "");
         assertNumber(",3333333333333333", "0,3333333333333333", "");
@@ -105,7 +105,7 @@ public class CalculatorControllerTest extends ApplicationTest {
     }
 
     @Test
-    void checkInput() {
+    void checkInput () {
         //Text zero
         assertNumber("0000000", "0", "");
         assertNumber("001", "1", "");
@@ -118,9 +118,9 @@ public class CalculatorControllerTest extends ApplicationTest {
         assertNumber("2222222222222222222", "2 222 222 222 222 222", "");
         assertNumber("222222222222222222 ", "-2 222 222 222 222 222", "");
         assertNumber("222222222222222222  ", "2 222 222 222 222 222", "");
-        assertNumber(MAX_POSITIVE_NUMBER_INPUT+" ", "-9 999 999 999 999 999", "");
-        assertNumber(MAX_POSITIVE_NUMBER_INPUT+" ", "9 999 999 999 999 999", "");
-        
+        assertNumber(MAX_POSITIVE_NUMBER_INPUT + " ", "-9 999 999 999 999 999", "");
+        assertNumber(MAX_POSITIVE_NUMBER_INPUT + " ", "9 999 999 999 999 999", "");
+
         //Decimal number
         assertNumber("0,00000000", "0,00000000", "");
         assertNumber("0,00000000000000", "0,00000000000000", "");
@@ -129,8 +129,8 @@ public class CalculatorControllerTest extends ApplicationTest {
         assertNumber("1,00000000000001", "1,00000000000001", "");
         assertNumber("1,000000000000001", "1,000000000000001", "");
         assertNumber("0,000000000000001234", "0,0000000000000012", "");
-        assertNumber(MIN_POSITIVE_NUMBER_INPUT+"64553476", "0,0000000000000001", "");
-        
+        assertNumber(MIN_POSITIVE_NUMBER_INPUT + "64553476", "0,0000000000000001", "");
+
         //Random
         assertNumber("1234,567891 ,234567", "1 234,567891234567", "");
         assertNumber("123 456,1234567891234", "123 456,1234567891", "");
@@ -145,28 +145,28 @@ public class CalculatorControllerTest extends ApplicationTest {
     }
 
     @Test
-    void checkBackspace() {
+    void checkBackspace () {
         assertNumber(" ", "0", "");
         assertNumber("5 ", "0", "");
         assertNumber("01 ", "0", "");
         assertNumber("8  ", "0", "");
-        
+
         assertNumber("11111 ", "1 111", "");
         assertNumber("444  ", "-44", "");
         assertNumber("8888888888 ", "88 888 888", "");
         assertNumber("7838765,89  ", "0", "");
-        
+
         //backspace point
         assertNumber("234567, ", "234 567", "");
         assertNumber("234567,8 ", "234 567", "");
         assertNumber("678395,  ", "-678 395", "");
-        
+
         assertNumber("679 + 67 ", "0", "679 + ");
         assertNumber("3  + 987 ", "9", "1/(3) + ");
         assertNumber("3  - ,0000 ", "0,00", "sqr(3) - ");
         assertNumber("2456 x 2 - 789 ", "7", "2456 x 2 - ");
         assertNumber("86  ", "7 396", "sqr(86) ");
-        
+
         //backspace result
         assertNumber("347 - 13 - ", "334", "347 - 13 - ");
         assertNumber("89654 √ = ", "299,422778024652", "");
@@ -177,7 +177,7 @@ public class CalculatorControllerTest extends ApplicationTest {
     }
 
     @Test
-    void checkAdd() {
+    void checkAdd () {
         //both operands are integer
         assertNumber("0 + 0 +", "0", "0 + 0 + ");
 
@@ -367,7 +367,7 @@ public class CalculatorControllerTest extends ApplicationTest {
 
 
     @Test
-    void checkSubtract() {
+    void checkSubtract () {
 //        //both operands are integer
 //        assertNumber("0 - 0 -", "0", "0 - 0 - ");
 //
@@ -554,7 +554,7 @@ public class CalculatorControllerTest extends ApplicationTest {
     }
 
     @Test
-    void checkMultiply() {
+    void checkMultiply () {
         //both operands are integer
         assertNumber("0 x 0 x", "0", "0 x 0 x ");
 
@@ -744,7 +744,7 @@ public class CalculatorControllerTest extends ApplicationTest {
     }
 
     @Test
-    void checkDivide() {
+    void checkDivide () {
         //both operands are integer
         assertNumber("0 / 0 /", "Result is undefined", "0 ÷ 0 ÷ ");
 
@@ -963,7 +963,7 @@ public class CalculatorControllerTest extends ApplicationTest {
     }
 
     @Test
-    void checkEqual() {
+    void checkEqual () {
         assertNumber("=", "0", "");
 
         //Operation with equal
@@ -973,7 +973,7 @@ public class CalculatorControllerTest extends ApplicationTest {
         assertNumber(" =", "0", "");
         assertNumber("√ =", "0", "");
         assertNumber("% =", "0", "");
-        
+
         //Number with equal
         assertNumber("0 =", "0", "");
         assertNumber("0 =", "0", "");
@@ -1057,7 +1057,7 @@ public class CalculatorControllerTest extends ApplicationTest {
     }
 
     @Test
-    void checkNegate() {
+    void checkNegate () {
         //Print "negate()" in history
         //after pressed equal
         assertNumber("0 = ", "0", "negate(0) ");
@@ -1101,7 +1101,7 @@ public class CalculatorControllerTest extends ApplicationTest {
     }
 
     @Test
-    void checkOperationHistory() {
+    void checkOperationHistory () {
         //One operation
         assertNumber("+", "0", "0 + ");
         assertNumber("-", "0", "0 - ");
@@ -1126,7 +1126,7 @@ public class CalculatorControllerTest extends ApplicationTest {
     }
 
     @Test
-    void checkMIXBinaryOperations() {
+    void checkMIXBinaryOperations () {
         assertNumber("1 + 0,9999999999999999 - 0,9999999999999999 =", "1", "");
         assertNumber("34156,745   + 388656 x 45532  =", "1 925 066 427,985", "");
         assertNumber(",77765544 + 7785  / 4,999999 =", "-1 556,844780280956", "");
@@ -1151,7 +1151,7 @@ public class CalculatorControllerTest extends ApplicationTest {
     }
 
     @Test
-    void checkOneDivideX() {
+    void checkOneDivideX () {
         //Integer number
         assertNumber("1 ", "1", "1/(1) ");
         assertNumber("2 ", "2", "1/(1/(2)) ");
@@ -1204,7 +1204,7 @@ public class CalculatorControllerTest extends ApplicationTest {
 
 
     @Test
-    void checkSquareRoot() {
+    void checkSquareRoot () {
         //Integer
         assertNumber("0 √", "0", "√(0) ");
         assertNumber("1 √", "1", "√(1) ");
@@ -1268,12 +1268,12 @@ public class CalculatorControllerTest extends ApplicationTest {
 
 
     @Test
-    void checkSquareX() {
-//        assertNumber("0 ", "0", "sqr(0) ");
-//        //Integer
-//        assertNumber("1 ", "1", "sqr(1) ");
-//        assertNumber("2 ", "4", "sqr(2) ");
-//        assertNumber("2  ", "16", "sqr(sqr(2)) ");
+    void checkSquareX () {
+        assertNumber("0 ", "0", "sqr(0) ");
+        //Integer
+        assertNumber("1 ", "1", "sqr(1) ");
+        assertNumber("2 ", "4", "sqr(2) ");
+        assertNumber("2  ", "16", "sqr(sqr(2)) ");
         assertNumber("2 ", "16", "sqr(sqr(-2)) ");
         assertNumber("2   ", "16", "sqr(negate(sqr(2))) ");
         assertNumber("2 ", "-16", "negate(sqr(sqr(2))) ");
@@ -1328,7 +1328,7 @@ public class CalculatorControllerTest extends ApplicationTest {
     }
 
     @Test
-    void checkOverflow() {
+    void checkOverflow () {
         /*
          * Max number from model for controller => 9999999999999999 9...99,99...99 because, number hasn`t got border scale
          * Max number for controller before printing on display => 9999999999999999 49...99,99...99
@@ -1338,7 +1338,7 @@ public class CalculatorControllerTest extends ApplicationTest {
         // checks number which invisible after printing on display 
         assertNumber(MAX_POSITIVE_NUMBER + "" + MAX_POSITIVE_NUMBER_VISIBLE + "+=", "5,e+9983", "");
 
-        //  calls max positive number from memory => 9999999999999999 49...99,99...990
+        //  calls max po sitive number from memory => 9999999999999999 49...99,99...990
         assertNumber(MIN_POSITIVE_NUMBER + "+=", "Overflow", "1,e-9999 + ");
 
 
@@ -1351,7 +1351,7 @@ public class CalculatorControllerTest extends ApplicationTest {
     }
 
     @Test
-    void checkMIXUnaryOperations() {
+    void checkMIXUnaryOperations () {
         assertNumber("15678√", "15 678", "sqr(√(15678)) ");
         assertNumber("99999", "1,000020000300004e-10", "1/(sqr(99999)) ");
         assertNumber("854321√", "0,00108190582506", "√(1/(854321)) ");
@@ -1384,7 +1384,7 @@ public class CalculatorControllerTest extends ApplicationTest {
     }
 
     @Test
-    void checkOperationsEnotationValid() {
+    void checkOperationsEnotationValid () {
         assertNumber("0,0011111111111111 / 10 +", "1,1111111111111e-4", "0,0011111111111111 ÷ 10 + ");
         assertNumber("0,0099999999999999 / 10 +", "9,9999999999999e-4", "0,0099999999999999 ÷ 10 + ");
         assertNumber("0,1111111111111111 / 1000 -", "1,111111111111111e-4", "0,1111111111111111 ÷ 1000 - ");
@@ -1415,7 +1415,7 @@ public class CalculatorControllerTest extends ApplicationTest {
 
 
     @Test
-    void checkPercent() {
+    void checkPercent () {
         //One operand
         assertNumber("0%", "0", "0 ");
         assertNumber("2%", "0", "0 ");
@@ -1654,7 +1654,7 @@ public class CalculatorControllerTest extends ApplicationTest {
     }
 
     @Test
-    void checkMemorySubtract() {
+    void checkMemorySubtract () {
         //  was pressed one time
         assertNumber("0  8  ", "0", "");
 
@@ -1724,41 +1724,41 @@ public class CalculatorControllerTest extends ApplicationTest {
         assertNumber("0,2   0,3   ", "0,5", "");
 //
 //        //Min positive number which can input
-        assertNumber(MIN_POSITIVE_NUMBER_INPUT+" "+MIN_POSITIVE_NUMBER_INPUT+"  ", "-0,0000000000000002", "");
-        assertNumber(MIN_POSITIVE_NUMBER_INPUT+" "+MIN_POSITIVE_NUMBER_INPUT+"  ", "0", "");
-        assertNumber(MIN_POSITIVE_NUMBER_INPUT+" "+MIN_POSITIVE_NUMBER_INPUT+"  ", "0", "");
-        assertNumber(MIN_POSITIVE_NUMBER_INPUT+" "+MIN_POSITIVE_NUMBER_INPUT+"  ", "0,0000000000000002", "");
+        assertNumber(MIN_POSITIVE_NUMBER_INPUT + " " + MIN_POSITIVE_NUMBER_INPUT + "  ", "-0,0000000000000002", "");
+        assertNumber(MIN_POSITIVE_NUMBER_INPUT + " " + MIN_POSITIVE_NUMBER_INPUT + "  ", "0", "");
+        assertNumber(MIN_POSITIVE_NUMBER_INPUT + " " + MIN_POSITIVE_NUMBER_INPUT + "  ", "0", "");
+        assertNumber(MIN_POSITIVE_NUMBER_INPUT + " " + MIN_POSITIVE_NUMBER_INPUT + "  ", "0,0000000000000002", "");
 
-        assertNumber(MIN_POSITIVE_NUMBER_INPUT+" 1   ", "-1", "");
-        assertNumber(MIN_POSITIVE_NUMBER_INPUT+" 1   ", "0,9999999999999999", "");
-        assertNumber(MIN_POSITIVE_NUMBER_INPUT+" 1   ", "-0,9999999999999999", "");
-        assertNumber(MIN_POSITIVE_NUMBER_INPUT+" 1   ", "1", "");
+        assertNumber(MIN_POSITIVE_NUMBER_INPUT + " 1   ", "-1", "");
+        assertNumber(MIN_POSITIVE_NUMBER_INPUT + " 1   ", "0,9999999999999999", "");
+        assertNumber(MIN_POSITIVE_NUMBER_INPUT + " 1   ", "-0,9999999999999999", "");
+        assertNumber(MIN_POSITIVE_NUMBER_INPUT + " 1   ", "1", "");
 
-        assertNumber(MIN_POSITIVE_NUMBER_INPUT+" 0,1   ", "-0,1000000000000001", "");
-        assertNumber(MIN_POSITIVE_NUMBER_INPUT+" 0,1   ", "0,0999999999999999", "");
-        assertNumber(MIN_POSITIVE_NUMBER_INPUT+" 0,1   ", "-0,0999999999999999", "");
-        assertNumber(MIN_POSITIVE_NUMBER_INPUT+" 0,1   ", "0,1000000000000001", "");
+        assertNumber(MIN_POSITIVE_NUMBER_INPUT + " 0,1   ", "-0,1000000000000001", "");
+        assertNumber(MIN_POSITIVE_NUMBER_INPUT + " 0,1   ", "0,0999999999999999", "");
+        assertNumber(MIN_POSITIVE_NUMBER_INPUT + " 0,1   ", "-0,0999999999999999", "");
+        assertNumber(MIN_POSITIVE_NUMBER_INPUT + " 0,1   ", "0,1000000000000001", "");
 
-        assertNumber(MIN_POSITIVE_NUMBER_INPUT+" "+MAX_POSITIVE_NUMBER_INPUT+"  ", "-9 999 999 999 999 999", "");
-        assertNumber(MIN_POSITIVE_NUMBER_INPUT+" "+MAX_POSITIVE_NUMBER_INPUT+"  ", "9 999 999 999 999 999", "");
-        assertNumber(MIN_POSITIVE_NUMBER_INPUT+" "+MAX_POSITIVE_NUMBER_INPUT+"  ", "-9 999 999 999 999 999", "");
-        assertNumber(MIN_POSITIVE_NUMBER_INPUT+" "+MAX_POSITIVE_NUMBER_INPUT+"  ", "9 999 999 999 999 999", "");
+        assertNumber(MIN_POSITIVE_NUMBER_INPUT + " " + MAX_POSITIVE_NUMBER_INPUT + "  ", "-9 999 999 999 999 999", "");
+        assertNumber(MIN_POSITIVE_NUMBER_INPUT + " " + MAX_POSITIVE_NUMBER_INPUT + "  ", "9 999 999 999 999 999", "");
+        assertNumber(MIN_POSITIVE_NUMBER_INPUT + " " + MAX_POSITIVE_NUMBER_INPUT + "  ", "-9 999 999 999 999 999", "");
+        assertNumber(MIN_POSITIVE_NUMBER_INPUT + " " + MAX_POSITIVE_NUMBER_INPUT + "  ", "9 999 999 999 999 999", "");
 
         // Max positive number which can input
-        assertNumber(MAX_POSITIVE_NUMBER_INPUT+" "+MAX_POSITIVE_NUMBER_INPUT+"  ", "-2,e+16", "");
-        assertNumber(MAX_POSITIVE_NUMBER_INPUT+" "+MAX_POSITIVE_NUMBER_INPUT+"  ", "0", "");
-        assertNumber(MAX_POSITIVE_NUMBER_INPUT+" "+MAX_POSITIVE_NUMBER_INPUT+"  ", "0", "");
-        assertNumber(MAX_POSITIVE_NUMBER_INPUT+" "+MAX_POSITIVE_NUMBER_INPUT+"  ", "2,e+16", "");
+        assertNumber(MAX_POSITIVE_NUMBER_INPUT + " " + MAX_POSITIVE_NUMBER_INPUT + "  ", "-2,e+16", "");
+        assertNumber(MAX_POSITIVE_NUMBER_INPUT + " " + MAX_POSITIVE_NUMBER_INPUT + "  ", "0", "");
+        assertNumber(MAX_POSITIVE_NUMBER_INPUT + " " + MAX_POSITIVE_NUMBER_INPUT + "  ", "0", "");
+        assertNumber(MAX_POSITIVE_NUMBER_INPUT + " " + MAX_POSITIVE_NUMBER_INPUT + "  ", "2,e+16", "");
 
-        assertNumber(MAX_POSITIVE_NUMBER_INPUT+" 1   ", "-1,e+16", "");
-        assertNumber(MAX_POSITIVE_NUMBER_INPUT+" 1   ", "-9 999 999 999 999 998", "");
-        assertNumber(MAX_POSITIVE_NUMBER_INPUT+" 1   ", "9 999 999 999 999 998", "");
-        assertNumber(MAX_POSITIVE_NUMBER_INPUT+" 1   ", "1,e+16", "");
+        assertNumber(MAX_POSITIVE_NUMBER_INPUT + " 1   ", "-1,e+16", "");
+        assertNumber(MAX_POSITIVE_NUMBER_INPUT + " 1   ", "-9 999 999 999 999 998", "");
+        assertNumber(MAX_POSITIVE_NUMBER_INPUT + " 1   ", "9 999 999 999 999 998", "");
+        assertNumber(MAX_POSITIVE_NUMBER_INPUT + " 1   ", "1,e+16", "");
 
-        assertNumber(MAX_POSITIVE_NUMBER_INPUT+" 0,1   ", "-9 999 999 999 999 999", "");
-        assertNumber(MAX_POSITIVE_NUMBER_INPUT+" 0,1   ", "-9 999 999 999 999 999", "");
-        assertNumber(MAX_POSITIVE_NUMBER_INPUT+" 0,1   ", "9 999 999 999 999 999", "");
-        assertNumber(MAX_POSITIVE_NUMBER_INPUT+" 0,1   ", "9 999 999 999 999 999", "");
+        assertNumber(MAX_POSITIVE_NUMBER_INPUT + " 0,1   ", "-9 999 999 999 999 999", "");
+        assertNumber(MAX_POSITIVE_NUMBER_INPUT + " 0,1   ", "-9 999 999 999 999 999", "");
+        assertNumber(MAX_POSITIVE_NUMBER_INPUT + " 0,1   ", "9 999 999 999 999 999", "");
+        assertNumber(MAX_POSITIVE_NUMBER_INPUT + " 0,1   ", "9 999 999 999 999 999", "");
         // Min number
         assertNumber(MIN_POSITIVE_NUMBER + " " + MIN_POSITIVE_NUMBER + "  ", "-2,e-9999", "");
         assertNumber(MIN_POSITIVE_NUMBER + " " + MIN_POSITIVE_NUMBER + "  ", "0", "negate(1,e-9999) ");
@@ -1809,8 +1809,8 @@ public class CalculatorControllerTest extends ApplicationTest {
     }
 
     @Test
-    void checkMemoryAdd() {
-    //  pressed one time
+    void checkMemoryAdd () {
+        //  pressed one time
         assertNumber("0  8  ", "0", "");
 
         assertNumber("5  8  ", "5", "");
@@ -1819,22 +1819,22 @@ public class CalculatorControllerTest extends ApplicationTest {
         assertNumber("0,5  8  ", "0,5", "");
         assertNumber("0,5  8  ", "-0,5", "");
 
-        assertNumber(MIN_POSITIVE_NUMBER_INPUT+" 9  ", "0,0000000000000001", "");
-        assertNumber(MIN_POSITIVE_NUMBER_INPUT+" 9  ", "-0,0000000000000001", "");
+        assertNumber(MIN_POSITIVE_NUMBER_INPUT + " 9  ", "0,0000000000000001", "");
+        assertNumber(MIN_POSITIVE_NUMBER_INPUT + " 9  ", "-0,0000000000000001", "");
 
-        assertNumber(MAX_POSITIVE_NUMBER_INPUT+" 9  ", "9 999 999 999 999 999", "");
-        assertNumber(MAX_POSITIVE_NUMBER_INPUT+" 9  ", "-9 999 999 999 999 999", "");
+        assertNumber(MAX_POSITIVE_NUMBER_INPUT + " 9  ", "9 999 999 999 999 999", "");
+        assertNumber(MAX_POSITIVE_NUMBER_INPUT + " 9  ", "-9 999 999 999 999 999", "");
 
-        assertNumber(MAX_POSITIVE_NUMBER_VISIBLE+" 9  ", "9,999999999999999e+9999", "");
-        assertNumber(MAX_POSITIVE_NUMBER_VISIBLE+" 9  ", "-9,999999999999999e+9999", "");
+        assertNumber(MAX_POSITIVE_NUMBER_VISIBLE + " 9  ", "9,999999999999999e+9999", "");
+        assertNumber(MAX_POSITIVE_NUMBER_VISIBLE + " 9  ", "-9,999999999999999e+9999", "");
 
-        assertNumber(MAX_POSITIVE_NUMBER+" 9  ", "9,999999999999999e+9999", "");
-        assertNumber(MAX_POSITIVE_NUMBER+" 9  ", "-9,999999999999999e+9999", "");
+        assertNumber(MAX_POSITIVE_NUMBER + " 9  ", "9,999999999999999e+9999", "");
+        assertNumber(MAX_POSITIVE_NUMBER + " 9  ", "-9,999999999999999e+9999", "");
 
-        assertNumber(MIN_POSITIVE_NUMBER+" 9  ", "1,e-9999", "");
-        assertNumber(MIN_POSITIVE_NUMBER+" 9  ", "-1,e-9999", "");
+        assertNumber(MIN_POSITIVE_NUMBER + " 9  ", "1,e-9999", "");
+        assertNumber(MIN_POSITIVE_NUMBER + " 9  ", "-1,e-9999", "");
 
-    //  pressed two time
+        //  pressed two time
         //both operands are integer
         assertNumber("0  0   ", "0", "");
 
@@ -1880,41 +1880,41 @@ public class CalculatorControllerTest extends ApplicationTest {
         assertNumber("0,2   0,3    ", "-0,5", "");
 
         //Min positive number which can input
-        assertNumber(MIN_POSITIVE_NUMBER_INPUT+" "+MIN_POSITIVE_NUMBER_INPUT+"  ", "0,0000000000000002", "");
-        assertNumber(MIN_POSITIVE_NUMBER_INPUT+" "+MIN_POSITIVE_NUMBER_INPUT+"  ", "0", "");
-        assertNumber(MIN_POSITIVE_NUMBER_INPUT+" "+MIN_POSITIVE_NUMBER_INPUT+"  ", "0", "");
-        assertNumber(MIN_POSITIVE_NUMBER_INPUT+" "+MIN_POSITIVE_NUMBER_INPUT+"  ", "-0,0000000000000002", "");
+        assertNumber(MIN_POSITIVE_NUMBER_INPUT + " " + MIN_POSITIVE_NUMBER_INPUT + "  ", "0,0000000000000002", "");
+        assertNumber(MIN_POSITIVE_NUMBER_INPUT + " " + MIN_POSITIVE_NUMBER_INPUT + "  ", "0", "");
+        assertNumber(MIN_POSITIVE_NUMBER_INPUT + " " + MIN_POSITIVE_NUMBER_INPUT + "  ", "0", "");
+        assertNumber(MIN_POSITIVE_NUMBER_INPUT + " " + MIN_POSITIVE_NUMBER_INPUT + "  ", "-0,0000000000000002", "");
 
-        assertNumber(MIN_POSITIVE_NUMBER_INPUT+" 1   ", "1", "");
-        assertNumber(MIN_POSITIVE_NUMBER_INPUT+" 1   ", "-0,9999999999999999", "");
-        assertNumber(MIN_POSITIVE_NUMBER_INPUT+" 1   ", "0,9999999999999999", "");
-        assertNumber(MIN_POSITIVE_NUMBER_INPUT+" 1   ", "-1", "");
+        assertNumber(MIN_POSITIVE_NUMBER_INPUT + " 1   ", "1", "");
+        assertNumber(MIN_POSITIVE_NUMBER_INPUT + " 1   ", "-0,9999999999999999", "");
+        assertNumber(MIN_POSITIVE_NUMBER_INPUT + " 1   ", "0,9999999999999999", "");
+        assertNumber(MIN_POSITIVE_NUMBER_INPUT + " 1   ", "-1", "");
 
-        assertNumber(MIN_POSITIVE_NUMBER_INPUT+" 0,1   ", "0,1000000000000001", "");
-        assertNumber(MIN_POSITIVE_NUMBER_INPUT+" 0,1   ", "-0,0999999999999999", "");
-        assertNumber(MIN_POSITIVE_NUMBER_INPUT+" 0,1   ", "0,0999999999999999", "");
-        assertNumber(MIN_POSITIVE_NUMBER_INPUT+" 0,1   ", "-0,1000000000000001", "");
+        assertNumber(MIN_POSITIVE_NUMBER_INPUT + " 0,1   ", "0,1000000000000001", "");
+        assertNumber(MIN_POSITIVE_NUMBER_INPUT + " 0,1   ", "-0,0999999999999999", "");
+        assertNumber(MIN_POSITIVE_NUMBER_INPUT + " 0,1   ", "0,0999999999999999", "");
+        assertNumber(MIN_POSITIVE_NUMBER_INPUT + " 0,1   ", "-0,1000000000000001", "");
 
-        assertNumber(MIN_POSITIVE_NUMBER_INPUT+" "+MAX_POSITIVE_NUMBER_INPUT+"  ", "9 999 999 999 999 999", "");
-        assertNumber(MIN_POSITIVE_NUMBER_INPUT+" "+MAX_POSITIVE_NUMBER_INPUT+"  ", "-9 999 999 999 999 999", "");
-        assertNumber(MIN_POSITIVE_NUMBER_INPUT+" "+MAX_POSITIVE_NUMBER_INPUT+"  ", "9 999 999 999 999 999", "");
-        assertNumber(MIN_POSITIVE_NUMBER_INPUT+" "+MAX_POSITIVE_NUMBER_INPUT+"  ", "-9 999 999 999 999 999", "");
+        assertNumber(MIN_POSITIVE_NUMBER_INPUT + " " + MAX_POSITIVE_NUMBER_INPUT + "  ", "9 999 999 999 999 999", "");
+        assertNumber(MIN_POSITIVE_NUMBER_INPUT + " " + MAX_POSITIVE_NUMBER_INPUT + "  ", "-9 999 999 999 999 999", "");
+        assertNumber(MIN_POSITIVE_NUMBER_INPUT + " " + MAX_POSITIVE_NUMBER_INPUT + "  ", "9 999 999 999 999 999", "");
+        assertNumber(MIN_POSITIVE_NUMBER_INPUT + " " + MAX_POSITIVE_NUMBER_INPUT + "  ", "-9 999 999 999 999 999", "");
 
         // Max positive number which can input
-        assertNumber(MAX_POSITIVE_NUMBER_INPUT+" "+MAX_POSITIVE_NUMBER_INPUT+"  ", "2,e+16", "");
-        assertNumber(MAX_POSITIVE_NUMBER_INPUT+" "+MAX_POSITIVE_NUMBER_INPUT+"  ", "0", "");
-        assertNumber(MAX_POSITIVE_NUMBER_INPUT+" "+MAX_POSITIVE_NUMBER_INPUT+"  ", "0", "");
-        assertNumber(MAX_POSITIVE_NUMBER_INPUT+" "+MAX_POSITIVE_NUMBER_INPUT+"  ", "-2,e+16", "");
+        assertNumber(MAX_POSITIVE_NUMBER_INPUT + " " + MAX_POSITIVE_NUMBER_INPUT + "  ", "2,e+16", "");
+        assertNumber(MAX_POSITIVE_NUMBER_INPUT + " " + MAX_POSITIVE_NUMBER_INPUT + "  ", "0", "");
+        assertNumber(MAX_POSITIVE_NUMBER_INPUT + " " + MAX_POSITIVE_NUMBER_INPUT + "  ", "0", "");
+        assertNumber(MAX_POSITIVE_NUMBER_INPUT + " " + MAX_POSITIVE_NUMBER_INPUT + "  ", "-2,e+16", "");
 
-        assertNumber(MAX_POSITIVE_NUMBER_INPUT+" 1   ", "1,e+16", "");
-        assertNumber(MAX_POSITIVE_NUMBER_INPUT+" 1   ", "9 999 999 999 999 998", "");
-        assertNumber(MAX_POSITIVE_NUMBER_INPUT+" 1   ", "-9 999 999 999 999 998", "");
-        assertNumber(MAX_POSITIVE_NUMBER_INPUT+" 1   ", "-1,e+16", "");
+        assertNumber(MAX_POSITIVE_NUMBER_INPUT + " 1   ", "1,e+16", "");
+        assertNumber(MAX_POSITIVE_NUMBER_INPUT + " 1   ", "9 999 999 999 999 998", "");
+        assertNumber(MAX_POSITIVE_NUMBER_INPUT + " 1   ", "-9 999 999 999 999 998", "");
+        assertNumber(MAX_POSITIVE_NUMBER_INPUT + " 1   ", "-1,e+16", "");
 
-        assertNumber(MAX_POSITIVE_NUMBER_INPUT+" 0,1   ", "9 999 999 999 999 999", "");
-        assertNumber(MAX_POSITIVE_NUMBER_INPUT+" 0,1   ", "9 999 999 999 999 999", "");
-        assertNumber(MAX_POSITIVE_NUMBER_INPUT+" 0,1   ", "-9 999 999 999 999 999", "");
-        assertNumber(MAX_POSITIVE_NUMBER_INPUT+" 0,1   ", "-9 999 999 999 999 999", "");
+        assertNumber(MAX_POSITIVE_NUMBER_INPUT + " 0,1   ", "9 999 999 999 999 999", "");
+        assertNumber(MAX_POSITIVE_NUMBER_INPUT + " 0,1   ", "9 999 999 999 999 999", "");
+        assertNumber(MAX_POSITIVE_NUMBER_INPUT + " 0,1   ", "-9 999 999 999 999 999", "");
+        assertNumber(MAX_POSITIVE_NUMBER_INPUT + " 0,1   ", "-9 999 999 999 999 999", "");
 
         // Min number
         assertNumber(MIN_POSITIVE_NUMBER + " " + MIN_POSITIVE_NUMBER + "  ", "2,e-9999", "");
@@ -1965,7 +1965,7 @@ public class CalculatorControllerTest extends ApplicationTest {
     }
 
     @Test
-    void checkAllMemory() {
+    void checkAllMemory () {
         assertNumber("7   ", "7", "");
         assertNumber("24   ", "0", "");
         assertNumber(" 776  ", "776", "");
@@ -1985,7 +1985,7 @@ public class CalculatorControllerTest extends ApplicationTest {
     }
 
     @Test
-    void checkAllOperations() {
+    void checkAllOperations () {
         assertNumber("5  + 3 -", "28", "sqr(5) + 3 - ");
         assertNumber("5  - 3 x", "22", "sqr(5) - 3 x ");
         assertNumber("5  x 3 /", "75", "sqr(5) x 3 ÷ ");
@@ -2035,11 +2035,11 @@ public class CalculatorControllerTest extends ApplicationTest {
         assertNumber("1000000000000000  x 1000000000 = 9999999999999999 x  = ", "9,999999999999999e+9999", "");
     }
 
-    void assertNumber(String buttonsPressed, String result, String outOperationMemoryResult) {
+    void assertNumber (String buttonsPressed, String result, String outOperationMemoryResult) {
         checkMouseInputNumber(buttonsPressed, result, outOperationMemoryResult);
     }
 
-    void checkKeyInputNumber(String buttonsPressed, String result, String outOperationMemoryResult) {
+    void checkKeyInputNumber (String buttonsPressed, String result, String outOperationMemoryResult) {
         for (char idButton : buttonsPressed.toCharArray()) {
             keyboardInput(String.valueOf(idButton));
         }
@@ -2050,7 +2050,7 @@ public class CalculatorControllerTest extends ApplicationTest {
     }
 
 
-    void checkNumpadInputNumber(String buttonsPressed, String result, String outOperationMemoryResult) {
+    void checkNumpadInputNumber (String buttonsPressed, String result, String outOperationMemoryResult) {
         for (char idButton : buttonsPressed.toCharArray()) {
             keyboardNumpadInput(String.valueOf(idButton));
         }
@@ -2061,7 +2061,7 @@ public class CalculatorControllerTest extends ApplicationTest {
     }
 
 
-    void checkMouseInputNumber(String buttonsPressed, String result, String outOperationMemoryResult) {
+    void checkMouseInputNumber (String buttonsPressed, String result, String outOperationMemoryResult) {
         for (char idButton : buttonsPressed.toCharArray()) {
             mouseInput(String.valueOf(idButton));
         }
@@ -2073,7 +2073,7 @@ public class CalculatorControllerTest extends ApplicationTest {
     }
 
 
-    void keyboardNumpadInput(String idButton) {
+    void keyboardNumpadInput (String idButton) {
         if (idButton.equals("1")) {
             type(NUMPAD1);
         } else if (idButton.equals("2")) {
@@ -2135,7 +2135,7 @@ public class CalculatorControllerTest extends ApplicationTest {
         }
     }
 
-    void keyboardInput(String idButton) {
+    void keyboardInput (String idButton) {
         if (idButton.equals("1")) {
             type(DIGIT1);
         } else if (idButton.equals("2")) {
@@ -2197,7 +2197,7 @@ public class CalculatorControllerTest extends ApplicationTest {
         }
     }
 
-    void mouseInput(String idButtonClickedMouse) {
+    void mouseInput (String idButtonClickedMouse) {
         Button button = null;
         if (idButtonClickedMouse.equals("1")) {
             button = from(root).lookup("#one").query();

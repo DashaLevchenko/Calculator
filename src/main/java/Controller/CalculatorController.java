@@ -1,6 +1,9 @@
 package Controller;
 
 import Model.Calculator;
+import Model.Exceptions.DivideZeroException;
+import Model.Exceptions.InvalidInputException;
+import Model.Exceptions.ResultUndefinedException;
 import Model.History;
 import Model.Memory;
 import Model.OperationsEnum;
@@ -20,7 +23,6 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.math.BigDecimal;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -31,83 +33,12 @@ public class CalculatorController {
 
     //region FXML elements
 
-    //region Number buttons
-    @FXML
-    private GridPane calculatorButtons;
-
-    @FXML
-    private Button zero, one, two, three,
-            four, five, six, seven, eight, nine;
-    //endregion
-
-    //region Memory buttons
-    @FXML
-    private GridPane memoryPanel;
-
-    @FXML
-    private Button memoryClear, memoryRecall, memoryStore,
-            memoryAdd, memorySubtract;
-    //endregion
-
-    //Binary operation buttons
-    @FXML
-    private Button divide, multiply, subtract, add;
-
-    @FXML
-    private Button equal;
-
-    @FXML
-    private Button percent;
-
-    //Unary operation buttons
-    @FXML
-    private Button sqrt, sqr, oneDivideX;
-
-
-    //region Displays
-    @FXML
-    private Label generalDisplay, outOperationMemory;
-
-    @FXML
-    private ScrollPane scrollPaneOperation;
-
-    @FXML
-    private Button scrollButtonLeft, scrollButtonRight;
-
-
-    //endregion
-
-    //Clear buttons
-    @FXML
-    private Button CE, C;
-
-
-    //Change number buttons
-    @FXML
-    private Button backspace, negate, point;
-
-
-    //region Other Window elements
-    @FXML
-    private Label title, textStandard;
-
-    @FXML
-    private Button cancel, maximizeButton, hideButton;
-
-    @FXML
-    private AnchorPane leftMenu;
-
-    @FXML
-    private AnchorPane generalAnchorPane;
-    //endregion
-
-    //endregion
     /**
      * Variable which keeps key and value of operation.
      * Key is id of button was pressed.
      * Value is enum variable which match some operation.
      */
-    static final HashMap<String, OperationsEnum> operation = new HashMap<>();
+    private static final HashMap<String, OperationsEnum> operation = new HashMap<>();
 
     static {
         operation.put("add", OperationsEnum.ADD);
@@ -122,21 +53,22 @@ public class CalculatorController {
         operation.put("negate", OperationsEnum.NEGATE);
         operation.put("equal", OperationsEnum.EQUAL);
     }
+    //endregion
 
     /**
      * Maximal number of symbols which can be input in calculator
      */
-    public final int DEFAULT_MAX_NUMBERS_CHAR_INPUT = 16;
+    private final int DEFAULT_MAX_NUMBERS_CHAR_INPUT = 16;
 
     /**
      * Maximal invalid number which throws exception
      */
-    public final BigDecimal MAX_INVALID_NUMBER = new BigDecimal("1E10000");
+    private final BigDecimal MAX_INVALID_NUMBER = new BigDecimal("1E10000");
 
     /**
      * Minimal invalid number which throws exception
      */
-    public final BigDecimal MIN_INVALID_NUMBER = new BigDecimal("1E-10000");
+    private final BigDecimal MIN_INVALID_NUMBER = new BigDecimal("1E-10000");
 
     /**
      * Default text for {@code generalDisplay}
@@ -157,6 +89,58 @@ public class CalculatorController {
      * Variable keeps empty string value
      */
     private final String EMPTY_STRING = "";
+
+    //region Number buttons
+    @FXML
+    private GridPane calculatorButtons;
+    @FXML
+    private Button zero, one, two, three,
+            four, five, six, seven, eight, nine;
+
+
+    //endregion
+    //region Memory buttons
+    @FXML
+    private GridPane memoryPanel;
+    @FXML
+    private Button memoryClear, memoryRecall, memoryStore,
+            memoryAdd, memorySubtract;
+    //Binary operation buttons
+    @FXML
+    private Button divide, multiply, subtract, add;
+    @FXML
+    private Button equal;
+    @FXML
+    private Button percent;
+    //Unary operation buttons
+    @FXML
+    private Button sqrt, sqr, oneDivideX;
+    //endregion
+
+    //endregion
+    //region Displays
+    @FXML
+    private Label generalDisplay, outOperationMemory;
+    @FXML
+    private ScrollPane scrollPaneOperation;
+    @FXML
+    private Button scrollButtonLeft, scrollButtonRight;
+    //Clear buttons
+    @FXML
+    private Button CE, C;
+    //Change number buttons
+    @FXML
+    private Button backspace, negate, point;
+    //region Other Window elements
+    @FXML
+    private Label title, textStandard;
+    @FXML
+    private Button cancel, maximizeButton, hideButton;
+    @FXML
+    private AnchorPane leftMenu;
+    @FXML
+    private AnchorPane generalAnchorPane;
+    //endregion
 
     // Variable is true when can change binary operation
     private boolean canChangeOperator = false;
@@ -251,7 +235,7 @@ public class CalculatorController {
      * If comma contains in text yet, method does nothing.
      */
     @FXML
-    void commaPressed () {
+    void commaPressed () throws OverflowException {
         String outText = getTextDisplay();
         boolean isTextWithComma = outText.contains(DECIMAL_SEPARATOR);
 
@@ -299,7 +283,7 @@ public class CalculatorController {
      * text casts to BigDecimal and it formats again before printing
      */
     @FXML
-    void backspacePressed () {
+    void backspacePressed () throws OverflowException {
         clearError();
         String outText = getTextDisplay();
 
@@ -336,13 +320,8 @@ public class CalculatorController {
         return outText;
     }
 
-    /**
-     * This method deletes last symbol in text
-     *
-     * @param text Text which need to change
-     * @return Text was changed
-     */
-    public String backspace (String text) {
+    // This method deletes last symbol in text
+    private String backspace (String text) {
         int symbolsInTextWithoutComma = text.replace(DECIMAL_SEPARATOR, EMPTY_STRING).length();
 
         if (symbolsInTextWithoutComma > 0) {
@@ -357,7 +336,7 @@ public class CalculatorController {
             if (isMinLengthTextWithMinus || isMinLengthText) {
                 text = setDefaultText();
             } else {
-                text = text.substring(0, textLength-1);
+                text = text.substring(0, textLength - 1);
 
                 if (!text.contains(DECIMAL_SEPARATOR)) {
                     maxCharInText--;
@@ -385,7 +364,7 @@ public class CalculatorController {
      * @param actionEvent Button from number buttons group was pressed
      */
     @FXML
-    void numberPressed (ActionEvent actionEvent) {
+    void numberPressed (ActionEvent actionEvent) throws OverflowException {
         clearError();
         String outText = getTextDisplay();
         outText = setDefaultTextAfterResult(outText);
@@ -412,21 +391,16 @@ public class CalculatorController {
 
 
     private BigDecimal parseNumber (String out) {
-        BigDecimal number = null;
-        try {
-            number = FormatterNumber.parseNumber(out);
-        } catch (ParseException e) {
-            printError(e);
-        }
+        BigDecimal number;
+        number = FormatterNumber.parseNumber(out);
         return number;
     }
 
-    /**
+    /*
      * This method inserts {@code minus} to {@code out},
      * if {@code out} doesn't contains {@code minus}.
-     * Also method sets
      */
-    void negatePressed (OperationsEnum operationsEnum) {
+    private void negatePressed (OperationsEnum operationsEnum) throws OverflowException {
         String outText = getTextDisplay();
         int indexLastSymbol = outText.length() - 1;
         String lastSymbol = String.valueOf(outText.toCharArray()[indexLastSymbol]);
@@ -449,14 +423,11 @@ public class CalculatorController {
         }
     }
 
-    /**
+    /*
      * Method inserts "-" before text.
      * Example: before: "9", after: "-9"
-     *
-     * @param text Text need to change
-     * @return Text with "-"
      */
-    public String addNegate (String text) {
+    private String addNegate (String text) {
         boolean isDefaultText = text.equals(DEFAULT_TEXT);
 
         if (!isDefaultText) {
@@ -578,7 +549,7 @@ public class CalculatorController {
      * @param actionEvent Binary operation buttons was pressed
      */
     @FXML
-    public void operationPressed (ActionEvent actionEvent) {
+    public void operationPressed (ActionEvent actionEvent) throws OverflowException {
         String buttonID = getButton(actionEvent).getId();
 
         OperationsEnum operationsEnum = operation.get(buttonID);
@@ -607,7 +578,7 @@ public class CalculatorController {
     }
 
 
-    public void binaryOperation (OperationsEnum operationsEnum) {
+    private void binaryOperation (OperationsEnum operationsEnum) {
         if (!canChangeOperator) {
             addNumberFormula();
         }
@@ -626,18 +597,14 @@ public class CalculatorController {
     }
 
 
-    /**
+    /*
      * Method calculate unary operations, if {@code sqr, sqrt, oneDivideX} was pressed.
      * Also method sets first or second number in calculator.
      * Prints result or exception.
-     *
-     * @param operationsEnum Unary operation was pressed
      */
-
-    public void unaryOperations (OperationsEnum operationsEnum) {
+    private void unaryOperations (OperationsEnum operationsEnum) throws OverflowException {
 
         boolean isNegate = Calculator.isNegate(operationsEnum);
-
 
         if (isNegate) {
             negatePressed(operationsEnum);
@@ -649,14 +616,11 @@ public class CalculatorController {
             memoryPressed = false;
         }
 
-
     }
 
 
-    /**
-     * Method calculates percent operation, if {@code percent} was pressed
-     */
-    public void percentOperation (OperationsEnum operationsEnum) {
+    // Method calculates percent operation, if {@code percent} was pressed
+    private void percentOperation (OperationsEnum operationsEnum) {
         addNumberFormula();
         addOperationFormula(operationsEnum);
         calculate();
@@ -668,12 +632,12 @@ public class CalculatorController {
         formula.add(operationsEnum);
     }
 
-    /**
+    /*
      * Methods calculates operation, if {@code equal} was pressed.
      * Sets second number in calculator if {@code binaryOperation} not null.
      * Clears percent operation, sets default value {@code charValidInText}.
      */
-    void pressedEqual (OperationsEnum operationsEnum) {
+    private void pressedEqual (OperationsEnum operationsEnum) {
         clearError();
         addNumberFormula();
         addOperationFormula(operationsEnum);
@@ -698,23 +662,38 @@ public class CalculatorController {
         try {
             result = Calculator.calculator(formula);
 
-            if (result != null) {
-                String resultFormatted = FormatterNumber.formatterNumber(result);
-                printResult(resultFormatted);
-            }
+            String resultFormatted = formatterNumber(result);
+            printResult(resultFormatted);
 
             canBackspace = false;
 
-            if (!isError) {
+//            if (!isError) {
+            printHistory();
+//            }
+        } catch (Exception e) {
+            if (e instanceof DivideZeroException) {
+                e = new DivideZeroException("Cannot divide by zero");
+            } else if (e instanceof ResultUndefinedException) {
+                e = new ResultUndefinedException("Result is undefined");
+            } else if (e instanceof InvalidInputException) {
+                e = new InvalidInputException("Invalid input");
+            } else if (e instanceof OverflowException) {
+                e = new OverflowException("Overflow");
+            } else {
+                e = new Exception("Something wrong!\n" +
+                        "Please, press any available button\n" +
+                        "and try again, " +
+                        "or restart application.");
+                e.printStackTrace();
+            }
+
+            if (!(e instanceof OverflowException)) {
                 printHistory();
             }
-        } catch (Exception e) {
-            printHistory();
             printError(e);
         }
-
-        scrollOutOperationMemory();
     }
+
 
     //endregion
 
@@ -723,7 +702,7 @@ public class CalculatorController {
      * Method outputs exception's message on general display,
      * makes some buttons disable, resizes text on general display.
      */
-    public void printError (Exception e) {
+    private <T extends Exception> void printError (T e) {
         isError = true;
         operationsIsDisable(true);
         memoryPanel.setDisable(true);
@@ -739,15 +718,11 @@ public class CalculatorController {
     /*
      * Method outputs calculation's result on general display
      */
-    private void printResult (String text) {
-        try {
-            BigDecimal numberCheckedOverflow = parseNumber(text);
-            isOverflow(numberCheckedOverflow);
-            generalDisplay.setText(text);
-            resizeOutputText();
-        } catch (OverflowException e) {
-            printError(e);
-        }
+    private void printResult (String text) throws OverflowException {
+        BigDecimal numberCheckedOverflow = parseNumber(text);
+        isOverflow(numberCheckedOverflow);
+        generalDisplay.setText(text);
+        resizeOutputText();
     }
 
     /*
@@ -781,7 +756,7 @@ public class CalculatorController {
         }
 
         if (overflow) {
-            throw new OverflowException("Overflow");
+            throw new OverflowException();
         }
     }
 
@@ -987,7 +962,12 @@ public class CalculatorController {
             result = memory.memoryRecall();
             String out = formatterNumber(result);
             formula.add(result);
-            printResult(out);
+            try {
+                printResult(out);
+            } catch (OverflowException e) {
+                e = new OverflowException("Overflow");
+                printError(e);
+            }
         }
         canBackspace = false;
         memoryPressed = true;

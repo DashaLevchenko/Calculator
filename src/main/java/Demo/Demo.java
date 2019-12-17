@@ -3,7 +3,6 @@ package Demo;
 import Model.Calculator;
 import Model.Exceptions.DivideZeroException;
 import Model.Exceptions.InvalidInputException;
-import Model.Exceptions.OperationException;
 import Model.Exceptions.ResultUndefinedException;
 import Model.OperationsEnum;
 
@@ -19,7 +18,8 @@ public class Demo {
 
         } catch (DivideZeroException | ResultUndefinedException | InvalidInputException e) {
             System.out.println(e.getMessage());
-        } catch (OperationException e) {
+        } catch (Exception e){
+            System.out.println(e.getMessage());
             e.printStackTrace();
         }
     }

@@ -2,7 +2,6 @@ package Model;
 
 import Model.Exceptions.DivideZeroException;
 import Model.Exceptions.InvalidInputException;
-import Model.Exceptions.OperationException;
 import Model.Exceptions.ResultUndefinedException;
 import org.junit.jupiter.api.Test;
 
@@ -1191,7 +1190,7 @@ class BinaryMultiplyTest {
         try {
             BigDecimal resultActual = Calculator.calculator(formula);
             assertEquals(resultExpected, resultActual);
-        } catch (DivideZeroException | ResultUndefinedException | OperationException | InvalidInputException e) {
+        } catch (DivideZeroException | ResultUndefinedException | InvalidInputException e) {
             e.printStackTrace();
         }
 
@@ -1207,7 +1206,7 @@ class BinaryMultiplyTest {
         binary.setOperation(OperationsEnum.MULTIPLY);
         try {
             binary.calculateBinary();
-        } catch (ResultUndefinedException | DivideZeroException | OperationException e) {
+        } catch (ResultUndefinedException | DivideZeroException e) {
             e.printStackTrace();
         }
         BigDecimal resultActual = binary.getResult();

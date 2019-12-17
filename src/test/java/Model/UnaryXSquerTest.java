@@ -2,7 +2,6 @@ package Model;
 
 import Model.Exceptions.DivideZeroException;
 import Model.Exceptions.InvalidInputException;
-import Model.Exceptions.OperationException;
 import Model.Exceptions.ResultUndefinedException;
 import org.junit.jupiter.api.Test;
 
@@ -306,7 +305,7 @@ class UnaryXSquerTest {
         try {
             BigDecimal resultActual = Calculator.calculator(formula);
             assertEquals(resultExpected, resultActual);
-        } catch (DivideZeroException | ResultUndefinedException | OperationException | InvalidInputException e) {
+        } catch (DivideZeroException | ResultUndefinedException  | InvalidInputException e) {
             e.printStackTrace();
         }
         checkUnary(x, resultExpected);
@@ -319,7 +318,7 @@ class UnaryXSquerTest {
         try {
             unary.setOperation(OperationsEnum.SQR);
             unary.calculateUnary();
-        } catch (InvalidInputException | DivideZeroException | OperationException e) {
+        } catch (InvalidInputException | DivideZeroException  e) {
             e.printStackTrace();
         }
         BigDecimal resultActual = unary.getResult();

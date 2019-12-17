@@ -17,7 +17,7 @@ import java.math.RoundingMode;
     private OperationsEnum operation;
     private BigDecimal result;
 
-    protected void setOperation (OperationsEnum operation) {
+    public void setOperation (OperationsEnum operation) {
         this.operation = operation;
     }
 
@@ -28,7 +28,7 @@ import java.math.RoundingMode;
      */
     private void squareRoot () throws InvalidInputException {
         if (compareZero(number) < 0) {
-            throw new InvalidInputException("Invalid input");
+            throw new InvalidInputException();
         }
         result = number.sqrt(mathContext);
 
@@ -42,7 +42,7 @@ import java.math.RoundingMode;
 
     private void oneDivideX () throws DivideZeroException {
         if (compareZero(number) == 0) {
-            throw new DivideZeroException("Cannot divide by zero");
+            throw new DivideZeroException();
         }
 
         BigDecimal one = BigDecimal.ONE;
@@ -65,22 +65,24 @@ import java.math.RoundingMode;
      * @throws InvalidInputException If square root negative number
      * @throws DivideZeroException   If divide by zero
      */
-    protected void calculateUnary () throws InvalidInputException, DivideZeroException {
+    void calculateUnary () throws InvalidInputException, DivideZeroException {
         if (operation == null) {
             throw new NullPointerException("Enter operation");
         }
-        if (operation.equals(OperationsEnum.SQRT)) {
-            squareRoot();
-        } else if (operation.equals(OperationsEnum.SQR)) {
-            xSquare();
-        } else if (operation.equals(OperationsEnum.ONE_DIVIDE_X)) {
-            oneDivideX();
-        } else if (operation.equals(OperationsEnum.PERCENT)) {
-            percent();
-        } else if (operation.equals(OperationsEnum.NEGATE)) {
-            negate();
-        } else {
-            throw new IllegalArgumentException("Enter unary operation");
+        if (number != null) {
+            if (operation.equals(OperationsEnum.SQRT)) {
+                squareRoot();
+            } else if (operation.equals(OperationsEnum.SQR)) {
+                xSquare();
+            } else if (operation.equals(OperationsEnum.ONE_DIVIDE_X)) {
+                oneDivideX();
+            } else if (operation.equals(OperationsEnum.PERCENT)) {
+                percent();
+            } else if (operation.equals(OperationsEnum.NEGATE)) {
+                negate();
+            } else {
+                throw new IllegalArgumentException("Enter unary operation");
+            }
         }
         number = result;
     }
@@ -88,11 +90,11 @@ import java.math.RoundingMode;
     private void negate () {
         result = number.negate();
     }
-    protected void setNumber (BigDecimal number) {
+    public void setNumber (BigDecimal number) {
         this.number = number;
     }
 
-    protected BigDecimal getResult () {
+    public BigDecimal getResult () {
         return result;
     }
 

@@ -6,7 +6,6 @@ import Model.OperationsEnum;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormatSymbols;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -14,19 +13,16 @@ import java.util.HashMap;
  * This class change calculator history for calculator application
  */
 
-public class CalculatorHistory {
-    private History history;
-
+class CalculatorHistory {
     /**
      * Variable keeps empty string value
      */
     private final String EMPTY_STRING = "";
-
     /**
      * Exponent separator which is being used for number in application
      */
     private final String EXPONENT_SEPARATOR = "e";
-
+    private History history;
     private OperationsEnum percentOperation = OperationsEnum.PERCENT;
     private OperationsEnum negateOperation = OperationsEnum.NEGATE;
     private String historyUnaryOperations = "";
@@ -49,6 +45,10 @@ public class CalculatorHistory {
         operationSymbols.put(OperationsEnum.NEGATE, "negate");
     }
 
+    /**
+     * This constructor initialize {@code this.history}.
+     * @param history History which need to change
+     */
     CalculatorHistory (History history) {
         this.history = history;
     }
@@ -67,7 +67,7 @@ public class CalculatorHistory {
      *
      * @return History was changed
      */
-    public String getChangedHistory () {
+    String getChangedHistory () {
         int historyInSize = history.size();
 
         if (historyInSize != 0) {
@@ -86,36 +86,32 @@ public class CalculatorHistory {
         return getStringHistory();
     }
 
-    /**
-     * Method returns size of calculator history
-     *
-     * @return Size calculator history
-     */
-    public int historySize () {
+
+    // Method returns size of calculator history
+    private int historySize () {
         return historyListOut.size();
     }
 
 
-    /**
+    /*
      * Method cleans history which wrote down unary operation,
      * like "sqr(sqrt(8))"
      */
-    public void clearHistoryUnaryOperations () {
+    private void clearHistoryUnaryOperations () {
         historyUnaryOperations = EMPTY_STRING;
     }
 
-    /**
+    /*
      * Method cleans history which wrote down negate operation,
      * like "negate(negate(8))"
      */
-    public void clearNegateHistory () {
+    private void clearNegateHistory () {
         negateHistory = EMPTY_STRING;
     }
 
-    /**
-     * Method cleans calculator history
-     */
-    public void clearHistory () {
+
+     // Method cleans calculator history
+    private void clearHistory () {
         historyListOut.clear();
         clearNegateHistory();
         historyUnaryOperations = EMPTY_STRING;
@@ -126,7 +122,7 @@ public class CalculatorHistory {
         return Calculator.isBinary(operationsEnum);
     }
 
-    /**
+    /*
      * Method formats number for history.
      * It replaces "." to ",",
      * changes exponential separator "E" to "e",
@@ -157,15 +153,11 @@ public class CalculatorHistory {
     }
 
     private BigDecimal parseNumber (Object lastObject) {
-        BigDecimal number = null;
+        BigDecimal number;
         String lastHistory = lastObject.toString();
 
         if (lastHistory.contains(EXPONENT_SEPARATOR)) {
-            try {
-                number = FormatterNumber.parseNumber(lastHistory);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
+            number = FormatterNumber.parseNumber(lastHistory);
         } else {
             String numberWithoutSeparator = deleteGroupingSeparator(lastHistory);
             number = new BigDecimal(numberWithoutSeparator);
@@ -200,7 +192,7 @@ public class CalculatorHistory {
 
     }
 
-    /**
+    /*
      * Method deletes previous history.
      * if  {@code object} is binary operation
      * and his previous history is binary operation too, method deletes previous history.
@@ -225,18 +217,16 @@ public class CalculatorHistory {
                 if (historyObject instanceof OperationsEnum) {
                     OperationsEnum operation = (OperationsEnum) historyObject;
 
-                    if (isBinary(operation)) {
-                        if (isOperationSymbol(previousHistory)) {
-                            historyListOut.remove(i);
-                        } else {
-                            break;
-                        }
+                    boolean isBinaryPresent = isBinary(operation);
+                    boolean isOperationPrevious = isOperationSymbol(previousHistory);
+
+                    boolean isBinaryPresentIsPreviousOperation = isBinaryPresent && isOperationPrevious;
+                    boolean isNotBinaryPresentIsNotPreviousOperation = !isBinaryPresent && !isOperationPrevious;
+
+                    if (isBinaryPresentIsPreviousOperation || isNotBinaryPresentIsNotPreviousOperation) {
+                        historyListOut.remove(i);
                     } else {
-                        if (!isOperationSymbol(previousHistory)) {
-                            historyListOut.remove(i);
-                        } else {
-                            break;
-                        }
+                        break;
                     }
                 }
             }
@@ -247,7 +237,7 @@ public class CalculatorHistory {
         return operationSymbols.containsValue(previousHistory);
     }
 
-    /**
+    /*
      * This method changes history of Negate operation.
      * It wraps number was negated again or unary history in brackets and adds to calculator history,
      * Example:
@@ -287,16 +277,15 @@ public class CalculatorHistory {
         }
     }
 
-
     private String wrapOperationInBrackets (OperationsEnum operation, String text) {
         String operationSymbol = operationSymbols.get(operation);
-        String leftBracket = "(";
-        String rightBracket = ")";
 
+        String rightBracket = ")";
+        String leftBracket = "(";
         return operationSymbol.concat(leftBracket).concat(text).concat(rightBracket);
     }
 
-    /**
+    /*
      * Method changes history of percent operation.
      * It deletes last number and adds result of percent calculate
      */
@@ -313,12 +302,12 @@ public class CalculatorHistory {
                 new BigDecimal(text);
             }
             return true;
-        } catch (Exception e) {
+        } catch (NumberFormatException e) {
             return false;
         }
     }
 
-    /**
+    /*
      * Method changes history of unary operation.
      * It wraps number in brackets.
      * If negate history is not empty, method  wraps negate history in brackets too
@@ -339,9 +328,6 @@ public class CalculatorHistory {
      * <p>
      * was: 4 + negate(sqr(8)) -64 SQR
      * became: 4 + sqr(negate(sqr(8)))
-     *
-     * @param operation Unary operation
-     * @param index     Index of unary operation
      */
     private void changeUnaryOperationHistory (OperationsEnum operation, int index) {
         Object previousObject = getPreviousObject(index);
@@ -379,13 +365,13 @@ public class CalculatorHistory {
 
     private boolean isUnary (OperationsEnum operationsEnum) {
         boolean isUnary = false;
-        if (!operationsEnum.equals(negateOperation)) {
+        if (operationsEnum != OperationsEnum.NEGATE) {
             isUnary = Calculator.isUnary(operationsEnum);
         }
         return isUnary;
     }
 
-    /**
+    /*
      * Method changes history of binary operation,
      * clears history of unary operation if is not empty
      * <p>
@@ -396,8 +382,6 @@ public class CalculatorHistory {
      * <p>
      * was: 4 + 8 MULTIPLY
      * became: 4 + 8 x
-     *
-     * @param operationsEnum Binary operation
      */
     private void changeBinaryOperationHistory (OperationsEnum operationsEnum) {
         if (!historyUnaryOperations.isEmpty()) {
@@ -406,12 +390,6 @@ public class CalculatorHistory {
         if (!negateHistory.isEmpty()) {
             clearNegateHistory();
         }
-//
-//        Object previousObject = getPreviousObject(indexObject);
-//        if (previousObject instanceof BigDecimal) {
-//            String numberFormatted = formatterNumberHistory((BigDecimal) previousObject);
-//            historyListOut.add(numberFormatted);
-//        }
 
         String addHistory = operationSymbols.get(operationsEnum);
         historyListOut.add(addHistory);
@@ -419,18 +397,18 @@ public class CalculatorHistory {
         deletePreviousHistory(operationsEnum);
     }
 
-    /**
-     * Method returns string of history with separator.
-     *
-     * @return History was separated.
-     */
-    public String getStringHistory () {
+
+    // Method returns string of history with separator.
+    private String getStringHistory () {
         String stringHistory = "";
+
+        String separatorHistory = " ";
+
         for (String history : historyListOut) {
             stringHistory = stringHistory.concat(history);
-            String separatorHistory = " ";
             stringHistory = stringHistory.concat(separatorHistory);
         }
+
         return stringHistory;
     }
 }

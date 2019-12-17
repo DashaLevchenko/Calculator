@@ -14,7 +14,12 @@ class FormatterNumber {
     /**
      * Max scale for number print
      */
-    private static final int MAX_SCALE = 16;
+    private static final int MAX_SCALE_PRINT = 16;
+
+    /**
+     * Max scale for number
+     */
+    private static final int MAX_SCALE = 10000;
 
     /**
      * Max number before exponential formatting.
@@ -23,46 +28,74 @@ class FormatterNumber {
 
     /**
      * A {@code MathContext} object with a precision setting  16 digits, and a
-     * rounding mode of {@link RoundingMode#UP UP}.
-     */
-    private static final MathContext MATH_CONTEXT_UP = new MathContext(MAX_SCALE, RoundingMode.UP);
-
-    /**
-     * A {@code MathContext} object with a precision setting  16 digits, and a
      * rounding mode of {@link RoundingMode#HALF_DOWN HALF_DOWN}.
      */
-    private static final MathContext MATH_CONTEXT_HALF_DOWN = new MathContext(MAX_SCALE, RoundingMode.HALF_DOWN);
+    private static final MathContext MATH_CONTEXT_HALF_DOWN = new MathContext(MAX_SCALE_PRINT, RoundingMode.HALF_DOWN);
 
     /**
      * A {@code MathContext} object with a precision setting  16 digits, and a
      * rounding mode of {@link RoundingMode#HALF_UP HALF_UP}.
      */
-    private static final MathContext MATH_CONTEXT_HALF_UP = new MathContext(MAX_SCALE, RoundingMode.HALF_UP);
-
-    /**
-     * A {@code MathContext} object with a precision setting  17 digits, and a
-     * rounding mode of {@link RoundingMode#HALF_DOWN HALF_DOWN}.
-     */
-    private static final MathContext MATH_CONTEXT_HALF_DOWN_MAX_SCALE_PLUS_ONE = new MathContext(MAX_SCALE + 1, RoundingMode.HALF_DOWN);
+    private static final MathContext MATH_CONTEXT_HALF_UP = new MathContext(MAX_SCALE_PRINT, RoundingMode.HALF_UP);
 
     /**
      * Minimal precision for formatter decimal number
      */
     private static final int PRECISION_MIN = 1;
 
+    /**
+     * Minimal precision for formatter decimal number
+     */
+    private static final String DECIMAL_SEPARATOR = ".";
+
+    /**
+     * Exponent pattern
+     */
+    private static final String EXPONENT_PATTERN = "E0";
+
+    /**
+     * Number pattern
+     */
+    private static final String HASH_PATTERN = "#";
+
+    /**
+     * Simple decimal pattern
+     */
+    private static final String DECIMAL_PATTERN = "0.";
+
+    /**
+     * Simple integer pattern
+     */
+    private static final String INTEGER_PATTERN = "#,##0";
+
+    /**
+     * Exponent for print
+     */
+    private static final String EXPONENT = "e";
+
+    /**
+     * Empty string
+     */
+    private static final String EMPTY_STRING = "";
+
+
+    /**
+     * Constant keeps plus symbol
+     */
+    private static final String PLUS = "+";
+
     private static DecimalFormatSymbols symbols = new DecimalFormatSymbols();
     private static DecimalFormat decimalFormat = new DecimalFormat();
 
-
     //Set separator for formatter number
     static {
-        symbols.setExponentSeparator("e");
+        symbols.setExponentSeparator(EXPONENT);
         symbols.setGroupingSeparator(' ');
         symbols.setDecimalSeparator(',');
         decimalFormat.setDecimalFormatSymbols(symbols);
     }
 
-    public static DecimalFormatSymbols getSymbols () {
+    static DecimalFormatSymbols getSymbols () {
         return symbols;
     }
 
@@ -83,32 +116,38 @@ class FormatterNumber {
         } else if (compareOne(number) < 0 && compareZero(number) != 0) {
             number = number.stripTrailingZeros();
 
-            pattern.append("0.");
+            pattern.append(DECIMAL_PATTERN);
             int scale = number.scale();
 
-            if (scale > MAX_SCALE) {
+            String appendToPattern = EMPTY_STRING;
+            int hashRepeat = 0;
+            String exponentPattern = EMPTY_STRING;
+
+            if (scale > MAX_SCALE_PRINT) {
                 int precision = number.precision();
                 int numericInNumber = scale - precision;
                 int minNumericInNumber = 2;
 
                 if (numericInNumber > minNumericInNumber) {
-                    if (precision != PRECISION_MIN && precision <= MAX_SCALE) {
-                        pattern.append("#".repeat(precision));
+                    if (precision != PRECISION_MIN && precision <= MAX_SCALE_PRINT) {
+                        hashRepeat = precision;
                     }
-
-                    pattern.append("E0");
-
+                    exponentPattern = EXPONENT_PATTERN;
                 } else {
-                    number = number.setScale(MAX_SCALE, RoundingMode.HALF_UP);
-                    pattern.append("#".repeat(MAX_SCALE));
+                    number = number.setScale(MAX_SCALE_PRINT, RoundingMode.HALF_UP);
+                    hashRepeat = MAX_SCALE_PRINT;
                 }
-
             } else {
-                pattern.append("#".repeat(scale));
+                hashRepeat = scale;
             }
+
+            String hashPattern = HASH_PATTERN.repeat(hashRepeat);
+            appendToPattern = appendToPattern.concat(hashPattern).concat(exponentPattern);
+            pattern.append(appendToPattern);
         } else {
             pattern = patternNumber(number);
         }
+
 
         decimalFormat = new DecimalFormat(pattern.toString(), symbols);
         String outNumber = decimalFormat.format(number);
@@ -118,12 +157,11 @@ class FormatterNumber {
     }
 
     private static String changeExponent (String outNumber) {
-        String negateExponent = "e-";
-        String positiveExponent = "e+";
+        String negateExponent = EXPONENT.concat("-");
+        String positiveExponent = EXPONENT.concat(PLUS);
 
         if (!outNumber.contains(negateExponent)) {
-            String exponent = "e";
-            outNumber = outNumber.replace(exponent, positiveExponent);
+            outNumber = outNumber.replace(EXPONENT, positiveExponent);
         }
         return outNumber;
     }
@@ -131,17 +169,19 @@ class FormatterNumber {
     private static StringBuilder patternNumber (BigDecimal number) {
         StringBuilder pattern = new StringBuilder();
 
-        pattern.append("#,##0");
+        pattern.append(INTEGER_PATTERN);
 
         int scale = number.scale();
         if (scale > 0) {
-            pattern.append(".");
+            pattern.append(DECIMAL_SEPARATOR);
 
+            int repeatHash;
             if (isMoreMaxScale(scale)) {
-                pattern.append("#".repeat(MAX_SCALE));
+                repeatHash = MAX_SCALE_PRINT;
             } else {
-                pattern.append("#".repeat(scale));
+                repeatHash = scale;
             }
+            pattern.append(HASH_PATTERN.repeat(repeatHash));
         }
         return pattern;
     }
@@ -160,31 +200,41 @@ class FormatterNumber {
         int precision = number.precision();
         int numericInNumber = precision - scale;
 
-        if (isMoreMaxScale(numericInNumber)) {
-            pattern.append("0.");
-            number = number.stripTrailingZeros();
 
+        String decimalPattern;
+        String hashPattern;
+        String exponentPattern = EMPTY_STRING;
+        int hashRepeat = 0;
+        if (isMoreMaxScale(numericInNumber)) {
+            decimalPattern = DECIMAL_PATTERN;
+
+            number = number.stripTrailingZeros();
             precision = number.precision();
             scale = number.scale();
 
             if (precision != PRECISION_MIN && precision > scale) {
-                pattern.append("#".repeat(numericInNumber));
+                hashRepeat = numericInNumber;
             }
-            pattern.append("E0");
+            exponentPattern = EXPONENT_PATTERN;
 
         } else {
             if (scale < 0) {
-                pattern.append("0.E0");
+                decimalPattern = DECIMAL_PATTERN;
+                exponentPattern = EXPONENT_PATTERN;
             } else {
-                pattern.append("#,##0");
+                decimalPattern = INTEGER_PATTERN;
             }
         }
-        return pattern;
+
+        hashPattern = HASH_PATTERN.repeat(hashRepeat);
+
+        String addToPattern = decimalPattern.concat(hashPattern).concat(exponentPattern);
+        return pattern.append(addToPattern);
     }
 
     private static boolean isMoreMaxScale (int number) {
         boolean isMore = false;
-        if (number > MAX_SCALE) {
+        if (number > MAX_SCALE_PRINT) {
             isMore = true;
         }
         return isMore;
@@ -195,34 +245,17 @@ class FormatterNumber {
     }
 
     private static BigDecimal roundNumber (BigDecimal number) {
-        MathContext mathContext = chooseMathContext(number);
-        return number.round(mathContext);
-    }
 
-    private static MathContext chooseMathContext (BigDecimal number) {
         MathContext mathContext;
-        number = number.round(MATH_CONTEXT_HALF_DOWN_MAX_SCALE_PLUS_ONE);
-        String numberStr = number.toPlainString();
-
-        String point = ".";
-        if (numberStr.contains(point)) {
-            int indexAfterPoint = numberStr.indexOf(point) + 1;
-            String decimalPart = numberStr.substring(indexAfterPoint);
-
-            char nine = '9';
-            long countNine = decimalPart.chars().filter(ch -> ch == nine).count();
-
-            if (countNine == decimalPart.length()) {
-                mathContext = MATH_CONTEXT_UP;
-            } else {
-                mathContext = MATH_CONTEXT_HALF_DOWN;
-            }
+        if (number.scale() > 0 && number.scale() < MAX_SCALE) {
+            mathContext = MATH_CONTEXT_HALF_DOWN;
         } else {
             mathContext = MATH_CONTEXT_HALF_UP;
         }
 
-        return mathContext;
+        return number.round(mathContext);
     }
+
 
     /**
      * Method parses number from text
@@ -230,19 +263,24 @@ class FormatterNumber {
      * @param text Text need to parse
      * @return Number was parsed
      */
-    static BigDecimal parseNumber (String text) throws ParseException {
-        String plus = "+";
-        String emptyString = "";
+    static BigDecimal parseNumber (String text) {
         String groupingSeparator = " ";
-        text = text.replace(plus, emptyString).replace(groupingSeparator, emptyString);
+        text = text.replace(PLUS, EMPTY_STRING).replace(groupingSeparator, EMPTY_STRING);
         decimalFormat.setParseBigDecimal(true);
 
-        BigDecimal number = (BigDecimal) decimalFormat.parse(text);
-        number = number.stripTrailingZeros();
-
-        if (number.scale() < 0) {
-            number = number.setScale(0);
+        BigDecimal number = null;
+        try {
+            number = (BigDecimal) decimalFormat.parse(text);
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
+        if (number != null) {
+            number = number.stripTrailingZeros();
+            if (number.scale() < 0) {
+                number = number.setScale(0);
+            }
+        }
+
 
         return number;
     }

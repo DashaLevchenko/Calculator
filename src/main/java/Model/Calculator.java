@@ -32,21 +32,33 @@ public class Calculator {
         return history;
     }
 
+    /**
+     * This method implements calculator.
+     *
+     * @param objects Object(s) for calculate, as like number, operation or list which keep numbers and operations.
+     * @return Result of calculation.
+     * @throws DivideZeroException      If divide by zero.
+     * @throws ResultUndefinedException If zero divide by zero.
+     * @throws NullPointerException     If {@code objects} is null or if {@code objects} isn't operation or number.
+     * @throws InvalidInputException    If square root negative number.
+     */
     @SafeVarargs
-    public static <T> BigDecimal calculator (T... objects) throws DivideZeroException, ResultUndefinedException, InvalidInputException {
+    public static <T> BigDecimal calculator (T... objects) throws DivideZeroException, ResultUndefinedException, InvalidInputException, NullPointerException {
         setDefaultValue();
         ArrayList formula;
 
         if (objects == null) {
-            throw new NullPointerException("Cannot calculate null formula, enter number or operation.");
+            throw new NullPointerException();
         }
 
         if (objects.length > 0) {
             if (objects[0] instanceof Collection) {
                 formula = (ArrayList) objects[0];
+
             } else {
                 formula = new ArrayList<>(Arrays.asList(objects));
             }
+
             calculateFormula(formula);
         }
 
@@ -64,6 +76,7 @@ public class Calculator {
     }
 
 
+    // This method calculates operations from formula.
     private static void calculateFormula (ArrayList formula) throws DivideZeroException, ResultUndefinedException, InvalidInputException {
         for (int i = 0; i < formula.size(); i++) {
             Object object = formula.get(i);
@@ -80,88 +93,35 @@ public class Calculator {
         }
     }
 
-    private static void checkObject (Object object) {
+    /* Method checks object. If object is null, method will thrown NullPointerException.
+     * If object isn't number or operation, method will thrown IllegalArgumentException.
+     */
+    private static void checkObject (Object object)  throws NullPointerException, IllegalArgumentException{
         if (object == null) {
-            throw new IllegalArgumentException("Can not calculate null operation, enter operation or number.");
+            throw new NullPointerException();
         }
 
         if (!(object instanceof OperationsEnum)) {
             if (!(object instanceof Number)) {
-                if (!(object instanceof String)) {
-                    throw new IllegalArgumentException("\"" + object.toString() + "\" isn't number and isn't operation," +
-                            " enter operation or number. ");
-                } else {
-                    if (!isNumber(object) && !isOperation(object)) {
-                        throw new IllegalArgumentException("\"" + object.toString() + "\" isn't number and isn't operation," +
-                                " enter operation or number. ");
-                    }
-                }
+                throw new IllegalArgumentException();
             }
         }
 
     }
 
-    private static boolean isOperation (Object object) {
-        boolean isOperation;
-        String operationName = object.toString();
-
-
-        if (object.toString().contains("OperationsEnum.")) {
-            operationName = operationName.replace("OperationsEnum.", "");
-        }
-
-
-        try {
-            OperationsEnum.valueOf(operationName);
-            isOperation = true;
-        } catch (IllegalArgumentException e) {
-            isOperation = false;
-        }
-
-        return isOperation;
-    }
-
-    private static boolean isNumber (Object object) {
-        boolean isNumber;
-        try {
-            new BigDecimal(object.toString());
-            isNumber = true;
-        } catch (Exception e) {
-            isNumber = false;
-        }
-        return isNumber;
-
-    }
-
+    // This method checks number. If object is number, it will set number.
     private static void parseNumber (Object object) {
-        boolean instanceNumber = object instanceof Number;
-        boolean instanceString = object instanceof String;
-
-        if (isNumber(object)) {
-            if (instanceNumber || instanceString) {
-                String stringNumber = object.toString();
-                BigDecimal number = new BigDecimal(stringNumber);
-                setNumber(number);
-            }
+        if (object instanceof Number) {
+            BigDecimal number = new BigDecimal(object.toString());
+            setNumber(number);
         }
     }
 
-    private static void parseOperation (Object object, int i, ArrayList formula) throws  DivideZeroException, ResultUndefinedException {
-        boolean instanceOperation = object instanceof OperationsEnum;
-        boolean instanceString = object instanceof String;
-        OperationsEnum operationsEnum = null;
-        if (instanceOperation) {
-            operationsEnum = (OperationsEnum) object;
-        }
+    // This method checks object. If object is operation, it will set operation or will calculated previous operation.
+    private static void parseOperation (Object object, int i, ArrayList formula) throws DivideZeroException, ResultUndefinedException {
+        if (object instanceof OperationsEnum) {
+            OperationsEnum operationsEnum = (OperationsEnum) object;
 
-        if (instanceString) {
-            if (isOperation(object)) {
-                String operationName = object.toString().replace("OperationsEnum.", "");
-                operationsEnum = OperationsEnum.valueOf(operationName);
-            }
-        }
-
-        if (operationsEnum != null) {
             try {
                 calculateLastBinaryOperation(operationsEnum);
             } finally {
@@ -210,7 +170,7 @@ public class Calculator {
 
         if (previousObject != null) {
             if (previousObject instanceof OperationsEnum) {
-                if (isEqual(previousObject)) {
+                if (isEqual((OperationsEnum) previousObject)) {
                     if (numberFirst != null) {
                         history.addNumber(numberFirst);
                     }
@@ -243,16 +203,19 @@ public class Calculator {
                 if (objectPresent instanceof BigDecimal) {
                     numberFirst = null;
                 }
-                if (!isEqual(objectPresent)) {
-                    result = null;
-                    if (!isNegate(objectPresent)) {
-                        numberSecond = null;
-                        previousEqual = false;
-                        if (!isPercent(objectPresent)) {
-                            binaryOperation = null;
+                if (objectPresent instanceof OperationsEnum) {
+                    OperationsEnum operationsPresent = (OperationsEnum)objectPresent;
+                    if (!isEqual(operationsPresent)) {
+                        result = null;
+                        if (!isNegate(objectPresent)) {
+                            numberSecond = null;
+                            previousEqual = false;
+                            if (!isPercent(operationsPresent)) {
+                                binaryOperation = null;
+                            }
                         }
+                        operation = null;
                     }
-                    operation = null;
                 }
             }
         }
@@ -309,7 +272,7 @@ public class Calculator {
 
     // Method calculates unary operation,
     // sets true value to percent negate if unary operation is negate
-    private static void calculateUnaryOperation () throws  InvalidInputException, DivideZeroException {
+    private static void calculateUnaryOperation () throws InvalidInputException, DivideZeroException {
         setUnaryNumber();
 
         unary.setOperation(operation);
@@ -353,20 +316,12 @@ public class Calculator {
      * This method returns true if operation was binary,
      * and returns false if operation was not binary
      *
-     * @param operation Operation which need to check
+     * @param operation Operation which need to check.
      * @return Returns true if operation was binary, and returns false if operation was not binary
      */
     public static boolean isBinary (OperationsEnum operation) {
-        boolean isBinary = false;
-
-        if (operation != null) {
-            if (operation == OperationsEnum.ADD || operation == OperationsEnum.SUBTRACT ||
-                    operation == OperationsEnum.MULTIPLY || operation == OperationsEnum.DIVIDE) {
-                isBinary = true;
-            }
-        }
-
-        return isBinary;
+        return operation == OperationsEnum.ADD || operation == OperationsEnum.SUBTRACT ||
+                operation == OperationsEnum.MULTIPLY || operation == OperationsEnum.DIVIDE;
     }
 
     /* Method decides can calculator calculate operation or not.
@@ -436,12 +391,19 @@ public class Calculator {
         }
     }
 
+    /**
+     * This method returns true if operation was negate,
+     * and returns false if operation was not negate.
+     *
+     * @param operation Operation which need to check
+     * @return Returns true if operation was negate, and returns false if operation was not negate.
+     */
     public static boolean isNegate (Object operation) {
         return operation == OperationsEnum.NEGATE;
     }
 
     // Method calculates percent operation
-    private static void calculatePercent () throws  InvalidInputException, DivideZeroException, ResultUndefinedException {
+    private static void calculatePercent () throws InvalidInputException, DivideZeroException, ResultUndefinedException {
         if (binaryOperation == null) {
             calculateUnaryOperation();
             history.deleteLast();
@@ -504,12 +466,15 @@ public class Calculator {
         return percent;
     }
 
-    public static boolean isPercent (Object operation) {
-        boolean isPercent = false;
-        if (operation != null) {
-            isPercent = operation == OperationsEnum.PERCENT;
-        }
-        return isPercent;
+    /**
+     * This method returns true if operation was percent,
+     * and returns false if operation was not percent.
+     *
+     * @param operation Operation which need to check
+     * @return Returns true if operation was percent, and returns false if operation was not percent.
+     */
+    public static boolean isPercent (OperationsEnum operation) {
+        return operation == OperationsEnum.PERCENT;
     }
 
     // Method calculates binary operation if present object from formula is equal
@@ -544,15 +509,15 @@ public class Calculator {
         }
     }
 
-    public static boolean isEqual (Object operation) {
-        boolean isEqual = false;
-
-        if (operation instanceof OperationsEnum) {
-            OperationsEnum operationsEnum = (OperationsEnum) operation;
-            isEqual = operationsEnum == OperationsEnum.EQUAL;
-        }
-
-        return isEqual;
+    /**
+     * This method returns true if operation was equal,
+     * and returns false if operation was not equal.
+     *
+     * @param operation Operation which need to check
+     * @return Returns true if operation was equal, and returns false if operation was not equal.
+     */
+    public static boolean isEqual (OperationsEnum operation) {
+        return operation == OperationsEnum.EQUAL;
     }
 
     /**
@@ -563,15 +528,8 @@ public class Calculator {
      * @return Returns true if operation was unary, and returns false if operation was not unary.
      */
     public static boolean isUnary (OperationsEnum operation) {
-        boolean isUnary = false;
-        if (operation != null) {
-            if (operation == OperationsEnum.SQRT || operation == OperationsEnum.SQR ||
-                    operation == OperationsEnum.ONE_DIVIDE_X || operation == OperationsEnum.NEGATE) {
-                isUnary = true;
-            }
-        }
-
-        return isUnary;
+        return operation == OperationsEnum.SQRT || operation == OperationsEnum.SQR ||
+                operation == OperationsEnum.ONE_DIVIDE_X || operation == OperationsEnum.NEGATE;
     }
 
 }

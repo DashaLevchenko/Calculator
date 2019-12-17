@@ -17,7 +17,7 @@ import javafx.stage.Stage;
  * This class resizes application`s window
  */
 
-public class ResizeWindow {
+class ResizeWindow {
 
     /**
      * Text for button which was pressed for maximized stage
@@ -58,11 +58,11 @@ public class ResizeWindow {
     }
 
 
-    /**
+    /*
      * This method resizes application's stage
      * and  adds handler mouse event to all stage's children
      */
-    public void resizeAllStage () {
+    void resizeAllStage () {
         EventHandler<MouseEvent> event = resizeWindow();
         setEventHandler(event);
     }
@@ -89,12 +89,11 @@ public class ResizeWindow {
         }
     }
 
-    /**
+    /*
      * This method changes image cursor when mouse was moved on border area.
      * Also this method changes width and height window when mouse was dragged
      * and moved in border area
      *
-     * @return Mouse event
      */
     private EventHandler<MouseEvent> resizeWindow () {
         EventHandler<MouseEvent> event = mouseEvent -> {
@@ -197,13 +196,8 @@ public class ResizeWindow {
         }
     }
 
-    /**
-     * Method resizes button's font size if width stage was changed
-     *
-     * @param node Node which keeps buttons
-     */
-
-    public void resizeButton (Node node) {
+     // Method resizes button's font size if width stage was changed
+    void resizeButton (Node node) {
         ObservableList<Node> buttons = ((Parent) node).getChildrenUnmodifiable();
         for (Node child : buttons) {
             Button button = (Button) child;
@@ -223,13 +217,11 @@ public class ResizeWindow {
         return newSize;
     }
 
-    /**
+    /*
      * This methods makes stage size on all device window,
      * and change button text
-     *
-     * @param button  Button was pressed for maximized stage
      */
-    public void maximizeWindow (Button button) {
+    void maximizeWindow (Button button) {
         String buttonText;
         if (!stage.isMaximized()) {
             stage.setMaximized(true);
