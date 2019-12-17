@@ -23,6 +23,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.math.BigDecimal;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -166,6 +167,7 @@ public class CalculatorController {
     private double yOffset = 0;
     private Memory memory;
 
+
     // Variable keeps general display's css options from, value sets when application is started.
     private String firstStyleLabel;
 
@@ -174,6 +176,7 @@ public class CalculatorController {
 
     // Formula which need to calculate
     private ArrayList<Object> formula = new ArrayList<>();
+    private boolean overflow;
 
 
     @FXML
@@ -235,7 +238,7 @@ public class CalculatorController {
      * If comma contains in text yet, method does nothing.
      */
     @FXML
-    void commaPressed () throws OverflowException {
+    void commaPressed () {
         String outText = getTextDisplay();
         boolean isTextWithComma = outText.contains(DECIMAL_SEPARATOR);
 
@@ -283,7 +286,7 @@ public class CalculatorController {
      * text casts to BigDecimal and it formats again before printing
      */
     @FXML
-    void backspacePressed () throws OverflowException {
+    void backspacePressed () {
         clearError();
         String outText = getTextDisplay();
 
@@ -364,7 +367,7 @@ public class CalculatorController {
      * @param actionEvent Button from number buttons group was pressed
      */
     @FXML
-    void numberPressed (ActionEvent actionEvent) throws OverflowException {
+    void numberPressed (ActionEvent actionEvent) {
         clearError();
         String outText = getTextDisplay();
         outText = setDefaultTextAfterResult(outText);
@@ -391,8 +394,13 @@ public class CalculatorController {
 
 
     private BigDecimal parseNumber (String out) {
-        BigDecimal number;
-        number = FormatterNumber.parseNumber(out);
+        BigDecimal number = null;
+        try {
+            number = FormatterNumber.parseNumber(out);
+        } catch (ParseException e) {
+            printError(e.getMessage());
+            e.printStackTrace();
+        }
         return number;
     }
 
@@ -400,7 +408,7 @@ public class CalculatorController {
      * This method inserts {@code minus} to {@code out},
      * if {@code out} doesn't contains {@code minus}.
      */
-    private void negatePressed (OperationsEnum operationsEnum) throws OverflowException {
+    private void negatePressed (OperationsEnum operationsEnum) {
         String outText = getTextDisplay();
         int indexLastSymbol = outText.length() - 1;
         String lastSymbol = String.valueOf(outText.toCharArray()[indexLastSymbol]);
@@ -549,7 +557,7 @@ public class CalculatorController {
      * @param actionEvent Binary operation buttons was pressed
      */
     @FXML
-    public void operationPressed (ActionEvent actionEvent) throws OverflowException {
+    public void operationPressed (ActionEvent actionEvent) {
         String buttonID = getButton(actionEvent).getId();
 
         OperationsEnum operationsEnum = operation.get(buttonID);
@@ -602,7 +610,7 @@ public class CalculatorController {
      * Also method sets first or second number in calculator.
      * Prints result or exception.
      */
-    private void unaryOperations (OperationsEnum operationsEnum) throws OverflowException {
+    private void unaryOperations (OperationsEnum operationsEnum) {
 
         boolean isNegate = Calculator.isNegate(operationsEnum);
 
@@ -661,36 +669,49 @@ public class CalculatorController {
     private void calculate () {
         try {
             result = Calculator.calculator(formula);
-
             String resultFormatted = formatterNumber(result);
             printResult(resultFormatted);
 
             canBackspace = false;
-
-//            if (!isError) {
-            printHistory();
+//        } catch (InvalidInputException | ResultUndefinedException | DivideZeroException e) {
+//            String messageError = null;
+//            if (e instanceof DivideZeroException) {
+//                messageError = "Cannot divide by zero";
 //            }
+//            if (e instanceof ResultUndefinedException) {
+//                messageError = "Result is undefined";
+//            }
+//            if (e instanceof InvalidInputException) {
+//                messageError = "Invalid input";
+//            }
+//            printError(messageError);
+//        } catch (Exception e) {
+//            printError("Something wrong!\n" +
+//                    "Please, press any available button\n" +
+//                    "and try again, " +
+//                    "or restart application.");
+//            e.printStackTrace();
         } catch (Exception e) {
+            String messageError = null;
             if (e instanceof DivideZeroException) {
-                e = new DivideZeroException("Cannot divide by zero");
+                messageError = "Cannot divide by zero";
             } else if (e instanceof ResultUndefinedException) {
-                e = new ResultUndefinedException("Result is undefined");
+                messageError = "Result is undefined";
             } else if (e instanceof InvalidInputException) {
-                e = new InvalidInputException("Invalid input");
-            } else if (e instanceof OverflowException) {
-                e = new OverflowException("Overflow");
+                messageError = "Invalid input";
             } else {
-                e = new Exception("Something wrong!\n" +
+                messageError = "Something wrong!\n" +
                         "Please, press any available button\n" +
                         "and try again, " +
-                        "or restart application.");
+                        "or restart application.";
                 e.printStackTrace();
             }
 
-            if (!(e instanceof OverflowException)) {
+            printError(messageError);
+        } finally {
+            if (!overflow) {
                 printHistory();
             }
-            printError(e);
         }
     }
 
@@ -702,14 +723,13 @@ public class CalculatorController {
      * Method outputs exception's message on general display,
      * makes some buttons disable, resizes text on general display.
      */
-    private <T extends Exception> void printError (T e) {
+    private void printError (String messageError) {
         isError = true;
         operationsIsDisable(true);
         memoryPanel.setDisable(true);
 
         generalDisplay.setStyle(firstStyleLabel);
-        String errorMessage = e.getMessage();
-        generalDisplay.setText(errorMessage);
+        generalDisplay.setText(messageError);
 
         resizeOutputText();
         scrollOutOperationMemory();
@@ -718,9 +738,14 @@ public class CalculatorController {
     /*
      * Method outputs calculation's result on general display
      */
-    private void printResult (String text) throws OverflowException {
+    private void printResult (String text) {
         BigDecimal numberCheckedOverflow = parseNumber(text);
-        isOverflow(numberCheckedOverflow);
+
+        try {
+            isOverflow(numberCheckedOverflow);
+        } catch (OverflowException e) {
+            printError("Overflow");
+        }
         generalDisplay.setText(text);
         resizeOutputText();
     }
@@ -737,9 +762,9 @@ public class CalculatorController {
      * If number is equal or more than max invalid number throws OverflowException.
      * Also if number is equal or less than min invalid number throws OverflowException.
      */
-    private void isOverflow (BigDecimal result) throws OverflowException {
-        boolean overflow = false;
 
+    private void isOverflow (BigDecimal result) throws OverflowException {
+        overflow = false;
         BigDecimal number = parseNumber(formatterNumber(result));
 
         if (number != null) {
@@ -773,8 +798,8 @@ public class CalculatorController {
     private void printHistory () {
         History history = Calculator.getHistory();
         if (history != null) {
-            CalculatorHistory calculatorHistory = new CalculatorHistory(history);
-            String historyChanged = calculatorHistory.getChangedHistory();
+            FormatterHistory formatterHistory = new FormatterHistory(history);
+            String historyChanged = formatterHistory.formatterHistory();
             outOperationMemory.setText(historyChanged);
         }
 
@@ -962,12 +987,8 @@ public class CalculatorController {
             result = memory.memoryRecall();
             String out = formatterNumber(result);
             formula.add(result);
-            try {
-                printResult(out);
-            } catch (OverflowException e) {
-                e = new OverflowException("Overflow");
-                printError(e);
-            }
+
+            printResult(out);
         }
         canBackspace = false;
         memoryPressed = true;

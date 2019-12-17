@@ -203,7 +203,9 @@ class FormatterNumber {
 
         String decimalPattern;
         String hashPattern;
-        String exponentPattern = EMPTY_STRING;
+        String exponentPattern = heavyMethod();
+//        String exponentPattern = "";
+
         int hashRepeat = 0;
         if (isMoreMaxScale(numericInNumber)) {
             decimalPattern = DECIMAL_PATTERN;
@@ -230,6 +232,15 @@ class FormatterNumber {
 
         String addToPattern = decimalPattern.concat(hashPattern).concat(exponentPattern);
         return pattern.append(addToPattern);
+    }
+
+    private static String heavyMethod () {
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 
     private static boolean isMoreMaxScale (int number) {
@@ -263,17 +274,13 @@ class FormatterNumber {
      * @param text Text need to parse
      * @return Number was parsed
      */
-    static BigDecimal parseNumber (String text) {
+    static BigDecimal parseNumber (String text) throws ParseException {
         String groupingSeparator = " ";
         text = text.replace(PLUS, EMPTY_STRING).replace(groupingSeparator, EMPTY_STRING);
         decimalFormat.setParseBigDecimal(true);
 
-        BigDecimal number = null;
-        try {
-            number = (BigDecimal) decimalFormat.parse(text);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        BigDecimal number;
+        number = (BigDecimal) decimalFormat.parse(text);
         if (number != null) {
             number = number.stripTrailingZeros();
             if (number.scale() < 0) {

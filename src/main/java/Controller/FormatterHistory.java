@@ -6,6 +6,7 @@ import Model.OperationsEnum;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormatSymbols;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -13,7 +14,7 @@ import java.util.HashMap;
  * This class change calculator history for calculator application
  */
 
-class CalculatorHistory {
+class FormatterHistory {
     /**
      * Variable keeps empty string value
      */
@@ -47,9 +48,10 @@ class CalculatorHistory {
 
     /**
      * This constructor initialize {@code this.history}.
+     *
      * @param history History which need to change
      */
-    CalculatorHistory (History history) {
+    FormatterHistory (History history) {
         this.history = history;
     }
 
@@ -67,7 +69,7 @@ class CalculatorHistory {
      *
      * @return History was changed
      */
-    String getChangedHistory () {
+    String formatterHistory () {
         int historyInSize = history.size();
 
         if (historyInSize != 0) {
@@ -110,7 +112,7 @@ class CalculatorHistory {
     }
 
 
-     // Method cleans calculator history
+    // Method cleans calculator history
     private void clearHistory () {
         historyListOut.clear();
         clearNegateHistory();
@@ -147,12 +149,17 @@ class CalculatorHistory {
     }
 
     private void changeNumber (Object lastObject) {
-        BigDecimal number = parseNumber(lastObject);
+        BigDecimal number = null;
+        try {
+            number = parseNumber(lastObject);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         String addNumber = formatterNumberHistory(number);
         historyListOut.add(addNumber);
     }
 
-    private BigDecimal parseNumber (Object lastObject) {
+    private BigDecimal parseNumber (Object lastObject) throws ParseException {
         BigDecimal number;
         String lastHistory = lastObject.toString();
 
@@ -260,7 +267,12 @@ class CalculatorHistory {
 
                 if (historyUnaryOperations.isEmpty()) {
                     if (isNumber(previousObject)) {
-                        BigDecimal number = parseNumber(previousObject);
+                        BigDecimal number = null;
+                        try {
+                            number = parseNumber(previousObject);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
                         negateHistory = formatterNumberHistory(number);
 
                     } else {
@@ -295,16 +307,18 @@ class CalculatorHistory {
 
     private boolean isNumber (Object object) {
         String text = object.toString();
+        boolean isNumber;
         try {
             if (text.contains(EXPONENT_SEPARATOR)) {
-                FormatterNumber.parseNumber(text);
+                parseNumber(text);
             } else {
                 new BigDecimal(text);
             }
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
+            isNumber = true;
+        } catch (NumberFormatException | ParseException e) {
+            isNumber = false;
         }
+        return isNumber;
     }
 
     /*
@@ -335,7 +349,12 @@ class CalculatorHistory {
         if (negateHistory.isEmpty()) {
             if (historyUnaryOperations.isEmpty()) {
                 if (isNumber(previousObject)) {
-                    BigDecimal number = parseNumber(previousObject);
+                    BigDecimal number = null;
+                    try {
+                        number = parseNumber(previousObject);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
                     historyUnaryOperations = formatterNumberHistory(number);
                 }
             }
