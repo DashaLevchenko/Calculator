@@ -8,21 +8,8 @@
   <component name="ChangeListManager">
     <list default="true" id="feaeb0c2-feb2-4a9c-98e3-48b1d1a339aa" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/CalculatorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/CalculatorController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/CalculatorMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/CalculatorMain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/FormatterHistory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/FormatterCalculatorHistory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controller/FormatterNumber.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/FormatterNumber.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/ResizeDisplay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/ResizeDisplay.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Demo/Demo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Demo/Demo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/View/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Controller/CalculatorControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Controller/CalculatorControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Controller/CalculatorController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Controller/CalculatorController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Controller/CalculatorMain.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Controller/CalculatorMain.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Controller/FormatterNumber.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Controller/FormatterNumber.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Controller/ResizeDisplay.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Controller/ResizeDisplay.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Demo/Demo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Demo/Demo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/View/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/Controller/CalculatorControllerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/Controller/CalculatorControllerTest.class" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -155,7 +142,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.CalculatorControllerTest.checkSquareX">
+  <component name="RunManager" selected="JUnit.CalculatorControllerTest">
     <configuration name="CalculatorMain" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Controller.CalculatorMain" />
       <module name="Calculator2" />
@@ -284,10 +271,10 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.CalculatorControllerTest.checkSquareX" />
         <item itemvalue="JUnit.CalculatorControllerTest" />
-        <item itemvalue="Application.E (1)" />
+        <item itemvalue="JUnit.CalculatorControllerTest.checkSquareX" />
         <item itemvalue="JUnit.CalculatorControllerTest.checkOperationsEnotationValid" />
+        <item itemvalue="Application.E (1)" />
         <item itemvalue="Application.E" />
       </list>
     </recent_temporary>
@@ -316,13 +303,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1565432602101</updated>
-    </task>
-    <task id="LOCAL-00071" summary="before change MathContex in model">
-      <created>1573642760679</created>
-      <option name="number" value="00071" />
-      <option name="presentableId" value="LOCAL-00071" />
-      <option name="project" value="LOCAL" />
-      <updated>1573642760679</updated>
     </task>
     <task id="LOCAL-00072" summary="before change file limit BinaryDivideTest">
       <created>1573814643058</created>
@@ -660,7 +640,14 @@
       <option name="project" value="LOCAL" />
       <updated>1576594130470</updated>
     </task>
-    <option name="localTasksCounter" value="120" />
+    <task id="LOCAL-00120" summary="before change formatterNumber">
+      <created>1576678866218</created>
+      <option name="number" value="00120" />
+      <option name="presentableId" value="LOCAL-00120" />
+      <option name="project" value="LOCAL" />
+      <updated>1576678866218</updated>
+    </task>
+    <option name="localTasksCounter" value="121" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -734,7 +721,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="history works" />
     <MESSAGE value="all works, before add javadoc and refactoring" />
     <MESSAGE value="controller ok" />
     <MESSAGE value="javadoc history" />
@@ -759,7 +745,8 @@
     <MESSAGE value="before delete string from model" />
     <MESSAGE value="all works" />
     <MESSAGE value="before change demo Exception" />
-    <option name="LAST_COMMIT_MESSAGE" value="before change demo Exception" />
+    <MESSAGE value="before change formatterNumber" />
+    <option name="LAST_COMMIT_MESSAGE" value="before change formatterNumber" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

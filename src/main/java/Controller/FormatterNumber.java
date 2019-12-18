@@ -200,15 +200,36 @@ class FormatterNumber {
         int precision = number.precision();
         int numericInNumber = precision - scale;
 
-
-        String decimalPattern;
-        String hashPattern;
-        String exponentPattern;
+//
+//        String decimalPattern;
+//        String hashPattern;
+//        String exponentPattern;
+//
+//        int hashRepeat = 0;
+//        if (isMoreMaxScale(numericInNumber)) {
+//            decimalPattern = DECIMAL_PATTERN;
+//
+//            number = number.stripTrailingZeros();
+//            precision = number.precision();
+//            scale = number.scale();
+//
+//            if (precision != PRECISION_MIN && precision > scale) {
+//                hashRepeat = numericInNumber;
+//            }
+//            exponentPattern = EXPONENT_PATTERN;
+//        } else {
+//            if (scale < 0) {
+//                decimalPattern = DECIMAL_PATTERN;
+//                exponentPattern = EXPONENT_PATTERN;
+//            } else {
+//                decimalPattern = INTEGER_PATTERN;
+//                exponentPattern = EMPTY_STRING;
+//            }
+//        }
+//
 
         int hashRepeat = 0;
         if (isMoreMaxScale(numericInNumber)) {
-            decimalPattern = DECIMAL_PATTERN;
-
             number = number.stripTrailingZeros();
             precision = number.precision();
             scale = number.scale();
@@ -216,20 +237,12 @@ class FormatterNumber {
             if (precision != PRECISION_MIN && precision > scale) {
                 hashRepeat = numericInNumber;
             }
-            exponentPattern = EXPONENT_PATTERN;
-        } else {
-            if (scale < 0) {
-                decimalPattern = DECIMAL_PATTERN;
-                exponentPattern = EXPONENT_PATTERN;
-            } else {
-                decimalPattern = INTEGER_PATTERN;
-                exponentPattern = EMPTY_STRING;
-            }
         }
 
-        hashPattern = HASH_PATTERN.repeat(hashRepeat);
 
-        String addToPattern = decimalPattern.concat(hashPattern).concat(exponentPattern);
+        String hashPattern = HASH_PATTERN.repeat(hashRepeat);
+
+        String addToPattern = DECIMAL_PATTERN.concat(hashPattern).concat(EXPONENT_PATTERN);
         return pattern.append(addToPattern);
     }
 
