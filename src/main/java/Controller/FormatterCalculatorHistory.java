@@ -14,7 +14,7 @@ import java.util.HashMap;
  * This class change calculator history for calculator application
  */
 
-class FormatterHistory {
+class FormatterCalculatorHistory {
     /**
      * Variable keeps empty string value
      */
@@ -51,7 +51,7 @@ class FormatterHistory {
      *
      * @param history History which need to change
      */
-    FormatterHistory (History history) {
+    FormatterCalculatorHistory (History history) {
         this.history = history;
     }
 

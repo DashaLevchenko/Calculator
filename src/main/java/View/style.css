@@ -21,6 +21,7 @@
 -fx-font-size: 46px;
 -fx-background-color: e6e6e6;
 -fx-font-family:"Segoe UI Semibold";
+-fx-text-alignment: top-right;
 }
 
 .menu:hover, .init_other:hover {

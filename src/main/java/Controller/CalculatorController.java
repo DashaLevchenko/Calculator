@@ -10,6 +10,7 @@ import Model.OperationsEnum;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -19,6 +20,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -40,6 +42,7 @@ public class CalculatorController {
      * Value is enum variable which match some operation.
      */
     private static final HashMap<String, OperationsEnum> operation = new HashMap<>();
+    private static final Pos DEFAULT_ALIGNMENT = Pos.TOP_RIGHT;
 
     static {
         operation.put("add", OperationsEnum.ADD);
@@ -121,7 +124,9 @@ public class CalculatorController {
     //endregion
     //region Displays
     @FXML
-    private Label generalDisplay, outOperationMemory;
+    private Label generalDisplay;
+    @FXML
+    private Label outOperationMemory;
     @FXML
     private ScrollPane scrollPaneOperation;
     @FXML
@@ -141,47 +146,45 @@ public class CalculatorController {
     private AnchorPane leftMenu;
     @FXML
     private AnchorPane generalAnchorPane;
-    //endregion
-
     // Variable is true when can change binary operation
     private boolean canChangeOperator = false;
-
+    //endregion
     // Variable is true when left menu is visible
     private boolean showLeftMenu = false;
-
     // Variable is true when was printed exception
     private boolean isError = false;
-
     // Variable is true when memory buttons was pressed
     private boolean memoryPressed = false;
-
     // Variable is true when can change text from general display
     private boolean canBackspace = true;
-
     // Variable keeps result of calculation
     private BigDecimal result;
-
-
     private double moveScroll;
     private double xOffset = 0;
     private double yOffset = 0;
     private Memory memory;
-
-
-    // Variable keeps general display's css options from, value sets when application is started.
-    private String firstStyleLabel;
-
     // Variable keeps maximal length of symbol which can input
     private int maxCharInText = 16;
-
     // Formula which need to calculate
     private ArrayList<Object> formula = new ArrayList<>();
     private boolean overflow;
+    private boolean isUnknownError = false;
+
+    public void setUnknownError (boolean unknownError) {
+        this.isUnknownError = unknownError;
+    }
+
+    Label getGeneralDisplay () {
+        return generalDisplay;
+    }
+
+    public BigDecimal getResult () {
+        return result;
+    }
 
 
     @FXML
     void initialize () {
-        firstStyleLabel = generalDisplay.getStyle();
         generalDisplay.setText(DEFAULT_TEXT);
         equal.setDefaultButton(true);
     }
@@ -669,42 +672,23 @@ public class CalculatorController {
     private void calculate () {
         try {
             result = Calculator.calculator(formula);
+
             String resultFormatted = formatterNumber(result);
             printResult(resultFormatted);
 
             canBackspace = false;
-//        } catch (InvalidInputException | ResultUndefinedException | DivideZeroException e) {
-//            String messageError = null;
-//            if (e instanceof DivideZeroException) {
-//                messageError = "Cannot divide by zero";
-//            }
-//            if (e instanceof ResultUndefinedException) {
-//                messageError = "Result is undefined";
-//            }
-//            if (e instanceof InvalidInputException) {
-//                messageError = "Invalid input";
-//            }
-//            printError(messageError);
-//        } catch (Exception e) {
-//            printError("Something wrong!\n" +
-//                    "Please, press any available button\n" +
-//                    "and try again, " +
-//                    "or restart application.");
-//            e.printStackTrace();
-        } catch (Exception e) {
+
+        } catch (DivideZeroException | ResultUndefinedException | InvalidInputException e) {
             String messageError = null;
+
             if (e instanceof DivideZeroException) {
                 messageError = "Cannot divide by zero";
-            } else if (e instanceof ResultUndefinedException) {
+            }
+            if (e instanceof ResultUndefinedException) {
                 messageError = "Result is undefined";
-            } else if (e instanceof InvalidInputException) {
+            }
+            if (e instanceof InvalidInputException) {
                 messageError = "Invalid input";
-            } else {
-                messageError = "Something wrong!\n" +
-                        "Please, press any available button\n" +
-                        "and try again, " +
-                        "or restart application.";
-                e.printStackTrace();
             }
 
             printError(messageError);
@@ -715,20 +699,21 @@ public class CalculatorController {
         }
     }
 
-
     //endregion
 
     //region Print
-    /*
+
+    /**
      * Method outputs exception's message on general display,
      * makes some buttons disable, resizes text on general display.
+     *
+     * @param messageError Message which need to print on {@code generalDisplay}
      */
-    private void printError (String messageError) {
+    void printError (String messageError) {
         isError = true;
         operationsIsDisable(true);
         memoryPanel.setDisable(true);
 
-        generalDisplay.setStyle(firstStyleLabel);
         generalDisplay.setText(messageError);
 
         resizeOutputText();
@@ -743,11 +728,11 @@ public class CalculatorController {
 
         try {
             isOverflow(numberCheckedOverflow);
+            generalDisplay.setText(text);
+            resizeOutputText();
         } catch (OverflowException e) {
             printError("Overflow");
         }
-        generalDisplay.setText(text);
-        resizeOutputText();
     }
 
     /*
@@ -798,8 +783,8 @@ public class CalculatorController {
     private void printHistory () {
         History history = Calculator.getHistory();
         if (history != null) {
-            FormatterHistory formatterHistory = new FormatterHistory(history);
-            String historyChanged = formatterHistory.formatterHistory();
+            FormatterCalculatorHistory formatterCalculatorHistory = new FormatterCalculatorHistory(history);
+            String historyChanged = formatterCalculatorHistory.formatterHistory();
             outOperationMemory.setText(historyChanged);
         }
 
@@ -862,8 +847,7 @@ public class CalculatorController {
      */
     @FXML
     void clearAllC () {
-        //Displays
-        generalDisplay.setStyle(firstStyleLabel);
+        generalDisplay.setAlignment(DEFAULT_ALIGNMENT);
         generalDisplay.setText(DEFAULT_TEXT);
         outOperationMemory.setText(EMPTY_STRING);
 
@@ -880,6 +864,7 @@ public class CalculatorController {
         memoryPanel.setDisable(false);
 
         maxCharInText = DEFAULT_MAX_NUMBERS_CHAR_INPUT;
+        isUnknownError = false;
         resizeOutputText();
         isError = false;
     }
@@ -890,7 +875,6 @@ public class CalculatorController {
      */
     @FXML
     void clearNumberCE () {
-        generalDisplay.setStyle(firstStyleLabel);
         generalDisplay.setText(DEFAULT_TEXT);
         maxCharInText = DEFAULT_MAX_NUMBERS_CHAR_INPUT;
         clearError();
@@ -961,7 +945,6 @@ public class CalculatorController {
             memoryButtonDisable(false);
         }
         memory.memoryAdd(setMemoryNumber());
-
         memoryPressed = true;
     }
 
@@ -1058,7 +1041,9 @@ public class CalculatorController {
         resizeWindow.maximizeWindow(maximizeButton);
         resizeWindow.resizeButton(calculatorButtons);
 
+
         resizeOutputText();
+
         scrollOutOperationMemory();
     }
 
@@ -1119,7 +1104,15 @@ public class CalculatorController {
      * Method resize text for general display and sets one
      */
     private void resizeOutputText () {
-        Font newFont = ResizeDisplay.fontSize(generalDisplay);
+        Font newFont;
+        if (!isUnknownError) {
+            newFont = ResizeDisplay.fontSizeChangedWidth(generalDisplay);
+        } else {
+            double sizeFontUnknownError = 12;
+            newFont = new Font(ResizeDisplay.DEFAULT_FONT_DISPLAY, sizeFontUnknownError);
+            generalDisplay.setTextAlignment(TextAlignment.CENTER);
+            generalDisplay.setAlignment(Pos.CENTER);
+        }
         generalDisplay.setFont(newFont);
     }
 

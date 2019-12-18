@@ -203,8 +203,7 @@ class FormatterNumber {
 
         String decimalPattern;
         String hashPattern;
-        String exponentPattern = heavyMethod();
-//        String exponentPattern = "";
+        String exponentPattern;
 
         int hashRepeat = 0;
         if (isMoreMaxScale(numericInNumber)) {
@@ -218,13 +217,13 @@ class FormatterNumber {
                 hashRepeat = numericInNumber;
             }
             exponentPattern = EXPONENT_PATTERN;
-
         } else {
             if (scale < 0) {
                 decimalPattern = DECIMAL_PATTERN;
                 exponentPattern = EXPONENT_PATTERN;
             } else {
                 decimalPattern = INTEGER_PATTERN;
+                exponentPattern = EMPTY_STRING;
             }
         }
 

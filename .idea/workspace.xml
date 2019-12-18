@@ -9,14 +9,19 @@
     <list default="true" id="feaeb0c2-feb2-4a9c-98e3-48b1d1a339aa" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controller/CalculatorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/CalculatorController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/CalculatorHistory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/FormatterHistory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/CalculatorMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/CalculatorMain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/FormatterHistory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/FormatterCalculatorHistory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controller/FormatterNumber.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/FormatterNumber.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/ResizeDisplay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/ResizeDisplay.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Demo/Demo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Demo/Demo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/View/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/Controller/CalculatorControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Controller/CalculatorControllerTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Controller/CalculatorController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Controller/CalculatorController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Controller/CalculatorHistory.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Controller/CalculatorMain.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Controller/CalculatorMain.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Controller/FormatterNumber.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Controller/FormatterNumber.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Controller/ResizeDisplay.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Controller/ResizeDisplay.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Demo/Demo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Demo/Demo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/View/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/test-classes/Controller/CalculatorControllerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/Controller/CalculatorControllerTest.class" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -94,7 +99,7 @@
     <property name="ToolWindowFind.ShowToolbar" value="false" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
-    <property name="last_opened_file_path" value="C:/Program Files/Git/cmd/git.exe" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/target/classes/View" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -113,17 +118,10 @@
       <recent name="" />
       <recent name="org.testfx.framework.junit.ApplicationTest" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\User\IdeaProjects\Calculator2\src\test\java\Model" />
-    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="Model" />
       <recent name="Controller" />
       <recent name="" />
-    </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="Model" />
-      <recent name="View" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\User\IdeaProjects\Calculator2\target\classes\View" />
@@ -131,6 +129,13 @@
       <recent name="C:\Users\User\IdeaProjects\Calculator2\src\test\java" />
       <recent name="D:\Calculator" />
       <recent name="D:\Calculator\target\classes\View" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="Model" />
+      <recent name="View" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\User\IdeaProjects\Calculator2\src\test\java\Model" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -150,7 +155,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.E (1)">
+  <component name="RunManager" selected="JUnit.CalculatorControllerTest.checkSquareX">
     <configuration name="CalculatorMain" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Controller.CalculatorMain" />
       <module name="Calculator2" />
@@ -222,7 +227,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CalculatorControllerTest.checkOverflow" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CalculatorControllerTest.checkSquareX" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Calculator2" />
       <extension name="coverage">
         <pattern>
@@ -232,7 +237,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="Controller" />
       <option name="MAIN_CLASS_NAME" value="Controller.CalculatorControllerTest" />
-      <option name="METHOD_NAME" value="checkOverflow" />
+      <option name="METHOD_NAME" value="checkSquareX" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -271,19 +276,19 @@
     <list>
       <item itemvalue="Application.CalculatorMain" />
       <item itemvalue="JUnit.Calculator_ControllerTest" />
-      <item itemvalue="JUnit.CalculatorControllerTest.checkOverflow" />
       <item itemvalue="Application.E" />
       <item itemvalue="JUnit.CalculatorControllerTest.checkOperationsEnotationValid" />
       <item itemvalue="JUnit.CalculatorControllerTest" />
       <item itemvalue="Application.E (1)" />
+      <item itemvalue="JUnit.CalculatorControllerTest.checkSquareX" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.CalculatorControllerTest.checkSquareX" />
+        <item itemvalue="JUnit.CalculatorControllerTest" />
         <item itemvalue="Application.E (1)" />
         <item itemvalue="JUnit.CalculatorControllerTest.checkOperationsEnotationValid" />
-        <item itemvalue="JUnit.CalculatorControllerTest" />
         <item itemvalue="Application.E" />
-        <item itemvalue="JUnit.CalculatorControllerTest.checkOverflow" />
       </list>
     </recent_temporary>
   </component>
@@ -299,7 +304,7 @@
   </component>
   <component name="StructureViewFactory">
     <option name="AUTOSCROLL_MODE" value="false" />
-    <option name="ACTIVE_ACTIONS" value=",SHOW_FIELDS,VISIBILITY_SORTER,ALPHA_COMPARATOR" />
+    <option name="ACTIVE_ACTIONS" value=",SHOW_FIELDS" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -311,13 +316,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1565432602101</updated>
-    </task>
-    <task id="LOCAL-00070" summary="before change format tests">
-      <created>1572963431636</created>
-      <option name="number" value="00070" />
-      <option name="presentableId" value="LOCAL-00070" />
-      <option name="project" value="LOCAL" />
-      <updated>1572963431636</updated>
     </task>
     <task id="LOCAL-00071" summary="before change MathContex in model">
       <created>1573642760679</created>
@@ -655,7 +653,14 @@
       <option name="project" value="LOCAL" />
       <updated>1576573659418</updated>
     </task>
-    <option name="localTasksCounter" value="119" />
+    <task id="LOCAL-00119" summary="before change demo Exception">
+      <created>1576594130470</created>
+      <option name="number" value="00119" />
+      <option name="presentableId" value="LOCAL-00119" />
+      <option name="project" value="LOCAL" />
+      <updated>1576594130470</updated>
+    </task>
+    <option name="localTasksCounter" value="120" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -729,7 +734,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="before printhistory number" />
     <MESSAGE value="history works" />
     <MESSAGE value="all works, before add javadoc and refactoring" />
     <MESSAGE value="controller ok" />
@@ -754,17 +758,14 @@
     <MESSAGE value="before delete string frommodel" />
     <MESSAGE value="before delete string from model" />
     <MESSAGE value="all works" />
-    <option name="LAST_COMMIT_MESSAGE" value="all works" />
+    <MESSAGE value="before change demo Exception" />
+    <option name="LAST_COMMIT_MESSAGE" value="before change demo Exception" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
       <configuration name="JUnit">
         <watch expression="calculator" language="JAVA" />
         <watch expression="calculator" language="JAVA" />
-      </configuration>
-      <configuration name="Application">
-        <watch expression="((Controller.Controller)this).calculator" custom="Controller.Controller" />
-        <watch expression="((Controller.Controller)this).outOperationMemory" custom="Controller.Controller" />
       </configuration>
     </watches-manager>
   </component>

@@ -17,21 +17,19 @@ public class Demo {
             System.out.println(Calculator.calculator(5, OperationsEnum.DIVIDE, 0, OperationsEnum.DIVIDE, 2, OperationsEnum.SUBTRACT, 1,
                     OperationsEnum.EQUAL, OperationsEnum.SQRT, OperationsEnum.ADD, 4, OperationsEnum.EQUAL));
 
-        } catch (InvalidInputException | ResultUndefinedException | DivideZeroException e) {
-            String messageError = null;
+        } catch (Exception e) {
+            String messageError;
             if (e instanceof DivideZeroException) {
                 messageError = "Cannot divide by zero";
-            }
-            if (e instanceof ResultUndefinedException) {
+            } else if (e instanceof ResultUndefinedException) {
                 messageError = "Result is undefined";
-            }
-            if (e instanceof InvalidInputException) {
+            } else if (e instanceof InvalidInputException) {
                 messageError = "Invalid input";
+            } else {
+                messageError = "Something wrong!";
+                e.printStackTrace();
             }
             System.out.println(messageError);
-        } catch (Exception e) {
-            System.out.println("Something wrong!");
-            e.printStackTrace();
         }
     }
 }

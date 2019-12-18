@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 /**
  * Class resizes text
  */
-public class ResizeDisplay {
+class ResizeDisplay {
 
     /**
      * Text size when window was maximized
@@ -27,16 +27,17 @@ public class ResizeDisplay {
     /**
      * Default font is used for print
      */
-    private static final String DEFAULT_FONT_DISPLAY = "Segoe UI Semibold";
+    public static final String DEFAULT_FONT_DISPLAY = "Segoe UI Semibold";
 
     private static Stage stage;
 
     /**
      * Resizes size text if it exceeds border of label
+     *
      * @param label Label keeps text for resize
      * @return Font with size was resized
      */
-    public static Font fontSize(Label label){
+    static Font fontSizeChangedWidth (Label label) {
         setStage(label);
 
         String labelText = label.getText();
@@ -80,7 +81,7 @@ public class ResizeDisplay {
      * @param scrollButtonRight Button for scroll text right
      * @return Horizontal scroll position of the ScrollPane
      */
-    public static double scrollText(ScrollPane scrollPane, String text, Button scrollButtonLeft, Button scrollButtonRight){
+    static double scrollText (ScrollPane scrollPane, String text, Button scrollButtonLeft, Button scrollButtonRight) {
         setStage(scrollPane);
 
         double moveScroll = 0;
