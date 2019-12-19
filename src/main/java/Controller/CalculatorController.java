@@ -20,7 +20,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
-import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -659,6 +658,7 @@ public class CalculatorController {
         maxCharInText = DEFAULT_MAX_NUMBERS_CHAR_INPUT;
 
         scrollOutOperationMemory();
+        throw  new NullPointerException();
     }
     //endregion
 
@@ -1110,8 +1110,8 @@ public class CalculatorController {
         } else {
             double sizeFontUnknownError = 12;
             newFont = new Font(ResizeDisplay.DEFAULT_FONT_DISPLAY, sizeFontUnknownError);
-            generalDisplay.setTextAlignment(TextAlignment.CENTER);
-            generalDisplay.setAlignment(Pos.CENTER);
+//            generalDisplay.setTextAlignment(TextAlignment.CENTER);
+//            generalDisplay.setAlignment(Pos.CENTER);
         }
         generalDisplay.setFont(newFont);
     }

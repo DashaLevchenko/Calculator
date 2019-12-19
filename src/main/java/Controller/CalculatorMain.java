@@ -4,7 +4,6 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -25,16 +24,14 @@ public class CalculatorMain extends Application {
     }
 
 
-    private static void printError () {
+    private static void printError ( ) {
         CalculatorController calculatorController = loader.getController();
-        Label generalDisplay = calculatorController.getGeneralDisplay();
-        String lastPrintedResult = generalDisplay.getText();
 
         calculatorController.setUnknownError(true);
-        calculatorController.printError( "Something wrong\n" +
-                "Please, press any available button\n" +
-                "and try again.\n"+
-                "Your last result: "+ lastPrintedResult);
+        calculatorController.printError("Something wrong!\n"  +
+                "Please, press any available button and try again\n" +
+                "or restart calculator.\n" +
+                "If error happens again, please, reinstall calculator.");
     }
 
 

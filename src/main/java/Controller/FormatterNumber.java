@@ -116,17 +116,17 @@ class FormatterNumber {
         } else if (compareOne(number) < 0 && compareZero(number) != 0) {
             number = number.stripTrailingZeros();
 
-            pattern.append(DECIMAL_PATTERN);
+
             int scale = number.scale();
 
-            String appendToPattern = EMPTY_STRING;
             int hashRepeat = 0;
-            String exponentPattern = EMPTY_STRING;
+            String exponentPattern;
 
             if (scale > MAX_SCALE_PRINT) {
                 int precision = number.precision();
                 int numericInNumber = scale - precision;
                 int minNumericInNumber = 2;
+                exponentPattern = EMPTY_STRING;
 
                 if (numericInNumber > minNumericInNumber) {
                     if (precision != PRECISION_MIN && precision <= MAX_SCALE_PRINT) {
@@ -139,10 +139,11 @@ class FormatterNumber {
                 }
             } else {
                 hashRepeat = scale;
+                exponentPattern = EMPTY_STRING;
             }
 
             String hashPattern = HASH_PATTERN.repeat(hashRepeat);
-            appendToPattern = appendToPattern.concat(hashPattern).concat(exponentPattern);
+            String appendToPattern = DECIMAL_PATTERN.concat(hashPattern).concat(exponentPattern);
             pattern.append(appendToPattern);
         } else {
             pattern = patternNumber(number);
@@ -200,7 +201,6 @@ class FormatterNumber {
         int precision = number.precision();
         int numericInNumber = precision - scale;
 
-
         String decimalPattern;
         String exponentPattern;
 
@@ -225,18 +225,6 @@ class FormatterNumber {
                 exponentPattern = EMPTY_STRING;
             }
         }
-
-
-//        int hashRepeat = 0;
-//        if (isMoreMaxScale(numericInNumber)) {
-//            number = number.stripTrailingZeros();
-//            precision = number.precision();
-//            scale = number.scale();
-//
-//            if (precision != PRECISION_MIN && precision > scale) {
-//                hashRepeat = numericInNumber;
-//            }
-//        }
 
         String hashPattern = HASH_PATTERN.repeat(hashRepeat);
 
