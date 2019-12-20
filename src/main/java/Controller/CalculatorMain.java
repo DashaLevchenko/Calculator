@@ -4,8 +4,11 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+
+import java.io.IOException;
 
 /**
  * Class launches calculator application
@@ -19,19 +22,30 @@ public class CalculatorMain extends Application {
     }
 
     private static void catchError (Thread thread, Throwable throwable) {
-        printError();
-        throwable.printStackTrace();
+        openErrorWindow(throwable);
+        CalculatorController calculatorController = loader.getController();
+        calculatorController.printError("Please, press any available button\n" +
+                "and try again");
+
     }
 
+    private static void openErrorWindow (Throwable throwable) {
+        Stage stageError = new Stage();
+        stageError.initModality(Modality.APPLICATION_MODAL);
+        FXMLLoader loaderError = new FXMLLoader(CalculatorMain.class.getResource("/View/calculator_error_view.fxml"));
+        try {
+            Parent root = loaderError.load();
+            stageError.setScene(new Scene(root));
+            stageError.setMinHeight(200);
+            stageError.setMinWidth(320);
+            stageError.initStyle(StageStyle.UNDECORATED);
+            stageError.show();
 
-    private static void printError ( ) {
-        CalculatorController calculatorController = loader.getController();
-
-        calculatorController.setUnknownError(true);
-        calculatorController.printError("Something wrong!\n"  +
-                "Please, press any available button and try again\n" +
-                "or restart calculator.\n" +
-                "If error happens again, please, reinstall calculator.");
+            ErrorController errorController = loaderError.getController();
+            errorController.setErrorText(throwable);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 

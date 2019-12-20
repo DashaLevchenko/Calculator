@@ -107,6 +107,16 @@
 -fx-background-color: #e8e8e8;
 }
 
+
+.text-area { /* FX theme stylesheet */
+-fx-border-color: e6e6e6;
+-fx-background-color: e6e6e6;
+}
+.text-area *.content { /* FX theme stylesheet */
+-fx-background-color: e6e6e6;
+-fx-border-color: e6e6e6;
+}
+
 .leftMenuButton:hover{
 -fx-background-color: #cfcfcf;
 }
@@ -181,11 +191,14 @@
 -fx-background-color: #5c5c5c;
 -fx-pref-height: 20px;
 -fx-pref-width: 5px;
--fx-text-base-color: red;
+
 }
 
 .scroll_pane_left_menu *.scroll-bar:hover *.decrement-button:pressed *.decrement-arrow ,
 .scroll_pane_left_menu *.scroll-bar:hover *.increment-button:pressed *.increment-arrow{
 -fx-background-color: #dbdbdb;
+
+
+
 
 }

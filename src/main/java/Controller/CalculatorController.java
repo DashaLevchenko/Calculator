@@ -658,7 +658,7 @@ public class CalculatorController {
         maxCharInText = DEFAULT_MAX_NUMBERS_CHAR_INPUT;
 
         scrollOutOperationMemory();
-        throw  new NullPointerException();
+        throw new NullPointerException();
     }
     //endregion
 
@@ -1052,7 +1052,12 @@ public class CalculatorController {
      */
     @FXML
     public void hideWindow () {
-        Stage stage = (Stage) hideButton.getScene().getWindow();
+        hideWindowByButton(hideButton);
+    }
+
+
+    public void hideWindowByButton (Button button) {
+        Stage stage = (Stage) button.getScene().getWindow();
         stage.setIconified(true);
     }
 

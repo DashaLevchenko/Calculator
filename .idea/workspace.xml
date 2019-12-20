@@ -7,13 +7,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="feaeb0c2-feb2-4a9c-98e3-48b1d1a339aa" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/Controller/ErrorController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controller/CalculatorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/CalculatorController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controller/CalculatorMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/CalculatorMain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/FormatterNumber.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/FormatterNumber.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/View/calculator_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/calculator_view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/View/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Controller/CalculatorController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Controller/CalculatorController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Controller/CalculatorMain.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Controller/CalculatorMain.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Controller/FormatterNumber.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Controller/FormatterNumber.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/View/calculator_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/calculator_view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/View/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/style.css" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -99,6 +102,9 @@
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Color Scheme Font" />
   </component>
   <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="Controller" />
+    </key>
     <key name="CreateTestDialog.RecentsKey">
       <recent name="Demo" />
       <recent name="Model" />
@@ -307,13 +313,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1565432602101</updated>
-    </task>
-    <task id="LOCAL-00074" summary="before create new classes">
-      <created>1574073694812</created>
-      <option name="number" value="00074" />
-      <option name="presentableId" value="LOCAL-00074" />
-      <option name="project" value="LOCAL" />
-      <updated>1574073694812</updated>
     </task>
     <task id="LOCAL-00075" summary="before create History">
       <created>1574084260336</created>
@@ -651,7 +650,14 @@
       <option name="project" value="LOCAL" />
       <updated>1576682369257</updated>
     </task>
-    <option name="localTasksCounter" value="123" />
+    <task id="LOCAL-00123" summary="before create error window">
+      <created>1576761929761</created>
+      <option name="number" value="00123" />
+      <option name="presentableId" value="LOCAL-00123" />
+      <option name="project" value="LOCAL" />
+      <updated>1576761929761</updated>
+    </task>
+    <option name="localTasksCounter" value="124" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -725,7 +731,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="controller ok" />
     <MESSAGE value="javadoc history" />
     <MESSAGE value="before change variable" />
     <MESSAGE value="before delete Text" />
@@ -750,7 +755,8 @@
     <MESSAGE value="before change demo Exception" />
     <MESSAGE value="before change formatterNumber" />
     <MESSAGE value="before change formatterNumber 2" />
-    <option name="LAST_COMMIT_MESSAGE" value="before change formatterNumber 2" />
+    <MESSAGE value="before create error window" />
+    <option name="LAST_COMMIT_MESSAGE" value="before create error window" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
