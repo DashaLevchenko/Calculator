@@ -167,15 +167,7 @@ public class CalculatorController {
     // Formula which need to calculate
     private ArrayList<Object> formula = new ArrayList<>();
     private boolean overflow;
-    private boolean isUnknownError = false;
 
-    public void setUnknownError (boolean unknownError) {
-        this.isUnknownError = unknownError;
-    }
-
-    Label getGeneralDisplay () {
-        return generalDisplay;
-    }
 
     public BigDecimal getResult () {
         return result;
@@ -703,13 +695,13 @@ public class CalculatorController {
 
     //region Print
 
-    /**
+    /*
      * Method outputs exception's message on general display,
      * makes some buttons disable, resizes text on general display.
      *
      * @param messageError Message which need to print on {@code generalDisplay}
      */
-    void printError (String messageError) {
+    private void printError (String messageError) {
         isError = true;
         operationsIsDisable(true);
         memoryPanel.setDisable(true);
@@ -864,7 +856,6 @@ public class CalculatorController {
         memoryPanel.setDisable(false);
 
         maxCharInText = DEFAULT_MAX_NUMBERS_CHAR_INPUT;
-        isUnknownError = false;
         resizeOutputText();
         isError = false;
     }
@@ -954,9 +945,11 @@ public class CalculatorController {
      */
     @FXML
     void memoryClear () {
-        memory.memoryClear();
-        memory = null;
-        memoryButtonDisable(true);
+        if (memory != null) {
+            memory.memoryClear();
+            memory = null;
+            memoryButtonDisable(true);
+        }
     }
 
     /**
@@ -1056,7 +1049,7 @@ public class CalculatorController {
     }
 
 
-    public void hideWindowByButton (Button button) {
+    private void hideWindowByButton (Button button) {
         Stage stage = (Stage) button.getScene().getWindow();
         stage.setIconified(true);
     }
@@ -1109,15 +1102,7 @@ public class CalculatorController {
      * Method resize text for general display and sets one
      */
     private void resizeOutputText () {
-        Font newFont;
-        if (!isUnknownError) {
-            newFont = ResizeDisplay.fontSizeChangedWidth(generalDisplay);
-        } else {
-            double sizeFontUnknownError = 12;
-            newFont = new Font(ResizeDisplay.DEFAULT_FONT_DISPLAY, sizeFontUnknownError);
-//            generalDisplay.setTextAlignment(TextAlignment.CENTER);
-//            generalDisplay.setAlignment(Pos.CENTER);
-        }
+        Font newFont = ResizeDisplay.fontSizeChangedWidth(generalDisplay);
         generalDisplay.setFont(newFont);
     }
 

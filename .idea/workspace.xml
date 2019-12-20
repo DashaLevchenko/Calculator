@@ -7,16 +7,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="feaeb0c2-feb2-4a9c-98e3-48b1d1a339aa" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Controller/ErrorController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/View/calculator_unknown_error_view.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controller/CalculatorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/CalculatorController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controller/CalculatorMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/CalculatorMain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/View/calculator_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/calculator_view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/View/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/ErrorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/CalculatorUnknownErrorController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Controller/CalculatorController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Controller/CalculatorController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Controller/CalculatorMain.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Controller/CalculatorMain.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/View/calculator_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/calculator_view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/View/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/style.css" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -123,9 +120,9 @@
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\User\IdeaProjects\Calculator2\target\classes\View" />
       <recent name="C:\Users\User\IdeaProjects\Calculator2\target\classes" />
+      <recent name="C:\Users\User\IdeaProjects\Calculator2\target\classes\View\src" />
       <recent name="C:\Users\User\IdeaProjects\Calculator2\src\test\java" />
       <recent name="D:\Calculator" />
-      <recent name="D:\Calculator\target\classes\View" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="Model" />
@@ -313,13 +310,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1565432602101</updated>
-    </task>
-    <task id="LOCAL-00075" summary="before create History">
-      <created>1574084260336</created>
-      <option name="number" value="00075" />
-      <option name="presentableId" value="LOCAL-00075" />
-      <option name="project" value="LOCAL" />
-      <updated>1574084260336</updated>
     </task>
     <task id="LOCAL-00076" summary="before change controller">
       <created>1574264237678</created>
@@ -657,7 +647,14 @@
       <option name="project" value="LOCAL" />
       <updated>1576761929761</updated>
     </task>
-    <option name="localTasksCounter" value="124" />
+    <task id="LOCAL-00124" summary="Error window was created,&#10;before add retry button">
+      <created>1576833520767</created>
+      <option name="number" value="00124" />
+      <option name="presentableId" value="LOCAL-00124" />
+      <option name="project" value="LOCAL" />
+      <updated>1576833520768</updated>
+    </task>
+    <option name="localTasksCounter" value="125" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -731,7 +728,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="javadoc history" />
     <MESSAGE value="before change variable" />
     <MESSAGE value="before delete Text" />
     <MESSAGE value="all work" />
@@ -756,7 +752,8 @@
     <MESSAGE value="before change formatterNumber" />
     <MESSAGE value="before change formatterNumber 2" />
     <MESSAGE value="before create error window" />
-    <option name="LAST_COMMIT_MESSAGE" value="before create error window" />
+    <MESSAGE value="Error window was created,&#10;before add retry button" />
+    <option name="LAST_COMMIT_MESSAGE" value="Error window was created,&#10;before add retry button" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

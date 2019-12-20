@@ -21,28 +21,23 @@ public class CalculatorMain extends Application {
         launch(args);
     }
 
-    private static void catchError (Thread thread, Throwable throwable) {
+    private static void catchUnknownError (Thread thread, Throwable throwable) {
         openErrorWindow(throwable);
-        CalculatorController calculatorController = loader.getController();
-        calculatorController.printError("Please, press any available button\n" +
-                "and try again");
-
     }
 
     private static void openErrorWindow (Throwable throwable) {
         Stage stageError = new Stage();
         stageError.initModality(Modality.APPLICATION_MODAL);
-        FXMLLoader loaderError = new FXMLLoader(CalculatorMain.class.getResource("/View/calculator_error_view.fxml"));
+        FXMLLoader loaderError = new FXMLLoader(CalculatorMain.class.getResource("/View/calculator_unknown_error_view.fxml"));
         try {
             Parent root = loaderError.load();
             stageError.setScene(new Scene(root));
-            stageError.setMinHeight(200);
-            stageError.setMinWidth(320);
             stageError.initStyle(StageStyle.UNDECORATED);
             stageError.show();
 
-            ErrorController errorController = loaderError.getController();
-            errorController.setErrorText(throwable);
+            CalculatorUnknownErrorController calculatorUnknownErrorController = loaderError.getController();
+            calculatorUnknownErrorController.setErrorText(throwable);
+            calculatorUnknownErrorController.setGeneralController(loader.getController());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -59,7 +54,7 @@ public class CalculatorMain extends Application {
         stage.setMinHeight(500);
         stage.setMinWidth(320);
         stage.initStyle(StageStyle.UNDECORATED);
-        Thread.setDefaultUncaughtExceptionHandler(CalculatorMain::catchError);
+        Thread.setDefaultUncaughtExceptionHandler(CalculatorMain::catchUnknownError);
 
         stage.show();
     }
