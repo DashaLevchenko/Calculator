@@ -13,5 +13,8 @@
   </component>
   <component name="JavacSettings">
     <option name="GENERATE_NO_WARNINGS" value="true" />
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="Calculator2" options="--add-exports=org.junit.platform.commons/org.junit.platform.commons.logging=calculator" />
+    </option>
   </component>
 </project>

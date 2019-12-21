@@ -7,13 +7,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="feaeb0c2-feb2-4a9c-98e3-48b1d1a339aa" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/View/calculator_unknown_error_view.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/logging.config" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Controller/log/calculator_log.txt.0" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Controller/log/calculator_log.txt.0.lck" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Controller/log/calculator_log.txt.1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/CalculatorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/CalculatorController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controller/CalculatorMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/CalculatorMain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/ErrorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/CalculatorUnknownErrorController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Controller/CalculatorController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Controller/CalculatorController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/CalculatorUnknownErrorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/CalculatorUnknownErrorController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/View/calculator_unknown_error_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/calculator_unknown_error_view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Controller/CalculatorMain.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Controller/CalculatorMain.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/module-info.class" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -82,8 +87,11 @@
     </option>
   </component>
   <component name="ProjectId" id="1PgWSDgDGhULvVlBsGRkvbBRrgj" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="TODO_SCOPE" value="Open Files" />
@@ -96,7 +104,7 @@
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Color Scheme Font" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.tabs" />
   </component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
@@ -129,6 +137,9 @@
       <recent name="View" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\User\IdeaProjects\Calculator2\src" />
+      <recent name="C:\Users\User\IdeaProjects\Calculator2" />
+      <recent name="C:\Users\User\IdeaProjects\Calculator2\src\main\java\Controller" />
       <recent name="C:\Users\User\IdeaProjects\Calculator2\src\test\java\Model" />
     </key>
   </component>
@@ -298,7 +309,7 @@
   </component>
   <component name="StructureViewFactory">
     <option name="AUTOSCROLL_MODE" value="false" />
-    <option name="ACTIVE_ACTIONS" value=",SHOW_FIELDS" />
+    <option name="ACTIVE_ACTIONS" value=",SHOW_FIELDS,VISIBILITY_SORTER" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -310,13 +321,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1565432602101</updated>
-    </task>
-    <task id="LOCAL-00076" summary="before change controller">
-      <created>1574264237678</created>
-      <option name="number" value="00076" />
-      <option name="presentableId" value="LOCAL-00076" />
-      <option name="project" value="LOCAL" />
-      <updated>1574264237678</updated>
     </task>
     <task id="LOCAL-00077" summary="before change controller">
       <created>1574266795019</created>
@@ -654,11 +658,19 @@
       <option name="project" value="LOCAL" />
       <updated>1576833520768</updated>
     </task>
-    <option name="localTasksCounter" value="125" />
+    <task id="LOCAL-00125" summary="before add logger">
+      <created>1576838435648</created>
+      <option name="number" value="00125" />
+      <option name="presentableId" value="LOCAL-00125" />
+      <option name="project" value="LOCAL" />
+      <updated>1576838435649</updated>
+    </task>
+    <option name="localTasksCounter" value="126" />
     <servers />
   </component>
   <component name="UnknownFeatures">
     <option featureType="com.intellij.fileTypeFactory" implementationName="*.css" />
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.config" />
   </component>
   <component name="Vcs.Log.History.Properties">
     <option name="COLUMN_ORDER">
@@ -728,7 +740,7 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="before change variable" />
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="before delete Text" />
     <MESSAGE value="all work" />
     <MESSAGE value="demo change" />
@@ -753,7 +765,8 @@
     <MESSAGE value="before change formatterNumber 2" />
     <MESSAGE value="before create error window" />
     <MESSAGE value="Error window was created,&#10;before add retry button" />
-    <option name="LAST_COMMIT_MESSAGE" value="Error window was created,&#10;before add retry button" />
+    <MESSAGE value="before add logger" />
+    <option name="LAST_COMMIT_MESSAGE" value="before add logger" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
