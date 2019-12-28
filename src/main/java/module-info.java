@@ -9,5 +9,6 @@ module calculator {
     opens Controller;
     opens View;
     opens Model;
-    opens CalculatorApp;
+    opens CalculatorApp to javafx.fxml;
+    exports CalculatorApp;
 }
