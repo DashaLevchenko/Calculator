@@ -70,7 +70,7 @@
                         <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <Button fx:id="memoryClear" alignment="TOP_CENTER" disable="true" focusTraversable="false" minHeight="30.0" minWidth="50.0" mnemonicParsing="false" onAction="#memoryClear" style="-fx-background-color: e6e6e6; -fx-background-radius: 0; -fx-border-radius: 0;" text="MC">
+                        <Button fx:id="memoryClear" alignment="TOP_CENTER" disable="true" focusTraversable="false" minHeight="30.0" minWidth="50.0" mnemonicParsing="false" onAction="#memoryClearPressed" style="-fx-background-color: e6e6e6; -fx-background-radius: 0; -fx-border-radius: 0;" text="MC">
                            <font>
                               <Font name="Segoe UI Semibold" size="12.0" />
                            </font>
@@ -78,7 +78,7 @@
                               <Insets />
                            </GridPane.margin>
                         </Button>
-                        <Button fx:id="memoryRecall" alignment="TOP_CENTER" disable="true" focusTraversable="false" minHeight="30.0" minWidth="50.0" mnemonicParsing="false" onAction="#memoryRecall" style="-fx-background-color: e6e6e6; -fx-background-radius: 0; -fx-border-radius: 0;" text="MR" GridPane.columnIndex="1">
+                        <Button fx:id="memoryRecall" alignment="TOP_CENTER" disable="true" focusTraversable="false" minHeight="30.0" minWidth="50.0" mnemonicParsing="false" onAction="#memoryRecallPressed" style="-fx-background-color: e6e6e6; -fx-background-radius: 0; -fx-border-radius: 0;" text="MR" GridPane.columnIndex="1">
                            <font>
                               <Font name="Segoe UI Semibold" size="12.0" />
                            </font>
@@ -86,7 +86,7 @@
                               <Insets left="2.0" right="2.0" />
                            </GridPane.margin>
                         </Button>
-                        <Button fx:id="memoryAdd" alignment="BOTTOM_CENTER" focusTraversable="false" minHeight="30.0" minWidth="50.0" mnemonicParsing="false" onAction="#memoryAdd" style="-fx-background-color: e6e6e6; -fx-background-radius: 0; -fx-border-radius: 0;" stylesheets="@style.css" text="M+" GridPane.columnIndex="2">
+                        <Button fx:id="memoryAdd" alignment="BOTTOM_CENTER" focusTraversable="false" minHeight="30.0" minWidth="50.0" mnemonicParsing="false" onAction="#memoryAddPressed" style="-fx-background-color: e6e6e6; -fx-background-radius: 0; -fx-border-radius: 0;" stylesheets="@style.css" text="M+" GridPane.columnIndex="2">
                            <font>
                               <Font name="Segoe UI Semibold" size="13.0" />
                            </font>
@@ -97,7 +97,7 @@
                               <Insets bottom="6.0" />
                            </padding>
                         </Button>
-                        <Button fx:id="memorySubtract" alignment="BOTTOM_CENTER" focusTraversable="false" minHeight="30.0" minWidth="50.0" mnemonicParsing="false" onAction="#memorySubtract" style="-fx-background-color: e6e6e6; -fx-background-radius: 0; -fx-border-radius: 0;" stylesheets="@style.css" text="M-" GridPane.columnIndex="3">
+                        <Button fx:id="memorySubtract" alignment="BOTTOM_CENTER" focusTraversable="false" minHeight="30.0" minWidth="50.0" mnemonicParsing="false" onAction="#memorySubtractPressed" style="-fx-background-color: e6e6e6; -fx-background-radius: 0; -fx-border-radius: 0;" stylesheets="@style.css" text="M-" GridPane.columnIndex="3">
                            <font>
                               <Font name="Segoe UI Semibold" size="13.0" />
                            </font>
@@ -108,7 +108,7 @@
                               <Insets bottom="6.0" />
                            </padding>
                         </Button>
-                        <Button fx:id="memoryStore" alignment="BOTTOM_CENTER" focusTraversable="false" minHeight="30.0" minWidth="50.0" mnemonicParsing="false" onAction="#memoryStore" style="-fx-background-color: e6e6e6; -fx-background-radius: 0; -fx-border-radius: 0;" styleClass="memory_bold" stylesheets="@style.css" text="MS" GridPane.columnIndex="4">
+                        <Button fx:id="memoryStore" alignment="BOTTOM_CENTER" focusTraversable="false" minHeight="30.0" minWidth="50.0" mnemonicParsing="false" onAction="#memoryStorePressed" style="-fx-background-color: e6e6e6; -fx-background-radius: 0; -fx-border-radius: 0;" styleClass="memory_bold" stylesheets="@style.css" text="MS" GridPane.columnIndex="4">
                            <font>
                               <Font name="Segoe UI Semibold" size="13.0" />
                            </font>
@@ -235,7 +235,7 @@
                         <Insets />
                      </GridPane.margin>
                   </Button>
-                  <Button fx:id="seven" alignment="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#numberPressed" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_number" stylesheets="@style.css" text="7" GridPane.rowIndex="2">
+                  <Button fx:id="seven" alignment="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#numberButtonPressed" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_number" stylesheets="@style.css" text="7" GridPane.rowIndex="2">
                      <rotationAxis>
                         <Point3D />
                      </rotationAxis>
@@ -246,7 +246,7 @@
                         <Insets />
                      </GridPane.margin>
                   </Button>
-                  <Button fx:id="eight" alignment="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#numberPressed" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_number" stylesheets="@style.css" text="8" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <Button fx:id="eight" alignment="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#numberButtonPressed" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_number" stylesheets="@style.css" text="8" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <rotationAxis>
                         <Point3D />
                      </rotationAxis>
@@ -257,7 +257,7 @@
                         <Insets />
                      </GridPane.margin>
                   </Button>
-                  <Button fx:id="nine" alignment="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#numberPressed" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_number" stylesheets="@style.css" text="9" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                  <Button fx:id="nine" alignment="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#numberButtonPressed" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_number" stylesheets="@style.css" text="9" GridPane.columnIndex="2" GridPane.rowIndex="2">
                      <rotationAxis>
                         <Point3D />
                      </rotationAxis>
@@ -279,7 +279,7 @@
                         <Insets />
                      </GridPane.margin>
                   </Button>
-                  <Button fx:id="four" alignment="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#numberPressed" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_number" stylesheets="@style.css" text="4" GridPane.rowIndex="3">
+                  <Button fx:id="four" alignment="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#numberButtonPressed" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_number" stylesheets="@style.css" text="4" GridPane.rowIndex="3">
                      <rotationAxis>
                         <Point3D />
                      </rotationAxis>
@@ -290,7 +290,7 @@
                         <Insets />
                      </GridPane.margin>
                   </Button>
-                  <Button fx:id="five" alignment="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#numberPressed" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_number" stylesheets="@style.css" text="5" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                  <Button fx:id="five" alignment="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#numberButtonPressed" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_number" stylesheets="@style.css" text="5" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <rotationAxis>
                         <Point3D />
                      </rotationAxis>
@@ -301,7 +301,7 @@
                         <Insets />
                      </GridPane.margin>
                   </Button>
-                  <Button fx:id="six" alignment="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#numberPressed" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_number" stylesheets="@style.css" text="6" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                  <Button fx:id="six" alignment="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#numberButtonPressed" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_number" stylesheets="@style.css" text="6" GridPane.columnIndex="2" GridPane.rowIndex="3">
                      <rotationAxis>
                         <Point3D />
                      </rotationAxis>
@@ -323,7 +323,7 @@
                         <Insets />
                      </GridPane.margin>
                   </Button>
-                  <Button fx:id="one" alignment="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#numberPressed" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_number" stylesheets="@style.css" text="1" GridPane.rowIndex="4">
+                  <Button fx:id="one" alignment="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#numberButtonPressed" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_number" stylesheets="@style.css" text="1" GridPane.rowIndex="4">
                      <rotationAxis>
                         <Point3D />
                      </rotationAxis>
@@ -334,7 +334,7 @@
                         <Insets />
                      </GridPane.margin>
                   </Button>
-                  <Button fx:id="two" alignment="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#numberPressed" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_number" stylesheets="@style.css" text="2" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                  <Button fx:id="two" alignment="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#numberButtonPressed" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_number" stylesheets="@style.css" text="2" GridPane.columnIndex="1" GridPane.rowIndex="4">
                      <rotationAxis>
                         <Point3D />
                      </rotationAxis>
@@ -345,7 +345,7 @@
                         <Insets />
                      </GridPane.margin>
                   </Button>
-                  <Button fx:id="three" alignment="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#numberPressed" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_number" stylesheets="@style.css" text="3" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                  <Button fx:id="three" alignment="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#numberButtonPressed" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_number" stylesheets="@style.css" text="3" GridPane.columnIndex="2" GridPane.rowIndex="4">
                      <rotationAxis>
                         <Point3D />
                      </rotationAxis>
@@ -378,7 +378,7 @@
                         <Insets />
                      </GridPane.margin>
                   </Button>
-                  <Button fx:id="zero" alignment="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#numberPressed" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_number" stylesheets="@style.css" text="0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                  <Button fx:id="zero" alignment="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#numberButtonPressed" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_number" stylesheets="@style.css" text="0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="5">
                      <rotationAxis>
                         <Point3D />
                      </rotationAxis>
@@ -389,7 +389,7 @@
                         <Insets />
                      </GridPane.margin>
                   </Button>
-                  <Button fx:id="point" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#commaPressed" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation" stylesheets="@style.css" text="," GridPane.columnIndex="2" GridPane.rowIndex="5">
+                  <Button fx:id="point" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#addCommaToTextOutput" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation" stylesheets="@style.css" text="," GridPane.columnIndex="2" GridPane.rowIndex="5">
                      <rotationAxis>
                         <Point3D />
                      </rotationAxis>

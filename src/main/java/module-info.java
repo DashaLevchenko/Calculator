@@ -7,4 +7,7 @@ module calculator {
     requires org.junit.jupiter.api;
 
     opens Controller;
+    opens View;
+    opens Model;
+    opens CalculatorApp;
 }

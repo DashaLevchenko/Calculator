@@ -3,6 +3,9 @@ package Model;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
+/**
+ * This class keeps calculator's history.
+ */
 public class History{
 
     private ArrayList<Object> history = new ArrayList<>();
@@ -11,7 +14,7 @@ public class History{
      * This method adds number to {@code history}
      * @param number Number need to add to history
      */
-    public void addNumber (BigDecimal number) {
+    void addNumber (BigDecimal number) {
         history.add(number);
     }
 
@@ -19,7 +22,7 @@ public class History{
      * This method adds operation to {@code history}.
      * @param operation Operation need to add to history.
      */
-    public void addOperation (OperationsEnum operation) {
+    void addOperation (OperationsEnum operation) {
         if (history.size() > 0) {
             deletePreviousOperation(operation);
         }
@@ -54,7 +57,7 @@ public class History{
     /**
      * Method deletes last history object.
      */
-    public void deleteLast () {
+    void deleteLast () {
         if (history.size() > 0) {
             int indexLastObject = history.size() - 1;
             history.remove(indexLastObject);
@@ -65,7 +68,7 @@ public class History{
     /**
      * Method clears history.
      */
-    public void clear () {
+    void clear () {
         history.clear();
     }
 
@@ -81,7 +84,7 @@ public class History{
      * Method returns last history objects.
      * @return Last history objects or null if history is empty.
      */
-    public Object getLast () {
+    private Object getLast () {
         Object lastObject = null;
         if (history.size() > 0) {
             int indexLastObject = history.size() - 1;

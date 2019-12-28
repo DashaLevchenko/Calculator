@@ -7,18 +7,56 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="feaeb0c2-feb2-4a9c-98e3-48b1d1a339aa" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/logging.config" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Controller/log/calculator_log.txt.0" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Controller/log/calculator_log.txt.0.lck" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Controller/log/calculator_log.txt.1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/CalculatorApp/CalculatorMain.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Controller/CalculatorUnknownError.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/View/Fonts/CalcMDL2.ttf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/CalculatorMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/CalculatorMain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/CalculatorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/CalculatorController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/CalculatorMain.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controller/CalculatorUnknownErrorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/CalculatorUnknownErrorController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/FormatterCalculatorHistory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/CalculatorHistoryFormatter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/FormatterNumber.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/CalculatorNumberFormatter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/OverflowException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/OverflowException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/ResizeDisplay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/ResizeDisplay.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/ResizeWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/ResizeWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/log/calculator_log.txt.0" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/log/calculator_log.txt.0.lck" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/log/calculator_log.txt.1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Binary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Binary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Calculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Calculator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Exceptions/DivideZeroException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Exceptions/DivideZeroException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Exceptions/InvalidInputException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Exceptions/InvalidInputException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Exceptions/ResultUndefinedException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Exceptions/ResultUndefinedException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/History.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/History.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Memory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Memory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Unary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Unary.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/View/calculator_unknown_error_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/calculator_unknown_error_view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/View/calculator_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/calculator_view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/View/src/CalcMDL2.ttf" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Controller/CalculatorMain.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Controller/CalculatorMain.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Controller/CalculatorControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Controller/CalculatorControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/View/Calculator_ViewTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/View/Calculator_ViewTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Controller/CalculatorController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Controller/CalculatorController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Controller/CalculatorMain.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Controller/FormatterNumber.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Controller/OverflowException.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Controller/OverflowException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Controller/ResizeDisplay.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Controller/ResizeDisplay.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Controller/ResizeWindow.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Controller/ResizeWindow.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Model/Binary.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Model/Binary.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Model/Calculator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Model/Calculator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Model/Exceptions/DivideZeroException.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Model/Exceptions/DivideZeroException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Model/Exceptions/InvalidInputException.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Model/Exceptions/InvalidInputException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Model/Exceptions/ResultUndefinedException.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Model/Exceptions/ResultUndefinedException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Model/History.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Model/History.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Model/Memory.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Model/Memory.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Model/Unary.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Model/Unary.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/View/calculator_view.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/View/src/CalcMDL2.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/View/style.css" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/module-info.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/Controller/CalculatorControllerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/Controller/CalculatorControllerTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/View/Calculator_ViewTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/View/Calculator_ViewTest.class" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -98,18 +136,15 @@
     <property name="ToolWindowFind.ShowToolbar" value="false" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/target/classes/View" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/target/classes" />
     <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.tabs" />
   </component>
   <component name="RecentsManager">
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="Controller" />
-    </key>
     <key name="CreateTestDialog.RecentsKey">
       <recent name="Demo" />
       <recent name="Model" />
@@ -125,27 +160,32 @@
       <recent name="Controller" />
       <recent name="" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\User\IdeaProjects\Calculator2\target\classes\View" />
-      <recent name="C:\Users\User\IdeaProjects\Calculator2\target\classes" />
-      <recent name="C:\Users\User\IdeaProjects\Calculator2\target\classes\View\src" />
-      <recent name="C:\Users\User\IdeaProjects\Calculator2\src\test\java" />
-      <recent name="D:\Calculator" />
-    </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="Model" />
-      <recent name="View" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\User\IdeaProjects\Calculator2\src" />
       <recent name="C:\Users\User\IdeaProjects\Calculator2" />
       <recent name="C:\Users\User\IdeaProjects\Calculator2\src\main\java\Controller" />
       <recent name="C:\Users\User\IdeaProjects\Calculator2\src\test\java\Model" />
     </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\User\IdeaProjects\Calculator2\target\classes" />
+      <recent name="C:\Users\User\IdeaProjects\Calculator2\src\main\java" />
+      <recent name="C:\Users\User\IdeaProjects\Calculator2\target\classes\View" />
+      <recent name="C:\Users\User\IdeaProjects\Calculator2\target\classes\View\src" />
+      <recent name="C:\Users\User\IdeaProjects\Calculator2\src\test\java" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="Model" />
+      <recent name="View" />
+    </key>
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="Controller" />
+    </key>
   </component>
   <component name="RunAnythingCache">
     <option name="myCommands">
       <command value="#cfcfcf" />
+      <command value="mvn clean" />
+      <command value="mvn clean compile" />
     </option>
   </component>
   <component name="RunDashboard">
@@ -160,7 +200,20 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.CalculatorMain">
+  <component name="RunManager" selected="Application.CalculatorMain (1)">
+    <configuration name="CalculatorMain (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="CalculatorApp.CalculatorMain" />
+      <module name="Calculator" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="CalculatorApp.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="CalculatorMain" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Controller.CalculatorMain" />
       <module name="Calculator2" />
@@ -168,32 +221,6 @@
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value=".*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="E (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Demo.E" />
-      <module name="Calculator2" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Demo.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="E" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Controller.E" />
-      <module name="Calculator2" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Controller.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -278,22 +305,26 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Calculator-1.0-SNAPSHOT.jar" type="JarApplication" temporary="true">
+      <option name="JAR_PATH" value="$PROJECT_DIR$/target/Calculator-1.0-SNAPSHOT.jar" />
+      <method v="2" />
+    </configuration>
     <list>
       <item itemvalue="Application.CalculatorMain" />
       <item itemvalue="JUnit.Calculator_ControllerTest" />
-      <item itemvalue="Application.E" />
       <item itemvalue="JUnit.CalculatorControllerTest.checkOperationsEnotationValid" />
       <item itemvalue="JUnit.CalculatorControllerTest" />
-      <item itemvalue="Application.E (1)" />
       <item itemvalue="JUnit.CalculatorControllerTest.checkSquareX" />
+      <item itemvalue="JAR Application.Calculator-1.0-SNAPSHOT.jar" />
+      <item itemvalue="Application.CalculatorMain (1)" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.CalculatorMain (1)" />
+        <item itemvalue="JAR Application.Calculator-1.0-SNAPSHOT.jar" />
         <item itemvalue="JUnit.CalculatorControllerTest" />
         <item itemvalue="JUnit.CalculatorControllerTest.checkSquareX" />
         <item itemvalue="JUnit.CalculatorControllerTest.checkOperationsEnotationValid" />
-        <item itemvalue="Application.E (1)" />
-        <item itemvalue="Application.E" />
       </list>
     </recent_temporary>
   </component>
@@ -710,6 +741,31 @@
             </State>
           </value>
         </entry>
+        <entry key="2">
+          <value>
+            <State>
+              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                  <entry key="roots">
+                    <value>
+                      <list>
+                        <option value="$PROJECT_DIR$" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
         <entry key="MAIN">
           <value>
             <State>
@@ -722,6 +778,7 @@
     <option name="OPEN_TABS">
       <set>
         <option value="1" />
+        <option value="2" />
       </set>
     </option>
     <option name="RECENT_FILTERS">

@@ -10,7 +10,6 @@ import Model.OperationsEnum;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -33,15 +32,19 @@ import java.util.HashMap;
  */
 public class CalculatorController {
 
-    //region FXML elements
-
     /**
      * Variable which keeps key and value of operation.
      * Key is id of button was pressed.
      * Value is enum variable which match some operation.
      */
     private static final HashMap<String, OperationsEnum> operation = new HashMap<>();
-    private static final Pos DEFAULT_ALIGNMENT = Pos.TOP_RIGHT;
+
+    /**
+     * Variable which keeps key and value of exceptions.
+     * Key is name of exception's class.
+     * Value is message which refers to some exception.
+     */
+    private static final HashMap<String, String> exceptions = new HashMap<>();
 
     static {
         operation.put("add", OperationsEnum.ADD);
@@ -55,53 +58,37 @@ public class CalculatorController {
         operation.put("percent", OperationsEnum.PERCENT);
         operation.put("negate", OperationsEnum.NEGATE);
         operation.put("equal", OperationsEnum.EQUAL);
+
+        exceptions.put("InvalidInputException", "Invalid input");
+        exceptions.put("ResultUndefinedException", "Result is undefined");
+        exceptions.put("DivideZeroException", "Cannot divide by zero");
+        exceptions.put("OverflowException", "Overflow");
     }
-    //endregion
 
-    /**
-     * Maximal number of symbols which can be input in calculator
-     */
-    private final int DEFAULT_MAX_NUMBERS_CHAR_INPUT = 16;
-
-    /**
-     * Maximal invalid number which throws exception
-     */
+    /** Maximal number of symbols which can be input in calculator */
+    private final int DEFAULT_MAX_CHARS_INPUT = 16;
+    /** Maximal invalid number which throws exception */
     private final BigDecimal MAX_INVALID_NUMBER = new BigDecimal("1E10000");
-
-    /**
-     * Minimal invalid number which throws exception
-     */
+    /** Minimal invalid number which throws exception */
     private final BigDecimal MIN_INVALID_NUMBER = new BigDecimal("1E-10000");
-
-    /**
-     * Default text for {@code generalDisplay}
-     */
+    /** Default text for {@code generalDisplay} */
     private final String DEFAULT_TEXT = "0";
+    /** Decimal separator which is being used for number in application */
+    private final String DECIMAL_SEPARATOR = CalculatorNumberFormatter.DECIMAL_SEPARATOR_AFTER_FORMATTER;
+    /** Grouping separator which is being used for number in application */
+    private final String GROUPING_SEPARATOR = CalculatorNumberFormatter.GROUPING_SEPARATOR;
 
-    /**
-     * Decimal separator which is being used for number in application
-     */
-    private final String DECIMAL_SEPARATOR = ",";
-
-    /**
-     * Grouping separator which is being used for number in application
-     */
-    private final String GROUPING_SEPARATOR = " ";
-
-    /**
-     * Variable keeps empty string value
-     */
+    //region FXML elements
+    /** Variable keeps empty string value */
     private final String EMPTY_STRING = "";
-
+    private final String MINUS = "-";
     //region Number buttons
     @FXML
     private GridPane calculatorButtons;
+    //endregion
     @FXML
     private Button zero, one, two, three,
             four, five, six, seven, eight, nine;
-
-
-    //endregion
     //region Memory buttons
     @FXML
     private GridPane memoryPanel;
@@ -115,17 +102,16 @@ public class CalculatorController {
     private Button equal;
     @FXML
     private Button percent;
+    //endregion
     //Unary operation buttons
     @FXML
     private Button sqrt, sqr, oneDivideX;
-    //endregion
-
-    //endregion
     //region Displays
     @FXML
     private Label generalDisplay;
     @FXML
     private Label outOperationMemory;
+    //endregion
     @FXML
     private ScrollPane scrollPaneOperation;
     @FXML
@@ -143,42 +129,51 @@ public class CalculatorController {
     private Button cancel, maximizeButton, hideButton;
     @FXML
     private AnchorPane leftMenu;
+    //endregion
     @FXML
     private AnchorPane generalAnchorPane;
-    // Variable is true when can change binary operation
-    private boolean canChangeOperator = false;
     //endregion
-    // Variable is true when left menu is visible
-    private boolean showLeftMenu = false;
-    // Variable is true when was printed exception
-    private boolean isError = false;
-    // Variable is true when memory buttons was pressed
-    private boolean memoryPressed = false;
-    // Variable is true when can change text from general display
-    private boolean canBackspace = true;
-    // Variable keeps result of calculation
-    private BigDecimal result;
-    private double moveScroll;
-    private double xOffset = 0;
-    private double yOffset = 0;
-    private Memory memory;
-    // Variable keeps maximal length of symbol which can input
-    private int maxCharInText = 16;
-    // Formula which need to calculate
-    private ArrayList<Object> formula = new ArrayList<>();
-    private boolean overflow;
 
+    /** Variable is true when can change binary operation */
+    private boolean canChangeOperator = false;
+
+    /** Variable is true when left menu is visible */
+    private boolean showLeftMenu = false;
+
+    /** Variable is true when was printed exception */
+    private boolean isError = false;
+
+    /** Variable is true when memory buttons was pressed */
+    private boolean memoryPressed = false;
+
+    /** Variable is true when can change text from general display */
+    private boolean canBackspace = true;
+
+    /** Variable keeps result of calculation */
+    private BigDecimal result;
+
+    private double moveScroll;
+    /** Variable keeps default x-position */
+    private double xOffset = 0;
+
+    /** Variable keeps default y-position */
+    private double yOffset = 0;
+
+    private Memory memory;
+    /** Variable keeps maximal length of symbol which can input */
+    private int maxCharInText = 16;
+    /** Formula which need to calculate */
+    private ArrayList<Object> formula = new ArrayList<>();
 
     public BigDecimal getResult () {
         return result;
     }
 
-
     @FXML
     void initialize () {
         generalDisplay.setText(DEFAULT_TEXT);
-        equal.setDefaultButton(true);
     }
+
 
     /**
      * This method show calculator's left menu, if button show menu was pressed
@@ -207,20 +202,6 @@ public class CalculatorController {
         transition.play();
     }
 
-    // Method does some button disable or not disable
-    private void operationsIsDisable (boolean disable) {
-        percent.setDisable(disable);
-        sqrt.setDisable(disable);
-        sqr.setDisable(disable);
-        oneDivideX.setDisable(disable);
-        divide.setDisable(disable);
-        multiply.setDisable(disable);
-        subtract.setDisable(disable);
-        add.setDisable(disable);
-        negate.setDisable(disable);
-        point.setDisable(disable);
-    }
-
     //region Text
 
     /**
@@ -230,43 +211,45 @@ public class CalculatorController {
      * If text equals default text, valid count char in text increases.
      * <p>
      * If comma contains in text yet, method does nothing.
+     *
+     * @throws ParseException If can't parse text in number for check overflow
      */
     @FXML
-    void commaPressed () {
-        String outText = getTextDisplay();
-        boolean isTextWithComma = outText.contains(DECIMAL_SEPARATOR);
+    void addCommaToTextOutput () throws ParseException {
+        String textFromDisplay = getTextDisplay();
+        boolean isTextWithComma = textFromDisplay.contains(DECIMAL_SEPARATOR);
 
         if (!isTextWithComma || canChangeOperator) {
             if (!canBackspace) {
-                outText = DEFAULT_TEXT;
+                textFromDisplay = DEFAULT_TEXT;
                 canBackspace = true;
             }
 
             // Will increased min numbers symbol in text, if text from general display is "0".
-            if (outText.equals(DEFAULT_TEXT)) {
+            if (textFromDisplay.equals(DEFAULT_TEXT)) {
                 maxCharInText++;
             }
 
-            outText = outText.concat(DECIMAL_SEPARATOR);
+            textFromDisplay = textFromDisplay.concat(DECIMAL_SEPARATOR);
             maxCharInText++;
             canChangeOperator = false;
-            printResult(outText);
+            printResult(textFromDisplay);
         }
 
         memoryPressed = false;
     }
 
-    private int lengthTextWithoutGroupingSeparator (String out) {
-        String outWithoutSeparator = out.replace(GROUPING_SEPARATOR, EMPTY_STRING);
+    private int lengthTextWithoutGroupingSeparator (String text) {
+        String outWithoutSeparator = text.replace(GROUPING_SEPARATOR, EMPTY_STRING);
         return outWithoutSeparator.length();
     }
 
-    private String formatterInputNumber (String text) {
-        BigDecimal number = parseNumber(text);
+    private String formatTextInput (String text) throws ParseException {
+        BigDecimal number = getParsedNumber(text);
         boolean isTextWithComma = text.contains(DECIMAL_SEPARATOR);
 
         if (!isTextWithComma) {
-            text = formatterNumber(number);
+            text = formatTextForOutput(number);
         }
 
         return text;
@@ -280,15 +263,29 @@ public class CalculatorController {
      * text casts to BigDecimal and it formats again before printing
      */
     @FXML
-    void backspacePressed () {
+    void backspacePressed () throws ParseException {
         clearError();
-        String outText = getTextDisplay();
+        String textFromDisplay = getTextDisplay();
 
         if (canBackspace) {
-            outText = backspace(outText);
-            outText = formatterBackspaceResult(outText);
+            int textLength = textFromDisplay.length();
+            int minLengthWithMinus = 2;
+            int minLengthText = 1;
 
-            printResult(outText);
+            boolean isTextContainsMinus = isTextContainsMinus(textFromDisplay);
+            boolean isMinLengthTextWithMinus = textLength == minLengthWithMinus && isTextContainsMinus;
+            boolean isMinLengthText = textLength == minLengthText;
+
+            if (isMinLengthTextWithMinus || isMinLengthText) {
+                textFromDisplay = setDefaultText();
+            } else {
+                textFromDisplay = textFromDisplay.substring(0, textLength - 1);
+
+                if (!textFromDisplay.contains(DECIMAL_SEPARATOR)) {
+                    maxCharInText--;
+                }
+            }
+            printResult(formatTextInput(textFromDisplay));
         }
     }
 
@@ -296,57 +293,37 @@ public class CalculatorController {
         return generalDisplay.getText();
     }
 
-    private String formatterBackspaceResult (String outText) {
-        int lengthOutText = outText.length();
-
-        if (lengthOutText > 0) {
-            int indexLastSymbol = lengthOutText - 1;
-            String lastSymbol = String.valueOf(outText.toCharArray()[indexLastSymbol]);
-            boolean isCommaLastSymbol = lastSymbol.equals(DECIMAL_SEPARATOR);
-            boolean isZeroLastSymbol = lastSymbol.equals(DEFAULT_TEXT);
-
-            if (!isCommaLastSymbol && !isZeroLastSymbol) {
-                String outWithoutSeparator = outText.replace(GROUPING_SEPARATOR, EMPTY_STRING);
-                String point = ".";
-                outWithoutSeparator = outWithoutSeparator.replace(DECIMAL_SEPARATOR, point);
-
-                BigDecimal number = new BigDecimal(outWithoutSeparator);
-                outText = formatterNumber(number);
-            }
-        }
-        return outText;
-    }
-
-    // This method deletes last symbol in text
-    private String backspace (String text) {
-        int symbolsInTextWithoutComma = text.replace(DECIMAL_SEPARATOR, EMPTY_STRING).length();
-
-        if (symbolsInTextWithoutComma > 0) {
-            int textLength = text.length();
-            int minLengthWithMinus = 2;
-            int minLengthText = 1;
-
-            boolean isTextContainsMinus = isTextContainsMinus(text);
-            boolean isMinLengthTextWithMinus = textLength == minLengthWithMinus && isTextContainsMinus;
-            boolean isMinLengthText = textLength == minLengthText;
-
-            if (isMinLengthTextWithMinus || isMinLengthText) {
-                text = setDefaultText();
-            } else {
-                text = text.substring(0, textLength - 1);
-
-                if (!text.contains(DECIMAL_SEPARATOR)) {
-                    maxCharInText--;
-                }
-            }
-        }
-
-        return text;
-    }
+//    /**
+//     * This method deletes last symbol in text
+//     *
+//     * @param text Text which need to backspace
+//     * @return Text without last symbol
+//     */
+//    private String backspaceText (String text) {
+//
+//        int textLength = text.length();
+//        int minLengthWithMinus = 2;
+//        int minLengthText = 1;
+//
+//        boolean isTextContainsMinus = isTextContainsMinus(text);
+//        boolean isMinLengthTextWithMinus = textLength == minLengthWithMinus && isTextContainsMinus;
+//        boolean isMinLengthText = textLength == minLengthText;
+//
+//        if (isMinLengthTextWithMinus || isMinLengthText) {
+//            text = setDefaultText();
+//        } else {
+//            text = text.substring(0, textLength - 1);
+//
+//            if (!text.contains(DECIMAL_SEPARATOR)) {
+//                maxCharInText--;
+//            }
+//        }
+//
+//        return text;
+//    }
 
     private boolean isTextContainsMinus (String text) {
-        String minus = "-";
-        return text.contains(minus);
+        return text.contains(MINUS);
     }
 
     /**
@@ -361,7 +338,7 @@ public class CalculatorController {
      * @param actionEvent Button from number buttons group was pressed
      */
     @FXML
-    void numberPressed (ActionEvent actionEvent) {
+    void numberButtonPressed (ActionEvent actionEvent) throws ParseException {
         clearError();
         String outText = getTextDisplay();
         outText = setDefaultTextAfterResult(outText);
@@ -378,7 +355,7 @@ public class CalculatorController {
                 outText = outText.concat(buttonText);
             }
         }
-        printResult(formatterInputNumber(outText));
+        printResult(formatTextInput(outText));
         canChangeOperator = false;
     }
 
@@ -387,58 +364,26 @@ public class CalculatorController {
     }
 
 
-    private BigDecimal parseNumber (String out) {
-        BigDecimal number = null;
-        try {
-            number = FormatterNumber.parseNumber(out);
-        } catch (ParseException e) {
-            printError(e.getMessage());
-            e.printStackTrace();
-        }
-        return number;
+    private BigDecimal getParsedNumber (String numberString) throws ParseException {
+        return CalculatorNumberFormatter.getParsedNumber(numberString);
     }
 
-    /*
-     * This method inserts {@code minus} to {@code out},
-     * if {@code out} doesn't contains {@code minus}.
-     */
-    private void negatePressed (OperationsEnum operationsEnum) {
-        String outText = getTextDisplay();
-        int indexLastSymbol = outText.length() - 1;
-        String lastSymbol = String.valueOf(outText.toCharArray()[indexLastSymbol]);
 
-        boolean isCommaLastSymbol = lastSymbol.equals(DECIMAL_SEPARATOR);
-        if (isCommaLastSymbol || canBackspace) {
-            outText = addNegate(outText);
-            printResult(outText);
-        } else {
-            addNumberFormula();
-            addOperationFormula(operationsEnum);
-            calculate();
-        }
-
-        boolean isTextContainsMinus = isTextContainsMinus(outText);
-        if (isTextContainsMinus) {
-            maxCharInText++;
-        } else {
-            maxCharInText--;
-        }
-    }
-
-    /*
+    /**
      * Method inserts "-" before text.
      * Example: before: "9", after: "-9"
+     *
+     * @param text Text
      */
-    private String addNegate (String text) {
+    private String addMinusToText (String text) {
         boolean isDefaultText = text.equals(DEFAULT_TEXT);
 
         if (!isDefaultText) {
-            char minus = '-';
-            char firstChar = text.charAt(0);
-            if (firstChar != minus) {
-                text = minus + text;
+            String firstChar = String.valueOf(text.charAt(0));
+            if (!firstChar.equals(MINUS)) {
+                text = MINUS.concat(text);
             } else {
-                text = new StringBuilder(text).deleteCharAt(0).toString();
+                text = text.substring(1);
             }
         }
         return text;
@@ -528,19 +473,6 @@ public class CalculatorController {
 
     //endregion
 
-
-    /**
-     * Method returns calculator
-     *
-     * @return Calculator
-     */
-
-    private BigDecimal getDisplayNumber () {
-        String textFromGeneralDisplay = getTextDisplay();
-        return parseNumber(textFromGeneralDisplay);
-    }
-
-
     //region Operations
 
     /**
@@ -551,7 +483,7 @@ public class CalculatorController {
      * @param actionEvent Binary operation buttons was pressed
      */
     @FXML
-    public void operationPressed (ActionEvent actionEvent) {
+    public void operationPressed (ActionEvent actionEvent) throws ParseException {
         String buttonID = getButton(actionEvent).getId();
 
         OperationsEnum operationsEnum = operation.get(buttonID);
@@ -559,143 +491,164 @@ public class CalculatorController {
         if (operationsEnum != null) {
             boolean isBinary = Calculator.isBinary(operationsEnum);
             if (isBinary) {
-                binaryOperation(operationsEnum);
+                calculateBinaryOperation(operationsEnum);
             }
 
             boolean isUnary = Calculator.isUnary(operationsEnum);
             if (isUnary) {
-                unaryOperations(operationsEnum);
+                calculateUnaryOperations(operationsEnum);
             }
 
             boolean isPercent = Calculator.isPercent(operationsEnum);
             if (isPercent) {
-                percentOperation(operationsEnum);
+                calculatePercentOperation();
             }
 
             boolean isEqual = Calculator.isEqual(operationsEnum);
             if (isEqual) {
-                pressedEqual(operationsEnum);
+                calculateOperationsAfterEqual();
             }
         }
     }
 
 
-    private void binaryOperation (OperationsEnum operationsEnum) {
-        if (!canChangeOperator) {
-            addNumberFormula();
-        }
-
-        addOperationFormula(operationsEnum);
-        canChangeOperator = true;
-        calculate();
-        memoryPressed = false;
-    }
-
-    private void addNumberFormula () {
+    private void addNumberToFormula () throws ParseException {
         if (canBackspace) {
             formula.add(getDisplayNumber());
             canChangeOperator = false;
         }
     }
 
+    /**
+     * Method returns calculator
+     *
+     * @return Calculator
+     */
 
-    /*
+    private BigDecimal getDisplayNumber () throws ParseException {
+        String textFromGeneralDisplay = getTextDisplay();
+        return getParsedNumber(textFromGeneralDisplay);
+    }
+
+    private void addOperationToFormula (OperationsEnum operationsEnum) {
+        formula.add(operationsEnum);
+    }
+
+    //endregion
+
+    //region Calculate
+
+    /**
+     * Method calculates operation,
+     * calls print result method,
+     * catches exception.
+     */
+    private void calculateFormula () throws ParseException {
+        try {
+            result = Calculator.calculator(formula);
+            String resultFormatted = formatTextForOutput(result);
+            printResult(resultFormatted);
+            canBackspace = false;
+
+        } catch (DivideZeroException | ResultUndefinedException | InvalidInputException e) {
+            printError(getMassageException(e));
+            printHistory();
+        }
+    }
+
+    /**
+     * This method inserts {@code minus} to {@code out},
+     * if {@code out} doesn't contains {@code minus}.
+     */
+    private void calculateNegateOperation () throws ParseException {
+        String outText = getTextDisplay();
+        int indexLastSymbol = outText.length() - 1;
+        String lastSymbol = String.valueOf(outText.toCharArray()[indexLastSymbol]);
+
+        boolean isCommaLastSymbol = lastSymbol.equals(DECIMAL_SEPARATOR);
+        if (isCommaLastSymbol || canBackspace) {
+            outText = addMinusToText(outText);
+            printResult(outText);
+        } else {
+            addNumberToFormula();
+            addOperationToFormula(OperationsEnum.NEGATE);
+            calculateFormula();
+        }
+
+        boolean isTextContainsMinus = isTextContainsMinus(outText);
+        if (isTextContainsMinus) {
+            maxCharInText++;
+        } else {
+            maxCharInText--;
+        }
+    }
+
+    private void calculateBinaryOperation (OperationsEnum operationsEnum) throws ParseException {
+        if (!canChangeOperator) {
+            addNumberToFormula();
+        }
+
+        addOperationToFormula(operationsEnum);
+        canChangeOperator = true;
+        calculateFormula();
+        memoryPressed = false;
+    }
+
+    /**
+     * Methods calculates operation, if {@code equal} was pressed.
+     * Sets second number in calculator if {@code binaryOperation} not null.
+     * Clears percent operation, sets default value {@code charValidInText}.
+     */
+    private void calculateOperationsAfterEqual () throws ParseException {
+        clearError();
+        addNumberToFormula();
+        addOperationToFormula(OperationsEnum.EQUAL);
+        calculateFormula();
+
+        canBackspace = false;
+        memoryPressed = false;
+        maxCharInText = DEFAULT_MAX_CHARS_INPUT;
+
+        scrollOutOperationMemory();
+//        throw new NullPointerException();
+    }
+
+    /** Method calculates percent operation, if {@code percent} was pressed */
+    private void calculatePercentOperation () throws ParseException {
+        addNumberToFormula();
+        addOperationToFormula(OperationsEnum.PERCENT);
+        calculateFormula();
+        printHistory();
+
+    }
+
+
+    /**
      * Method calculate unary operations, if {@code sqr, sqrt, oneDivideX} was pressed.
      * Also method sets first or second number in calculator.
      * Prints result or exception.
+     *
+     * @param operationsEnum Operation
      */
-    private void unaryOperations (OperationsEnum operationsEnum) {
-
+    private void calculateUnaryOperations (OperationsEnum operationsEnum) throws ParseException {
         boolean isNegate = Calculator.isNegate(operationsEnum);
 
         if (isNegate) {
-            negatePressed(operationsEnum);
+            calculateNegateOperation();
         } else {
-            addNumberFormula();
-            addOperationFormula(operationsEnum);
-            calculate();
+            addNumberToFormula();
+            addOperationToFormula(operationsEnum);
+            calculateFormula();
             printHistory();
             memoryPressed = false;
         }
 
     }
-
-
-    // Method calculates percent operation, if {@code percent} was pressed
-    private void percentOperation (OperationsEnum operationsEnum) {
-        addNumberFormula();
-        addOperationFormula(operationsEnum);
-        calculate();
-        printHistory();
-
-    }
-
-    private void addOperationFormula (OperationsEnum operationsEnum) {
-        formula.add(operationsEnum);
-    }
-
-    /*
-     * Methods calculates operation, if {@code equal} was pressed.
-     * Sets second number in calculator if {@code binaryOperation} not null.
-     * Clears percent operation, sets default value {@code charValidInText}.
-     */
-    private void pressedEqual (OperationsEnum operationsEnum) {
-        clearError();
-        addNumberFormula();
-        addOperationFormula(operationsEnum);
-        calculate();
-
-        canBackspace = false;
-        memoryPressed = false;
-        maxCharInText = DEFAULT_MAX_NUMBERS_CHAR_INPUT;
-
-        scrollOutOperationMemory();
-        throw new NullPointerException();
-    }
-    //endregion
-
-    //region Calculate
-
-    /*
-     * Method calculates operation,
-     * calls print result method,
-     * catches exception.
-     */
-    private void calculate () {
-        try {
-            result = Calculator.calculator(formula);
-
-            String resultFormatted = formatterNumber(result);
-            printResult(resultFormatted);
-
-            canBackspace = false;
-
-        } catch (DivideZeroException | ResultUndefinedException | InvalidInputException e) {
-            String messageError = null;
-
-            if (e instanceof DivideZeroException) {
-                messageError = "Cannot divide by zero";
-            }
-            if (e instanceof ResultUndefinedException) {
-                messageError = "Result is undefined";
-            }
-            if (e instanceof InvalidInputException) {
-                messageError = "Invalid input";
-            }
-
-            printError(messageError);
-        } finally {
-            if (!overflow) {
-                printHistory();
-            }
-        }
-    }
-
     //endregion
 
     //region Print
 
-    /*
+    /**
      * Method outputs exception's message on general display,
      * makes some buttons disable, resizes text on general display.
      *
@@ -703,7 +656,7 @@ public class CalculatorController {
      */
     private void printError (String messageError) {
         isError = true;
-        operationsIsDisable(true);
+        setOperationsDisable(true);
         memoryPanel.setDisable(true);
 
         generalDisplay.setText(messageError);
@@ -712,47 +665,65 @@ public class CalculatorController {
         scrollOutOperationMemory();
     }
 
-    /*
-     * Method outputs calculation's result on general display
-     */
-    private void printResult (String text) {
-        BigDecimal numberCheckedOverflow = parseNumber(text);
+    /** Method does some button disable or not disable */
+    private void setOperationsDisable (boolean disable) {
+        percent.setDisable(disable);
+        sqrt.setDisable(disable);
+        sqr.setDisable(disable);
+        oneDivideX.setDisable(disable);
+        divide.setDisable(disable);
+        multiply.setDisable(disable);
+        subtract.setDisable(disable);
+        add.setDisable(disable);
+        negate.setDisable(disable);
+        point.setDisable(disable);
+    }
+
+    /** Method outputs calculation's result on general display */
+    private void printResult (String text) throws ParseException {
+        BigDecimal numberCheckedOverflow = getParsedNumber(text);
 
         try {
             isOverflow(numberCheckedOverflow);
             generalDisplay.setText(text);
             resizeOutputText();
+            printHistory();
         } catch (OverflowException e) {
-            printError("Overflow");
+            printError(getMassageException(e));
         }
     }
 
-    /*
-     * Method formatters number for print to general display
-     */
-    private String formatterNumber (BigDecimal number) {
-        return FormatterNumber.formatterNumber(number);
+    private String getMassageException (Exception exception) {
+        String exceptionType = exception.getClass().getSimpleName();
+        return exceptions.get(exceptionType);
     }
 
-    /*
+
+    /** Method formatters number for print to general display */
+    private String formatTextForOutput (BigDecimal number) {
+        return CalculatorNumberFormatter.formatNumber(number);
+    }
+
+    /**
      * Method checked number before prints to general display.
      * If number is equal or more than max invalid number throws OverflowException.
      * Also if number is equal or less than min invalid number throws OverflowException.
+     *
+     * @param result Number which need to check.
      */
-
-    private void isOverflow (BigDecimal result) throws OverflowException {
-        overflow = false;
-        BigDecimal number = parseNumber(formatterNumber(result));
+    private void isOverflow (BigDecimal result) throws OverflowException, ParseException {
+        boolean overflow = false;
+        BigDecimal number = getParsedNumber(formatTextForOutput(result));
 
         if (number != null) {
             BigDecimal absoluteNumber = number.abs();
-            int compareOne = compareOne(absoluteNumber);
+            int compareOne = compareToOne(absoluteNumber);
 
             if (compareOne > 0) {
                 overflow = absoluteNumber.compareTo(MAX_INVALID_NUMBER) >= 0;
             }
 
-            if (compareOne < 0 && compareZero(absoluteNumber) != 0) {
+            if (compareOne < 0 && compareToZero(absoluteNumber) != 0) {
                 overflow = absoluteNumber.compareTo(MIN_INVALID_NUMBER) <= 0;
             }
         }
@@ -762,11 +733,11 @@ public class CalculatorController {
         }
     }
 
-    private int compareZero (BigDecimal absoluteNumber) {
+    private int compareToZero (BigDecimal absoluteNumber) {
         return absoluteNumber.compareTo(BigDecimal.ZERO);
     }
 
-    private int compareOne (BigDecimal absoluteNumber) {
+    private int compareToOne (BigDecimal absoluteNumber) {
         return absoluteNumber.compareTo(BigDecimal.ONE);
     }
     //endregion
@@ -775,8 +746,8 @@ public class CalculatorController {
     private void printHistory () {
         History history = Calculator.getHistory();
         if (history != null) {
-            FormatterCalculatorHistory formatterCalculatorHistory = new FormatterCalculatorHistory(history);
-            String historyChanged = formatterCalculatorHistory.formatterHistory();
+            CalculatorHistoryFormatter calculatorHistoryFormatter = new CalculatorHistoryFormatter(history);
+            String historyChanged = calculatorHistoryFormatter.formatHistory();
             outOperationMemory.setText(historyChanged);
         }
 
@@ -802,7 +773,6 @@ public class CalculatorController {
         double maxHvalue = scrollPaneOperation.getHmax();
         if (presentHvalue == maxHvalue) {
             scrollButtonLeft.setVisible(false);
-            scrollButtonRight.setVisible(true);
         }
     }
 
@@ -839,7 +809,6 @@ public class CalculatorController {
      */
     @FXML
     void clearAllC () {
-        generalDisplay.setAlignment(DEFAULT_ALIGNMENT);
         generalDisplay.setText(DEFAULT_TEXT);
         outOperationMemory.setText(EMPTY_STRING);
 
@@ -852,10 +821,10 @@ public class CalculatorController {
         scrollButtonRight.setVisible(false);
         scrollButtonLeft.setVisible(false);
 
-        operationsIsDisable(false);
+        setOperationsDisable(false);
         memoryPanel.setDisable(false);
 
-        maxCharInText = DEFAULT_MAX_NUMBERS_CHAR_INPUT;
+        maxCharInText = DEFAULT_MAX_CHARS_INPUT;
         resizeOutputText();
         isError = false;
     }
@@ -867,22 +836,23 @@ public class CalculatorController {
     @FXML
     void clearNumberCE () {
         generalDisplay.setText(DEFAULT_TEXT);
-        maxCharInText = DEFAULT_MAX_NUMBERS_CHAR_INPUT;
+        maxCharInText = DEFAULT_MAX_CHARS_INPUT;
         clearError();
         resizeOutputText();
     }
 
-    /*
+    /**
      * Methods sets default value for some variable for cleans general display
      * This method calls if calculator's number button was pressed,
-     * result of calculation was printed,
+     * result of calculation was printed.
+     *
+     * @param textFromGeneralDisplay Text from general display
      */
-    private String setDefaultTextAfterResult (String out) {
+    private String setDefaultTextAfterResult (String textFromGeneralDisplay) {
         if (!canBackspace || memoryPressed || canChangeOperator) {
             canBackspace = true;
-            maxCharInText = DEFAULT_MAX_NUMBERS_CHAR_INPUT;
-            out = setDefaultText();
-
+            maxCharInText = DEFAULT_MAX_CHARS_INPUT;
+            textFromGeneralDisplay = setDefaultText();
         }
 
         if (memoryPressed) {
@@ -890,15 +860,15 @@ public class CalculatorController {
             formula.clear();
             memoryPressed = false;
         }
-        return out;
+        return textFromGeneralDisplay;
     }
 
     private String setDefaultText () {
-        maxCharInText = DEFAULT_MAX_NUMBERS_CHAR_INPUT;
+        maxCharInText = DEFAULT_MAX_CHARS_INPUT;
         return DEFAULT_TEXT;
     }
 
-    /*
+    /**
      * Method imitates press C button,
      * if exception massage was printed and some button was pressed
      */
@@ -915,13 +885,13 @@ public class CalculatorController {
      * Method saves number in memory, if {@code memoryStore} button was pressed
      */
     @FXML
-    void memoryStore () {
+    void memoryStorePressed () throws ParseException {
         if (memory == null) {
             memory = new Memory();
         }
         memory.setNumber(setMemoryNumber());
 
-        memoryButtonDisable(false);
+        setMemoryButtonsDisable(false);
         memoryPressed = true;
     }
 
@@ -930,10 +900,10 @@ public class CalculatorController {
      * Sets variable {@code memoryPressed} value true.
      */
     @FXML
-    void memoryAdd () {
+    void memoryAddPressed () throws ParseException {
         if (memory == null) {
             memory = new Memory();
-            memoryButtonDisable(false);
+            setMemoryButtonsDisable(false);
         }
         memory.memoryAdd(setMemoryNumber());
         memoryPressed = true;
@@ -944,11 +914,11 @@ public class CalculatorController {
      * Makes some memory buttons disable.
      */
     @FXML
-    void memoryClear () {
+    void memoryClearPressed () {
         if (memory != null) {
             memory.memoryClear();
             memory = null;
-            memoryButtonDisable(true);
+            setMemoryButtonsDisable(true);
         }
     }
 
@@ -958,10 +928,10 @@ public class CalculatorController {
      * Sets variable {@code memoryPressed} value true.
      */
     @FXML
-    void memoryRecall () {
+    void memoryRecallPressed () throws ParseException {
         if (memory != null) {
             result = memory.memoryRecall();
-            String out = formatterNumber(result);
+            String out = formatTextForOutput(result);
             formula.add(result);
 
             printResult(out);
@@ -976,28 +946,26 @@ public class CalculatorController {
      * Sets variable {@code memoryPressed} value true.
      */
     @FXML
-    void memorySubtract () {
+    void memorySubtractPressed () throws ParseException {
         if (memory == null) {
             memory = new Memory();
-            memoryButtonDisable(false);
+            setMemoryButtonsDisable(false);
         }
         memory.memorySubtract(setMemoryNumber());
 
         memoryPressed = true;
     }
 
-    /*
-     * Method makes memory clear and memory recall buttons disable or not disable
-     */
-    private void memoryButtonDisable (boolean disable) {
+
+    /** Method makes memory clear and memory recall buttons disable or not disable */
+    private void setMemoryButtonsDisable (boolean disable) {
         memoryClear.setDisable(disable);
         memoryRecall.setDisable(disable);
     }
 
-    /*
-     * Method sets number in memory object
-     */
-    private BigDecimal setMemoryNumber () {
+
+    /** Method sets number in memory object */
+    private BigDecimal setMemoryNumber () throws ParseException {
         BigDecimal number = null;
 
         if (canBackspace) {
@@ -1015,18 +983,14 @@ public class CalculatorController {
 
     //region Window
 
-    /**
-     * Close calculator, if {@code cancel} was pressed
-     */
+    /** Close calculator, if {@code cancel} was pressed */
     @FXML
     public void closeWindow () {
         Stage stage = (Stage) cancel.getScene().getWindow();
         stage.close();
     }
 
-    /**
-     * Maximize window of calculator and resize all button, if {@code maximize} was pressed
-     */
+    /** Maximize window of calculator and resize all button, if {@code maximize} was pressed */
     @FXML
     public void maximizeWindow () {
         Stage stage = (Stage) maximizeButton.getScene().getWindow();
@@ -1098,9 +1062,7 @@ public class CalculatorController {
         scrollOutOperationMemory();
     }
 
-    /*
-     * Method resize text for general display and sets one
-     */
+    /** Method resize text for general display and sets one */
     private void resizeOutputText () {
         Font newFont = ResizeDisplay.fontSizeChangedWidth(generalDisplay);
         generalDisplay.setFont(newFont);

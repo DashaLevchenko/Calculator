@@ -14,20 +14,14 @@ import javafx.stage.Stage;
  */
 class ResizeDisplay {
 
-    /**
-     * Text size when window was maximized
-     */
+    /** Text size when window was maximized */
     private static final double MAX_FONT_SIZE_MAX_WINDOW = 71;
 
-    /**
-     * Text size when window wasn't maximized and text doesn't exceed border of label
-     */
+    /** Text size when window wasn't maximized and text doesn't exceed border of label */
     private static final double MAX_FONT_SIZE_MIN_WINDOW = 46;
 
-    /**
-     * Default font is used for print
-     */
-    public static final String DEFAULT_FONT_DISPLAY = "Segoe UI Semibold";
+    /** Default font is used for print */
+    private static final String DEFAULT_FONT_DISPLAY = "Segoe UI Semibold";
 
     private static Stage stage;
 
@@ -49,14 +43,10 @@ class ResizeDisplay {
         double textWidthNew = textNew.getBoundsInLocal().getWidth();
 
         Insets padding = label.getPadding();
-        double paddingRight = padding.getRight();
-        double paddingLeft = padding.getLeft();
-        double labelWidth = label.getWidth();
-        double widthMaxTextOutput = labelWidth - paddingRight - paddingLeft;
+        double widthMaxTextOutput = label.getWidth() - padding.getRight() - padding.getLeft();
 
-        double percentOfChange = widthMaxTextOutput / textWidthNew;
         double presentSize = labelFont.getSize();
-        double newSize = presentSize * percentOfChange;
+        double newSize = presentSize * widthMaxTextOutput / textWidthNew;
 
         if (newSize > MAX_FONT_SIZE_MIN_WINDOW && !stage.isMaximized()) {
             newSize = MAX_FONT_SIZE_MIN_WINDOW;
@@ -75,38 +65,35 @@ class ResizeDisplay {
 
     /**
      * Method calculates horizontal scroll position of the ScrollPane
-     * @param scrollPane Keeps text need to scroll
-     * @param text Text in Scroll pane
-     * @param scrollButtonLeft Button for scroll text left
+     *
+     * @param scrollPane        Keeps text need to scroll
+     * @param text              Text in Scroll pane
+     * @param scrollButtonLeft  Button for scroll text left
      * @param scrollButtonRight Button for scroll text right
      * @return Horizontal scroll position of the ScrollPane
      */
     static double scrollText (ScrollPane scrollPane, String text, Button scrollButtonLeft, Button scrollButtonRight) {
         setStage(scrollPane);
-
-        double moveScroll = 0;
-        double scrollPaneWidth = scrollPane.getWidth();
-
         Insets padding = scrollPane.getPadding();
-        double paddingRight = padding.getRight();
-        double paddingLeft = padding.getLeft();
 
-        double maxWidthLabelOperation = scrollPaneWidth - paddingLeft - paddingRight;
+        double maxWidthLabelOperation = scrollPane.getWidth() - padding.getLeft() - padding.getRight();
         Text history = new Text(text);
         double historyWidth = history.getBoundsInLocal().getWidth();
 
+        double moveScroll;
+        boolean scrollButtonLeftVisible;
+
         if (historyWidth > maxWidthLabelOperation) {
-            scrollButtonLeft.setVisible(true);
-
-            double fullWidth = historyWidth / maxWidthLabelOperation;
-            int fullWidthInt = (int) fullWidth;
-
+            scrollButtonLeftVisible = true;
+            int fullWidth = (int) (historyWidth / maxWidthLabelOperation);
             double maxH = scrollPane.getHmax();
-            moveScroll = maxH / fullWidthInt;
+            moveScroll = maxH / fullWidth;
         } else {
-            scrollButtonLeft.setVisible(false);
+            scrollButtonLeftVisible = false;
             scrollButtonRight.setVisible(false);
+            moveScroll = 0;
         }
+        scrollButtonLeft.setVisible(scrollButtonLeftVisible);
         return moveScroll;
     }
 }

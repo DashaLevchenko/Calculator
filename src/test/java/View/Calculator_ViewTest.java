@@ -1,6 +1,6 @@
 package View;
 
-import Controller.CalculatorMain;
+import CalculatorApp.CalculatorMain;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
 import javafx.scene.Parent;

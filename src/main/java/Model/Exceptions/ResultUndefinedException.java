@@ -8,15 +8,11 @@ package Model.Exceptions;
  */
 public class ResultUndefinedException extends Exception {
     /**
-     * Constructs an {@code ResultUndefinedException} with the specified  detail message.
+     * Constructs an {@code ResultUndefinedException}.
      * This exception throws when divide zero by zero.
-     * @param message Detail about exception
      */
-    public ResultUndefinedException(String message){
-        super(message);
-    }
 
-    public ResultUndefinedException(){
+    public ResultUndefinedException () {
         super();
     }
 

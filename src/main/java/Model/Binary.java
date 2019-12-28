@@ -7,31 +7,42 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
 
+
+/**
+ * This class calculates binary operations,
+ * like divide, add, subtract, multiply.
+ */
 class Binary {
-
-    private BigDecimal numberFirst;
-    private BigDecimal numberSecond;
-
-    /**
-     * Max default rounding
-     */
+    /** Max default rounding */
     private final RoundingMode DEFAULT_ROUNDING = RoundingMode.UP;
 
+    /** Variable keeps value of first number */
+    private BigDecimal numberFirst;
+
+    /** Variable keeps value of second number */
+    private BigDecimal numberSecond;
+
+    /** Variable keeps value of operation */
     private OperationsEnum operation;
+
+    /** Variable keeps value of result */
     private BigDecimal result;
 
     public void setOperation (OperationsEnum operation) {
         this.operation = operation;
     }
 
+    /** This method sums two number */
     private void add () {
         result = numberFirst.add(numberSecond);
     }
 
+    /** This method calculates the difference of two number */
     private void subtract () {
         result = numberFirst.subtract(numberSecond);
     }
 
+    /** This method multiplies two number */
     private void multiply () {
         result = numberFirst.multiply(numberSecond);
     }
@@ -59,7 +70,7 @@ class Binary {
         return number.compareTo(BigDecimal.ZERO);
     }
 
-
+    /** This method calculate percent {@code numberSecond} of number {@code numberFirst}. */
     private void percent () {
         BigDecimal oneHundred = BigDecimal.valueOf(100);
         BigDecimal numberSecondDivideHundred = numberSecond.divide(oneHundred, MathContext.DECIMAL128);

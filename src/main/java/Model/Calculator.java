@@ -9,18 +9,38 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 
+/**
+ * This class realizes algorithm of calculator Windows 10
+ */
 public class Calculator {
+    /** Variable keeps value of first number */
     private static BigDecimal numberFirst;
+
+    /** Variable keeps value of second number */
     private static BigDecimal numberSecond;
+
+    /** Variable keeps value of operation */
     private static OperationsEnum operation;
+
+    /** Variable keeps value of binary operation */
     private static OperationsEnum binaryOperation;
+
+    /** Variable keeps value of result */
     private static BigDecimal result;
 
+    /** Variable true if result of percent operation must be negate */
     private static boolean percentNegate;
+
+    /** Variable true if previous object was equal operation */
     private static boolean previousEqual;
 
+    /** Variable keeps binary object */
     private static Binary binary = new Binary();
+
+    /** Variable keeps unary object */
     private static Unary unary = new Unary();
+
+    /** Variable keeps history object */
     private static History history = new History();
 
     /**
@@ -75,8 +95,13 @@ public class Calculator {
         return result;
     }
 
-
-    // This method calculates operations from formula.
+    /**
+     * This method calculates operations from formula.
+     * @param formula Formula which need to calculate.
+     * @throws DivideZeroException If divide by zero
+     * @throws ResultUndefinedException If zero divide by zero
+     * @throws InvalidInputException If square root negate number.
+     */
     private static void calculateFormula (ArrayList formula) throws DivideZeroException, ResultUndefinedException, InvalidInputException {
         for (int i = 0; i < formula.size(); i++) {
             Object object = formula.get(i);
@@ -93,10 +118,15 @@ public class Calculator {
         }
     }
 
-    /* Method checks object. If object is null, method will thrown NullPointerException.
+    /**
+     * Method checks object. If object is null, method will thrown NullPointerException.
      * If object isn't number or operation, method will thrown IllegalArgumentException.
+     *
+     * @param object Object which need to check.
+     * @throws NullPointerException If object is null.
+     * @throws IllegalArgumentException If object isn't operation and isn't number.
      */
-    private static void checkObject (Object object)  throws NullPointerException, IllegalArgumentException{
+    private static void checkObject (Object object) throws NullPointerException, IllegalArgumentException {
         if (object == null) {
             throw new NullPointerException();
         }
@@ -109,7 +139,10 @@ public class Calculator {
 
     }
 
-    // This method checks number. If object is number, it will set number.
+    /**
+     * This method checks number. If object is number, it will set number.
+     * @param object Object which need to parse
+     */
     private static void parseNumber (Object object) {
         if (object instanceof Number) {
             BigDecimal number = new BigDecimal(object.toString());
@@ -118,6 +151,15 @@ public class Calculator {
     }
 
     // This method checks object. If object is operation, it will set operation or will calculated previous operation.
+
+    /**
+     *
+     * @param object
+     * @param i
+     * @param formula
+     * @throws DivideZeroException If
+     * @throws ResultUndefinedException
+     */
     private static void parseOperation (Object object, int i, ArrayList formula) throws DivideZeroException, ResultUndefinedException {
         if (object instanceof OperationsEnum) {
             OperationsEnum operationsEnum = (OperationsEnum) object;
@@ -153,9 +195,9 @@ public class Calculator {
     /* Method adds result of percent calculation to history.
      * If after percent was negate operation
      */
-    private static void addPercentResultHistory (OperationsEnum operationsPresent) {
+    private static void addPercentResultHistory (OperationsEnum operationPresent) {
         OperationsEnum operationPrevious = operation;
-        if (isNegate(operationsPresent) && isPercent(operationPrevious)) {
+        if (isNegate(operationPresent) && isPercent(operationPrevious)) {
             if (result != null) {
                 history.addNumber(result);
             }
@@ -204,7 +246,7 @@ public class Calculator {
                     numberFirst = null;
                 }
                 if (objectPresent instanceof OperationsEnum) {
-                    OperationsEnum operationsPresent = (OperationsEnum)objectPresent;
+                    OperationsEnum operationsPresent = (OperationsEnum) objectPresent;
                     if (!isEqual(operationsPresent)) {
                         result = null;
                         if (!isNegate(objectPresent)) {
@@ -286,8 +328,9 @@ public class Calculator {
         }
     }
 
-    // Method chooses which number must be calculate with unary operation,
-    // sets it to unary object.
+    /* Method chooses which number must be calculate with unary operation,
+     *sets it to unary object.
+     */
     private static void setUnaryNumber () {
         BigDecimal number;
         if (numberSecond == null || previousEqual) {
@@ -338,7 +381,7 @@ public class Calculator {
             nextObject = formula.get(nextIndex);
         }
 
-        if (!nextOperationUnary(nextObject) || !isBinary(operation)) {
+        if (!isUnaryNextObject(nextObject) || !isBinary(operation)) {
             canCalculate = true;
         }
 
@@ -348,7 +391,7 @@ public class Calculator {
     /* Method returns true if next object is unary operation,
      * and false if next object is null or isn't unary operation.
      */
-    private static boolean nextOperationUnary (Object nextObject) {
+    private static boolean isUnaryNextObject (Object nextObject) {
         boolean isUnary = false;
 
         if (nextObject != null) {

@@ -6,16 +6,10 @@ package Model.Exceptions;
  * when tried divide number by zero.
  */
 public class DivideZeroException extends Exception {
-
     /**
-     * Constructs an {@code DivideZeroException} with the specified detail message.
+     * Constructs an {@code DivideZeroException}.
      * This exception throws when number is divided by zero.
-     * @param message Detail about exception
-     */
-    public DivideZeroException(String message){
-        super(message);
-    }
-
+    */
     public DivideZeroException(){
         super();
     }

@@ -9,7 +9,8 @@ import java.math.RoundingMode;
 
 
 /**
- * This class calculates unary operations
+ * This class calculates unary operations,
+ * like number square root, number square, number divide by one.
  */
  class Unary {
     private BigDecimal number;

@@ -4,7 +4,8 @@ import java.math.BigDecimal;
 
 
 /**
- * Class calculates number without print
+ * Class keeps number, add another number to this number,
+ * subtract another number frm this number.
  */
 public class Memory {
     private BigDecimal number;
@@ -41,6 +42,9 @@ public class Memory {
     }
 
 
+    /**
+     * This method set null value to {@code number}
+     */
     public void memoryClear() {
         number = null;
     }

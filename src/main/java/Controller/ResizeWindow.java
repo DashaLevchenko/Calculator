@@ -18,32 +18,22 @@ import javafx.stage.Stage;
  */
 
 class ResizeWindow {
-
-    /**
-     * Text for button which was pressed for maximized stage
-     */
+    /** Text for button which was pressed for maximized stage */
     private static final String BUTTON_TEXT_STAGE_MAXIMIZED = "";
 
-    /**
-     * Text for button which was pressed for return default size stage
-     */
+    /** Text for button which was pressed for return default size stage */
     private static final String BUTTON_TEXT_STAGE_NOT_MAXIMIZED = "";
 
+    /** Max width of device where application is used */
+    private static final double MAX_WIDTH_WINDOWS = 1600;
+
+    /** Font is always used for buttons */
+    private static final String DEFAULT_FONT_BUTTON = "Calculator MDL2 Assets";
     private Stage stage;
     private Scene scene;
     private double minWidth;
     private double minHeight;
     private Cursor cursorEvent = Cursor.DEFAULT;
-
-    /**
-     * Max width of device where application is used
-     */
-    private static final double MAX_WIDTH_WINDOWS = 1600;
-
-    /**
-     * Font is always used for buttons
-     */
-    private static final String DEFAULT_FONT_BUTTON = "Calculator MDL2 Assets";
 
     /**
      * This constructor gets stage, sets min width of stage, sets min height of stage, sets scene of stage.
@@ -58,7 +48,7 @@ class ResizeWindow {
     }
 
 
-    /*
+    /**
      * This method resizes application's stage
      * and  adds handler mouse event to all stage's children
      */
@@ -89,11 +79,10 @@ class ResizeWindow {
         }
     }
 
-    /*
+    /**
      * This method changes image cursor when mouse was moved on border area.
      * Also this method changes width and height window when mouse was dragged
      * and moved in border area
-     *
      */
     private EventHandler<MouseEvent> resizeWindow () {
         EventHandler<MouseEvent> event = mouseEvent -> {
@@ -196,7 +185,7 @@ class ResizeWindow {
         }
     }
 
-     // Method resizes button's font size if width stage was changed
+    // Method resizes button's font size if width stage was changed
     void resizeButton (Node node) {
         ObservableList<Node> buttons = ((Parent) node).getChildrenUnmodifiable();
         for (Node child : buttons) {

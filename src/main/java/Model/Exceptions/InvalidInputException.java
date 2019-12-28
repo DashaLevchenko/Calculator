@@ -8,14 +8,10 @@ package Model.Exceptions;
 public class InvalidInputException extends Exception {
 
     /**
-     * Constructs an {@code InvalidInputException} with the specified  detail message.
+     * Constructs an {@code InvalidInputException}.
      * This exception throws when square root negative number.
-     * @param message Detail about exception
      */
-    public InvalidInputException(String message){
-        super(message);
-    }
-    public InvalidInputException(){
+    public InvalidInputException () {
         super();
     }
 
