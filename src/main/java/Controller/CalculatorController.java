@@ -265,28 +265,33 @@ public class CalculatorController {
     @FXML
     void backspacePressed () throws ParseException {
         clearError();
-        String textFromDisplay = getTextDisplay();
+        BigDecimal number = getParsedNumber(getTextDisplay());
+        String print = CalculatorNumberFormatter.backspace(number);
+        generalDisplay.setText(print);
 
-        if (canBackspace) {
-            int textLength = textFromDisplay.length();
-            int minLengthWithMinus = 2;
-            int minLengthText = 1;
 
-            boolean isTextContainsMinus = isTextContainsMinus(textFromDisplay);
-            boolean isMinLengthTextWithMinus = textLength == minLengthWithMinus && isTextContainsMinus;
-            boolean isMinLengthText = textLength == minLengthText;
+//        String textFromDisplay = getTextDisplay();
 
-            if (isMinLengthTextWithMinus || isMinLengthText) {
-                textFromDisplay = setDefaultText();
-            } else {
-                textFromDisplay = textFromDisplay.substring(0, textLength - 1);
-
-                if (!textFromDisplay.contains(DECIMAL_SEPARATOR)) {
-                    maxCharInText--;
-                }
-            }
-            printResult(formatTextInput(textFromDisplay));
-        }
+//        if (canBackspace) {
+//            int textLength = textFromDisplay.length();
+//            int minLengthWithMinus = 2;
+//            int minLengthText = 1;
+//
+//            boolean isTextContainsMinus = isTextContainsMinus(textFromDisplay);
+//            boolean isMinLengthTextWithMinus = textLength == minLengthWithMinus && isTextContainsMinus;
+//            boolean isMinLengthText = textLength == minLengthText;
+//
+//            if (isMinLengthTextWithMinus || isMinLengthText) {
+//                textFromDisplay = setDefaultText();
+//            } else {
+//                textFromDisplay = textFromDisplay.substring(0, textLength - 1);
+//
+//                if (!textFromDisplay.contains(DECIMAL_SEPARATOR)) {
+//                    maxCharInText--;
+//                }
+//            }
+//            printResult(formatTextInput(textFromDisplay));
+//        }
     }
 
     private String getTextDisplay () {
@@ -522,7 +527,7 @@ public class CalculatorController {
     /**
      * Method returns calculator
      *
-     * @return Calculator
+     * @return CalculatorApp.Calculator
      */
 
     private BigDecimal getDisplayNumber () throws ParseException {
@@ -813,6 +818,7 @@ public class CalculatorController {
         outOperationMemory.setText(EMPTY_STRING);
 
         formula.clear();
+        Calculator.clearAllCalculator();
 
         canChangeOperator = false;
         canBackspace = true;
@@ -858,6 +864,7 @@ public class CalculatorController {
         if (memoryPressed) {
             outOperationMemory.setText(EMPTY_STRING);
             formula.clear();
+            Calculator.clearAllCalculator();
             memoryPressed = false;
         }
         return textFromGeneralDisplay;

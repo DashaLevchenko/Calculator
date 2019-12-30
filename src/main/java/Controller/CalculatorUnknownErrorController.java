@@ -55,16 +55,16 @@ public class CalculatorUnknownErrorController {
         boolean isResetVisible;
         boolean isOkVisible;
         if (isLoggerException) {
-             isResetVisible = false;
-             isOkVisible = true;
+            isResetVisible = false;
+            isOkVisible = true;
             setErrorMessage(messageError);
         }else{
             isResetVisible = true;
             isOkVisible = false;
         }
-            reset.setVisible(isResetVisible);
-            ok.setVisible(isOkVisible);
-            setErrorMessage(messageError);
+        reset.setVisible(isResetVisible);
+        ok.setVisible(isOkVisible);
+        setErrorMessage(messageError);
     }
 
 }

@@ -64,7 +64,7 @@ public class Calculator {
      */
     @SafeVarargs
     public static <T> BigDecimal calculator (T... objects) throws DivideZeroException, ResultUndefinedException, InvalidInputException, NullPointerException {
-        setDefaultValue();
+        clearAllCalculator();
         ArrayList formula;
 
         if (objects == null) {
@@ -97,10 +97,11 @@ public class Calculator {
 
     /**
      * This method calculates operations from formula.
+     *
      * @param formula Formula which need to calculate.
-     * @throws DivideZeroException If divide by zero
+     * @throws DivideZeroException      If divide by zero
      * @throws ResultUndefinedException If zero divide by zero
-     * @throws InvalidInputException If square root negate number.
+     * @throws InvalidInputException    If square root negate number.
      */
     private static void calculateFormula (ArrayList formula) throws DivideZeroException, ResultUndefinedException, InvalidInputException {
         for (int i = 0; i < formula.size(); i++) {
@@ -123,7 +124,7 @@ public class Calculator {
      * If object isn't number or operation, method will thrown IllegalArgumentException.
      *
      * @param object Object which need to check.
-     * @throws NullPointerException If object is null.
+     * @throws NullPointerException     If object is null.
      * @throws IllegalArgumentException If object isn't operation and isn't number.
      */
     private static void checkObject (Object object) throws NullPointerException, IllegalArgumentException {
@@ -141,6 +142,7 @@ public class Calculator {
 
     /**
      * This method checks number. If object is number, it will set number.
+     *
      * @param object Object which need to parse
      */
     private static void parseNumber (Object object) {
@@ -150,24 +152,24 @@ public class Calculator {
         }
     }
 
-    // This method checks object. If object is operation, it will set operation or will calculated previous operation.
-
     /**
+     * This method checks object.
+     * If object is operation, it will set operation or will calculated previous operation.
      *
-     * @param object
-     * @param i
-     * @param formula
-     * @throws DivideZeroException If
-     * @throws ResultUndefinedException
+     * @param objectPresent      Object which need to parse
+     * @param indexPresentObject Index of present object in formula
+     * @param formula            Full formula with object
+     * @throws DivideZeroException      If divide by zero
+     * @throws ResultUndefinedException If divide zero by zero
      */
-    private static void parseOperation (Object object, int i, ArrayList formula) throws DivideZeroException, ResultUndefinedException {
-        if (object instanceof OperationsEnum) {
-            OperationsEnum operationsEnum = (OperationsEnum) object;
+    private static void parseOperation (Object objectPresent, int indexPresentObject, ArrayList formula) throws DivideZeroException, ResultUndefinedException {
+        if (objectPresent instanceof OperationsEnum) {
+            OperationsEnum operationsEnum = (OperationsEnum) objectPresent;
 
             try {
                 calculateLastBinaryOperation(operationsEnum);
             } finally {
-                addEqualHistory(i, formula);
+                addEqualHistory(indexPresentObject, formula);
                 addPercentResultHistory(operationsEnum);
                 setOperation(operationsEnum);
             }
@@ -175,9 +177,10 @@ public class Calculator {
 
     }
 
-
-    //Method sets default value to all variables
-    private static void setDefaultValue () {
+    /**
+     * Method sets default value to all variables
+     */
+    public static void clearAllCalculator () {
         numberFirst = null;
         numberSecond = null;
         operation = null;
@@ -236,7 +239,12 @@ public class Calculator {
         }
     }
 
-    // Method sets default value to some variable, if previous operation was equal.
+    /**
+     * Method sets default value to some variable, if previous operation was equal or unary operation
+     * @param index
+     * @param objectPresent
+     * @param formula
+     */
     private static void clearCalculator (int index, Object objectPresent, ArrayList formula) {
         Object previousObject = getPreviousFormulaObject(index, formula);
 
@@ -245,6 +253,7 @@ public class Calculator {
                 if (objectPresent instanceof BigDecimal) {
                     numberFirst = null;
                 }
+
                 if (objectPresent instanceof OperationsEnum) {
                     OperationsEnum operationsPresent = (OperationsEnum) objectPresent;
                     if (!isEqual(operationsPresent)) {
@@ -258,6 +267,13 @@ public class Calculator {
                         }
                         operation = null;
                     }
+                }
+            }
+            if (objectPresent instanceof BigDecimal) {
+                if (isUnary((OperationsEnum) previousObject)) {
+                    numberFirst = null;
+                    operation = null;
+                    result = null;
                 }
             }
         }

@@ -14,6 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
+
 public class CalculatorUnknownError {
     private static Logger logger;
 
@@ -44,7 +45,7 @@ public class CalculatorUnknownError {
             stageError.show();
 
             CalculatorUnknownErrorController calculatorUnknownErrorController = loaderError.getController();
-//            calculatorUnknownErrorController.setGeneralController(CalculatorMain.getCalculatorController());
+            calculatorUnknownErrorController.setGeneralController(CalculatorMain.getCalculatorController());
             calculatorUnknownErrorController.changeErrorWindow(errorMessage, isLoggerException);
 
         } catch (IOException e) {

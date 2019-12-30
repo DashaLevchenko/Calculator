@@ -100,6 +100,7 @@ class CalculatorHistoryFormatter {
                 }
             }
         }
+
         return getStringHistory();
     }
 
@@ -172,6 +173,7 @@ class CalculatorHistoryFormatter {
         }
         String addNumber = formatNumber(number);
         historyListOut.add(addNumber);
+        deletePreviousHistory(number);
     }
 
     private BigDecimal parseNumber (Object lastObject) throws ParseException {
@@ -237,10 +239,14 @@ class CalculatorHistoryFormatter {
             for (int i = indexStart; i >= 0; i--) {
                 String previousHistory = historyListOut.get(i);
 
-                if (presentHistoryObject instanceof OperationsEnum) {
-                    OperationsEnum operation = (OperationsEnum) presentHistoryObject;
 
-                    boolean isBinaryPresent = isBinary(operation);
+                if (presentHistoryObject instanceof OperationsEnum || isNumber(presentHistoryObject)) {
+//                    OperationsEnum operation = (OperationsEnum) presentHistoryObject;
+
+                    boolean isBinaryPresent = false;
+                    if (presentHistoryObject instanceof OperationsEnum) {
+                        isBinaryPresent = isBinary((OperationsEnum) presentHistoryObject);
+                    }
                     boolean isOperationPrevious = isOperationSymbol(previousHistory);
 
                     boolean isBinaryPresentIsPreviousOperation = isBinaryPresent && isOperationPrevious;

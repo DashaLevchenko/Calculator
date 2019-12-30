@@ -80,6 +80,32 @@ class CalculatorNumberFormatter {
         return symbols;
     }
 
+    static String backspace(BigDecimal number){
+        String pattern;
+        int scale =number.scale();
+        if(scale > 0){
+            pattern = DECIMAL_PATTERN.concat("0".repeat(scale-1));
+        }else{
+            number = number.movePointLeft(1);
+            pattern = INTEGER_PATTERN;
+        }
+
+
+        boolean isLessZero = compareZero(number) > 0 && compareOne(number) <0;
+        boolean isOneNumber = number.scale() == 1;
+        if(isLessZero && isOneNumber){
+            number = number.abs();
+        }
+
+
+        decimalFormat = new DecimalFormat(pattern);
+        decimalFormat.setRoundingMode(RoundingMode.DOWN);
+
+        return decimalFormat.format(number);
+    }
+
+
+
     /**
      * Method formatters number for print on display
      *

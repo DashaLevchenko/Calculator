@@ -1,5 +1,7 @@
 package CalculatorApp;
 
+import Controller.CalculatorController;
+import Controller.CalculatorUnknownError;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,7 +15,7 @@ import java.io.IOException;
  * Class launches calculator application.
  */
 public class CalculatorMain extends Application {
-//    private static CalculatorController calculatorController;
+    private static CalculatorController calculatorController;
 
 
     public static void main (String[] args) {
@@ -21,9 +23,9 @@ public class CalculatorMain extends Application {
     }
 
 
-//    public static CalculatorController getCalculatorController () {
-//        return calculatorController;
-//    }
+    public static CalculatorController getCalculatorController () {
+        return calculatorController;
+    }
 
 
     @Override
@@ -33,15 +35,15 @@ public class CalculatorMain extends Application {
         Parent root = loader.load();
 
         stage.setScene(new Scene(root));
-        stage.setTitle("Calculator");
+        stage.setTitle("CalculatorApp.Calculator");
         stage.setMinHeight(500);
         stage.setMinWidth(320);
         stage.initStyle(StageStyle.UNDECORATED);
 
         stage.show();
-//        calculatorController = loader.getController();
-//        CalculatorUnknownError calculatorUnknownError = new CalculatorUnknownError();
-//        Thread.setDefaultUncaughtExceptionHandler(calculatorUnknownError::catchUnknownError);
+        calculatorController = loader.getController();
+        CalculatorUnknownError calculatorUnknownError = new CalculatorUnknownError();
+        Thread.setDefaultUncaughtExceptionHandler(calculatorUnknownError::catchUnknownError);
 
     }
 }

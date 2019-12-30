@@ -3,10 +3,16 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <groupId>com.Calculator</groupId>
     <artifactId>Calculator</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    </properties>
+
     <build>
         <resources>
             <resource>
@@ -35,7 +41,7 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.3</version>
                 <configuration>
-                    <mainClass>CalculatorApp.CalculatorMain</mainClass>
+                    <mainClass>CalculatorApp.Calculator</mainClass>
                 </configuration>
             </plugin>
 
@@ -48,11 +54,9 @@
                         <phase>prepare-package</phase>
                         <goals>
                             <goal>unpack-dependencies</goal>
-                            <!--                            <goal>copy-dependencies</goal>-->
                         </goals>
                         <configuration>
                             <outputDirectory>${project.build.directory}/classes</outputDirectory>
-
                             <overWriteReleases>false</overWriteReleases>
                             <overWriteSnapshots>false</overWriteSnapshots>
                             <overWriteIfNewer>true</overWriteIfNewer>
@@ -69,27 +73,13 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <!--                            <addClasspath>true</addClasspath>-->
-                            <!--                            <classpathPrefix>lib/</classpathPrefix>-->
-                            <mainClass>CalculatorApp.CalculatorMain</mainClass>
+                            <mainClass>CalculatorApp.Calculator</mainClass>
                         </manifest>
-                        <manifestEntries>
-                            <Class-Path>.</Class-Path>
-                        </manifestEntries>
                     </archive>
-
-                    <!--                    <finalName>Crunchify/Crunchify</finalName>-->
                 </configuration>
             </plugin>
-
-
         </plugins>
     </build>
-
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    </properties>
 
     <dependencies>
         <dependency>

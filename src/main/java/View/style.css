@@ -57,6 +57,7 @@
 .button_operation_arithmetic {
 -fx-background-color: #f0f0f0;
 -fx-text-base-color: #000;
+-fx-font-family:"Calculator MDL2 Assets";
 }
 
 .button_operation_arithmetic:hover{
@@ -67,11 +68,13 @@
 .button_operation_arithmetic:pressed {
 -fx-background-color: #a6d8ff;
 -fx-text-base-color: #fff;
+
 }
 
 .button_operation {
 -fx-background-color: #f0f0f0;
 -fx-text-base-color: #000;
+-fx-font-family:"Calculator MDL2 Assets";
 }
 
 .button_number {
@@ -101,6 +104,10 @@
 
 .leftMenuButton *.text{
 -fx-translate-x: -21;
+}
+
+.leftMenuIcon{
+-fx-font-family:"Calculator MDL2 Assets";
 }
 
 .leftMenuButton{
@@ -197,7 +204,6 @@
 .scroll_pane_left_menu *.scroll-bar:hover *.decrement-button:pressed *.decrement-arrow ,
 .scroll_pane_left_menu *.scroll-bar:hover *.increment-button:pressed *.increment-arrow{
 -fx-background-color: #dbdbdb;
-
 
 
 
