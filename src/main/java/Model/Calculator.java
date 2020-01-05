@@ -13,33 +13,25 @@ import java.util.Collection;
  * This class realizes algorithm of calculator Windows 10
  */
 public class Calculator {
+//    static boolean deleteNegateHistory;
     /** Variable keeps value of first number */
     private static BigDecimal numberFirst;
-
     /** Variable keeps value of second number */
     private static BigDecimal numberSecond;
-
     /** Variable keeps value of operation */
     private static OperationsEnum operation;
-
     /** Variable keeps value of binary operation */
     private static OperationsEnum binaryOperation;
-
     /** Variable keeps value of result */
     private static BigDecimal result;
-
     /** Variable true if result of percent operation must be negate */
     private static boolean percentNegate;
-
     /** Variable true if previous object was equal operation */
     private static boolean previousEqual;
-
     /** Variable keeps binary object */
     private static Binary binary = new Binary();
-
     /** Variable keeps unary object */
     private static Unary unary = new Unary();
-
     /** Variable keeps history object */
     private static History history = new History();
 
@@ -109,8 +101,8 @@ public class Calculator {
             checkObject(object);
 
             clearCalculator(i, object, formula);
-            parseOperation(object, i, formula);
             parseNumber(object);
+            parseOperation(object, i, formula);
 
             boolean canCalculate = canCalculate(i, formula);
             if (canCalculate) {
@@ -165,16 +157,65 @@ public class Calculator {
     private static void parseOperation (Object objectPresent, int indexPresentObject, ArrayList formula) throws DivideZeroException, ResultUndefinedException {
         if (objectPresent instanceof OperationsEnum) {
             OperationsEnum operationsEnum = (OperationsEnum) objectPresent;
-
+//            Object previousObject = getPreviousFormulaObject(indexPresentObject, formula);
+//
+//            if (isNegate(previousObject)) {
+//                if (!isNegate(operationsEnum)) {
+//                    if (numberSecond == null) {
+//                        history.addNumber(result);
+//                    }
+//                }
+//            }
+//            if(isNegate(operationsEnum)){
+//                if (numberSecond == null) {
+//                    history.addNumber(result);
+//                }
+//            }
+//            if (indexPresentObject - 1 > 0) {
+//                Object previousObject = formula.get(indexPresentObject - 1);
+//                if (!isNegate(objectPresent) && isNegate(previousObject)) {
+//                    if (deleteNegateHistory) {
+//                        history.deleteLast();
+//                        history.addNumber(result);
+//                        deleteNegateHistory = false;
+//                    }
+//                }
+//            }
             try {
                 calculateLastBinaryOperation(operationsEnum);
             } finally {
                 addEqualHistory(indexPresentObject, formula);
                 addPercentResultHistory(operationsEnum);
                 setOperation(operationsEnum);
+//                deleteNegateHistory(objectPresent, indexPresentObject, formula);
             }
         }
 
+    }
+
+    private static void deleteNegateHistory (Object objectPresent, int indexPresentObject, ArrayList formula) {
+//        if (isNegate(objectPresent)) {
+//            if (history.size() >= 2) {
+//                Object previousObjectHistory = history.get(history.size() - 2);
+//
+//                if (binaryOperation == null && numberSecond == null) {
+//                    deleteNegateHistory = previousObjectHistory instanceof Number;
+//                }else {
+//                    deleteNegateHistory = false;
+//                }
+//                if (deleteNegateHistory) {
+//                    history.deleteLast();
+//                    history.deleteLast();
+//                } else {
+//                    if (!isNegate(previousObjectHistory)) {
+//                        history.deleteLast();
+//                        history.addNumber(result);
+//                        history.addOperation(operation);
+//                    }
+//                }
+//
+//            }
+//        }
     }
 
     /**
@@ -241,6 +282,7 @@ public class Calculator {
 
     /**
      * Method sets default value to some variable, if previous operation was equal or unary operation
+     *
      * @param index
      * @param objectPresent
      * @param formula
@@ -249,31 +291,39 @@ public class Calculator {
         Object previousObject = getPreviousFormulaObject(index, formula);
 
         if (previousObject != null) {
-            if (previousEqual) {
-                if (objectPresent instanceof BigDecimal) {
-                    numberFirst = null;
-                }
+            clearIfPreviousEqual(objectPresent);
+            clearIfPresentNumber(objectPresent, previousObject);
+        }
+    }
 
-                if (objectPresent instanceof OperationsEnum) {
-                    OperationsEnum operationsPresent = (OperationsEnum) objectPresent;
-                    if (!isEqual(operationsPresent)) {
-                        result = null;
-                        if (!isNegate(objectPresent)) {
-                            numberSecond = null;
-                            previousEqual = false;
-                            if (!isPercent(operationsPresent)) {
-                                binaryOperation = null;
-                            }
-                        }
-                        operation = null;
-                    }
-                }
+    private static void clearIfPresentNumber (Object objectPresent, Object previousObject) {
+        if (objectPresent instanceof BigDecimal) {
+            if (isUnary((OperationsEnum) previousObject)) {
+                numberFirst = null;
+                operation = null;
+                result = null;
             }
+        }
+    }
+
+    private static void clearIfPreviousEqual (Object objectPresent) {
+        if (previousEqual) {
             if (objectPresent instanceof BigDecimal) {
-                if (isUnary((OperationsEnum) previousObject)) {
-                    numberFirst = null;
-                    operation = null;
+                numberFirst = null;
+            }
+
+            if (objectPresent instanceof OperationsEnum) {
+                OperationsEnum operationsPresent = (OperationsEnum) objectPresent;
+                if (!isEqual(operationsPresent)) {
                     result = null;
+                    if (!isNegate(objectPresent)) {
+                        numberSecond = null;
+                        previousEqual = false;
+                        if (!isPercent(operationsPresent)) {
+                            binaryOperation = null;
+                        }
+                    }
+                    operation = null;
                 }
             }
         }
@@ -446,8 +496,8 @@ public class Calculator {
             history.deleteLast();
             history.addNumber(result);
             setOperation(operation);
-
         }
+
     }
 
     /**
@@ -483,7 +533,8 @@ public class Calculator {
         history.addOperation(OperationsEnum.PERCENT);
     }
 
-    /* Method returns percent which need to calculate
+    /**
+     * Method returns percent which need to calculate
      * and sets number in binary object for calculate percent.
      * If binary operation is divide or multiply, need to calculate one percent from number.
      */

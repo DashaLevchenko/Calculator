@@ -160,8 +160,8 @@ public class CalculatorController {
     private double yOffset = 0;
 
     private Memory memory;
-    /** Variable keeps maximal length of symbol which can input */
-    private int maxCharInText = 16;
+//    /** Variable keeps maximal length of symbol which can input */
+//    private int maxCharInText = 16;
     /** Formula which need to calculate */
     private ArrayList<Object> formula = new ArrayList<>();
 
@@ -216,26 +216,20 @@ public class CalculatorController {
      */
     @FXML
     void addCommaToTextOutput () throws ParseException {
-        String textFromDisplay = getTextDisplay();
-        boolean isTextWithComma = textFromDisplay.contains(DECIMAL_SEPARATOR);
+        BigDecimal number;
 
-        if (!isTextWithComma || canChangeOperator) {
-            if (!canBackspace) {
-                textFromDisplay = DEFAULT_TEXT;
-                canBackspace = true;
-            }
-
-            // Will increased min numbers symbol in text, if text from general display is "0".
-            if (textFromDisplay.equals(DEFAULT_TEXT)) {
-                maxCharInText++;
-            }
-
-            textFromDisplay = textFromDisplay.concat(DECIMAL_SEPARATOR);
-            maxCharInText++;
-            canChangeOperator = false;
-            printResult(textFromDisplay);
+        if (canBackspace) {
+            number = getParsedNumber(getTextDisplay());
+        } else {
+            number = BigDecimal.ZERO;
+            canBackspace = true;
         }
 
+        if (number.scale() == 0) {
+            printToGeneralDisplay(CalculatorNumberFormatter.addDecimalSeparator(number));
+        }
+
+        canChangeOperator = false;
         memoryPressed = false;
     }
 
@@ -249,7 +243,7 @@ public class CalculatorController {
         boolean isTextWithComma = text.contains(DECIMAL_SEPARATOR);
 
         if (!isTextWithComma) {
-            text = formatTextForOutput(number);
+            text = formatNumberForOutput(number);
         }
 
         return text;
@@ -265,9 +259,14 @@ public class CalculatorController {
     @FXML
     void backspacePressed () throws ParseException {
         clearError();
-        BigDecimal number = getParsedNumber(getTextDisplay());
-        String print = CalculatorNumberFormatter.backspace(number);
-        generalDisplay.setText(print);
+        if (canBackspace) {
+            String textDisplay = getTextDisplay();
+
+            boolean isLastSymbolComma = isLastSymbolComma(textDisplay);
+            BigDecimal number = getParsedNumber(textDisplay);
+            String print = CalculatorNumberFormatter.backspace(number, isLastSymbolComma);
+            printToGeneralDisplay(print);
+        }
 
 
 //        String textFromDisplay = getTextDisplay();
@@ -292,6 +291,11 @@ public class CalculatorController {
 //            }
 //            printResult(formatTextInput(textFromDisplay));
 //        }
+    }
+
+    private boolean isLastSymbolComma (String textDisplay) {
+        String lastSymbol = textDisplay.substring(textDisplay.length() - 1);
+        return lastSymbol.equals(DECIMAL_SEPARATOR);
     }
 
     private String getTextDisplay () {
@@ -327,9 +331,9 @@ public class CalculatorController {
 //        return text;
 //    }
 
-    private boolean isTextContainsMinus (String text) {
-        return text.contains(MINUS);
-    }
+//    private boolean isTextContainsMinus (String text) {
+//        return text.contains(MINUS);
+//    }
 
     /**
      * Method gets text from button which was pressed
@@ -345,23 +349,42 @@ public class CalculatorController {
     @FXML
     void numberButtonPressed (ActionEvent actionEvent) throws ParseException {
         clearError();
-        String outText = getTextDisplay();
-        outText = setDefaultTextAfterResult(outText);
+        String textDisplay = getTextDisplay();
+
+        textDisplay = setDefaultTextAfterResult(textDisplay);
 
         String buttonText = getButton(actionEvent).getText();
-        boolean isTextDefault = outText.equals(DEFAULT_TEXT);
+        boolean isTextDefault = textDisplay.equals(DEFAULT_TEXT);
 
         if (isTextDefault) {
-            outText = buttonText;
+            textDisplay = buttonText;
         } else {
-            int lengthTextWithoutGroupingSeparator = lengthTextWithoutGroupingSeparator(outText);
+            int maxCharInput = countMaxCharInput(textDisplay);
+            int lengthTextWithoutGroupingSeparator = lengthTextWithoutGroupingSeparator(textDisplay);
 
-            if (lengthTextWithoutGroupingSeparator < maxCharInText) {
-                outText = outText.concat(buttonText);
+            if (lengthTextWithoutGroupingSeparator < maxCharInput) {
+                textDisplay = textDisplay.concat(buttonText);
             }
         }
-        printResult(formatTextInput(outText));
+
+        printToGeneralDisplay(formatTextInput(textDisplay));
+//        printToGeneralDisplay(for);
         canChangeOperator = false;
+    }
+
+    private int countMaxCharInput (String textDisplay) {
+        int msxCharInput = DEFAULT_MAX_CHARS_INPUT;
+        if (textDisplay.contains(MINUS)) {
+            msxCharInput++;
+        }
+
+        if (textDisplay.startsWith(DEFAULT_TEXT.concat(DECIMAL_SEPARATOR))) {
+            msxCharInput++;
+        }
+        if (textDisplay.contains(DECIMAL_SEPARATOR)) {
+            msxCharInput++;
+        }
+        return msxCharInput;
     }
 
     private Button getButton (ActionEvent actionEvent) {
@@ -380,8 +403,9 @@ public class CalculatorController {
      *
      * @param text Text
      */
-    private String addMinusToText (String text) {
+    private String addMinusToText (String text) throws ParseException {
         boolean isDefaultText = text.equals(DEFAULT_TEXT);
+        BigDecimal number = getParsedNumber(getTextDisplay());
 
         if (!isDefaultText) {
             String firstChar = String.valueOf(text.charAt(0));
@@ -391,6 +415,14 @@ public class CalculatorController {
                 text = text.substring(1);
             }
         }
+//        if (!isDefaultText) {
+//            String firstChar = String.valueOf(text.charAt(0));
+//            if (!firstChar.equals(MINUS)) {
+//                text = MINUS.concat(text);
+//            } else {
+//                text = text.substring(1);
+//            }
+//        }
         return text;
     }
 
@@ -551,8 +583,7 @@ public class CalculatorController {
     private void calculateFormula () throws ParseException {
         try {
             result = Calculator.calculator(formula);
-            String resultFormatted = formatTextForOutput(result);
-            printResult(resultFormatted);
+            printCalculateResult();
             canBackspace = false;
 
         } catch (DivideZeroException | ResultUndefinedException | InvalidInputException e) {
@@ -566,25 +597,20 @@ public class CalculatorController {
      * if {@code out} doesn't contains {@code minus}.
      */
     private void calculateNegateOperation () throws ParseException {
-        String outText = getTextDisplay();
-        int indexLastSymbol = outText.length() - 1;
-        String lastSymbol = String.valueOf(outText.toCharArray()[indexLastSymbol]);
-
-        boolean isCommaLastSymbol = lastSymbol.equals(DECIMAL_SEPARATOR);
-        if (isCommaLastSymbol || canBackspace) {
-            outText = addMinusToText(outText);
-            printResult(outText);
-        } else {
+        if (!canBackspace) {
             addNumberToFormula();
             addOperationToFormula(OperationsEnum.NEGATE);
             calculateFormula();
-        }
-
-        boolean isTextContainsMinus = isTextContainsMinus(outText);
-        if (isTextContainsMinus) {
-            maxCharInText++;
         } else {
-            maxCharInText--;
+            String textDisplay = getTextDisplay();
+            boolean isCommaLastSymbol = isLastSymbolComma(textDisplay);
+            BigDecimal number = getParsedNumber(textDisplay).negate();
+            printToGeneralDisplay(CalculatorNumberFormatter.formatNumberForPrint(number));
+
+            if (isCommaLastSymbol) {
+                printToGeneralDisplay(CalculatorNumberFormatter.addDecimalSeparator(number));
+            }
+
         }
     }
 
@@ -612,7 +638,7 @@ public class CalculatorController {
 
         canBackspace = false;
         memoryPressed = false;
-        maxCharInText = DEFAULT_MAX_CHARS_INPUT;
+//        maxCharInText = DEFAULT_MAX_CHARS_INPUT;
 
         scrollOutOperationMemory();
 //        throw new NullPointerException();
@@ -685,18 +711,21 @@ public class CalculatorController {
     }
 
     /** Method outputs calculation's result on general display */
-    private void printResult (String text) throws ParseException {
-        BigDecimal numberCheckedOverflow = getParsedNumber(text);
-
+    private void printCalculateResult () throws ParseException {
         try {
-            isOverflow(numberCheckedOverflow);
-            generalDisplay.setText(text);
-            resizeOutputText();
+            isOverflow(result);
+            printToGeneralDisplay(formatNumberForOutput(result));
             printHistory();
         } catch (OverflowException e) {
             printError(getMassageException(e));
         }
     }
+
+    private void printToGeneralDisplay (String text) {
+        generalDisplay.setText(text);
+        resizeOutputText();
+    }
+
 
     private String getMassageException (Exception exception) {
         String exceptionType = exception.getClass().getSimpleName();
@@ -705,8 +734,8 @@ public class CalculatorController {
 
 
     /** Method formatters number for print to general display */
-    private String formatTextForOutput (BigDecimal number) {
-        return CalculatorNumberFormatter.formatNumber(number);
+    private String formatNumberForOutput (BigDecimal number) {
+        return CalculatorNumberFormatter.formatNumberForPrint(number);
     }
 
     /**
@@ -718,17 +747,17 @@ public class CalculatorController {
      */
     private void isOverflow (BigDecimal result) throws OverflowException, ParseException {
         boolean overflow = false;
-        BigDecimal number = getParsedNumber(formatTextForOutput(result));
+        BigDecimal number = getParsedNumber(formatNumberForOutput(result));
 
         if (number != null) {
             BigDecimal absoluteNumber = number.abs();
-            int compareOne = compareToOne(absoluteNumber);
+            int compareToOne = compareToOne(absoluteNumber);
 
-            if (compareOne > 0) {
+            if (compareToOne > 0) {
                 overflow = absoluteNumber.compareTo(MAX_INVALID_NUMBER) >= 0;
             }
 
-            if (compareOne < 0 && compareToZero(absoluteNumber) != 0) {
+            if (compareToOne < 0 && compareToZero(absoluteNumber) != 0) {
                 overflow = absoluteNumber.compareTo(MIN_INVALID_NUMBER) <= 0;
             }
         }
@@ -748,13 +777,13 @@ public class CalculatorController {
     //endregion
 
     //region History
-    private void printHistory () {
+    private void printHistory () throws ParseException {
+
         History history = Calculator.getHistory();
-        if (history != null) {
-            CalculatorHistoryFormatter calculatorHistoryFormatter = new CalculatorHistoryFormatter(history);
-            String historyChanged = calculatorHistoryFormatter.formatHistory();
-            outOperationMemory.setText(historyChanged);
-        }
+
+        CalculatorHistoryFormatter calculatorHistoryFormatter = new CalculatorHistoryFormatter(history);
+        String historyChanged = calculatorHistoryFormatter.formatHistory();
+        outOperationMemory.setText(historyChanged);
 
         scrollOutOperationMemory();
     }
@@ -830,7 +859,7 @@ public class CalculatorController {
         setOperationsDisable(false);
         memoryPanel.setDisable(false);
 
-        maxCharInText = DEFAULT_MAX_CHARS_INPUT;
+//        maxCharInText = DEFAULT_MAX_CHARS_INPUT;
         resizeOutputText();
         isError = false;
     }
@@ -842,7 +871,7 @@ public class CalculatorController {
     @FXML
     void clearNumberCE () {
         generalDisplay.setText(DEFAULT_TEXT);
-        maxCharInText = DEFAULT_MAX_CHARS_INPUT;
+//        maxCharInText = DEFAULT_MAX_CHARS_INPUT;
         clearError();
         resizeOutputText();
     }
@@ -857,7 +886,7 @@ public class CalculatorController {
     private String setDefaultTextAfterResult (String textFromGeneralDisplay) {
         if (!canBackspace || memoryPressed || canChangeOperator) {
             canBackspace = true;
-            maxCharInText = DEFAULT_MAX_CHARS_INPUT;
+//            maxCharInText = DEFAULT_MAX_CHARS_INPUT;
             textFromGeneralDisplay = setDefaultText();
         }
 
@@ -871,7 +900,7 @@ public class CalculatorController {
     }
 
     private String setDefaultText () {
-        maxCharInText = DEFAULT_MAX_CHARS_INPUT;
+//        maxCharInText = DEFAULT_MAX_CHARS_INPUT;
         return DEFAULT_TEXT;
     }
 
@@ -938,10 +967,9 @@ public class CalculatorController {
     void memoryRecallPressed () throws ParseException {
         if (memory != null) {
             result = memory.memoryRecall();
-            String out = formatTextForOutput(result);
             formula.add(result);
 
-            printResult(out);
+            printCalculateResult();
         }
         canBackspace = false;
         memoryPressed = true;

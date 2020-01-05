@@ -89,7 +89,16 @@
 
 .button_operation:hover, .button_number:hover, .button_operation:pressed, .button_number:pressed {
 -fx-background-color: #e6e6e6;
+
 }
+.button_operation, .button_operation:hover, .button_operation:pressed, .button_number:pressed {
+-fx-font-family:"Calculator MDL2 Assets";
+-fx-font-size: 15px;
+}
+
+
+
+
 
 .scrollButton{
 -fx-background-color: transparent;

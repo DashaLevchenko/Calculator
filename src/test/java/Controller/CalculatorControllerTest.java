@@ -369,110 +369,110 @@ public class CalculatorControllerTest extends ApplicationTest {
 
     @Test
     void checkSubtract () {
-//        //both operands are integer
-//        assertNumber("0 - 0 -", "0", "0 - 0 - ");
-//
-//        assertNumber("2 - 0 -", "2", "2 - 0 - ");
-//        assertNumber("2  - 0 -", "-2", "-2 - 0 - ");
-//        assertNumber("0 - 2  -", "2", "0 - -2 - ");
-//
-//        assertNumber("2 - 2 -", "0", "2 - 2 - ");
-//        assertNumber("2 - 2 -", "4", "2 - -2 - ");
-//        assertNumber("2 - 2 -", "-4", "-2 - 2 - ");
-//        assertNumber("2 - 2 -", "0", "-2 - -2 - ");
-//
-//        assertNumber("2 - 3 -", "-1", "2 - 3 - ");
-//        assertNumber("2 - 3  -", "5", "2 - -3 - ");
-//        assertNumber("2  - 3 -", "-5", "-2 - 3 - ");
-//        assertNumber("2  - 3  -", "1", "-2 - -3 - ");
-//        //first operand is decimal
-//        assertNumber("0,2  - 0 -", "0,2", "0,2 - 0 - ");
-//        assertNumber("0,2  - 0 -", "-0,2", "-0,2 - 0 - ");
-//
-//        assertNumber("0,2 - 3 -", "-2,8", "0,2 - 3 - ");
-//        assertNumber("0,2 - 3  -", "3,2", "0,2 - -3 - ");
-//        assertNumber("0,2  - 3 -", "-3,2", "-0,2 - 3 - ");
-//        assertNumber("0,2  - 3  -", "2,8", "-0,2 - -3 - ");
-//        //second operand is decimal
-//        assertNumber("0 - ,2 -", "-0,2", "0 - 0,2 - ");
-//        assertNumber("0 - ,2  -", "0,2", "0 - -0,2 - ");
-//
-//        assertNumber("2 - 0,3 -", "1,7", "2 - 0,3 - ");
-//        assertNumber("2 - 0,3  -", "2,3", "2 - -0,3 - ");
-//        assertNumber("2  - 0,3 -", "-2,3", "-2 - 0,3 - ");
-//        assertNumber("2  - 0,3  -", "-1,7", "-2 - -0,3 - ");
-//        //both operands are decimal
-//        assertNumber("0,2 - 0,2 -", "0", "0,2 - 0,2 - ");
-//        assertNumber("0,2 - 0,2 -", "0,4", "0,2 - -0,2 - ");
-//        assertNumber("0,2 - 0,2 -", "-0,4", "-0,2 - 0,2 - ");
-//        assertNumber("0,2 - 0,2 -", "0", "-0,2 - -0,2 - ");
-//
-//        assertNumber("0,2 - 0,3 -", "-0,1", "0,2 - 0,3 - ");
-//        assertNumber("0,2  - 0,3 -", "-0,5", "-0,2 - 0,3 - ");
-//        assertNumber("0,2 - 0,3  -", "0,5", "0,2 - -0,3 - ");
-//        assertNumber("0,2  - 0,3  -", "0,1", "-0,2 - -0,3 - ");
+////        //both operands are integer
+////        assertNumber("0 - 0 -", "0", "0 - 0 - ");
+////
+////        assertNumber("2 - 0 -", "2", "2 - 0 - ");
+////        assertNumber("2  - 0 -", "-2", "-2 - 0 - ");
+////        assertNumber("0 - 2  -", "2", "0 - -2 - ");
+////
+////        assertNumber("2 - 2 -", "0", "2 - 2 - ");
+////        assertNumber("2 - 2 -", "4", "2 - -2 - ");
+////        assertNumber("2 - 2 -", "-4", "-2 - 2 - ");
+////        assertNumber("2 - 2 -", "0", "-2 - -2 - ");
+////
+////        assertNumber("2 - 3 -", "-1", "2 - 3 - ");
+////        assertNumber("2 - 3  -", "5", "2 - -3 - ");
+////        assertNumber("2  - 3 -", "-5", "-2 - 3 - ");
+////        assertNumber("2  - 3  -", "1", "-2 - -3 - ");
+////        //first operand is decimal
+////        assertNumber("0,2  - 0 -", "0,2", "0,2 - 0 - ");
+////        assertNumber("0,2  - 0 -", "-0,2", "-0,2 - 0 - ");
+////
+////        assertNumber("0,2 - 3 -", "-2,8", "0,2 - 3 - ");
+////        assertNumber("0,2 - 3  -", "3,2", "0,2 - -3 - ");
+////        assertNumber("0,2  - 3 -", "-3,2", "-0,2 - 3 - ");
+////        assertNumber("0,2  - 3  -", "2,8", "-0,2 - -3 - ");
+////        //second operand is decimal
+////        assertNumber("0 - ,2 -", "-0,2", "0 - 0,2 - ");
+////        assertNumber("0 - ,2  -", "0,2", "0 - -0,2 - ");
+////
+////        assertNumber("2 - 0,3 -", "1,7", "2 - 0,3 - ");
+////        assertNumber("2 - 0,3  -", "2,3", "2 - -0,3 - ");
+////        assertNumber("2  - 0,3 -", "-2,3", "-2 - 0,3 - ");
+////        assertNumber("2  - 0,3  -", "-1,7", "-2 - -0,3 - ");
+////        //both operands are decimal
+////        assertNumber("0,2 - 0,2 -", "0", "0,2 - 0,2 - ");
+////        assertNumber("0,2 - 0,2 -", "0,4", "0,2 - -0,2 - ");
+////        assertNumber("0,2 - 0,2 -", "-0,4", "-0,2 - 0,2 - ");
+////        assertNumber("0,2 - 0,2 -", "0", "-0,2 - -0,2 - ");
+////
+////        assertNumber("0,2 - 0,3 -", "-0,1", "0,2 - 0,3 - ");
+////        assertNumber("0,2  - 0,3 -", "-0,5", "-0,2 - 0,3 - ");
+////        assertNumber("0,2 - 0,3  -", "0,5", "0,2 - -0,3 - ");
+////        assertNumber("0,2  - 0,3  -", "0,1", "-0,2 - -0,3 - ");
+////
+////        /*
+////         * Max positive number which can input is saved in memory for accelerate tests,
+////         * and called by  symbol
+////         */
+////        assertNumber(MAX_POSITIVE_NUMBER_INPUT + " - 0 =", "9 999 999 999 999 999", "");
+////        assertNumber(" - 0 =", "-9 999 999 999 999 999", "");
+////        //  => 9999999999999999
+////        assertNumber(" - =", "0", "");
+////        assertNumber(" -  =", "2,e+16", "");
+////        assertNumber(" - =", "-2,e+16", "");
+////        assertNumber(" -  =", "0", "");
+////        //  => 9999999999999999
+////        assertNumber(" - 1 =", "9 999 999 999 999 998", "");
+////        assertNumber(" - 1  =", "1,e+16", "");
+////        assertNumber(" - 1 =", "-1,e+16", "");
+////        assertNumber(" - 1 =", "-9 999 999 999 999 998", "");
+////        //  => 9999999999999999
+////        assertNumber(" - 0,1 =", "9 999 999 999 999 999", "");
+////        assertNumber(" - 0,1  =", "9 999 999 999 999 999", "");
+////        assertNumber(" - 0,1 =", "-9 999 999 999 999 999", "");
+////        assertNumber(" - 0,1 = ", "-9 999 999 999 999 999", "");
+////        //  => 9999999999999999
+////        assertNumber(" - " + MIN_POSITIVE_NUMBER_INPUT + "=", "9 999 999 999 999 999", "");
+////        assertNumber(" - " + MIN_POSITIVE_NUMBER_INPUT + " =", "9 999 999 999 999 999", "");
+////        assertNumber(" - " + MIN_POSITIVE_NUMBER_INPUT + "=", "-9 999 999 999 999 999", "");
+////        assertNumber(" - " + MIN_POSITIVE_NUMBER_INPUT + " =", "-9 999 999 999 999 999", "");
+////
+////        /*
+////         * Min positive number  which can input is saved in memory for accelerate tests,
+////         * and called by  symbol
+////         */
+////        assertNumber(MIN_POSITIVE_NUMBER_INPUT + " - 0 =", "0,0000000000000001", "");
+////        assertNumber(" - 0 =", "-0,0000000000000001", "");
+////        //  => 0,0000000000000001
+////        assertNumber(" - =", "0", "");
+////        assertNumber(" -  =", "0,0000000000000002", "");
+////        assertNumber(" - =", "-0,0000000000000002", "");
+////        assertNumber(" -  =", "0", "");
+////        //  => 0,0000000000000001
+////        assertNumber(" - 1 =", "-0,9999999999999999", "");
+////        assertNumber(" - 1  =", "1", "");
+////        assertNumber(" - 1 =", "-1", "");
+////        assertNumber(" - 1 =", "0,9999999999999999", "");
+////        //  => 0,0000000000000001
+////        assertNumber(" - 0,1 =", "-0,0999999999999999", "");
+////        assertNumber(" - 0,1  =", "0,1000000000000001", "");
+////        assertNumber(" - 0,1 =", "-0,1000000000000001", "");
+////        assertNumber(" - 0,1 =", "0,0999999999999999", "");
+////        //  => 0,0000000000000001
+////        assertNumber(" - " + MAX_POSITIVE_NUMBER_INPUT + " =", "-9 999 999 999 999 999", "");
+////        assertNumber(" - " + MAX_POSITIVE_NUMBER_INPUT + "  =", "9 999 999 999 999 999", "");
+////        assertNumber(" - " + MAX_POSITIVE_NUMBER_INPUT + " =", "-9 999 999 999 999 999", "");
+////        assertNumber(" - " + MAX_POSITIVE_NUMBER_INPUT + " =", "9 999 999 999 999 999", "");
 //
 //        /*
-//         * Max positive number which can input is saved in memory for accelerate tests,
+//         * Max number visible => 9,999999999999999e+9999,
+//         * max number from model for controller => 9999999999999999 49...99,99...99
+//         * Max number is saved at memory for accelerate tests,
 //         * and called by  symbol
 //         */
-//        assertNumber(MAX_POSITIVE_NUMBER_INPUT + " - 0 =", "9 999 999 999 999 999", "");
-//        assertNumber(" - 0 =", "-9 999 999 999 999 999", "");
-//        //  => 9999999999999999
-//        assertNumber(" - =", "0", "");
-//        assertNumber(" -  =", "2,e+16", "");
-//        assertNumber(" - =", "-2,e+16", "");
-//        assertNumber(" -  =", "0", "");
-//        //  => 9999999999999999
-//        assertNumber(" - 1 =", "9 999 999 999 999 998", "");
-//        assertNumber(" - 1  =", "1,e+16", "");
-//        assertNumber(" - 1 =", "-1,e+16", "");
-//        assertNumber(" - 1 =", "-9 999 999 999 999 998", "");
-//        //  => 9999999999999999
-//        assertNumber(" - 0,1 =", "9 999 999 999 999 999", "");
-//        assertNumber(" - 0,1  =", "9 999 999 999 999 999", "");
-//        assertNumber(" - 0,1 =", "-9 999 999 999 999 999", "");
-//        assertNumber(" - 0,1 = ", "-9 999 999 999 999 999", "");
-//        //  => 9999999999999999
-//        assertNumber(" - " + MIN_POSITIVE_NUMBER_INPUT + "=", "9 999 999 999 999 999", "");
-//        assertNumber(" - " + MIN_POSITIVE_NUMBER_INPUT + " =", "9 999 999 999 999 999", "");
-//        assertNumber(" - " + MIN_POSITIVE_NUMBER_INPUT + "=", "-9 999 999 999 999 999", "");
-//        assertNumber(" - " + MIN_POSITIVE_NUMBER_INPUT + " =", "-9 999 999 999 999 999", "");
-//
-//        /*
-//         * Min positive number  which can input is saved in memory for accelerate tests,
-//         * and called by  symbol
-//         */
-//        assertNumber(MIN_POSITIVE_NUMBER_INPUT + " - 0 =", "0,0000000000000001", "");
-//        assertNumber(" - 0 =", "-0,0000000000000001", "");
-//        //  => 0,0000000000000001
-//        assertNumber(" - =", "0", "");
-//        assertNumber(" -  =", "0,0000000000000002", "");
-//        assertNumber(" - =", "-0,0000000000000002", "");
-//        assertNumber(" -  =", "0", "");
-//        //  => 0,0000000000000001
-//        assertNumber(" - 1 =", "-0,9999999999999999", "");
-//        assertNumber(" - 1  =", "1", "");
-//        assertNumber(" - 1 =", "-1", "");
-//        assertNumber(" - 1 =", "0,9999999999999999", "");
-//        //  => 0,0000000000000001
-//        assertNumber(" - 0,1 =", "-0,0999999999999999", "");
-//        assertNumber(" - 0,1  =", "0,1000000000000001", "");
-//        assertNumber(" - 0,1 =", "-0,1000000000000001", "");
-//        assertNumber(" - 0,1 =", "0,0999999999999999", "");
-//        //  => 0,0000000000000001
-//        assertNumber(" - " + MAX_POSITIVE_NUMBER_INPUT + " =", "-9 999 999 999 999 999", "");
-//        assertNumber(" - " + MAX_POSITIVE_NUMBER_INPUT + "  =", "9 999 999 999 999 999", "");
-//        assertNumber(" - " + MAX_POSITIVE_NUMBER_INPUT + " =", "-9 999 999 999 999 999", "");
-//        assertNumber(" - " + MAX_POSITIVE_NUMBER_INPUT + " =", "9 999 999 999 999 999", "");
-
-        /*
-         * Max number visible => 9,999999999999999e+9999,
-         * max number from model for controller => 9999999999999999 49...99,99...99
-         * Max number is saved at memory for accelerate tests,
-         * and called by  symbol
-         */
-//        assertNumber(MAX_POSITIVE_NUMBER + "" + MAX_POSITIVE_NUMBER_VISIBLE + " -  =", "-5,e+9983", "");9983
+////        assertNumber(MAX_POSITIVE_NUMBER + "" + MAX_POSITIVE_NUMBER_VISIBLE + " -  =", "-5,e+9983", "");9983
         assertNumber(MAX_POSITIVE_NUMBER + "", "9,999999999999999e+9999", "");
         //  => 9999999999999999 49...99,99...99
         assertNumber(" - 0 =", "9,999999999999999e+9999", "");

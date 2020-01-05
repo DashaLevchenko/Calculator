@@ -64,15 +64,20 @@ class CalculatorNumberFormatter {
 
     /** Constant keeps plus symbol */
     private static final String PLUS = "+";
+    /** Constant keeps plus symbol */
+    private static final String MINUS = "-";
     private static DecimalFormatSymbols symbols = new DecimalFormatSymbols();
     private static DecimalFormat decimalFormat = new DecimalFormat();
+    private static String pattern;
+
 
     /*Set separator for formatter number*/
     static {
         symbols.setExponentSeparator(EXPONENT);
+//        symbols.setMinusSign(MINUS.charAt(0));
         symbols.setGroupingSeparator(GROUPING_SEPARATOR.charAt(0));
         symbols.setDecimalSeparator(DECIMAL_SEPARATOR_AFTER_FORMATTER.charAt(0));
-        decimalFormat.setDecimalFormatSymbols(symbols);
+
     }
 
 
@@ -80,30 +85,57 @@ class CalculatorNumberFormatter {
         return symbols;
     }
 
-    static String backspace(BigDecimal number){
-        String pattern;
-        int scale =number.scale();
-        if(scale > 0){
-            pattern = DECIMAL_PATTERN.concat("0".repeat(scale-1));
-        }else{
-            number = number.movePointLeft(1);
-            pattern = INTEGER_PATTERN;
-        }
-
-
-        boolean isLessZero = compareZero(number) > 0 && compareOne(number) <0;
-        boolean isOneNumber = number.scale() == 1;
-        if(isLessZero && isOneNumber){
-            number = number.abs();
-        }
-
-
-        decimalFormat = new DecimalFormat(pattern);
+    static String addDecimalSeparator (BigDecimal number) {
+        pattern = INTEGER_PATTERN.concat(DECIMAL_SEPARATOR_BEFORE_FORMATTER);
         decimalFormat.setRoundingMode(RoundingMode.DOWN);
 
+        return formatNumber(number);
+
+    }
+
+    static String addNegatePrefix (BigDecimal number) {
+        formatNumberForPrint(number);
+        if (number.signum() > 0) {
+            pattern = MINUS.concat(pattern);
+        }
+
+        decimalFormat.setRoundingMode(RoundingMode.DOWN);
+
+        return formatNumber(number);
+
+    }
+
+
+    private static String formatNumber (BigDecimal number) {
+        decimalFormat = new DecimalFormat(pattern, symbols);
+        decimalFormat.setRoundingMode(RoundingMode.DOWN);
         return decimalFormat.format(number);
     }
 
+
+    static String backspace (BigDecimal number, boolean lastSymbolComma) {
+
+        int scale = number.scale();
+
+        if (scale > 0) {
+            pattern = INTEGER_PATTERN.concat(DECIMAL_SEPARATOR_BEFORE_FORMATTER).concat("0".repeat(scale - 1));
+        } else {
+            pattern = INTEGER_PATTERN;
+            if (!lastSymbolComma) {
+                number = number.movePointLeft(1);
+            }
+
+        }
+
+
+        boolean isLessZero = compareZero(number) > 0 && compareOne(number) < 0;
+        boolean isOneNumber = number.scale() == 1;
+        if (isLessZero && isOneNumber) {
+            number = number.abs();
+        }
+
+        return formatNumber(number);
+    }
 
 
     /**
@@ -112,13 +144,11 @@ class CalculatorNumberFormatter {
      * @param number Number need to format
      * @return String with number was formatted
      */
-    static String formatNumber (BigDecimal number) {
-        String pattern;
-
+    static String formatNumberForPrint (BigDecimal number) {
         number = roundNumber(number);
 
         if (isMoreMaxInputNumber(number) > 0) {
-            pattern = definePatternNumberMoreMaxInput(number);
+            definePatternNumberMoreMaxInput(number);
 
         } else if (compareOne(number) < 0 && compareZero(number) != 0) {
             number = number.stripTrailingZeros();
@@ -149,12 +179,12 @@ class CalculatorNumberFormatter {
         }
 
 
-        decimalFormat = new DecimalFormat(pattern, symbols);
-        String outNumber = decimalFormat.format(number);
+        String outNumber = formatNumber(number);
         outNumber = changeExponent(outNumber);
 
         return outNumber;
     }
+
 
     private static String changeExponent (String outNumber) {
         String negateExponent = EXPONENT.concat("-");
@@ -167,7 +197,7 @@ class CalculatorNumberFormatter {
     }
 
     private static String definePatternNumberMoreOneLessMaxInput (BigDecimal number) {
-        String pattern;
+//        String pattern;
 
         int scale = number.scale();
         if (scale > 0) {
@@ -189,12 +219,12 @@ class CalculatorNumberFormatter {
         return number.abs().compareTo(BigDecimal.ONE);
     }
 
-    private static String definePatternNumberMoreMaxInput (BigDecimal number) {
+    private static void definePatternNumberMoreMaxInput (BigDecimal number) {
         int scale = number.scale();
         int precision = number.precision();
         int numericInNumber = precision - scale;
 
-        String pattern;
+//        String pattern;
         if (numericInNumber > MAX_SCALE_PRINT) {
             pattern = DECIMAL_PATTERN;
 
@@ -203,18 +233,18 @@ class CalculatorNumberFormatter {
             scale = number.scale();
 
             if (precision != PRECISION_MIN && precision > scale) {
-                pattern = pattern.concat(HASH_PATTERN.repeat(numericInNumber));
+                pattern = pattern.concat(HASH_PATTERN.repeat(precision-PRECISION_MIN));
             }
 
             pattern = pattern.concat(EXPONENT_PATTERN);
         } else {
             if (scale < 0) {
                 pattern = DECIMAL_PATTERN.concat(EXPONENT_PATTERN);
-            } else {
+            }
+            else {
                 pattern = INTEGER_PATTERN;
             }
         }
-        return pattern;
     }
 
     private static int isMoreMaxInputNumber (BigDecimal number) {
@@ -242,20 +272,9 @@ class CalculatorNumberFormatter {
      * @return Number was parsed
      */
     static BigDecimal getParsedNumber (String text) throws ParseException {
-        text = text.replace(PLUS, EMPTY_STRING).replace(GROUPING_SEPARATOR, EMPTY_STRING);
+        text = text.replace(PLUS, EMPTY_STRING);
         decimalFormat.setParseBigDecimal(true);
-
-        BigDecimal number;
-        number = (BigDecimal) decimalFormat.parse(text);
-        if (number != null) {
-            number = number.stripTrailingZeros();
-            if (number.scale() < 0) {
-                number = number.setScale(0);
-            }
-        }
-
-
-        return number;
+        return (BigDecimal) decimalFormat.parse(text);
     }
 
 }

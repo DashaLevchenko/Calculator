@@ -82,7 +82,7 @@ class CalculatorHistoryFormatter {
      *
      * @return History was changed
      */
-    String formatHistory () {
+    String formatHistory () throws ParseException {
         int historyInSize = history.size();
         negateHistory = "";
         historyUnaryOperations = "";
@@ -160,7 +160,7 @@ class CalculatorHistoryFormatter {
      * @return String number was formatted
      */
     private String formatNumber (BigDecimal number) {
-        String formattedNumber = CalculatorNumberFormatter.formatNumber(number);
+        String formattedNumber = CalculatorNumberFormatter.formatNumberForPrint(number);
         return deleteGroupingSeparator(formattedNumber);
     }
 
@@ -196,7 +196,7 @@ class CalculatorHistoryFormatter {
         return text.replace(groupingSeparator, "");
     }
 
-    private void changeOperation (OperationsEnum operation, int indexObject) {
+    private void changeOperation (OperationsEnum operation, int indexObject) throws ParseException {
         if (isBinary(operation)) {
             changeBinaryOperationHistory(operation);
         }
@@ -241,12 +241,12 @@ class CalculatorHistoryFormatter {
 
 
                 if (presentHistoryObject instanceof OperationsEnum || isNumber(presentHistoryObject)) {
-//                    OperationsEnum operation = (OperationsEnum) presentHistoryObject;
 
                     boolean isBinaryPresent = false;
                     if (presentHistoryObject instanceof OperationsEnum) {
                         isBinaryPresent = isBinary((OperationsEnum) presentHistoryObject);
                     }
+
                     boolean isOperationPrevious = isOperationSymbol(previousHistory);
 
                     boolean isBinaryPresentIsPreviousOperation = isBinaryPresent && isOperationPrevious;
@@ -258,7 +258,9 @@ class CalculatorHistoryFormatter {
                         break;
                     }
                 }
+
             }
+
         }
     }
 
@@ -279,7 +281,7 @@ class CalculatorHistoryFormatter {
      * @param operation Negate operation
      * @param index     Index of negate operation in calculator history
      */
-    private void changeNegateOperationHistory (OperationsEnum operation, int index) {
+    private void changeNegateOperationHistory (OperationsEnum operation, int index) throws ParseException {
         int minSizeHistory = 1;
         int sizeHistoryIn = history.size();
 
@@ -289,12 +291,8 @@ class CalculatorHistoryFormatter {
 
                 if (historyUnaryOperations.isEmpty()) {
                     if (isNumber(previousObject)) {
-                        BigDecimal number = null;
-                        try {
-                            number = parseNumber(previousObject);
-                        } catch (ParseException e) {
-                            e.printStackTrace();
-                        }
+                        BigDecimal number = parseNumber(previousObject);
+
                         negateHistory = formatNumber(number);
 
                     } else {

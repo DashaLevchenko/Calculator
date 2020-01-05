@@ -57,7 +57,7 @@ public class History{
     /**
      * Method deletes last history object.
      */
-    void deleteLast () {
+    public void deleteLast () {
         if (history.size() > 0) {
             int indexLastObject = history.size() - 1;
             history.remove(indexLastObject);
