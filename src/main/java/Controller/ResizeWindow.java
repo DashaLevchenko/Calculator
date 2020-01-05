@@ -29,10 +29,20 @@ class ResizeWindow {
 
     /** Font is always used for buttons */
     private static final String DEFAULT_FONT_BUTTON = "Calculator MDL2 Assets";
+
+    /** Stage need to resize */
     private Stage stage;
+
+    /** Scene need to resize */
     private Scene scene;
+
+    /** Minimal width of application */
     private double minWidth;
+
+    /** Minimal height of application */
     private double minHeight;
+
+    /** Default value of cursor */
     private Cursor cursorEvent = Cursor.DEFAULT;
 
     /**
@@ -85,7 +95,8 @@ class ResizeWindow {
      * and moved in border area
      */
     private EventHandler<MouseEvent> resizeWindow () {
-        EventHandler<MouseEvent> event = mouseEvent -> {
+
+        return mouseEvent -> {
             EventType<? extends MouseEvent> mouseEventType = mouseEvent.getEventType();
 
             double mouseWinX = mouseEvent.getSceneX();
@@ -142,8 +153,6 @@ class ResizeWindow {
                 }
             }
         };
-
-        return event;
     }
 
     private void setCursorEvent (double mouseWinX, double mouseWinY, double sceneWidth, double sceneHeight) {
@@ -185,7 +194,7 @@ class ResizeWindow {
         }
     }
 
-    // Method resizes button's font size if width stage was changed
+    /** Method resizes button's font size if width stage was changed */
     void resizeButton (Node node) {
         ObservableList<Node> buttons = ((Parent) node).getChildrenUnmodifiable();
         for (Node child : buttons) {
@@ -194,6 +203,12 @@ class ResizeWindow {
         }
     }
 
+    /**
+     * Method calculates new size for font of node
+     *
+     * @param font Font of node
+     * @return New size
+     */
     private double newSize (Font font) {
         double oldSize = font.getSize();
         double numberForChange = MAX_WIDTH_WINDOWS / stage.getMinWidth();
@@ -206,9 +221,11 @@ class ResizeWindow {
         return newSize;
     }
 
-    /*
+    /**
      * This methods makes stage size on all device window,
-     * and change button text
+     * and change button text.
+     *
+     * @param button Button need to change
      */
     void maximizeWindow (Button button) {
         String buttonText;

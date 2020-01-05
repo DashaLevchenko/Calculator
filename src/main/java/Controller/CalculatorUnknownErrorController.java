@@ -19,15 +19,21 @@ public class CalculatorUnknownErrorController {
     @FXML
     private TextArea errorMessage;
 
+    /**
+     * Controller of calculator
+     */
     private CalculatorController generalController;
 
-
+    /**
+     * Method will close error window.
+     */
     private void closeErrorWindow () {
         Stage stage = (Stage) reset.getScene().getWindow();
         stage.close();
     }
 
-    public void setGeneralController (CalculatorController generalController) {
+
+    void setGeneralController (CalculatorController generalController) {
         this.generalController = generalController;
     }
 
@@ -41,27 +47,37 @@ public class CalculatorUnknownErrorController {
         closeErrorWindow();
     }
 
-    void setErrorMessage (String message) {
+    private void setErrorMessage (String message) {
         errorMessage.setText(message);
     }
 
+    /**
+     * If (@code ok} was pressed, calculator will close.
+     */
     @FXML
     void okButtonPressed () {
         closeErrorWindow();
         generalController.closeWindow();
     }
 
-    public void changeErrorWindow (String messageError, boolean isLoggerException) {
+    /**
+     * This method sets error message.
+     * If was thrown logger exception, {@code reset} will unvisible and {@code ok} will visible
+     * @param messageError Message need to print
+     * @param isLoggerException True, If logger exception was thrown
+     */
+    void changeErrorWindow (String messageError, boolean isLoggerException) {
         boolean isResetVisible;
         boolean isOkVisible;
+
         if (isLoggerException) {
             isResetVisible = false;
             isOkVisible = true;
-            setErrorMessage(messageError);
         }else{
             isResetVisible = true;
             isOkVisible = false;
         }
+
         reset.setVisible(isResetVisible);
         ok.setVisible(isOkVisible);
         setErrorMessage(messageError);

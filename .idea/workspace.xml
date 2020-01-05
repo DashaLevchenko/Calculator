@@ -11,20 +11,22 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="feaeb0c2-feb2-4a9c-98e3-48b1d1a339aa" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Controller/Ex.java" afterDir="false" />
+    <list default="true" id="feaeb0c2-feb2-4a9c-98e3-48b1d1a339aa" name="Default Changelist" comment="before cha">
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/User.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/User.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/CalculatorApp/CalculatorMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CalculatorApp/CalculatorMain.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controller/CalculatorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/CalculatorController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controller/CalculatorHistoryFormatter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/CalculatorHistoryFormatter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controller/CalculatorNumberFormatter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/CalculatorNumberFormatter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Calculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Calculator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Model/History.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/History.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/CalculatorUnknownError.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/CalculatorUnknownError.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/CalculatorUnknownErrorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/CalculatorUnknownErrorController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Ex.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/ResizeDisplay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/ResizeDisplay.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/ResizeWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/ResizeWindow.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/View/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Controller/CalculatorControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Controller/CalculatorControllerTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Controller/CalculatorController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Controller/CalculatorController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Model/Calculator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Model/Calculator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Model/History.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Model/History.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/View/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Controller/ResizeDisplay.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Controller/ResizeDisplay.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Controller/ResizeWindow.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Controller/ResizeWindow.class" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -173,11 +175,10 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.CalculatorControllerTest">
+  <component name="RunManager" selected="Application.CalculatorMain">
     <configuration name="CalculatorMain" type="Application" factoryName="Application" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Controller.CalculatorMain" />
-      <module name="Calculator2" />
-      <option name="PROGRAM_PARAMETERS" value="BigDecimal.valueOf(1) OperationsEnum.ADD OperationsEnum.EQUAL" />
+      <option name="MAIN_CLASS_NAME" value="CalculatorApp.CalculatorMain" />
+      <module name="Calculator" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value=".*" />
@@ -340,13 +341,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1565432602101</updated>
-    </task>
-    <task id="LOCAL-00079" summary="all work">
-      <created>1574415896354</created>
-      <option name="number" value="00079" />
-      <option name="presentableId" value="LOCAL-00079" />
-      <option name="project" value="LOCAL" />
-      <updated>1574415896354</updated>
     </task>
     <task id="LOCAL-00080" summary="all work">
       <created>1574416077222</created>
@@ -684,7 +678,14 @@
       <option name="project" value="LOCAL" />
       <updated>1577717985604</updated>
     </task>
-    <option name="localTasksCounter" value="128" />
+    <task id="LOCAL-00128" summary="before add javadoc">
+      <created>1578230009345</created>
+      <option name="number" value="00128" />
+      <option name="presentableId" value="LOCAL-00128" />
+      <option name="project" value="LOCAL" />
+      <updated>1578230009345</updated>
+    </task>
+    <option name="localTasksCounter" value="129" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -786,7 +787,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="demo change" />
     <MESSAGE value="before change operation un demo" />
     <MESSAGE value="before delete calculate formula" />
     <MESSAGE value="before change controller" />
@@ -811,7 +811,8 @@
     <MESSAGE value="before add logger" />
     <MESSAGE value="all work before fix bug jar" />
     <MESSAGE value="all work before backspace" />
-    <option name="LAST_COMMIT_MESSAGE" value="all work before backspace" />
+    <MESSAGE value="before add javadoc" />
+    <option name="LAST_COMMIT_MESSAGE" value="before add javadoc" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -822,24 +823,9 @@
           <option name="timeStamp" value="42" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/Controller/Ex.java</url>
-          <line>11</line>
-          <option name="timeStamp" value="43" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/Controller/Ex.java</url>
-          <line>32</line>
-          <option name="timeStamp" value="45" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/Controller/CalculatorController.java</url>
-          <line>671</line>
+          <line>635</line>
           <option name="timeStamp" value="46" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/Controller/CalculatorController.java</url>
-          <line>262</line>
-          <option name="timeStamp" value="47" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

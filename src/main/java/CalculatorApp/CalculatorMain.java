@@ -43,7 +43,7 @@ public class CalculatorMain extends Application {
         stage.show();
         calculatorController = loader.getController();
         CalculatorUnknownError calculatorUnknownError = new CalculatorUnknownError();
-        Thread.setDefaultUncaughtExceptionHandler(calculatorUnknownError::catchUnknownError);
+        Thread.setDefaultUncaughtExceptionHandler((thread, throwable) -> calculatorUnknownError.catchUnknownError(throwable));
 
     }
 }

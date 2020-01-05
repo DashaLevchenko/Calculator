@@ -179,10 +179,10 @@ class CalculatorNumberFormatter {
         }
 
 
-        String outNumber = formatNumber(number);
-        outNumber = changeExponent(outNumber);
+        String formattedNumber = formatNumber(number);
+        formattedNumber = changeExponent(formattedNumber);
 
-        return outNumber;
+        return formattedNumber;
     }
 
 
@@ -233,15 +233,14 @@ class CalculatorNumberFormatter {
             scale = number.scale();
 
             if (precision != PRECISION_MIN && precision > scale) {
-                pattern = pattern.concat(HASH_PATTERN.repeat(precision-PRECISION_MIN));
+                pattern = pattern.concat(HASH_PATTERN.repeat(precision - PRECISION_MIN));
             }
 
             pattern = pattern.concat(EXPONENT_PATTERN);
         } else {
             if (scale < 0) {
                 pattern = DECIMAL_PATTERN.concat(EXPONENT_PATTERN);
-            }
-            else {
+            } else {
                 pattern = INTEGER_PATTERN;
             }
         }
@@ -275,6 +274,11 @@ class CalculatorNumberFormatter {
         text = text.replace(PLUS, EMPTY_STRING);
         decimalFormat.setParseBigDecimal(true);
         return (BigDecimal) decimalFormat.parse(text);
+    }
+
+    static String formatNumberForHistory (BigDecimal number) {
+        String formattedNumber = formatNumberForPrint(number);
+        return formattedNumber.replace(GROUPING_SEPARATOR, EMPTY_STRING);
     }
 
 }

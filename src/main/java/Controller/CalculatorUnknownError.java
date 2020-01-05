@@ -16,15 +16,26 @@ import java.util.logging.Logger;
 
 
 public class CalculatorUnknownError {
+    /**
+     * Logger object writes down errors
+     */
     private static Logger logger;
 
+    /**
+     * Constructor initializes logger object and set setting for loggong
+     */
     public CalculatorUnknownError () {
         logger = Logger.getLogger(CalculatorUnknownError.class.getName());
         settingLogging();
 
     }
 
-    public void catchUnknownError (Thread thread, Throwable throwable) {
+    /**
+     * Method catches unknown errors of calculator.
+     *
+     * @param throwable Error need to catch.
+     */
+    public void catchUnknownError (Throwable throwable) {
         logger.log(Level.SEVERE, "Error: ", throwable);
 
         openErrorWindow("Something wrong.\n" +
@@ -33,6 +44,13 @@ public class CalculatorUnknownError {
                 "If error happens again, please, reinstall your calculator.", false);
     }
 
+    /**
+     * Method opens error window with error message.
+     *
+     * @param errorMessage      Message need to print.
+     * @param isLoggerException If error was thrown when logger was initialized
+     *                          or something wrong in settings.
+     */
     private void openErrorWindow (String errorMessage, boolean isLoggerException) {
         FXMLLoader loaderError = new FXMLLoader(CalculatorUnknownError.class.getResource("/View/calculator_unknown_error_view.fxml"));
 
@@ -53,6 +71,10 @@ public class CalculatorUnknownError {
         }
     }
 
+    /**
+     * Method set setting for logger,
+     * and open error window if something wrong.
+     */
     private void settingLogging () {
         try {
             FileInputStream file = new FileInputStream("src/logging.config");

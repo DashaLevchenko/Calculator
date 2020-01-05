@@ -23,6 +23,7 @@ class ResizeDisplay {
     /** Default font is used for print */
     private static final String DEFAULT_FONT_DISPLAY = "Segoe UI Semibold";
 
+    /** Stage where locate all application */
     private static Stage stage;
 
     /**
