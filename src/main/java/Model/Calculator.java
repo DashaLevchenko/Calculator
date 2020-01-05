@@ -298,11 +298,13 @@ public class Calculator {
 
     private static void clearIfPresentNumber (Object objectPresent, Object previousObject) {
         if (objectPresent instanceof BigDecimal) {
-            if (isUnary((OperationsEnum) previousObject)) {
-                numberFirst = null;
-                operation = null;
-                result = null;
-            }
+           if(previousObject instanceof OperationsEnum){
+               if (isUnary((OperationsEnum) previousObject)) {
+                   numberFirst = null;
+                   operation = null;
+                   result = null;
+               }
+           }
         }
     }
 

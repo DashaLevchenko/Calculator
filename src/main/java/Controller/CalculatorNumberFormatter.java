@@ -50,6 +50,9 @@ class CalculatorNumberFormatter {
     /** Number pattern */
     private static final String HASH_PATTERN = "#";
 
+    /** Number pattern */
+    private static final String ZERO_PATTERN = "0";
+
     /** Simple decimal pattern */
     private static final String DECIMAL_PATTERN = "0.";
 
@@ -146,13 +149,9 @@ class CalculatorNumberFormatter {
      */
     static String formatNumberForPrint (BigDecimal number) {
         number = roundNumber(number);
-
         if (isMoreMaxInputNumber(number) > 0) {
             definePatternNumberMoreMaxInput(number);
-
         } else if (compareOne(number) < 0 && compareZero(number) != 0) {
-            number = number.stripTrailingZeros();
-
             int scale = number.scale();
 
             pattern = DECIMAL_PATTERN;
@@ -172,7 +171,7 @@ class CalculatorNumberFormatter {
                     pattern = pattern.concat(HASH_PATTERN.repeat(MAX_SCALE_PRINT));
                 }
             } else {
-                pattern = pattern.concat(HASH_PATTERN.repeat(scale));
+                pattern = pattern.concat(ZERO_PATTERN.repeat(scale));
             }
         } else {
             pattern = definePatternNumberMoreOneLessMaxInput(number);
@@ -197,13 +196,11 @@ class CalculatorNumberFormatter {
     }
 
     private static String definePatternNumberMoreOneLessMaxInput (BigDecimal number) {
-//        String pattern;
-
         int scale = number.scale();
         if (scale > 0) {
             int numberOfHash = Math.min(scale, MAX_SCALE_PRINT);
             pattern = INTEGER_PATTERN.concat(DECIMAL_SEPARATOR_BEFORE_FORMATTER);
-            pattern = pattern.concat(HASH_PATTERN.repeat(numberOfHash));
+            pattern = pattern.concat(ZERO_PATTERN.repeat(numberOfHash));
         } else {
             pattern = INTEGER_PATTERN;
         }
@@ -250,7 +247,7 @@ class CalculatorNumberFormatter {
         return number.abs().compareTo(MAX_NUMBER_INPUT);
     }
 
-    private static BigDecimal roundNumber (BigDecimal number) {
+    public static BigDecimal roundNumber (BigDecimal number) {
 
         MathContext mathContext;
         int scale = number.scale();
@@ -277,6 +274,7 @@ class CalculatorNumberFormatter {
     }
 
     static String formatNumberForHistory (BigDecimal number) {
+        number = number.stripTrailingZeros();
         String formattedNumber = formatNumberForPrint(number);
         return formattedNumber.replace(GROUPING_SEPARATOR, EMPTY_STRING);
     }
