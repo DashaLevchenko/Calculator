@@ -34,6 +34,9 @@ public class Calculator {
     private static Unary unary = new Unary();
     /** Variable keeps history object */
     private static History history = new History();
+    /** Variable keeps memory object */
+    private static Memory memory;
+
 
     /**
      * Method returns history operation from calculator
@@ -664,6 +667,36 @@ public class Calculator {
     public static boolean isUnary (OperationsEnum operation) {
         return operation == OperationsEnum.SQRT || operation == OperationsEnum.SQR ||
                 operation == OperationsEnum.ONE_DIVIDE_X || operation == OperationsEnum.NEGATE;
+    }
+
+    public static void memoryAdd(BigDecimal number){
+        if(memory == null){
+            memory = new Memory();
+        }
+        memory.memoryAdd(number);
+    }
+    public static void memorySubtract(BigDecimal number){
+        if(memory == null){
+            memory = new Memory();
+        }
+        memory.memorySubtract(number);
+    }
+
+    public static void memoryClear(){
+        if(memory != null){
+            memory.memoryClear();
+            memory = null;
+        }
+    }
+    public static void memoryStore(BigDecimal number){
+        if(memory == null){
+            memory= new Memory();
+        }
+        memory.setNumber(number);
+    }
+
+    public static BigDecimal memoryRecall(){
+        return memory.memoryRecall();
     }
 
 }

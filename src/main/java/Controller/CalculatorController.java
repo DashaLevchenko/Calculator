@@ -854,11 +854,11 @@ public class CalculatorController {
      */
     @FXML
     void memoryStorePressed () throws ParseException {
-        if (memory == null) {
-            memory = new Memory();
-        }
-        memory.setNumber(setMemoryNumber());
-
+//        if (memory == null) {
+//            memory = new Memory();
+//        }
+//        memory.setNumber(setMemoryNumber());
+        Calculator.memoryStore(setMemoryNumber());
         setMemoryButtonsDisable(false);
         memoryPressed = true;
     }
@@ -869,11 +869,12 @@ public class CalculatorController {
      */
     @FXML
     void memoryAddPressed () throws ParseException {
-        if (memory == null) {
-            memory = new Memory();
-            setMemoryButtonsDisable(false);
-        }
-        memory.memoryAdd(setMemoryNumber());
+//        if (memory == null) {
+//            memory = new Memory();
+//        }
+//        memory.memoryAdd(setMemoryNumber());
+        Calculator.memoryAdd(setMemoryNumber());
+        setMemoryButtonsDisable(false);
         memoryPressed = true;
     }
 
@@ -883,11 +884,12 @@ public class CalculatorController {
      */
     @FXML
     void memoryClearPressed () {
-        if (memory != null) {
-            memory.memoryClear();
-            memory = null;
-            setMemoryButtonsDisable(true);
-        }
+//        if (memory != null) {
+//            memory.memoryClear();
+//            memory = null;
+//        }
+        Calculator.memoryClear();
+        setMemoryButtonsDisable(true);
     }
 
     /**
@@ -897,12 +899,12 @@ public class CalculatorController {
      */
     @FXML
     void memoryRecallPressed () {
-        if (memory != null) {
-            memoryPressed = true;
-            result = memory.memoryRecall();
-            formula.add(result);
-            printCalculateResult();
-        }
+//        if (memory != null) {
+//            formula.add(result);
+//        }
+        memoryPressed = true;
+        result = Calculator.memoryRecall();
+        printCalculateResult();
     }
 
     /**
@@ -912,12 +914,13 @@ public class CalculatorController {
      */
     @FXML
     void memorySubtractPressed () throws ParseException {
-        if (memory == null) {
-            memory = new Memory();
-            setMemoryButtonsDisable(false);
-        }
-        memory.memorySubtract(setMemoryNumber());
+//        if (memory == null) {
+//            memory = new Memory();
+//        }
+//        memory.memorySubtract(setMemoryNumber());
 
+        Calculator.memorySubtract(setMemoryNumber());
+        setMemoryButtonsDisable(false);
         memoryPressed = true;
     }
 

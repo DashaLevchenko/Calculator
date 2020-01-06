@@ -12,9 +12,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="feaeb0c2-feb2-4a9c-98e3-48b1d1a339aa" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/CalculatorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/CalculatorController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Model/Calculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Calculator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Model/OperationsEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/OperationsEnum.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -163,7 +162,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.CalculatorControllerTest">
+  <component name="RunManager" selected="Application.CalculatorMain">
     <configuration name="CalculatorMain" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="CalculatorApp.CalculatorMain" />
       <module name="Calculator" />
@@ -326,13 +325,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1565432602101</updated>
-    </task>
-    <task id="LOCAL-00082" summary="before change model,&#10;setOperation">
-      <created>1574690774752</created>
-      <option name="number" value="00082" />
-      <option name="presentableId" value="LOCAL-00082" />
-      <option name="project" value="LOCAL" />
-      <updated>1574690774752</updated>
     </task>
     <task id="LOCAL-00083" summary="before change model,&#10;setOperation">
       <created>1574698646399</created>
@@ -670,7 +662,14 @@
       <option name="project" value="LOCAL" />
       <updated>1578263085096</updated>
     </task>
-    <option name="localTasksCounter" value="131" />
+    <task id="LOCAL-00131" summary="Javadoc was added, before change memory in controller">
+      <created>1578273035218</created>
+      <option name="number" value="00131" />
+      <option name="presentableId" value="LOCAL-00131" />
+      <option name="project" value="LOCAL" />
+      <updated>1578273035219</updated>
+    </task>
+    <option name="localTasksCounter" value="132" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -772,7 +771,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="before change controller" />
     <MESSAGE value="rename model" />
     <MESSAGE value="before change model" />
     <MESSAGE value="before make calculator static" />
@@ -797,7 +795,8 @@
     <MESSAGE value="before add javadoc" />
     <MESSAGE value="before change methods in Controller" />
     <MESSAGE value="before change memory" />
-    <option name="LAST_COMMIT_MESSAGE" value="before change memory" />
+    <MESSAGE value="Javadoc was added, before change memory in controller" />
+    <option name="LAST_COMMIT_MESSAGE" value="Javadoc was added, before change memory in controller" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
