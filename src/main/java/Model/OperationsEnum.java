@@ -48,6 +48,7 @@ public enum OperationsEnum {
      * The singleton is negate
      */
     NEGATE,
+
     /**
      * The singleton is equal
      */
