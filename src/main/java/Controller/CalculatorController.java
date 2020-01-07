@@ -1,12 +1,9 @@
 package Controller;
 
-import Model.Calculator;
+import Model.*;
 import Model.Exceptions.DivideZeroException;
 import Model.Exceptions.InvalidInputException;
 import Model.Exceptions.ResultUndefinedException;
-import Model.History;
-import Model.Memory;
-import Model.OperationsEnum;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -172,12 +169,12 @@ public class CalculatorController {
     /** Variable keeps default y-position */
     private double yOffset = 0;
 
-    private Memory memory;
+//    private Memory memory;
 
     /** Formula which need to calculate */
     private ArrayList<Object> formula = new ArrayList<>();
 
-    private static BigDecimal roundNumber (BigDecimal number) {
+    private BigDecimal roundNumber (BigDecimal number) {
         return CalculatorNumberFormatter.roundNumber(number);
 
     }
@@ -517,6 +514,7 @@ public class CalculatorController {
     private void calculateFormula () {
         try {
             result = Calculator.calculator(formula);
+
             canBackspace = false;
             printCalculateResult();
 
@@ -786,6 +784,9 @@ public class CalculatorController {
      */
     @FXML
     void clearAllC () {
+//        if (memoryPressed) {
+//        calculateFormula();
+//        }
         generalDisplay.setText(DEFAULT_TEXT_TO_GENERAL_DISPLAY);
         outOperationMemory.setText(EMPTY_STRING);
 
@@ -828,7 +829,7 @@ public class CalculatorController {
             printToGeneralDisplay(DEFAULT_TEXT_TO_GENERAL_DISPLAY);
             if (memoryPressed) {
                 outOperationMemory.setText(EMPTY_STRING);
-                formula.clear();
+//                formula.clear();
                 Calculator.clearAllCalculator();
                 memoryPressed = false;
             }
@@ -858,6 +859,9 @@ public class CalculatorController {
 //            memory = new Memory();
 //        }
 //        memory.setNumber(setMemoryNumber());
+//        addNumberToFormula();
+//        addMemoryOperationToFormula(MemoryEnum.MEMORY_STORE);
+//        calculateMemory();
         Calculator.memoryStore(setMemoryNumber());
         setMemoryButtonsDisable(false);
         memoryPressed = true;
@@ -873,9 +877,42 @@ public class CalculatorController {
 //            memory = new Memory();
 //        }
 //        memory.memoryAdd(setMemoryNumber());
+
+//        addNumberToFormula();
+//        addMemoryOperationToFormula(MemoryEnum.MEMORY_ADD);
+//        calculateMemory();
+//        calculateFormula();
         Calculator.memoryAdd(setMemoryNumber());
         setMemoryButtonsDisable(false);
         memoryPressed = true;
+    }
+
+    private BigDecimal setMemoryNumber () throws ParseException {
+        BigDecimal memoryNumber;
+        if(canBackspace){
+            memoryNumber = getDisplayNumber();
+        }else{
+            if (result != null){
+                memoryNumber = result;
+            }else{
+                memoryNumber = getDisplayNumber();
+            }
+        }
+        return memoryNumber;
+    }
+
+//    private void calculateMemory () {
+//        try {
+//            result = Calculator.calculator(formula);
+//        }  catch (DivideZeroException | ResultUndefinedException | InvalidInputException e) {
+//            printError(getMassageException(e));
+//            printHistory();
+//        }
+////        canBackspace = false;
+//    }
+
+    private void addMemoryOperationToFormula (MemoryEnum memoryOperation) {
+        formula.add(memoryOperation);
     }
 
     /**
@@ -888,6 +925,9 @@ public class CalculatorController {
 //            memory.memoryClear();
 //            memory = null;
 //        }
+
+//        addMemoryOperationToFormula(MemoryEnum.MEMORY_CLEAR);
+//        calculateMemory();
         Calculator.memoryClear();
         setMemoryButtonsDisable(true);
     }
@@ -900,11 +940,24 @@ public class CalculatorController {
     @FXML
     void memoryRecallPressed () {
 //        if (memory != null) {
-//            formula.add(result);
 //        }
-        memoryPressed = true;
+
+//        result = Calculator.getMemoryResult();
+//        if(result != null){
+//            printCalculateResult();
+//        }
+
+//      addMemoryOperationToFormula(MemoryEnum.MEMORY_RECALL);
+//      calculateFormula();
         result = Calculator.memoryRecall();
+        formula.add(result);
+        memoryPressed = true;
+        canBackspace = false;
         printCalculateResult();
+//        System.out.println(result);
+//        result = Calculator.memoryRecall();
+//            formula.add(result);
+//        printCalculateResult();
     }
 
     /**
@@ -919,6 +972,9 @@ public class CalculatorController {
 //        }
 //        memory.memorySubtract(setMemoryNumber());
 
+//        addNumberToFormula();
+//        addMemoryOperationToFormula(MemoryEnum.MEMORY_SUBTRACT);
+//        calculateMemory();
         Calculator.memorySubtract(setMemoryNumber());
         setMemoryButtonsDisable(false);
         memoryPressed = true;
@@ -932,18 +988,18 @@ public class CalculatorController {
     }
 
 
-    /** Method sets number in memory object */
-    private BigDecimal setMemoryNumber () throws ParseException {
-        BigDecimal number;
-
-        if (result != null && !canBackspace) {
-            number = result;
-        } else {
-            number = getDisplayNumber();
-        }
-
-        return number;
-    }
+//    /** Method sets number in memory object */
+//    private BigDecimal setMemoryNumber () throws ParseException {
+//        BigDecimal number;
+//
+//        if (result != null && !canBackspace) {
+//            number = result;
+//        } else {
+//            number = getDisplayNumber();
+//        }
+//
+//        return number;
+//    }
 
     //endregion
 

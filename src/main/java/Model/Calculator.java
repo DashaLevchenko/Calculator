@@ -8,6 +8,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Objects;
 
 /**
  * This class realizes algorithm of calculator Windows 10
@@ -35,7 +36,7 @@ public class Calculator {
     /** Variable keeps history object */
     private static History history = new History();
     /** Variable keeps memory object */
-    private static Memory memory;
+    private static Memory memory = new Memory();
 
 
     /**
@@ -104,7 +105,7 @@ public class Calculator {
             checkObject(object);
 
             clearCalculator(i, object, formula);
-            parseNumber(object);
+            parseNumber(object, i, formula);
             parseOperation(object, i, formula);
 
             boolean canCalculate = canCalculate(i, formula);
@@ -112,6 +113,40 @@ public class Calculator {
                 calculate();
             }
         }
+    }
+
+    private static void parseMemory (Object object) {
+//        if (object instanceof MemoryEnum) {
+//            MemoryEnum memoryOperation = (MemoryEnum) object;
+//            BigDecimal memoryNumber = defineNumberForMemory();
+//            if (memoryOperation.equals(MemoryEnum.MEMORY_ADD)) {
+//                memoryAdd(memoryNumber);
+//            } else if (memoryOperation.equals(MemoryEnum.MEMORY_SUBTRACT)) {
+//                memorySubtract(memoryNumber);
+//            } else if (memoryOperation.equals(MemoryEnum.MEMORY_RECALL)) {
+//                memoryRecall();
+//            } else if (memoryOperation.equals(MemoryEnum.MEMORY_STORE)) {
+//                memoryStore(memoryNumber);
+//            } else if (memoryOperation.equals(MemoryEnum.MEMORY_CLEAR)) {
+//                memoryClear();
+//            }
+//        }
+    }
+
+    private static BigDecimal defineNumberForMemory () {
+        BigDecimal memoryNumber;
+        if (numberSecond == null && result == null) {
+            if (numberFirst != null) {
+                memoryNumber = numberFirst;
+            } else {
+                memoryNumber = BigDecimal.ZERO;
+            }
+        } else {
+            memoryNumber = Objects.requireNonNullElseGet(result, () -> numberSecond);
+        }
+
+
+        return memoryNumber;
     }
 
     /**
@@ -128,8 +163,10 @@ public class Calculator {
         }
 
         if (!(object instanceof OperationsEnum)) {
-            if (!(object instanceof Number)) {
-                throw new IllegalArgumentException();
+            if (!(object instanceof MemoryEnum)) {
+                if (!(object instanceof Number)) {
+                    throw new IllegalArgumentException();
+                }
             }
         }
 
@@ -140,10 +177,21 @@ public class Calculator {
      *
      * @param object Object which need to parse
      */
-    private static void parseNumber (Object object) {
+    private static void parseNumber (Object object, int index, ArrayList formula) {
         if (object instanceof Number) {
             BigDecimal number = new BigDecimal(object.toString());
             setNumber(number);
+
+            if (formula.size() > index + 1) {
+                Object nextObject = formula.get(index + 1);
+                if (nextObject instanceof MemoryEnum) {
+                    if (nextObject.equals(MemoryEnum.MEMORY_ADD) ||
+                            nextObject.equals(MemoryEnum.MEMORY_SUBTRACT) ||
+                            nextObject.equals(MemoryEnum.MEMORY_STORE) ) {
+                        history.deleteLast();
+                    }
+                }
+            }
         }
     }
 
@@ -168,6 +216,9 @@ public class Calculator {
                 setOperation(operationsEnum);
             }
         }
+        if (objectPresent instanceof MemoryEnum) {
+            parseMemory(objectPresent);
+        }
     }
 
 
@@ -187,6 +238,7 @@ public class Calculator {
         binary = new Binary();
         unary = new Unary();
         history = new History();
+//        memory = new Memory();
     }
 
     /**
@@ -669,34 +721,34 @@ public class Calculator {
                 operation == OperationsEnum.ONE_DIVIDE_X || operation == OperationsEnum.NEGATE;
     }
 
-    public static void memoryAdd(BigDecimal number){
-        if(memory == null){
-            memory = new Memory();
-        }
+    public static void memoryAdd (BigDecimal number) {
         memory.memoryAdd(number);
     }
-    public static void memorySubtract(BigDecimal number){
-        if(memory == null){
-            memory = new Memory();
-        }
+
+    public static void memorySubtract (BigDecimal number) {
         memory.memorySubtract(number);
     }
 
-    public static void memoryClear(){
-        if(memory != null){
-            memory.memoryClear();
-            memory = null;
-        }
-    }
-    public static void memoryStore(BigDecimal number){
-        if(memory == null){
-            memory= new Memory();
-        }
-        memory.setNumber(number);
+    public static void memoryClear () {
+        memory.memoryClear();
+//        memoryResult = null;
+        memory = new Memory();
     }
 
-    public static BigDecimal memoryRecall(){
+    public static void memoryStore (BigDecimal number) {
+        memory.setNumber(number);
+    }
+//
+//    public static BigDecimal getMemoryResult () {
+//        return memoryResult;
+//    }
+//
+//    private static BigDecimal memoryResult;
+    public static BigDecimal memoryRecall () {
         return memory.memoryRecall();
+//        if (memoryResult != null) {
+//            result = memoryResult;
+//        }
     }
 
 }

@@ -1,13 +1,17 @@
 package Controller;
 
+import Model.Calculator;
+import Model.Exceptions.DivideZeroException;
+import Model.Exceptions.InvalidInputException;
+import Model.Exceptions.ResultUndefinedException;
+import Model.MemoryEnum;
+
 import java.math.BigDecimal;
 
 public class e {
 
-    public static void main (String[] args) {
-        String k = "0.00000000000000123";
-        BigDecimal l = new BigDecimal(k);
-        System.out.println(l.precision());
-        System.out.println(CalculatorNumberFormatter.formatNumberForPrint(l));
+    public static void main (String[] args) throws DivideZeroException, ResultUndefinedException, InvalidInputException {
+        BigDecimal u = Calculator.calculator(8, MemoryEnum.MEMORY_ADD,  MemoryEnum.MEMORY_ADD, MemoryEnum.MEMORY_RECALL );
+        System.out.println(u);
     }
 }

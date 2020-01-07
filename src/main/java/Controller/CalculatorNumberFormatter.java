@@ -247,9 +247,9 @@ class CalculatorNumberFormatter {
         return number.abs().compareTo(MAX_NUMBER_INPUT);
     }
 
-    public static BigDecimal roundNumber (BigDecimal number) {
-
+    static BigDecimal roundNumber (BigDecimal number) {
         MathContext mathContext;
+
         int scale = number.scale();
         if (scale > 0 && scale < MAX_SCALE) {
             mathContext = MATH_CONTEXT_HALF_DOWN;

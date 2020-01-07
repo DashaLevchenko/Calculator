@@ -10,34 +10,41 @@ import java.math.BigDecimal;
 public class Memory {
     private BigDecimal number;
 
+//
+//    private BigDecimal numberSecond;
+//
+//    public void setNumberSecond (BigDecimal numberSecond) {
+//        this.numberSecond = numberSecond;
+//    }
+
     /**
      * Method adds numbers
-     * @param numberSecond Number which added to {@code number}
      */
     public void memoryAdd(BigDecimal numberSecond) {
         if (number != null) {
             number = number.add(numberSecond);
-        } else{
+        } else {
             number = numberSecond;
         }
     }
+
     /**
      * Method subtracts numbers
-     * @param numberSecond Number which subtract to {@code number}
      */
     public void memorySubtract(BigDecimal numberSecond) {
         if (number != null) {
             number = number.subtract(numberSecond);
-        } else{
+        } else {
             number = BigDecimal.ZERO.subtract(numberSecond);
         }
     }
 
     /**
      * Method returns {@code number}
+     *
      * @return Number
      */
-    public BigDecimal memoryRecall() {
+    public BigDecimal memoryRecall () {
         return number;
     }
 
@@ -45,12 +52,30 @@ public class Memory {
     /**
      * This method set null value to {@code number}
      */
-    public void memoryClear() {
+    public void memoryClear () {
         number = null;
     }
 
+//    public void memory (MemoryEnum memoryOperation) {
+//        if (memoryOperation == null) {
+//            throw new NullPointerException("Enter memory operation");
+//        }
+//
+//        if (memoryOperation.equals(MemoryEnum.MEMORY_ADD)) {
+//            memoryAdd();
+//        } else if (memoryOperation.equals(MemoryEnum.MEMORY_SUBTRACT)) {
+//            memorySubtract();
+//        } else if (memoryOperation.equals(MemoryEnum.MEMORY_RECALL)) {
+//            memoryRecall();
+////        } else if (memoryOperation.equals(MemoryEnum.MEMORY_STORE)) {
+////            memorySrore();
+//        } else if (memoryOperation.equals(MemoryEnum.MEMORY_CLEAR)) {
+//            memoryClear();
+//        }
+//    }
 
-    public void setNumber(BigDecimal number) {
+
+    public void setNumber (BigDecimal number) {
         this.number = number;
     }
 }
