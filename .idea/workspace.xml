@@ -12,13 +12,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="feaeb0c2-feb2-4a9c-98e3-48b1d1a339aa" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Model/MemoryEnum.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controller/CalculatorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/CalculatorController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/CalculatorNumberFormatter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/CalculatorNumberFormatter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/e.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/e.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/e.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Model/Calculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Calculator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Model/Memory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Memory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/MemoryEnum.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/Controller/CalculatorControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Controller/CalculatorControllerTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Controller/CalculatorController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Controller/CalculatorController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Model/Calculator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Model/Calculator.class" afterDir="false" />
@@ -172,7 +171,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.CalculatorControllerTest.checkMemorySubtract">
+  <component name="RunManager" selected="JUnit.CalculatorControllerTest">
     <configuration name="CalculatorMain" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="CalculatorApp.CalculatorMain" />
       <module name="Calculator" />
@@ -303,8 +302,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.CalculatorControllerTest.checkMemorySubtract" />
         <item itemvalue="JUnit.CalculatorControllerTest" />
+        <item itemvalue="JUnit.CalculatorControllerTest.checkMemorySubtract" />
         <item itemvalue="JUnit.CalculatorControllerTest.checkAllMemory" />
         <item itemvalue="Application.e" />
         <item itemvalue="JUnit.CalculatorControllerTest.checkMIXBinaryOperations" />
@@ -809,15 +808,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="memory methods was added, &#10;need to change them" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/Controller/CalculatorController.java</url>
-          <line>949</line>
-          <option name="timeStamp" value="82" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="JUnit">
         <watch expression="calculator" language="JAVA" />

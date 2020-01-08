@@ -10,13 +10,6 @@ import java.math.BigDecimal;
 public class Memory {
     private BigDecimal number;
 
-//
-//    private BigDecimal numberSecond;
-//
-//    public void setNumberSecond (BigDecimal numberSecond) {
-//        this.numberSecond = numberSecond;
-//    }
-
     /**
      * Method adds numbers
      */
@@ -48,32 +41,12 @@ public class Memory {
         return number;
     }
 
-
     /**
      * This method set null value to {@code number}
      */
     public void memoryClear () {
         number = null;
     }
-
-//    public void memory (MemoryEnum memoryOperation) {
-//        if (memoryOperation == null) {
-//            throw new NullPointerException("Enter memory operation");
-//        }
-//
-//        if (memoryOperation.equals(MemoryEnum.MEMORY_ADD)) {
-//            memoryAdd();
-//        } else if (memoryOperation.equals(MemoryEnum.MEMORY_SUBTRACT)) {
-//            memorySubtract();
-//        } else if (memoryOperation.equals(MemoryEnum.MEMORY_RECALL)) {
-//            memoryRecall();
-////        } else if (memoryOperation.equals(MemoryEnum.MEMORY_STORE)) {
-////            memorySrore();
-//        } else if (memoryOperation.equals(MemoryEnum.MEMORY_CLEAR)) {
-//            memoryClear();
-//        }
-//    }
-
 
     public void setNumber (BigDecimal number) {
         this.number = number;

@@ -2261,7 +2261,6 @@ public class CalculatorControllerTest extends ApplicationTest {
         }
 
         if (button != null) {
-//            clickOn(button);
             Scene scene = button.getScene();
             double sceneX = scene.getWindow().getX();
             double sceneY = scene.getWindow().getY();

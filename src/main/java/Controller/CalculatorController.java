@@ -173,11 +173,7 @@ public class CalculatorController {
 
     /** Formula which need to calculate */
     private ArrayList<Object> formula = new ArrayList<>();
-
-    private BigDecimal roundNumber (BigDecimal number) {
-        return CalculatorNumberFormatter.roundNumber(number);
-
-    }
+    private Memory memory;
 
     public BigDecimal getResult () {
         return result;
@@ -239,11 +235,16 @@ public class CalculatorController {
         }
 
         if (number.scale() == 0) {
-            printToGeneralDisplay(CalculatorNumberFormatter.addDecimalSeparator(number));
+            String textPrint = addDecimalSeparator(number);
+            printToGeneralDisplay(textPrint);
         }
 
         canChangeOperator = false;
         memoryPressed = false;
+    }
+
+    private String addDecimalSeparator (BigDecimal number) {
+        return  CalculatorNumberFormatter.addDecimalSeparator(number);
     }
 
     /**
@@ -305,7 +306,7 @@ public class CalculatorController {
         String textToPrint = formatNumberForOutput(number);
 
         if (isLastSymbolDecimalSeparator) {
-            textToPrint = CalculatorNumberFormatter.addDecimalSeparator(number);
+            textToPrint = addDecimalSeparator(number);
         }
 
         printToGeneralDisplay(textToPrint);
@@ -543,7 +544,7 @@ public class CalculatorController {
             String textForPrint = formatNumberForOutput(number);
 
             if (isLastSymbolDecimalSeparator) {
-                textForPrint = CalculatorNumberFormatter.addDecimalSeparator(number);
+                textForPrint = addDecimalSeparator(number);
             }
             printToGeneralDisplay(textForPrint);
         }
@@ -657,6 +658,7 @@ public class CalculatorController {
         }
     }
 
+
     private void printToGeneralDisplay (String text) {
         generalDisplay.setText(text);
         resizeOutputText();
@@ -705,6 +707,11 @@ public class CalculatorController {
         if (overflow) {
             throw new OverflowException();
         }
+    }
+
+    private BigDecimal roundNumber (BigDecimal number) {
+        return CalculatorNumberFormatter.roundNumber(number);
+
     }
 
     private int compareToZero (BigDecimal absoluteNumber) {
@@ -855,14 +862,11 @@ public class CalculatorController {
      */
     @FXML
     void memoryStorePressed () throws ParseException {
-//        if (memory == null) {
-//            memory = new Memory();
-//        }
-//        memory.setNumber(setMemoryNumber());
-//        addNumberToFormula();
-//        addMemoryOperationToFormula(MemoryEnum.MEMORY_STORE);
-//        calculateMemory();
-        Calculator.memoryStore(setMemoryNumber());
+        if (memory == null) {
+            memory = new Memory();
+        }
+        memory.setNumber(setMemoryNumber());
+
         setMemoryButtonsDisable(false);
         memoryPressed = true;
     }
@@ -873,46 +877,12 @@ public class CalculatorController {
      */
     @FXML
     void memoryAddPressed () throws ParseException {
-//        if (memory == null) {
-//            memory = new Memory();
-//        }
-//        memory.memoryAdd(setMemoryNumber());
-
-//        addNumberToFormula();
-//        addMemoryOperationToFormula(MemoryEnum.MEMORY_ADD);
-//        calculateMemory();
-//        calculateFormula();
-        Calculator.memoryAdd(setMemoryNumber());
-        setMemoryButtonsDisable(false);
-        memoryPressed = true;
-    }
-
-    private BigDecimal setMemoryNumber () throws ParseException {
-        BigDecimal memoryNumber;
-        if(canBackspace){
-            memoryNumber = getDisplayNumber();
-        }else{
-            if (result != null){
-                memoryNumber = result;
-            }else{
-                memoryNumber = getDisplayNumber();
-            }
+        if (memory == null) {
+            memory = new Memory();
+            setMemoryButtonsDisable(false);
         }
-        return memoryNumber;
-    }
-
-//    private void calculateMemory () {
-//        try {
-//            result = Calculator.calculator(formula);
-//        }  catch (DivideZeroException | ResultUndefinedException | InvalidInputException e) {
-//            printError(getMassageException(e));
-//            printHistory();
-//        }
-////        canBackspace = false;
-//    }
-
-    private void addMemoryOperationToFormula (MemoryEnum memoryOperation) {
-        formula.add(memoryOperation);
+        memory.memoryAdd(setMemoryNumber());
+        memoryPressed = true;
     }
 
     /**
@@ -921,15 +891,11 @@ public class CalculatorController {
      */
     @FXML
     void memoryClearPressed () {
-//        if (memory != null) {
-//            memory.memoryClear();
-//            memory = null;
-//        }
-
-//        addMemoryOperationToFormula(MemoryEnum.MEMORY_CLEAR);
-//        calculateMemory();
-        Calculator.memoryClear();
-        setMemoryButtonsDisable(true);
+        if (memory != null) {
+            memory.memoryClear();
+            memory = null;
+            setMemoryButtonsDisable(true);
+        }
     }
 
     /**
@@ -939,25 +905,14 @@ public class CalculatorController {
      */
     @FXML
     void memoryRecallPressed () {
-//        if (memory != null) {
-//        }
-
-//        result = Calculator.getMemoryResult();
-//        if(result != null){
-//            printCalculateResult();
-//        }
-
-//      addMemoryOperationToFormula(MemoryEnum.MEMORY_RECALL);
-//      calculateFormula();
-        result = Calculator.memoryRecall();
-        formula.add(result);
         memoryPressed = true;
+        if (memory != null) {
+            result = memory.memoryRecall();
+            formula.add(result);
+
+            printCalculateResult();
+        }
         canBackspace = false;
-        printCalculateResult();
-//        System.out.println(result);
-//        result = Calculator.memoryRecall();
-//            formula.add(result);
-//        printCalculateResult();
     }
 
     /**
@@ -967,16 +922,12 @@ public class CalculatorController {
      */
     @FXML
     void memorySubtractPressed () throws ParseException {
-//        if (memory == null) {
-//            memory = new Memory();
-//        }
-//        memory.memorySubtract(setMemoryNumber());
+        if (memory == null) {
+            memory = new Memory();
+            setMemoryButtonsDisable(false);
+        }
+        memory.memorySubtract(setMemoryNumber());
 
-//        addNumberToFormula();
-//        addMemoryOperationToFormula(MemoryEnum.MEMORY_SUBTRACT);
-//        calculateMemory();
-        Calculator.memorySubtract(setMemoryNumber());
-        setMemoryButtonsDisable(false);
         memoryPressed = true;
     }
 
@@ -988,18 +939,18 @@ public class CalculatorController {
     }
 
 
-//    /** Method sets number in memory object */
-//    private BigDecimal setMemoryNumber () throws ParseException {
-//        BigDecimal number;
-//
-//        if (result != null && !canBackspace) {
-//            number = result;
-//        } else {
-//            number = getDisplayNumber();
-//        }
-//
-//        return number;
-//    }
+    /** Method sets number in memory object */
+    private BigDecimal setMemoryNumber () throws ParseException {
+        BigDecimal number;
+
+        if (result != null && !canBackspace) {
+            number = result;
+        } else {
+            number = getDisplayNumber();
+        }
+
+        return number;
+    }
 
     //endregion
 
