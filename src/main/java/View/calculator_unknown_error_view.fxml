@@ -52,12 +52,12 @@
       </TextArea>
       <Button fx:id="reset" defaultButton="true" layoutX="370.0" layoutY="218.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#resetCalculator" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation_arithmetic" stylesheets="@style.css" text="reset" AnchorPane.bottomAnchor="16.0" AnchorPane.rightAnchor="22.0">
          <font>
-            <Font name="CalculatorApp.Calculator MDL2 Assets" size="15.0" />
+            <Font name="Calculator MDL2 Assets" size="15.0" />
          </font>
       </Button>
       <Button fx:id="ok" defaultButton="true" layoutX="295.0" layoutY="140.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#okButtonPressed" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation_arithmetic" stylesheets="@style.css" text="Ok" visible="false">
          <font>
-            <Font name="CalculatorApp.Calculator MDL2 Assets" size="15.0" />
+            <Font name="Calculator MDL2 Assets" size="15.0" />
          </font>
       </Button>
    </children>

@@ -7,5 +7,4 @@ module Calculator {
 
     opens Controller;
     opens View;
-    opens CalculatorApp;
 }

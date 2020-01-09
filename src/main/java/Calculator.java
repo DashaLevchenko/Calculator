@@ -1,4 +1,6 @@
-package CalculatorApp;
+package main.java;
+
+import View.CalculatorMain;
 
 public class Calculator {
 

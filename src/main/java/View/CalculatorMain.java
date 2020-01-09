@@ -1,4 +1,4 @@
-package CalculatorApp;
+package View;
 
 import Controller.CalculatorController;
 import Controller.CalculatorUnknownError;
@@ -14,6 +14,7 @@ import java.io.IOException;
 /**
  * Class launches calculator application.
  */
+//todo refactor
 public class CalculatorMain extends Application {
     private static CalculatorController calculatorController;
 
@@ -35,12 +36,12 @@ public class CalculatorMain extends Application {
         Parent root = loader.load();
 
         stage.setScene(new Scene(root));
-        stage.setTitle("CalculatorApp.Calculator");
         stage.setMinHeight(500);
         stage.setMinWidth(320);
         stage.initStyle(StageStyle.UNDECORATED);
 
         stage.show();
+
         calculatorController = loader.getController();
         CalculatorUnknownError calculatorUnknownError = new CalculatorUnknownError();
         Thread.setDefaultUncaughtExceptionHandler((thread, throwable) -> calculatorUnknownError.catchUnknownError(throwable));

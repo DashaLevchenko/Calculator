@@ -1,9 +1,12 @@
-package Controller;
+package main.java.Controller;
 
-import Model.*;
+import Model.Calculator;
 import Model.Exceptions.DivideZeroException;
 import Model.Exceptions.InvalidInputException;
 import Model.Exceptions.ResultUndefinedException;
+import Model.History;
+import Model.Memory;
+import Model.OperationsEnum;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -89,16 +92,24 @@ public class CalculatorController {
     //region Number buttons
     @FXML
     private GridPane calculatorButtons;
-    //endregion
     @FXML
     private Button zero, one, two, three,
             four, five, six, seven, eight, nine;
+    //endregion
+
     //region Memory buttons
     @FXML
     private GridPane memoryPanel;
     @FXML
     private Button memoryClear, memoryRecall, memoryStore,
             memoryAdd, memorySubtract;
+
+    //endregion
+
+    //region Operation buttons
+    //Unary operation buttons
+    @FXML
+    private Button sqrt, sqr, oneDivideX;
     //Binary operation buttons
     @FXML
     private Button divide, multiply, subtract, add;
@@ -106,10 +117,11 @@ public class CalculatorController {
     private Button equal;
     @FXML
     private Button percent;
-    //endregion
-    //Unary operation buttons
+    //Clear buttons
     @FXML
-    private Button sqrt, sqr, oneDivideX;
+    private Button CE, C;
+    //endregion
+
     //region Displays
     @FXML
     private Label generalDisplay;
@@ -120,9 +132,7 @@ public class CalculatorController {
     private ScrollPane scrollPaneOperation;
     @FXML
     private Button scrollButtonLeft, scrollButtonRight;
-    //Clear buttons
-    @FXML
-    private Button CE, C;
+
     //Change number buttons
     @FXML
     private Button backspace, negate, point;
@@ -184,34 +194,7 @@ public class CalculatorController {
         generalDisplay.setText(DEFAULT_TEXT_TO_GENERAL_DISPLAY);
     }
 
-    //region Text
-
-    /**
-     * This method show calculator's left menu, if button show menu was pressed
-     */
-    @FXML
-    void showLeftMenu () {
-        double transitionX;
-        boolean visible;
-
-        if (!showLeftMenu) {
-            transitionX = leftMenu.getWidth();
-            showLeftMenu = true;
-            visible = false;
-        } else {
-            transitionX = 0;
-            showLeftMenu = false;
-            visible = true;
-        }
-
-        double speedOfAnimation = 0.1;
-        Duration duration = Duration.seconds(speedOfAnimation);
-        TranslateTransition transition = new TranslateTransition(duration, leftMenu);
-
-        transition.setToX(transitionX);
-        textStandard.setVisible(visible);
-        transition.play();
-    }
+    //region Input
 
     /**
      * Method adds comma to text from general display,
@@ -243,8 +226,22 @@ public class CalculatorController {
         memoryPressed = false;
     }
 
+
+    /**
+     * Method gets text from general display and parses text to number.
+     *
+     * @return Number was parsed from general display.
+     * @throws ParseException If can't parse text to number.
+     */
+    //todo rename out, delete print Stack Trace(ParseException)
+    private BigDecimal getDisplayNumber () throws ParseException {
+        String textFromGeneralDisplay = generalDisplay.getText();
+        isLastSymbolComma(textFromGeneralDisplay);
+        return getParsedNumber(textFromGeneralDisplay);
+    }
+
     private String addDecimalSeparator (BigDecimal number) {
-        return  CalculatorNumberFormatter.addDecimalSeparator(number);
+        return CalculatorNumberFormatter.addDecimalSeparator(number);
     }
 
     /**
@@ -267,22 +264,19 @@ public class CalculatorController {
      *
      * @throws ParseException If can't parse text to number.
      */
+    //todo change backspace
     @FXML
     void backspacePressed () throws ParseException {
         clearError();
         if (canBackspace) {
             BigDecimal number = getDisplayNumber();
-            String print = CalculatorNumberFormatter.backspace(number, isLastSymbolDecimalSeparator);
-            printToGeneralDisplay(print);
+            String textForPrint = CalculatorNumberFormatter.backspace(number, isLastSymbolDecimalSeparator);
+            printToGeneralDisplay(textForPrint);
         }
     }
 
     private void isLastSymbolComma (String textDisplay) {
         isLastSymbolDecimalSeparator = textDisplay.endsWith(DECIMAL_SEPARATOR_AFTER_FORMATTER);
-    }
-
-    private String getTextDisplay () {
-        return generalDisplay.getText();
     }
 
     /**
@@ -292,17 +286,19 @@ public class CalculatorController {
      * If count symbols in text from general display more than valid count char,
      * method does not concat text from general display with text from number button.
      * <p>
-     * Also method sets default text and outs it on general display
+     * Also method sets default text and outs it on general display.
      *
-     * @param actionEvent Button from number buttons group was pressed
+     * @param actionEvent Button from number buttons group was pressed.
+     * @throws ParseException If can't parse text to number.
      */
+    //todo change method
     @FXML
     void numberButtonPressed (ActionEvent actionEvent) throws ParseException {
         clearError();
         setDefaultTextAfterResult();
 
-        BigDecimal numeric = new BigDecimal(getButton(actionEvent).getText());
-        BigDecimal number = addNumericToNumber(numeric);
+        BigDecimal digit = new BigDecimal(getButton(actionEvent).getText());
+        BigDecimal number = addDigitToNumber(digit);
         String textToPrint = formatNumberForOutput(number);
 
         if (isLastSymbolDecimalSeparator) {
@@ -310,47 +306,60 @@ public class CalculatorController {
         }
 
         printToGeneralDisplay(textToPrint);
-
         canChangeOperator = false;
     }
 
-    private BigDecimal addNumericToNumber (BigDecimal numeric) throws ParseException {
+    /**
+     * This method add digit to number from {@code generalDisplay}.
+     *
+     * @param digit The digit need do add to {@code number}
+     * @return Number with digit was added
+     * @throws ParseException If can't parse text to number.
+     */
+    private BigDecimal addDigitToNumber (BigDecimal digit) throws ParseException {
         BigDecimal number = getDisplayNumber();
 
         if (compareToZero(number) == 0 && number.scale() == 0 && !isLastSymbolDecimalSeparator) {
-            number = numeric;
+            number = digit;
         } else {
-            int numericInNumber = numericInNumber(number);
+            int digitInNumber = countDigitInNumber(number);
 
-            if (numericInNumber < DEFAULT_MAX_CHARS_INPUT) {
+            if (digitInNumber < DEFAULT_MAX_CHARS_INPUT) {
                 String numberString = number.toPlainString();
 
                 if (isLastSymbolDecimalSeparator) {
                     numberString = numberString.concat(DECIMAL_SEPARATOR_BEFORE_FORMATTER);
                     isLastSymbolDecimalSeparator = false;
                 }
-                number = new BigDecimal(numberString.concat(numeric.toString()));
+                number = new BigDecimal(numberString.concat(digit.toString()));
             }
         }
         return number;
     }
 
-    private int numericInNumber (BigDecimal number) {
-        int numericInNumber;
+    /**
+     * Method calculate the number of digits in {@code number}
+     *
+     * @param number The number in which need to calculate the number of digits
+     * @return Number of digit
+     */
+    private int countDigitInNumber (BigDecimal number) {
+        int digitInNumber;
         number = number.abs();
         if (compareToZero(number) > 0 && compareToOne(number) < 0) {
-            numericInNumber = number.scale();
+            digitInNumber = number.scale();
         } else {
-            numericInNumber = number.precision();
+            digitInNumber = number.precision();
         }
 
-        return numericInNumber;
+        return digitInNumber;
     }
 
     private Button getButton (ActionEvent actionEvent) {
         return ((Button) actionEvent.getSource());
     }
 
+    //todo try/catch remove
     private BigDecimal getParsedNumber (String numberString) throws ParseException {
         return CalculatorNumberFormatter.getParsedNumber(numberString);
     }
@@ -486,19 +495,6 @@ public class CalculatorController {
             canChangeOperator = false;
         }
     }
-
-    /**
-     * Method gets text from general display and parses text to number.
-     *
-     * @return Number was parsed from general display.
-     * @throws ParseException If can't parse text to number.
-     */
-    private BigDecimal getDisplayNumber () throws ParseException {
-        String textFromGeneralDisplay = getTextDisplay();
-        isLastSymbolComma(textFromGeneralDisplay);
-        return getParsedNumber(textFromGeneralDisplay);
-    }
-
     //endregion
 
     //region Calculate
@@ -512,17 +508,38 @@ public class CalculatorController {
      * calls print result method,
      * catches exception.
      */
+    //todo remove global variable overflow
     private void calculateFormula () {
         try {
             result = Calculator.calculator(formula);
-
             canBackspace = false;
             printCalculateResult();
-
         } catch (DivideZeroException | ResultUndefinedException | InvalidInputException e) {
             printError(getMassageException(e));
             printHistory();
         }
+    }
+
+    /**
+     * Method calculate unary operations, if {@code sqr, sqrt, oneDivideX} was pressed.
+     * Also method sets first or second number in calculator.
+     * Prints result or exception.
+     *
+     * @param operationsEnum Operation
+     */
+    private void calculateUnaryOperations (OperationsEnum operationsEnum) throws ParseException {
+        boolean isNegate = Calculator.isNegate(operationsEnum);
+
+        if (isNegate) {
+            calculateNegateOperation();
+        } else {
+            addNumberToFormula();
+            addOperationToFormula(operationsEnum);
+            calculateFormula();
+            printHistory();
+            memoryPressed = false;
+        }
+
     }
 
     /**
@@ -535,6 +552,7 @@ public class CalculatorController {
      *
      * @throws ParseException If can't parse text to number.
      */
+    //todo change negate
     private void calculateNegateOperation () throws ParseException {
         if (!canBackspace || memoryPressed) {
             addOperationToFormula(OperationsEnum.NEGATE);
@@ -591,27 +609,6 @@ public class CalculatorController {
 
     //region Print
 
-    /**
-     * Method calculate unary operations, if {@code sqr, sqrt, oneDivideX} was pressed.
-     * Also method sets first or second number in calculator.
-     * Prints result or exception.
-     *
-     * @param operationsEnum Operation
-     */
-    private void calculateUnaryOperations (OperationsEnum operationsEnum) throws ParseException {
-        boolean isNegate = Calculator.isNegate(operationsEnum);
-
-        if (isNegate) {
-            calculateNegateOperation();
-        } else {
-            addNumberToFormula();
-            addOperationToFormula(operationsEnum);
-            calculateFormula();
-            printHistory();
-            memoryPressed = false;
-        }
-
-    }
 
     /**
      * Method outputs exception's message on general display,
@@ -744,6 +741,7 @@ public class CalculatorController {
      * This method moves scroll of calculator history in left if scroll button was pressed.
      * Makes left button invisible, if can't scroll left
      */
+    //todo duplication  scrollButtonRight.setVisible(true);
     @FXML
     void scrollButtonLeftPressed () {
         double moveScrollLeft = scrollPaneOperation.getHvalue() + moveScroll;
@@ -933,6 +931,7 @@ public class CalculatorController {
 
 
     /** Method makes memory clear and memory recall buttons disable or not disable */
+    //todo rename
     private void setMemoryButtonsDisable (boolean disable) {
         memoryClear.setDisable(disable);
         memoryRecall.setDisable(disable);
@@ -1016,6 +1015,33 @@ public class CalculatorController {
     void clickWindow (MouseEvent event) {
         xOffset = event.getSceneX();
         yOffset = event.getSceneY();
+    }
+
+    /**
+     * This method show calculator's left menu, if button show menu was pressed
+     */
+    @FXML
+    void showLeftMenu () {
+        double transitionX;
+        boolean visible;
+
+        if (!showLeftMenu) {
+            transitionX = leftMenu.getWidth();
+            showLeftMenu = true;
+            visible = false;
+        } else {
+            transitionX = 0;
+            showLeftMenu = false;
+            visible = true;
+        }
+
+        double speedOfAnimation = 0.1;
+        Duration duration = Duration.seconds(speedOfAnimation);
+        TranslateTransition transition = new TranslateTransition(duration, leftMenu);
+
+        transition.setToX(transitionX);
+        textStandard.setVisible(visible);
+        transition.play();
     }
 
     //endregion

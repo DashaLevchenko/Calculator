@@ -12,17 +12,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="feaeb0c2-feb2-4a9c-98e3-48b1d1a339aa" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/Calculator_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/Calculator_jar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/CalculatorApp/Calculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calculator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/CalculatorApp/CalculatorMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/CalculatorMain.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controller/CalculatorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/CalculatorController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/e.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Calculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Calculator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Memory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Memory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Model/MemoryEnum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/CalculatorUnknownError.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/CalculatorUnknownError.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Demo/Demo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Demo/Demo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/View/calculator_unknown_error_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/calculator_unknown_error_view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/View/calculator_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/calculator_view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/View/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/Controller/CalculatorControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Controller/CalculatorControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/View/Calculator_ViewTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/View/Calculator_ViewTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Controller/CalculatorController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Controller/CalculatorController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Model/Calculator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Model/Calculator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Model/Memory.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Model/Memory.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Demo/Demo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Demo/Demo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/View/calculator_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/calculator_view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/View/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/module-info.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/test-classes/Controller/CalculatorControllerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/Controller/CalculatorControllerTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/View/Calculator_ViewTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/View/Calculator_ViewTest.class" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -49,12 +59,12 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JavaFXApplication" />
         <option value="module-info" />
         <option value="FxmlFile" />
         <option value="JUnit5 Test Class" />
         <option value="Class" />
         <option value="Enum" />
+        <option value="JavaFXApplication" />
       </list>
     </option>
   </component>
@@ -102,18 +112,16 @@
     <property name="ToolWindowFind.ShowToolbar" value="false" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
+    <property name="last_directory_selection" value="$PROJECT_DIR$/src/main/java" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
-    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="project.structure.side.proportion" value="0.19375" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="Controller" />
-    </key>
     <key name="CreateTestDialog.RecentsKey">
       <recent name="Demo" />
       <recent name="Model" />
@@ -125,9 +133,16 @@
       <recent name="org.testfx.framework.junit.ApplicationTest" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
-      <recent name="Model" />
-      <recent name="Controller" />
       <recent name="" />
+      <recent name="Controller" />
+      <recent name="View" />
+      <recent name="Model" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\User\IdeaProjects\Calculator2\src" />
+      <recent name="C:\Users\User\IdeaProjects\Calculator2" />
+      <recent name="C:\Users\User\IdeaProjects\Calculator2\src\main\java\Controller" />
+      <recent name="C:\Users\User\IdeaProjects\Calculator2\src\test\java\Model" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\User\IdeaProjects\Calculator\src\main\java" />
@@ -137,15 +152,12 @@
       <recent name="C:\Users\User\IdeaProjects\Calculator2\target\classes\View\src" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="View" />
       <recent name="CalculatorApp" />
       <recent name="Model" />
-      <recent name="View" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\User\IdeaProjects\Calculator2\src" />
-      <recent name="C:\Users\User\IdeaProjects\Calculator2" />
-      <recent name="C:\Users\User\IdeaProjects\Calculator2\src\main\java\Controller" />
-      <recent name="C:\Users\User\IdeaProjects\Calculator2\src\test\java\Model" />
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="Controller" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -154,9 +166,9 @@
       <command value="mvn clean install:install" />
       <command value="mvn clean install" />
       <command value="mvn clean compile javafx:compile jar" />
+      <command value="mvn clean compile" />
       <command value="mvn clean" />
       <command value="mvn clean package" />
-      <command value="mvn clean compile" />
     </option>
   </component>
   <component name="RunDashboard">
@@ -171,9 +183,35 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.CalculatorControllerTest">
+  <component name="RunManager" selected="Application.CalculatorLaunch">
+    <configuration name="Calculator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Calculator" />
+      <module name="Calculator" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="View.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CalculatorLaunch" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="CalculatorApp.CalculatorLaunch" />
+      <module name="Calculator" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="View.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="CalculatorMain" type="Application" factoryName="Application" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="CalculatorApp.CalculatorMain" />
+      <option name="MAIN_CLASS_NAME" value="View.CalculatorMain" />
       <module name="Calculator" />
       <extension name="coverage">
         <pattern>
@@ -185,24 +223,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="e" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Controller.e" />
-      <module name="Calculator" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Controller.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="CalculatorControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Calculator" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Controller.*" />
+          <option name="PATTERN" value=".*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -213,59 +238,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CalculatorControllerTest.checkAllMemory" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Calculator" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Controller.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="Controller" />
-      <option name="MAIN_CLASS_NAME" value="Controller.CalculatorControllerTest" />
-      <option name="METHOD_NAME" value="checkAllMemory" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="CalculatorControllerTest.checkMIXBinaryOperations" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Calculator" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Controller.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="Controller" />
-      <option name="MAIN_CLASS_NAME" value="Controller.CalculatorControllerTest" />
-      <option name="METHOD_NAME" value="checkMIXBinaryOperations" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="CalculatorControllerTest.checkMemorySubtract" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Calculator" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Controller.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="Controller" />
-      <option name="MAIN_CLASS_NAME" value="Controller.CalculatorControllerTest" />
-      <option name="METHOD_NAME" value="checkMemorySubtract" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="Calculator_ControllerTest" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
       <module name="Calculator2" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Controller.*" />
+          <option name="PATTERN" value=".*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -291,22 +268,30 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Calculator-1.0-SNAPSHOT.jar" type="JarApplication" temporary="true">
+      <option name="JAR_PATH" value="$PROJECT_DIR$/target/Calculator-1.0-SNAPSHOT.jar" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Calculator.jar" type="JarApplication" temporary="true">
+      <option name="JAR_PATH" value="$PROJECT_DIR$/out/artifacts/Calculator_jar/Calculator.jar" />
+      <method v="2" />
+    </configuration>
     <list>
       <item itemvalue="Application.CalculatorMain" />
-      <item itemvalue="Application.e" />
+      <item itemvalue="Application.CalculatorLaunch" />
+      <item itemvalue="Application.CalculatorLaunch" />
+      <item itemvalue="JAR Application.Calculator-1.0-SNAPSHOT.jar" />
       <item itemvalue="JUnit.Calculator_ControllerTest" />
       <item itemvalue="JUnit.CalculatorControllerTest" />
-      <item itemvalue="JUnit.CalculatorControllerTest.checkAllMemory" />
-      <item itemvalue="JUnit.CalculatorControllerTest.checkMIXBinaryOperations" />
-      <item itemvalue="JUnit.CalculatorControllerTest.checkMemorySubtract" />
+      <item itemvalue="JAR Application.Calculator.jar" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.CalculatorLaunch" />
+        <item itemvalue="JAR Application.Calculator-1.0-SNAPSHOT.jar" />
+        <item itemvalue="JAR Application.Calculator.jar" />
+        <item itemvalue="Application.CalculatorLaunch" />
         <item itemvalue="JUnit.CalculatorControllerTest" />
-        <item itemvalue="JUnit.CalculatorControllerTest.checkMemorySubtract" />
-        <item itemvalue="JUnit.CalculatorControllerTest.checkAllMemory" />
-        <item itemvalue="Application.e" />
-        <item itemvalue="JUnit.CalculatorControllerTest.checkMIXBinaryOperations" />
       </list>
     </recent_temporary>
   </component>
@@ -334,13 +319,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1565432602101</updated>
-    </task>
-    <task id="LOCAL-00084" summary="before change calculateUnary">
-      <created>1574758773818</created>
-      <option name="number" value="00084" />
-      <option name="presentableId" value="LOCAL-00084" />
-      <option name="project" value="LOCAL" />
-      <updated>1574758773819</updated>
     </task>
     <task id="LOCAL-00085" summary="before change history %">
       <created>1574844913000</created>
@@ -678,7 +656,14 @@
       <option name="project" value="LOCAL" />
       <updated>1578273813488</updated>
     </task>
-    <option name="localTasksCounter" value="133" />
+    <task id="LOCAL-00133" summary="before change memory">
+      <created>1578477936317</created>
+      <option name="number" value="00133" />
+      <option name="presentableId" value="LOCAL-00133" />
+      <option name="project" value="LOCAL" />
+      <updated>1578477936317</updated>
+    </task>
+    <option name="localTasksCounter" value="134" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -802,10 +787,10 @@
     <MESSAGE value="all work before backspace" />
     <MESSAGE value="before add javadoc" />
     <MESSAGE value="before change methods in Controller" />
-    <MESSAGE value="before change memory" />
     <MESSAGE value="Javadoc was added, before change memory in controller" />
     <MESSAGE value="memory methods was added, &#10;need to change them" />
-    <option name="LAST_COMMIT_MESSAGE" value="memory methods was added, &#10;need to change them" />
+    <MESSAGE value="before change memory" />
+    <option name="LAST_COMMIT_MESSAGE" value="before change memory" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

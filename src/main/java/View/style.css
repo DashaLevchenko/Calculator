@@ -100,12 +100,14 @@
 .scrollButton{
 -fx-background-color: transparent;
 -fx-text-base-color: #2088d9;
+-fx-font-family:"Calculator MDL2 Assets";
 }
 
 .scrollButton:hover{
 -fx-background-color: #757474;
 -fx-text-base-color: #000000;
 -fx-opacity: 0.7;
+-fx-font-family:"Calculator MDL2 Assets";
 }
 
 .leftMenuButton *.text{
