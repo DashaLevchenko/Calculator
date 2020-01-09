@@ -5,6 +5,6 @@ module Calculator {
     requires javafx.base;
     requires java.logging;
 
-    opens Controller;
-    opens View;
+    opens CalculatorApplication.Controller;
+    opens CalculatorApplication.View;
 }
