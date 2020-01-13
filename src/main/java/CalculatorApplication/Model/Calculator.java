@@ -163,7 +163,6 @@ public class Calculator {
                 calculateLastBinaryOperation(operationsEnum);
             } finally {
                 addEqualHistory(indexPresentObject, formula);
-                addPercentResultHistory(operationsEnum);
                 setOperation(operationsEnum);
             }
         }
@@ -188,18 +187,6 @@ public class Calculator {
         history = new History();
     }
 
-    /**
-     * Method adds result of percent calculation to history.
-     * If after percent was negate operation
-     */
-    private static void addPercentResultHistory (OperationsEnum operationPresent) {
-        OperationsEnum operationPrevious = operation;
-        if (isNegate(operationPresent) && isPercent(operationPrevious)) {
-            if (result != null) {
-                history.addNumber(result);
-            }
-        }
-    }
 
     /**
      * Method adds result of operations to history.
@@ -240,6 +227,7 @@ public class Calculator {
                 numberSecond = null;
             }
             previousEqual = false;
+            percentNegate = false;
         }
     }
 
@@ -397,11 +385,18 @@ public class Calculator {
         BigDecimal number;
         if (numberSecond == null || previousEqual) {
             number = numberFirst;
+            if (binaryOperation != null && !isPercent(operation)) {
+                history.deleteLast();
+                history.addNumber(number);
+                history.addOperation(operation);
+            }
         } else {
             number = numberSecond;
         }
 
         unary.setNumber(number);
+
+
     }
 
     /**
@@ -531,8 +526,6 @@ public class Calculator {
     private static void calculatePercent () throws InvalidInputException, DivideZeroException, ResultUndefinedException {
         if (binaryOperation == null) {
             calculateUnaryOperation();
-            history.deleteLast();
-
         } else {
             BigDecimal percent = setPercentBinaryNumber();
 
@@ -541,12 +534,19 @@ public class Calculator {
             binary.calculateBinary();
             result = binary.getResult();
             numberSecond = result;
-
-            history.deleteLast();
         }
 
+        history.deleteLast();
+        if (history.get(history.size() - 1) instanceof BigDecimal) {
+            history.deleteLast();
+        }
+        if (percentNegate) {
+            history.deleteLast();
+            history.deleteLast();
+            history.deleteLast();
+            percentNegate = false;
+        }
         history.addNumber(result);
-        history.addOperation(OperationsEnum.PERCENT);
     }
 
     /**
@@ -559,19 +559,18 @@ public class Calculator {
         boolean binaryOperationDivide = binaryOperation.equals(OperationsEnum.DIVIDE);
         boolean binaryOperationMultiply = binaryOperation.equals(OperationsEnum.MULTIPLY);
 
+        BigDecimal number;
         if (binaryOperationDivide || binaryOperationMultiply) {
-            BigDecimal number;
             if (numberSecond != null) {
                 number = numberSecond;
             } else {
                 number = numberFirst;
             }
 
-            binary.setNumberFirst(number);
             percent = BigDecimal.ONE;
 
         } else {
-            binary.setNumberFirst(numberFirst);
+            number = numberFirst;
 
             if (numberSecond != null) {
                 percent = numberSecond;
@@ -581,13 +580,14 @@ public class Calculator {
 
             percent = percentNegate(percent);
         }
+        binary.setNumberFirst(number);
+
         return percent;
     }
 
     private static BigDecimal percentNegate (BigDecimal percent) {
         if (percentNegate) {
             percent = percent.negate();
-            percentNegate = false;
         }
         return percent;
     }
@@ -617,14 +617,14 @@ public class Calculator {
 
             try {
                 calculateBinaryOperation();
-                history.clear();
+
             } catch (DivideZeroException | ResultUndefinedException e) {
                 history.deleteLast();
                 history.deleteLast();
                 throw e;
             }
         }
-
+        history.clear();
         percentNegate = false;
         previousEqual = true;
     }

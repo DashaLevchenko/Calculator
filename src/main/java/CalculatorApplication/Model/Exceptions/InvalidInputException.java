@@ -7,12 +7,5 @@ package CalculatorApplication.Model.Exceptions;
  */
 public class InvalidInputException extends Exception {
 
-    /**
-     * Constructs an {@code InvalidInputException}.
-     * This exception throws when square root negative number.
-     */
-    public InvalidInputException () {
-        super();
-    }
 
 }

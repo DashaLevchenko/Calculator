@@ -1297,7 +1297,6 @@ public class UnaryPercentTest {
             Calculator.calculator(formula);
             fail();
         } catch (Exception e) {
-            assertEquals("Can not calculate null operation, enter operation or number.", e.getMessage());
-        }
+            assertEquals("NullPointerException", e.getClass().getSimpleName());        }
     }
 }

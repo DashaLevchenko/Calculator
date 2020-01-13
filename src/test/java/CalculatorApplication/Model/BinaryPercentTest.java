@@ -15,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class BinaryPercentTest {
     private Binary binary = new Binary();
     private ArrayList<Object> formula;
+
     @Test
     void percentInteger () {
         assertionsPercent("0", "1", "0.00");
@@ -1066,7 +1067,7 @@ class BinaryPercentTest {
         assertionsPercent("-986859867454E-10967", "536556E-643", "-5.29505583041648424E-11595");
         assertionsPercent("-986859867454E-10967", "-536556E-643", "5.29505583041648424E-11595");
 
-    //Special numbers for realization
+        //Special numbers for realization
         //=> 9999999999999999
         assertionsPercent("9999999999999999", "0", "0");
         assertionsPercent("-9999999999999999", "0", "0");
@@ -1189,10 +1190,9 @@ class BinaryPercentTest {
         try {
             BigDecimal resultActual = Calculator.calculator(formula);
             assertEquals(resultExpected, resultActual);
-        } catch (DivideZeroException | ResultUndefinedException  | InvalidInputException e) {
+        } catch (DivideZeroException | ResultUndefinedException | InvalidInputException e) {
             e.printStackTrace();
         }
-
 
 
         assertBinary(x, percent, resultExpected);
@@ -1206,7 +1206,7 @@ class BinaryPercentTest {
         binary.setOperation(OperationsEnum.PERCENT);
         try {
             binary.calculateBinary();
-        } catch (ResultUndefinedException | DivideZeroException  e) {
+        } catch (ResultUndefinedException | DivideZeroException e) {
             e.printStackTrace();
         }
         BigDecimal resultActual = binary.getResult();
@@ -1220,8 +1220,10 @@ class BinaryPercentTest {
         try {
             binary.setOperation(OperationsEnum.PERCENT);
             binary.calculateBinary();
-        } catch (ResultUndefinedException | DivideZeroException e) {
-            e.printStackTrace();
+        } catch (DivideZeroException e) {
+            assertEquals("DivideZeroException", e.getClass().getSimpleName());
+        } catch (ResultUndefinedException e) {
+            assertEquals("ResultUndefinedException", e.getClass().getSimpleName());
         }
     }
 }

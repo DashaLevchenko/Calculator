@@ -1,6 +1,6 @@
 package CalculatorApplication.Controller;
 
-import CalculatorApplication.View.CalculatorMain;
+import CalculatorApplication.View.CalculatorGraphicsLaunch;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -22,7 +22,7 @@ public class CalculatorUnknownError {
     private static Logger logger;
 
     /**
-     * Constructor initializes logger object and set setting for loggong
+     * Constructor initializes logger object and set setting for logging
      */
     public CalculatorUnknownError () {
         logger = Logger.getLogger(CalculatorUnknownError.class.getName());
@@ -63,7 +63,7 @@ public class CalculatorUnknownError {
             stageError.show();
 
             CalculatorUnknownErrorController calculatorUnknownErrorController = loaderError.getController();
-            calculatorUnknownErrorController.setGeneralController(CalculatorMain.getCalculatorController());
+            calculatorUnknownErrorController.setGeneralController(CalculatorGraphicsLaunch.getCalculatorController());
             calculatorUnknownErrorController.changeErrorWindow(errorMessage, isLoggerException);
 
         } catch (IOException e) {

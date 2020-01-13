@@ -381,7 +381,7 @@
                         <Insets />
                      </GridPane.margin>
                   </Button>
-                  <Button fx:id="point" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#addCommaToTextOutput" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation" stylesheets="@style.css" text="," GridPane.columnIndex="2" GridPane.rowIndex="5">
+                  <Button fx:id="point" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#commaButtonPressed" prefHeight="46.0" prefWidth="77.0" style="-fx-background-radius: 0; -fx-border-radius: 0;" styleClass="button_operation" stylesheets="@style.css" text="," GridPane.columnIndex="2" GridPane.rowIndex="5">
                      <rotationAxis>
                         <Point3D />
                      </rotationAxis>

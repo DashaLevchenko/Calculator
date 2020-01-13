@@ -7,13 +7,6 @@ package CalculatorApplication.Model.Exceptions;
  * when tried divide zero by zero.
  */
 public class ResultUndefinedException extends Exception {
-    /**
-     * Constructs an {@code ResultUndefinedException}.
-     * This exception throws when divide zero by zero.
-     */
 
-    public ResultUndefinedException () {
-        super();
-    }
 
 }

@@ -68,7 +68,7 @@ import java.math.RoundingMode;
      */
     void calculateUnary () throws InvalidInputException, DivideZeroException {
         if (operation == null) {
-            throw new NullPointerException("Enter operation");
+            throw new NullPointerException();
         }
         if (number != null) {
             if (operation.equals(OperationsEnum.SQRT)) {

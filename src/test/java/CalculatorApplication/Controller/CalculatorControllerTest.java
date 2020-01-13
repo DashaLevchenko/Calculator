@@ -1,7 +1,7 @@
 package CalculatorApplication.Controller;
 
 
-import CalculatorApplication.View.CalculatorMain;
+import CalculatorApplication.View.CalculatorGraphicsLaunch;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -29,7 +29,7 @@ public class CalculatorControllerTest extends ApplicationTest {
 
     @Override
     public void start (Stage stage) throws Exception {
-        root = FXMLLoader.load(CalculatorMain.class.getResource("/main/CalculatorApplication.View/calculator_view.fxml"));
+        root = FXMLLoader.load(CalculatorGraphicsLaunch.class.getResource("/CalculatorApplication/View/calculator_view.fxml"));
         stage.setScene(new Scene(root));
         stage.show();
         stage.toFront();
@@ -1417,7 +1417,7 @@ public class CalculatorControllerTest extends ApplicationTest {
 
     @Test
     void checkPercent () {
-        //One operand
+//        One operand
         assertNumber("0%", "0", "0 ");
         assertNumber("2%", "0", "0 ");
         assertNumber("0,2%", "0", "0 ");

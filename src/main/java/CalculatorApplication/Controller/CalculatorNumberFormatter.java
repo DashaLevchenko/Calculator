@@ -12,7 +12,7 @@ import java.text.ParseException;
  */
 class CalculatorNumberFormatter {
     /** This variable keeps grouping separator for number */
-    static final String GROUPING_SEPARATOR = " ";
+    private static final String GROUPING_SEPARATOR = " ";
 
     /** Decimal separator before formatter */
     static final String DECIMAL_SEPARATOR_AFTER_FORMATTER = ",";
@@ -77,36 +77,12 @@ class CalculatorNumberFormatter {
     /*Set separator for formatter number*/
     static {
         symbols.setExponentSeparator(EXPONENT);
-//        symbols.setMinusSign(MINUS.charAt(0));
         symbols.setGroupingSeparator(GROUPING_SEPARATOR.charAt(0));
         symbols.setDecimalSeparator(DECIMAL_SEPARATOR_AFTER_FORMATTER.charAt(0));
 
     }
 
 
-    static DecimalFormatSymbols getSymbols () {
-        return symbols;
-    }
-
-    static String addDecimalSeparator (BigDecimal number) {
-        pattern = INTEGER_PATTERN.concat(DECIMAL_SEPARATOR_BEFORE_FORMATTER);
-        decimalFormat.setRoundingMode(RoundingMode.DOWN);
-
-        return formatNumber(number);
-
-    }
-
-    static String addNegatePrefix (BigDecimal number) {
-        formatNumberForPrint(number);
-        if (number.signum() > 0) {
-            pattern = MINUS.concat(pattern);
-        }
-
-        decimalFormat.setRoundingMode(RoundingMode.DOWN);
-
-        return formatNumber(number);
-
-    }
 
 
     private static String formatNumber (BigDecimal number) {
@@ -115,39 +91,16 @@ class CalculatorNumberFormatter {
         return decimalFormat.format(number);
     }
 
-
-    static String backspace (BigDecimal number, boolean lastSymbolComma) {
-
-        int scale = number.scale();
-
-        if (scale > 0) {
-            pattern = INTEGER_PATTERN.concat(DECIMAL_SEPARATOR_BEFORE_FORMATTER).concat("0".repeat(scale - 1));
-        } else {
-            pattern = INTEGER_PATTERN;
-            if (!lastSymbolComma) {
-                number = number.movePointLeft(1);
-            }
-
-        }
-
-
-        boolean isLessZero = compareZero(number) > 0 && compareOne(number) < 0;
-        boolean isOneNumber = number.scale() == 1;
-        if (isLessZero && isOneNumber) {
-            number = number.abs();
-        }
-
-        return formatNumber(number);
-    }
-
-
     /**
-     * Method formatters number for print on display
+     * Method formatters number for print on display,
+     * If last symbol for number was formatted must be decimal separator and number without decimal part,
+     * pattern for format will concat decimal separator.
      *
      * @param number Number need to format
+     * @param isLastSymbolDecimalSeparator Is true, If last symbol for number was formatted must be decimal separator
      * @return String with number was formatted
      */
-    static String formatNumberForPrint (BigDecimal number) {
+    static String formatNumberForPrint (BigDecimal number, boolean isLastSymbolDecimalSeparator) {
         number = roundNumber(number);
         if (isMoreMaxInputNumber(number) > 0) {
             definePatternNumberMoreMaxInput(number);
@@ -175,6 +128,9 @@ class CalculatorNumberFormatter {
             }
         } else {
             pattern = definePatternNumberMoreOneLessMaxInput(number);
+            if(isLastSymbolDecimalSeparator){
+                pattern = pattern.concat(DECIMAL_SEPARATOR_BEFORE_FORMATTER);
+            }
         }
 
 
@@ -186,7 +142,7 @@ class CalculatorNumberFormatter {
 
 
     private static String changeExponent (String outNumber) {
-        String negateExponent = EXPONENT.concat("-");
+        String negateExponent = EXPONENT.concat(MINUS);
         String positiveExponent = EXPONENT.concat(PLUS);
 
         if (!outNumber.contains(negateExponent)) {
@@ -221,7 +177,6 @@ class CalculatorNumberFormatter {
         int precision = number.precision();
         int numericInNumber = precision - scale;
 
-//        String pattern;
         if (numericInNumber > MAX_SCALE_PRINT) {
             pattern = DECIMAL_PATTERN;
 
@@ -275,7 +230,7 @@ class CalculatorNumberFormatter {
 
     static String formatNumberForHistory (BigDecimal number) {
         number = number.stripTrailingZeros();
-        String formattedNumber = formatNumberForPrint(number);
+        String formattedNumber = formatNumberForPrint(number, false);
         return formattedNumber.replace(GROUPING_SEPARATOR, EMPTY_STRING);
     }
 

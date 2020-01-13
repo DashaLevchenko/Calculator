@@ -482,8 +482,8 @@ class UnarySquerRootTest {
             unary.setOperation(OperationsEnum.SQRT);
             unary.calculateUnary();
             fail();
-        } catch (Exception e) {
-            assertEquals("Invalid input", e.getMessage());
+        } catch (InvalidInputException | DivideZeroException e) {
+            assertEquals("InvalidInputException", e.getClass().getSimpleName());
         }
     }
 
@@ -503,8 +503,7 @@ class UnarySquerRootTest {
             Calculator.calculator(formula);
             fail();
         } catch (Exception e) {
-            assertEquals("Can not calculate null operation, enter operation or number.", e.getMessage());
-        }
+            assertEquals("NullPointerException", e.getClass().getSimpleName());        }
     }
 
 

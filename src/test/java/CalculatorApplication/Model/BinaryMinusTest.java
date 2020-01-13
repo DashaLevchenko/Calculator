@@ -1204,7 +1204,7 @@ class BinaryMinusTest {
         binary.setOperation(OperationsEnum.SUBTRACT);
         try {
             binary.calculateBinary();
-        } catch (ResultUndefinedException | DivideZeroException  e) {
+        } catch (ResultUndefinedException | DivideZeroException e) {
             e.printStackTrace();
         }
         BigDecimal resultActual = binary.getResult();
@@ -1227,7 +1227,7 @@ class BinaryMinusTest {
             binary.calculateBinary();
             fail();
         } catch (Exception e) {
-            assertEquals(e.getMessage(), "Enter binary operation");
+            assertEquals("Enter binary operation", e.getMessage());
         }
     }
 
@@ -1237,7 +1237,7 @@ class BinaryMinusTest {
             Calculator.calculator(formula);
             fail();
         } catch (Exception e) {
-            assertEquals("Can not calculate null operation, enter operation or number.", e.getMessage());
+            assertEquals("NullPointerException", e.getClass().getSimpleName());
         }
     }
 

@@ -23,7 +23,7 @@ public class Calculator_ViewTest extends ApplicationTest {
 
     @Override
     public void start(Stage stage) throws Exception {
-        root = FXMLLoader.load(CalculatorMain.class.getResource("/main/CalculatorApplication.View/calculator_view.fxml"));
+        root = FXMLLoader.load(CalculatorGraphicsLaunch.class.getResource("/main/CalculatorApplication.View/calculator_view.fxml"));
         stage.setScene(new Scene(root));
         this.stage = stage;
         stage.setHeight(500);

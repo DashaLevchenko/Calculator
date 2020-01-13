@@ -7,4 +7,6 @@ module Calculator {
 
     opens CalculatorApplication.Controller;
     opens CalculatorApplication.View;
+    opens CalculatorApplication;
+
 }

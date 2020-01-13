@@ -1245,8 +1245,8 @@ class UnaryOneDivideXTest {
             unary.setOperation(OperationsEnum.ONE_DIVIDE_X);
             unary.calculateUnary();
             fail();
-        } catch (Exception e) {
-            assertEquals("Cannot divide by zero", e.getMessage());
+        } catch (DivideZeroException | InvalidInputException e) {
+            assertEquals("DivideZeroException", e.getClass().getSimpleName());
         }
     }
 
@@ -1309,7 +1309,7 @@ class UnaryOneDivideXTest {
             Calculator.calculator(formula);
             fail();
         } catch (Exception e) {
-            assertEquals("Can not calculate null operation, enter operation or number.", e.getMessage());
+            assertEquals("NullPointerException", e.getClass().getSimpleName());
         }
     }
 

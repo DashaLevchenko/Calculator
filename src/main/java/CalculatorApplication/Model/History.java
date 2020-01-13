@@ -6,12 +6,13 @@ import java.util.ArrayList;
 /**
  * This class keeps calculator's history.
  */
-public class History{
+public class History {
 
     private ArrayList<Object> history = new ArrayList<>();
 
     /**
      * This method adds number to {@code history}
+     *
      * @param number Number need to add to history
      */
     void addNumber (BigDecimal number) {
@@ -20,6 +21,7 @@ public class History{
 
     /**
      * This method adds operation to {@code history}.
+     *
      * @param operation Operation need to add to history.
      */
     void addOperation (OperationsEnum operation) {
@@ -29,17 +31,19 @@ public class History{
         history.add(operation);
     }
 
-    /*
+    /**
      * Method checks last history object.
-     * If last history object is operation, methods deletes last history.
+     * If last history object is operation, methods deletes last history object.
+     *
+     * @param operation Operation was added to history.
      */
     private void deletePreviousOperation (OperationsEnum operation) {
         if (history.size() > 0) {
             if (getLast() instanceof OperationsEnum) {
                 OperationsEnum lastOperation = (OperationsEnum) getLast();
 
-                boolean isBinaryLast = isBinary(lastOperation);
-                boolean isBinaryNew = isBinary(operation);
+                boolean isBinaryLast = Calculator.isBinary(lastOperation);
+                boolean isBinaryNew = Calculator.isBinary(operation);
 
                 if (isBinaryLast && isBinaryNew) {
                     deleteLast();
@@ -49,15 +53,10 @@ public class History{
 
     }
 
-    private boolean isBinary (OperationsEnum operation) {
-        return operation.equals(OperationsEnum.ADD) || operation.equals(OperationsEnum.SUBTRACT) ||
-                operation.equals(OperationsEnum.MULTIPLY) || operation.equals(OperationsEnum.DIVIDE);
-    }
-
     /**
      * Method deletes last history object.
      */
-    public void deleteLast () {
+    void deleteLast () {
         if (history.size() > 0) {
             int indexLastObject = history.size() - 1;
             history.remove(indexLastObject);
@@ -74,6 +73,7 @@ public class History{
 
     /**
      * Method returns number history objects in history.
+     *
      * @return Number history objects in history.
      */
     public int size () {
@@ -82,6 +82,7 @@ public class History{
 
     /**
      * Method returns last history objects.
+     *
      * @return Last history objects or null if history is empty.
      */
     private Object getLast () {
@@ -94,9 +95,9 @@ public class History{
     }
 
 
-
     /**
      * Method returns history object by index.
+     *
      * @param index Index of history object need to return.
      * @return History object.
      */

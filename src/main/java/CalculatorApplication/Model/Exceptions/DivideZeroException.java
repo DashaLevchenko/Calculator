@@ -6,11 +6,5 @@ package CalculatorApplication.Model.Exceptions;
  * when tried divide number by zero.
  */
 public class DivideZeroException extends Exception {
-    /**
-     * Constructs an {@code DivideZeroException}.
-     * This exception throws when number is divided by zero.
-    */
-    public DivideZeroException(){
-        super();
-    }
+
 }
