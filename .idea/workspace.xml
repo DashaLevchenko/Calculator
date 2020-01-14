@@ -12,40 +12,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="feaeb0c2-feb2-4a9c-98e3-48b1d1a339aa" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/Calculator.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/CalculatorApplication/CalculatorMain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/Calculator_jar.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Logs/calculator_log.txt.0" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Logs/calculator_log.txt.1" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Logs/calculator_log.txt.2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Logs/calculator_log.txt.3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/logging.config" beforeDir="false" afterPath="$PROJECT_DIR$/src/logging.config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/CalculatorApplication/Calculator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/logging.config" beforeDir="false" afterPath="$PROJECT_DIR$/logging.config" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/CalculatorApplication/CalculatorMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CalculatorApplication/X.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/CalculatorApplication/Controller/CalculatorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CalculatorApplication/Controller/CalculatorController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/CalculatorApplication/Controller/CalculatorHistoryFormatter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CalculatorApplication/Controller/CalculatorHistoryFormatter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/CalculatorApplication/Controller/CalculatorNumberFormatter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CalculatorApplication/Controller/CalculatorNumberFormatter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/CalculatorApplication/Controller/CalculatorUnknownError.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CalculatorApplication/Controller/CalculatorUnknownError.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/CalculatorApplication/Controller/OverflowException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CalculatorApplication/Controller/OverflowException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/CalculatorApplication/Model/Calculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CalculatorApplication/Model/Calculator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/CalculatorApplication/Model/Exceptions/DivideZeroException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CalculatorApplication/Model/Exceptions/DivideZeroException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/CalculatorApplication/Model/Exceptions/InvalidInputException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CalculatorApplication/Model/Exceptions/InvalidInputException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/CalculatorApplication/Model/Exceptions/ResultUndefinedException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CalculatorApplication/Model/Exceptions/ResultUndefinedException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/CalculatorApplication/Model/History.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CalculatorApplication/Model/History.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/CalculatorApplication/Model/Unary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CalculatorApplication/Model/Unary.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/CalculatorApplication/View/CalculatorMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CalculatorApplication/View/CalculatorGraphicsLaunch.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/CalculatorApplication/View/calculator_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CalculatorApplication/View/calculator_view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/CalculatorApplication/Controller/CalculatorControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/CalculatorApplication/Controller/CalculatorControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/CalculatorApplication/Model/BinaryDivideTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/CalculatorApplication/Model/BinaryDivideTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/CalculatorApplication/Model/BinaryMinusTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/CalculatorApplication/Model/BinaryMinusTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/CalculatorApplication/Model/BinaryMultiplyTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/CalculatorApplication/Model/BinaryMultiplyTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/CalculatorApplication/Model/BinaryPercentTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/CalculatorApplication/Model/BinaryPercentTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/CalculatorApplication/Model/BinarySumTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/CalculatorApplication/Model/BinarySumTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/CalculatorApplication/Model/MemoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/CalculatorApplication/Model/MemoryTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/CalculatorApplication/Model/UnaryOneDivideXTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/CalculatorApplication/Model/UnaryOneDivideXTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/CalculatorApplication/Model/UnaryPercentTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/CalculatorApplication/Model/UnaryPercentTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/CalculatorApplication/Model/UnarySquerRootTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/CalculatorApplication/Model/UnarySquerRootTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/CalculatorApplication/Model/UnaryXSquerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/CalculatorApplication/Model/UnaryXSquerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/CalculatorApplication/View/Calculator_ViewTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/CalculatorApplication/View/Calculator_ViewTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/module-info.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/CalculatorApplication/View/CalculatorGraphicsLaunch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CalculatorApplication/View/CalculatorGraphicsLaunch.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -57,7 +35,7 @@
     <option name="optimizeImportsOnTheFly" value="true" />
   </component>
   <component name="CoverageViewManager">
-    <option name="myElementSize" value="149" />
+    <option name="myElementSize" value="334" />
   </component>
   <component name="ErrorTreeViewConfiguration">
     <option name="autoscrollToSource" value="true" />
@@ -146,18 +124,18 @@
       <recent name="org.testfx.framework.junit.ApplicationTest" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
-      <recent name="CalculatorApplication.View" />
-      <recent name="CalculatorApplication" />
       <recent name="" />
+      <recent name="CalculatorApplication" />
+      <recent name="CalculatorApplication.View" />
       <recent name="Controller" />
       <recent name="View" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\User\IdeaProjects\Calculator" />
       <recent name="C:\Users\User\IdeaProjects\Calculator\src\main\java" />
+      <recent name="C:\Users\User\IdeaProjects\Calculator\src\main\java\CalculatorApplication" />
       <recent name="C:\Users\User\IdeaProjects\Calculator\src\main\java\Demo" />
       <recent name="C:\Users\User\IdeaProjects\Calculator\src" />
-      <recent name="C:\Users\User\IdeaProjects\Calculator2\src" />
-      <recent name="C:\Users\User\IdeaProjects\Calculator2" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\User\IdeaProjects\Calculator\src\main\java" />
@@ -201,7 +179,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.CalculatorMain">
+  <component name="RunManager">
     <configuration name="Calculator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="CalculatorApplication.Calculator" />
       <module name="Calculator" />
@@ -215,8 +193,21 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CalculatorMain" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="CalculatorApplication.CalculatorMain" />
+    <configuration name="CalculatorGraphicsLaunch" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="CalculatorApplication.View.CalculatorGraphicsLaunch" />
+      <module name="Calculator" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="CalculatorApplication.View.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="X" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="CalculatorApplication.X" />
       <module name="Calculator" />
       <extension name="coverage">
         <pattern>
@@ -303,21 +294,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="UnarySquerRootTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Calculator" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="CalculatorApplication.Model.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="CalculatorApplication.Model" />
-      <option name="MAIN_CLASS_NAME" value="CalculatorApplication.Model.UnarySquerRootTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="Calculator-1.0-SNAPSHOT.jar" type="JarApplication">
       <option name="JAR_PATH" value="$PROJECT_DIR$/target/Calculator-1.0-SNAPSHOT.jar" />
       <method v="2" />
@@ -325,19 +301,19 @@
     <list>
       <item itemvalue="JAR Application.Calculator-1.0-SNAPSHOT.jar" />
       <item itemvalue="JUnit.Calculator_ControllerTest" />
-      <item itemvalue="JUnit.UnarySquerRootTest" />
       <item itemvalue="JUnit.CalculatorApplication.Model in Calculator" />
       <item itemvalue="JUnit.CalculatorControllerTest" />
       <item itemvalue="JUnit.CalculatorControllerTest.checkInput" />
-      <item itemvalue="Application.CalculatorMain" />
+      <item itemvalue="Application.X" />
+      <item itemvalue="Application.CalculatorGraphicsLaunch" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.CalculatorMain" />
+        <item itemvalue="Application.X" />
+        <item itemvalue="Application.CalculatorGraphicsLaunch" />
         <item itemvalue="JUnit.CalculatorControllerTest.checkInput" />
         <item itemvalue="JUnit.CalculatorControllerTest" />
         <item itemvalue="JUnit.CalculatorApplication.Model in Calculator" />
-        <item itemvalue="JUnit.UnarySquerRootTest" />
       </list>
     </recent_temporary>
   </component>
@@ -365,13 +341,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1565432602101</updated>
-    </task>
-    <task id="LOCAL-00087" summary="all teats are ok">
-      <created>1575029387603</created>
-      <option name="number" value="00087" />
-      <option name="presentableId" value="LOCAL-00087" />
-      <option name="project" value="LOCAL" />
-      <updated>1575029387604</updated>
     </task>
     <task id="LOCAL-00088" summary="before printhistory number">
       <created>1575108467370</created>
@@ -709,7 +678,14 @@
       <option name="project" value="LOCAL" />
       <updated>1578569179593</updated>
     </task>
-    <option name="localTasksCounter" value="136" />
+    <task id="LOCAL-00136" summary="main was changed,&#10;calculator history formatter was changed">
+      <created>1578916546157</created>
+      <option name="number" value="00136" />
+      <option name="presentableId" value="LOCAL-00136" />
+      <option name="project" value="LOCAL" />
+      <updated>1578916546157</updated>
+    </task>
+    <option name="localTasksCounter" value="137" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -811,7 +787,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="before run test" />
     <MESSAGE value="before change history" />
     <MESSAGE value="all works after refactoring" />
     <MESSAGE value="before changing demo" />
@@ -836,33 +811,10 @@
     <MESSAGE value="before change memory" />
     <MESSAGE value="before change structure" />
     <MESSAGE value="structure was changed,&#10;jar was assembled,&#10;before change backspace" />
-    <option name="LAST_COMMIT_MESSAGE" value="structure was changed,&#10;jar was assembled,&#10;before change backspace" />
+    <MESSAGE value="main was changed,&#10;calculator history formatter was changed" />
+    <option name="LAST_COMMIT_MESSAGE" value="main was changed,&#10;calculator history formatter was changed" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/CalculatorApplication/Model/Calculator.java</url>
-          <line>384</line>
-          <option name="timeStamp" value="153" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/CalculatorApplication/Model/Calculator.java</url>
-          <line>488</line>
-          <option name="timeStamp" value="156" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/CalculatorApplication/Model/Calculator.java</url>
-          <line>572</line>
-          <option name="timeStamp" value="160" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/CalculatorApplication/Controller/CalculatorController.java</url>
-          <line>565</line>
-          <option name="timeStamp" value="163" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="JUnit">
         <watch expression="calculator" language="JAVA" />
@@ -897,6 +849,9 @@
     </SUITE>
     <SUITE FILE_PATH="coverage/Calculator2$CalculateFormulaTest.ic" NAME="CalculateFormulaTest Coverage Results" MODIFIED="1575284791546" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>Demo.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/Calculator$CalculatorGraphicsLaunch.ic" NAME="CalculatorGraphicsLaunch Coverage Results" MODIFIED="1578917703047" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>CalculatorApplication.View.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/Calculator$Calculator_ControllerTest_checkBackspace.ic" NAME="Calculator_ControllerTest.checkBackspace Coverage Results" MODIFIED="1571915563922" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>Controller.*</FILTER>

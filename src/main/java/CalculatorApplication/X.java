@@ -5,8 +5,9 @@ import CalculatorApplication.View.CalculatorGraphicsLaunch;
 /**
  * This class starts calculator application.
  */
-public class CalculatorMain {
+public class X {
     public static void main (String[] args) {
-        CalculatorGraphicsLaunch.main(args);
+        CalculatorGraphicsLaunch.launchCalculator(args);
+//        Application.launch(args);
     }
 }

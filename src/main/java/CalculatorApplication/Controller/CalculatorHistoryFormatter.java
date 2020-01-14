@@ -11,25 +11,16 @@ import java.util.HashMap;
 /**
  * This class change calculator history for calculator application.
  */
-//todo
+//todo delete static method
 class CalculatorHistoryFormatter {
-    /** Variable keeps empty string value */
-    private static final String EMPTY_STRING = "";
-
-    /** Variable keeps unary operation history was formatted */
-    private static String unaryOperationsFormatted;
-
-    /** This list keeps history objects was formatted */
-    private static ArrayList<String> formattedHistory;
-
     /**
      * Variable which keeps key and value of operation.
      * Key is name of enum operation.
-     * Value is symbol need to change.
+     * Value is symbol need to format.
      */
-    private static HashMap<OperationsEnum, String> operationSymbols = new HashMap<>();
+    private HashMap<OperationsEnum, String> operationSymbols = new HashMap<>();
 
-    static {
+     {
         operationSymbols.put(OperationsEnum.ADD, "+");
         operationSymbols.put(OperationsEnum.SUBTRACT, "-");
         operationSymbols.put(OperationsEnum.DIVIDE, "÷");
@@ -42,6 +33,13 @@ class CalculatorHistoryFormatter {
 
         operationSymbols.put(OperationsEnum.NEGATE, "negate");
     }
+
+    /** Variable keeps empty string value */
+    private final String EMPTY_STRING = "";
+    /** Variable keeps unary operation history was formatted */
+    private String unaryOperationsFormatted;
+    /** This list keeps history objects was formatted */
+    private ArrayList<String> formattedHistory = new ArrayList<>();
 
     /**
      * This method format {@code calculatorHistory}
@@ -60,8 +58,7 @@ class CalculatorHistoryFormatter {
      * @param calculatorHistory Calculator history need to format
      * @return History was formatted
      */
-    static String formatCalculatorHistory (History calculatorHistory) {
-        formattedHistory = new ArrayList<>();
+    String formatCalculatorHistory (History calculatorHistory) {
         unaryOperationsFormatted = "";
 
         for (int index = 0; index < calculatorHistory.size(); index++) {
@@ -95,7 +92,7 @@ class CalculatorHistoryFormatter {
      *
      * @param number Number need to format.
      */
-    private static void formatNumber (BigDecimal number) {
+    private void formatNumber (BigDecimal number) {
         String addNumber = CalculatorNumberFormatter.formatNumberForHistory(number);
         formattedHistory.add(addNumber);
     }
@@ -107,7 +104,7 @@ class CalculatorHistoryFormatter {
      * @param operation                      Operation which was in calculator history.
      * @param previousFormattedHistoryObject Previous object of formatted history.
      */
-    private static void formatOperation (OperationsEnum operation, String previousFormattedHistoryObject) {
+    private void formatOperation (OperationsEnum operation, String previousFormattedHistoryObject) {
         if (Calculator.isBinary(operation)) {
             formatBinaryOperation(operation);
         }
@@ -118,7 +115,7 @@ class CalculatorHistoryFormatter {
 
 
     /**
-     * Method wraps previous  history into brackets.
+     * Method wraps previous  history in brackets.
      * Example: (2),
      * (sqrt(2)),
      * (sqr(sqrt(2))),
@@ -126,7 +123,7 @@ class CalculatorHistoryFormatter {
      * @param previousFormattedHistoryObject Previous object of formatted history need to wrap.
      * @return Previous object of formatted history was wrapped .
      */
-    private static String wrapPreviousFormattedHistoryToBrackets (String previousFormattedHistoryObject) {
+    private String wrapPreviousFormattedHistoryInBrackets (String previousFormattedHistoryObject) {
         String rightBracket = ")";
         String leftBracket = "(";
         return leftBracket.concat(previousFormattedHistoryObject).concat(rightBracket);
@@ -161,7 +158,7 @@ class CalculatorHistoryFormatter {
      * @param unaryOperation           Unary operation
      * @param previousFormattedHistory Previous object of formatted history need to wrap.
      */
-    private static void formatUnaryOperation (OperationsEnum unaryOperation, String previousFormattedHistory) {
+    private void formatUnaryOperation (OperationsEnum unaryOperation, String previousFormattedHistory) {
         formattedHistory.remove(formattedHistory.size() - 1);
 
         int indexPreviousFormattedHistory = formattedHistory.size() - 1;
@@ -171,7 +168,7 @@ class CalculatorHistoryFormatter {
         unaryOperationsFormatted = previousFormattedHistory;
 
         String operationSymbol = operationSymbols.get(unaryOperation);
-        String previousHistoryObjectWrapped = wrapPreviousFormattedHistoryToBrackets(previousFormattedHistory);
+        String previousHistoryObjectWrapped = wrapPreviousFormattedHistoryInBrackets(previousFormattedHistory);
         unaryOperationsFormatted = operationSymbol.concat(previousHistoryObjectWrapped);
 
         if (formattedHistory.size() > 0) {
@@ -199,7 +196,7 @@ class CalculatorHistoryFormatter {
      *
      * @param binaryOperation Binary operation
      */
-    private static void formatBinaryOperation (OperationsEnum binaryOperation) {
+    private void formatBinaryOperation (OperationsEnum binaryOperation) {
         if (!unaryOperationsFormatted.isEmpty()) {
             unaryOperationsFormatted = EMPTY_STRING;
         }
@@ -210,7 +207,7 @@ class CalculatorHistoryFormatter {
 
 
     /** Method returns string of history with separator */
-    private static String getStringHistory () {
+    private String getStringHistory () {
         String stringHistory = "";
         String separatorHistory = " ";
 
@@ -218,7 +215,7 @@ class CalculatorHistoryFormatter {
             stringHistory = stringHistory.concat(history);
             stringHistory = stringHistory.concat(separatorHistory);
         }
-
+        formattedHistory.clear();
         return stringHistory;
     }
 }

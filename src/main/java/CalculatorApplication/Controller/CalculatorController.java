@@ -479,6 +479,15 @@ public class CalculatorController {
         }
     }
 
+
+    //endregion
+
+    //region Calculate
+
+    private void addOperationToFormula (OperationsEnum operationsEnum) {
+        formula.add(operationsEnum);
+    }
+
     /**
      * Method add number from general display to formula for calculate.
      *
@@ -489,13 +498,6 @@ public class CalculatorController {
             formula.add(getDisplayNumber());
             canChangeOperator = false;
         }
-    }
-    //endregion
-
-    //region Calculate
-
-    private void addOperationToFormula (OperationsEnum operationsEnum) {
-        formula.add(operationsEnum);
     }
 
     /**
@@ -598,7 +600,8 @@ public class CalculatorController {
     //region Print
     private void printHistory () {
         History calculatorHistory = Calculator.getHistory();
-        String historyChanged = CalculatorHistoryFormatter.formatCalculatorHistory(calculatorHistory);
+        CalculatorHistoryFormatter calculatorHistoryFormatter = new CalculatorHistoryFormatter();
+        String historyChanged = calculatorHistoryFormatter.formatCalculatorHistory(calculatorHistory);
         outOperationMemory.setText(historyChanged);
         scrollOutOperationMemory();
     }

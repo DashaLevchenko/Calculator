@@ -52,7 +52,7 @@ public class CalculatorUnknownError {
      *                          or something wrong in settings.
      */
     private void openErrorWindow (String errorMessage, boolean isLoggerException) {
-        FXMLLoader loaderError = new FXMLLoader(CalculatorUnknownError.class.getResource("/main/CalculatorApplication.View/calculator_unknown_error_view.fxml"));
+        FXMLLoader loaderError = new FXMLLoader(CalculatorUnknownError.class.getResource("/CalculatorApplication/View/calculator_unknown_error_view.fxml"));
 
         Stage stageError = new Stage();
         stageError.initModality(Modality.APPLICATION_MODAL);
@@ -77,7 +77,7 @@ public class CalculatorUnknownError {
      */
     private void settingLogging () {
         try {
-            FileInputStream file = new FileInputStream("src/logging.config");
+            FileInputStream file = new FileInputStream("logging.config");
             LogManager.getLogManager().readConfiguration(file);
         } catch (IOException e) {
             e.printStackTrace();

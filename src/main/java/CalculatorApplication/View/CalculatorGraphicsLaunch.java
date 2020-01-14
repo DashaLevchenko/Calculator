@@ -12,15 +12,14 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 
 /**
- * Class launches calculator application.
+ * Class launches graphics of calculator application.
  */
 public class CalculatorGraphicsLaunch extends Application {
     private static CalculatorController calculatorController;
 
-    public static void main (String[] args) {
+    public static void launchCalculator (String[] args) {
         Application.launch(args);
     }
-
 
     public static CalculatorController getCalculatorController () {
         return calculatorController;
