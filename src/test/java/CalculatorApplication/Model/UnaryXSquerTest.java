@@ -15,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 class UnaryXSquerTest {
     private Unary unary = new Unary();
+    private Calculator calculator = new Calculator();
     private ArrayList<Object> formula;
 
     @Test
@@ -303,7 +304,7 @@ class UnaryXSquerTest {
         formula = new ArrayList<>(Arrays.asList(x, OperationsEnum.SQR));
 
         try {
-            BigDecimal resultActual = Calculator.calculator(formula);
+            BigDecimal resultActual = calculator.calculator(formula);
             assertEquals(resultExpected, resultActual);
         } catch (DivideZeroException | ResultUndefinedException  | InvalidInputException e) {
             e.printStackTrace();
@@ -349,7 +350,7 @@ class UnaryXSquerTest {
     private void assertEnumNull (BigDecimal x) {
         formula = new ArrayList<>(Arrays.asList(x, null));
         try {
-            Calculator.calculator(formula);
+            calculator.calculator(formula);
             fail();
         } catch (Exception e) {
             assertEquals("NullPointerException", e.getClass().getSimpleName());

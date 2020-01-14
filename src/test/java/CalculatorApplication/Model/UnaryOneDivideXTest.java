@@ -16,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 class UnaryOneDivideXTest {
     private Unary unary = new Unary();
     private ArrayList<Object> formula;
+    Calculator calculator = new Calculator();
     @Test
     void oneDivideXValidInteger (){
         assertionOneDivideXValid("1", "1");
@@ -1257,7 +1258,7 @@ class UnaryOneDivideXTest {
         formula = new ArrayList<>(Arrays.asList(x, OperationsEnum.ONE_DIVIDE_X));
 
         try {
-            BigDecimal resultActual = Calculator.calculator(formula);
+            BigDecimal resultActual = calculator.calculator(formula);
             assertEquals(resultExpected, resultActual);
         } catch (DivideZeroException | ResultUndefinedException | InvalidInputException e) {
             e.printStackTrace();
@@ -1306,7 +1307,7 @@ class UnaryOneDivideXTest {
     private void assertEnumNull (BigDecimal x) {
         formula = new ArrayList<>(Arrays.asList(x, null));
         try {
-            Calculator.calculator(formula);
+            calculator.calculator(formula);
             fail();
         } catch (Exception e) {
             assertEquals("NullPointerException", e.getClass().getSimpleName());

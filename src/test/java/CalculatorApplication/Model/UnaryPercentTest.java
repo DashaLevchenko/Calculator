@@ -12,9 +12,10 @@ import java.util.Arrays;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
-public class UnaryPercentTest {
+class UnaryPercentTest {
     private Unary unary = new Unary();
     private ArrayList<Object> formula;
+    private Calculator calculator = new Calculator();
 
     @Test
     void percentInteger () {
@@ -1249,7 +1250,7 @@ public class UnaryPercentTest {
         formula = new ArrayList<>(Arrays.asList(x, OperationsEnum.PERCENT));
 
         try {
-            BigDecimal resultActual = Calculator.calculator(formula);
+            BigDecimal resultActual = calculator.calculator(formula);
             assertEquals(resultExpected, resultActual);
         } catch (DivideZeroException | ResultUndefinedException | InvalidInputException e) {
             e.printStackTrace();
@@ -1294,7 +1295,7 @@ public class UnaryPercentTest {
     private void assertEnumNull (BigDecimal x) {
         formula = new ArrayList<>(Arrays.asList(x, null));
         try {
-            Calculator.calculator(formula);
+            calculator.calculator(formula);
             fail();
         } catch (Exception e) {
             assertEquals("NullPointerException", e.getClass().getSimpleName());        }

@@ -16,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 class BinaryMultiplyTest {
     private Binary binary = new Binary();
     private ArrayList<Object> formula;
+    Calculator calculator = new Calculator();
 
     @Test
     void multiplyInteger(){
@@ -1188,7 +1189,7 @@ class BinaryMultiplyTest {
         formula = new ArrayList<>(Arrays.asList(x, OperationsEnum.MULTIPLY, y, OperationsEnum.EQUAL));
 
         try {
-            BigDecimal resultActual = Calculator.calculator(formula);
+            BigDecimal resultActual = calculator.calculator(formula);
             assertEquals(resultExpected, resultActual);
         } catch (DivideZeroException | ResultUndefinedException | InvalidInputException e) {
             e.printStackTrace();
@@ -1236,7 +1237,7 @@ class BinaryMultiplyTest {
     private void assertEnumNull (BigDecimal x, BigDecimal y) {
         formula = new ArrayList<>(Arrays.asList(x, null, y, OperationsEnum.EQUAL));
         try {
-            Calculator.calculator(formula);
+            calculator.calculator(formula);
             fail();
         } catch (Exception e) {
             assertEquals("NullPointerException", e.getClass().getSimpleName());

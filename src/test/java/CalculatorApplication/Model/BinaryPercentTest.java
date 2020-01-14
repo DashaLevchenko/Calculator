@@ -14,8 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class BinaryPercentTest {
     private Binary binary = new Binary();
-    private ArrayList<Object> formula;
-
+    Calculator calculator = new Calculator();
     @Test
     void percentInteger () {
         assertionsPercent("0", "1", "0.00");
@@ -1185,10 +1184,10 @@ class BinaryPercentTest {
         BigDecimal resultExpected = new BigDecimal(resultString);
 
 
-        formula = new ArrayList<>(Arrays.asList(x, OperationsEnum.ADD, percent, OperationsEnum.PERCENT));
+        ArrayList<Object> formula = new ArrayList<>(Arrays.asList(x, OperationsEnum.ADD, percent, OperationsEnum.PERCENT));
 
         try {
-            BigDecimal resultActual = Calculator.calculator(formula);
+            BigDecimal resultActual = calculator.calculator(formula);
             assertEquals(resultExpected, resultActual);
         } catch (DivideZeroException | ResultUndefinedException | InvalidInputException e) {
             e.printStackTrace();

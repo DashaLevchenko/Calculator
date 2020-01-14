@@ -16,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 class UnarySquerRootTest {
     private Unary unary = new Unary();
     private ArrayList<Object> formula;
+    private Calculator calculator = new Calculator();
 
     @Test
     void squareRootInteger(){
@@ -439,7 +440,7 @@ class UnarySquerRootTest {
 
         formula = new ArrayList<>(Arrays.asList(x, OperationsEnum.SQRT));
         try {
-            BigDecimal resultActual = Calculator.calculator(formula);
+            BigDecimal resultActual = calculator.calculator(formula);
             assertEquals(resultExpected, resultActual);
         } catch (DivideZeroException | ResultUndefinedException  | InvalidInputException e) {
             e.printStackTrace();
@@ -500,7 +501,7 @@ class UnarySquerRootTest {
     private void assertEnumNull (BigDecimal x) {
         formula = new ArrayList<>(Arrays.asList(x, null));
         try {
-            Calculator.calculator(formula);
+            calculator.calculator(formula);
             fail();
         } catch (Exception e) {
             assertEquals("NullPointerException", e.getClass().getSimpleName());        }

@@ -14,33 +14,89 @@ import java.util.Collection;
  */
 public class Calculator {
     /** Variable keeps value of first number */
-    private static BigDecimal numberFirst;
+    private BigDecimal numberFirst;
     /** Variable keeps value of second number */
-    private static BigDecimal numberSecond;
+    private BigDecimal numberSecond;
     /** Variable keeps value of operation */
-    private static OperationsEnum operation;
+    private OperationsEnum operation;
     /** Variable keeps value of binary operation */
-    private static OperationsEnum binaryOperation;
+    private OperationsEnum binaryOperation;
     /** Variable keeps value of result */
-    private static BigDecimal result;
+    private BigDecimal result;
     /** Variable true if result of percent operation must be negate */
-    private static boolean percentNegate;
+    private boolean percentNegate;
     /** Variable true if previous object was equal operation */
-    private static boolean previousEqual;
+    private boolean previousEqual;
     /** Variable keeps binary object */
-    private static Binary binary = new Binary();
+    private Binary binary = new Binary();
     /** Variable keeps unary object */
-    private static Unary unary = new Unary();
+    private Unary unary = new Unary();
     /** Variable keeps history object */
-    private static History history = new History();
+    private History history = new History();
 
+    /**
+     * This method returns true if operation was binary,
+     * and returns false if operation was not binary
+     *
+     * @param operation Operation which need to check.
+     * @return Returns true if operation was binary, and returns false if operation was not binary
+     */
+    public static boolean isBinary (OperationsEnum operation) {
+        return operation == OperationsEnum.ADD || operation == OperationsEnum.SUBTRACT ||
+                operation == OperationsEnum.MULTIPLY || operation == OperationsEnum.DIVIDE;
+    }
+
+    /**
+     * This method returns true if operation was negate,
+     * and returns false if operation was not negate.
+     *
+     * @param operation Operation which need to check
+     * @return Returns true if operation was negate, and returns false if operation was not negate.
+     */
+    public static boolean isNegate (Object operation) {
+        return operation == OperationsEnum.NEGATE;
+    }
+
+    /**
+     * This method returns true if operation was percent,
+     * and returns false if operation was not percent.
+     *
+     * @param operation Operation which need to check
+     * @return Returns true if operation was percent, and returns false if operation was not percent.
+     */
+    public static boolean isPercent (OperationsEnum operation) {
+        return operation == OperationsEnum.PERCENT;
+    }
+
+    /**
+     * This method returns true if operation was equal,
+     * and returns false if operation was not equal.
+     *
+     * @param operation Operation which need to check
+     * @return Returns true if operation was equal, and returns false if operation was not equal.
+     */
+    public static boolean isEqual (OperationsEnum operation) {
+        return operation == OperationsEnum.EQUAL;
+    }
+
+    /**
+     * This method returns true if operation was unary,
+     * and returns false if operation was not unary.
+     *
+     * @param operation Operation which need to check
+     * @return Returns true if operation was unary, and returns false if operation was not unary.
+     */
+    public static boolean isUnary (OperationsEnum operation) {
+        return operation == OperationsEnum.SQRT || operation == OperationsEnum.SQR ||
+                operation == OperationsEnum.ONE_DIVIDE_X || operation == OperationsEnum.NEGATE;
+    }
 
     /**
      * Method returns history operation from calculator
      *
      * @return History operation
      */
-    public static History getHistory () {
+    public History getHistory () {
         return history;
     }
 
@@ -55,7 +111,7 @@ public class Calculator {
      * @throws InvalidInputException    If square root negative number.
      */
     @SafeVarargs
-    public static <T> BigDecimal calculator (T... objects) throws DivideZeroException, ResultUndefinedException, InvalidInputException, NullPointerException {
+    public final <T> BigDecimal calculator (T... objects) throws DivideZeroException, ResultUndefinedException, InvalidInputException, NullPointerException {
         clearAllCalculator();
         ArrayList formula;
 
@@ -95,7 +151,7 @@ public class Calculator {
      * @throws ResultUndefinedException If zero divide by zero
      * @throws InvalidInputException    If square root negate number.
      */
-    private static void calculateFormula (ArrayList formula) throws DivideZeroException, ResultUndefinedException, InvalidInputException {
+    private void calculateFormula (ArrayList formula) throws DivideZeroException, ResultUndefinedException, InvalidInputException {
         for (int i = 0; i < formula.size(); i++) {
             Object object = formula.get(i);
             checkObject(object);
@@ -111,7 +167,6 @@ public class Calculator {
         }
     }
 
-
     /**
      * Method checks object. If object is null, method will thrown NullPointerException.
      * If object isn't number or operation, method will thrown IllegalArgumentException.
@@ -120,7 +175,7 @@ public class Calculator {
      * @throws NullPointerException     If object is null.
      * @throws IllegalArgumentException If object isn't operation and isn't number.
      */
-    private static void checkObject (Object object) throws NullPointerException, IllegalArgumentException {
+    private void checkObject (Object object) throws NullPointerException, IllegalArgumentException {
         if (object == null) {
             throw new NullPointerException();
         }
@@ -138,7 +193,7 @@ public class Calculator {
      *
      * @param object Object which need to parse
      */
-    private static void parseNumber (Object object) {
+    private void parseNumber (Object object) {
         if (object instanceof Number) {
             BigDecimal number = new BigDecimal(object.toString());
             setNumber(number);
@@ -156,7 +211,7 @@ public class Calculator {
      * @throws DivideZeroException      If divide by zero
      * @throws ResultUndefinedException If divide zero by zero
      */
-    private static void parseOperation (Object objectPresent, int indexPresentObject, ArrayList formula) throws DivideZeroException, ResultUndefinedException {
+    private void parseOperation (Object objectPresent, int indexPresentObject, ArrayList formula) throws DivideZeroException, ResultUndefinedException {
         if (objectPresent instanceof OperationsEnum) {
             OperationsEnum operationsEnum = (OperationsEnum) objectPresent;
             try {
@@ -168,11 +223,10 @@ public class Calculator {
         }
     }
 
-
     /**
      * Method sets default value to all variables
      */
-    public static void clearAllCalculator () {
+    public void clearAllCalculator () {
         numberFirst = null;
         numberSecond = null;
         operation = null;
@@ -187,7 +241,6 @@ public class Calculator {
         history = new History();
     }
 
-
     /**
      * Method adds result of operations to history.
      * If previous operation was equal, result of calculation adds to history
@@ -195,7 +248,7 @@ public class Calculator {
      * @param index   Index of present object
      * @param formula Full formula with object
      */
-    private static void addEqualHistory (int index, ArrayList formula) {
+    private void addEqualHistory (int index, ArrayList formula) {
         Object previousObject = getPreviousFormulaObject(index, formula);
 
         if (previousObject != null) {
@@ -209,7 +262,6 @@ public class Calculator {
         }
     }
 
-
     /**
      * Method calculate previous binary operation,
      * if present operation is binary too.
@@ -218,7 +270,7 @@ public class Calculator {
      * @throws DivideZeroException      If divide number by zero
      * @throws ResultUndefinedException If divide zero by zero
      */
-    private static void calculateLastBinaryOperation (OperationsEnum operationPresent) throws DivideZeroException, ResultUndefinedException {
+    private void calculateLastBinaryOperation (OperationsEnum operationPresent) throws DivideZeroException, ResultUndefinedException {
         if (isBinary(operationPresent) && !isEqual(operationPresent)) {
             if (binaryOperation != null) {
                 setOperation(binaryOperation);
@@ -238,7 +290,7 @@ public class Calculator {
      * @param objectPresent Present object
      * @param formula       Formula which calculating
      */
-    private static void clearCalculator (int index, Object objectPresent, ArrayList formula) {
+    private void clearCalculator (int index, Object objectPresent, ArrayList formula) {
         Object previousObject = getPreviousFormulaObject(index, formula);
 
         if (previousObject != null) {
@@ -254,7 +306,7 @@ public class Calculator {
      * @param objectPresent  Present object
      * @param previousObject Previous object
      */
-    private static void clearIfPresentNumber (Object objectPresent, Object previousObject) {
+    private void clearIfPresentNumber (Object objectPresent, Object previousObject) {
         if (objectPresent instanceof BigDecimal) {
             if (previousObject instanceof OperationsEnum) {
                 if (isUnary((OperationsEnum) previousObject)) {
@@ -271,7 +323,7 @@ public class Calculator {
      *
      * @param objectPresent Present object in formula
      */
-    private static void clearIfPreviousEqual (Object objectPresent) {
+    private void clearIfPreviousEqual (Object objectPresent) {
         if (previousEqual) {
             if (objectPresent instanceof BigDecimal) {
                 numberFirst = null;
@@ -301,7 +353,7 @@ public class Calculator {
      * @param formula Full formula with object
      * @return Previous object
      */
-    private static Object getPreviousFormulaObject (int index, ArrayList formula) {
+    private Object getPreviousFormulaObject (int index, ArrayList formula) {
         int nextIndex = index - 1;
         Object previousObject = null;
 
@@ -312,7 +364,7 @@ public class Calculator {
         return previousObject;
     }
 
-    private static void setNumber (BigDecimal number) {
+    private void setNumber (BigDecimal number) {
         if (numberFirst == null) {
             numberFirst = number;
         } else {
@@ -329,7 +381,7 @@ public class Calculator {
      *
      * @param operationsEnum Operation need sen
      */
-    private static void setOperation (OperationsEnum operationsEnum) {
+    private void setOperation (OperationsEnum operationsEnum) {
         if (isBinary(operationsEnum)) {
             binaryOperation = operationsEnum;
         }
@@ -344,7 +396,7 @@ public class Calculator {
      * @throws DivideZeroException      If number divide by zero
      * @throws ResultUndefinedException If zero divide by zero
      */
-    private static void calculateBinaryOperation () throws DivideZeroException, ResultUndefinedException {
+    private void calculateBinaryOperation () throws DivideZeroException, ResultUndefinedException {
         if (numberFirst != null && numberSecond != null) {
             binary.setNumberFirst(numberFirst);
             binary.setNumberSecond(numberSecond);
@@ -363,7 +415,7 @@ public class Calculator {
      * @throws DivideZeroException   If number divide by zero
      * @throws InvalidInputException If square root negative number
      */
-    private static void calculateUnaryOperation () throws InvalidInputException, DivideZeroException {
+    private void calculateUnaryOperation () throws InvalidInputException, DivideZeroException {
         setUnaryNumber();
 
         unary.setOperation(operation);
@@ -381,7 +433,7 @@ public class Calculator {
      * Method chooses which number must be calculate with unary operation,
      * sets it to unary object.
      */
-    private static void setUnaryNumber () {
+    private void setUnaryNumber () {
         BigDecimal number;
         if (numberSecond == null || previousEqual) {
             number = numberFirst;
@@ -403,26 +455,13 @@ public class Calculator {
      * Chooses which calculator variable must keep result of unary operation,
      * and sets result.
      */
-    private static void getUnaryResult () {
+    private void getUnaryResult () {
 
         if (numberSecond == null && binaryOperation == null || previousEqual) {
             numberFirst = result;
         } else {
             numberSecond = result;
         }
-    }
-
-
-    /**
-     * This method returns true if operation was binary,
-     * and returns false if operation was not binary
-     *
-     * @param operation Operation which need to check.
-     * @return Returns true if operation was binary, and returns false if operation was not binary
-     */
-    public static boolean isBinary (OperationsEnum operation) {
-        return operation == OperationsEnum.ADD || operation == OperationsEnum.SUBTRACT ||
-                operation == OperationsEnum.MULTIPLY || operation == OperationsEnum.DIVIDE;
     }
 
     /**
@@ -432,7 +471,7 @@ public class Calculator {
      * * @param index   Index of present object
      * * @param formula Full formula with object
      */
-    private static boolean canCalculate (int index, ArrayList formula) {
+    private boolean canCalculate (int index, ArrayList formula) {
         boolean canCalculate = false;
 
         int nextIndex = index + 1;
@@ -456,7 +495,7 @@ public class Calculator {
      *
      * @param nextObject Next object in formula
      */
-    private static boolean isUnaryNextObject (Object nextObject) {
+    private boolean isUnaryNextObject (Object nextObject) {
         boolean isUnary = false;
 
         if (nextObject != null) {
@@ -478,7 +517,7 @@ public class Calculator {
      * @throws ResultUndefinedException If square root negative number.
      * @throws InvalidInputException    If zero divide by zero.
      */
-    private static void calculate () throws DivideZeroException, ResultUndefinedException, InvalidInputException {
+    private void calculate () throws DivideZeroException, ResultUndefinedException, InvalidInputException {
         if (operation != null) {
             if (isUnary(operation)) {
                 addResultHistory();
@@ -496,7 +535,7 @@ public class Calculator {
     }
 
     /** Method adds result of calculation to history */
-    private static void addResultHistory () {
+    private void addResultHistory () {
         if (result != null && numberSecond == null) {
             history.deleteLast();
             history.addNumber(result);
@@ -506,24 +545,13 @@ public class Calculator {
     }
 
     /**
-     * This method returns true if operation was negate,
-     * and returns false if operation was not negate.
-     *
-     * @param operation Operation which need to check
-     * @return Returns true if operation was negate, and returns false if operation was not negate.
-     */
-    public static boolean isNegate (Object operation) {
-        return operation == OperationsEnum.NEGATE;
-    }
-
-    /**
      * Method calculates percent operation
      *
      * @throws DivideZeroException      If number divide by zero.
      * @throws ResultUndefinedException If square root negative number.
      * @throws InvalidInputException    If zero divide by zero.
      */
-    private static void calculatePercent () throws InvalidInputException, DivideZeroException, ResultUndefinedException {
+    private void calculatePercent () throws InvalidInputException, DivideZeroException, ResultUndefinedException {
         if (binaryOperation == null) {
             calculateUnaryOperation();
         } else {
@@ -554,7 +582,7 @@ public class Calculator {
      * and sets number in binary object for calculate percent.
      * If binary operation is divide or multiply, need to calculate one percent from number.
      */
-    private static BigDecimal setPercentBinaryNumber () {
+    private BigDecimal setPercentBinaryNumber () {
         BigDecimal percent;
         boolean binaryOperationDivide = binaryOperation.equals(OperationsEnum.DIVIDE);
         boolean binaryOperationMultiply = binaryOperation.equals(OperationsEnum.MULTIPLY);
@@ -585,22 +613,11 @@ public class Calculator {
         return percent;
     }
 
-    private static BigDecimal percentNegate (BigDecimal percent) {
+    private BigDecimal percentNegate (BigDecimal percent) {
         if (percentNegate) {
             percent = percent.negate();
         }
         return percent;
-    }
-
-    /**
-     * This method returns true if operation was percent,
-     * and returns false if operation was not percent.
-     *
-     * @param operation Operation which need to check
-     * @return Returns true if operation was percent, and returns false if operation was not percent.
-     */
-    public static boolean isPercent (OperationsEnum operation) {
-        return operation == OperationsEnum.PERCENT;
     }
 
     /**
@@ -610,7 +627,7 @@ public class Calculator {
      * @throws DivideZeroException      If number divide by zero.
      * @throws ResultUndefinedException If square root negative number.
      */
-    private static void calculateEqual () throws DivideZeroException, ResultUndefinedException {
+    private void calculateEqual () throws DivideZeroException, ResultUndefinedException {
         if (binaryOperation != null) {
             setNumberEqual();
             operation = binaryOperation;
@@ -634,7 +651,7 @@ public class Calculator {
      * If result isn't null second number equal result,
      * else second number equals first number.
      */
-    private static void setNumberEqual () {
+    private void setNumberEqual () {
         if (numberSecond == null) {
             if (result == null) {
                 numberSecond = numberFirst;
@@ -642,29 +659,6 @@ public class Calculator {
                 numberSecond = result;
             }
         }
-    }
-
-    /**
-     * This method returns true if operation was equal,
-     * and returns false if operation was not equal.
-     *
-     * @param operation Operation which need to check
-     * @return Returns true if operation was equal, and returns false if operation was not equal.
-     */
-    public static boolean isEqual (OperationsEnum operation) {
-        return operation == OperationsEnum.EQUAL;
-    }
-
-    /**
-     * This method returns true if operation was unary,
-     * and returns false if operation was not unary.
-     *
-     * @param operation Operation which need to check
-     * @return Returns true if operation was unary, and returns false if operation was not unary.
-     */
-    public static boolean isUnary (OperationsEnum operation) {
-        return operation == OperationsEnum.SQRT || operation == OperationsEnum.SQR ||
-                operation == OperationsEnum.ONE_DIVIDE_X || operation == OperationsEnum.NEGATE;
     }
 
 }

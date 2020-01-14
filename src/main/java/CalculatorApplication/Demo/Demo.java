@@ -13,9 +13,10 @@ public class Demo {
 
     public static void main (String[] args) {
         System.out.print("Result: ");
+        Calculator calculator = new Calculator();
         try {
-            System.out.println(Calculator.calculator(153));
-            Calculator.calculator(5);
+            System.out.println(calculator.calculator(153));
+
         } catch (Exception e) {
             String messageError;
             if (e instanceof DivideZeroException) {

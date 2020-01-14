@@ -183,6 +183,8 @@ public class CalculatorController {
     /** Formula which need to calculate */
     private ArrayList<Object> formula = new ArrayList<>();
     private Memory memory;
+    private Calculator calculator = new Calculator();
+    private CalculatorHistoryFormatter calculatorHistoryFormatter = new CalculatorHistoryFormatter();
 
     public BigDecimal getResult () {
         return result;
@@ -507,7 +509,7 @@ public class CalculatorController {
      */
     private void calculateFormula () {
         try {
-            result = Calculator.calculator(formula);
+            result = calculator.calculator(formula);
             canBackspace = false;
             printCalculateResult();
         } catch (DivideZeroException | ResultUndefinedException | InvalidInputException e) {
@@ -599,10 +601,9 @@ public class CalculatorController {
 
     //region Print
     private void printHistory () {
-        History calculatorHistory = Calculator.getHistory();
-        CalculatorHistoryFormatter calculatorHistoryFormatter = new CalculatorHistoryFormatter();
-        String historyChanged = calculatorHistoryFormatter.formatCalculatorHistory(calculatorHistory);
-        outOperationMemory.setText(historyChanged);
+        History calculatorHistory = calculator.getHistory();
+        String historyFormated = calculatorHistoryFormatter.formatCalculatorHistory(calculatorHistory);
+        outOperationMemory.setText(historyFormated);
         scrollOutOperationMemory();
     }
 
@@ -771,7 +772,7 @@ public class CalculatorController {
         outOperationMemory.setText(EMPTY_STRING);
 
         formula.clear();
-        Calculator.clearAllCalculator();
+        calculator.clearAllCalculator();
 
         canChangeOperator = false;
         canBackspace = true;
@@ -809,7 +810,7 @@ public class CalculatorController {
             generalDisplay.setText(DEFAULT_TEXT_TO_GENERAL_DISPLAY);
             if (memoryPressed) {
                 outOperationMemory.setText(EMPTY_STRING);
-                Calculator.clearAllCalculator();
+                calculator.clearAllCalculator();
                 memoryPressed = false;
             }
         }

@@ -12,18 +12,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="feaeb0c2-feb2-4a9c-98e3-48b1d1a339aa" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Logs/calculator_log.txt.0" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Logs/calculator_log.txt.1" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Logs/calculator_log.txt.2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Logs/calculator_log.txt.3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/CalculatorApplication/ParallelThreads.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/User.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/User.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/logging.config" beforeDir="false" afterPath="$PROJECT_DIR$/logging.config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/CalculatorApplication/CalculatorMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CalculatorApplication/X.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/CalculatorApplication/Controller/CalculatorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CalculatorApplication/Controller/CalculatorController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/CalculatorApplication/Controller/CalculatorHistoryFormatter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CalculatorApplication/Controller/CalculatorHistoryFormatter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/CalculatorApplication/Controller/CalculatorUnknownError.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CalculatorApplication/Controller/CalculatorUnknownError.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/CalculatorApplication/View/CalculatorGraphicsLaunch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CalculatorApplication/View/CalculatorGraphicsLaunch.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/CalculatorApplication/Controller/CalculatorNumberFormatter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CalculatorApplication/Controller/CalculatorNumberFormatter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/CalculatorApplication/Demo/Demo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CalculatorApplication/Demo/Demo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/CalculatorApplication/Model/Calculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CalculatorApplication/Model/Calculator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/CalculatorApplication/X.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CalculatorApplication/Calculator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/CalculatorApplication/Model/BinaryDivideTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/CalculatorApplication/Model/BinaryDivideTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/CalculatorApplication/Model/BinaryMinusTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/CalculatorApplication/Model/BinaryMinusTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/CalculatorApplication/Model/BinaryMultiplyTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/CalculatorApplication/Model/BinaryMultiplyTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/CalculatorApplication/Model/BinaryPercentTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/CalculatorApplication/Model/BinaryPercentTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/CalculatorApplication/Model/BinarySumTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/CalculatorApplication/Model/BinarySumTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/CalculatorApplication/Model/UnaryOneDivideXTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/CalculatorApplication/Model/UnaryOneDivideXTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/CalculatorApplication/Model/UnaryPercentTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/CalculatorApplication/Model/UnaryPercentTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/CalculatorApplication/Model/UnarySquerRootTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/CalculatorApplication/Model/UnarySquerRootTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/CalculatorApplication/Model/UnaryXSquerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/CalculatorApplication/Model/UnaryXSquerTest.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -124,8 +131,8 @@
       <recent name="org.testfx.framework.junit.ApplicationTest" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
-      <recent name="" />
       <recent name="CalculatorApplication" />
+      <recent name="" />
       <recent name="CalculatorApplication.View" />
       <recent name="Controller" />
       <recent name="View" />
@@ -179,7 +186,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.ParallelThreads">
     <configuration name="Calculator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="CalculatorApplication.Calculator" />
       <module name="Calculator" />
@@ -193,12 +200,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CalculatorGraphicsLaunch" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="CalculatorApplication.View.CalculatorGraphicsLaunch" />
+    <configuration name="Demo" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="CalculatorApplication.Demo.Demo" />
       <module name="Calculator" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="CalculatorApplication.View.*" />
+          <option name="PATTERN" value="CalculatorApplication.Demo.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -206,8 +213,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="X" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="CalculatorApplication.X" />
+    <configuration name="ParallelThread" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="CalculatorApplication.ParallelThread" />
+      <module name="Calculator" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ParallelThreads" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="CalculatorApplication.ParallelThreads" />
       <module name="Calculator" />
       <extension name="coverage">
         <pattern>
@@ -219,21 +233,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CalculatorApplication.Model in Calculator" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Calculator" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="CalculatorApplication.Model.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="CalculatorApplication.Model" />
-      <option name="TEST_OBJECT" value="package" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="CalculatorControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CalculatorControllerTest.checkNegate" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Calculator" />
       <extension name="coverage">
         <pattern>
@@ -243,12 +243,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="CalculatorApplication.Controller" />
       <option name="MAIN_CLASS_NAME" value="CalculatorApplication.Controller.CalculatorControllerTest" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="METHOD_NAME" value="checkNegate" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CalculatorControllerTest.checkInput" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CalculatorControllerTest.checkOperationHistory" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Calculator" />
       <extension name="coverage">
         <pattern>
@@ -258,7 +259,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="CalculatorApplication.Controller" />
       <option name="MAIN_CLASS_NAME" value="CalculatorApplication.Controller.CalculatorControllerTest" />
-      <option name="METHOD_NAME" value="checkInput" />
+      <option name="METHOD_NAME" value="checkOperationHistory" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -301,19 +302,19 @@
     <list>
       <item itemvalue="JAR Application.Calculator-1.0-SNAPSHOT.jar" />
       <item itemvalue="JUnit.Calculator_ControllerTest" />
-      <item itemvalue="JUnit.CalculatorApplication.Model in Calculator" />
-      <item itemvalue="JUnit.CalculatorControllerTest" />
-      <item itemvalue="JUnit.CalculatorControllerTest.checkInput" />
-      <item itemvalue="Application.X" />
-      <item itemvalue="Application.CalculatorGraphicsLaunch" />
+      <item itemvalue="Application.TooParallelThread" />
+      <item itemvalue="Application.Demo" />
+      <item itemvalue="JUnit.CalculatorControllerTest.checkOperationHistory" />
+      <item itemvalue="JUnit.CalculatorControllerTest.checkNegate" />
+      <item itemvalue="Application.ParallelThreads" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.X" />
-        <item itemvalue="Application.CalculatorGraphicsLaunch" />
-        <item itemvalue="JUnit.CalculatorControllerTest.checkInput" />
-        <item itemvalue="JUnit.CalculatorControllerTest" />
-        <item itemvalue="JUnit.CalculatorApplication.Model in Calculator" />
+        <item itemvalue="Application.ParallelThreads" />
+        <item itemvalue="JUnit.CalculatorControllerTest.checkNegate" />
+        <item itemvalue="JUnit.CalculatorControllerTest.checkOperationHistory" />
+        <item itemvalue="Application.Demo" />
+        <item itemvalue="Application.TooParallelThread" />
       </list>
     </recent_temporary>
   </component>
@@ -341,13 +342,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1565432602101</updated>
-    </task>
-    <task id="LOCAL-00088" summary="before printhistory number">
-      <created>1575108467370</created>
-      <option name="number" value="00088" />
-      <option name="presentableId" value="LOCAL-00088" />
-      <option name="project" value="LOCAL" />
-      <updated>1575108467370</updated>
     </task>
     <task id="LOCAL-00089" summary="history works">
       <created>1575215112913</created>
@@ -685,7 +679,14 @@
       <option name="project" value="LOCAL" />
       <updated>1578916546157</updated>
     </task>
-    <option name="localTasksCounter" value="137" />
+    <task id="LOCAL-00137" summary="before calculator history formatter change">
+      <created>1579002999584</created>
+      <option name="number" value="00137" />
+      <option name="presentableId" value="LOCAL-00137" />
+      <option name="project" value="LOCAL" />
+      <updated>1579002999584</updated>
+    </task>
+    <option name="localTasksCounter" value="138" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -787,7 +788,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="before change history" />
     <MESSAGE value="all works after refactoring" />
     <MESSAGE value="before changing demo" />
     <MESSAGE value="before delete operation in demo" />
@@ -812,7 +812,8 @@
     <MESSAGE value="before change structure" />
     <MESSAGE value="structure was changed,&#10;jar was assembled,&#10;before change backspace" />
     <MESSAGE value="main was changed,&#10;calculator history formatter was changed" />
-    <option name="LAST_COMMIT_MESSAGE" value="main was changed,&#10;calculator history formatter was changed" />
+    <MESSAGE value="before calculator history formatter change" />
+    <option name="LAST_COMMIT_MESSAGE" value="before calculator history formatter change" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
