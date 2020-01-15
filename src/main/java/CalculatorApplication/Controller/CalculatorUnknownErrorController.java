@@ -63,7 +63,8 @@ public class CalculatorUnknownErrorController {
     /**
      * This method sets error message.
      * If was thrown logger exception, {@code reset} will unvisible and {@code ok} will visible
-     * @param messageError Message need to print
+     *
+     * @param messageError      Message need to print
      * @param isLoggerException True, If logger exception was thrown
      */
     void changeErrorWindow (String messageError, boolean isLoggerException) {
@@ -73,7 +74,7 @@ public class CalculatorUnknownErrorController {
         if (isLoggerException) {
             isResetVisible = false;
             isOkVisible = true;
-        }else{
+        } else {
             isResetVisible = true;
             isOkVisible = false;
         }

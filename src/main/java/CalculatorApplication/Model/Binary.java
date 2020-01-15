@@ -13,36 +13,53 @@ import java.math.RoundingMode;
  * like divide, add, subtract, multiply.
  */
 class Binary {
-    /** Max default rounding */
+    private static final int DEFAULT_SCALE = 10000;
+    /**
+     * Max default rounding
+     */
     private final RoundingMode DEFAULT_ROUNDING = RoundingMode.UP;
 
-    /** Variable keeps value of first number */
+    /**
+     * Variable keeps value of first number
+     */
     private BigDecimal numberFirst;
 
-    /** Variable keeps value of second number */
+    /**
+     * Variable keeps value of second number
+     */
     private BigDecimal numberSecond;
 
-    /** Variable keeps value of operation */
+    /**
+     * Variable keeps value of operation
+     */
     private OperationsEnum operation;
 
-    /** Variable keeps value of result */
+    /**
+     * Variable keeps value of result
+     */
     private BigDecimal result;
 
     public void setOperation (OperationsEnum operation) {
         this.operation = operation;
     }
 
-    /** This method sums two number */
+    /**
+     * This method sums two number
+     */
     private void add () {
         result = numberFirst.add(numberSecond);
     }
 
-    /** This method calculates the difference of two number */
+    /**
+     * This method calculates the difference of two number
+     */
     private void subtract () {
         result = numberFirst.subtract(numberSecond);
     }
 
-    /** This method multiplies two number */
+    /**
+     * This method multiplies two number
+     */
     private void multiply () {
         result = numberFirst.multiply(numberSecond);
     }
@@ -61,8 +78,7 @@ class Binary {
             throw new DivideZeroException();
         }
 
-        int defaultScale = 10000;
-        result = numberFirst.divide(numberSecond, defaultScale, DEFAULT_ROUNDING);
+        result = numberFirst.divide(numberSecond, DEFAULT_SCALE, DEFAULT_ROUNDING);
     }
 
     private int compareZero (BigDecimal number) {
@@ -70,7 +86,9 @@ class Binary {
         return number.compareTo(BigDecimal.ZERO);
     }
 
-    /** This method calculate percent {@code numberSecond} of number {@code numberFirst}. */
+    /**
+     * This method calculate percent {@code numberSecond} of number {@code numberFirst}.
+     */
     private void percent () {
         BigDecimal oneHundred = BigDecimal.valueOf(100);
         BigDecimal numberSecondDivideHundred = numberSecond.divide(oneHundred, MathContext.DECIMAL128);

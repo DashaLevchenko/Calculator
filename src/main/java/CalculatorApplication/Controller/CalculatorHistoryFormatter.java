@@ -13,16 +13,18 @@ import java.util.HashMap;
  */
 //todo delete static method
 public class CalculatorHistoryFormatter {
-    /** Variable keeps empty string value */
-    private final String EMPTY_STRING = "";
+    /**
+     * Variable keeps empty string value
+     */
+    private static final String EMPTY_STRING = "";
     /**
      * Variable which keeps key and value of operation.
      * Key is name of enum operation.
      * Value is string equivalent of enum operation.
      */
-    private final HashMap<OperationsEnum, String> OPERATION_SYMBOLS = new HashMap<>();
+    private static final HashMap<OperationsEnum, String> OPERATION_SYMBOLS = new HashMap<>();
 
-     {
+    static {
         OPERATION_SYMBOLS.put(OperationsEnum.ADD, "+");
         OPERATION_SYMBOLS.put(OperationsEnum.SUBTRACT, "-");
         OPERATION_SYMBOLS.put(OperationsEnum.DIVIDE, "÷");
@@ -53,9 +55,10 @@ public class CalculatorHistoryFormatter {
      * @param calculatorHistory Calculator history need to format
      * @return String of history was formatted.
      */
-    public String formatCalculatorHistory (History calculatorHistory) {
+    public static String formatCalculatorHistory (History calculatorHistory) {
         ArrayList<String> historyFormatted = new ArrayList<>();
         String unaryOperationsFormatted = EMPTY_STRING;
+        CalculatorNumberFormatter calculatorNumberFormatter = new CalculatorNumberFormatter();
 
         for (int index = 0; index < calculatorHistory.size(); index++) {
             Object object = calculatorHistory.get(index);
@@ -81,7 +84,7 @@ public class CalculatorHistoryFormatter {
 
             } else {
                 BigDecimal number = (BigDecimal) object;
-                historyObjectFormatted = CalculatorNumberFormatter.formatNumberForHistory(number);
+                historyObjectFormatted = calculatorNumberFormatter.formatNumberForHistory(number);
             }
 
             historyFormatted.add(historyObjectFormatted);
@@ -100,9 +103,9 @@ public class CalculatorHistoryFormatter {
      *
      * @param formattedHistory History was formatted
      * @return Returns true if previous history record was formatted is value of {@code OPERATION_SYMBOLS},
-     * and returns false if previous history record was formatted isn't value of {@code OPERATION_SYMBOLS}.
+     *         and returns false if previous history record was formatted isn't value of {@code OPERATION_SYMBOLS}.
      */
-    private boolean isPreviousBinaryFormattedHistoryRecord (ArrayList<String> formattedHistory) {
+    private static boolean isPreviousBinaryFormattedHistoryRecord (ArrayList<String> formattedHistory) {
         boolean isPreviousBinaryFormattedHistoryObject;
         if (formattedHistory.size() > 0) {
             int indexPreviousFormattedHistory = formattedHistory.size() - 1;
@@ -131,9 +134,9 @@ public class CalculatorHistoryFormatter {
      * @param unaryOperation                 Unary operation.
      * @param previousFormattedHistoryRecord Previous formatted history record.
      * @return String of formatted unary operation with
-     * previous formatted history record which was wrapped in brackets.
+     *         previous formatted history record which was wrapped in brackets.
      */
-    private String formatUnaryOperation (String previousFormattedHistoryRecord, OperationsEnum unaryOperation) {
+    private static String formatUnaryOperation (String previousFormattedHistoryRecord, OperationsEnum unaryOperation) {
         String operationSymbol = OPERATION_SYMBOLS.get(unaryOperation);
         String previousHistoryObjectWrapped = wrapPreviousFormattedHistoryInBrackets(previousFormattedHistoryRecord);
         return operationSymbol.concat(previousHistoryObjectWrapped);
@@ -146,7 +149,7 @@ public class CalculatorHistoryFormatter {
      * @param formattedHistory         History was formatted.
      * @return Previous formatted history record.
      */
-    private String getPreviousFormattedHistoryRecord (String unaryOperationsFormatted, ArrayList<String> formattedHistory) {
+    private static String getPreviousFormattedHistoryRecord (String unaryOperationsFormatted, ArrayList<String> formattedHistory) {
         String previousFormattedHistoryRecord;
         if (formattedHistory.size() > 0) {
             if (!unaryOperationsFormatted.isEmpty()) {
@@ -178,7 +181,9 @@ public class CalculatorHistoryFormatter {
     }
 
 
-    /** Method returns string of history with separator */
+    /**
+     * Method returns string of history with separator
+     */
     private static String getStringHistory (ArrayList<String> formattedHistory) {
         String stringHistory = "";
         String separatorHistory = " ";

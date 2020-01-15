@@ -13,25 +13,45 @@ import java.util.Collection;
  * This class realizes algorithm of calculator Windows 10
  */
 public class Calculator {
-    /** Variable keeps value of first number */
+    /**
+     * Variable keeps value of first number
+     */
     private BigDecimal numberFirst;
-    /** Variable keeps value of second number */
+    /**
+     * Variable keeps value of second number
+     */
     private BigDecimal numberSecond;
-    /** Variable keeps value of operation */
+    /**
+     * Variable keeps value of operation
+     */
     private OperationsEnum operation;
-    /** Variable keeps value of binary operation */
+    /**
+     * Variable keeps value of binary operation
+     */
     private OperationsEnum binaryOperation;
-    /** Variable keeps value of result */
+    /**
+     * Variable keeps value of result
+     */
     private BigDecimal result;
-    /** Variable true if result of percent operation must be negate */
+    /**
+     * Variable true if result of percent operation must be negate
+     */
     private boolean percentNegate;
-    /** Variable true if previous object was equal operation */
+    /**
+     * Variable true if previous object was equal operation
+     */
     private boolean previousEqual;
-    /** Variable keeps binary object */
+    /**
+     * Variable keeps binary object
+     */
     private Binary binary = new Binary();
-    /** Variable keeps unary object */
+    /**
+     * Variable keeps unary object
+     */
     private Unary unary = new Unary();
-    /** Variable keeps history object */
+    /**
+     * Variable keeps history object
+     */
     private History history = new History();
 
     /**
@@ -534,7 +554,9 @@ public class Calculator {
         }
     }
 
-    /** Method adds result of calculation to history */
+    /**
+     * Method adds result of calculation to history
+     */
     private void addResultHistory () {
         if (result != null && numberSecond == null) {
             history.deleteLast();

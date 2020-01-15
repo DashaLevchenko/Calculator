@@ -18,31 +18,49 @@ import javafx.stage.Stage;
  */
 
 class ResizeWindow {
-    /** Text for button which was pressed for maximized stage */
+    /**
+     * Text for button which was pressed for maximized stage
+     */
     private static final String BUTTON_TEXT_STAGE_MAXIMIZED = "";
 
-    /** Text for button which was pressed for return default size stage */
+    /**
+     * Text for button which was pressed for return default size stage
+     */
     private static final String BUTTON_TEXT_STAGE_NOT_MAXIMIZED = "";
 
-    /** Max width of device where application is used */
+    /**
+     * Max width of device where application is used
+     */
     private static final double MAX_WIDTH_WINDOWS = 1600;
 
-    /** Font is always used for buttons */
+    /**
+     * Font is always used for buttons
+     */
     private static final String DEFAULT_FONT_BUTTON = "CalculatorApplication.Calculator MDL2 Assets";
 
-    /** Stage need to resize */
+    /**
+     * Stage need to resize
+     */
     private Stage stage;
 
-    /** Scene need to resize */
+    /**
+     * Scene need to resize
+     */
     private Scene scene;
 
-    /** Minimal width of application */
+    /**
+     * Minimal width of application
+     */
     private double minWidth;
 
-    /** Minimal height of application */
+    /**
+     * Minimal height of application
+     */
     private double minHeight;
 
-    /** Default value of cursor */
+    /**
+     * Default value of cursor
+     */
     private Cursor cursorEvent = Cursor.DEFAULT;
 
     /**
@@ -194,7 +212,9 @@ class ResizeWindow {
         }
     }
 
-    /** Method resizes button's font size if width stage was changed */
+    /**
+     * Method resizes button's font size if width stage was changed
+     */
     void resizeButton (Node node) {
         ObservableList<Node> buttons = ((Parent) node).getChildrenUnmodifiable();
         for (Node child : buttons) {

@@ -23,7 +23,6 @@ public class ParallelThreads {
     @SafeVarargs
     private static <T> void calculate (T... object) {
         Calculator calculator = new Calculator();
-
         try {
             BigDecimal result = calculator.calculator(object);
             System.out.println(result + " history: " + CalculatorHistoryFormatter.formatCalculatorHistory(calculator.getHistory()));

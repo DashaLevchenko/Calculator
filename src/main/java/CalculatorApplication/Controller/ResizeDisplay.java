@@ -14,17 +14,25 @@ import javafx.stage.Stage;
  */
 class ResizeDisplay {
 
-    /** Text size when window was maximized */
+    /**
+     * Text size when window was maximized
+     */
     private static final double MAX_FONT_SIZE_MAX_WINDOW = 71;
 
-    /** Text size when window wasn't maximized and text doesn't exceed border of label */
+    /**
+     * Text size when window wasn't maximized and text doesn't exceed border of label
+     */
     private static final double MAX_FONT_SIZE_MIN_WINDOW = 46;
 
-    /** Default font is used for print */
+    /**
+     * Default font is used for print
+     */
     private static final String DEFAULT_FONT_DISPLAY = "Segoe UI Semibold";
 
-    /** Stage where locate all application */
-    private static Stage stage;
+    /**
+     * Stage where locate all application
+     */
+    private Stage stage;
 
     /**
      * Resizes size text if it exceeds border of label
@@ -32,7 +40,7 @@ class ResizeDisplay {
      * @param label Label keeps text for resize
      * @return Font with size was resized
      */
-    static Font fontSizeChangedWidth (Label label) {
+    Font fontSizeChangedWidth (Label label) {
         setStage(label);
 
         String labelText = label.getText();
@@ -58,7 +66,7 @@ class ResizeDisplay {
         return new Font(DEFAULT_FONT_DISPLAY, newSize);
     }
 
-    private static void setStage (Node node) {
+    private void setStage (Node node) {
         if (stage == null) {
             stage = (Stage) node.getScene().getWindow();
         }
@@ -73,7 +81,7 @@ class ResizeDisplay {
      * @param scrollButtonRight Button for scroll text right
      * @return Horizontal scroll position of the ScrollPane
      */
-    static double scrollText (ScrollPane scrollPane, String text, Button scrollButtonLeft, Button scrollButtonRight) {
+    double scrollText (ScrollPane scrollPane, String text, Button scrollButtonLeft, Button scrollButtonRight) {
         setStage(scrollPane);
         Insets padding = scrollPane.getPadding();
 

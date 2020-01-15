@@ -1,6 +1,5 @@
 package CalculatorApplication.View;
 
-import CalculatorApplication.Controller.CalculatorController;
 import CalculatorApplication.Controller.CalculatorUnknownError;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -15,15 +14,19 @@ import java.io.IOException;
  * Class launches graphics of calculator application.
  */
 public class CalculatorGraphicsLaunch extends Application {
-    private static CalculatorController calculatorController;
+    /**
+     * This variable keeps minimal height of application window
+     */
+    private static final int MIN_HEIGHT = 500;
+    /**
+     * This variable keeps minimal width of application window
+     */
+    private static final int MIN_WIDTH = 320;
 
     public static void launchCalculator (String[] args) {
         Application.launch(args);
     }
 
-    public static CalculatorController getCalculatorController () {
-        return calculatorController;
-    }
 
 
     @Override
@@ -33,14 +36,13 @@ public class CalculatorGraphicsLaunch extends Application {
         Parent root = loader.load();
 
         stage.setScene(new Scene(root));
-        stage.setMinHeight(500);
-        stage.setMinWidth(320);
+        stage.setMinHeight(MIN_HEIGHT);
+        stage.setMinWidth(MIN_WIDTH);
         stage.initStyle(StageStyle.UNDECORATED);
 
         stage.show();
 
-        calculatorController = loader.getController();
-        CalculatorUnknownError calculatorUnknownError = new CalculatorUnknownError();
+        CalculatorUnknownError calculatorUnknownError = new CalculatorUnknownError(loader.getController());
         Thread.setDefaultUncaughtExceptionHandler((thread, throwable) -> calculatorUnknownError.catchUnknownError(throwable));
 
     }

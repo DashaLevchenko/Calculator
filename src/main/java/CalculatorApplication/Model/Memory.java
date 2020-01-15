@@ -13,7 +13,7 @@ public class Memory {
     /**
      * Method adds numbers
      */
-    public void memoryAdd(BigDecimal numberSecond) {
+    public void memoryAdd (BigDecimal numberSecond) {
         if (number != null) {
             number = number.add(numberSecond);
         } else {
@@ -24,7 +24,7 @@ public class Memory {
     /**
      * Method subtracts numbers
      */
-    public void memorySubtract(BigDecimal numberSecond) {
+    public void memorySubtract (BigDecimal numberSecond) {
         if (number != null) {
             number = number.subtract(numberSecond);
         } else {

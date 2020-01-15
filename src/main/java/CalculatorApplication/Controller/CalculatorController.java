@@ -10,6 +10,7 @@ import CalculatorApplication.Model.OperationsEnum;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -28,65 +29,42 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import static javafx.scene.input.KeyCode.*;
-import static javafx.scene.input.KeyCode.DIGIT2;
 
 /**
  * This class realizes controller for calculator application
  */
 public class CalculatorController {
 
+    private static final double SPEED_OF_ANIMATION = 0.1;
     /**
      * Variable which keeps key and value of operation.
      * Key is id of button was pressed.
      * Value is enum variable which match some operation.
      */
-    private static final HashMap<String, OperationsEnum> operation = new HashMap<>();
+    private final HashMap<String, OperationsEnum> operation = new HashMap<>();
 
     /**
      * Variable which keeps key and value of exceptions.
      * Key is name of exception's class.
      * Value is message which refers to some exception.
      */
-    private static final HashMap<String, String> exceptions = new HashMap<>();
-
-    static {
-        operation.put("add", OperationsEnum.ADD);
-        operation.put("subtract", OperationsEnum.SUBTRACT);
-        operation.put("divide", OperationsEnum.DIVIDE);
-        operation.put("multiply", OperationsEnum.MULTIPLY);
-
-        operation.put("sqrt", OperationsEnum.SQRT);
-        operation.put("sqr", OperationsEnum.SQR);
-        operation.put("oneDivideX", OperationsEnum.ONE_DIVIDE_X);
-        operation.put("percent", OperationsEnum.PERCENT);
-        operation.put("negate", OperationsEnum.NEGATE);
-        operation.put("equal", OperationsEnum.EQUAL);
-
-        exceptions.put("InvalidInputException", "Invalid input");
-        exceptions.put("ResultUndefinedException", "Result is undefined");
-        exceptions.put("DivideZeroException", "Cannot divide by zero");
-        exceptions.put("OverflowException", "Overflow");
-    }
-
-    /** Maximal number of symbols which can be input in calculator */
-    private final int DEFAULT_MAX_CHARS_INPUT = 16;
-
-    /** Maximal invalid number which throws exception */
+    private final HashMap<String, String> exceptions = new HashMap<>();
+    /**
+     * Maximal invalid number which throws exception
+     */
     private final BigDecimal MAX_INVALID_NUMBER = new BigDecimal("1E10000");
-
-    /** Minimal invalid number which throws exception */
+    /**
+     * Minimal invalid number which throws exception
+     */
     private final BigDecimal MIN_INVALID_NUMBER = new BigDecimal("1E-10000");
-
-    /** Default text for {@code generalDisplay} */
+    /**
+     * Default text for {@code generalDisplay}
+     */
     private final String DEFAULT_TEXT_TO_GENERAL_DISPLAY = "0";
-
-    /** Decimal separator which is being used for number in application after format */
-    private final String DECIMAL_SEPARATOR_AFTER_FORMATTER = CalculatorNumberFormatter.DECIMAL_SEPARATOR_AFTER_FORMATTER;
-
-    /** Variable keeps empty string value */
+    /**
+     * Variable keeps empty string value
+     */
     private final String EMPTY_STRING = "";
-
-
     //region FXML elements
     //region Number buttons
     @FXML
@@ -143,48 +121,72 @@ public class CalculatorController {
     @FXML
     private AnchorPane leftMenu;
     //endregion
-    @FXML
-    private AnchorPane generalAnchorPane;
-    //endregion
-
-    /** Variable is true when can change binary operation */
+    /**
+     * Variable is true when can change binary operation
+     */
     private boolean canChangeOperator = false;
-
-    /** Variable is true when left menu is visible */
+    //endregion
+    /**
+     * Variable is true when left menu is visible
+     */
     private boolean showLeftMenu = false;
-
-    /** Variable is true when was printed exception */
+    /**
+     * Variable is true when was printed exception
+     */
     private boolean isError = false;
-
-    /** Variable is true when memory buttons was pressed */
+    /**
+     * Variable is true when memory buttons was pressed
+     */
     private boolean memoryPressed = false;
-
-    /** Variable is true when can change text from general display */
+    /**
+     * Variable is true when can change text from general display
+     */
     private boolean canBackspace = true;
-
     /**
      * Variable keeps true if last symbol of text from general display is decimal separator,
      * else keeps false
      */
     private boolean isLastSymbolDecimalSeparator;
-
-    /** Variable keeps result of calculation */
+    /**
+     * Variable keeps result of calculation
+     */
     private BigDecimal result;
-
     private double moveScroll;
-    /** Variable keeps default x-position */
+    /**
+     * Variable keeps default x-position
+     */
     private double xOffset = 0;
-
-    /** Variable keeps default y-position */
+    /**
+     * Variable keeps default y-position
+     */
     private double yOffset = 0;
-
-//    private Memory memory;
-
-    /** Formula which need to calculate */
+    /**
+     * Formula which need to calculate
+     */
+    private CalculatorNumberFormatter calculatorNumberFormatter = new CalculatorNumberFormatter();
     private ArrayList<Object> formula = new ArrayList<>();
-    private Memory memory;
+    private Memory memory = new Memory();
+    private ResizeDisplay resizeDisplay = new ResizeDisplay();
     private Calculator calculator = new Calculator();
-    private CalculatorHistoryFormatter calculatorHistoryFormatter = new CalculatorHistoryFormatter();
+
+    {
+        operation.put("add", OperationsEnum.ADD);
+        operation.put("subtract", OperationsEnum.SUBTRACT);
+        operation.put("divide", OperationsEnum.DIVIDE);
+        operation.put("multiply", OperationsEnum.MULTIPLY);
+
+        operation.put("sqrt", OperationsEnum.SQRT);
+        operation.put("sqr", OperationsEnum.SQR);
+        operation.put("oneDivideX", OperationsEnum.ONE_DIVIDE_X);
+        operation.put("percent", OperationsEnum.PERCENT);
+        operation.put("negate", OperationsEnum.NEGATE);
+        operation.put("equal", OperationsEnum.EQUAL);
+
+        exceptions.put("InvalidInputException", "Invalid input");
+        exceptions.put("ResultUndefinedException", "Result is undefined");
+        exceptions.put("DivideZeroException", "Cannot divide by zero");
+        exceptions.put("OverflowException", "Overflow");
+    }
 
     public BigDecimal getResult () {
         return result;
@@ -193,6 +195,7 @@ public class CalculatorController {
     @FXML
     void initialize () {
         generalDisplay.setText(DEFAULT_TEXT_TO_GENERAL_DISPLAY);
+
     }
 
     //region Input
@@ -236,8 +239,9 @@ public class CalculatorController {
      */
     private BigDecimal getDisplayNumber () throws ParseException {
         String textFromGeneralDisplay = generalDisplay.getText();
-        isLastSymbolDecimalSeparator = textFromGeneralDisplay.endsWith(DECIMAL_SEPARATOR_AFTER_FORMATTER);
-        return CalculatorNumberFormatter.getParsedNumber(textFromGeneralDisplay);
+        String decimalSeparatorAfterFormatter = CalculatorNumberFormatter.DECIMAL_SEPARATOR_AFTER_FORMATTER;
+        isLastSymbolDecimalSeparator = textFromGeneralDisplay.endsWith(decimalSeparatorAfterFormatter);
+        return calculatorNumberFormatter.getParsedNumber(textFromGeneralDisplay);
     }
 
     /**
@@ -308,7 +312,8 @@ public class CalculatorController {
         } else {
             int digitInNumber = countDigitInNumber(number);
 
-            if (digitInNumber < DEFAULT_MAX_CHARS_INPUT) {
+            int defaultMaxCharsInput = CalculatorNumberFormatter.MAX_SCALE_PRINT;
+            if (digitInNumber < defaultMaxCharsInput) {
                 int scale = number.scale();
                 int digitScale;
                 if (isLastSymbolDecimalSeparator) {
@@ -461,7 +466,6 @@ public class CalculatorController {
      * @param actionEvent Operation button was pressed.
      * @throws ParseException If can't parse text to number.
      */
-    //todo change else if
     @FXML
     public void operationPressed (ActionEvent actionEvent) throws ParseException {
         String buttonID = getButton(actionEvent).getId();
@@ -589,7 +593,9 @@ public class CalculatorController {
         scrollOutOperationMemory();
     }
 
-    /** Method calculates percent operation, if {@code percent} was pressed */
+    /**
+     * Method calculates percent operation, if {@code percent} was pressed
+     */
     private void calculatePercentOperation () throws ParseException {
         addNumberToFormula();
         addOperationToFormula(OperationsEnum.PERCENT);
@@ -602,8 +608,8 @@ public class CalculatorController {
     //region Print
     private void printHistory () {
         History calculatorHistory = calculator.getHistory();
-        String historyFormated = calculatorHistoryFormatter.formatCalculatorHistory(calculatorHistory);
-        outOperationMemory.setText(historyFormated);
+        String historyFormatted = CalculatorHistoryFormatter.formatCalculatorHistory(calculatorHistory);
+        outOperationMemory.setText(historyFormatted);
         scrollOutOperationMemory();
     }
 
@@ -624,7 +630,9 @@ public class CalculatorController {
         scrollOutOperationMemory();
     }
 
-    /** Method does some button disable or not disable */
+    /**
+     * Method does some button disable or not disable
+     */
     private void setOperationsDisable (boolean disable) {
         percent.setDisable(disable);
         sqrt.setDisable(disable);
@@ -659,7 +667,7 @@ public class CalculatorController {
         if (!canBackspace || memoryPressed) {
             number = number.stripTrailingZeros();
         }
-        String textForPrint = CalculatorNumberFormatter.formatNumberForPrint(number, isLastSymbolDecimalSeparator);
+        String textForPrint = calculatorNumberFormatter.formatNumberForPrint(number, isLastSymbolDecimalSeparator);
         generalDisplay.setText(textForPrint);
         resizeOutputText();
     }
@@ -701,7 +709,7 @@ public class CalculatorController {
     }
 
     private BigDecimal roundNumber (BigDecimal number) {
-        return CalculatorNumberFormatter.roundNumber(number);
+        return calculatorNumberFormatter.roundNumber(number);
 
     }
 
@@ -757,7 +765,7 @@ public class CalculatorController {
      * if text width more then width history area.
      */
     private void scrollOutOperationMemory () {
-        moveScroll = ResizeDisplay.scrollText(scrollPaneOperation, outOperationMemory.getText(), scrollButtonLeft, scrollButtonRight);
+        moveScroll = resizeDisplay.scrollText(scrollPaneOperation, outOperationMemory.getText(), scrollButtonLeft, scrollButtonRight);
     }
     //endregion
 
@@ -835,9 +843,6 @@ public class CalculatorController {
      */
     @FXML
     void memoryStorePressed () throws ParseException {
-        if (memory == null) {
-            memory = new Memory();
-        }
         memory.setNumber(setMemoryNumber());
 
         setMemoryButtonsDisable(false);
@@ -850,10 +855,8 @@ public class CalculatorController {
      */
     @FXML
     void memoryAddPressed () throws ParseException {
-        if (memory == null) {
-            memory = new Memory();
-            setMemoryButtonsDisable(false);
-        }
+        setMemoryButtonsDisable(false);
+
         memory.memoryAdd(setMemoryNumber());
         memoryPressed = true;
     }
@@ -864,11 +867,8 @@ public class CalculatorController {
      */
     @FXML
     void memoryClearPressed () {
-        if (memory != null) {
-            memory.memoryClear();
-            memory = null;
-            setMemoryButtonsDisable(true);
-        }
+        memory.memoryClear();
+        setMemoryButtonsDisable(true);
     }
 
     /**
@@ -879,12 +879,11 @@ public class CalculatorController {
     @FXML
     void memoryRecallPressed () {
         memoryPressed = true;
-        if (memory != null) {
-            result = memory.memoryRecall();
-            formula.add(result);
+        result = memory.memoryRecall();
+        formula.add(result);
 
-            printCalculateResult();
-        }
+        printCalculateResult();
+
         canBackspace = false;
     }
 
@@ -895,24 +894,24 @@ public class CalculatorController {
      */
     @FXML
     void memorySubtractPressed () throws ParseException {
-        if (memory == null) {
-            memory = new Memory();
-            setMemoryButtonsDisable(false);
-        }
+        setMemoryButtonsDisable(false);
         memory.memorySubtract(setMemoryNumber());
-
         memoryPressed = true;
     }
 
 
-    /** Method makes memory clear and memory recall buttons disable or not disable */
+    /**
+     * Method makes memory clear and memory recall buttons disable or not disable
+     */
     private void setMemoryButtonsDisable (boolean disable) {
         memoryClear.setDisable(disable);
         memoryRecall.setDisable(disable);
     }
 
 
-    /** Method sets number in memory object */
+    /**
+     * Method sets number in memory object
+     */
     private BigDecimal setMemoryNumber () throws ParseException {
         BigDecimal number;
 
@@ -929,24 +928,34 @@ public class CalculatorController {
 
     //region Window
 
-    /** Close calculator, if {@code cancel} was pressed */
+    /**
+     * Close calculator, if {@code cancel} was pressed
+     */
     @FXML
     public void closeWindow () {
-        Stage stage = (Stage) cancel.getScene().getWindow();
-        stage.close();
+        getStage(cancel).close();
     }
 
-    /** Maximize window of calculator and resize all button, if {@code maximize} was pressed */
+    /**
+     * Maximize window of calculator and resize all button, if {@code maximize} was pressed
+     */
     @FXML
     public void maximizeWindow () {
-        Stage stage = (Stage) maximizeButton.getScene().getWindow();
-        ResizeWindow resizeWindow = new ResizeWindow(stage);
+        ResizeWindow resizeWindow = getResizeWindowObject(maximizeButton);
         resizeWindow.maximizeWindow(maximizeButton);
         resizeWindow.resizeButton(calculatorButtons);
 
         resizeOutputText();
-
         scrollOutOperationMemory();
+    }
+
+    private ResizeWindow getResizeWindowObject (Node node) {
+        Stage stage = getStage(node);
+        return new ResizeWindow(stage);
+    }
+
+    private Stage getStage (Node node) {
+        return (Stage) node.getScene().getWindow();
     }
 
     /**
@@ -954,15 +963,8 @@ public class CalculatorController {
      */
     @FXML
     public void hideWindow () {
-        hideWindowByButton(hideButton);
+        getStage(hideButton).setIconified(true);
     }
-
-
-    private void hideWindowByButton (Button button) {
-        Stage stage = (Stage) button.getScene().getWindow();
-        stage.setIconified(true);
-    }
-
 
     /**
      * If mouse was dragged method changes location of calculator.
@@ -971,8 +973,7 @@ public class CalculatorController {
      */
     @FXML
     void draggedWindow (MouseEvent event) {
-        Stage stage = (Stage) title.getScene().getWindow();
-
+        Stage stage = getStage(title);
         double x = event.getScreenX() - xOffset;
         stage.setX(x);
 
@@ -1009,8 +1010,7 @@ public class CalculatorController {
             visible = true;
         }
 
-        double speedOfAnimation = 0.1;
-        Duration duration = Duration.seconds(speedOfAnimation);
+        Duration duration = Duration.seconds(SPEED_OF_ANIMATION);
         TranslateTransition transition = new TranslateTransition(duration, leftMenu);
 
         transition.setToX(transitionX);
@@ -1028,15 +1028,16 @@ public class CalculatorController {
      */
     @FXML
     void resizeWindow () {
-        Stage stage = (Stage) generalAnchorPane.getScene().getWindow();
-        ResizeWindow resize = new ResizeWindow(stage);
-        resize.resizeAllStage();
+        ResizeWindow resizeWindow = getResizeWindowObject(maximizeButton);
+        resizeWindow.resizeAllStage();
         scrollOutOperationMemory();
     }
 
-    /** Method resize text for general display and sets one */
+    /**
+     * Method resize text for general display and sets one
+     */
     private void resizeOutputText () {
-        Font newFont = ResizeDisplay.fontSizeChangedWidth(generalDisplay);
+        Font newFont = resizeDisplay.fontSizeChangedWidth(generalDisplay);
         generalDisplay.setFont(newFont);
     }
 

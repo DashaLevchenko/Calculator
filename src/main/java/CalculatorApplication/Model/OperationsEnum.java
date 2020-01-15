@@ -17,22 +17,22 @@ public enum OperationsEnum {
     /**
      * The singleton is multiplication
      */
-    MULTIPLY ,
+    MULTIPLY,
 
     /**
      * The singleton is division
      */
-    DIVIDE ,
+    DIVIDE,
 
     /**
      * The singleton is percent of number
      */
-    PERCENT ,
+    PERCENT,
 
     /**
      * The singleton is square root
      */
-    SQRT ,
+    SQRT,
 
     /**
      * The singleton is square number

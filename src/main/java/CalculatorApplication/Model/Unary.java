@@ -12,7 +12,7 @@ import java.math.RoundingMode;
  * This class calculates unary operations,
  * like number square root, number square, number divide by one.
  */
- class Unary {
+class Unary {
     private BigDecimal number;
     private MathContext mathContext = MathContext.DECIMAL128;
     private OperationsEnum operation;
@@ -91,6 +91,7 @@ import java.math.RoundingMode;
     private void negate () {
         result = number.negate();
     }
+
     public void setNumber (BigDecimal number) {
         this.number = number;
     }
