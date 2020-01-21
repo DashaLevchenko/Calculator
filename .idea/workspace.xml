@@ -12,24 +12,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="feaeb0c2-feb2-4a9c-98e3-48b1d1a339aa" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Logs/calculator_log.txt.4" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/CalculatorApplication/Controller/CalculatorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CalculatorApplication/Controller/CalculatorController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/CalculatorApplication/Controller/CalculatorHistoryFormatter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CalculatorApplication/Controller/CalculatorHistoryFormatter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/CalculatorApplication/Controller/CalculatorNumberFormatter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CalculatorApplication/Controller/CalculatorNumberFormatter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/CalculatorApplication/Controller/CalculatorUnknownError.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CalculatorApplication/Controller/CalculatorUnknownError.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/CalculatorApplication/Controller/CalculatorUnknownErrorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CalculatorApplication/Controller/CalculatorUnknownErrorController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/CalculatorApplication/Controller/ResizeDisplay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CalculatorApplication/Controller/ResizeDisplay.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/CalculatorApplication/Controller/ResizeWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CalculatorApplication/Controller/ResizeWindow.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/CalculatorApplication/Model/Binary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CalculatorApplication/Model/Binary.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/CalculatorApplication/Model/Calculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CalculatorApplication/Model/Calculator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/CalculatorApplication/Model/Memory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CalculatorApplication/Model/Memory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/CalculatorApplication/Model/OperationsEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CalculatorApplication/Model/OperationsEnum.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/CalculatorApplication/Model/Unary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CalculatorApplication/Model/Unary.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/CalculatorApplication/ParallelThreads.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CalculatorApplication/ParallelThreads.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/CalculatorApplication/View/CalculatorGraphicsLaunch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CalculatorApplication/View/CalculatorGraphicsLaunch.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Logs/calculator_log.txt.1" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Logs/calculator_log.txt.1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Logs/calculator_log.txt.3" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Logs/calculator_log.txt.3" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -110,13 +101,13 @@
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/src/main/java" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/CalculatorApplication" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../ParallelThreadCalculator" />
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.19375" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.Java" />
+    <property name="settings.editor.selected.configurable" value="Errors" />
   </component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.RecentsKey">
@@ -168,9 +159,9 @@
       <command value="mvn clean compile javafx:compile jar" />
       <command value="mvn compile" />
       <command value="mvn dependency:unpack jar:jar" />
-      <command value="mvn clean compile" />
       <command value="mvn clean" />
       <command value="mvn clean package" />
+      <command value="mvn clean compile" />
     </option>
   </component>
   <component name="RunDashboard">
@@ -185,8 +176,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.CalculatorControllerTest.checkMemorySubtract">
-    <configuration name="Calculator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Application.Calculator">
+    <configuration name="Calculator (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="CalculatorApplication.Calculator" />
       <module name="Calculator" />
       <extension name="coverage">
@@ -199,8 +190,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ParallelThreads" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="CalculatorApplication.ParallelThreads" />
+    <configuration name="Calculator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="CalculatorApplication.Calculator" />
       <module name="Calculator" />
       <extension name="coverage">
         <pattern>
@@ -227,7 +218,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CalculatorControllerTest.checkMemorySubtract" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CalculatorControllerTest.checkAllOperations" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Calculator" />
       <extension name="coverage">
         <pattern>
@@ -237,13 +228,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="CalculatorApplication.Controller" />
       <option name="MAIN_CLASS_NAME" value="CalculatorApplication.Controller.CalculatorControllerTest" />
-      <option name="METHOD_NAME" value="checkMemorySubtract" />
+      <option name="METHOD_NAME" value="checkAllOperations" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CalculatorControllerTest.checkNegate" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CalculatorControllerTest.checkMemoryAdd" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Calculator" />
       <extension name="coverage">
         <pattern>
@@ -253,7 +244,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="CalculatorApplication.Controller" />
       <option name="MAIN_CLASS_NAME" value="CalculatorApplication.Controller.CalculatorControllerTest" />
-      <option name="METHOD_NAME" value="checkNegate" />
+      <option name="METHOD_NAME" value="checkMemoryAdd" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -295,20 +286,20 @@
     </configuration>
     <list>
       <item itemvalue="Application.Calculator" />
-      <item itemvalue="Application.ParallelThreads" />
       <item itemvalue="JAR Application.Calculator-1.0-SNAPSHOT.jar" />
       <item itemvalue="JUnit.Calculator_ControllerTest" />
-      <item itemvalue="JUnit.CalculatorControllerTest.checkNegate" />
+      <item itemvalue="JUnit.CalculatorControllerTest.checkAllOperations" />
+      <item itemvalue="Application.Calculator (1)" />
+      <item itemvalue="JUnit.CalculatorControllerTest.checkMemoryAdd" />
       <item itemvalue="JUnit.CalculatorControllerTest" />
-      <item itemvalue="JUnit.CalculatorControllerTest.checkMemorySubtract" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.CalculatorControllerTest.checkMemorySubtract" />
-        <item itemvalue="JUnit.CalculatorControllerTest" />
         <item itemvalue="Application.Calculator" />
-        <item itemvalue="Application.ParallelThreads" />
-        <item itemvalue="JUnit.CalculatorControllerTest.checkNegate" />
+        <item itemvalue="JUnit.CalculatorControllerTest" />
+        <item itemvalue="JUnit.CalculatorControllerTest.checkMemoryAdd" />
+        <item itemvalue="JUnit.CalculatorControllerTest.checkAllOperations" />
+        <item itemvalue="Application.Calculator (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -336,13 +327,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1565432602101</updated>
-    </task>
-    <task id="LOCAL-00089" summary="history works">
-      <created>1575215112913</created>
-      <option name="number" value="00089" />
-      <option name="presentableId" value="LOCAL-00089" />
-      <option name="project" value="LOCAL" />
-      <updated>1575215112913</updated>
     </task>
     <task id="LOCAL-00090" summary="all works, before add javadoc and refactoring">
       <created>1575291564470</created>
@@ -680,7 +664,14 @@
       <option name="project" value="LOCAL" />
       <updated>1579002999584</updated>
     </task>
-    <option name="localTasksCounter" value="138" />
+    <task id="LOCAL-00138" summary="concurrency was fixed">
+      <created>1579101983269</created>
+      <option name="number" value="00138" />
+      <option name="presentableId" value="LOCAL-00138" />
+      <option name="project" value="LOCAL" />
+      <updated>1579101983269</updated>
+    </task>
+    <option name="localTasksCounter" value="139" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -782,7 +773,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="all works after refactoring" />
     <MESSAGE value="before changing demo" />
     <MESSAGE value="before delete operation in demo" />
     <MESSAGE value="before change controller operations" />
@@ -807,18 +797,10 @@
     <MESSAGE value="structure was changed,&#10;jar was assembled,&#10;before change backspace" />
     <MESSAGE value="main was changed,&#10;calculator history formatter was changed" />
     <MESSAGE value="before calculator history formatter change" />
-    <option name="LAST_COMMIT_MESSAGE" value="before calculator history formatter change" />
+    <MESSAGE value="concurrency was fixed" />
+    <option name="LAST_COMMIT_MESSAGE" value="concurrency was fixed" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/CalculatorApplication/Controller/CalculatorController.java</url>
-          <line>845</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="JUnit">
         <watch expression="calculator" language="JAVA" />

@@ -17,16 +17,15 @@ public class CalculatorGraphicsLaunch extends Application {
     /**
      * This variable keeps minimal height of application window
      */
-    private static final int MIN_HEIGHT = 500;
+    private final int MIN_HEIGHT = 500;
     /**
      * This variable keeps minimal width of application window
      */
-    private static final int MIN_WIDTH = 320;
+    private final int MIN_WIDTH = 320;
 
     public static void launchCalculator (String[] args) {
         Application.launch(args);
     }
-
 
 
     @Override

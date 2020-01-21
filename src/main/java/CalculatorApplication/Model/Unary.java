@@ -14,7 +14,7 @@ import java.math.RoundingMode;
  */
 class Unary {
     private BigDecimal number;
-    private MathContext mathContext = MathContext.DECIMAL128;
+    private static final MathContext MATH_CONTEXT = MathContext.DECIMAL128;
     private OperationsEnum operation;
     private BigDecimal result;
 
@@ -31,13 +31,13 @@ class Unary {
         if (compareZero(number) < 0) {
             throw new InvalidInputException();
         }
-        result = number.sqrt(mathContext);
+        result = number.sqrt(MATH_CONTEXT);
 
     }
 
     private void xSquare () {
         int power = 2;
-        result = number.pow(power).round(mathContext);
+        result = number.pow(power).round(MATH_CONTEXT);
     }
 
 
@@ -47,7 +47,7 @@ class Unary {
         }
 
         BigDecimal one = BigDecimal.ONE;
-        result = one.divide(number, mathContext);
+        result = one.divide(number, MATH_CONTEXT);
     }
 
     private int compareZero (BigDecimal number) {

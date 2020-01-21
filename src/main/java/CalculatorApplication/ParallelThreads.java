@@ -21,11 +21,12 @@ public class ParallelThreads {
     }
 
     @SafeVarargs
-    private static <T> void calculate (T... object) {
+    private static  <T> void calculate (T... object) {
         Calculator calculator = new Calculator();
+        CalculatorHistoryFormatter calculatorHistoryFormatter = new CalculatorHistoryFormatter();
         try {
             BigDecimal result = calculator.calculator(object);
-            System.out.println(result + " history: " + CalculatorHistoryFormatter.formatCalculatorHistory(calculator.getHistory()));
+            System.out.println(result + " history: " + calculatorHistoryFormatter.formatCalculatorHistory(calculator.getHistory()));
         } catch (DivideZeroException | ResultUndefinedException | InvalidInputException e) {
             e.printStackTrace();
         }

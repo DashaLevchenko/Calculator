@@ -1,7 +1,6 @@
 package CalculatorApplication.Controller;
 
 import javafx.geometry.Insets;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -29,10 +28,6 @@ class ResizeDisplay {
      */
     private static final String DEFAULT_FONT_DISPLAY = "Segoe UI Semibold";
 
-    /**
-     * Stage where locate all application
-     */
-    private Stage stage;
 
     /**
      * Resizes size text if it exceeds border of label
@@ -41,7 +36,7 @@ class ResizeDisplay {
      * @return Font with size was resized
      */
     Font fontSizeChangedWidth (Label label) {
-        setStage(label);
+         Stage stage = (Stage) label.getScene().getWindow();
 
         String labelText = label.getText();
         Text textNew = new Text(labelText);
@@ -66,11 +61,6 @@ class ResizeDisplay {
         return new Font(DEFAULT_FONT_DISPLAY, newSize);
     }
 
-    private void setStage (Node node) {
-        if (stage == null) {
-            stage = (Stage) node.getScene().getWindow();
-        }
-    }
 
     /**
      * Method calculates horizontal scroll position of the ScrollPane
@@ -82,7 +72,6 @@ class ResizeDisplay {
      * @return Horizontal scroll position of the ScrollPane
      */
     double scrollText (ScrollPane scrollPane, String text, Button scrollButtonLeft, Button scrollButtonRight) {
-        setStage(scrollPane);
         Insets padding = scrollPane.getPadding();
 
         double maxWidthLabelOperation = scrollPane.getWidth() - padding.getLeft() - padding.getRight();

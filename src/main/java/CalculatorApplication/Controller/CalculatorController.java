@@ -35,54 +35,72 @@ import static javafx.scene.input.KeyCode.*;
  */
 public class CalculatorController {
 
+    /**
+     * Variable keeps empty string value
+     */
+    private static final String EMPTY_STRING = "";
     private static final double SPEED_OF_ANIMATION = 0.1;
     /**
      * Variable which keeps key and value of operation.
      * Key is id of button was pressed.
      * Value is enum variable which match some operation.
      */
-    private final HashMap<String, OperationsEnum> operation = new HashMap<>();
-
+    private static final HashMap<String, OperationsEnum> OPERATIONS = new HashMap<>();
     /**
      * Variable which keeps key and value of exceptions.
      * Key is name of exception's class.
      * Value is message which refers to some exception.
      */
-    private final HashMap<String, String> exceptions = new HashMap<>();
+    private static final HashMap<String, String> EXCEPTIONS = new HashMap<>();
+
+    static {
+        OPERATIONS.put("add", OperationsEnum.ADD);
+        OPERATIONS.put("subtract", OperationsEnum.SUBTRACT);
+        OPERATIONS.put("divide", OperationsEnum.DIVIDE);
+        OPERATIONS.put("multiply", OperationsEnum.MULTIPLY);
+
+        OPERATIONS.put("sqrt", OperationsEnum.SQRT);
+        OPERATIONS.put("sqr", OperationsEnum.SQR);
+        OPERATIONS.put("oneDivideX", OperationsEnum.ONE_DIVIDE_X);
+        OPERATIONS.put("percent", OperationsEnum.PERCENT);
+        OPERATIONS.put("negate", OperationsEnum.NEGATE);
+        OPERATIONS.put("equal", OperationsEnum.EQUAL);
+
+        EXCEPTIONS.put("InvalidInputException", "Invalid input");
+        EXCEPTIONS.put("ResultUndefinedException", "Result is undefined");
+        EXCEPTIONS.put("DivideZeroException", "Cannot divide by zero");
+        EXCEPTIONS.put("OverflowException", "Overflow");
+    }
+
     /**
      * Maximal invalid number which throws exception
      */
-    private final BigDecimal MAX_INVALID_NUMBER = new BigDecimal("1E10000");
+    private static final BigDecimal MAX_INVALID_NUMBER = new BigDecimal("1E10000");
     /**
      * Minimal invalid number which throws exception
      */
-    private final BigDecimal MIN_INVALID_NUMBER = new BigDecimal("1E-10000");
+    private static final BigDecimal MIN_INVALID_NUMBER = new BigDecimal("1E-10000");
     /**
      * Default text for {@code generalDisplay}
      */
-    private final String DEFAULT_TEXT_TO_GENERAL_DISPLAY = "0";
-    /**
-     * Variable keeps empty string value
-     */
-    private final String EMPTY_STRING = "";
+    private static final String DEFAULT_TEXT_TO_GENERAL_DISPLAY = "0";
+
     //region FXML elements
     //region Number buttons
     @FXML
     private GridPane calculatorButtons;
+    //endregion
     @FXML
     private Button zero, one, two, three,
             four, five, six, seven, eight, nine;
-    //endregion
-
     //region Memory buttons
     @FXML
     private GridPane memoryPanel;
+
+    //endregion
     @FXML
     private Button memoryClear, memoryRecall, memoryStore,
             memoryAdd, memorySubtract;
-
-    //endregion
-
     //region Operation buttons
     //Unary operation buttons
     @FXML
@@ -94,11 +112,10 @@ public class CalculatorController {
     private Button equal;
     @FXML
     private Button percent;
+    //endregion
     //Clear buttons
     @FXML
     private Button CE, C;
-    //endregion
-
     //region Displays
     @FXML
     private Label generalDisplay;
@@ -109,7 +126,6 @@ public class CalculatorController {
     private ScrollPane scrollPaneOperation;
     @FXML
     private Button scrollButtonLeft, scrollButtonRight;
-
     //Change number buttons
     @FXML
     private Button backspace, negate, point;
@@ -118,6 +134,7 @@ public class CalculatorController {
     private Label title, textStandard;
     @FXML
     private Button cancel, maximizeButton, hideButton;
+    //endregion
     @FXML
     private AnchorPane leftMenu;
     //endregion
@@ -125,7 +142,6 @@ public class CalculatorController {
      * Variable is true when can change binary operation
      */
     private boolean canChangeOperator = false;
-    //endregion
     /**
      * Variable is true when left menu is visible
      */
@@ -164,33 +180,18 @@ public class CalculatorController {
      * Formula which need to calculate
      */
     private CalculatorNumberFormatter calculatorNumberFormatter = new CalculatorNumberFormatter();
+    /**
+     * Formula which need to calculate.
+     */
     private ArrayList<Object> formula = new ArrayList<>();
+
     private Memory memory = new Memory();
     private ResizeDisplay resizeDisplay = new ResizeDisplay();
     private Calculator calculator = new Calculator();
+    private CalculatorHistoryFormatter calculatorHistoryFormatter = new CalculatorHistoryFormatter();
 
-    {
-        operation.put("add", OperationsEnum.ADD);
-        operation.put("subtract", OperationsEnum.SUBTRACT);
-        operation.put("divide", OperationsEnum.DIVIDE);
-        operation.put("multiply", OperationsEnum.MULTIPLY);
 
-        operation.put("sqrt", OperationsEnum.SQRT);
-        operation.put("sqr", OperationsEnum.SQR);
-        operation.put("oneDivideX", OperationsEnum.ONE_DIVIDE_X);
-        operation.put("percent", OperationsEnum.PERCENT);
-        operation.put("negate", OperationsEnum.NEGATE);
-        operation.put("equal", OperationsEnum.EQUAL);
 
-        exceptions.put("InvalidInputException", "Invalid input");
-        exceptions.put("ResultUndefinedException", "Result is undefined");
-        exceptions.put("DivideZeroException", "Cannot divide by zero");
-        exceptions.put("OverflowException", "Overflow");
-    }
-
-    public BigDecimal getResult () {
-        return result;
-    }
 
     @FXML
     void initialize () {
@@ -470,7 +471,7 @@ public class CalculatorController {
     public void operationPressed (ActionEvent actionEvent) throws ParseException {
         String buttonID = getButton(actionEvent).getId();
 
-        OperationsEnum operationsEnum = operation.get(buttonID);
+        OperationsEnum operationsEnum = OPERATIONS.get(buttonID);
 
         if (operationsEnum != null) {
             if (Calculator.isBinary(operationsEnum)) {
@@ -608,7 +609,7 @@ public class CalculatorController {
     //region Print
     private void printHistory () {
         History calculatorHistory = calculator.getHistory();
-        String historyFormatted = CalculatorHistoryFormatter.formatCalculatorHistory(calculatorHistory);
+        String historyFormatted = calculatorHistoryFormatter.formatCalculatorHistory(calculatorHistory);
         outOperationMemory.setText(historyFormatted);
         scrollOutOperationMemory();
     }
@@ -674,7 +675,7 @@ public class CalculatorController {
 
     private String getMassageException (Exception exception) {
         String exceptionType = exception.getClass().getSimpleName();
-        return exceptions.get(exceptionType);
+        return EXCEPTIONS.get(exceptionType);
     }
 
     /**

@@ -17,7 +17,7 @@ class Binary {
     /**
      * Max default rounding
      */
-    private final RoundingMode DEFAULT_ROUNDING = RoundingMode.UP;
+    private static final RoundingMode DEFAULT_ROUNDING = RoundingMode.UP;
 
     /**
      * Variable keeps value of first number
