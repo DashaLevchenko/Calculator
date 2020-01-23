@@ -10,7 +10,7 @@ import java.text.ParseException;
 /**
  * Class formatters number for print
  */
-class CalculatorNumberFormatter {
+public class CalculatorNumberFormatter {
     /**
      * Decimal separator before formatter
      */
@@ -89,14 +89,14 @@ class CalculatorNumberFormatter {
     /**
      * Create a DecimalFormatSymbols object for customize the behavior of the format.
      */
-    private static DecimalFormatSymbols symbols = new DecimalFormatSymbols();
-
+    private static final DecimalFormatSymbols SYMBOLS = new DecimalFormatSymbols();
+    private DecimalFormat decimalFormat = new DecimalFormat();
     /*
       Set separator for formatter number
      */ static {
-        symbols.setExponentSeparator(EXPONENT);
-        symbols.setGroupingSeparator(GROUPING_SEPARATOR.charAt(0));
-        symbols.setDecimalSeparator(DECIMAL_SEPARATOR_AFTER_FORMATTER.charAt(0));
+        SYMBOLS.setExponentSeparator(EXPONENT);
+        SYMBOLS.setGroupingSeparator(GROUPING_SEPARATOR.charAt(0));
+        SYMBOLS.setDecimalSeparator(DECIMAL_SEPARATOR_AFTER_FORMATTER.charAt(0));
     }
 
     /**
@@ -129,8 +129,8 @@ class CalculatorNumberFormatter {
      * @return String of formatted number.
      */
     private String formatNumber (BigDecimal number, String pattern) {
-        DecimalFormat decimalFormat = new DecimalFormat(pattern, symbols);
-        decimalFormat.setRoundingMode(RoundingMode.DOWN);
+        DecimalFormat decimalFormat = new DecimalFormat(pattern, SYMBOLS);
+
         return decimalFormat.format(number);
     }
 
@@ -282,10 +282,9 @@ class CalculatorNumberFormatter {
      * @throws ParseException If cannot parse text to number.
      */
 
-    BigDecimal getParsedNumber (String text) throws ParseException {
+    public BigDecimal getParsedNumber (String text) throws ParseException {
         text = text.replace(PLUS, EMPTY_STRING);
-        DecimalFormat decimalFormat = new DecimalFormat();
-        decimalFormat.setDecimalFormatSymbols(symbols);
+        decimalFormat.setDecimalFormatSymbols(SYMBOLS);
         decimalFormat.setParseBigDecimal(true);
         return (BigDecimal) decimalFormat.parse(text);
     }

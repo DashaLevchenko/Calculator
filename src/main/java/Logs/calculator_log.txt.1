@@ -1,4 +1,4 @@
-янв. 15, 2020 4:00:50 PM CalculatorApplication.Controller.CalculatorUnknownError catchUnknownError
+янв. 21, 2020 6:15:57 PM CalculatorApplication.Controller.CalculatorUnknownError catchUnknownError
 SEVERE: Error: 
 java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
 	at javafx.fxml/javafx.fxml.FXMLLoader$MethodHandler.invoke(FXMLLoader.java:1787)
@@ -8,6 +8,10 @@ java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
 	at javafx.base/com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:191)
 	at javafx.base/com.sun.javafx.event.CompositeEventDispatcher.dispatchBubblingEvent(CompositeEventDispatcher.java:59)
 	at javafx.base/com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:58)
+	at javafx.base/com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at javafx.base/com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at javafx.base/com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at javafx.base/com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
 	at javafx.base/com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
 	at javafx.base/com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
 	at javafx.base/com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
@@ -35,6 +39,10 @@ java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
 	at javafx.base/com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
 	at javafx.base/com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
 	at javafx.base/com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at javafx.base/com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at javafx.base/com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at javafx.base/com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at javafx.base/com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
 	at javafx.base/com.sun.javafx.event.EventUtil.fireEventImpl(EventUtil.java:74)
 	at javafx.base/com.sun.javafx.event.EventUtil.fireEvent(EventUtil.java:54)
 	at javafx.base/javafx.event.Event.fireEvent(Event.java:198)
@@ -53,8 +61,7 @@ java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
 	at javafx.graphics/com.sun.glass.ui.win.WinApplication.lambda$runLoop$3(WinApplication.java:174)
 	at java.base/java.lang.Thread.run(Thread.java:835)
 Caused by: java.lang.reflect.InvocationTargetException
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at jdk.internal.reflect.GeneratedMethodAccessor39.invoke(Unknown Source)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
 	at com.sun.javafx.reflect.Trampoline.invoke(MethodUtil.java:76)
@@ -63,9 +70,20 @@ Caused by: java.lang.reflect.InvocationTargetException
 	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
 	at javafx.base/com.sun.javafx.reflect.MethodUtil.invoke(MethodUtil.java:273)
 	at javafx.fxml/com.sun.javafx.fxml.MethodHelper.invoke(MethodHelper.java:83)
-	at javafx.fxml/javafx.fxml.FXMLLoader$MethodHandler.invoke(FXMLLoader.java:1784)
-	... 50 more
-Caused by: java.lang.NullPointerException
-	at Calculator/CalculatorApplication.Controller.CalculatorController.memoryStorePressed(CalculatorController.java:846)
-	... 61 more
+	at javafx.fxml/javafx.fxml.FXMLLoader$MethodHandler.invoke(FXMLLoader.java:1782)
+	... 58 more
+Caused by: java.lang.IndexOutOfBoundsException: Index -1 out of bounds for length 0
+	at java.base/jdk.internal.util.Preconditions.outOfBounds(Preconditions.java:64)
+	at java.base/jdk.internal.util.Preconditions.outOfBoundsCheckIndex(Preconditions.java:70)
+	at java.base/jdk.internal.util.Preconditions.checkIndex(Preconditions.java:248)
+	at java.base/java.util.Objects.checkIndex(Objects.java:372)
+	at java.base/java.util.ArrayList.remove(ArrayList.java:535)
+	at Calculator/CalculatorApplication.Controller.CalculatorHistoryFormatter.removeLastHistoryFormattedObject(CalculatorHistoryFormatter.java:97)
+	at Calculator/CalculatorApplication.Controller.CalculatorHistoryFormatter.formatCalculatorHistory(CalculatorHistoryFormatter.java:78)
+	at Calculator/CalculatorApplication.Controller.CalculatorController.printHistory(CalculatorController.java:612)
+	at Calculator/CalculatorApplication.Controller.CalculatorController.printCalculateResult(CalculatorController.java:659)
+	at Calculator/CalculatorApplication.Controller.CalculatorController.calculateFormula(CalculatorController.java:519)
+	at Calculator/CalculatorApplication.Controller.CalculatorController.calculateUnaryOperations(CalculatorController.java:541)
+	at Calculator/CalculatorApplication.Controller.CalculatorController.operationPressed(CalculatorController.java:480)
+	... 68 more
 
