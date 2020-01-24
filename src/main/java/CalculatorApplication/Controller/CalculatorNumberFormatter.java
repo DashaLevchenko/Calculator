@@ -90,13 +90,18 @@ public class CalculatorNumberFormatter {
      * Create a DecimalFormatSymbols object for customize the behavior of the format.
      */
     private static final DecimalFormatSymbols SYMBOLS = new DecimalFormatSymbols();
-    private DecimalFormat decimalFormat = new DecimalFormat();
+
+
+    private static DecimalFormat DECIMAL_FORMAT = new DecimalFormat();
+
     /*
       Set separator for formatter number
      */ static {
         SYMBOLS.setExponentSeparator(EXPONENT);
         SYMBOLS.setGroupingSeparator(GROUPING_SEPARATOR.charAt(0));
         SYMBOLS.setDecimalSeparator(DECIMAL_SEPARATOR_AFTER_FORMATTER.charAt(0));
+        DECIMAL_FORMAT.setDecimalFormatSymbols(SYMBOLS);
+        DECIMAL_FORMAT.setParseBigDecimal(true);
     }
 
     /**
@@ -128,11 +133,18 @@ public class CalculatorNumberFormatter {
      * @param pattern Pattern for format number
      * @return String of formatted number.
      */
-    private String formatNumber (BigDecimal number, String pattern) {
-        DecimalFormat decimalFormat = new DecimalFormat(pattern, SYMBOLS);
-
-        return decimalFormat.format(number);
+    public String formatNumber (BigDecimal number, String pattern) {
+        synchronized (DECIMAL_FORMAT){
+            DECIMAL_FORMAT.applyPattern(pattern);
+            return DECIMAL_FORMAT.format(number);
+        }
     }
+
+//    private DecimalFormat getDecimalFormat () {
+//        DecimalFormat decimalFormat = (DecimalFormat) NumberFormat.getInstance();
+//        decimalFormat.setDecimalFormatSymbols(SYMBOLS);
+//        return decimalFormat;
+//    }
 
     /**
      * Method formatters number for print on display,
@@ -281,12 +293,16 @@ public class CalculatorNumberFormatter {
      * @return Number was parsed
      * @throws ParseException If cannot parse text to number.
      */
-
-    public BigDecimal getParsedNumber (String text) throws ParseException {
+    public  BigDecimal getParsedNumber (String text) throws ParseException {
         text = text.replace(PLUS, EMPTY_STRING);
-        decimalFormat.setDecimalFormatSymbols(SYMBOLS);
-        decimalFormat.setParseBigDecimal(true);
-        return (BigDecimal) decimalFormat.parse(text);
+        synchronized (PLUS) {
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return (BigDecimal) DECIMAL_FORMAT.parse(text);
+        }
     }
 
     String formatNumberForCalculatorHistory (BigDecimal number) {

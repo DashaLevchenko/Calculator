@@ -1,42 +1,76 @@
 package CalculatorApplication;
 
-import CalculatorApplication.Controller.CalculatorHistoryFormatter;
-import CalculatorApplication.Controller.CalculatorNumberFormatter;
-import CalculatorApplication.Model.Calculator;
-import CalculatorApplication.Model.Exceptions.DivideZeroException;
-import CalculatorApplication.Model.Exceptions.InvalidInputException;
-import CalculatorApplication.Model.Exceptions.ResultUndefinedException;
-
-import java.math.BigDecimal;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import static CalculatorApplication.Model.OperationsEnum.*;
-
 public class ParallelThreads {
-    public static void main (String[] args) {
+    private StringBuilder stringBuilder = new StringBuilder();
+    private StringBuilder stringBuilderSecond = new StringBuilder();
+//    public static void main (String[] args) {
+//
+//        CalculatorNumberFormatter calculatorNumberFormatter = new CalculatorNumberFormatter();
+//        ExecutorService pool = Executors.newFixedThreadPool(2);
+//        pool.submit(() -> {
+//            try {
+//                System.out.println(calculatorNumberFormatter.getParsedNumber("123456e9"));
+//
+//            } catch (ParseException e) {
+//                e.printStackTrace();
+//            }
+//        });
+//        pool.submit(() -> {
+//            try {
+////            System.out.println(calculatorNumberFormatter.formatNumber(BigDecimal.valueOf(55555E7), "#,##0E0"));
+//            System.out.println(calculatorNumberFormatter.getParsedNumber("789123"));
+//
+//            } catch (ParseException e) {
+//                e.printStackTrace();
+//            }
+//        });
+//
+//
+//
+//    }
 
-        CalculatorNumberFormatter calculatorNumberFormatter = new CalculatorNumberFormatter();
-        ExecutorService pool = Executors.newFixedThreadPool(3);
-//        pool.submit(() -> calculate(8, ADD, 99, SQRT));
-        pool.submit(() -> calculatorNumberFormatter.getParsedNumber("99989"));
-        pool.submit(() -> calculatorNumberFormatter.getParsedNumber("7688"));
-        pool.submit(() -> calculate(99, SQRT, SQR, SQR));
-        pool.submit(() -> calculate(2, ADD, 3, EQUAL, SQR));
+    public static void main (String[] args) {
+        ParallelThreads parallelThreads = new ParallelThreads();
+        ExecutorService pool = Executors.newFixedThreadPool(2);
+        pool.submit(() -> {
+            String text = "Hello";
+            for (char c : text.toCharArray()) {
+//                parallelThreads.stringBuilder.append(c);
+                parallelThreads.experiment(String.valueOf(c));
+                parallelThreads.experimentSecond(String.valueOf(c));
+//                System.out.println(parallelThreads.stringBuilder +" "+Thread.currentThread().getName());
+            }
+        });
+        pool.submit(() -> {
+            String text = "World";
+            for (char c : text.toCharArray()) {
+                parallelThreads.experimentSecond(String.valueOf(c));
+                parallelThreads.experiment(String.valueOf(c));
+            }
+        });
+
+//        System.out.println(parallelThreads.stringBuilder);
     }
 
-    @SafeVarargs
-    private static  <T> void calculate (T... object) {
-
-        Calculator calculator = new Calculator();
-        CalculatorHistoryFormatter calculatorHistoryFormatter = new CalculatorHistoryFormatter();
-        try {
-            BigDecimal result = calculator.calculator(object);
-            System.out.println(result + " history: " + calculatorHistoryFormatter.formatCalculatorHistory(calculator.getHistory()));
-        } catch (DivideZeroException | ResultUndefinedException | InvalidInputException e) {
-            e.printStackTrace();
+    private  void experiment (String string) {
+        synchronized (stringBuilderSecond){
+            stringBuilder.append(string);
+            stringBuilderSecond.append(string);
+            System.out.println(stringBuilder +" "+Thread.currentThread().getName()+" First");
+            System.out.println(stringBuilderSecond +" "+Thread.currentThread().getName()+" Second");
         }
     }
 
+    private  void experimentSecond (String string) {
+        synchronized (stringBuilder){
+            stringBuilder.append(string);
+            stringBuilderSecond.append(string);
+            System.out.println(stringBuilder +" "+Thread.currentThread().getName()+" First");
+            System.out.println(stringBuilderSecond +" "+Thread.currentThread().getName()+" Second");
+        }
+    }
 
 }

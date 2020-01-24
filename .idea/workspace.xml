@@ -12,11 +12,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="feaeb0c2-feb2-4a9c-98e3-48b1d1a339aa" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Logs/calculator_log.txt.0.lck" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/CalculatorApplication/Controller/CalculatorHistoryFormatter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CalculatorApplication/Controller/CalculatorHistoryFormatter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/CalculatorApplication/Controller/CalculatorNumberFormatter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CalculatorApplication/Controller/CalculatorNumberFormatter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/CalculatorApplication/ParallelThreads.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CalculatorApplication/ParallelThreads.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Logs/calculator_log.txt.0.lck" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Logs/calculator_log.txt.1" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Logs/calculator_log.txt.1" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Logs/calculator_log.txt.3" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Logs/calculator_log.txt.3" afterDir="false" />
     </list>
@@ -174,7 +173,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.CalculatorControllerTest.checkMIXUnaryOperations">
+  <component name="RunManager" selected="Application.ParallelThreads">
     <configuration name="Calculator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="CalculatorApplication.Calculator" />
       <module name="Calculator" />
@@ -188,22 +187,20 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CalculatorControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ParallelThreads" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="CalculatorApplication.ParallelThreads" />
       <module name="Calculator" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="CalculatorApplication.Controller.*" />
+          <option name="PATTERN" value="CalculatorApplication.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="CalculatorApplication.Controller" />
-      <option name="MAIN_CLASS_NAME" value="CalculatorApplication.Controller.CalculatorControllerTest" />
-      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CalculatorControllerTest.checkAllOperations" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CalculatorControllerTest.checkAdd" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Calculator" />
       <extension name="coverage">
         <pattern>
@@ -213,13 +210,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="CalculatorApplication.Controller" />
       <option name="MAIN_CLASS_NAME" value="CalculatorApplication.Controller.CalculatorControllerTest" />
-      <option name="METHOD_NAME" value="checkAllOperations" />
+      <option name="METHOD_NAME" value="checkAdd" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CalculatorControllerTest.checkMIXUnaryOperations" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CalculatorControllerTest.checkInput" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Calculator" />
       <extension name="coverage">
         <pattern>
@@ -229,13 +226,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="CalculatorApplication.Controller" />
       <option name="MAIN_CLASS_NAME" value="CalculatorApplication.Controller.CalculatorControllerTest" />
-      <option name="METHOD_NAME" value="checkMIXUnaryOperations" />
+      <option name="METHOD_NAME" value="checkInput" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CalculatorControllerTest.checkMemoryAdd" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CalculatorControllerTest.checkOperationsEnotationValid" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Calculator" />
       <extension name="coverage">
         <pattern>
@@ -245,7 +242,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="CalculatorApplication.Controller" />
       <option name="MAIN_CLASS_NAME" value="CalculatorApplication.Controller.CalculatorControllerTest" />
-      <option name="METHOD_NAME" value="checkMemoryAdd" />
+      <option name="METHOD_NAME" value="checkOperationsEnotationValid" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -286,21 +283,21 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Application.Calculator" />
       <item itemvalue="JAR Application.Calculator-1.0-SNAPSHOT.jar" />
       <item itemvalue="JUnit.Calculator_ControllerTest" />
-      <item itemvalue="JUnit.CalculatorControllerTest.checkAllOperations" />
-      <item itemvalue="JUnit.CalculatorControllerTest.checkMemoryAdd" />
-      <item itemvalue="JUnit.CalculatorControllerTest" />
-      <item itemvalue="JUnit.CalculatorControllerTest.checkMIXUnaryOperations" />
+      <item itemvalue="Application.Calculator" />
+      <item itemvalue="JUnit.CalculatorControllerTest.checkInput" />
+      <item itemvalue="JUnit.CalculatorControllerTest.checkAdd" />
+      <item itemvalue="JUnit.CalculatorControllerTest.checkOperationsEnotationValid" />
+      <item itemvalue="Application.ParallelThreads" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.CalculatorControllerTest.checkMIXUnaryOperations" />
-        <item itemvalue="JUnit.CalculatorControllerTest.checkAllOperations" />
+        <item itemvalue="Application.ParallelThreads" />
         <item itemvalue="Application.Calculator" />
-        <item itemvalue="JUnit.CalculatorControllerTest" />
-        <item itemvalue="JUnit.CalculatorControllerTest.checkMemoryAdd" />
+        <item itemvalue="JUnit.CalculatorControllerTest.checkOperationsEnotationValid" />
+        <item itemvalue="JUnit.CalculatorControllerTest.checkAdd" />
+        <item itemvalue="JUnit.CalculatorControllerTest.checkInput" />
       </list>
     </recent_temporary>
   </component>
@@ -328,13 +325,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1565432602101</updated>
-    </task>
-    <task id="LOCAL-00091" summary="all works, before add javadoc and refactoring">
-      <created>1575319632831</created>
-      <option name="number" value="00091" />
-      <option name="presentableId" value="LOCAL-00091" />
-      <option name="project" value="LOCAL" />
-      <updated>1575319632831</updated>
     </task>
     <task id="LOCAL-00092" summary="controller ok">
       <created>1575321649740</created>
@@ -672,7 +662,14 @@
       <option name="project" value="LOCAL" />
       <updated>1579616309679</updated>
     </task>
-    <option name="localTasksCounter" value="140" />
+    <task id="LOCAL-00140" summary="before change getParse">
+      <created>1579773678849</created>
+      <option name="number" value="00140" />
+      <option name="presentableId" value="LOCAL-00140" />
+      <option name="project" value="LOCAL" />
+      <updated>1579773678849</updated>
+    </task>
+    <option name="localTasksCounter" value="141" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -774,7 +771,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="before delete operation in demo" />
     <MESSAGE value="before change controller operations" />
     <MESSAGE value="фдд цщклы" />
     <MESSAGE value="before delete string frommodel" />
@@ -799,16 +795,14 @@
     <MESSAGE value="before calculator history formatter change" />
     <MESSAGE value="concurrency was fixed" />
     <MESSAGE value="concurrency was fixed,&#10;changed controller history" />
-    <option name="LAST_COMMIT_MESSAGE" value="concurrency was fixed,&#10;changed controller history" />
+    <MESSAGE value="before change getParse" />
+    <option name="LAST_COMMIT_MESSAGE" value="before change getParse" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
       <configuration name="JUnit">
         <watch expression="calculator" language="JAVA" />
         <watch expression="calculator" language="JAVA" />
-      </configuration>
-      <configuration name="Application">
-        <watch expression="historyChanged.get(3)" />
       </configuration>
     </watches-manager>
   </component>
